@@ -1,0 +1,1 @@
+export default () => <div>THIS IS FROM CODE BLOCK!!</div>
