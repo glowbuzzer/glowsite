@@ -1,4 +1,6 @@
-////////////// PRETTY SURE THIS ISN'T USED!!! //////////////////
+/**
+ * This is only used during the static site build/generate
+ */
 
 import ReactDOM from 'react-dom'
 import {BrowserRouter} from 'react-router-dom'

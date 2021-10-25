@@ -1,16 +1,17 @@
 import react from '@vitejs/plugin-react'
+import tsconfigPaths from 'vite-tsconfig-paths'
 import mdx from 'vite-plugin-mdx'
 import {imagetools} from 'vite-imagetools'
 import macrosPlugin from "vite-plugin-babel-macros"
 import remarkMermaid from "./plugins/remark-mermaid.mjs";
 import remarkCodeblock from "./plugins/remark-codeblock.mjs";
 import vx from 'vite-plugin-virtual'
-import loadTypedoc from "./plugins/virtual/typedoc.mjs";
+import gbc from "./plugins/data/data-gbcschema.mjs"
 
 // not sure why we need this hack, their ESM module looks okay
 const virtual = vx.default
 
-const typedoc = loadTypedoc("./src/gbc.ts")
+const {pages: gbcschema}=gbc
 
 // const myformat = (args) => {
 //     console.log("MYFORMAT", args)
@@ -40,8 +41,9 @@ export default {
         }),
         virtual({
             'virtual:module': `export default { hello: 'world' }`,
-            'virtual:typedoc': typedoc
+            'virtual:gbcschema': gbcschema
         }),
+        tsconfigPaths(),
         mdx.default({
             remarkPlugins: [
                 remarkMermaid,

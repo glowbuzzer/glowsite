@@ -1,7 +1,7 @@
 import * as React from "react"
-import {useGbcSchema} from "../hooks/typedoc";
 import {Link} from "react-router-dom"
 import styled from "styled-components/macro";
+import {useEffect, useState} from "react";
 
 export const title="GBC Schema Doc"
 
@@ -12,8 +12,30 @@ const StyledDiv = styled.div`
     }
 `
 
+type GbcSchemaItem = {
+    kindString: string
+    name: string
+    slug: string
+}
+
 export default function GbcSchema() {
-    const groups = useGbcSchema()
+    const [groups, setGroups]=useState({})
+
+    useEffect(() => {
+        // @ts-ignore
+        import("virtual:gbcschema").then(r => {
+            console.log("RESULT", r.default)
+            const groups = {
+                Enumeration: [] as GbcSchemaItem[],
+                "Type alias": [] as GbcSchemaItem[]
+            }
+
+            r.default.forEach((source) => groups[source.kindString]?.push(source))
+            setGroups(groups)
+        })
+    }, [])
+
+    console.log("GROUPS", groups)
 
     return (
         <StyledDiv>
@@ -23,7 +45,7 @@ export default function GbcSchema() {
                     <div className="group">
                         {groups[k].map(item => (
                             <div className="item" key={item.name}>
-                                <Link to={"/docs/gbc/schema/" + item.name}>{item.name}</Link>
+                                <Link to={item.slug}>{item.name}</Link>
                             </div>
                         ))}
                     </div>

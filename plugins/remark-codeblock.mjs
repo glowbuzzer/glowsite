@@ -8,7 +8,7 @@ const PLUGIN_NAME = 'remark-codeblock';
 
 function render(source, destination) {
     const unique = crypto.createHmac('sha1', PLUGIN_NAME).update(source).digest('hex');
-    const jsxFilename = `${unique}.jsx`;
+    const jsxFilename = `${unique}.tsx`;
     const jsxPath = path.join(destination, jsxFilename);
 
     if (!fs.existsSync(jsxPath)) {

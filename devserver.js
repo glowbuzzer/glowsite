@@ -1,9 +1,9 @@
-// @ts-check
+/**
+ * Express dev server
+ */
 const fs = require('fs')
 const path = require('path')
 const express = require('express')
-const {ServerStyleSheet} = require("styled-components");
-const {renderToString} = require("react-dom/server");
 
 /**
  * This file is based on ssr-react project in playground of vite main project. Removed the isProd code as we will never run
@@ -47,7 +47,7 @@ async function createServer(
             const template = await vite.transformIndexHtml(url, fs.readFileSync(resolve('index.html'), 'utf-8'))
 
             // entry-server.jsx provides our render method
-            const render = (await vite.ssrLoadModule('/src/entry-server.jsx')).render
+            const render = (await vite.ssrLoadModule('/src/_render.jsx')).render
 
             const context = {}
             // the render method returns the rendered html plus the styled-components generated stylesheet (see https://styled-components.com/docs/advanced#server-side-rendering)
@@ -59,6 +59,7 @@ async function createServer(
                 return res.redirect(301, context.url)
             }
 
+            // helmet will take care of updating head section in dev mode
             const html = template
                 .replace(`<!--app-css-->`, styles) // replace css
                 .replace(`<!--app-html-->`, appHtml) // replace body
