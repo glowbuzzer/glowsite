@@ -35,7 +35,7 @@ const {pages: gbcschema}=gbc
 export default {
     plugins: [
         react(),
-        macrosPlugin.default(),
+        // macrosPlugin.default(),
         imagetools({
             // extendOutputFormats: defaults => ({...defaults, myformat})
         }),
