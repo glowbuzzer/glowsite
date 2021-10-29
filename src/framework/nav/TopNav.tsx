@@ -1,20 +1,41 @@
 import { useRootNav } from "../providers/NavProvider"
 import { Link, useLocation } from "react-router-dom"
-import { Menu } from "antd"
+import { Menu, Layout } from "antd"
 import * as React from "react"
 import styled from "@emotion/styled"
+
 import {GbColours} from "../utils/GbColours";
+
+import Gblogo from '../../images/logos/small-logo.svg'
 
 const StyledTopNav = styled.div`
     .ant-menu-submenu-title {
         :hover {
             color: ${GbColours.MainPurple};
         }   
+            margin: 0px 20px 0px 20px;
+
     }
  
+ .ant-layout-header {
+    background: ${GbColours.BackgroundGrey};
+    }
+
+.ant-menu {
+        background: ${GbColours.BackgroundGrey};
+        }
+
+ }
 `
 
-import Gblogo from '../../images/logos/small-logo.svg'
+
+const StyledNavLogo = styled.div`
+ float: left;
+  width: 180px;
+    background: ${GbColours.BackgroundGrey};
+`
+
+const { Header } = Layout;
 
 export const TopNav = () => {
     const { pathname } = useLocation()
@@ -25,7 +46,11 @@ export const TopNav = () => {
     return (
 
         <StyledTopNav>
-
+            <Layout>
+                <Header>
+                    <StyledNavLogo>
+                        <a href="/"><img src={Gblogo}/></a>
+                    </StyledNavLogo>
             <Menu mode="horizontal" selectedKeys={[pathname]}>
                 {nav.children.map(({ path, title, children }) =>
                     children?.length ? (
@@ -44,6 +69,9 @@ export const TopNav = () => {
                     )
                 )}
             </Menu>
+
+                </Header>
+            </Layout>
         </StyledTopNav>
     )
 }
