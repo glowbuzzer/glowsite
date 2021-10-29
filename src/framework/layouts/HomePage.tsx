@@ -1,6 +1,6 @@
 import { BaseLayout } from "./BaseLayout"
 import {Row, Col, Carousel, Space} from 'antd'
-import styled from 'styled-components'
+import styled from "@emotion/styled"
 
 import {GbColours} from "../utils/GbColours";
 

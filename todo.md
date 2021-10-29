@@ -12,3 +12,4 @@ antd change @primary-color to purple-5
 mdx comments break everything
 add title and new description from front matter into helmet
 add google analytics tag after head tag
+add page footer
