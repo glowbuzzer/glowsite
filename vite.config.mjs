@@ -8,11 +8,13 @@ import remarkCodeblock from "./plugins/remark-codeblock.mjs";
 import vx from 'vite-plugin-virtual'
 import gbc from "./plugins/data/data-gbcschema.mjs"
 import remarkGlowbuzzerFrontmatter from "./plugins/remark-gb-frontmatter.mjs";
+import {glowsiteSvgrPlugin} from "./plugins/vite-plugin-gb-svgr.mjs";
+import {glowsiteImageToolsPresets} from "./plugins/imagetools-ext.mjs";
 
 // not sure why we need this hack, their ESM module looks okay
 const virtual = vx.default
 
-const {pages: gbcschema}=gbc
+const {pages: gbcschema} = gbc
 
 // const myformat = (args) => {
 //     console.log("MYFORMAT", args)
@@ -37,8 +39,11 @@ export default {
     plugins: [
         react(),
         // macrosPlugin.default(),
+        glowsiteSvgrPlugin(),
         imagetools({
+            // extendTransforms: builtins => [...builtins, ...glowsiteDirectives()]
             // extendOutputFormats: defaults => ({...defaults, myformat})
+            resolveConfigs: glowsiteImageToolsPresets()
         }),
         virtual({
             'virtual:module': `export default { hello: 'world' }`,
