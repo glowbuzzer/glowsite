@@ -8,7 +8,7 @@ sort: 2
 ## Compiling
 To compile and run outside of an IDE. The steps are:
 
-```shell
+```text
 mkdir build
 cd build
 cmake ..

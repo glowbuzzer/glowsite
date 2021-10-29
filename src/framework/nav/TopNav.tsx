@@ -3,16 +3,18 @@ import { Link, useLocation } from "react-router-dom"
 import { Menu } from "antd"
 import * as React from "react"
 import styled from "@emotion/styled"
+import {GbColours} from "../utils/GbColours";
 
 const StyledTopNav = styled.div`
     .ant-menu-submenu-title {
         :hover {
-            color: green;
-        }
-
-        color: red;
+            color: ${GbColours.MainPurple};
+        }   
     }
+ 
 `
+
+import Gblogo from '../../images/logos/small-logo.svg'
 
 export const TopNav = () => {
     const { pathname } = useLocation()
@@ -21,7 +23,9 @@ export const TopNav = () => {
     // we are expecting each node in the top nav to have children
 
     return (
+
         <StyledTopNav>
+
             <Menu mode="horizontal" selectedKeys={[pathname]}>
                 {nav.children.map(({ path, title, children }) =>
                     children?.length ? (
