@@ -2,11 +2,12 @@ import react from '@vitejs/plugin-react'
 import tsconfigPaths from 'vite-tsconfig-paths'
 import mdx from 'vite-plugin-mdx'
 import {imagetools} from 'vite-imagetools'
-import macrosPlugin from "vite-plugin-babel-macros"
+// import macrosPlugin from "vite-plugin-babel-macros"
 import remarkMermaid from "./plugins/remark-mermaid.mjs";
 import remarkCodeblock from "./plugins/remark-codeblock.mjs";
 import vx from 'vite-plugin-virtual'
 import gbc from "./plugins/data/data-gbcschema.mjs"
+import remarkGlowbuzzerFrontmatter from "./plugins/remark-gb-frontmatter.mjs";
 
 // not sure why we need this hack, their ESM module looks okay
 const virtual = vx.default
@@ -47,7 +48,8 @@ export default {
         mdx.default({
             remarkPlugins: [
                 remarkMermaid,
-                remarkCodeblock
+                remarkCodeblock,
+                remarkGlowbuzzerFrontmatter
             ]
         })],
     // css: {

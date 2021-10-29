@@ -2,10 +2,12 @@
   "compilerOptions": {
     "jsx": "react-jsx",
     "module": "ES2020",
+    "lib": ["ES2020", "DOM"],
     "moduleResolution": "Node",
+    "downlevelIteration": true,
     "baseUrl": ".",
     "paths": {
-      "@glowbuzzer/controls": ["./src/controls/index.ts"]
+      "@glowbuzzer/controls": ["./src/controls/CustomComponent.tsx"]
     }
   }
 }

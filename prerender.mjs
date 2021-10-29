@@ -29,14 +29,14 @@ routesToPrerender.push("/")
     // pre-render each route...
     for (const url of routesToPrerender) {
         // our render method generates html and CSS
-        const {html: appHtml, helmetData} = await render(url, {})
+        const {html: appHtml, /*styles, */helmetData} = await render(url, {})
 
         const html = template
             .replace(`<!--app-title-->`, helmetData.title || "Glowbuzzer") // TODO: externalise default title
-            .replace(`<!--app-css-->`, "") // in prod this is added by vite
+            .replace(`<!--app-css-->`, "")
             .replace(`<!--app-html-->`, appHtml)
 
-        const filePath = `dist/static${url === '/' ? '/index' : (url + "/index")}.html`
+        const filePath = `dist/static${url === '/' ? '/index' : (url.toLowerCase() + "/index")}.html`
 
         const dir = path.dirname(filePath)
         fs.mkdirSync(dir, {recursive: true})
