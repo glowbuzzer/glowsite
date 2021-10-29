@@ -19,6 +19,7 @@ specifiers:
   fast-glob: ^3.2.7
   imagetools-core: ^2.8.0
   less: ^4.1.2
+  magic-string: ^0.25.7
   markdown-to-jsx: ^7.1.3
   mermaid: ^8.13.3
   prettier: ^2.4.1
@@ -33,7 +34,7 @@ specifiers:
   typescript: ^4.4.4
   unist-util-visit: ^4.1.0
   vite: ^2.6.10
-  vite-imagetools: file://../imagetools/packages/vite
+  vite-imagetools: git://github.com/jugglingcats/imagetools.git#dist
   vite-plugin-mdx: ^3.5.9
   vite-plugin-virtual: ^0.1.1
   vite-tsconfig-paths: ^3.3.17
@@ -64,6 +65,7 @@ devDependencies:
   fast-glob: 3.2.7
   imagetools-core: 2.8.0
   less: 4.1.2
+  magic-string: 0.25.7
   markdown-to-jsx: 7.1.3_react@17.0.2
   mermaid: 8.13.3
   prettier: 2.4.1
@@ -74,7 +76,7 @@ devDependencies:
   typescript: 4.4.4
   unist-util-visit: 4.1.0
   vite: 2.6.10_less@4.1.2
-  vite-imagetools: link:../imagetools/packages/vite
+  vite-imagetools: github.com/jugglingcats/imagetools/e531df304a0ca58f81110ed0788234a441103d32
   vite-plugin-mdx: 3.5.9_@mdx-js+mdx@1.6.22+vite@2.6.10
   vite-plugin-virtual: 0.1.1_vite@2.6.10
   vite-tsconfig-paths: 3.3.17_vite@2.6.10
@@ -2652,6 +2654,12 @@ packages:
     resolution: {integrity: sha512-zTU3DaZaF3Rt9rhN3uBMGQD3dD2/vFQqnvZCDv4dl5iOzq2IZQqTxu90r4E5J+nP70J3ilqVCrbho2eWaeW8Ow==}
     dev: true
 
+  /magic-string/0.25.7:
+    resolution: {integrity: sha512-4CrMT5DOHTDk4HYDlzmwu4FVCcIYI8gauveasrdCu2IKIFOJ3f0v/8MDGJCDL9oD2ppz/Av1b0Nj345H9M+XIA==}
+    dependencies:
+      sourcemap-codec: 1.4.8
+    dev: true
+
   /make-dir/2.1.0:
     resolution: {integrity: sha512-LS9X+dc8KLxXCb8dni79fLIIUA5VyZoyjSMCwTluaXA0o27cCK0bhXkpgw+sTXVpPy/lSO57ilRixqk0vDmtRA==}
     engines: {node: '>=6'}
@@ -4057,6 +4065,10 @@ packages:
     dev: true
     optional: true
 
+  /sourcemap-codec/1.4.8:
+    resolution: {integrity: sha512-9NykojV5Uih4lgo5So5dtw+f0JgJX30KCNI8gwhz2J9A15wD0Ml6tjHKwf6fTSa6fAdVBdZeNOs9eJ71qCk8vA==}
+    dev: true
+
   /space-separated-tokens/1.1.5:
     resolution: {integrity: sha512-q/JSVd1Lptzhf5bkYm4ob4iWPjx0KiRe3sRFBNrVqbJkFaBm5vbbowy1mymoPNLRa52+oadOhJ+K49wsSeSjTA==}
     dev: true
@@ -4525,4 +4537,9 @@ packages:
 
   /zwitch/1.0.5:
     resolution: {integrity: sha512-V50KMwwzqJV0NpZIZFwfOD5/lyny3WlSzRiXgA0G7VUnRlqttta1L6UQIHzd6EuBY/cHGfwTIck7w1yH6Q5zUw==}
+    dev: true
+
+  github.com/jugglingcats/imagetools/e531df304a0ca58f81110ed0788234a441103d32:
+    resolution: {tarball: https://codeload.github.com/jugglingcats/imagetools/tar.gz/e531df304a0ca58f81110ed0788234a441103d32}
+    name: imagetools
     dev: true

@@ -1,7 +1,7 @@
 import react from '@vitejs/plugin-react'
 import tsconfigPaths from 'vite-tsconfig-paths'
 import mdx from 'vite-plugin-mdx'
-import {imagetools} from 'vite-imagetools'
+import {imagetools} from 'vite-imagetools/packages/vite/dist/index.cjs'
 // import macrosPlugin from "vite-plugin-babel-macros"
 import remarkMermaid from "./plugins/remark-mermaid.mjs";
 import remarkCodeblock from "./plugins/remark-codeblock.mjs";
