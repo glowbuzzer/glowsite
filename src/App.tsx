@@ -4,12 +4,16 @@ import { NavProvider } from "./framework/providers/NavProvider"
 import { GlowsiteRouter } from "./framework/GlowsiteRouter"
 import styled from "@emotion/styled"
 
+import {GbColours} from "./framework/utils/GbColours";
+
 // this avoids lots of warnings being spat out
 // TODO: put back in? seemed to be an issue with some antd components - tbd
-// (React as any).useLayoutEffect = React.useEffect
+// (React    as any).useLayoutEffect = React.useEffect
+
 
 const AppStyle = styled.div`
-    font-family: monospace;
+    font-family: Roboto;
+    background: ${GbColours.BackgroundGrey};
 `
 
 const AppTheme = {
@@ -29,10 +33,10 @@ export function App() {
                 {/* default title if not set by page */}
                 <title>Glowbuzzer</title>
             </Helmet>
-
             <AppStyle>
                 <GlowsiteRouter />
             </AppStyle>
         </NavProvider>
+
     )
 }

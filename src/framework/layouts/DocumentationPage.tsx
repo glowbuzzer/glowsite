@@ -5,6 +5,8 @@ import { BaseLayout } from "./BaseLayout"
 const StyledDiv = styled.div`
     display: flex;
     gap: 20px;
+    
+
 `
 
 export const DocumentationPage = ({ children }) => {
