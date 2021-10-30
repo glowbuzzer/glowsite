@@ -1,0 +1,25 @@
+import standard from "./tux.png?width=500&webp"
+import glowsite from "./tux.png?glowsite"
+import { Image } from "../../framework/components/Image"
+import {Col, Row} from "antd"
+
+# Image using basic imagetools params
+
+<img src={standard} alt="Basic image" />
+
+# Image using glowsite sugar
+
+<Image meta={glowsite} alt="Glowsite fancy image" preset="body" width={"100%"} />
+
+# Image in grid
+
+<Row>
+    <Col span={12}>
+        <h2>Col 1</h2>
+        <Image meta={glowsite} alt="Glowsite fancy image" preset="col2" width={"100%"} />
+    </Col>
+    <Col span={12}>
+        <h2>Col 2</h2>
+        <Image meta={glowsite} alt="Glowsite fancy image" preset="col2" width={"100%"} />
+    </Col>
+</Row>

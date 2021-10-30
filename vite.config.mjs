@@ -9,7 +9,7 @@ import vx from 'vite-plugin-virtual'
 import gbc from "./plugins/data/data-gbcschema.mjs"
 import remarkGlowbuzzerFrontmatter from "./plugins/remark-gb-frontmatter.mjs";
 import {glowsiteSvgrPlugin} from "./plugins/vite-plugin-gb-svgr.mjs";
-import {glowsiteImageToolsPresets} from "./plugins/imagetools-ext.mjs";
+import {glowsiteImageToolsPresets, glowsiteOutputFormats} from "./plugins/imagetools-ext.mjs";
 import remarkPrism from "remark-prism"
 
 // not sure why we need this hack, their ESM module looks okay
@@ -17,37 +17,19 @@ const virtual = vx.default
 
 const {pages: gbcschema} = gbc
 
-// const myformat = (args) => {
-//     console.log("MYFORMAT", args)
-//     return metadatas => {
-//         // console.log("META", meta)
-//         const sources = metadatas.map((meta) => `${meta.src} ${meta.width}w`)
-//         const metas = metadatas.map((meta) => {
-//             const {image, ...rest} = meta
-//             return {...rest}
-//         })
-//         return {
-//             sources: sources.join(', '),
-//             metas
-//         }
-//     }
-// }
-
 /**
  * @type {import('vite').UserConfig}
  */
 export default {
     plugins: [
         react(),
-        // macrosPlugin.default(),
         glowsiteSvgrPlugin(),
         imagetools({
-            // extendTransforms: builtins => [...builtins, ...glowsiteDirectives()]
-            // extendOutputFormats: defaults => ({...defaults, myformat})
+            extendOutputFormats: glowsiteOutputFormats,
             resolveConfigs: glowsiteImageToolsPresets()
         }),
         virtual({
-            'virtual:module': `export default { hello: 'world' }`,
+            // 'virtual:module': `export default { hello: 'world' }`,
             'virtual:gbcschema': gbcschema
         }),
         tsconfigPaths(),
@@ -59,13 +41,6 @@ export default {
                 remarkPrism,
             ]
         })],
-    // css: {
-    //     preprocessorOptions: {
-    //         less: {
-    //             javascriptEnabled: true,
-    //         }
-    //     }
-    // },
     build: {
         minify: false,
         // manifest: true,
