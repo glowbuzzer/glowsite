@@ -8,10 +8,10 @@ import fg from "fast-glob"
 const prefix = "./src/pages"
 const exts = ["jsx", "tsx", "mdx"]
 
-const entries = fg.sync(prefix + "/**/*.{jsx,tsx,mdx}")
+const entries = fg.sync(prefix + "/**/*.{jsx,tsx,mdx,md}")
 
 const pages = entries.map(e => {
-    const slug = e.substr(prefix.length).replace(/\.(jsx|tsx|mdx)$/, '')
+    const slug = e.substr(prefix.length).replace(/\.(jsx|tsx|mdx|md)$/, '')
     return {slug}
 
 })

@@ -6,7 +6,7 @@ const path = require('path')
 const express = require('express')
 
 // read the antd css raw for later injection (dev mode only)
-const antd = fs.readFileSync("node_modules/antd/dist/antd.css")
+const antd = fs.readFileSync("./src/glowsite-theme.css")
 
 /**
  * This file is based on ssr-react project in playground of vite main project. Removed the isProd code as we will never run

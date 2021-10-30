@@ -10,7 +10,7 @@
 import { createContext, FC } from "react"
 
 // @ts-ignore because globEager is not defined
-const imports = import.meta.globEager("../../pages/**/*.{jsx,tsx,md,mdx,ts}")
+const imports = import.meta.globEager("../../pages/playground/**/*.{jsx,tsx,md,mdx,ts}")
 
 // console.log("IMPORTS", imports)
 
