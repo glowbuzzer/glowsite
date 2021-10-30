@@ -4,6 +4,8 @@ import { NavProvider } from "./framework/providers/NavProvider"
 import { GlowsiteRouter } from "./framework/GlowsiteRouter"
 import styled from "@emotion/styled"
 
+import "prismjs/themes/prism-tomorrow.css"
+
 // this avoids lots of warnings being spat out
 // TODO: put back in? seemed to be an issue with some antd components - tbd
 // (React as any).useLayoutEffect = React.useEffect

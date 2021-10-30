@@ -10,6 +10,7 @@ import gbc from "./plugins/data/data-gbcschema.mjs"
 import remarkGlowbuzzerFrontmatter from "./plugins/remark-gb-frontmatter.mjs";
 import {glowsiteSvgrPlugin} from "./plugins/vite-plugin-gb-svgr.mjs";
 import {glowsiteImageToolsPresets} from "./plugins/imagetools-ext.mjs";
+import remarkPrism from "remark-prism"
 
 // not sure why we need this hack, their ESM module looks okay
 const virtual = vx.default
@@ -54,7 +55,8 @@ export default {
             remarkPlugins: [
                 remarkMermaid,
                 remarkCodeblock,
-                remarkGlowbuzzerFrontmatter
+                remarkGlowbuzzerFrontmatter,
+                remarkPrism,
             ]
         })],
     // css: {
