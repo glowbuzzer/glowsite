@@ -3,6 +3,8 @@ title: EL7031
 sort: 5
 ---
 
+import { Image } from "../../../../framework/components/Image"
+
 # EL7031
 
 ## Introduction
@@ -23,7 +25,14 @@ DC support
 
 
 
-<img src="/el7031_product_shot.png" alt="EL7031" style="zoom:50%;" />
+
+
+
+import el7031_product_shot from "./el7031_product_shot.png?glowsite"
+
+<Image meta={el7031_product_shot} alt="EL7031 product" preset="body" width={"50%"} />
+
+
 
 ## Wiring up
 
@@ -31,7 +40,11 @@ The wiring up the EL7031 could not be much simpler. The motor connects to A1, A2
 
 So the simplest set-up for a single stepper motor, is an EK1100 bus coupler with the EL7031 connected to it as follows:
 
-<img src="/EK1100_EL7031.png" alt="EK1100_EL7031" style="zoom:150%;" />
+
+import EK1100_EL7031 from "./EK1100_EL7031.png?glowsite"
+
+<Image meta={EK1100_EL7031} alt="EL7031 wiring" preset="body" width={"50%"} />
+
 
 ## PDO mapping
 
@@ -190,7 +203,7 @@ PDO mapping according to CoE :
 
 
 
-## CiA 402
+    ## CiA 402
 
 This simple stepper drive does not support the CiA402 drive profile it just contains a bit to enable the motor and a set of of bits that signal if teh drive is ready to enable, enabled or has and error and warning. 
 

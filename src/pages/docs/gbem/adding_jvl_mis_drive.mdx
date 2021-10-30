@@ -2,6 +2,7 @@
 title: Detailed guide to adding a JVL MIS drive
 sort: 9
 ---
+import { Image } from "../../../framework/components/Image"
 
 # ADDING SUPPORT FOR A JVL MIS DRIVE - BLOW-BY-BLOW
 ## Introduction
@@ -28,11 +29,19 @@ The motor has four connectors:
 
 The drives look like this:
 
-![JVL MIS drive](jvl_mis_drive.png)
+
+import jvl_mis_drive from "./jvl_mis_drive.png?glowsite"
+
+<Image meta={jvl_mis_drive} alt="JVL MIS Drive" preset="body" width={"50%"} />
+
+
 
 The motor uses 4 pin M12 connectors for its fieldbus. These are easily converted to the standard Ethernet Rj45 form with cables like these:
 
-![M12 to RJ45 cable](jvl_m12_rj45.png)
+import jvl_m12_rj45 from "./jvl_m12_rj45.png?glowsite"
+
+<Image meta={jvl_m12_rj45} alt="JVL M12 RJ45 connector" preset="body" width={"100%"} />
+
 
 ## What do you need to order?
 
@@ -63,7 +72,10 @@ Tools: wire cutter, wire stripper, bootlace ferrule crimp tool.
 
 These are the components from the above BoM as delivered from JVL.
 
-![JVL drive unboxing](jvl_unboxing.jpg)
+import jvl_unboxing from "./jvl_unboxing.jpg?glowsite"
+
+<Image meta={jvl_unboxing} alt="JVL MIS unboxing" preset="body" width={"100%"} />
+
 
 ## MacTalk
 
@@ -98,7 +110,11 @@ For production use an use with multiple drives you are going to need to have sep
 
 The bare wire end of the power cable will need a bit of preparation before use.  The power supply cable needs crimping and also the braided screen terminating so that we can ground the end of the cable screen.
 
-<img src="jvl_power_connector_prep.jpg" alt="Power cable preparation" style="zoom:50%;" />
+
+import jvl_power_connector_prep from "./jvl_power_connector_prep.jpg?glowsite"
+
+<Image meta={jvl_power_connector_prep} alt="JVL power cable prep" preset="body" width={"100%"} />
+
 
 ### Power cable plugged into power supply and motor
 
@@ -114,7 +130,10 @@ The aim of this step is to make sure that we can talk to the motor from MacTalk.
 5. Run the MacTalk software
 6. Click "Scan" (1) in top bar of the software (after selecting the right COM port) and then in the window that appears, click "Scan All" (2) then select the motor with the "Select" (3) button.
 
-![JVL drive scan](jvl_scan.png)
+import jvl_scan from "./jvl_scan.png?glowsite"
+
+<Image meta={jvl_scan} alt="JVL scan" preset="body" width={"100%"} />
+
 
 The first test involved turning the motor shaft by hand. The Actual Position value shown in the right hand panel should change. That is pretty good confirmation that MacTalk is talking to the drive.
 
@@ -123,7 +142,10 @@ The next steps involve making sure the drive is configured the correct way to su
 1. Go to the EtherCAT screen in MacTalk
 2. Check "Enabled DSP402 drive profile" is selected
 
-![JVL EtherCAT](jvl_ethercat.png)
+import jvl_ethercat from "./jvl_ethercat.png?glowsite"
+
+<Image meta={jvl_ethercat} alt="JVL MacTalk EtherCAT" preset="body" width={"100%"} />
+
 
 It is also useful but not essential to upgrade the firmware on the drive. This is accessed through the "Updates" top drop down menu.
 
@@ -517,7 +539,7 @@ then write the functions
 
 ### `ec_get_remote_jvl_mis`
 
-```
+```c
 bool ec_get_remote_jvl_mis(const uint16_t drive) {
 
     uint16_t drive_stat_wrd;
@@ -534,7 +556,7 @@ bool ec_get_remote_jvl_mis(const uint16_t drive) {
 
 
 
-```
+```c
 gberror_t ec_standard_sdos_jvl_mis(const uint16_t slave) {
 
     if (!ec_sdo_write_int32(slave, JVL_MIS_POS_POSLIMIT_SDO_INDEX, JVL_MIS_POS_POSLIMIT_SDO_SUB_INDEX, map_drive_pos_limit[slave])) {
@@ -556,7 +578,7 @@ gberror_t ec_standard_sdos_jvl_mis(const uint16_t slave) {
 
 
 
-```
+```c
 int8_t ec_get_moo_pdo_jvl_mis(const uint16_t drive) {
     return ec_pdo_get_input_int8(map_drive_to_slave[drive], JVL_MIS_MOODISP_PDO_INDEX);
 }
@@ -564,14 +586,14 @@ int8_t ec_get_moo_pdo_jvl_mis(const uint16_t drive) {
 
 
 
-```
+```c
 gberror_t ec_initial_pdo_jvl_mis(const uint16_t slave) {
     ec_pdo_set_output_int8(slave, JVL_MIS_MOOSET_PDO_INDEX, CIA_MOO_CSP);
     return E_SUCCESS;
 }
 ```
 
-```
+```c
 bool ec_get_remote_jvl_mis(const uint16_t drive) {
     uint16_t drive_stat_wrd;
     drive_stat_wrd = ec_get_stat_wrd_jvl_mis(drive);
@@ -584,7 +606,7 @@ bool ec_get_remote_jvl_mis(const uint16_t drive) {
 
 
 
-```
+```c
 #define JVL_MIS_FOLLOWERROR_TOLERANCE 20000
 
 bool ec_get_follow_error_jvl_mis(const uint16_t drive) {
@@ -600,7 +622,7 @@ bool ec_get_follow_error_jvl_mis(const uint16_t drive) {
 
 
 
-```
+```c
 #define NUM_OF_JVL_MIS_ERROR_STRINGS 20
 
 const jvl_mis_error_string_t jvl_mis_alarm_code[NUM_OF_JVL_MIS_ERROR_STRINGS] = {
@@ -643,7 +665,7 @@ uint8_t *ec_get_error_string_pdo_jvl_mis(const uint16_t drive) {
 
 
 
-```
+```c
 int32_t ec_get_actpos_wrd_jvl_mis(const uint16_t drive) {
     return ec_pdo_get_input_int32(map_drive_to_slave[drive], JVL_MIS_ACTPOS_PDO_INDEX);
 }
@@ -651,7 +673,7 @@ int32_t ec_get_actpos_wrd_jvl_mis(const uint16_t drive) {
 
 
 
-```
+```c
 gberror_t ec_set_ctrl_wrd_jvl_mis(const uint16_t drive, const uint16_t ctrlwrd) {
     ec_pdo_set_output_uint16(map_drive_to_slave[drive], JVL_MIS_CONTROLWORD_PDO_INDEX, ctrlwrd);
     return E_SUCCESS;
@@ -662,7 +684,7 @@ gberror_t ec_set_ctrl_wrd_jvl_mis(const uint16_t drive, const uint16_t ctrlwrd) 
 
 
 
-```
+```c
 uint16_t ec_get_stat_wrd_jvl_mis(const uint16_t drive) {
     return ec_pdo_get_input_uint16(map_drive_to_slave[drive], JVL_MIS_STATUSWORD_PDO_INDEX);
 }
@@ -670,7 +692,7 @@ uint16_t ec_get_stat_wrd_jvl_mis(const uint16_t drive) {
 
 
 
-```
+```c
 gberror_t ec_set_setpos_wrd_jvl_mis(const uint16_t drive, const int32_t setpos) {
     ec_pdo_set_output_int32(map_drive_to_slave[drive], JVL_MIS_SETPOS_PDO_INDEX, setpos);
     return E_SUCCESS;
@@ -721,7 +743,13 @@ Need to create a JSON file
 4. run the front-end web app and see if you can jog the motor from the commissioning UI
 5. run MacTalk in parallel look for sync in MacTalk. This is the green "leds" marked "Distributed clocks" & "Motor synchronised"  in the following screen shot:
 
-![JVL sync ok](jvl_dc_sync_ok.png)
+
+
+import jvl_dc_sync_ok from "./jvl_dc_sync_ok.png?glowsite"
+
+<Image meta={jvl_dc_sync_ok} alt="JVL sync ok" preset="body" width={"100%"} />
+
+
 
 
 
@@ -775,5 +803,4 @@ Using the SDO objects on the drive:
 
 
 
-
-in teh CMakeList.txt for machine_mapping add the JVL to the target_link_libraries() section
+In the CMakeList.txt for machine_mapping add the JVL to the target_link_libraries() section

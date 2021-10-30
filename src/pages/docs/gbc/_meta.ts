@@ -1,2 +1,3 @@
+import {DocumentationPage} from "../../../framework/layouts/DocumentationPage";
 export const title="Glowbuzzer Control Documentation"
-export const section=true
+export const layout=DocumentationPage

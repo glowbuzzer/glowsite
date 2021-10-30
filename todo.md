@@ -5,8 +5,9 @@ click to zoom image
 
 
 ak
-sub-titles and human readable titles on top nav
-prismjs formatting of mdx ``` code```
+bitmap and svg handling
+sub-titles (descriptions we had on glowsite1) and human readable titles on top nav
+prismjs formatting of mdx ``` code``` blocks
 add 404 handler in router
 antd change @primary-color to purple-5
 mdx comments break everything

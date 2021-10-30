@@ -3,6 +3,8 @@ title: Invertek Optidrive P2
 sort: 9
 ---
 
+import { Image } from "../../../../framework/components/Image"
+
 # Invertek Optidrive P2
 
 ## Introduction
@@ -39,8 +41,10 @@ This has the following i/o specifications:
 
 * OUTPUT - 0-500V 9.5A KW 3 phase
 
-<img src="/invertek_optidrive_p2_product_shot.png" alt="Invertek Optidrive P2" style="zoom:33%;" />
 
+import invertek_optidrive_p2_product_shot from "./invertek_optidrive_p2_product_shot.png?glowsite"
+
+<Image meta={invertek_optidrive_p2_product_shot} alt="Optidrive P2 product" preset="body" width={"50%"} />
 
 
 We are using it with a standard issue 3 phase motor.
@@ -49,7 +53,13 @@ We are using it with a standard issue 3 phase motor.
 
 The Invertek Optidrive P series inverters have an optional fieldbus interface - OPT-2-ETCAT-IN. This is a little card that slides into the VFD with two Ethernet ports on it to connect to the fieldbus.
 
-<img src="invertek_optidrive_p2_ethercat.png" alt="Optidrive EtherCAT card" style="zoom:33%;" />
+
+
+
+import invertek_optidrive_p2_ethercat from "./invertek_optidrive_p2_ethercat.png?glowsite"
+
+<Image meta={invertek_optidrive_p2_ethercat} alt="Optidrive P2 EtherCAT" preset="body" width={"50%"} />
+
 
 Our aim is to control the motor's velocity using GBC/GBEM and control motor start/stop.
 

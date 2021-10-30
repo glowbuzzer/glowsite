@@ -6,6 +6,11 @@ const StyledDiv = styled.div`
     display: flex;
     gap: 20px;
     
+    code {
+    background: #d9d9d9;
+    border-radius: 5px;
+    padding: 0 3px 0 3px;
+    }
 
 `
 

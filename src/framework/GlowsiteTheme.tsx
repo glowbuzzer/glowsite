@@ -3,7 +3,8 @@ import styled from "@emotion/styled"
 
 const GbColours = {
     BackgroundGrey: "#f0f0f0",
-    MainPurple: "#9254de"
+    MainPurple: "#9254de",
+    TopNav: "#d9d9d9"
 }
 
 const AppStyle = styled.div`
