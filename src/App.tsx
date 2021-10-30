@@ -1,31 +1,14 @@
 import * as React from "react"
 import { Helmet } from "react-helmet"
 import { NavProvider } from "./framework/providers/NavProvider"
+import { GlowsiteTheme } from "./framework/GlowsiteTheme"
 import { GlowsiteRouter } from "./framework/GlowsiteRouter"
-import styled from "@emotion/styled"
-
-import {GbColours} from "./framework/utils/GbColours";
 
 import "prismjs/themes/prism-tomorrow.css"
 
 // this avoids lots of warnings being spat out
 // TODO: put back in? seemed to be an issue with some antd components - tbd
 // (React as any).useLayoutEffect = React.useEffect
-
-const AppStyle = styled.div`
-    font-family: Roboto;
-    background: ${GbColours.BackgroundGrey};
-`
-
-const AppTheme = {
-    color: {
-        red1: "#813c8c"
-    }
-}
-
-declare module "@emotion/react" {
-    export interface Theme extends Readonly<typeof AppTheme> {}
-}
 
 export function App() {
     return (
@@ -35,9 +18,9 @@ export function App() {
                 <title>Glowbuzzer</title>
             </Helmet>
 
-            <AppStyle>
+            <GlowsiteTheme>
                 <GlowsiteRouter />
-            </AppStyle>
+            </GlowsiteTheme>
         </NavProvider>
     )
 }
