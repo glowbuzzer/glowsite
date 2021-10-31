@@ -3,7 +3,7 @@ title: Getting started with example hardware
 sort: 10
 ---
 
-# GETTING START WITH EXAMPLE HARDWARE
+# Getting started with the example hardware
 
 ## Introduction
 This guide assumes that you want to use the recommended example hardware to get started with GBEM. Using the recommended hardware means that no C code, or indeed any other code, will need to be written by you and you will be able to get the system working end-to-end moving motors and reading and writing IO from the browser.

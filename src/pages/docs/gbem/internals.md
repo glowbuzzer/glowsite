@@ -2,7 +2,7 @@
 title: GBEM Internals
 sort: 13
 ---
-# LINUX GBEM INTERNALS
+# Linux GBEM internals
 ## Threads (Linux POSIX pthreads)
 
 When everything is up and running we will have the following threads running:

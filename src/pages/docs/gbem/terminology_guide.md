@@ -2,7 +2,7 @@
 title: Terminology guide
 sort: 16
 ---
-# TERMINOLOGY GUIDE
+# Terminology guide
 
 ## General
 

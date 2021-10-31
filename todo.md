@@ -12,13 +12,14 @@ add a new description bit of front matter into helmet
 add google analytics tag after head tag
 pop out left nav
 top nav hamburger for mobile
-get the example ui components docs fired up again 
+get the example ui components docs fired up again @glowbuzzer/controls
 md in components still nasty
 tldr component
 codeblocks with aliased imports
 test SSG
 mdxjs 2.0.0-rc.1 nice features?
 favicon vanishes sometimes
+fix min width of left nav - css doesnt seam to worky?
 
 
 dg
@@ -28,4 +29,4 @@ responsive carousel for home page
 frip
 change svg icon colour on hover
 footer change text colour on hover
-click to zoom image?
+image zoom on hover

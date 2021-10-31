@@ -3,7 +3,7 @@ title: Adding slaves
 sort: 7
 ---
 
-# ADDING A NEW SLAVE
+# Adding a new slave
 
 ## Where to put the code
 

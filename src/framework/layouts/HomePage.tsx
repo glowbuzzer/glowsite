@@ -205,7 +205,7 @@ export const HomePage = () => {
                     <div style={{ textAlign: "center", fill: "#9254de" }}>
                         <Row justify={"center"}>
                             <Col span={8}>
-                                <Html5Icon width={"25%"} />
+                                <Html5Icon width={"15%"} />
                                 <FeatureTitle>Web stack</FeatureTitle>
                                 <FeatureSubTitle>
                                     Build complex machine control applications in a web stack - no
@@ -213,7 +213,7 @@ export const HomePage = () => {
                                 </FeatureSubTitle>
                             </Col>
                             <Col span={8}>
-                                <CoordinatedIcon width={"25%"} />
+                                <CoordinatedIcon width={"15%"} />
                                 <FeatureTitle>Co-ordinated motion</FeatureTitle>
                                 <FeatureSubTitle>
                                     Control robots and machines with complex kinematic
@@ -221,7 +221,7 @@ export const HomePage = () => {
                                 </FeatureSubTitle>
                             </Col>
                             <Col span={8}>
-                                <EmbeddedIcon width={"25%"} />
+                                <EmbeddedIcon width={"15%"} />
                                 <FeatureTitle>Embeddable</FeatureTitle>
                                 <FeatureSubTitle>
                                     Runs on a Linux or microcontroller platform making it easy to
@@ -232,7 +232,7 @@ export const HomePage = () => {
 
                         <Row justify={"center"}>
                             <Col span={8}>
-                                <RealTimeIcon width={"25%"} />
+                                <RealTimeIcon width={"15%"} />
                                 <FeatureTitle>Real-time</FeatureTitle>
                                 <FeatureSubTitle>
                                     Handle complex real-time machine control challenges in a
@@ -240,7 +240,7 @@ export const HomePage = () => {
                                 </FeatureSubTitle>
                             </Col>
                             <Col span={8}>
-                                <FieldbusIcon width={"25%"} />
+                                <FieldbusIcon width={"15%"} />
                                 <FeatureTitle>Fieldbus integration</FeatureTitle>
                                 <FeatureSubTitle>
                                     Integrates common fieldbusses (EtherCAT, PROFINET, Ethernet/IP
@@ -248,7 +248,7 @@ export const HomePage = () => {
                                 </FeatureSubTitle>
                             </Col>
                             <Col span={8}>
-                                <RoboticArmIcon width={"25%"} />
+                                <RoboticArmIcon width={"15%"} />
                                 <FeatureTitle>
                                     Solve challenging machine control problems
                                 </FeatureTitle>
@@ -261,7 +261,7 @@ export const HomePage = () => {
 
                         <Row justify={"center"}>
                             <Col span={8}>
-                                <IntegratedIcon width={"25%"} />
+                                <IntegratedIcon width={"15%"} />
                                 <FeatureTitle>PLC integration</FeatureTitle>
                                 <FeatureSubTitle>
                                     Integrates with PLCs from leading manufacturers - Codesys,
@@ -269,7 +269,7 @@ export const HomePage = () => {
                                 </FeatureSubTitle>
                             </Col>
                             <Col span={8}>
-                                <IndependenceIcon width={"25%"} />
+                                <IndependenceIcon width={"15%"} />
                                 <FeatureTitle>Vendor independence</FeatureTitle>
                                 <FeatureSubTitle>
                                     Work with any hardware so you can mix and match to get the
@@ -277,7 +277,7 @@ export const HomePage = () => {
                                 </FeatureSubTitle>
                             </Col>
                             <Col span={8}>
-                                <GearsIcon width={"25%"} />
+                                <GearsIcon width={"15%"} />
                                 <FeatureTitle>Develop using technology you understand</FeatureTitle>
                                 <FeatureSubTitle>
                                     Runs on a Linux or microcontroller platform making it easy to

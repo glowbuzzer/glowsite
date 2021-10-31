@@ -3,7 +3,7 @@ title: Supported drives overview
 sort: 3
 ---
 
-# DRIVE SUPPORT OVERVIEW
+# Overview of drive support
 
 ## What drives does GBEM support?
 

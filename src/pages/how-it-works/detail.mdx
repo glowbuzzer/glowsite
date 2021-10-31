@@ -3,7 +3,7 @@ title: More technical details
 sort: 2
 ---
 
-import { Row, Col, Divider, List } from 'antd';
+import { Row, Col, Divider, List, Space } from 'antd';
 import {CheckCircleOutlined} from '@ant-design/icons'
 
 import Image2Theme from '../../images/theme_images/theme_2.svg'
@@ -12,21 +12,27 @@ import Image2Theme from '../../images/theme_images/theme_2.svg'
 import TiersImage1 from './tiers-GBEM.svg'
 import TiersImage2 from './tiers-GBSM.svg'
 
+
+
+
 # A little bit more technical detail...
 
 
+
+The glowbuzzer toolkit is structured as three layers.
+Each layer is a separate software component in the glowbuzzer toolkit.
+
 <Row align={"middle"}>
-    <Col span={12}><p>The glowbuzzer toolkit is structured as three layers.</p>
-        <p>Each layer is a separate software component in the glowbuzzer toolkit.</p>
+    <Col span={2}/>
+    <Col span={22}>
         <li>LAYER 1 is the front-end react components used to build the user interface and machine control logic</li>
         <li>LAYER 2 is the real-time core control</li>
         <li>LAYER 3 is the interface to drives and IO</li>
     </Col>
-    <Col span={12}> <img src={Image2Theme} height={"500px"}/></Col>
 </Row>
 
 
-
+<div style={{margin: '30px'}}>
 <Row>
     <Col span={12} ><img src={TiersImage1} alt="GBEM tiers" /></Col>
     <Col span={12} ><img src={TiersImage2} alt="GBSM tiers" /></Col>
@@ -36,6 +42,7 @@ import TiersImage2 from './tiers-GBSM.svg'
 <Col span={6}><b>With EtherCAT drives and IO</b></Col>
 <Col span={6}><b>With embedded motor drive electronics</b></Col>
 </Row>
+</div>
 
 
 

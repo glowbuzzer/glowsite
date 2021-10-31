@@ -3,7 +3,7 @@ title: Status messages (EMSTAT)
 sort: 12
 ---
 
-# EMSTAT
+# EMSTAT - reading the status of GBEM
 
 ## Introduction
 

@@ -3,7 +3,9 @@ title: Compiling & Running
 sort: 2
 ---
 
-# COMPILING & RUNNING
+import { Image } from "../../../framework/components/Image"
+
+# Compiling & Running GBEM
 
 ## Compiling
 To compile and run outside of an IDE. The steps are:
@@ -226,7 +228,12 @@ If enabled with the #defines `CTRL_ENABLE_FORCING` (force EtherCAT PDO variables
 
 In the following screen shot (taken from the JetBrains CLion IDE) shows that we have navigated to our machine map .c file whilst the debugger is paused and clicked on the `map_iomap[]` variable and then navigated to the the line in the iomap we want to force and can set a value and a Boolean active flag to force the val to our desired value. The value is a union of the available types so you will need to select the one that corresponds to type you want to force.
 
-![Forcing a variable in the IDE](E:\gb-dev\monorepo\apps\GBEM\end_user_docs\forcing_a_variable.png)
 
-This is a little clumsy to use but it does provide an invaluable test/debugging tool in certain situations.
+
+import forcing_a_variable from "./forcing_a_variable.png?glowsite"
+
+<Image meta={forcing_a_variable} alt="Forcing a variable in the IDE" preset="body" width={"50%"} />
+
+
+This is a little clumsy to use, but it does provide an invaluable test/debugging tool in certain situations.
 

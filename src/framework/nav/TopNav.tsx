@@ -1,26 +1,25 @@
-import {useRootNav} from "../providers/NavProvider"
-import {Link, useLocation} from "react-router-dom"
-import {Menu, Layout, Space} from "antd"
+import { useRootNav } from "../providers/NavProvider"
+import { Link, useLocation } from "react-router-dom"
+import { Menu, Layout, Space } from "antd"
 import * as React from "react"
 import styled from "@emotion/styled"
 
+import { ReactComponent as StandardLogo } from "../../images/logos/small-logo.svg?inline"
+import { ReactComponent as TinyLogo } from "../../images/logos/tiny-logo.svg?inline"
 
-import Gblogo from '../../images/logos/small-logo.svg'
-
-import {GithubOutlined, YoutubeOutlined} from "@ant-design/icons"
+import { GithubOutlined, YoutubeOutlined } from "@ant-design/icons"
 
 const StyledTopNav = styled.div`
     .ant-menu-submenu-title {
         :hover {
-            
         }
         margin: 0 20px 0 20px;
     }
     .ant-layout-header {
-      background: ${props => props.theme.color.TopNav};
+        background: ${props => props.theme.color.TopNav};
     }
     .ant-menu {
-      background: ${props => props.theme.color.TopNav};
+        background: ${props => props.theme.color.TopNav};
     }
 
     height: 66px;
@@ -33,7 +32,6 @@ const StyledMenuItem = styled(Menu.Item)`
         height: auto;
         line-height: 20px;
         :hover {
-            
         }
         .title {
             font-weight: bold;
@@ -41,50 +39,51 @@ const StyledMenuItem = styled(Menu.Item)`
     }
 `
 
-
 const StyleOffsiteLinks = styled.div`
-float: right;
+    float: right;
 `
-
 
 const StyledNavLogo = styled.div`
- float: left;
-  width: 180px;
+    float: left;
     background: ${props => props.theme.color.TopNav};
+    padding: 10px 20px 10px 0;
+    height: 64px;
 `
 
-
-const {Header} = Layout;
+const { Header } = Layout
 
 export const TopNav = () => {
-    const {pathname} = useLocation()
+    const { pathname } = useLocation()
     const nav = useRootNav()
 
     console.log(nav)
     // we are expecting each node in the top nav to have children
 
     return (
-
         <StyledTopNav>
             <Layout>
-                <Header >
+                <Header>
                     <StyledNavLogo>
-                        <a href="/"><img src={Gblogo}/></a>
+                        <a href="/">
+                            <StandardLogo height={"43px"} width={"139px"} />
+                        </a>
                     </StyledNavLogo>
                     <StyleOffsiteLinks>
                         <Space size="middle">
-                            <a href={"https://www.github.com/glowbuzzer"}><GithubOutlined
-                                style={{fontSize: '24px', color: '#9254de'}}/></a>
-                            <a href={"https://www.youtube.com/glowbuzzer"}><YoutubeOutlined
-                                style={{fontSize: '24px', color: '#9254de'}}/></a>
+                            <a href={"https://www.github.com/glowbuzzer"}>
+                                <GithubOutlined style={{ fontSize: "24px", color: "#9254de" }} />
+                            </a>
+                            <a href={"https://www.youtube.com/glowbuzzer"}>
+                                <YoutubeOutlined style={{ fontSize: "24px", color: "#9254de" }} />
+                            </a>
                         </Space>
                     </StyleOffsiteLinks>
 
                     <Menu mode="horizontal" selectedKeys={[pathname]}>
-                        {nav.children.map(({path, title, children}) =>
+                        {nav.children.map(({ path, title, children }) =>
                             children?.length ? (
-                                <Menu.SubMenu key={path} className={"capitalize"} title={title} >
-                                    {children.map(({type, path, title, children}) => {
+                                <Menu.SubMenu key={path} className={"capitalize"} title={title}>
+                                    {children.map(({ type, path, title, children }) => {
                                         const to = children.length ? children[0].path : path
                                         return (
                                             <Menu.Item key={path}>

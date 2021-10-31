@@ -2,7 +2,7 @@
 title: Troubleshooting
 sort: 14
 ---
-# TROUBLESHOOTING
+# Troubleshooting GBEM
 
 ## What do I do if netscan fails to find any slaves of the EtherCAT network?
 

@@ -2,7 +2,7 @@
 title: Adding PLC functions
 sort: 11
 ---
-# PLC
+# PLC functionality in GBEM
 
 ## Introduction
 

@@ -2,7 +2,7 @@
 title: Which files do i edit?
 sort: 4
 ---
-# WHICH FILES DO I EDIT?
+# Which files do I need to edit in the GBEM codebase?
 
 ## Adding new machines using existing slaves and drives
 

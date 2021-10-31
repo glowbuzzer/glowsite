@@ -3,7 +3,7 @@ title: Adding drives
 sort: 8
 ---
 
-# ADDING A NEW DRIVE
+# Adding a new drive
 
 ## Introduction
 

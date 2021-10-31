@@ -1,3 +1,3 @@
-import {DocumentationPage} from "../../../framework/layouts/DocumentationPage";
-export const title="GBEM Documentation"
-export const layout=DocumentationPage
+import { DocumentationPage } from "../../../framework/layouts/DocumentationPage"
+export const title = "EtherCAT Master (GBEM)"
+export const layout = DocumentationPage

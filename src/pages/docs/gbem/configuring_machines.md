@@ -3,7 +3,7 @@ title: Configuring machines
 sort: 6
 ---
 
-# CONFIGURING MACHINES
+# Configuring machines
 
 ## Introduction
 
