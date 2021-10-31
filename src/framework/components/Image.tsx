@@ -42,9 +42,11 @@ export const Image = ({ meta, width, alt, preset = "body" }: ImageProps) => {
     const [placeholder, ...others] = meta
     const srcset = others.map(meta => `${meta.src} ${meta.width}w`).join(", ")
 
-    const preset_sizes=presets[preset]
+    const preset_sizes = presets[preset]
 
-    const sizes = Object.entries(AntdBreaks).map(([key, width]) => `(max-width: ${width}px) ${preset_sizes[key]}px`).join(", ")
+    const sizes = Object.entries(AntdBreaks)
+        .map(([key, width]) => `(max-width: ${width}px) ${preset_sizes[key]}px`)
+        .join(", ")
 
     return (
         <picture>

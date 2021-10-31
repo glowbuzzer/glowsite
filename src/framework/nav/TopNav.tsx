@@ -22,6 +22,8 @@ const StyledTopNav = styled.div`
     .ant-menu {
       background: ${props => props.theme.color.TopNav};
     }
+
+    height: 66px;
 `
 
 // doesn't work when placed in component above, I think because menu items are created dynamically
@@ -51,7 +53,6 @@ const StyledNavLogo = styled.div`
     background: ${props => props.theme.color.TopNav};
 `
 
-// #d9d9d9 = top nav
 
 const {Header} = Layout;
 

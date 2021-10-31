@@ -1,50 +1,79 @@
-import {Row, Col} from 'antd'
+import { Row, Col } from "antd"
 import styled from "@emotion/styled"
 
+import { GithubOutlined, YoutubeOutlined } from "@ant-design/icons"
+import * as React from "react"
 
 const StyledFooter = styled.div`
-        padding:20px 100px;
-        background-color: #d9d9d9;
-        height: 200px;
-        
+    padding: 20px 100px;
+    background-color: #d9d9d9;
+    height: 200px;
+    text-align: center;
+`
 
-`;
+const StyledA = styled.a`
+    color: ${props => props.theme.color.MainPurple};
+    &:hover {
+        color: #391085;
+    }
+`
 
-
-export const GlowsiteFooter  = () => {
-    return(
+export const GlowsiteFooter = () => {
+    return (
         <StyledFooter>
             <Row>
                 <Col span={3}></Col>
                 <Col span={5}>
                     <h3>How it works</h3>
-                    <p/>
-                    <p>item1</p>
-                    <p>item2</p>
-                    <p>item3</p>
+                    <p />
+                    <p>
+                        <StyledA href="/how-it-works/basics">Basics</StyledA>
+                    </p>
+                    <p>
+                        <StyledA href="/how-it-works/basics">More detail</StyledA>
+                    </p>
+                    <p>
+                        <StyledA href="/how-it-works/platforms">Supported platforms</StyledA>
+                    </p>
                 </Col>
                 <Col span={5}>
                     <h3>Get started</h3>
-                    <p/>
-                    <p>item1</p>
-                    <p>item2</p>
-                    <p>item3</p>
+                    <p />
+                    <p>
+                        <StyledA href="/get-started/hardware">Required hardware</StyledA>
+                    </p>
+                    <p>
+                        <StyledA href="/get-started/motion">Make a drive move</StyledA>
+                    </p>
+                    <p>
+                        <StyledA href="/get-started/how_to_buy">How to buy</StyledA>
+                    </p>
                 </Col>
                 <Col span={5}>
                     <h3>Legal</h3>
-                    <p/>
-                    <p>item1</p>
-                    <p>item2</p>
+                    <p />
+                    <p>
+                        <StyledA href="/how-it-works/basics">Privacy policy</StyledA>
+                    </p>
+                    <p>
+                        <StyledA href="/how-it-works/basics">Legal notice</StyledA>
+                    </p>
                 </Col>
                 <Col span={5}>
                     <h3>github & youtube</h3>
-                    <p/>
-                    <p>item1</p>
-                    <p>item2</p>
+                    <p />
+                    <p>
+                        <a href={"https://www.github.com/glowbuzzer"}>
+                            <GithubOutlined style={{ fontSize: "24px", color: "#9254de" }} />
+                        </a>
+                    </p>
+                    <p>
+                        <a href={"https://www.youtube.com/glowbuzzer"}>
+                            <YoutubeOutlined style={{ fontSize: "24px", color: "#9254de" }} />
+                        </a>
+                    </p>
                 </Col>
             </Row>
         </StyledFooter>
-
     )
-
 }
