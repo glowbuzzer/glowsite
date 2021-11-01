@@ -38,7 +38,6 @@ export const Image = ({ meta, width, alt, preset = "body" }: ImageProps) => {
         return <div>INVALID META FOR IMAGE</div>
     }
 
-    console.log(meta)
     const [placeholder, ...others] = meta
     const srcset = others.map(meta => `${meta.src} ${meta.width}w`).join(", ")
 
