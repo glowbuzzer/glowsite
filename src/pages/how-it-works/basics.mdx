@@ -5,9 +5,9 @@ sort: 1
 
 import { Row, Col, Divider} from 'antd';
 import {CheckCircleOutlined} from '@ant-design/icons'
-import Image1Theme from '../../images/theme_images/theme_1.svg'
 import Markdown from "markdown-to-jsx";
-import styled from "@emotion/styled"
+import {Tldr} from "../../framework/components/tldr";
+import {YoutubeEmbed} from "../../framework/components/Video";
 
 export const TextMd = `The glowbuzzer toolkit allows you to build machine control applications using a web stack.\n\n
 A machine is a combination of motors and IO. It could be an industrial robot arm, a cutting machine, a piece of laboratory equipment.\n\n
@@ -20,39 +20,18 @@ At is simplest, a browser running your React machine control application is talk
 This gives you the ability to build a sophisticated control for complex machines and robots using a modern web and open software stack with absolutely no proprietary hardware required.\n\n
 `
 
-export const StyledImage = styled.div`
-background-image: url(${Image1Theme});
-background-repeat: no-repeat;
-background-position: right;
-`
-
-export const StyledSpan = styled.span`
-color: red;
-`
-
-export const YoutubeEmbed = ({ embedId }) => (
-<div style={{overflow: 'hidden', position: 'relative', padding: '50px'}}>
-    <iframe
-        width="853"
-        height="480"
-        src={`https://www.youtube.com/embed/${embedId}`}
-        frameBorder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowFullScreen
-        title="Embedded youtube"
-    />
-</div>
-);
-
-
-export const StyledImage2 = styled.div`
-float: right;
-`
-
-
 
 
 # Basically, how does it work?
+
+<Tldr>
+    <TldrItem>Control machines with a web-stack</TldrItem>
+    <TldrItem>Control all types of machine including robots</TldrItem>
+    <TldrItem>Runs on Linux & Microcontrollers</TldrItem>
+    <TldrItem>Works with common fieldbusses</TldrItem>
+    <TldrItem>Designed to be embedded</TldrItem>
+</Tldr>
+
 
 <Markdown children={TextMd} options={{ forceBlock: true }}/>
 
