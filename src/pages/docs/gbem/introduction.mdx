@@ -4,12 +4,14 @@ sort: 1
 ---
 
 import gbem_bbd from "./gbem_bbd.svg"
-import {Card, Avatar} from "antd"
-
+import {Card, Avatar, Divider} from "antd"
+import {AimOutlined} from '@ant-design/icons';
 
 # Introduction to the glowbuzzer EtherCAT Master (GBEM)
 
-<Card size="small" title="TLDR"  style={{ width: 300, float: 'right'}}>
+<Card size="small" style={{ width: 300, float: 'right'}}>
+    <Card.Meta title={"TLDR"} style={{padding: '10px 0 0 0'}} avatar={<Avatar style={{ backgroundColor: '#000000'}} size="small" icon={<AimOutlined />} />}/>
+    <Divider />
     <ul>
     <li>Open source EtherCAT master</li>
     <li>CiA 402 based state machine framework</li>
