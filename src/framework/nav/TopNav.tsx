@@ -1,11 +1,10 @@
 import { useRootNav } from "../providers/NavProvider"
 import { Link, useLocation } from "react-router-dom"
-import { Menu, Layout, Space } from "antd"
+import { Layout, Menu, Space } from "antd"
 import * as React from "react"
 import styled from "@emotion/styled"
 
 import { ReactComponent as StandardLogo } from "../../images/logos/small-logo.svg?inline"
-import { ReactComponent as TinyLogo } from "../../images/logos/tiny-logo.svg?inline"
 
 import { GithubOutlined, YoutubeOutlined } from "@ant-design/icons"
 
@@ -13,11 +12,14 @@ const StyledTopNav = styled.div`
     .ant-menu-submenu-title {
         :hover {
         }
+
         margin: 0 20px 0 20px;
     }
+
     .ant-layout-header {
         background: ${props => props.theme.color.TopNav};
     }
+
     .ant-menu {
         background: ${props => props.theme.color.TopNav};
     }
@@ -31,8 +33,10 @@ const StyledMenuItem = styled(Menu.Item)`
         padding: 8px 12px;
         height: auto;
         line-height: 20px;
+
         :hover {
         }
+
         .title {
             font-weight: bold;
         }
@@ -56,7 +60,6 @@ export const TopNav = () => {
     const { pathname } = useLocation()
     const nav = useRootNav()
 
-    console.log(nav)
     // we are expecting each node in the top nav to have children
 
     return (

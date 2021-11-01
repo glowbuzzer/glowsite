@@ -1,4 +1,4 @@
-import {metadataFormat, resolveConfigs} from "imagetools-core";
+import {metadataFormat} from "imagetools-core";
 
 // if presets not specified in vite.config.js we will use these
 const defaultPresets = {
@@ -39,5 +39,15 @@ export function glowsiteImageToolsPresets(pluginConfig) {
 export function glowsiteOutputFormats(builtinOutputFormats) {
     // all this does is ensure that when we write image.png?glowsite we get the metadata back not the urls
     // (it means we don't have to write image.png?glowsite&meta all the time)
-    return {...builtinOutputFormats, glowsite: metadataFormat}
+    //
+    // we also filter out a lot of the redundant metadata from the json as it ends up in the bundle
+    return {
+        ...builtinOutputFormats, glowsite: () => {
+            const defaultFormat = metadataFormat()
+            return (metadatas) => {
+                // just return the metadata we need
+                return defaultFormat(metadatas).map(({format, width, height, src}) => ({format, width, height, src}))
+            }
+        }
+    }
 }
