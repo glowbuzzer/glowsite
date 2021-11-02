@@ -3,14 +3,16 @@ title: What drives does it work with?
 sort: 4
 ---
 
-import {Carousel} from 'antd';
-
-
-
-
-
+import {Carousel} from 'antd'
+import {Tldr} from "../../framework/components/Tldr"
 
 # What drives does it work with?
+<Tldr>
+    <TldrItem>Works with all EtherCAT drives</TldrItem>
+    <TldrItem>Also integrates with embedded driver ICs</TldrItem>
+    <TldrItem>Wide range of drives pre-configured</TldrItem>
+    <TldrItem>Easy to integrate your own drives</TldrItem>
+</Tldr>
 
 ## EtherCAT
 If you are using glowbuzzer toolkit with an EtherCAT fieldbus, we can support any stepper or BLDC or servo drive that offers a CiA-402 drive profile and cyclic-synchronous-position mode (CSP) – this is almost every EtherCAT drive on the market.

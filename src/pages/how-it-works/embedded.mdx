@@ -4,7 +4,7 @@ sort: 5
 ---
 
 import { Timeline, Table, Divider } from 'antd'
-
+import {Tldr} from "../../framework/components/Tldr";
 
 export const dataSourceMicrocontroller = [
     {
@@ -101,8 +101,16 @@ export const columns = [
 ];
 
 # embedded development
+<Tldr>
+    <TldrItem>Runs on embedded Linux</TldrItem>
+    <TldrItem>Runs on dual core high-end microcontrollers</TldrItem>
+    <TldrItem>Integreates with motor driver ICs</TldrItem>
+    <TldrItem>EtherCAT master is ported to microcontroller</TldrItem>
+</Tldr>
 
 ## Introduction
+
+
 **“embedded”** is a tag that gets attached to all sorts of things these days. What do we mean by an embedded motion/machine control?
 
 If you are building your own custom electronics which incorporates motion and machine control functions then you are building an embedded motion control.

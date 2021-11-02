@@ -3,24 +3,19 @@ title: Fieldbus
 sort: 7
 ---
 
-import { Carousel} from 'antd';
-
-
-export const carouselContentStyle = {
-    width: "500px",
-    height: '50px',
-    color: '#0',
-};
-
-import Image1Fieldbus from './fieldbus_images/fiedlbus_canopen.svg'
-import Image2Fieldbus from './fieldbus_images/fieldbus_ethercat.svg'
-import Image3Fieldbus from './fieldbus_images/fieldbus_ethernetip.svg'
-import Image4Fieldbus from './fieldbus_images/fieldbus_powerlink.svg'
-import Image5Fieldbus from './fieldbus_images/fieldbus_profinet.svg'
-import Image6Fieldbus from './fieldbus_images/fieldbus_sercos.svg'
-
+import { Carousel} from 'antd'
+import {Tldr} from "../../framework/components/Tldr"
 
 # How does glowbuzzer woks with different fieldbusses?
+
+<Tldr>
+    <TldrItem>Control machines with a web-stack</TldrItem>
+    <TldrItem>Control all types of machine including robots</TldrItem>
+    <TldrItem>Runs on Linux & Microcontrollers</TldrItem>
+    <TldrItem>Works with common fieldbusses</TldrItem>
+    <TldrItem>Designed to be embedded</TldrItem>
+</Tldr>
+
 ## Introduction
 Interoperability with the major fieldbus protocols is at the heart of the glowbuzzer toolkit.
 
@@ -37,41 +32,55 @@ EtherCAT is the primary fieldbus we support. Mainly because of the wide range of
 1. Powerlink
 
 
+export const carouselContentStyle = {
+    width: "500px",
+    height: "40px",
+    color: '#0',
+};
+
+import Image1Fieldbus from './fieldbus_images/fiedlbus_canopen.svg'
+import Image2Fieldbus from './fieldbus_images/fieldbus_ethercat.svg'
+import Image3Fieldbus from './fieldbus_images/fieldbus_ethernetip.svg'
+import Image4Fieldbus from './fieldbus_images/fieldbus_powerlink.svg'
+import Image5Fieldbus from './fieldbus_images/fieldbus_profinet.svg'
+import Image6Fieldbus from './fieldbus_images/fieldbus_sercos.svg'
+
+
 export const settings = {
     arrows: false,
     dots: false,
     pauseOnHover: true,
     infinite: true,
-    speed: 5000,
+    speed: 2000,
     centerMode: true,
     autoplay: true,
     fade: true,
     variableWidth: false,
-    adaptiveHeight: false,
+    adaptiveHeight: true,
 }
 
-
+<div style={carouselContentStyle}>
 <Carousel {...settings}>
-    <div style={carouselContentStyle}>
-    <img src={Image1Fieldbus} height="100px"/>
-</div>
-    <div>
-        <img src={Image2Fieldbus} height="100px" />
+<div>
+    <img src={Image1Fieldbus} width="100px"/>
     </div>
     <div>
-        <img src={Image3Fieldbus} height="100px"/>
+        <img src={Image2Fieldbus} width="100px" />
     </div>
     <div>
-        <img src={Image4Fieldbus} height="100px"/>
+        <img src={Image3Fieldbus} width="100px"/>
     </div>
     <div>
-        <img src={Image5Fieldbus} height="100px"/>
+        <img src={Image4Fieldbus} width="100px"/>
     </div>
     <div>
-        <img src={Image6Fieldbus}height="100px" />
+        <img src={Image5Fieldbus} width="100px"/>
+    </div>
+    <div>
+        <img src={Image6Fieldbus} width="100px" />
     </div>
 </Carousel>
-
+</div>
 
 We are taking a keen interest in the development of OPC/UA TSN and have examples working in the lab.
 

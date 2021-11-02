@@ -6,7 +6,7 @@ sort: 1
 import { Row, Col, Divider} from 'antd';
 import {CheckCircleOutlined} from '@ant-design/icons'
 import Markdown from "markdown-to-jsx";
-import {Tldr} from "../../framework/components/tldr";
+import {Tldr} from "../../framework/components/Tldr";
 import {YoutubeEmbed} from "../../framework/components/Video";
 
 export const TextMd = `The glowbuzzer toolkit allows you to build machine control applications using a web stack.\n\n
@@ -40,32 +40,31 @@ This gives you the ability to build a sophisticated control for complex machines
 
 
 
-<Divider orientation="left" plain><b><em>Summary of features/benefits</em></b></Divider>
-<Row style={{ marginBottom: 12}}>
+<Divider orientation="left" plain><h1>Summary of features/benefits</h1></Divider>
+<Row style={{ margin: '10px 10px 10px 10px'}}>
     <Col span={1}> <CheckCircleOutlined/> </Col>
     <Col span={11}><b>Control machines and robots with a web stack</b></Col>
     <Col span={1}> <CheckCircleOutlined/> </Col>
     <Col span={11}><b>Runs on desktop Linux, Embedded Linux or microcontrollers</b></Col>
 </Row>
-<Row style={{ marginBottom: 12}}>
+<Row style={{ margin: '10px 10px 10px 10px'}}>
     <Col span={1}> <CheckCircleOutlined/> </Col>
     <Col span={11}><b>Work with the main industrial fieldbusses e.g. EtherCAT</b></Col>
     <Col span={1}> <CheckCircleOutlined/> </Col>
     <Col span={11}><b>Deliver rich user interfaces to HMIs, tablets with React Native</b></Col>
 </Row>
-<Row style={{ marginBottom: 12}}>
+<Row style={{ margin: '10px 10px 10px 10px'}}>
     <Col span={1}> <CheckCircleOutlined/> </Col>
     <Col span={11}><b>Not tied to any particular vendor's hardware</b></Col>
     <Col span={1}> <CheckCircleOutlined/> </Col>
     <Col span={11}><b>Runs in real-time to handle demanding control tasks</b></Col>
 </Row>
-<Row style={{ marginBottom: 12}}>
+<Row style={{ margin: '10px 10px 10px 10px'}}>
     <Col span={1}> <CheckCircleOutlined/> </Col>
     <Col span={11}><b>Built for machine control developers who want to use modern software frameworks</b></Col>
     <Col span={1}> <CheckCircleOutlined/> </Col>
     <Col span={11}><b>Majority of software components delivered under an open-source license agreement</b></Col>
 </Row>
-
 <Divider plain />
 
 Insert great video showing:

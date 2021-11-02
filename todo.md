@@ -36,3 +36,5 @@ image zoom on hover
 
 
 [Step 1](#Step 1) internal md linking
+cookies thingymajig
+not all pages respect max width

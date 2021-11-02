@@ -1,8 +1,7 @@
 import { Row, Col } from "antd"
 import styled from "@emotion/styled"
-
-import { GithubOutlined, YoutubeOutlined } from "@ant-design/icons"
 import * as React from "react"
+import { GithubOutlined, YoutubeOutlined } from "@ant-design/icons"
 
 const StyledFooter = styled.div`
     padding: 20px 100px;

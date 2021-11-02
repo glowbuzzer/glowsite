@@ -7,27 +7,29 @@ sort: 6
 
 ## Introduction
 
-You can use GBEM without writing any new c code if you work with the types of drives/slaves we have pre-configured. These include a a range of slaves from Beckhoff, Oriental Motor, JVL, Kollmorgen, Panasonic, Omron, Delta, Cannon, nanotec, Trinamic, Delta etc. (see [DRIVE SUPPORT](drive_support.md)).
+You can use GBEM without writing any new c code if you work with the types of drives/slaves we have pre-configured. These include a a range of slaves from Beckhoff, Oriental Motor, JVL, Kollmorgen, Panasonic, Omron, Delta, Cannon, nanotec, Trinamic, Delta etc. (see [DRIVE SUPPORT](/docs/gbem/drive_support_overview)).
 
-If you want to add support for new slaves from different manufacturers then some very basic c programming know-how is needed - see [ADDING A NEW SLAVE](adding_a_new_slave.md) &  [ADDING A NEW DRIVE](adding_a_new_drive.md).
+If you want to add support for new slaves from different manufacturers then some very basic c programming know-how is needed - see [ADDING A NEW SLAVE](/docs/gbem/adding_a_new_slave) &  [ADDING A NEW DRIVE](/docs/gbem/adding_a_new_drive).
 
 If you are using the pre-configured drives/slaves (or have already written your drive / slave interfaces) the steps involved in creating a machine configuration are:
 
-1. Create a new pair of machine .h and .c files (`mymachine_map.c` & `mymachine_map.h`that will hold the configuration of your new machine [Step 1](#Step 1)
-2. Edit the `map_config` files to add in a #define for your new machine [Step 2](#Step 2 )
-3. Add links in the new `mymachine_map.c` file to existing functions for slave configuration [Step 3](#Step 3)
-4. Add links in the `mymachine_map.c` file to existing functions for drive control [Step 4](#Step 4)
-5. Define the iomap (how different EtherCAT IO is mapped to PLC and GBC IO) in the `mymachine_map.c` file [Step 5](#Step 5) 
-6. Layout the order slaves appear on the network and key information about them in an array in the `mymachine_map.c` file [Step 6](#Step 6)
-7. In the `mymachine_map.h` file,  define the configuration parameters for the EtherCAT network [Step 7](#Step 7)
-8. Check the config for misconfiguration by running `GBEM -d`  [Step 8](#Step 8)
-9. Test the machine! [Step 9](#Step 9)
+1. Create a new pair of machine .h and .c files (`mymachine_map.c` & `mymachine_map.h`that will hold the configuration of your new machine <a href="#step-1">Step 1</a>
+2. Edit the `map_config` files to add in a #define for your new machine <a href="#step-2">Step 2</a>
+3. Add links in the new `mymachine_map.c` file to existing functions for slave configuration <a href="#step-3">Step 3</a>
+4. Add links in the `mymachine_map.c` file to existing functions for drive control <a href="#step-4">Step 4</a>
+5. Define the iomap (how different EtherCAT IO is mapped to PLC and GBC IO) in the `mymachine_map.c` file <a href="#step-5">Step 5</a>
+6. Layout the order slaves appear on the network and key information about them in an array in the `mymachine_map.c` file <a href="(#step-6">Step 6</a>
+7. In the `mymachine_map.h` file,  define the configuration parameters for the EtherCAT network <a href="#step-7">Step 7</a>
+8. Check the config for misconfiguration by running `GBEM -d`  <a href="#step-8">Step 8</a>
+9. Test the machine! <a href="(#step-9">Step 9</a>
 
 There are plenty of examples of machine maps provided in the `libs/machine_mapping/src/machines` and `libs/machine_mapping/inc/machines` directories for you to look at. We strongly suggest that you have a look at the examples before you try and create your own. Often you will be able to find one that behaves in a similar manner to your machine and can adapt it.
 
 The machine configuration is deliberately structured as a statically defined set of c data structures rather than a separate configuration file that is loaded and parsed at start-up. This makes it much easier for the programmer to understand how things work and make changes to extend existing functionality. It would be easy to extend functionality yourself to read the configuration from a file on the filesystem at start-up if that is a desired behaviour for your application.
 
 The machine mapping allows you to easily recompile your GBEM code to target different machines (i.e. machines with different combinations of EtherCAT slaves) by flipping a #define without having to have separate projects . This is a very handy feature of GBEM.
+
+<a id="step-1"/>
 
 ## Step 1
 
@@ -62,11 +64,14 @@ The `mymachine_map.c` needs to include the header files for the libraries of the
 
 The entire `mymachine_map.c` file's contents needs to be enclosed in a `#if MACHINE_CONVEYORS == 1` ... `#endif`to stop it from being included in the compilation when the machine is not enabled with the #define.
 
+<a id="step-2"/>
+
 ## Step 2
 
 **Edit  the `map_config.h` & `map_config.c` files**
 
  
+
 
 Add #define in `map_config.h` for your new machine alongside the other machine #defines. This is where (by flipping the 1 to a 0) you will enable and disable this machine config.
 
@@ -122,6 +127,8 @@ Finally in `main.c`, add a new entry as follows:
     map_machine_type = MAP_MACHINE_MYMACHINE;
 #endif
 ````
+
+<a id="step-3"/>
 
 ## Step 3
 
@@ -192,6 +199,8 @@ This is an enum of the different types of DC (Distributed Clocks) configuration 
 ### `MAP_SLAVE_DC_CYCLE`
 
 This is an array of ints that detail the Distributed Clock cycle time for each slave.
+
+<a id="step-4"/>
 
 ## Step 4
 
@@ -313,6 +322,8 @@ This is an array of bools that indicate whether homing is to be executed on the 
 ### `MAP_DRIVE_PRINT_PARAMS_FUNCTIONS`
 
 This the function that is called at boot time to print (to console or log) any configuration parameters you need.
+
+<a id="step-5"/>
 
 ## Step 5
 
@@ -468,6 +479,8 @@ Usually the data types match - for example a PDO digital in has a type of ECT_BO
 
 Somethings though you do want to map together different types. For example, an anlog input module might provide a value as an 16 bit integer but we want this mapped to an analog GBC input. In this case the type of the PDO object in the iomap will be `ECT_INTEGER16` and the GBC type will be `ECT_REAL32`. When mapping integers to floats (and vice versa) a max value parameter is also needs to be defined in the PDO mapping object. For example if you are mapping `ECT_INTEGER16` to `ECT_REAL32` the maximum value of the `ECT_INTEGER16` is 0x7fff = 32,767 and if we provide a maximum value of 10.0 then we want the 'ECT_REAL32' to be 10 when the 'ECT_INTEGER16' is 32,767 and the  'ECT_REAL32' to be 5 when the 'ECT_INTEGER16' is 16,383. 
 
+<a id="step-6"/>
+
 ## Step 6
 
 **Populate the slave info section of the machine map .c file**
@@ -480,6 +493,7 @@ The next step is the final bit of config needed in the `mymachine_map.c`. We nee
 MAP_SLAVE_EEP ({EK1100_EEP_NAME},{EL2008_EEP_NAME}, {EL1008_EEP_NAME},{EL2022_EEP_NAME}, {AKD_EEP_NAME, AKD_EEP_ID, AKD_EEP_MAN, AKD_EEP_REV});
 
 ```
+<a id="step-7"/>
 
 ## Step 7
 
@@ -525,6 +539,8 @@ Finally, `#define CTRL_ESTOP_DIN` defines the GBC io number (digital in) we are 
 
 `#define CTRL_ESTOP_RESET_DIN` defines the GBC io number (digital in) we are using for estop reset, this will have been mapped to a PDO in the iomap.
 
+<a id="step-8"/>
+
 ## Step 8
 
 **Check the config**
@@ -536,6 +552,8 @@ The first step in checking the config is to try and compile GBEM. Of course in a
 `./gbem -d -ieth0`
 
 The config checking process examines the config arrays and defines that you have made and looks for inconsistencies and problems and outputs to stdout messages and summaries of what you have configured. We strongly suggest you inspect the output of the config check carefully as lots of clues are given regarding any issues in the output.
+
+<a id="step-9"/>
 
 ## Step 9
 
