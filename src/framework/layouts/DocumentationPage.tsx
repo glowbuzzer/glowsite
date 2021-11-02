@@ -1,19 +1,15 @@
 import { ContexualLeftNav } from "../nav/ContexualLeftNav"
 import styled from "@emotion/styled"
 import { BaseLayout } from "./BaseLayout"
-import { Col, Row } from "antd"
-import {MenuUnfoldOutlined} from "@ant-design/icons";
+import { MenuUnfoldOutlined } from "@ant-design/icons"
 
 const StyledDiv = styled.div`
-    //display: flex;
-    //gap: 20px;
+    display: flex;
     height: 100%;
 
-    .ant-row {
-        height: 100%;
-    }
-
     .left {
+        flex-grow: 20;
+        flex-basis: 0;
         background: white;
 
         .collapsed {
@@ -23,7 +19,9 @@ const StyledDiv = styled.div`
         }
 
         @media (max-width: 768px) {
-            width: 50px;
+            flex-basis: 50px;
+            flex-grow: 0;
+          
             .full {
                 display: none;
             }
@@ -36,7 +34,8 @@ const StyledDiv = styled.div`
 
     .content {
         margin: 20px;
-        //flex-grow: 1;
+        flex-basis: 0;
+        flex-grow: 80;
     }
 
     // only format code elements outside of pre block
@@ -52,19 +51,15 @@ export const DocumentationPage = ({ children }) => {
     return (
         <BaseLayout>
             <StyledDiv>
-                <Row>
-                    <Col md={4} className="left">
-                        <div className="full">
-                            <ContexualLeftNav />
-                        </div>
-                        <div className="collapsed">
-                            <MenuUnfoldOutlined onClick={() => alert("TODO")}/>
-                        </div>
-                    </Col>
-                    <Col flex="auto">
-                        <div className="content">{children}</div>
-                    </Col>
-                </Row>
+                <div className="left">
+                    <div className="full">
+                        <ContexualLeftNav />
+                    </div>
+                    <div className="collapsed">
+                        <MenuUnfoldOutlined onClick={() => alert("TODO")} />
+                    </div>
+                </div>
+                <div className="content">{children}</div>
             </StyledDiv>
         </BaseLayout>
     )

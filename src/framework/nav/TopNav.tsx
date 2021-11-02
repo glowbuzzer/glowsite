@@ -6,14 +6,41 @@ import styled from "@emotion/styled"
 
 import { ReactComponent as StandardLogo } from "../../images/logos/small-logo.svg?inline"
 
-import { GithubOutlined, YoutubeOutlined } from "@ant-design/icons"
+import { GithubOutlined, MenuOutlined, YoutubeOutlined } from "@ant-design/icons"
 
 const StyledTopNav = styled.div`
+    .nav-narrow {
+        display: none;
+    }
+
+    @media (max-width: 950px) {
+        .nav-wide {
+            display: none;
+        }
+
+        .nav-narrow {
+            display: block;
+            text-align: right;
+          font-size: 1.5em;
+          cursor: pointer;
+        }
+    }
+
+    &&& {
+        .ant-menu-submenu {
+            margin: 0 8px;
+        }
+    }
+
     .ant-menu-submenu-title {
         :hover {
         }
 
         margin: 0 20px 0 20px;
+
+        @media (max-width: 1080px) {
+            margin: 0 8px 0 8px;
+        }
     }
 
     .ant-layout-header {
@@ -34,7 +61,16 @@ const StyledMenuItem = styled(Menu.Item)`
         height: auto;
         line-height: 20px;
 
+        a {
+            color: grey;
+        }
+
         :hover {
+            background: ${props => props.theme.color.MainPurple};
+
+            a {
+                color: white;
+            }
         }
 
         .title {
@@ -71,35 +107,47 @@ export const TopNav = () => {
                             <StandardLogo height={"43px"} width={"139px"} />
                         </a>
                     </StyledNavLogo>
-                    <StyleOffsiteLinks>
-                        <Space size="middle">
-                            <a href={"https://www.github.com/glowbuzzer"}>
-                                <GithubOutlined style={{ fontSize: "24px", color: "#9254de" }} />
-                            </a>
-                            <a href={"https://www.youtube.com/glowbuzzer"}>
-                                <YoutubeOutlined style={{ fontSize: "24px", color: "#9254de" }} />
-                            </a>
-                        </Space>
-                    </StyleOffsiteLinks>
+                    <div className="nav-wide">
+                        <StyleOffsiteLinks>
+                            <Space size="middle">
+                                <a href={"https://www.github.com/glowbuzzer"}>
+                                    <GithubOutlined
+                                        style={{ fontSize: "24px", color: "#9254de" }}
+                                    />
+                                </a>
+                                <a href={"https://www.youtube.com/glowbuzzer"}>
+                                    <YoutubeOutlined
+                                        style={{ fontSize: "24px", color: "#9254de" }}
+                                    />
+                                </a>
+                            </Space>
+                        </StyleOffsiteLinks>
 
-                    <Menu mode="horizontal" selectedKeys={[pathname]}>
-                        {nav.children.map(({ path, title, children }) =>
-                            children?.length ? (
-                                <Menu.SubMenu key={path} className={"capitalize"} title={title}>
-                                    {children.map(({ type, path, title, children }) => {
-                                        const to = children.length ? children[0].path : path
-                                        return (
-                                            <Menu.Item key={path}>
-                                                <Link to={to}>{title}</Link>
-                                            </Menu.Item>
-                                        )
-                                    })}
-                                </Menu.SubMenu>
-                            ) : (
-                                <Menu.SubMenu>NO CHILDREN</Menu.SubMenu>
-                            )
-                        )}
-                    </Menu>
+                        <Menu mode="horizontal" selectedKeys={[pathname]}>
+                            {nav.children.map(({ path, title, children }) =>
+                                children?.length ? (
+                                    <Menu.SubMenu key={path} className={"capitalize"} title={title}>
+                                        {children.map(({ path, title, subtitle, children }) => {
+                                            const to = children.length ? children[0].path : path
+                                            return (
+                                                <StyledMenuItem key={path}>
+                                                    <Link to={to}>
+                                                        <div className="title">{title}</div>
+                                                        <div className="subtitle">{subtitle}</div>
+                                                    </Link>
+                                                </StyledMenuItem>
+                                            )
+                                        })}
+                                    </Menu.SubMenu>
+                                ) : (
+                                    <Menu.SubMenu>NO CHILDREN</Menu.SubMenu>
+                                )
+                            )}
+                        </Menu>
+                    </div>
+                    <div className="nav-narrow">
+                        <MenuOutlined onClick={() => alert("todo")}/>
+                    </div>
                 </Header>
             </Layout>
         </StyledTopNav>
