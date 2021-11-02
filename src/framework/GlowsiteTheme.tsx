@@ -8,8 +8,16 @@ const GbColours = {
 }
 
 const AppStyle = styled.div`
-    font-family: Roboto;
+    font-family: Roboto, sans-serif;
     background: ${GbColours.BackgroundGrey};
+
+    max-width: 1400px;
+    height: 100vh;
+    margin: auto;
+
+    .capitalize {
+        text-transform: capitalize;
+    }
 `
 
 const AppTheme = {

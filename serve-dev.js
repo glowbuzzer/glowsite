@@ -7,6 +7,7 @@ const express = require('express')
 
 // read the antd css raw for later injection (dev mode only)
 const antd = fs.readFileSync("./src/glowsite-theme.css")
+const prism = fs.readFileSync("./node_modules/prismjs/themes/prism-tomorrow.css")
 
 /**
  * This file is based on ssr-react project in playground of vite main project. Removed the isProd code as we will never run
@@ -64,10 +65,14 @@ async function createServer(
             }
 
             // helmet will take care of updating head section dynamically in dev mode
+            // noinspection CssMissingComma
             const html = template
                 // in dev mode we inject the styled-component css and antd css manually to avoid FOUC
                 .replace(`<!--app-css-->`, `
-                    <style>${antd}</style>
+                    <style>
+                        ${antd}
+                        ${prism}
+                    </style>
                 `)
                 // replace body
                 .replace(`<!--app-html-->`, appHtml)

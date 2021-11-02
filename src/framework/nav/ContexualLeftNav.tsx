@@ -12,10 +12,16 @@ function* ancestors(node: Node): IterableIterator<Node> {
 }
 
 const StyledMenu = styled.div`
+    background: white;
+  
     .title {
         padding: 12px;
         font-size: 1.2em;
         font-weight: bold;
+    }
+
+    .ant-menu {
+        height: 100%;
     }
 `
 export const ContexualLeftNav = () => {
@@ -27,14 +33,14 @@ export const ContexualLeftNav = () => {
 
     return (
         <StyledMenu>
-            <div className="title">{title}</div>
+            <div className="title capitalize">{title}</div>
             <Menu mode="inline" defaultSelectedKeys={[pathname]} defaultOpenKeys={open}>
                 {children.map(({ name, title, path, children }) => {
                     if (children?.length) {
                         return (
                             <Menu.SubMenu key={path} className={"capitalize"} title={title}>
                                 {children.map(({ path, title, name }) => (
-                                    <Menu.Item key={path}>
+                                    <Menu.Item key={path} className="capitalize">
                                         <Link to={path}>{title || name}</Link>
                                     </Menu.Item>
                                 ))}
@@ -42,7 +48,7 @@ export const ContexualLeftNav = () => {
                         )
                     }
                     return (
-                        <Menu.Item key={path}>
+                        <Menu.Item key={path} className="capitalize">
                             <Link to={path}>{title || name}</Link>
                         </Menu.Item>
                     )

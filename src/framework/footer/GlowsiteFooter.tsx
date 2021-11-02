@@ -30,13 +30,13 @@ const OnDesktopHide = styled.div`
     }
 `
 
-export const MobileFooter = ({}) => (
+const MobileFooter = ({}) => (
     <div>
         <span>©2022 by glowbuzzer All Rights Reserved </span>
     </div>
 )
 
-export const DesktopFooter = ({}) => (
+const DesktopFooter = ({}) => (
     <div>
         <Row>
             <Col span={3}></Col>
