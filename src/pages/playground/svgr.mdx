@@ -1,11 +1,14 @@
+---
+title: SVGs
+---
 
 import {ReactComponent as MyImage} from "../docs/gbem/gbem_bbd.svg?inline"
 import myimg from "../docs/gbem/gbem_bbd.svg"
 
-# SVGR Plugin
+# Using SVGR plugin to inline SVG
 
 <MyImage width={"100%"}/>
 
-# Using url
+# Using regular import to include as url
 
 <img src={myimg} width="100%"/>
