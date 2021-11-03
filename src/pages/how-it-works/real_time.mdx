@@ -1,7 +1,9 @@
 ---
 title: Real-time communciation
+subtitle: How we get fast reaction to events
 sort: 8
 ---
+
 import { Row, Col } from 'antd';
 import Markdown from 'markdown-to-jsx';
 import {Tldr} from "../../framework/components/Tldr";
@@ -32,20 +34,19 @@ Response time guaranteed to be your cycle time (4 milliseconds down to 0.5 milli
     <TldrItem>Control machines with a web-stack</TldrItem>
     <TldrItem>Control all types of machine including robots</TldrItem>
     <TldrItem>Runs on Linux & Microcontrollers</TldrItem>
-    <TldrItem>Works with common fieldbusses</TldrItem>
     <TldrItem>Designed to be embedded</TldrItem>
 </Tldr>
 A question you must be asking yourself is "How can a React app running in the browser or on a desktop handle the 1ms responses times needed by industrial control applications?
 
-The simple answer is that it can’t but we solve this problem through our clever architecture.
+The simple answer is that it can’t, but we solve this problem through our clever architecture.
 
 Standard Windows/Mac desktops running a react application are subject to the Garbage Collection (GC) regime and the “moments” desktop PCs have which means your React control application can’t always respond to events occurring on the machine in real-time.
 
 We get around this limitation through supporting code being deployed into 4 tiers with differing response times.
 
+Important activities that need a 1ms response time are not handled in the React application but much of the control logic can.
 
-
-
+<div style={{width: "70%"}}>
 <Row>
     <Col span="20" style={{background: '#722ed7', color: '#ffff', padding: '10px 10px'}}><Markdown children={Tier1Md}/></Col>
 </Row>
@@ -58,7 +59,7 @@ We get around this limitation through supporting code being deployed into 4 tier
 <Row>
     <Col span="20" style={{background: '#d3adf7', color: '#ffff', padding: '10px 10px'}}><Markdown children={Tier4Md}/> </Col>
 </Row>
-
+</div>
 
 You need to architect your application carefully based on the response time needed to make sure the code runs in the right tier - usually 99% of the code lives in Tier1 and just some small specialised functions live in the other tiers.
 

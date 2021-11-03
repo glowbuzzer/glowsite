@@ -1,4 +1,5 @@
 import { DocumentationPage } from "../../../framework/layouts/DocumentationPage"
 
-export const title = "Drive related blogs"
+export const title = "Drives"
+export const subtitle = "Blogs about drives (servo, stepper)"
 export const layout = DocumentationPage

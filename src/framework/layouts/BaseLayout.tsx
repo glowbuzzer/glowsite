@@ -9,6 +9,7 @@ const StyledLayout = styled.div`
 
     .body {
         flex-grow: 1;
+        background: #fafafa;
     }
 `
 

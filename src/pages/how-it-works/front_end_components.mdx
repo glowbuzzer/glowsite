@@ -1,12 +1,9 @@
 ---
 title: Front-end components
+subtitle: Building a machine control in React
 sort: 9
 ---
 
-
-import {Tabs} from "antd";
-import {Tldr} from "../../framework/components/Tldr";
-export const TabPane = Tabs.TabPane;
 
 
 # Front-end components
@@ -17,8 +14,14 @@ export const TabPane = Tabs.TabPane;
     <TldrItem>Works with common fieldbusses</TldrItem>
     <TldrItem>Designed to be embedded</TldrItem>
 </Tldr>
+
 ## React components
 The glowbuzzer tookit ships with many front-end React components. You will probably use some of these components unmodified (e.g., the component to connect to a machine) while others can be the starting point for you to modify to your specific needs.
+
+import {Tabs} from "antd"
+import {Tldr} from "../../framework/components/Tldr";
+export const TabPane = Tabs.TabPane;
+
 
 
 

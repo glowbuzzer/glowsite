@@ -37,14 +37,14 @@ export const CarouselSettings = {
 }
 
 const CarouselWrapper = styled(Carousel)`
-    .slick-dots li button {
+    > .slick-dots li button {
         width: 6px !important;
         height: 6px !important;
         border-radius: 100% !important;
         background: grey !important;
     }
 
-    .slick-dots li.slick-active button {
+    > .slick-dots li.slick-active button {
         width: 7px !important;
         height: 7px !important;
         border-radius: 100% !important;
