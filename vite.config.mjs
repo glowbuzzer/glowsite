@@ -1,48 +1,59 @@
-import react from '@vitejs/plugin-react'
-import tsconfigPaths from 'vite-tsconfig-paths'
-import mdx from 'vite-plugin-mdx'
-import {imagetools} from 'vite-imagetools/packages/vite/dist/index.cjs'
-// import macrosPlugin from "vite-plugin-babel-macros"
-import remarkMermaid from "./plugins/remark-mermaid.mjs";
-import remarkCodeblock from "./plugins/remark-codeblock.mjs";
-import vx from 'vite-plugin-virtual'
+import react from "@vitejs/plugin-react"
+import tsconfigPaths from "vite-tsconfig-paths"
+import { imagetools } from "vite-imagetools/packages/vite/dist/index.cjs"
+import vx from "vite-plugin-virtual"
 import gbc from "./plugins/data/data-gbcschema.mjs"
-import remarkGlowbuzzerFrontmatter from "./plugins/remark-gb-frontmatter.mjs";
-import {glowsiteSvgrPlugin} from "./plugins/vite-plugin-gb-svgr.mjs";
-import {glowsiteImageToolsPresets, glowsiteOutputFormats} from "./plugins/imagetools-ext.mjs";
+// import { glowsiteSvgrPlugin as svgr } from "./plugins/vite-plugin-svgr.mjs"
+import {
+    glowsiteImageToolsPresets as resolveConfigsFactory,
+    glowsiteOutputFormats as extendOutputFormats
+} from "./plugins/imagetools-ext.mjs"
+import mdx from "@mdx-js/rollup"
+import remarkMermaid from "./plugins/remark-mermaid.mjs"
+import remarkCodeblock from "./plugins/remark-codeblock.mjs"
+import remarkGlowbuzzerFrontmatter from "./plugins/remark-frontmatter.mjs"
 import remarkPrism from "remark-prism"
+import {svgWrapper as svgr} from "./plugins/svr-plugin-wrapper.mjs";
 
 // not sure why we need this hack, their ESM module looks okay
 const virtual = vx.default
-
-const {pages: gbcschema} = gbc
+const { pages: gbcschema } = gbc
+const resolveConfigs = resolveConfigsFactory(/* put custom presets here */)
 
 /**
  * @type {import('vite').UserConfig}
  */
 export default {
     plugins: [
-        react(),
-        glowsiteSvgrPlugin(),
-        imagetools({
-            extendOutputFormats: glowsiteOutputFormats,
-            resolveConfigs: glowsiteImageToolsPresets()
-        }),
-        virtual({
-            // 'virtual:module': `export default { hello: 'world' }`,
-            'virtual:gbcschema': gbcschema
-        }),
-        tsconfigPaths(),
-        mdx.default({
+        mdx({
             remarkPlugins: [
                 remarkMermaid,
                 remarkCodeblock,
                 remarkGlowbuzzerFrontmatter,
-                remarkPrism,
+                remarkPrism
             ]
-        })],
+        }),
+        react(),
+        svgr(),
+        imagetools({
+            extendOutputFormats,
+            resolveConfigs
+        }),
+        virtual({
+            // 'virtual:module': `export default { hello: 'world' }`,
+            "virtual:gbcschema": gbcschema
+        }),
+        tsconfigPaths()
+    ],
+    resolve: {
+        alias: {
+            // because react@17.x still uses cjs module syntax and we are fully esm
+            // https://github.com/mdx-js/mdx/discussions/1794
+            "react/jsx-runtime": "react/jsx-runtime.js"
+        }
+    },
     build: {
-        minify: false,
+        minify: false
         // manifest: true,
         // ssrManifest: true
     }
