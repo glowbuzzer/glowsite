@@ -4,6 +4,8 @@ import * as React from "react"
 import { useRoutes } from "./providers/NavProvider"
 import { Helmet } from "react-helmet"
 import { FallbackLayout } from "./layouts/FallbackLayout"
+import * as NotFound from "../pages/404.mdx"
+import {BaseLayout} from "./layouts/BaseLayout";
 
 /**
  * Emits all site routes
@@ -28,6 +30,14 @@ export const GlowsiteRouter = () => {
                     </Route>
                 )
             })}
+            <Route>
+                {/* 404 route */}
+                <Helmet>
+                    <meta charSet="utf-8" />
+                    <title>Not Found</title>
+                </Helmet>
+                <BaseLayout><NotFound.default/></BaseLayout>
+            </Route>
         </>
     )
 }
