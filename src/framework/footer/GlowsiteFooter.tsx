@@ -6,7 +6,6 @@ import { GithubOutlined, YoutubeOutlined } from "@ant-design/icons"
 const StyledFooter = styled.div`
     padding: 20px 100px;
     background-color: #d9d9d9;
-    height: 200px;
     text-align: center;
 `
 
@@ -20,12 +19,14 @@ const StyledA = styled.a`
 const OnMobileHide = styled.div`
     @media (max-width: 400px) {
         display: none;
+        height: 50px;
     }
 `
 
 const OnDesktopHide = styled.div`
     @media (min-width: 401px) {
         display: none;
+        height: 200px;
     }
 `
 

@@ -5,6 +5,7 @@ import * as React from "react"
 import styled from "@emotion/styled"
 
 import { ReactComponent as StandardLogo } from "../../images/logos/small-logo.svg?inline"
+import { ReactComponent as SmallLogo } from "../../images/logos/tiny-logo.svg?inline"
 
 import { GithubOutlined, MenuOutlined, YoutubeOutlined } from "@ant-design/icons"
 
@@ -21,8 +22,8 @@ const StyledTopNav = styled.div`
         .nav-narrow {
             display: block;
             text-align: right;
-          font-size: 1.5em;
-          cursor: pointer;
+            font-size: 1.5em;
+            cursor: pointer;
         }
     }
 
@@ -85,7 +86,6 @@ const StyleOffsiteLinks = styled.div`
 
 const StyledNavLogo = styled.div`
     float: left;
-    background: ${props => props.theme.color.TopNav};
     padding: 10px 20px 10px 0;
     height: 64px;
 `
@@ -102,12 +102,12 @@ export const TopNav = () => {
         <StyledTopNav>
             <Layout>
                 <Header>
-                    <StyledNavLogo>
-                        <a href="/">
-                            <StandardLogo height={"43px"} width={"139px"} />
-                        </a>
-                    </StyledNavLogo>
                     <div className="nav-wide">
+                        <StyledNavLogo>
+                            <a href="/">
+                                <StandardLogo height={"43px"} width={"139px"} />
+                            </a>
+                        </StyledNavLogo>
                         <StyleOffsiteLinks>
                             <Space size="middle">
                                 <a href={"https://www.github.com/glowbuzzer"}>
@@ -146,7 +146,12 @@ export const TopNav = () => {
                         </Menu>
                     </div>
                     <div className="nav-narrow">
-                        <MenuOutlined onClick={() => alert("todo")}/>
+                        <StyledNavLogo>
+                            <a href="/">
+                                <SmallLogo height={"43px"} width={"43px"} />
+                            </a>
+                        </StyledNavLogo>
+                        <MenuOutlined onClick={() => alert("todo")} />
                     </div>
                 </Header>
             </Layout>
