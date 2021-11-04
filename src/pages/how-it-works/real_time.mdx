@@ -5,7 +5,6 @@ sort: 8
 ---
 
 import { Row, Col } from 'antd';
-import Markdown from 'markdown-to-jsx';
 import {Tldr} from "../../framework/components/Tldr";
 
 export const Tier1Md = `#Tier 1
@@ -31,10 +30,10 @@ Response time guaranteed to be your cycle time (4 milliseconds down to 0.5 milli
 
 # Real-time communication
 <Tldr>
-    <TldrItem>Control machines with a web-stack</TldrItem>
-    <TldrItem>Control all types of machine including robots</TldrItem>
-    <TldrItem>Runs on Linux & Microcontrollers</TldrItem>
-    <TldrItem>Designed to be embedded</TldrItem>
+- Control machines with a web-stack
+- Control all types of machine including robots
+- Runs on Linux & Microcontrollers
+- Designed to be embedded
 </Tldr>
 A question you must be asking yourself is "How can a React app running in the browser or on a desktop handle the 1ms responses times needed by industrial control applications?
 
@@ -48,16 +47,16 @@ Important activities that need a 1ms response time are not handled in the React 
 
 <div style={{width: "70%"}}>
 <Row>
-    <Col span="20" style={{background: '#722ed7', color: '#ffff', padding: '10px 10px'}}><Markdown children={Tier1Md}/></Col>
+    <Col span="20" style={{background: '#722ed7', color: '#ffff', padding: '10px 10px'}}><div children={Tier1Md}/></Col>
 </Row>
 <Row>
-    <Col span="20" style={{background: '#9254de', color: '#ffff', padding: '10px 10px'}}><Markdown children={Tier2Md}/></Col>
+    <Col span="20" style={{background: '#9254de', color: '#ffff', padding: '10px 10px'}}><div children={Tier2Md}/></Col>
 </Row>
 <Row>
-    <Col span="20" style={{background: '#b37feb', color: '#ffff', padding: '10px 10px'}}><Markdown children={Tier3Md}/> </Col>
+    <Col span="20" style={{background: '#b37feb', color: '#ffff', padding: '10px 10px'}}><div children={Tier3Md}/> </Col>
 </Row>
 <Row>
-    <Col span="20" style={{background: '#d3adf7', color: '#ffff', padding: '10px 10px'}}><Markdown children={Tier4Md}/> </Col>
+    <Col span="20" style={{background: '#d3adf7', color: '#ffff', padding: '10px 10px'}}><div children={Tier4Md}/> </Col>
 </Row>
 </div>
 

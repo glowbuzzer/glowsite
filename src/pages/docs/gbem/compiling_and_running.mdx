@@ -17,16 +17,16 @@ cmake ..
 make
 ```
 
-There is a single main executable, GBEM, which is run with a number of command line options. 
+There is a single main executable, GBEM, which is run with a number of command line options.
 
-To do any substantial development with GBEM, the code will need to be imported into your IDE of choice (for example JetBrains CLion <https://www.jetbrains.com/clion>). The provided CMakeLists files provides a basis for IDEs that use CMake but the code is simple and should be easy to import into any IDE.
+To do any substantial development with GBEM, the code will need to be imported into your IDE of choice (for example [JetBrains CLion](https://www.jetbrains.com/clion). The provided CMakeLists files provides a basis for IDEs that use CMake but the code is simple and should be easy to import into any IDE.
 
 ## Command line options
 
 The main command line modes are:
 
 1. cyclic "-c" - run GBEM in cyclic mode (normal)
-2. netscan "-n" - run GBEM in netscan mode (**without** applying PDO mapping) 
+2. netscan "-n" - run GBEM in netscan mode (**without** applying PDO mapping)
 3. netscan "-m" - run GBEM in netscan mode (**with** applying PDO mapping
 4. machine config - "" - run GBEM to check and print machine configuration
 
@@ -79,7 +79,7 @@ This allows you to save 50 MB of data to `/mnt/ramdisk`. After a restart, you ca
 sudo df -h
 ````
 
- 
+
 
 ## Running for the first time
 
@@ -121,7 +121,7 @@ Create a directory, `rpi_new_kernel` on your PC, and a subdirectory `rpi_rt_kern
 
 ```sh
 mkdir ~/rpi_new_kernel
-cd ~/rpi_new_kernel 
+cd ~/rpi_new_kernel
 mkdir rpi_rt_kernel
 ```
 
@@ -151,10 +151,10 @@ make bcm2711_defconfig
 To compile the kernel you need to type the following:
 
 ```sh
-make -j8 zImage 
-make -j8 modules 
-make -j8 dtbs 
-make -j8 modules_install 
+make -j8 zImage
+make -j8 modules
+make -j8 dtbs
+make -j8 modules_install
 make -j9 dtbs_install
 ```
 

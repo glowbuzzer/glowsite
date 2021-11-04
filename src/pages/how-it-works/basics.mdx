@@ -6,7 +6,6 @@ sort: 1
 
 import { Row, Col, Divider} from 'antd';
 import {CheckCircleOutlined} from '@ant-design/icons'
-import Markdown from "markdown-to-jsx";
 import {Tldr} from "../../framework/components/Tldr";
 import {YoutubeEmbed} from "../../framework/components/Video";
 
@@ -26,15 +25,15 @@ This gives you the ability to build a sophisticated control for complex machines
 # Basically, how does it work?
 
 <Tldr>
-    <TldrItem>Control machines with a web-stack</TldrItem>
-    <TldrItem>Control all types of machine including robots</TldrItem>
-    <TldrItem>Runs on Linux & Microcontrollers</TldrItem>
-    <TldrItem>Works with common fieldbusses</TldrItem>
-    <TldrItem>Designed to be embedded</TldrItem>
+- Control machines with a web-stack
+- Control all types of machine including robots
+- Runs on Linux & Microcontrollers
+- Works with common fieldbusses
+- Designed to be embedded
 </Tldr>
 
 
-<Markdown children={TextMd} options={{ forceBlock: true }}/>
+<div children={TextMd}/>
 
 
 <YoutubeEmbed embedId="hwCXSckISXM" />

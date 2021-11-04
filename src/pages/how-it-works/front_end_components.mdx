@@ -4,26 +4,23 @@ subtitle: Building a machine control in React
 sort: 9
 ---
 
-
+import {Tabs} from "antd"
+import {Tldr} from "../../framework/components/Tldr";
+import {Link} from "react-router-dom"
 
 # Front-end components
+
 <Tldr>
-    <TldrItem>Control machines with a web-stack</TldrItem>
-    <TldrItem>Control all types of machine including robots</TldrItem>
-    <TldrItem>Runs on Linux & Microcontrollers</TldrItem>
-    <TldrItem>Works with common fieldbusses</TldrItem>
-    <TldrItem>Designed to be embedded</TldrItem>
+    - Control machines with a web-stack
+    - Control all types of machine including robots
+    - Runs on Linux & Microcontrollers
+    - Works with common fieldbusses
+    - Designed to be embedded
 </Tldr>
 
 ## React components
+
 The glowbuzzer tookit ships with many front-end React components. You will probably use some of these components unmodified (e.g., the component to connect to a machine) while others can be the starting point for you to modify to your specific needs.
-
-import {Tabs} from "antd"
-import {Tldr} from "../../framework/components/Tldr";
-export const TabPane = Tabs.TabPane;
-
-
-
 
 We have selected a handful of the components here to give you a flavour of what's available. But see: <Link to="/docs/ui/getting_started">User interface Documentation</Link> to see the full suite of components.
 
@@ -37,23 +34,23 @@ We have selected a handful of the components here to give you a flavour of what'
 * **Robot/machine view** - for machines with non-trivial kinematics (robots) shows a 3d view of the machine
 * **Telemetry** - shows the trajectories that are sent to drives (for diagnostic purposes)
 
-<Tabs defaultActiveKey="1" >
-    <TabPane tab="Machine connection" key="1">
+<Tabs defaultActiveKey="1">
+    <Tabs.TabPane tab="Machine connection" key="1">
         The machine connection
-    </TabPane>
-    <TabPane tab="Joint DRO" key="2">
+    </Tabs.TabPane>
+
+    <Tabs.TabPane tab="Joint DRO" key="2">
         Content of Tab Pane 2
-    </TabPane>
-    <TabPane tab="Bit Field Display" key="3">
+    </Tabs.TabPane>
+
+    <Tabs.TabPane tab="Bit Field Display" key="3">
         The bitfield display is used
-    </TabPane>
+    </Tabs.TabPane>
 </Tabs>
-
-
 
 You will import the controls you need into your project:
 
-````js
+```js
 import {
     CartesianDro,
     ConnectTile,
@@ -64,13 +61,12 @@ import {
     JogTile,
     ToolPathTile
 } from "@glowbuzzer/controls"
-````
-
-
+```
 
 ## HMI options
 
 ### React on mobile
+
 Front-ends built with the glowbuzzer toolkit are web applications and any device running a modern browser that uses the V8 engine (Chrome, and Chromium based browsers e.g., Microsoft Edge, Opera etc.) can happily display the applications. This includes many HMI panels available.
 
 However, sometimes you need your application to run as a proper application on the mobile device (phone/tablet running Android or IoS). Most of the time you interact with an app on your phone or tablet (banking, facebook etc.) it is with an app actually running on the device, not through the browser, as it gives the developers the mechanisms to build a much better user experience.
@@ -84,6 +80,7 @@ You can have a shared codebase between Android and iOS apps. Huge number of libr
 Downsides: slightly less performance especially for data-heavy apps. But it’s good enough for most of Facebook though!
 
 ### Android on embedded
+
 Can run android on non-phone devices e.g. HMIs
 
 Industrial Android, as the name suggests, is a great option for customers looking to introduce innovation to their factories, plants and devices through user-friendly, familiar-looking HMIs.
