@@ -5,7 +5,7 @@ import { GlowsiteFooter } from "../footer/GlowsiteFooter"
 const StyledLayout = styled.div`
     display: flex;
     flex-direction: column;
-    height: 100vh;
+    min-height: 100vh;
 
     .body {
         flex-grow: 1;

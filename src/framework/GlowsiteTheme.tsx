@@ -7,11 +7,15 @@ const GbColours = {
     TopNav: "#d9d9d9"
 }
 
+const Background = styled.div`
+    background: ${GbColours.BackgroundGrey};
+`
+
 const AppStyle = styled.div`
     font-family: Roboto, sans-serif;
     background: ${GbColours.BackgroundGrey};
     max-width: 1400px;
-    height: 100vh;
+    min-height: 100vh;
     margin: auto;
 
     .capitalize {
@@ -31,6 +35,8 @@ declare module "@emotion/react" {
 
 export const GlowsiteTheme = ({ children }) => (
     <ThemeProvider theme={AppTheme}>
-        <AppStyle>{children}</AppStyle>
+        <Background>
+            <AppStyle>{children}</AppStyle>
+        </Background>
     </ThemeProvider>
 )

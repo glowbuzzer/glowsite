@@ -1,11 +1,11 @@
-import { Route } from "react-router"
+import { Route, Switch } from "react-router"
 import { TypedocItem } from "../typedoc/TypedocItem"
 import * as React from "react"
 import { useRoutes } from "./providers/NavProvider"
 import { Helmet } from "react-helmet"
 import { FallbackLayout } from "./layouts/FallbackLayout"
 import * as NotFound from "../pages/404.mdx"
-import {BaseLayout} from "./layouts/BaseLayout";
+import { BaseLayout } from "./layouts/BaseLayout"
 
 /**
  * Emits all site routes
@@ -15,8 +15,7 @@ export const GlowsiteRouter = () => {
     const routes = useRoutes()
 
     return (
-        <>
-            <Route path={"/docs/gbc/schema/:name"} component={TypedocItem} />
+        <Switch>
             {routes.map(({ path, title, layout, component: RouteComp }) => {
                 const Layout = layout || FallbackLayout
                 return (
@@ -30,14 +29,17 @@ export const GlowsiteRouter = () => {
                     </Route>
                 )
             })}
+            <Route path={"/docs/gbc/schema/:name"} component={TypedocItem} />
             <Route>
                 {/* 404 route */}
                 <Helmet>
                     <meta charSet="utf-8" />
                     <title>Not Found</title>
                 </Helmet>
-                <BaseLayout><NotFound.default/></BaseLayout>
+                <BaseLayout>
+                    <NotFound.default />
+                </BaseLayout>
             </Route>
-        </>
+        </Switch>
     )
 }
