@@ -8,7 +8,7 @@ import {CheckCircleOutlined} from '@ant-design/icons'
 import {Tldr} from "../../framework/components/Tldr";
 import {YoutubeEmbed} from "../../framework/components/Video";
 
-import { ReactComponent as StandardLogo } from "../../images/logos/small-logo.svg?inline"
+import ImageTest from './test.svg'
 
 # Basically, how does it work?
 
@@ -20,12 +20,11 @@ import { ReactComponent as StandardLogo } from "../../images/logos/small-logo.sv
     - Designed to be embedded
 </Tldr>
 
-<StandardLogo/>
-
+<img src={ImageTest} width="100%"/>
 
 The glowbuzzer toolkit allows you to build machine control applications using a web stack.
 
-A machine is a combination of motors and IO. It could be an industrial robot arm, a cutting machine, a piece of laboratory equipment.
+A machine is a combination of motors and IO. It could be an industrial robot arm, a cutting machine, a piece of laboratory equipment, whatever your machine is.
 
 At a high level, you take the glowbuzzer toolkit’s React components and use them either unchanged, extended or added to with your own custom components to build the visual front-end and control logic for your machine control.
 

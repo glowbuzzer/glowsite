@@ -3,18 +3,25 @@ title: Fieldbus
 subtitle: How does the fieldbus interface work
 sort: 7
 ---
-
-import { Carousel} from 'antd'
+import {StandardCarousel} from "../../framework/components/Carousel"
 import {Tldr} from "../../framework/components/Tldr"
+
+import Image1Fieldbus from './fieldbus_images/fiedlbus_canopen.svg'
+import Image2Fieldbus from './fieldbus_images/fieldbus_ethercat.svg'
+import Image3Fieldbus from './fieldbus_images/fieldbus_ethernetip.svg'
+import Image4Fieldbus from './fieldbus_images/fieldbus_powerlink.svg'
+import Image5Fieldbus from './fieldbus_images/fieldbus_profinet.svg'
+import Image6Fieldbus from './fieldbus_images/fieldbus_sercos.svg'
+
 
 # How does glowbuzzer woks with different fieldbusses?
 
 <Tldr>
-- Control machines with a web-stack
-- Control all types of machine including robots
-- Runs on Linux & Microcontrollers
-- Works with common fieldbusses
-- Designed to be embedded
+- Integrates with main industrial fieldbusses
+- EtherCAT is reference architecture
+- Supports OpenSource fieldbus stacks
+- Integrates with Hislcher NetX & Microchip LAN9252
+
 </Tldr>
 
 ## Introduction
@@ -33,55 +40,16 @@ EtherCAT is the primary fieldbus we support. Mainly because of the wide range of
 1. Powerlink
 
 
-export const carouselContentStyle = {
-    width: "500px",
-    height: "40px",
-    color: '#0',
-};
 
-import Image1Fieldbus from './fieldbus_images/fiedlbus_canopen.svg'
-import Image2Fieldbus from './fieldbus_images/fieldbus_ethercat.svg'
-import Image3Fieldbus from './fieldbus_images/fieldbus_ethernetip.svg'
-import Image4Fieldbus from './fieldbus_images/fieldbus_powerlink.svg'
-import Image5Fieldbus from './fieldbus_images/fieldbus_profinet.svg'
-import Image6Fieldbus from './fieldbus_images/fieldbus_sercos.svg'
+<StandardCarousel width={"500px"} height={"120px"} fade={true} labelsOn={false} dotsTop={'480px'} dotsOn={false} pauseOnHover={false} imgdata={[
+    [`${Image1Fieldbus}`, "image1"],
+    [`${Image2Fieldbus}`, "image2"],
+    [`${Image3Fieldbus}`, "image3"],
+    [`${Image4Fieldbus}`, "image4"],
+    [`${Image5Fieldbus}`, "image5"],
+    [`${Image6Fieldbus}`, "image6"],
+]} />
 
-
-export const settings = {
-    arrows: false,
-    dots: false,
-    pauseOnHover: true,
-    infinite: true,
-    speed: 2000,
-    centerMode: true,
-    autoplay: true,
-    fade: true,
-    variableWidth: false,
-    adaptiveHeight: true,
-}
-
-<div style={carouselContentStyle}>
-<Carousel {...settings}>
-<div>
-    <img src={Image1Fieldbus} width="100px"/>
-    </div>
-    <div>
-        <img src={Image2Fieldbus} width="100px" />
-    </div>
-    <div>
-        <img src={Image3Fieldbus} width="100px"/>
-    </div>
-    <div>
-        <img src={Image4Fieldbus} width="100px"/>
-    </div>
-    <div>
-        <img src={Image5Fieldbus} width="100px"/>
-    </div>
-    <div>
-        <img src={Image6Fieldbus} width="100px" />
-    </div>
-</Carousel>
-</div>
 
 We are taking a keen interest in the development of OPC/UA TSN and have examples working in the lab.
 

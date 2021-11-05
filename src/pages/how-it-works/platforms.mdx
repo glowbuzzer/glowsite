@@ -6,13 +6,20 @@ sort: 3
 import {StandardCarousel} from "../../framework/components/Carousel"
 import {Tldr} from "../../framework/components/tldr"
 
+import Image1Platform from './platform_images/platform_ipc.svg'
+import Image2Platform from './platform_images/platform_sbc.svg'
+import Image3Platform from './platform_images/platform_som.svg'
+import Image4Platform from './platform_images/platform_stm32.svg'
+
+
 # What platforms does the glowbuzzer toolkit run on?
 
 <Tldr>
-- Control machines with a web-stack
-- Control all types of machine including robots
-- Runs on Linux & Microcontrollers
-- Works with common fieldbusses
+    - Runs on desktop Linux
+    - Runs on embedded Linux
+    - Runs on microcontroller (STM32)
+    - Integrates with main fieldbusses
+    - Integrates with motor drivers over SPI for embedded applications
 </Tldr>
 
 
@@ -38,12 +45,8 @@ Industrial PCs come in two flavours:
   * To use either option will require multiple Ethernet ports or Ethernet+WiFi. One Ethernet port will be devoted to EtherCAT traffic and the other to communicating over websockets to the React front-end software.
   * GBC runs on low-end hardware but needs multiple cores. The lowest specification we would recommend would be a quad-core running at 1+ GHz and having 1+ GB of RAM.
 
-import Image1Platform from './platform_images/platform_ipc.svg'
-import Image2Platform from './platform_images/platform_sbc.svg'
-import Image3Platform from './platform_images/platform_som.svg'
-import Image4Platform from './platform_images/platform_stm32.svg'
 
-<StandardCarousel width={"500px"} height={"500px"} fade={true} dotsTop={'480px'} dotsOn={false} pauseOnHover={false} imgdata={[[`${Image1Platform}`, "Linux IPC"],[`${Image2Platform}`, "Linux SBC"],[`${Image3Platform}`, "Linux SoM"],[`${Image4Platform}`,"STM32 Microcontroller"]]} />
+<StandardCarousel width={"500px"} height={"200px"} fade={true} dotsTop={'480px'} dotsOn={false} pauseOnHover={false} imgdata={[[`${Image1Platform}`, "Linux IPC"],[`${Image2Platform}`, "Linux SBC"],[`${Image3Platform}`, "Linux SoM"],[`${Image4Platform}`,"STM32 Microcontroller"]]} />
 
 # Drive and IO interfacing (GBEM/GBSM)
 
