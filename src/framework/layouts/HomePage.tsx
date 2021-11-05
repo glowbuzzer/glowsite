@@ -2,6 +2,7 @@ import { BaseLayout } from "./BaseLayout"
 import { Row, Col, Space } from "antd"
 import styled from "@emotion/styled"
 import { HomeCarousel } from "../components/HomeCarousel"
+import { YoutubeEmbed } from "../components/Video"
 
 import { ReactComponent as StackIcon } from "../../images/home_icons/stack-icon.svg?inline"
 import { ReactComponent as BeautifulIcon } from "../../images/home_icons/beautiful-icon.svg?inline"
@@ -37,7 +38,12 @@ export const HomePage = () => {
 
                 <img src={HexImage} />
 
-                <Space direction="horizontal" style={{ width: "100%", justifyContent: "center" }}>
+                <YoutubeEmbed embedId="hwCXSckISXM" />
+
+                <Space
+                    direction="horizontal"
+                    style={{ width: "100%", justifyContent: "center", marginTop: "30px" }}
+                >
                     <div style={{ textAlign: "center", fill: "#9254de" }}>
                         <Row justify={"center"}>
                             <Col span={8}>
