@@ -7,21 +7,22 @@ sort: 6
 
 ## Introduction
 
+
 You can use GBEM without writing any new c code if you work with the types of drives/slaves we have pre-configured. These include a a range of slaves from Beckhoff, Oriental Motor, JVL, Kollmorgen, Panasonic, Omron, Delta, Cannon, nanotec, Trinamic, Delta etc. (see [DRIVE SUPPORT](/docs/gbem/drive_support_overview)).
 
 If you want to add support for new slaves from different manufacturers then some very basic c programming know-how is needed - see [ADDING A NEW SLAVE](/docs/gbem/adding_a_new_slave) &  [ADDING A NEW DRIVE](/docs/gbem/adding_a_new_drive).
 
 If you are using the pre-configured drives/slaves (or have already written your drive / slave interfaces) the steps involved in creating a machine configuration are:
 
-1. Create a new pair of machine .h and .c files (`mymachine_map.c` & `mymachine_map.h`that will hold the configuration of your new machine <a href="#step-1">Step 1</a>
-2. Edit the `map_config` files to add in a #define for your new machine <a href="#step-2">Step 2</a>
-3. Add links in the new `mymachine_map.c` file to existing functions for slave configuration <a href="#step-3">Step 3</a>
-4. Add links in the `mymachine_map.c` file to existing functions for drive control <a href="#step-4">Step 4</a>
-5. Define the iomap (how different EtherCAT IO is mapped to PLC and GBC IO) in the `mymachine_map.c` file <a href="#step-5">Step 5</a>
-6. Layout the order slaves appear on the network and key information about them in an array in the `mymachine_map.c` file <a href="(#step-6">Step 6</a>
-7. In the `mymachine_map.h` file,  define the configuration parameters for the EtherCAT network <a href="#step-7">Step 7</a>
-8. Check the config for misconfiguration by running `GBEM -d`  <a href="#step-8">Step 8</a>
-9. Test the machine! <a href="(#step-9">Step 9</a>
+1. Create a new pair of machine .h and .c files (`mymachine_map.c` & `mymachine_map.h`that will hold the configuration of your new machine [Step 1](#Step-1)
+1. Edit the `map_config` files to add in a #define for your new machine [Step 2](#step-2)
+1. Add links in the new `mymachine_map.c` file to existing functions for slave configuration [Step 3](#step-3)
+1. Add links in the `mymachine_map.c` file to existing functions for drive control [Step 4](#step-4)
+1. Define the iomap (how different EtherCAT IO is mapped to PLC and GBC IO) in the `mymachine_map.c` file [Step 5](#step-5)
+1. Layout the order slaves appear on the network and key information about them in an array in the `mymachine_map.c` file [Step 6](#step-6)
+1. In the `mymachine_map.h` file,  define the configuration parameters for the EtherCAT network [Step 7](#step-7)
+1. Check the config for misconfiguration by running `GBEM -d`  [Step 8](#step-8)
+1. Test the machine! [Step 9](#step-9)
 
 There are plenty of examples of machine maps provided in the `libs/machine_mapping/src/machines` and `libs/machine_mapping/inc/machines` directories for you to look at. We strongly suggest that you have a look at the examples before you try and create your own. Often you will be able to find one that behaves in a similar manner to your machine and can adapt it.
 
@@ -65,7 +66,6 @@ The `mymachine_map.c` needs to include the header files for the libraries of the
 The entire `mymachine_map.c` file's contents needs to be enclosed in a `#if MACHINE_CONVEYORS == 1` ... `#endif`to stop it from being included in the compilation when the machine is not enabled with the #define.
 
 <a id="step-2"/>
-
 ## Step 2
 
 **Edit  the `map_config.h` & `map_config.c` files**

@@ -8,7 +8,7 @@ import {CheckCircleOutlined} from '@ant-design/icons'
 import {Tldr} from "../../framework/components/Tldr";
 import {YoutubeEmbed} from "../../framework/components/Video";
 
-import { ReactComponent as StandardLogo } from "../../images/logos/small-logo.svg?inline"
+import ImageBbd from './bbd3.svg'
 
 # Basically, how does it work?
 
@@ -20,16 +20,13 @@ import { ReactComponent as StandardLogo } from "../../images/logos/small-logo.sv
     - Designed to be embedded
 </Tldr>
 
-<StandardLogo/>
-
-
-The glowbuzzer toolkit allows you to build machine control applications using a web stack.
-
-A machine is a combination of motors and IO. It could be an industrial robot arm, a cutting machine, a piece of laboratory equipment.
+A machine is a combination of motors and IO. It could be an industrial robot arm, a cutting machine, a piece of laboratory equipment, whatever your machine is.
 
 At a high level, you take the glowbuzzer toolkit’s React components and use them either unchanged, extended or added to with your own custom components to build the visual front-end and control logic for your machine control.
 
 This user interface and control logic code runs either in the browser or as a desktop application or on a mobile device.
+
+The glowbuzzer toolkit allows you to build machine control applications using a web stack.
 
 Where a front-end component needs to make the machine perform an action (move or turn something on or off) it issues commands over a WebSocket interface. When a front-end component needs to interact with the state of the machine it reads from a WebSocket interface.
 
@@ -40,6 +37,9 @@ It is this software’s responsibility to translate the high-level instructions 
 At is simplest, a browser running your React machine control application is talking WebSockets over the network to the real-time control and EtherCAT master running on a Linux platform which is connected to a fieldbus (containing drives and IO) or to embedded drives and IO.
 
 This gives you the ability to build a sophisticated control for complex machines and robots using a modern web and open software stack with absolutely no proprietary hardware required.
+
+<img src={ImageBbd} width="100%"/>
+
 
 
 <YoutubeEmbed embedId="hwCXSckISXM" />

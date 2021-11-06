@@ -9,10 +9,10 @@ import {Tldr} from "../../framework/components/Tldr";
 
 # Real-time communication
 <Tldr>
-    - Control machines with a web-stack
-    - Control all types of machine including robots
-    - Runs on Linux & Microcontrollers
-    - Designed to be embedded
+    - Different tiers support different response times
+    - Can place user code in all tiers
+    - Response times vary by tier - 1ms -> 100ms
+    - React layer is least responsive
 </Tldr>
 A question you must be asking yourself is "How can a React app running in the browser or on a desktop handle the 1ms responses times needed by industrial control applications?
 
@@ -27,32 +27,32 @@ Important activities that need a 1ms response time are not handled in the React 
 
 <div style={{width: "70%"}}>
     <Row>
-        <Col span="20" style={{background: '#722ed7', color: '#ffff', padding: '10px 10px'}}>
+        <Col span="20" style={{background: '#b37feb', padding: '10px 10px'}}>
             # Tier 1
             ## React application
-            Response time between 10 milliseconds & 1 second (usually fast as PCs are generally very quick but this is
-            not guaranteed)
+            **Response time between 10 milliseconds & 1 second (usually fast as PCs are generally very quick but this is
+            not guaranteed)**
         </Col>
     </Row>
     <Row>
-        <Col span="20" style={{background: '#9254de', color: '#ffff', padding: '10px 10px'}}>
+        <Col span="20" style={{background: '#d3adf7', padding: '10px 10px'}}>
             # Tier 2
             ## Javascript code running inside the real-time control (GBC)
-            Response time around 5 milliseconds
+            **Response time around 5 milliseconds**
         </Col>
     </Row>
     <Row>
-        <Col span="20" style={{background: '#b37feb', color: '#ffff', padding: '10px 10px'}}>
+        <Col span="20" style={{background: '#efdbff', padding: '10px 10px'}}>
             # Tier 3
             ## C code hooked into the real-time control (GBC)
-            Response time guaranteed to be your cycle time (4 milliseconds down to 0.5 milliseconds)
+            **Response time guaranteed to be your cycle time (4 milliseconds down to 0.5 milliseconds)**
         </Col>
     </Row>
     <Row>
-        <Col span="20" style={{background: '#d3adf7', color: '#ffff', padding: '10px 10px'}}>
+        <Col span="20" style={{background: '#f9f0ff', padding: '10px 10px'}}>
             # Tier 4
             ## C code running in GBEM (EtherCAT master) or GBSM (Step master)
-            Response time guaranteed to be your cycle time (4 milliseconds down to 0.5 milliseconds)
+            **Response time guaranteed to be your cycle time (4 milliseconds down to 0.5 milliseconds)**
         </Col>
     </Row>
 </div>

@@ -2,17 +2,21 @@ import * as React from "react"
 import styled from "@emotion/styled"
 import { Carousel } from "antd"
 
-type CarouselProps = {
+type CarouselStyleProps = {
     width: string
     height: string
-    fade: boolean
     dotsTop: string
+}
+
+type CarouselProps = CarouselStyleProps & {
+    fade: boolean
     pauseOnHover: boolean
     dotsOn: boolean
+    labelsOn: boolean
     imgdata: [url: string, name: string][]
 }
 
-const StandardCarouselStyle = styled.div`
+const StandardCarouselStyle = styled.div<CarouselStyleProps>`
     width: ${props => props.width};
     height: ${props => props.height};
 
@@ -58,6 +62,7 @@ export const StandardCarousel = ({
     dotsTop,
     pauseOnHover,
     dotsOn,
+    labelsOn,
     imgdata
 }: CarouselProps) => (
     <StandardCarouselStyle width={width} height={height} dotsTop={dotsTop}>
@@ -75,7 +80,11 @@ export const StandardCarousel = ({
             {imgdata.map(([url, name], index) => (
                 <div className="slide" key={index}>
                     <img src={url} />
-                    <h3 style={{ padding: "0 0 0 50px" }}>{name}</h3>
+                    {labelsOn && (
+                        <h3 style={{ padding: "0 0 0 50px" }}>
+                            <em>{name}</em>
+                        </h3>
+                    )}
                 </div>
             ))}
         </Carousel>
