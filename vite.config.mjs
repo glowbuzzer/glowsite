@@ -1,6 +1,6 @@
 import react from "@vitejs/plugin-react"
 import tsconfigPaths from "vite-tsconfig-paths"
-import { imagetools } from "vite-imagetools/packages/vite/dist/index.cjs"
+import { imagetools } from "vite-imagetools"
 import vx from "vite-plugin-virtual"
 import gbc from "./plugins/data/data-gbcschema.mjs"
 // import { glowsiteSvgrPlugin as svgr } from "./plugins/vite-plugin-svgr.mjs"
