@@ -4,6 +4,7 @@ sort: 13
 ---
 
 import { Image } from "../../../../framework/components/Image"
+import { Rate, Row, Col } from 'antd';
 
 # OMROM ACCURAX G5
 
@@ -15,7 +16,7 @@ This short guide reviews the Omrom Accurax G5 range of drives and discusses how 
 
 import omron_g5_product_shot from "./omron_g5_product_shot.png?glowsite"
 
-<Image meta={omron_g5_product_shot} alt="G5 product" preset="body" width={"50%"} />
+<Image meta={omron_g5_product_shot} alt="G5 product"  />
 
 
 ## Overview of the G5 drive range
@@ -140,18 +141,44 @@ We can disable this
 
 
 ## Our ratings for the Omron G5
+<div style={{margin:"20px"}}>
+<Row>
+    <Col span={5}>Overall ease of use</Col>
+    <Col span={6}><Rate disabled defaultValue={3}/></Col>
+    <Col span={11}>(Medium, )</Col>
+</Row>
 
-````text
-
-Overall ease of use :				★★★☆☆ ()
-Drive configuration software :		★☆☆☆☆ (fiddly to install, no support for high-res screens, 1990s feel to it)
-Features :							★★★★★ (excellent)
-Range of motors :					★★★★☆ (bit short on shaft options for the motors)		
-Quality of motors :					★★★☆☆ (outdated motor connectors, hard to make custom cables
-Gearbox options :					★★★★★ (Excellent,)
-Price :								★★★☆☆ (Roughly €700 for 3A drive excluding cables and motor)
-````
-
+<Row>
+    <Col span={5}>Drive configuration softwar</Col>
+    <Col span={6}><Rate disabled defaultValue={1}/></Col>
+    <Col span={11}>(Fiddly to install, no support for high-res screens, 1990s feel to it)</Col>
+</Row>
+<Row>
+    <Col span={5}>Features</Col>
+    <Col span={6}><Rate disabled defaultValue={5}/></Col>
+    <Col span={11}>(Excellent, they have covered pretty much everything in these drives)</Col>
+</Row>
+<Row>
+    <Col span={5}>Range of motors</Col>
+    <Col span={6}><Rate disabled defaultValue={4}/></Col>
+    <Col span={11}>(Bit short on shaft options for the motors)</Col>
+</Row>
+<Row>
+    <Col span={5}>Quality of motors</Col>
+    <Col span={6}><Rate disabled defaultValue={3}/></Col>
+    <Col span={11}>(Outdated motor connectors, hard to make custom cables)</Col>
+</Row>
+<Row>
+    <Col span={5}>Gearbox option</Col>
+    <Col span={6}><Rate disabled defaultValue={5}/></Col>
+    <Col span={11}>(Excellent)</Col>
+</Row>
+<Row>
+    <Col span={5}>Price</Col>
+    <Col span={6}><Rate disabled defaultValue={3}/></Col>
+    <Col span={11}>(Roughly €700 for 3A drive excluding cables and motor)</Col>
+</Row>
+</div>
 
 
 ## Titbits

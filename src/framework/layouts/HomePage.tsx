@@ -4,6 +4,8 @@ import styled from "@emotion/styled"
 import { HomeCarousel } from "../components/HomeCarousel"
 import { YoutubeEmbed } from "../components/Video"
 
+import { FeaturedBlog } from "../components/FeaturedBlog"
+
 import { ReactComponent as StackIcon } from "../../images/home_icons/stack-icon.svg?inline"
 import { ReactComponent as BeautifulIcon } from "../../images/home_icons/beautiful-icon.svg?inline"
 import { ReactComponent as CoordinatedIcon } from "../../images/home_icons/coordinated-icon.svg?inline"
@@ -129,6 +131,8 @@ export const HomePage = () => {
                         </Row>
                     </div>
                 </Space>
+                <h1>Blogs that might interest you</h1>
+                <FeaturedBlog />
             </div>
         </BaseLayout>
     )

@@ -32,15 +32,14 @@ The drives look like this:
 
 import jvl_mis_drive from "./jvl_mis_drive.png?glowsite"
 
-<Image meta={jvl_mis_drive} alt="JVL MIS Drive" preset="body" width={"50%"} />
-
+<Image meta={jvl_mis_drive} alt="JVL MIS Drive" maxWidth={400} />
 
 
 The motor uses 4 pin M12 connectors for its fieldbus. These are easily converted to the standard Ethernet Rj45 form with cables like these:
 
 import jvl_m12_rj45 from "./jvl_m12_rj45.png?glowsite"
 
-<Image meta={jvl_m12_rj45} alt="JVL M12 RJ45 connector" preset="body" width={"100%"} />
+<Image meta={jvl_m12_rj45} alt="JVL M12 RJ45 connector" maxWidth={400} />
 
 
 ## What do you need to order?
@@ -74,7 +73,7 @@ These are the components from the above BoM as delivered from JVL.
 
 import jvl_unboxing from "./jvl_unboxing.jpg?glowsite"
 
-<Image meta={jvl_unboxing} alt="JVL MIS unboxing" preset="body" width={"100%"} />
+<Image meta={jvl_unboxing} alt="JVL MIS unboxing" maxWidth={400} />
 
 
 ## MacTalk
@@ -113,7 +112,7 @@ The bare wire end of the power cable will need a bit of preparation before use. 
 
 import jvl_power_connector_prep from "./jvl_power_connector_prep.jpg?glowsite"
 
-<Image meta={jvl_power_connector_prep} alt="JVL power cable prep" preset="body" width={"100%"} />
+<Image meta={jvl_power_connector_prep} alt="JVL power cable prep"  maxWidth={400} />
 
 
 ### Power cable plugged into power supply and motor
@@ -132,7 +131,7 @@ The aim of this step is to make sure that we can talk to the motor from MacTalk.
 
 import jvl_scan from "./jvl_scan.png?glowsite"
 
-<Image meta={jvl_scan} alt="JVL scan" preset="body" width={"100%"} />
+<Image meta={jvl_scan} alt="JVL scan" preset="wide" />
 
 
 The first test involved turning the motor shaft by hand. The Actual Position value shown in the right hand panel should change. That is pretty good confirmation that MacTalk is talking to the drive.
@@ -144,7 +143,7 @@ The next steps involve making sure the drive is configured the correct way to su
 
 import jvl_ethercat from "./jvl_ethercat.png?glowsite"
 
-<Image meta={jvl_ethercat} alt="JVL MacTalk EtherCAT" preset="body" width={"100%"} />
+<Image meta={jvl_ethercat} alt="JVL MacTalk EtherCAT" preset="wide" />
 
 
 It is also useful but not essential to upgrade the firmware on the drive. This is accessed through the "Updates" top drop down menu.
@@ -747,7 +746,7 @@ Need to create a JSON file
 
 import jvl_dc_sync_ok from "./jvl_dc_sync_ok.png?glowsite"
 
-<Image meta={jvl_dc_sync_ok} alt="JVL sync ok" preset="body" width={"100%"} />
+<Image meta={jvl_dc_sync_ok} alt="JVL sync ok" preset={"wide"} />
 
 
 

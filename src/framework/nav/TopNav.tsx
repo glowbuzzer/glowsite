@@ -115,7 +115,11 @@ export const TopNav = () => {
                                         style={{ fontSize: "24px", color: "#9254de" }}
                                     />
                                 </a>
-                                <a href={"https://www.youtube.com/glowbuzzer"}>
+                                <a
+                                    href={
+                                        "https://www.youtube.com/channel/UCd5lSqWK5Ep4su1sHx6kkUA"
+                                    }
+                                >
                                     <YoutubeOutlined
                                         style={{ fontSize: "24px", color: "#9254de" }}
                                     />
