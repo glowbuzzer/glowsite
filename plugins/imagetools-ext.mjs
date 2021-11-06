@@ -1,8 +1,8 @@
-import {metadataFormat} from "imagetools-core";
+import {metadataFormat} from "imagetools-core"
 
 // if presets not specified in vite.config.js we will use these
 const defaultPresets = {
-    default: {widths: [300, 800, 1200]}
+    default: { widths: [300, 800, 1200] }
 }
 
 /**
@@ -14,9 +14,9 @@ const defaultPresets = {
 export function glowsiteImageToolsPresets(pluginConfig) {
     const presets = pluginConfig?.presets || defaultPresets
 
-    return function (config) {
+    return function (entries, outputFormats) {
         // look for 'glowsite' in the import name
-        const glowsite_config = config.find(([key]) => key === "glowsite")
+        const glowsite_config = entries.find(([key]) => key === "glowsite")
         if (glowsite_config) {
             // get the preset if specified
             const [, [value]] = glowsite_config
@@ -28,9 +28,9 @@ export function glowsiteImageToolsPresets(pluginConfig) {
             const widths = preset.widths
             const custom = widths.map((width, index) => ({
                 width,
-                webp: index === 0 ? undefined : "", // the first width is expected to be the placeholder, so we don't webp it
+                webp: /*index === 0 ? undefined :*/ "" // always webp
                 // glowsite: [""] // ensure metadata is returned
-            }));
+            }))
             return custom
         }
     }
@@ -42,11 +42,17 @@ export function glowsiteOutputFormats(builtinOutputFormats) {
     //
     // we also filter out a lot of the redundant metadata from the json as it ends up in the bundle
     return {
-        ...builtinOutputFormats, glowsite: () => {
+        ...builtinOutputFormats,
+        glowsite: () => {
             const defaultFormat = metadataFormat()
-            return (metadatas) => {
+            return metadatas => {
                 // just return the metadata we need
-                return defaultFormat(metadatas).map(({format, width, height, src}) => ({format, width, height, src}))
+                return defaultFormat(metadatas).map(({ format, width, height, src }) => ({
+                    format,
+                    width,
+                    height,
+                    src
+                }))
             }
         }
     }

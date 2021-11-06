@@ -12,16 +12,21 @@ import remarkMermaid from "./plugins/remark-mermaid.mjs"
 import remarkCodeblock from "./plugins/remark-codeblock.mjs"
 import remarkGlowbuzzerFrontmatter from "./plugins/remark-frontmatter.mjs"
 import remarkPrism from "remark-prism"
-import remarkGfm from 'remark-gfm'
+import remarkGfm from "remark-gfm"
 import { svgWrapper as svgr } from "./plugins/svr-plugin-wrapper.mjs"
 import { mdxWrapper as mdx } from "./plugins/mdx-plugin-wrapper.mjs"
-
 
 //
 // not sure why we need this hack, their ESM module looks okay
 const virtual = vx.default
 const { pages: gbcschema } = gbc
-const resolveConfigs = resolveConfigsFactory(/* put custom presets here */)
+const resolveConfigs = resolveConfigsFactory({
+    presets: {
+        default: {
+            widths: [480, 800, 1400]
+        }
+    }
+})
 
 /**
  * @type {import('vite').UserConfig}

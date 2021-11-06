@@ -13,13 +13,18 @@ const Background = styled.div`
 
 const AppStyle = styled.div`
     font-family: Roboto, sans-serif;
+    font-size: 1.1em;
     background: ${GbColours.BackgroundGrey};
     max-width: 1400px;
     min-height: 100vh;
     margin: auto;
-
-    .capitalize {
-        text-transform: capitalize;
+  
+    h1 {
+      margin: 28px 0 0 0;
+    }
+  
+    h2 {
+      margin: 20px 0 0 0;
     }
 `
 

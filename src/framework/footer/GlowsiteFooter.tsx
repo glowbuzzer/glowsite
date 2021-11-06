@@ -17,14 +17,14 @@ const StyledA = styled.a`
 `
 
 const OnMobileHide = styled.div`
-    @media (max-width: 400px) {
+    @media (max-width: 600px) {
         display: none;
         height: 50px;
     }
 `
 
 const OnDesktopHide = styled.div`
-    @media (min-width: 401px) {
+    @media (min-width: 601px) {
         display: none;
         height: 200px;
     }

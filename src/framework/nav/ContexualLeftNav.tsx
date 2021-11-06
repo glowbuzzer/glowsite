@@ -33,14 +33,14 @@ export const ContexualLeftNav = () => {
 
     return (
         <StyledMenu>
-            <div className="title capitalize">{title}</div>
+            <div className="title">{title}</div>
             <Menu mode="inline" defaultSelectedKeys={[pathname]} defaultOpenKeys={open}>
                 {children.map(({ name, title, path, children }) => {
                     if (children?.length) {
                         return (
-                            <Menu.SubMenu key={path} className={"capitalize"} title={title}>
+                            <Menu.SubMenu key={path} title={title}>
                                 {children.map(({ path, title, name }) => (
-                                    <Menu.Item key={path} className="capitalize">
+                                    <Menu.Item key={path}>
                                         <Link to={path}>{title || name}</Link>
                                     </Menu.Item>
                                 ))}
@@ -48,7 +48,7 @@ export const ContexualLeftNav = () => {
                         )
                     }
                     return (
-                        <Menu.Item key={path} className="capitalize">
+                        <Menu.Item key={path}>
                             <Link to={path}>{title || name}</Link>
                         </Menu.Item>
                     )

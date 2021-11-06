@@ -1,25 +1,48 @@
-import standard from "./tux.png?width=500&webp"
-import glowsite from "./tux.png?glowsite"
-import { Image } from "../../framework/components/Image"
+import standard from "./img1.png?width=200&webp"
+import img1 from "./img1.png?glowsite"
+import img2 from "./img2.png?glowsite"
+import img3 from "./img3.png?glowsite"
+import {Image} from "../../framework/components/Image"
 import {Col, Row} from "antd"
 
-# Image using basic imagetools params
+# Image using basic imagetools params (500px, webp)
 
-<img src={standard} alt="Basic image" />
+<img src={standard} alt="Basic image"/>
 
-# Image using glowsite sugar
+# Image using glowsite imagetools param
 
-<Image meta={glowsite} alt="Glowsite fancy image" preset="body" width={"100%"} />
+By default the Image component assumes documentation page (with left nav) and will optimise for approx 70% page split.
 
-# Image in grid
+<Image meta={img1} alt="Glowsite fancy image"/>
+
+## Go wide
+
+Specify 'wide' preset and Image component will optimise for the full viewport width.
+
+<Image meta={img2} alt="Glowsite fancy image" preset="wide"/>
+
+## Specify a max width (in pixels)
+
+Specify an explicit max-width to prevent image from expanding to full width. Image will still scale down when less
+width than specified is available.
+
+<Image meta={img2} alt="Glowsite fancy image" maxWidth={400}/>
+
+## Use narrow preset for multiple columns
+
+Using preset `narrow` will cause a smaller image to be loaded even on wider screens.
 
 <Row>
     <Col span={12}>
         <h2>Col 1</h2>
-        <Image meta={glowsite} alt="Glowsite fancy image" preset="col2" width={"100%"} />
+        <Image meta={img3} alt="Glowsite fancy image" preset="narrow"/>
     </Col>
     <Col span={12}>
         <h2>Col 2</h2>
-        <Image meta={glowsite} alt="Glowsite fancy image" preset="col2" width={"100%"} />
+        <Image meta={img3} alt="Glowsite fancy image" preset="narrow"/>
     </Col>
 </Row>
+
+# Test responsiveness of srcset
+
+<img alt="alt" width="100%" srcSet="https://via.placeholder.com/1200x300?text=1200x300 1200w, https://via.placeholder.com/1000x300?text=1000x300 1000w"/>

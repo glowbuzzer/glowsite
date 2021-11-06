@@ -39,7 +39,7 @@ specifiers:
   typescript: ^4.4.4
   unist-util-visit: ^4.1.0
   vite: ^2.6.10
-  vite-imagetools: git://github.com/jugglingcats/imagetools.git#dist
+  vite-imagetools: git://github.com/jugglingcats/imagetools.git?v0.2#dist
   vite-plugin-virtual: ^0.1.1
   vite-tsconfig-paths: ^3.3.17
   yaml: ^1.10.2
@@ -85,7 +85,7 @@ devDependencies:
   typescript: 4.4.4
   unist-util-visit: 4.1.0
   vite: 2.6.10_less@4.1.2
-  vite-imagetools: github.com/jugglingcats/imagetools/e531df304a0ca58f81110ed0788234a441103d32
+  vite-imagetools: github.com/jugglingcats/imagetools/b3fc8382e7e386eb7f056743974201b2cf428584
   vite-plugin-virtual: 0.1.1_vite@2.6.10
   vite-tsconfig-paths: 3.3.17_vite@2.6.10
   yaml: 1.10.2
@@ -7353,7 +7353,7 @@ packages:
     resolution: {integrity: sha512-JZxotl7SxAJH0j7dN4pxsTV6ZLXoLdGME+PsjkL/DaBrVryK9kTGq06GfKrwcSOqypP+fdXGoCHE36b99fWVoA==}
     dev: true
 
-  github.com/jugglingcats/imagetools/e531df304a0ca58f81110ed0788234a441103d32:
-    resolution: {tarball: https://codeload.github.com/jugglingcats/imagetools/tar.gz/e531df304a0ca58f81110ed0788234a441103d32}
+  github.com/jugglingcats/imagetools/b3fc8382e7e386eb7f056743974201b2cf428584:
+    resolution: {tarball: https://codeload.github.com/jugglingcats/imagetools/tar.gz/b3fc8382e7e386eb7f056743974201b2cf428584}
     name: imagetools
     dev: true

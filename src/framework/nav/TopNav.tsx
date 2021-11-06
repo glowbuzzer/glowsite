@@ -126,7 +126,7 @@ export const TopNav = () => {
                         <Menu mode="horizontal" selectedKeys={[pathname]}>
                             {nav.children.map(({ path, title, children }) =>
                                 children?.length ? (
-                                    <Menu.SubMenu key={path} className={"capitalize"} title={title}>
+                                    <Menu.SubMenu key={path} title={title}>
                                         {children.map(({ path, title, subtitle, children }) => {
                                             const to = children.length ? children[0].path : path
                                             return (
@@ -140,7 +140,7 @@ export const TopNav = () => {
                                         })}
                                     </Menu.SubMenu>
                                 ) : (
-                                    <Menu.SubMenu>NO CHILDREN</Menu.SubMenu>
+                                    <Menu.SubMenu key={path}>NO CHILDREN</Menu.SubMenu>
                                 )
                             )}
                         </Menu>
