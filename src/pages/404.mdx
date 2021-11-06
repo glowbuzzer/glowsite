@@ -1,9 +1,22 @@
 import {BaseLayout} from "../framework/layouts/BaseLayout";
 import {Image} from "../framework/components/Image"
 import robot_says_no from "./robot_says_no.png?glowsite"
-
+import styled from "@emotion/styled"
 export const layout = BaseLayout
 
-# 404
 
-<Image meta={robot_says_no} alt="Robot says no" preset="body" width={"100%"}/>
+export const FourOFourDiv = styled.div`
+display: block;
+marginLeft:'auto';
+marginRight:'auto';
+text-align: center;
+`
+
+
+# 404
+## The robot says no!
+### We are afraid we can't find the page you are looking for.
+
+<FourOFourDiv>
+<Image meta={robot_says_no} alt="Robot says no" maxWidth={400} />
+</FourOFourDiv>
