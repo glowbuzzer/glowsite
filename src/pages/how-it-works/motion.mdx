@@ -8,7 +8,7 @@ import { Row, Col } from 'antd';
 import {CheckCircleOutlined} from '@ant-design/icons'
 import {Tldr} from "../../framework/components/Tldr";
 import { Image } from "../../framework/components/Image"
-
+import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 
 # Motion - trajectory planning
 <Tldr>
@@ -36,11 +36,17 @@ The following screen show the clever calculation that occurs inside the glowbuzz
 
 Using limits of (amax = 3300, jmax = 314800, vmax = 1040) with initial conditions of (astart = 100, vstart = 0) calculate a trajectory to a position (pwayp = 1000) arriving at the waypoint with a velocity (vwayp = 0) and arriving at time (twayp = 10).
 
-import screenshot_raw_planner from "./trajectory_images/screenshot_raw_planner.png?glowsite"
+import screenshot_raw_planner from "./trajectory_images/screenshot_raw_planner.png"
 
 <div style={{margin: "50px"}}>
-<Image meta={screenshot_raw_planner} alt="gb trajectory planner" preset="wide"/>
+    <TransformWrapper>
+        <TransformComponent>
+            <img src={screenshot_raw_planner} width={"105%"} alt={"planner"} />
+        </TransformComponent>
+    </TransformWrapper>
 </div>
+
+
 
 
 # Features

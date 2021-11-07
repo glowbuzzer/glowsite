@@ -2,6 +2,7 @@ import { Row, Col } from "antd"
 import styled from "@emotion/styled"
 import * as React from "react"
 import { GithubOutlined, YoutubeOutlined } from "@ant-design/icons"
+import { Link } from "react-router-dom"
 
 const StyledFooter = styled.div`
     padding: 20px 100px;
@@ -9,7 +10,7 @@ const StyledFooter = styled.div`
     text-align: center;
 `
 
-const StyledA = styled.a`
+const StyledLink = styled(Link)`
     color: ${props => props.theme.color.MainPurple};
     &:hover {
         color: #391085;
@@ -44,36 +45,36 @@ const DesktopFooter = ({}) => (
                 <h3>How it works</h3>
                 <p />
                 <p>
-                    <StyledA href="/how-it-works/basics">Basics</StyledA>
+                    <StyledLink to="/how-it-works/basics">Basics</StyledLink>
                 </p>
                 <p>
-                    <StyledA href="/how-it-works/basics">More detail</StyledA>
+                    <StyledLink to="/how-it-works/basics">More detail</StyledLink>
                 </p>
                 <p>
-                    <StyledA href="/how-it-works/platforms">Supported platforms</StyledA>
+                    <StyledLink to="/how-it-works/platforms">Supported platforms</StyledLink>
                 </p>
             </Col>
             <Col span={5}>
                 <h3>Get started</h3>
                 <p />
                 <p>
-                    <StyledA href="/get-started/hardware">Required hardware</StyledA>
+                    <StyledLink to="/get-started/hardware">Required hardware</StyledLink>
                 </p>
                 <p>
-                    <StyledA href="/get-started/motion">Make a drive move</StyledA>
+                    <StyledLink to="/get-started/motion">Make a drive move</StyledLink>
                 </p>
                 <p>
-                    <StyledA href="/get-started/how_to_buy">How to buy</StyledA>
+                    <StyledLink to="/get-started/how_to_buy">How to buy</StyledLink>
                 </p>
             </Col>
             <Col span={5}>
                 <h3>Legal</h3>
                 <p />
                 <p>
-                    <StyledA href="/how-it-works/basics">Privacy policy</StyledA>
+                    <StyledLink to="/privacy">Privacy policy</StyledLink>
                 </p>
                 <p>
-                    <StyledA href="/how-it-works/basics">Legal notice</StyledA>
+                    <StyledLink to="/legal">Legal notice</StyledLink>
                 </p>
             </Col>
             <Col span={5}>

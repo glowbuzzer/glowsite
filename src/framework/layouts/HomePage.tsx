@@ -1,11 +1,12 @@
 import { BaseLayout } from "./BaseLayout"
-import { Row, Col, Space } from "antd"
+import { Row, Col, Space, Button } from "antd"
 import styled from "@emotion/styled"
+import { RightCircleOutlined } from "@ant-design/icons"
 import { HomeCarousel } from "../components/HomeCarousel"
 import { YoutubeEmbed } from "../components/Video"
-
 import { FeaturedBlog } from "../components/FeaturedBlog"
 
+import { ReactComponent as RocketIcon } from "../../home/rocket.svg?inline"
 import { ReactComponent as StackIcon } from "../../images/home_icons/stack-icon.svg?inline"
 import { ReactComponent as BeautifulIcon } from "../../images/home_icons/beautiful-icon.svg?inline"
 import { ReactComponent as CoordinatedIcon } from "../../images/home_icons/coordinated-icon.svg?inline"
@@ -31,6 +32,13 @@ const FeatureTitle = styled.h2``
 const FeatureSubTitle = styled.h3``
 
 import HexImage from "../../home/hex_components.svg"
+import * as React from "react"
+
+const GetStartedBar = styled.div`
+    background: #22075e;
+    color: white;
+    height: 350px;
+`
 
 export const HomePage = () => {
     return (
@@ -42,6 +50,41 @@ export const HomePage = () => {
 
                 <YoutubeEmbed embedId="VnhS6107czk" />
 
+                <GetStartedBar>
+                    <Row>
+                        <Col span={1} />
+                        <Col span={11}>
+                            <h1
+                                style={{
+                                    color: "white",
+                                    paddingBottom: "20px",
+                                    paddingTop: "40px"
+                                }}
+                            >
+                                Get started
+                            </h1>
+                            <p style={{ color: "white", paddingBottom: "20px" }}>
+                                With our starter-kit and easy to follow instructions, it is easy to
+                                quickly build a React application to control motors and IO and get
+                                started controlling with machines with web-tech
+                            </p>
+                            <p>
+                                <Button
+                                    type="primary"
+                                    href="/get-started/motion"
+                                    icon={<RightCircleOutlined />}
+                                >
+                                    Find out more{" "}
+                                </Button>
+                            </p>
+                        </Col>
+                        <Col span={2} />
+                        <Col span={10}>
+                            <RocketIcon height={"350px"} />
+                        </Col>
+                        <Col span={2} />
+                    </Row>
+                </GetStartedBar>
                 <Space
                     direction="horizontal"
                     style={{ width: "100%", justifyContent: "center", marginTop: "30px" }}

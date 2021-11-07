@@ -15,7 +15,7 @@ export const CarouselSettings = {
     speed: 5000,
     centerMode: false,
     autoplay: true,
-    fade: false,
+    fade: true,
     adaptiveHeight: false,
     variableWidth: false,
     cssEase: "cubic-bezier(0.65, 0, 0.35, 1)"
