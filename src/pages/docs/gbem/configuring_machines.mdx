@@ -2,19 +2,35 @@
 title: Configuring machines
 sort: 6
 ---
+import {Tldr} from "../../../framework/components/Tldr"
 
 # Configuring machines
+
+<Tldr>
+    - Machine is the definition of a collection of slaves
+    - Machine config is a series of c struct/arrays
+    - Must be created for each different machine GBEM is connected to
+    - Contains the map of the EtherCAT network
+    - Conatins the key configuration parameters for the slaves
+</Tldr>
 
 ## Introduction
 
 
-You can use GBEM without writing any new c code if you work with the types of drives/slaves we have pre-configured. These include a a range of slaves from Beckhoff, Oriental Motor, JVL, Kollmorgen, Panasonic, Omron, Delta, Cannon, nanotec, Trinamic, Delta etc. (see [DRIVE SUPPORT](/docs/gbem/drive_support_overview)).
+You can use GBEM without writing any new c code if you work with the types of drives/slaves we have pre-configured.
 
-If you want to add support for new slaves from different manufacturers then some very basic c programming know-how is needed - see [ADDING A NEW SLAVE](/docs/gbem/adding_a_new_slave) &  [ADDING A NEW DRIVE](/docs/gbem/adding_a_new_drive).
+These include a range of slaves from Beckhoff, Oriental Motor, JVL, Kollmorgen, Panasonic, Omron, Delta, Cannon, nanotec,
+Trinamic, Delta etc. (see [DRIVE SUPPORT](/docs/gbem/drive_support_overview)).
 
-If you are using the pre-configured drives/slaves (or have already written your drive / slave interfaces) the steps involved in creating a machine configuration are:
+If you want to add support for new slaves from different manufacturers then some very basic c programming know-how is needed.
+See [ADDING A NEW SLAVE](/docs/gbem/adding_a_new_slave) &  [ADDING A NEW DRIVE](/docs/gbem/adding_a_new_drive).
 
-1. Create a new pair of machine .h and .c files (`mymachine_map.c` & `mymachine_map.h`that will hold the configuration of your new machine [Step 1](#Step-1)
+If you are using the pre-configured drives/slaves (or have already written your drive / slave interfaces) the steps
+involved in creating a machine configuration are:
+
+1. Create a new pair of machine .h and .c files (`mymachine_map.c` & `mymachine_map.h`that will hold the configuration
+of your new machine [Step 1](#Step-1)
+
 1. Edit the `map_config` files to add in a #define for your new machine [Step 2](#step-2)
 1. Add links in the new `mymachine_map.c` file to existing functions for slave configuration [Step 3](#step-3)
 1. Add links in the `mymachine_map.c` file to existing functions for drive control [Step 4](#step-4)
@@ -24,11 +40,20 @@ If you are using the pre-configured drives/slaves (or have already written your 
 1. Check the config for misconfiguration by running `GBEM -d`  [Step 8](#step-8)
 1. Test the machine! [Step 9](#step-9)
 
-There are plenty of examples of machine maps provided in the `libs/machine_mapping/src/machines` and `libs/machine_mapping/inc/machines` directories for you to look at. We strongly suggest that you have a look at the examples before you try and create your own. Often you will be able to find one that behaves in a similar manner to your machine and can adapt it.
+There are plenty of examples of machine maps provided in the `libs/machine_mapping/src/machines` and `libs/machine_mapping/inc/machines`
+directories for you to look at. We strongly suggest that you have a look at the examples before you try and create your own.
 
-The machine configuration is deliberately structured as a statically defined set of c data structures rather than a separate configuration file that is loaded and parsed at start-up. This makes it much easier for the programmer to understand how things work and make changes to extend existing functionality. It would be easy to extend functionality yourself to read the configuration from a file on the filesystem at start-up if that is a desired behaviour for your application.
+Often you will be able to find one that behaves in a similar manner to your machine and can adapt it.
 
-The machine mapping allows you to easily recompile your GBEM code to target different machines (i.e. machines with different combinations of EtherCAT slaves) by flipping a #define without having to have separate projects . This is a very handy feature of GBEM.
+The machine configuration is deliberately structured as a statically defined set of c data structures rather than a separate configuration
+file that is loaded and parsed at start-up.
+
+This makes it much easier for the programmer to understand how things work and make changes to extend existing functionality.
+
+It would be easy to extend functionality yourself to read the configuration from a file on the filesystem at start-up if that is a desired behaviour for your application.
+
+The machine mapping allows you to easily recompile your GBEM code to target different machines (i.e. machines with
+different combinations of EtherCAT slaves) by flipping a #define without having to have separate projects . This is a very handy feature of GBEM.
 
 <a id="step-1"/>
 

@@ -2,10 +2,22 @@
 title: Detailed guide to adding a JVL MIS drive
 sort: 9
 ---
+
 import { Image } from "../../../framework/components/Image"
+import {Tldr} from "../../../framework/components/Tldr";
 
 # Adding support for JVL MIS drive - a blow-by-blow account
+
+<Tldr>
+    - Integrate JVL MIS drive with the toolkit
+    - Use MacTalk to test drive
+    - Scan drive with GBEM
+    - Write drive interface functions
+    - Handle 32-bit reference clocks (DC)
+</Tldr>
+
 ## Introduction
+
 This tutorial will describe the process for adding support for a JVL MIS176S35ECH466 drive to GBEM.
 
 The JVL MIS drives are integrated closed loop stepper motors. This means it has the motor drive electronics integrated into an enclosure built around the motor. 
@@ -61,7 +73,7 @@ Single 3A 24V PSU - for testing pretty much anything will do (switched mode or l
 
 Bootlace ferrules for the PSU wires.
 
-Terminal blocks to connect the power supply to the drive. 
+Terminal blocks to connect the power supply to the drive.
 
 Screened cable sleeve (to terminate shield on motor power cable)
 
@@ -188,7 +200,7 @@ The things that stand out as missing are:
 
 It would also be nice to get a value for the drive's follow error and actual velocity and torque.
 
-Looking in the drive's instruction manual, we can see that it doesn't support different pre-configured PDO layouts. With this drive: 
+Looking in the drive's instruction manual, we can see that it doesn't support different pre-configured PDO layouts. With this drive:
 
 * SM2 - 0x1c12 is permanently assigned to 0x1600
 * SM3 - 0x1c13 is permanently assigned to 0x1a00
@@ -217,11 +229,11 @@ From the drive's manual, we can layout the objects in the RxPDO and TxPDO.
  - 0x60f4:0/32 bits - follow error actual value
  - 0x603f:0/16 bits - error code
 
-There is a limit on the JVL drives that the PDO can contain a **MAXIMUM** of 8 entries so take care. 
+There is a limit on the JVL drives that the PDO can contain a **MAXIMUM** of 8 entries so take care.
 
-So, let's add the c code needed to do the PDO mapping. Add a new directory in `/libs` called `JVL` and inside this directory create `src` and `inc` sub-directories and inside `src` create a c file called `jvl_mis.c` and inside the `inc` directory a header file called `jvl_mis.h`. Then add a `CMakeLists.txt` file to the `JVL` directory. 
+So, let's add the c code needed to do the PDO mapping. Add a new directory in `/libs` called `JVL` and inside this directory create `src` and `inc` sub-directories and inside `src` create a c file called `jvl_mis.c` and inside the `inc` directory a header file called `jvl_mis.h`. Then add a `CMakeLists.txt` file to the `JVL` directory.
 
-````cmake
+````c
 cmake_minimum_required(VERSION 3.5)
 
 project(JVL C)
@@ -326,7 +338,7 @@ gberror_t ec_pdo_map_jvl_mis(const uint16_t slave) {
 }
 ```
 
- Next we need to create a new machine inside GBEM with which to test the motor. Inside `/libs/machine_mapping/src/machines` create a c file called `jvl_mis_test_map.c` and inside `/libs/machine_mapping/inc/machines` create a c file called `jvl_mis_test_map.h`.
+Next we need to create a new machine inside GBEM with which to test the motor. Inside `/libs/machine_mapping/src/machines` create a c file called `jvl_mis_test_map.c` and inside `/libs/machine_mapping/inc/machines` create a c file called `jvl_mis_test_map.h`.
 
 Inside `jvl_mis_test_map.c` we can start by defining the slave functions and parameters. We only have one slave / drive in our test machine just the JVL drive. We will add the link PDO mapping function we just wrote in `MAP_SLAVE_PDO_MAPPING_FUNCTIONS` .
 
@@ -350,7 +362,7 @@ From reading the drive's manual, we know that the drive supports using DC 0 dist
 
 And then we can add the following to `jvl_mis_test_map.c`.
 
-```C
+```c
 /* DRIVES */
 MAP_DRIVE_TO_NAME(                          "JVL1"                          );
 MAP_DRIVE_TO_SLAVE(                         MAP_JVL_MIS_1                   );
@@ -380,7 +392,7 @@ Because we added follow error to the PDO mapping we know we need a `MAP_DRIVE_GE
 
 `MAP_DRIVE_SET_CTRL_WRD_FUNCTIONS` will write the control word to the PDO object.
 
-`MAP_DRIVE_GET_STAT_WRD_FUNCTIONS` will read the status word from the PDO object. 
+`MAP_DRIVE_GET_STAT_WRD_FUNCTIONS` will read the status word from the PDO object.
 
 `MAP_DRIVE_GET_ACTPOS_WRD_FUNCTIONS` will read the actual position from the PDO object.
 
@@ -388,7 +400,7 @@ Because we added follow error to the PDO mapping we know we need a `MAP_DRIVE_GE
 
 We will not need a `MAP_DRIVE_HOMING_EXEC_FUNCTIONS` as our drive has a nifty absolute multiturn encoder so we are spared the pain of using the the on-drive switch based homing functions.
 
-So we can create function declarations in the `jvl_mis.h` and function definitions in `jvl_mis.c `for all the functions we need. 
+So we can create function declarations in the `jvl_mis.h` and function definitions in `jvl_mis.c `for all the functions we need.
 
 ```c
 gberror_t ec_pdo_map_jvl_mis(uint16_t slave);
@@ -401,7 +413,7 @@ int32_t ec_get_actpos_wrd_jvl_mis(uint16_t drive);
 gberror_t ec_set_ctrl_wrd_jvl_mis(uint16_t drive, uint16_t ctrlwrd);
 uint16_t ec_get_stat_wrd_jvl_mis(uint16_t drive);
 gberror_t ec_set_setpos_wrd_jvl_mis(uint16_t drive, int32_t setpos);
-gberror_t ec_print_params_jvl_mis(uint16_t drive); 
+gberror_t ec_print_params_jvl_mis(uint16_t drive);
 ```
 
 We can leave the function bodies empty apart from the `ec_pdo_map_jvl_mis` function to begin with as what we want to do first is just test the PDO mapping and not bother with all the other functions.
@@ -466,7 +478,7 @@ int32_t ec_get_actpos_wrd_jvl_mis(uint16_t drive);
 gberror_t ec_set_ctrl_wrd_jvl_mis(uint16_t drive, uint16_t ctrlwrd);
 uint16_t ec_get_stat_wrd_jvl_mis(uint16_t drive);
 gberror_t ec_set_setpos_wrd_jvl_mis(uint16_t drive, int32_t setpos);
-gberror_t ec_print_params_jvl_mis(uint16_t drive); 
+gberror_t ec_print_params_jvl_mis(uint16_t drive);
 ```
 
 As we only have a single slave on our EtherCAT network (the drive) we can't define an estop digital input so we need to disabled this in `gbem_config.h` with the #define:
@@ -702,10 +714,10 @@ gberror_t ec_set_setpos_wrd_jvl_mis(const uint16_t drive, const int32_t setpos) 
 
 from the netscan
 
- Vendor ID        : 00000117
- Product Code     : 00000201
- Revision Number  : 0000001D
- Serial Number    : 00010562
+Vendor ID        : 00000117
+Product Code     : 00000201
+Revision Number  : 0000001D
+Serial Number    : 00010562
 
 MISxxx with CiA402, DC
 
@@ -773,6 +785,7 @@ Scaling takes place in two places:
 
 
 In `machine_jvl_mis_test.json`in :
+
 
 ```json
 "joint": {

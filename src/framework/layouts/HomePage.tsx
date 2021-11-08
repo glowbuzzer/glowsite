@@ -40,6 +40,12 @@ const GetStartedBar = styled.div`
     height: 350px;
 `
 
+const BlogIntro = styled.div`
+    background: #22075e;
+    color: white;
+    height: 80px;
+`
+
 export const HomePage = () => {
     return (
         <BaseLayout>
@@ -85,13 +91,14 @@ export const HomePage = () => {
                         <Col span={2} />
                     </Row>
                 </GetStartedBar>
+
                 <Space
                     direction="horizontal"
                     style={{ width: "100%", justifyContent: "center", marginTop: "30px" }}
                 >
                     <div style={{ textAlign: "center", fill: "#9254de" }}>
                         <Row justify={"center"}>
-                            <Col span={8}>
+                            <Col span={8} style={{ padding: "20px" }}>
                                 <Html5Icon width={"15%"} />
                                 <FeatureTitle>Web stack</FeatureTitle>
                                 <FeatureSubTitle>
@@ -99,7 +106,7 @@ export const HomePage = () => {
                                     proprietary languages or IDEs
                                 </FeatureSubTitle>
                             </Col>
-                            <Col span={8}>
+                            <Col span={8} style={{ padding: "20px" }}>
                                 <CoordinatedIcon width={"15%"} />
                                 <FeatureTitle>Co-ordinated motion</FeatureTitle>
                                 <FeatureSubTitle>
@@ -107,7 +114,7 @@ export const HomePage = () => {
                                     configurations
                                 </FeatureSubTitle>
                             </Col>
-                            <Col span={8}>
+                            <Col span={8} style={{ padding: "20px" }}>
                                 <EmbeddedIcon width={"15%"} />
                                 <FeatureTitle>Embeddable</FeatureTitle>
                                 <FeatureSubTitle>
@@ -118,7 +125,7 @@ export const HomePage = () => {
                         </Row>
 
                         <Row justify={"center"}>
-                            <Col span={8}>
+                            <Col span={8} style={{ padding: "20px" }}>
                                 <RealTimeIcon width={"15%"} />
                                 <FeatureTitle>Real-time</FeatureTitle>
                                 <FeatureSubTitle>
@@ -126,7 +133,7 @@ export const HomePage = () => {
                                     software stack you are familiar with
                                 </FeatureSubTitle>
                             </Col>
-                            <Col span={8}>
+                            <Col span={8} style={{ padding: "20px" }}>
                                 <FieldbusIcon width={"15%"} />
                                 <FeatureTitle>Fieldbus integration</FeatureTitle>
                                 <FeatureSubTitle>
@@ -134,7 +141,7 @@ export const HomePage = () => {
                                     and so on)
                                 </FeatureSubTitle>
                             </Col>
-                            <Col span={8}>
+                            <Col span={8} style={{ padding: "20px" }}>
                                 <RoboticArmIcon width={"15%"} />
                                 <FeatureTitle>
                                     Solve challenging machine control problems
@@ -147,7 +154,7 @@ export const HomePage = () => {
                         </Row>
 
                         <Row justify={"center"}>
-                            <Col span={8}>
+                            <Col span={8} style={{ padding: "20px" }}>
                                 <IntegratedIcon width={"15%"} />
                                 <FeatureTitle>PLC integration</FeatureTitle>
                                 <FeatureSubTitle>
@@ -155,7 +162,7 @@ export const HomePage = () => {
                                     Siemens, Allen Bradley, ABB, Omron...
                                 </FeatureSubTitle>
                             </Col>
-                            <Col span={8}>
+                            <Col span={8} style={{ padding: "20px" }}>
                                 <IndependenceIcon width={"15%"} />
                                 <FeatureTitle>Vendor independence</FeatureTitle>
                                 <FeatureSubTitle>
@@ -163,7 +170,7 @@ export const HomePage = () => {
                                     performance you want at the price point you need
                                 </FeatureSubTitle>
                             </Col>
-                            <Col span={8}>
+                            <Col span={8} style={{ padding: "20px" }}>
                                 <GearsIcon width={"15%"} />
                                 <FeatureTitle>Develop using technology you understand</FeatureTitle>
                                 <FeatureSubTitle>
@@ -174,7 +181,11 @@ export const HomePage = () => {
                         </Row>
                     </div>
                 </Space>
-                <h1>Blogs that might interest you</h1>
+                <BlogIntro>
+                    <h1 style={{ color: "white", paddingLeft: "50px", paddingTop: "15px" }}>
+                        Blogs that might interest you
+                    </h1>
+                </BlogIntro>
                 <FeaturedBlog />
             </div>
         </BaseLayout>

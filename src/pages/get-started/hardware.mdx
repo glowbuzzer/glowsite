@@ -4,10 +4,10 @@ subtitle: Starter-kits and recommended hardware
 sort: 1
 ---
 
-
+import { Link } from "react-router-dom"
 import {Row, Col, Divider} from 'antd';
 import {Table, Tag, Space} from 'antd';
-
+import {Tldr} from "../../framework/components/Tldr"
 
 
 
@@ -104,39 +104,60 @@ export const columns = [
 
 # What hardware do I need to get started?
 
+<Tldr>
+    - Starter kits of hardware available
+    - Order from us or just buy yourself
+    - Single axis, three axis and embedded Linux kits
+    - Straight forward assembly
+</Tldr>
+
 ## Introduction
 You don't need any hardware to test the glowbuzzer toolkit in *simulation mode*. Everything can be run under WSL on a Windows PC or on Linux and no drives or IO is needed.
 
 This will allow you to test out the front-end React components and see how GBC behaves and test out writing your own React components to control machines.
 
-See <a href="./simulation">Simulation mode</a> for more details on how to run the toolkit without any drives and IO.
+See <Link to="/get-started/simulation">simulation mode</Link> for more details on how to run the toolkit without any drives and IO.
 
-But really, the the glowbuzzer toolkit is all about making things move and for that you need some hardware. That means something to run the core control in real-time on and some motors and IO to test your control program with.
+But really, the glowbuzzer toolkit is all about making things move and for that you need some hardware. That means you need something to run the core control (in real-time) on and some motors and IO to test your control program with.
 
-In terms of the platform to run the toolkit on, the easiest route to getting started is using a Linux single board computer on which the core control and EtherCAT master run. This board is then connected to EtherCAT drive(s) and IO.
+In terms of the platform to run the toolkit on, the easiest route to getting started is using a Linux single board computer on which the core control and EtherCAT master run. This board is then connected to EtherCAT drive(s) and IO. We suggest using the Raspberry Pi 4.
 
 You will then develop the control application using react on your PC (Windows, Mac, Linux) and the front-end will be accessed through a browser.
 
 Finally, you will need an EtherCAT servo or stepper drive and some EtherCAT IO - you need something to move and some IO to test.
 
-You can provide your own hardware to get started or we have packages available to order of all the items, cables, power supplier etc. you need. All the components are common off the shelf.
+You can provide your own hardware to get started or we have packages available to order of all the items, cables, power supplier etc. you need.
+
+All the components are common off the shelf, so you can easily order them directly from the manufacturers.
 
 If you use identical hardware to our suggestion then following the tutorials is straight forward, if you use your own hardware then there will be additional configuration steps.
-
 
 ## Starter packages
 
 We offer 3 starter packages:
-1. **single axis starter package** - Oriental Motor AZD drive and absolute encoder motor with drive based IO using Raspberry Pi 4 platform - €800
-1. **three axis Oriental Motor**
-1. **embedded Linux starter** - Toradex imx8plus
+
+1. **single axis starter package - GS_SP_01** - a single Oriental Motor AZD drive (with an absolute encoder motor) using with drive based IO with the Raspberry Pi 4 platform - €800?
+1. **three axis starter package - GS_SP_02** - three axis Oriental Motor AZD drive with three motors plus 8 channels of Beckhoff digital in/out (EK1100, EL1008, EL2008) plus Raspberry Pi 4 platform- €1800?
+1. **embedded Linux starter - GS_SP_03** - Toradex imx8plus on Verdin carrier board plus single Oriental Motor AZD drive (with an absolute encoder motor) - €1300?
+
+We build starter packages to order, so adjustments to the bill-of-materials e.g. motor shaft options, IO etc. are possible.
+
+TODO pictures of packages
 
 
-
-
-## Bill-of-materials for single axis starter package
+## Bill-of-materials for single axis starter package - GS_SP_01
 
 <Table dataSource={dataSource} columns={columns} bordered={true}/>
 
+## Bill-of-materials for three axis starter package - GS_SP_02
 
+TODO
+
+## Bill-of-materials for embedded Linux starter - GS_SP_03
+
+TODO
+
+##Assembling the Single axis starter kit
+
+TODO
 

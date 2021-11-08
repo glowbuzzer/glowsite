@@ -2,8 +2,13 @@
 title: Adding drives
 sort: 8
 ---
+import {Tldr} from "../../../framework/components/Tldr"
 
 # Adding a new drive
+
+<Tldr>
+    - Blah
+</Tldr>
 
 ## Introduction
 
@@ -102,7 +107,7 @@ There are also some useful things that it makes it easier to use GBEM so if thes
 * follow error indication 
 * error code
 
-> Some drives require the drive manufacturer's configuration software to be used to create the PDO map and save it to the drive's NVRAM. In this case you can't configure the PDO mapping through GBEM and the functions to do the PDO mapping are not needed.
+ Some drives require the drive manufacturer's configuration software to be used to create the PDO map and save it to the drive's NVRAM. In this case you can't configure the PDO mapping through GBEM and the functions to do the PDO mapping are not needed.
 
 To create the PDO mapping see the section in the slave document [ADDING A NEW SLAVE](adding_a_new_slave.md)
 
@@ -442,7 +447,7 @@ If the boot is successful, the next step is to run up GBC and the front-end and 
 
 Most of the drives we use when we need referenced positioning have absolute encoders fitted that remember their position over a power cycle. The cost of the encoder now tends to be less than the cost of the mechanical arrangements needed to support limit and/or homing switches. However, if you do need to home a drive with switches then there are a number of possible approaches:
 
-1. use the drive's own in built in homing functions where the limit switches are connected to the drives own inputs << recommended>>
+1. use the drive's own in built in homing functions where the limit switches are connected to the drives own inputs (this is recommended)
 2. write code in the front-end (react.js) to home the drive
 3. write c code in the GBEM PLC to home the drive
 
@@ -465,7 +470,7 @@ paste in hom  (AG something missing?)
 
 The homing exec function is called cyclically, so the coding style must reflect a function that is called cyclically.
 
-> IMPORTANT - To do drive based homing you need to have Modes of Operation set with a PDO not with an SDO so a suitable PDO mapping will need to be set-up
+IMPORTANT - To do drive based homing you need to have Modes of Operation set with a PDO not with an SDO so a suitable PDO mapping will need to be set-up
 
 ### What is the role of the configuration software provided by the manufacturer?
 

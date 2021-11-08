@@ -6,6 +6,12 @@ sort: 5
 
 import { Timeline, Table, Divider } from 'antd'
 import {Tldr} from "../../framework/components/Tldr";
+import {Image} from "../../framework/components/Image"
+import EmbeddedArch from './embedded_arch.png?glowsite'
+import {Col, Row} from "antd"
+
+import nucleo from "./embedded_dev_images/nucleo_transparent.png?glowsite"
+import disco from "./embedded_dev_images/disco_transparent.png?glowsite"
 
 export const dataSourceMicrocontroller = [
     {
@@ -121,7 +127,7 @@ The glowbuzzer toolkit will run on either a microcontroller or embedded Linux al
 
 ## How does the glowbuzzer toolkit help with embedded machine control development?
 
-<Timeline>
+<Timeline style={{paddingTop: '20px', paddingLeft: '10px'}}>
     <Timeline.Item>Develop your machine control application using our web stack based toolkit of components (React)</Timeline.Item>
 
     <Timeline.Item>Your application talks over websockets to GBC which performs the real time control functions</Timeline.Item>
@@ -132,7 +138,6 @@ The glowbuzzer toolkit will run on either a microcontroller or embedded Linux al
 </Timeline>
 
 And this gives you the ability to build complex co-ordinated motion control applications (robot, cartersian, delta etc.) built using web stack and running on a fully embedded platform with no PLC in the loop!
-
 
 ## Pros and cons of microcontroller vs embedded Linux
 There are pros and cons to each approach. Anyone, who has worked in this area knows these trade-offs intimately but to summarise:
@@ -176,11 +181,28 @@ There are two choices with regards to how the glowbuzzer toolkit communicates wi
 
 In the case of the of embedded drives (option 1 above) usually the communication is via SPI between GBC and the drive controller ICs and IO electronics. GBC will pass position commands every cycle to the drives.
 
+<Image meta={EmbeddedArch} alt="Embedded architecture"/>
 
 In the case of using industrial ethernet drives, assuming we are using EtherCAT, we need to provide an EtherCAT master. GBEM runs on a STM32 H7 microcontroller and acts as an SPI slave providing an interface to GBC to send drive commands. In these case commercial packaged EtherCAT drives and io modules would be distributed around the machine.
 
 
 When using embedded EtherCAT, the io and drives could take different physical forms depending on which is easier to integrate with your machine.
+
+
+## Embedded development environment
+
+If you are using STM32, the recommended development environment just uses the standard ST development boards. The Nucleo for developing the EtherCAT or Step Master (GBEM / GBSM) and the Discovery board for developing GBC (real-time control).
+
+<Row>
+    <Col span={12}>
+        <Image meta={nucleo} alt="STM32 H7 Nucleo" preset="narrow"/>
+        <h3>STM32 H7 Nucleo dev. board</h3>
+    </Col>
+    <Col span={12}>
+         <Image meta={disco} alt="STM32 H7 Discovery" preset="narrow"/>
+        <h3>STM32 H7 Discovery dev. board</h3>
+    </Col>
+</Row>
 
 
 IO options images

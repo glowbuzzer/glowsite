@@ -48,7 +48,7 @@ const DesktopFooter = ({}) => (
                     <StyledLink to="/how-it-works/basics">Basics</StyledLink>
                 </p>
                 <p>
-                    <StyledLink to="/how-it-works/basics">More detail</StyledLink>
+                    <StyledLink to="/how-it-works/detail">More detail</StyledLink>
                 </p>
                 <p>
                     <StyledLink to="/how-it-works/platforms">Supported platforms</StyledLink>

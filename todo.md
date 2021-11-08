@@ -1,6 +1,6 @@
 Nav
 * implement mobile navs 
-
+* min width on all left navs doesnt work?
 
 Style
 * few pixel error on top nav bar
@@ -9,8 +9,11 @@ Style
 * home page top nav bold?
 * padding / margin after headings - i like lots
 * indent on privacy and legal - see hack in legal
-* max width not respected on all pages - see docs/gbem/configuring_machines
+* max width not respected on all pages - see docs/gbc/misc - this is wide codeblock not wrapping have to decide what to do here...white-space : pre-wrap !important;?
 
+markdown
+* definition lists
+* 
 
 Images
 * How do we blow the image cache? if you change an imagetools image it doesnt update
@@ -19,10 +22,12 @@ meta
 * Add a new description bit of front matter into helmet - is this sub-title or longer para?
 * add google analytics tag after head tag
 
-
+links
+* react-router Link takes us to bottom of pages - higher order component
+* maybe remark up mdx links to avoid import of Link in any mdx file and no links in md files
 
 functionality
-* react-router Link takes us to bottom of pages - higher order component 
+
 * get the example ui components docs fired up again @glowbuzzer/controls
 * codeblocks with aliased imports
 * featured blog image cant think how to do this - need kirky inspi
@@ -47,6 +52,7 @@ frip
 
 
 content
+* starter kit photos and BoMs
 * getting started espe
 * front-end
 * gbc

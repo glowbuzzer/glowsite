@@ -2,9 +2,13 @@
 title: Adding slaves
 sort: 7
 ---
+import {Tldr} from "../../../framework/components/Tldr"
 
 # Adding a new slave
 
+<Tldr>
+    - blah
+</Tldr>
 ## Where to put the code
 
 We add new slaves and drives as a static library per manufacturer. This means you create a new directory in `/libs` called `bandr` or `wago`  and create a `/src` and `/inc` sub-directories inside it. These directories will hold the .h and .c files for the slave (`myslave.c` & `myslave.h`). This static library will need its own basic CMakeLists.txt file and will need adding to root CMakeLists.txt file. You can follow the pattern used for the other slave libraries. 

@@ -13,5 +13,19 @@ import {TitleImage} from "../../../framework/components/TitleImage";
 
 <TitleImage image={lan9252} alt="LAN9252"/>
 
-This blog describes the process of getting the Microchip LAN9252/52 EtherCAT slave controller working with the glowbuzzer toolkit
+This blog describes the process of getting the Microchip LAN9252/52 EtherCAT slave controller working with the glowbuzzer toolkit.
+
+The LAN9252 and the newer LAN9253 are Microchip’s 2/3-port EtherCAT device controller (ESC) with dual integrated Ethernet PHYs.
+
+It is available in an easy to prototype 64-TQFP or 64-QFN package.
+
+It is a simple chip, with a simple interface requiring simple software to drive it. This is a combination we find very appealing.
+
+Hardware design is very simple with a low BoM count:
+* An external crystal of MEMs oscillation
+* PSU filtering & decoupling
+* Dual magnetics
+* EEPROM
+
+There are easy options to prototype with the LAN9252 - (Micrchip dev board or EasyCAT) provide details here?
 
