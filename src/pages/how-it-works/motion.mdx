@@ -20,7 +20,7 @@ import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 
 A motion control calculates the trajectories that the motors follow in order to meet the desired commanded movement.
 
-At the heart of the glowbuzzer tool kit is our own innovative trajectory planner that computes time optimal and time synchronised multi-dimensional third-order trajectories complying maximal asymmetric motion limits on velocity, acceleration and jerk. This provides the core of our 3D-axis, synchronized axis and single-axis motion control capabilities.
+At the heart of the glowbuzzer tool kit is our own innovative trajectory planner that computes time optimal and time synchronised multi-dimensional third-order trajectories complying maximal asymmetric motion limits on velocity, acceleration and jerk. This provides the core of our 3D-axis, synchronised axis and single-axis motion control capabilities.
 
 A trajectory is often composed as a sequence of positions over time. These sequences tell the motors where to position itself at a certain time. Implicitly this gives how fast the motor will move.
 
@@ -28,9 +28,9 @@ These trajectories are sent to the drives which control the motors. The trajecto
 
 * 1ms - motor should be at 1 degree
 * 2ms - motor should be at 2 degrees
-* 3ms - motor should be at 4 degress
+* 3ms - motor should be at 4 degrees
 
-Each drive must receive the trajectory at precisely the same movement if you want to execute synchronised movements using multiple motors. Hence the need for real-time execution and time synchronised fieldbusses.
+Each drive must receive the trajectory at precisely the same movement if you want to execute synchronised movements using multiple motors. Hence, the need for real-time execution and time synchronised fieldbusses.
 
 The following screen show the clever calculation that occurs inside the glowbuzzer trajectory planner each cycle.
 
@@ -86,4 +86,4 @@ The glowbuzzer trajectory planner includes the following features:
     <Col xs={23} xl={7}><b>Jogging</b><p>Creation of continuous and step jog trajectories</p></Col>
 </Row>
 
-The motion control includes a variety of kinematics modules to support different types of robot and machines (6 industrial robots, 5 axis industrial SCARA robots, delta, cartesian, hexpod etc.)
+The motion control includes a variety of kinematics modules to support different types of robot and machines (collaborative robots, 6-DOF industrial robots, delta robots, gantry robots, scara robots, Cartesian gantry robots, h-bot gantry robots etc.)

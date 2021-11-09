@@ -30,7 +30,7 @@ If these steps fail the next step will be to get wireshark running (see below) a
 
 https://www.ethercat.org/download/documents/EtherCAT_Diagnosis_For_Users.pdf
 
-There is also a good document from the ETG for developers but registration (free) with the ETG is needed to get a uname and password to th
+There is also a good document from the ETG for developers but registration (free) with the ETG is needed to get a uname and password to it
 
 ## I am having problems with a particular slave
 
@@ -87,9 +87,9 @@ There are three sets of functions to check:
 - `MAP_SLAVE_PDO_MAPPING_FUNCTIONS`
   - If any the PDO remapping SDO writes fail, 
 - `MAP_SLAVE_STANDARD_SDO_FUNCTIONS`
-  - If a SDO write fails then the boot will not complete sucessfully. The GBEM user messages should report the address of teh failure. 
+  - If an SDO write fails then the boot will not complete successfully. The GBEM user messages should report the address of teh failure.
 - `MAP_SLAVE_INITIAL_PDO_FUNCTIONS`
-  - There isn;t much to go wrong here
+  - There isn't much to go wrong here
 
 
 
@@ -126,14 +126,14 @@ T: 0 ( 3431) P:99 I:1000 C: 100000 Min:      5 Act:   10 Avg:   14 Max:   39242
 T: 1 ( 3432) P:98 I:1500 C:  66934 Min:      4 Act:   10 Avg:   17 Max:   39661
 ```
 
-Whereas if a real-time kernel is doing what it should you will see something like this:
+Whereas if a real-time kernel is doing what it should, you will see something like this:
 
 ```shell
 T: 0 ( 3407) P:99 I:1000 C: 100000 Min:      7 Act:   10 Avg:   10 Max:      18
 T: 1 ( 3408) P:98 I:1500 C:  67043 Min:      7 Act:    8 Avg:   10 Max:      22
 ```
 
-The right-hand column show's a worst case latency of 18usec on core 1 and 22usec on core 2
+The right-hand column shows a worst-case latency of 18usec on core 1 and 22usec on core 2
 
 ## isolcpus
 

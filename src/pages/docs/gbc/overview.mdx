@@ -77,11 +77,11 @@ GBC is written in plain c code. It has been tested on different 32-bit and 64-bi
 
 ### Linux
 
-On Linux, GBC needs a multi core processor. Pretty much any desktop Intel/AMD processor will be sufficient and for embedded Linux a multi-core ARM Cortex-A series based SoC with the cores running at 1GHz will be adequate.
+On Linux, GBC needs a multi-core processor. Pretty much any desktop Intel/AMD processor will be sufficient and for embedded Linux a multi-core ARM Cortex-A series based SoC with the cores running at 1GHz will be adequate.
 
-The platform GBC runs on will need al least two Ethernet/Wifi ports if GBC is being combined with GBEM (EtherCAT master). One for websockets and one for EtherCAT (two needed for cable redundant EtherCAT).
+The platform GBC runs on will need al least two Ethernet/Wi-Fi ports if GBC is being combined with GBEM (EtherCAT master). One for websockets and one for EtherCAT (two needed for cable redundant EtherCAT).
 
- If GBC is being used in an embedded Linux environment with motor driver ICs then only one Ethernet/WiFi port will be needed which is used to communicate over websockets to the front-end control (browser). 
+ If GBC is being used in an embedded Linux environment with motor driver ICs then only one Ethernet/Wi-Fi port will be needed which is used to communicate over websockets to the front-end control (browser).
 
 ### Microcontroller
 
@@ -196,7 +196,7 @@ This is a powerful feature of GBC. Examples of how it can be used include:
 * (on a laser cutting machine) if the velocity of the TCP falls to zero automatically turn off the Digital Out controlling the laser
 * di changes exec code
 
-currently has task status change hool
+currently has task status change
 
 `user.js` file is loaded if present and contains the JavaScript functions
 

@@ -11,7 +11,7 @@ import {Tldr} from "../../../framework/components/Tldr"
     - Machine config is a series of c struct/arrays
     - Must be created for each different machine GBEM is connected to
     - Contains the map of the EtherCAT network
-    - Conatins the key configuration parameters for the slaves
+    - Contains the key configuration parameters for the slaves
 </Tldr>
 
 ## Introduction
@@ -145,7 +145,7 @@ const char *map_machine_type_strings[] = {"MACHINE_UNKNOWN", "MACHINE_MINI", "MA
 
 (This array needs to be in the same order as the enum typedef)
 
-Finally in `main.c`, add a new entry as follows:
+Finally, in `main.c`, add a new entry as follows:
 
 ````c
 #if MACHINE_MYMACHINE == 1
@@ -195,7 +195,7 @@ This details the number of drives attached to a slave (some drives are a single 
 
 ### `MAP_SLAVE_PDO_MAPPING_FUNCTIONS` 
 
-This details the function we want to be called to apply a custom PDO mapping. As you can see in the above array, the EK1110 coupler, the EL1008 8 channel digital input and the EL2008 8 channel digital output modules use the default PDO mapping of the slave (indeed for these slaves there is no option to change the PDO mapping ) so we don't need a function called to configure the PDO map but the drive (AZD) does and we want to call the function `ec_pdo_map_azd3a_ked` to perform this mapping. The `ec_pdo_map_azd3a_ked` function is very simple and just contains the series of SDO writes that will be made to the slave as it starts up to configure the desired PDO mapping.
+This details the function we want to be called to apply a custom PDO mapping. As you can see in the above array, the EK1110 coupler, the EL1008 8 channel digital input and the EL2008 8 channel digital output modules use the default PDO mapping of the slave (indeed for these slaves there is no option to change the PDO mapping ) so we don't need a function called to configure the PDO map but the drive (AZD) does, and we want to call the function `ec_pdo_map_azd3a_ked` to perform this mapping. The `ec_pdo_map_azd3a_ked` function is very simple and just contains the series of SDO writes that will be made to the slave as it starts up to configure the desired PDO mapping.
 
 The slave PDO mapping functions all following the naming pattern `ec_pdo_map_DRIVENAME`.
 
@@ -219,7 +219,7 @@ The slave initial PDO functions follow the naming pattern `ec_initial_pdo_DRIVEN
 
 ### `MAP_SLAVE_DC_TYPE` 
 
-This is an enum of the different types of DC (Distributed Clocks) configuration e.g. `EC_DC_NONE`, `EC_DC_0` & `EC_DC01`. DC 0 refers to SYNC 0 and SYNC 01 refers to SYNC 0 & SYNC 1. How do you know which one to use? The slaves documentation will provide guidance here. In the example network, we know that the AZD drive supports DC 0 and this is the most common type so use this.
+This is an enum of the different types of DC (Distributed Clocks) configuration e.g. `EC_DC_NONE`, `EC_DC_0` & `EC_DC01`. DC 0 refers to SYNC 0 and SYNC 01 refers to SYNC 0 & SYNC 1. How do you know which one to use? The slave's documentation will provide guidance here. In the example network, we know that the AZD drive supports DC 0 and this is the most common type so use this.
 
 ### `MAP_SLAVE_DC_CYCLE`
 
@@ -274,13 +274,13 @@ This is the number of the slave as it appears on the network and this is #define
 
 ### `MAP_DRIVE_TO_SUBDRIVE` 
 
-This is the number of the sub-drive. Most drives are a single slave which supports a single drive. In this case the `MAP_DRIVE_TO_SUBDRIVE` number is always 1.  Other types of drive which support multiple drives attached to a single slave need 1, 2, 3 etc, recorded here depending on whether they are sub-drive 1, 2, 3. In the case of the example network we have a slave with sub drives 1 and 2 attached.
+This is the number of the sub-drive. Most drives are a single slave which supports a single drive. In this case the `MAP_DRIVE_TO_SUBDRIVE` number is always 1.  Other types of drive which support multiple drives attached to a single slave need 1, 2, 3 etc. recorded here depending on whether they are sub-drive 1, 2, 3. In the case of the example network we have a slave with sub drives 1 and 2 attached.
 
 ### `MAP_DRIVE_GET_MOO_PDO_FUNCTIONS` & `MAP_DRIVE_GET_MOO_SDO_FUNCTIONS` 
 
-These are the functions that will return the Modes of Operation with an SDO read **or** PDO read for the drive. They are mutually exclusive with each other. Different drives either support reading the current Modes of Operation with an SDO read or a with a PDO read. So for any one drive one of these functions must be `NULL`.
+These are the functions that will return the Modes of Operation with an SDO read **or** PDO read for the drive. They are mutually exclusive with each other. Different drives either support reading the current Modes of Operation with an SDO read or a with a PDO read. So for, any one drive one of these functions must be `NULL`.
 
-In the example, we use a PDO function. With this, we use a function of the  ec_pdo_get_input_xxxx name pattern to read a PDO object and we return the value.
+In the example, we use a PDO function. With this, we use a function of the  ec_pdo_get_input_xxxx name pattern to read a PDO object, and we return the value.
 
 ```c
 int8_t ec_get_moo_pdo_azdza_ked(const uint16_t drive) {
@@ -302,31 +302,31 @@ Drive_get_remote functions follow the naming pattern `ec_get_remote_DRIVENAME`.
 
 This is the function to establish if the drive has a follow error.
 
-With drives we have written the interface function for, the provided function names follow the pattern `ec_get_follow_error_DRIVENAME`.
+With drives, we have written the interface function for, the provided function names follow the pattern `ec_get_follow_error_DRIVENAME`.
 
 ### `MAP_DRIVE_GET_ERROR_STRING_PDO_FUNCTIONS` & `MAP_DRIVE_GET_ERROR_STRING_SDO_FUNCTIONS` 
 
 This is the function to get an error code string.
 
-With drives we have written the interface function for, the provided function names follow the pattern `ec_get_error_string_pdo_DRIVENAME` & `ec_get_error_string_sdo_DRIVENAME`.
+With drives, we have written the interface function for, the provided function names follow the pattern `ec_get_error_string_pdo_DRIVENAME` & `ec_get_error_string_sdo_DRIVENAME`.
 
 ### `MAP_DRIVE_SET_CTRL_WRD_FUNCTIONS` 
 
 This is the function to set the control word of the drive with a PDO write. This usually uses the CiA-402 "syntax".
 
-With drives we have written the interface function for, the provided function names follow the pattern `ec_set_ctrl_wrd_DRIVENAME`.
+With drives, we have written the interface function for, the provided function names follow the pattern `ec_set_ctrl_wrd_DRIVENAME`.
 
 ### `MAP_DRIVE_GET_STAT_WRD_FUNCTIONS` 
 
 This is the function to get the status word of the drive using a PDO read. This usually uses the CiA-402 "syntax".
 
-With drives we have written the interface function for, the provided function names follow the pattern `ec_get_stat_wrd_DRIVENAME`.
+With drives, we have written the interface function for, the provided function names follow the pattern `ec_get_stat_wrd_DRIVENAME`.
 
 ### `MAP_DRIVE_GET_ACTPOS_WRD_FUNCTIONS` 
 
 This is the function to get the actpos of a drive using a PDO read.
 
-With drives we have written the interface function for, the provided function names follow the pattern `ec_get_actpos_wrd_DRIVENAME`.
+With drives, we have written the interface function for, the provided function names follow the pattern `ec_get_actpos_wrd_DRIVENAME`.
 
 ### `MAP_DRIVE_SET_SETPOS_WRD_FUNCTIONS` 
 
@@ -502,7 +502,7 @@ Part of the function of the iomap is mapping together different types. For this 
 
 Usually the data types match - for example a PDO digital in has a type of ECT_BOOLEAN and this is mapped to a GBC digital in which is also a `ECT_BOOLEAN`.
 
-Somethings though you do want to map together different types. For example, an anlog input module might provide a value as an 16 bit integer but we want this mapped to an analog GBC input. In this case the type of the PDO object in the iomap will be `ECT_INTEGER16` and the GBC type will be `ECT_REAL32`. When mapping integers to floats (and vice versa) a max value parameter is also needs to be defined in the PDO mapping object. For example if you are mapping `ECT_INTEGER16` to `ECT_REAL32` the maximum value of the `ECT_INTEGER16` is 0x7fff = 32,767 and if we provide a maximum value of 10.0 then we want the 'ECT_REAL32' to be 10 when the 'ECT_INTEGER16' is 32,767 and the  'ECT_REAL32' to be 5 when the 'ECT_INTEGER16' is 16,383. 
+Sometimes though, you do want to map together different types. For example, an anlog input module might provide a value as an 16 bit integer, but we want this mapped to an analog GBC input. In this case the type of the PDO object in the iomap will be `ECT_INTEGER16` and the GBC type will be `ECT_REAL32`. When mapping integers to floats (and vice versa) a max value parameter is also needs to be defined in the PDO mapping object. For example if you are mapping `ECT_INTEGER16` to `ECT_REAL32` the maximum value of the `ECT_INTEGER16` is 0x7fff = 32,767 and if we provide a maximum value of 10.0 then we want the 'ECT_REAL32' to be 10 when the 'ECT_INTEGER16' is 32,767 and the  'ECT_REAL32' to be 5 when the 'ECT_INTEGER16' is 16,383.
 
 <a id="step-6"/>
 

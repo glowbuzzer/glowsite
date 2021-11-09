@@ -1,6 +1,6 @@
 Nav
 * implement mobile navs 
-* min width on all left navs doesnt work?
+* min width on all left navs doesn't work?
 
 Style
 * few pixel error on top nav bar
@@ -36,7 +36,7 @@ functionality
 * make blogs look a bit more bloggy - mins to read, links, date - highlight component
 * add gdpr cookies thingymajig
 
-reponsive
+responsive
 * lose or inline tildr on mobile?
 * make hex lose text on mobile
 * max width of page doesnt work everywhere?

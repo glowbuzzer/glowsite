@@ -22,7 +22,7 @@ make
 
 There is a single main executable, GBEM, which is run with a number of command line options.
 
-To do any substantial development with GBEM, the code will need to be imported into your IDE of choice (for example [JetBrains CLion](https://www.jetbrains.com/clion). The provided CMakeLists files provides a basis for IDEs that use CMake but the code is simple and should be easy to import into any IDE.
+To do any substantial development with GBEM, the code will need to be imported into your IDE of choice (for example [JetBrains CLion](https://www.jetbrains.com/clion) ). The provided CMakeLists files provides a basis for IDEs that use CMake but the code is simple and should be easy to import into any IDE.
 
 ## Command line options
 
@@ -98,7 +98,7 @@ The netscan will either produce an error message 😕 or a blizzard of config in
 
 If you get an error message then it is time to read the troubleshooting guide. If you have found some slaves, the next step is check the machine config by running `./gbem -d -ith0`. This will either confirm that the machine configuration is valid or will produce error messages explaining where the misconfiguration lies.
 
-Finally you can run GBEM in cyclic mode with `./gbem -c -ieth0`. This will boot the EtherCAT network and then try and connect over shared memory to GBC (or a program you write to control GBEM over shared memory).
+Finally, you can run GBEM in cyclic mode with `./gbem -c -ieth0`. This will boot the EtherCAT network and then try and connect over shared memory to GBC (or a program you write to control GBEM over shared memory).
 
 ## GBEM config
 
@@ -229,7 +229,7 @@ uname -r
 
 If enabled with the #defines `CTRL_ENABLE_FORCING` (force EtherCAT PDO variables) and PLC_ENABLE_FORCING (force PLC variables) in `GBEM_config.h` you can force the value of a variable using the debugger. Most debuggers/IDEs offer the capability to pause the execution of a running program under the debugger and once paused give you the ability to change the value of a variable whilst the code is executing under the debugger.
 
-In the following screen shot (taken from the JetBrains CLion IDE) shows that we have navigated to our machine map .c file whilst the debugger is paused and clicked on the `map_iomap[]` variable and then navigated to the the line in the iomap we want to force and can set a value and a Boolean active flag to force the val to our desired value. The value is a union of the available types so you will need to select the one that corresponds to type you want to force.
+In the following screen-shot (taken from the JetBrains CLion IDE) shows that we have navigated to our machine map .c file whilst the debugger is paused and clicked on the `map_iomap[]` variable and then navigated to the line in the iomap we want to force and can set a value and a Boolean active flag to force the val to our desired value. The value is a union of the available types, so you will need to select the one that corresponds to type you want to force.
 
 
 

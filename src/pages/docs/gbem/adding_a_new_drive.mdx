@@ -16,7 +16,7 @@ Adding support for a new type of drive requires the implementation of a set of C
 
 If the drive follows the CiA 402 specification closely, implementing these functions a trivial exercise and the existing examples can just be largely copied and pasted. However, if your drive supports more exotic interfaces or has fancy extra features which you want to use, then this may be more complicated. 
 
-In GBEM adding a new drive a set of extra steps on top of those required to add a new slave so it is worth reviewing the documentation for adding a new slave as well as the instructions in this section - [ADDING A NEW SLAVE](adding_a_new_slave.md).
+In GBEM adding a new drive a set of extra steps on top of those required to add a new slave, so it is worth reviewing the documentation for adding a new slave as well as the instructions in this section - [ADDING A NEW SLAVE](adding_a_new_slave.md).
 
 ## First steps
 If you have ever commissioned a fieldbus drive before, you will already know that it is a bit of a painful process irrespective of the software you are integrating it with. There is, working out the wiring for the safety features to get it to move at all, a slightly baffling tuning process, a dense forest of configuration options to wade through and a "helpful" 500 page manual.
@@ -47,13 +47,13 @@ SDO functions take three parameters: the slave number, the index and the sub-ind
 
 SDOs are addressed using both an index and sub-index with the following structure:
 
-| Byte 0                                    | Byte 1:3 (multiplexor)         | Byte 4:7 (data)         |
+| Byte 0                                    | Byte 1:3 (multiplexer)         | Byte 4:7 (data)         |
 | ----------------------------------------- | ------------------------------ | ----------------------- |
 | Command specifier  (upload/download etc.) | 16 bit index + 8 bit sub-index | 1-4 byte parameter data |
 
 PDO functions take two parameters: the slave number and the byte number in the iomap you want to get or set. The byte number in the iomap is usually a #define that is created in the slave's header file when you add a new slave to GBEM.
 
-The slave number is an integer that represents the position of the slave on the network (note, index starts at 1). It is also usually a #define in the slaves header file.
+The slave number is an integer that represents the position of the slave on the network (note, index starts at 1). It is also usually a #define in the slave's header file.
 
 ## Where to put the code for a new drive
 
@@ -64,7 +64,7 @@ Inside the new src and inc directories create a pair of files called `mydrive.c`
 There are two types of drive functions that have to be written:
 
 1. *slave functions* which configure the slave itself (e.g. configure the slave's PDO map)
-2. *drive functions* most of which which are called cyclically to exchange data with the drive each cycle (e.g. write a set position to a drive)
+2. *drive functions* most of which are called cyclically to exchange data with the drive each cycle (e.g. write a set position to a drive)
 
 We discuss how to write these sets of functions in the next sections of this document.
 
@@ -72,7 +72,7 @@ There is also the drive's header file that will need writing. This contains main
 
 ## Write the slave functions
 
-The prototypes and suggested names of the required start-up functions that are needed for a drive are detailed below. You will need to write new functions for your drive for each of these although they are all optional based on what you need to configure on your drive.
+The prototypes and suggested names of the required start-up functions that are needed for a drive are detailed below. You will need to write new functions for your drive for each of these, although they are all optional based on what you need to configure on your drive.
 
 ```c
 gberror_t ec_pdo_map_mydrive(uint16_t slave){};
@@ -90,11 +90,11 @@ PDO mapping is deciding what data is included in the cyclic exchange between mas
 
 There are three options:
 
-1. take the default that the drive manufacturer has decide the drive will start-up with 
+1. take the default that the drive manufacturer has decided the drive will start-up with
 1. request a pre-defined PDO configuration from the list the manufacturer provides
 1. go &aacute; la carte where you pick objects from the slave's object dictionary individually
 
-Which option you do pick? There are some mandatory objects GBEM needs mapped. These are the core CiA 402 objects:
+Which option you do pick? There are some mandatory objects GBEM needs mapping. These are the core CiA 402 objects:
 
 * drive status word (uint16_t encoding of the status of the drive)
 * drive control word (uint16_t encoding that allow us to interact with the drive)
@@ -111,7 +111,7 @@ There are also some useful things that it makes it easier to use GBEM so if thes
 
 To create the PDO mapping see the section in the slave document [ADDING A NEW SLAVE](adding_a_new_slave.md)
 
-If you are using the drive's default PDO mapping this function wont be needed and its entry in the machine map will be NULL.
+If you are using the drive's default PDO mapping this function won't be needed and its entry in the machine map will be NULL.
 
 If you want (or have) to create PDO map using the drive then this function will need to be written. 
 
@@ -164,7 +164,7 @@ gberror_t ec_nvram_sdos_mydrive(const uint16_t slave) {
 }
 ```
 
-First it performs a series of SDO writes using the `ec_sdo_write_xxxx` functions from `ethercatgetset.c`. The #defines for the addresses (`xxxx_SDO_INDEX` and `xxxx_SDO_SUB_INDEX`) have come from the drive's reference manual are have been stored in the `mydrive.h` file.
+First it performs a series of SDO writes using the `ec_sdo_write_xxxx` functions from `ethercatgetset.c`. The #defines for the addresses (`xxxx_SDO_INDEX` and `xxxx_SDO_SUB_INDEX`) have come from the drive's reference manual and have been stored in the `mydrive.h` file.
 
 If an `ec_sdo_Owrite_xxxx` call fails we return `E_SDO_WRITE_FAILURE` (an error code defined in the gberror library).
 
@@ -296,7 +296,7 @@ This function returns a bool which is true if the drive has a follow error and f
 So this function needs to work out if the drive has a follow error. Different drives work with follow errors in different ways.
 
 * **Drive has no support for follow errors** - this function will just return false
-* **Drive provides the actual follow error value in a PDO** - the function will need to read the PDO with for example an `ec_pdo_get_input_int32`function and then threshold the returned value. If the follow error is greater than XXXX then return true and if less then return false
+* **Drive provides the actual follow error value in a PDO** - the function will need to read the PDO with for example an `ec_pdo_get_input_int32`function and then threshold the returned value. If the follow error is greater than XXXX then return true and if less than return false
 * **Drive provides the follow error as a flag in the high-byte of the status word** - the function will need to read the status word and test the bit and return true/false appropriately.
 
 An example of a get_follow_error function is shown below:
@@ -345,7 +345,7 @@ Now, the drive manufacturers have come up with every imaginable scheme to repres
 
 One of the common patterns is the drive provides an SDO address from which an error code can be read. Once you have read the error code, the function will need to implement a look-up table to convert the numeric code to a string to return.
 
-Here is a simple example of a function to look-up an error code. Our function returns a pointer to `uint8_t` which will be text error message. Frist we read a PDO which will return a `uint16_t` error code. Then we look up this string in an array of structs containing the error codes and their text descriptions and will return the matching one.
+Here is a simple example of a function to look-up an error code. Our function returns a pointer to `uint8_t` which will be text error message. First we read a PDO which will return a `uint16_t` error code. Then we look up this string in an array of structs containing the error codes and their text descriptions and will return the matching one.
 
 ````c
 uint8_t *ec_get_error_string_pdo_mydrive(const uint16_t drive) {
@@ -447,7 +447,7 @@ If the boot is successful, the next step is to run up GBC and the front-end and 
 
 Most of the drives we use when we need referenced positioning have absolute encoders fitted that remember their position over a power cycle. The cost of the encoder now tends to be less than the cost of the mechanical arrangements needed to support limit and/or homing switches. However, if you do need to home a drive with switches then there are a number of possible approaches:
 
-1. use the drive's own in built in homing functions where the limit switches are connected to the drives own inputs (this is recommended)
+1. use the drive's own in built-in homing functions where the limit switches are connected to the drives own inputs (this is recommended)
 2. write code in the front-end (react.js) to home the drive
 3. write c code in the GBEM PLC to home the drive
 

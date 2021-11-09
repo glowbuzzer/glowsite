@@ -32,7 +32,7 @@ routesToPrerender.push("/")
         const {html: appHtml, /*styles, */helmetData} = await render(url, {})
 
         const html = template
-            .replace(`<!--app-title-->`, helmetData.title || "Glowbuzzer") // TODO: externalise default title
+            .replace(`<!--app-title-->`, helmetData.title || "glowbuzzer") // TODO: externalise default title
             .replace(`<!--app-css-->`, "")
             .replace(`<!--app-html-->`, appHtml)
 

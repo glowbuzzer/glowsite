@@ -26,7 +26,7 @@ GBEM is free software; you can redistribute it and/or modify it under the terms 
 
 ## What does GBEM do?
 
-GBEM provides a **framework to control EtherCAT slaves**. It allows you to easily configure a *machine* (a combination of EtherCAT IO devices and servo and stepper drives) and provides a simple interface through which you can interact with that machine without worrying about the nitty gritty details of how EtherCAT drives and IO devices work.
+GBEM provides a **framework to control EtherCAT slaves**. It allows you to easily configure a *machine* (a combination of EtherCAT IO devices and servo and stepper drives) and provides a simple interface through which you can interact with that machine without worrying about the nitty-gritty details of how EtherCAT drives and IO devices work.
 
 It is designed to be used by programmers who want to build applications to control machines.
 
@@ -37,7 +37,7 @@ It is designed to be used by programmers who want to build applications to contr
 * An ability to write your own PLC style functions in the C programming language to control EtherCAT IO
 * A simple shared memory interface over which drives and IO can be controlled from your web stack high-level control application
 * A signal, synchronous with the fieldbus bus cycle, to trigger the cyclic execution of higher level control functions
-* Real-time execution - lowest achievable cycle times depends on hardware. Typically 0.5ms, 1ms or 4ms cycles are used
+* Real-time execution - the lowest achievable cycle times depends on hardware. Typically, 0.5ms, 1ms or 4ms cycles are used
 * A code based suitable for use on both Linux and microcontroller targets
 * An EtherCAT master (based on SOEM)
 * Open Source code base
@@ -45,7 +45,7 @@ It is designed to be used by programmers who want to build applications to contr
 A simple view of how GBEM operates is encapsulated in the following diagram.
 
 > Diagram changes:
-> make clear what in in dpm
+> make clear what is in dpm
 > fix sdo->pdo rhs
 > add slave check & plc threads
 > remove white border
@@ -99,7 +99,7 @@ There is also a [FAQ](faq.md) and [TERMINOLOGY GUIDE](terminology_guide.md)
 
 ## What skills do I need to work with GBEM?
 
-**Basic C programming know-how** - we have tried to keep the code-base as simple as possible and so to work with GBEM you definitely don't need to be the world's best c programmer but you do need to know how to create and debug simple c applications.
+**Basic C programming know-how** - we have tried to keep the code-base as simple as possible and so to work with GBEM you definitely don't need to be the world's best c programmer, but you do need to know how to create and debug simple c applications.
 
 **Basic understanding of EtherCAT** - you do need to understand basically how EtherCAT slaves work. The documents and examples we have provided help to explain a lot of this but it would be helpful to read background information. You need to example know what an SDO and PDO object is, what Distributed Clocks (DC) do etc. There is oodles of information available on EtherCAT online but a lot of it has been written from a very protocol orientated perspective which is just not needed to work with EtherCAT in practice.
 
@@ -111,7 +111,7 @@ There is also a [FAQ](faq.md) and [TERMINOLOGY GUIDE](terminology_guide.md)
 
 ## Why not just use a conventional PLC?
 
-You absolutely can use a conventional PLC as part of the Glowbuzzer control chain instead of GBEM. GBEM and PLCs are functionally equivalent - functions you can implement on a PLC can equally be implemented in GBEM and vice-versa.
+You absolutely can use a conventional PLC as part of the glowbuzzer control chain instead of GBEM. GBEM and PLCs are functionally equivalent - functions you can implement on a PLC can equally be implemented in GBEM and vice-versa.
 
 However, as we are specifically seeking to support software developers write machine control, GBEM provides a way for them to do that without knowing anything about PLCs.
 
@@ -119,10 +119,10 @@ Also, GBEM does offer some advantages over conventional PLCs in some circumstanc
 
 * You can use a proper IDE to develop software
 * You can hook in traditional unit test frameworks to your code easily
-* It works with Version Control Systems properly (e.g. github)
+* It works with Version Control Systems properly (e.g. GitHub)
 * You can use a "normal" programming language rather than  IEC 61131-3 languages
 * It is Open Source, not proprietary
 * You can easily bring in other Open Source code
 * It runs on any Linux hardware and has been ported to STM32 if you want to run on your own custom hardware
 * It is much more suitable to embed into a "product" where the user doesn't want to know anything about a PLC
-* PLCs feel old fashioned and awkward to use to a (relatively) modern software developer
+* PLCs feel old-fashioned and awkward to use to a (relatively) modern software developer

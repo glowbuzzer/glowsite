@@ -6,7 +6,7 @@ import { CheckCircleOutlined } from "@ant-design/icons"
 export const Tldr = ({ children }) => (
     <Card size="small" style={{ width: 300, float: "right", margin: "0 10px 0 20px" }}>
         <Card.Meta
-            title={"TLDR"}
+            title={"TL;DR"}
             style={{ padding: "10px 0 0 0" }}
             avatar={
                 <Avatar
@@ -18,7 +18,7 @@ export const Tldr = ({ children }) => (
         />
         <Divider />
         {children}
-{/*
+        {/*
         <ul>
             {React.Children.map(children, child => (
                 <li>{child}</li>

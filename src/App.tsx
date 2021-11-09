@@ -13,7 +13,7 @@ export function App() {
         <NavProvider>
             <Helmet>
                 {/* default title if not set by page */}
-                <title>Glowbuzzer</title>
+                <title>glowbuzzer</title>
             </Helmet>
 
             <GlowsiteTheme>

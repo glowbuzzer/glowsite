@@ -17,7 +17,7 @@ export const dataSourceMicrocontroller = [
     {
         key: '1',
         pros: 'Low power consumption',
-        cons: "Lower raw computational horsepowe",
+        cons: "Lower raw computational horsepower",
     },
     {
         key: '2',
@@ -46,7 +46,7 @@ export const dataSourceMicrocontroller = [
     },
     {
         key: '7',
-        pros: "Easier hardware design - deploying a microntroller to a custom board is straight forward",
+        pros: "Easier hardware design - deploying a microcontroller to a custom board is straight forward",
         cons: "Deploying SoM is straightforward but designing and building custom boards for SoCs is tricky",
     }
     ];
@@ -69,7 +69,7 @@ export const dataSourceEmbeddedLinux = [
     },
     {
         key: '4',
-        pros: "Ease e.g. spin up a websockets server on Linux = five minute job where as on a microntroller it is a bit of mission, filesystem",
+        pros: "Ease e.g. spin up a websockets server on Linux = five minute job where as on a microcontroller it is a bit of mission, filesystem",
         cons: "SoM is really SoC performance with uC h/w design simplicity. If you can design a microcontroller board then you can design a SoM carrier board.",
     },
     {
@@ -137,7 +137,7 @@ The glowbuzzer toolkit will run on either a microcontroller or embedded Linux al
     <Timeline.Item>GBEM or GBSEM is either integrated with embedded drives in your electronics or connects to packaged EtherCAT drives in your machine</Timeline.Item>
 </Timeline>
 
-And this gives you the ability to build complex co-ordinated motion control applications (robot, cartersian, delta etc.) built using web stack and running on a fully embedded platform with no PLC in the loop!
+And this gives you the ability to build complex co-ordinated motion control applications (robot, Cartesian, delta etc.) built using web stack and running on a fully embedded platform with no PLC in the loop!
 
 ## Pros and cons of microcontroller vs embedded Linux
 There are pros and cons to each approach. Anyone, who has worked in this area knows these trade-offs intimately but to summarise:
@@ -156,14 +156,14 @@ There are pros and cons to each approach. Anyone, who has worked in this area kn
 The toolkit’s real-time core (GBC) needs a high-performance dual-core microcontroller. This needs to run at as high a clock speed as possible (500 Mhz +) and with as much memory (1Mbyte +) and flash as possible (2Mbyte +).
 The chip set we have developed on is the STM32H7 with ST Arm Cortex-M7 and Cortex-M4 cores running up to 480 MHz and 240 MHz(respectively).
 
-Other chip manufacturers provide M4/M7 dual core microcontrollers. E.g. NXP with the i.MX RT1170 and these would likely prove a suitable platform.
+Other chip manufacturers provide M4/M7 dual-core microcontrollers. E.g. NXP with the i.MX RT1170 and these would likely prove a suitable platform.
 
 The glowbuzzer toolkit needs a set of uC middleware to operate:
 * RTOS - e.g. freertos
 * FS - e.g. littleFs
-* Network - e.g. LWIP (the toolkit includes the embedded webscockets, ftp  and http servers)
+* Network - e.g. LWIP (the toolkit includes the embedded websockets, ftp  and http servers)
 * Screen - e.g.
-The requirement for dual core microcontroller platform relates to how we distribute the application over the cores:
+The requirement for dual-core microcontroller platform relates to how we distribute the application over the cores:
 * M4
     * websockets & http server
     * JavaScript interpreter
@@ -173,11 +173,11 @@ The requirement for dual core microcontroller platform relates to how we distrib
     * trajectory planner
     * SPI master to talk to hardware slave controller chips or to the GBEM (EtherCAT master) or to EtherCAT slave chips (e.g. LAN9252) or mult-protocol slave chips (e.g. Netx 51)
 
-Communication between the M7 and M4 cores is based on shared memory as in the Arm dual core architecture memory sits either on the 64-bit AXI or 32 AHB busses with the bus masters and slaves interconnected with bus bridges.
+Communication between the M7 and M4 cores is based on shared memory as in the Arm dual-core architecture memory sits either on the 64-bit AXI or 32 AHB busses with the bus masters and slaves interconnected with bus bridges.
 
-There are two choices with regards to how the glowbuzzer toolkit communicates with drives and IO:
+There are two choices regarding how the glowbuzzer toolkit communicates with drives and IO:
 1. Drives are embedded into your board - using the like of Trinamic (https://www.trinamic.com/products/integrated-circuits/), TI (https://www.ti.com/motor-drivers/overview.html), ST (https://www.st.com/en/motor-drivers.html) etc. with their stepper or BLDC driver chip sets. Or it is possible to use semi-embedded drives like  technosoft (https://technosoftmotion.com/en/intelligent-drives/) or Elmo (https://www.elmomc.com/servo-drives/)
-1. Drives are external to the board an you communicate with them over industrial ethernet (feldbus). E.g. the huge range of EtherCAT drives from the likes of Kollmorgen, Omron, Beckhoff, Panasonic etc.
+1. Drives are external to the board, and you communicate with them over industrial ethernet (feldbus). E.g. the huge range of EtherCAT drives from the likes of Kollmorgen, Omron, Beckhoff, Panasonic etc.
 
 In the case of the of embedded drives (option 1 above) usually the communication is via SPI between GBC and the drive controller ICs and IO electronics. GBC will pass position commands every cycle to the drives.
 

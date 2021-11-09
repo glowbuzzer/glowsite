@@ -10,7 +10,7 @@ sort: 15
 
 Can I read an SDO whilst reading/writing PDOs in real-time?
 
-: SDO read/writes are supposed to be used to configure a slave and diagnose issues. All the SDO functions are blocking and will not work in the cyclic task. It is possible to read SDOs in a lower priority thread but this is not recomended. 
+: SDO read/writes are supposed to be used to configure a slave and diagnose issues. All the SDO functions are blocking and will not work in the cyclic task. It is possible to read SDOs in a lower priority thread but this is not recommended.
 
 What is the "Slave Information Interface" (SII)?
 
@@ -18,7 +18,7 @@ What is the "Slave Information Interface" (SII)?
 
 Why doesn't GBEM "ingest" the slave ESI files?
 
-: Some EtherCAT masters ingest the slave ESI files of the slaves that you are going to use, then you scan the network to see what slaves are on the network and then you select which you want adding to the device tree in the master's GUI and hey-presto the slaves appear and you can edit their PDOs, set their SDOs and configure other settings. That is great but GBEM is for programmers and they want to express things in code not in a GUI integrated with a strange IDE so GBEM expresses the EtherCAT configuration as code.
+: Some EtherCAT masters ingest the slave ESI files of the slaves that you are going to use, then you scan the network to see what slaves are on the network, and then you select which you want adding to the device tree in the master's GUI and hey-presto the slaves appear, and you can edit their PDOs, set their SDOs and configure other settings. That is great but GBEM is for programmers, and they want to express things in code not in a GUI integrated with a strange IDE so GBEM expresses the EtherCAT configuration as code.
 
 ## Stepper motors
 
@@ -37,7 +37,7 @@ What is the maximum number of slaves allowed?
 : This is defined by MAX_NUMblah. The dpm interface is constrained to x
 
 What is minimum cycle time?
-: Depends on hardware and exactly how things are set-up. Start at 4ms and move to 1ms. Good hardware below 1ms.
+: Depends on hardware and exactly how things are set up. Start at 4ms and move to 1ms. Good hardware below 1ms.
 
 How realtime is Linux realtime?
 
@@ -86,7 +86,7 @@ How do you read is slave's "register"?
 
 Can I run GBEM without patching the kernel?
 
-: Yes it should just about work but you will need a long (4ms+) bus cycle time. As you can see in the graphs below the standard Linux kernel gives latencies of around 300us. ![Raspberry Pi 4b kernel latency](pi4b_latency.png)
+: Yes it should just about work, but you will need a long (4ms+) bus cycle time. As you can see in the graphs below the standard Linux kernel gives latencies of around 300us. ![Raspberry Pi 4b kernel latency](pi4b_latency.png)
 
 What are the EtherCAT commands?
 

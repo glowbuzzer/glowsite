@@ -164,7 +164,7 @@ It is also useful but not essential to upgrade the firmware on the drive. This i
 
 Now we disconnect the RS485-to-USB converter and connect the drive to GBEM running on a Linux platform with an M12-Ethernet cable from the CN2/3 to the Ethernet port on the Linux host. Power up the drive again.
 
-The we run `gbem -n -ieth0`. And this should produces the following output:
+Then we run `gbem -n -ieth0`. And this should produce the following output:
 
 ````shell
 PDO mapping according to CoE :
@@ -205,9 +205,9 @@ Looking in the drive's instruction manual, we can see that it doesn't support di
 * SM2 - 0x1c12 is permanently assigned to 0x1600
 * SM3 - 0x1c13 is permanently assigned to 0x1a00
 
-So with this drive we can't assign additional PDO objects to SM2 and SM3 but we can can insert additional objects to the PDO content held at 0x1600 and 0x1a00.
+So with this drive we can't assign additional PDO objects to SM2 and SM3, but we can insert additional objects to the PDO content held at 0x1600 and 0x1a00.
 
-So, we will do a custom PDO mapping (a.k,a. flexible PDO mapping). Diving into the manual, we can get the addresses for the additional objects and we can lay out the PDO mapping we want.
+So, we will do a custom PDO mapping (a.k.a. flexible PDO mapping). Diving into the manual, we can get the addresses for the additional objects, and we can lay out the PDO mapping we want.
 
 From the drive's manual, we can layout the objects in the RxPDO and TxPDO.
 
@@ -225,7 +225,7 @@ From the drive's manual, we can layout the objects in the RxPDO and TxPDO.
 - 0x6061:0/8 bits - display modes of operation (MOO DISP)
  - 0x6064:0/32 bits - position actual value (actPos)
  - 0x606c:0/32 bits - velocity actual value (actVel)
- - 0x6077:0/16 bits - torque actual vlaue (actAcc)
+ - 0x6077:0/16 bits - torque actual value (actAcc)
  - 0x60f4:0/32 bits - follow error actual value
  - 0x603f:0/16 bits - error code
 
@@ -294,7 +294,7 @@ The meaning of the data (for example 0x60410010 in the mapping of 0x1A00 sub 1) 
 
 Now let's write the actual function to perform the SDO writes to create the PDO mapping from the data we defined in the structs and arrays above.
 
-First, it must write zeros to the assignment indexes, then it loops over the number of entries in the arrays of objects and writes these and finally it writes the total numbers of entries. It does this for SM2 and SM3 separately.
+First, it must write zeros to the assignment indexes, then it loops over the number of entries in the arrays of objects and writes these, and finally it writes the total numbers of entries. It does this for SM2 and SM3 separately.
 
 ```c
 gberror_t ec_pdo_map_jvl_mis(const uint16_t slave) {
@@ -354,11 +354,11 @@ MAP_SLAVE_INITIAL_PDO_FUNCTIONS(          ec_initial_pdo_jvl_mis   			);
 MAP_SLAVE_DC_TYPE(                        EC_DC_0,              			);
 ```
 
-We can see that we will need a function called `ec_standard_sdos_jvl_mis`to apply the standard SDOs so we can create an empty function in `jvl_mis.c` with the signature `gberror_t ec_standard_sdos_jvl_mis(const uint16_t slave)`that we will implement when we have worked out what SDOs we need to write to the drive at start-up.
+We can see that we will need a function called `ec_standard_sdos_jvl_mis`to apply the standard SDOs, so we can create an empty function in `jvl_mis.c` with the signature `gberror_t ec_standard_sdos_jvl_mis(const uint16_t slave)`that we will implement when we have worked out what SDOs we need to write to the drive at start-up.
 
-Also, because we added the Modes of Operation to the PDO mapping we will set the modes-of-operation with an initial PDO write so we will need an `ec_initial_pdo_jvl_mis` function in `jvl_mis.c` with a signature of `gberror_t ec_initial_pdo_jvl_mis(const uint16_t slave)`.
+Also, because we added the Modes of Operation to the PDO mapping we will set the modes-of-operation with an initial PDO write, so we will need an `ec_initial_pdo_jvl_mis` function in `jvl_mis.c` with a signature of `gberror_t ec_initial_pdo_jvl_mis(const uint16_t slave)`.
 
-From reading the drive's manual, we know that the drive supports using DC 0 distributed clock so we can set this here in `MAP_SLAVE_DC_TYPE`.
+From reading the drive's manual, we know that the drive supports using DC 0 distributed clock, so we can set this here in `MAP_SLAVE_DC_TYPE`.
 
 And then we can add the following to `jvl_mis_test_map.c`.
 
@@ -398,7 +398,7 @@ Because we added follow error to the PDO mapping we know we need a `MAP_DRIVE_GE
 
 `MAP_DRIVE_SET_SETPOS_WRD_FUNCTIONS` will write the set position to the PDO object.
 
-We will not need a `MAP_DRIVE_HOMING_EXEC_FUNCTIONS` as our drive has a nifty absolute multiturn encoder so we are spared the pain of using the the on-drive switch based homing functions.
+We will not need a `MAP_DRIVE_HOMING_EXEC_FUNCTIONS` as our drive has a nifty absolute multiturn encoder, so we are spared the pain of using the on-drive switch based homing functions.
 
 So we can create function declarations in the `jvl_mis.h` and function definitions in `jvl_mis.c `for all the functions we need.
 
@@ -455,7 +455,7 @@ In `main.c`, add a new entry so that the variable map_machine_type is set to val
 #endif
 ```
 
-Now we can come back to to a drive header file, `jvl_mis.h`, and here we need to add our variable definitions for the PDO mapping objects:
+Now we can come back to a drive header file, `jvl_mis.h`, and here we need to add our variable definitions for the PDO mapping objects:
 
 ```c
 map_PDO_configuration_object_t map_txpdo_object_jvl_mis;
@@ -481,13 +481,13 @@ gberror_t ec_set_setpos_wrd_jvl_mis(uint16_t drive, int32_t setpos);
 gberror_t ec_print_params_jvl_mis(uint16_t drive);
 ```
 
-As we only have a single slave on our EtherCAT network (the drive) we can't define an estop digital input so we need to disabled this in `gbem_config.h` with the #define:
+As we only have a single slave on our EtherCAT network (the drive) we can't define an estop digital input, so we need to disable this in `gbem_config.h` with the #define:
 
 ```c
 #define DISABLE_ESTOP_CHECKING                          1
 ```
 
-Now we can run netscan again, this time with the `-m` option - `gbem -m -ieth0`. The -m option runs the PDO mapping function we just wrote before doing the scan of the network. If you have the wind on your back, your should see:
+Now we can run netscan again, this time with the `-m` option - `gbem -m -ieth0`. The -m option runs the PDO mapping function we just wrote before doing the scan of the network. If you have the wind on your back, you should see:
 
 ````c
 PDO mapping according to CoE :
@@ -527,7 +527,7 @@ Now we need to create some #defines for our PDO objects. We try and keep things 
 #define JVL_MIS_ERROR_CODE_PDO_INDEX        17
 ````
 
-Also this is a good point to add the #defines for some SDO objects we will need:
+Also, this is a good point to add the #defines for some SDO objects we will need:
 
 ```c
 //SDOs
@@ -641,7 +641,7 @@ const jvl_mis_error_string_t jvl_mis_alarm_code[NUM_OF_JVL_MIS_ERROR_STRINGS] = 
         {16912, "Temperature too high"},
         {21376,"Initialization error"},
         {30081,"Initialization error"},
-        {34321,"Follow erro"},
+        {34321,"Follow error"},
         {34432,"SW position limit exceeded"},
         {12832,"Undervoltage on bus<"},
         {29446,"Multiturn encoder lost position"},
@@ -752,7 +752,7 @@ Need to create a JSON file
 
 3. run `gbem -c -ieth0` and in parallel run `gbc`
 4. run the front-end web app and see if you can jog the motor from the commissioning UI
-5. run MacTalk in parallel look for sync in MacTalk. This is the green "leds" marked "Distributed clocks" & "Motor synchronised"  in the following screen shot:
+5. run MacTalk in parallel look for sync in MacTalk. This is the green "leds" marked "Distributed clocks" & "Motor synchronised"  in the following screen-shot:
 
 
 
@@ -774,7 +774,7 @@ This needs fixing!
 
 The origin of the problem is the drive's support for a 32-bit DC reference clock rather than the more usual 64 bits
 
-During GBEM boot you may have noticed a warning from the function `check_dc_clock_type` saying the the JVL drive only supported a 32 bit DC reference clock. A 32 bit register holding a nanoseconds time overflows in 4-or-so seconds and this is causing the juddering issue.
+During GBEM boot you may have noticed a warning from the function `check_dc_clock_type` saying the JVL drive only supported a 32 bit DC reference clock. A 32 bit register holding a nanoseconds time overflows in 4-or-so seconds and this is causing the juddering issue.
 
 GBEM establishes synchronisation with slave number 1 on EtherCAT network. If this slave supports a 64 bit clock then the other slaves will sync with this. So the easiest fix is to have slave number 1 support a 64 clock. Inserting say an EK1100 module into the network in position 1 and having the drive as slave number 2 fixes the issue.
 
