@@ -27,10 +27,10 @@ export const CarouselSettings = {
             }
         }
     ],
-    speed: 2000,
+    speed: 10000,
     centerMode: false,
     centerPadding: "50px",
-    // autoplay: true,
+    autoplay: true,
     fade: false,
     adaptiveHeight: false,
     variableWidth: false,
@@ -61,6 +61,10 @@ const CarouselWrapper = styled(Carousel)`
         background: rgba(0, 0, 0, 0.01);
     }
 
+    .slick-dots {
+        top: 700px; // play with the number of pixels to position it as you want
+    }
+
     .slick-slide {
         height: inherit !important;
         margin: 20px 10px;
@@ -70,7 +74,7 @@ const CarouselWrapper = styled(Carousel)`
         }
     }
 `
-
+//vals
 const CarouselDiv = styled.div`
     height: 100%;
     padding: 10px;
@@ -90,7 +94,12 @@ const CarouselDiv = styled.div`
 
     figure {
         flex-grow: 1;
-        padding: 20px;
+        display: flex;
+        padding-left: 75px;
+        padding-right: 75px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        align-items: center;
     }
 
     .missing {
@@ -106,10 +115,11 @@ const CarouselDiv = styled.div`
 
     header {
         font-weight: bold;
-        font-size: 1.1em;
+        font-size: 1.5em;
     }
 
     .content {
+        font-size: 1.1em;
     }
 
     footer {
@@ -160,6 +170,7 @@ export const FeaturedBlog = () => {
                                 <div className="missing">NO IMAGE</div>
                             )}
                         </figure>
+                        <p>{item.description}</p>
                         <footer>
                             <Button type="primary" icon={<RightCircleOutlined />}>
                                 Read more{" "}

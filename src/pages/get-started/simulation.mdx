@@ -19,10 +19,53 @@ It is also used to speed up the development of front-end components by allowing 
 
 Testing the glowbuzzer toolkit in simulation mode means you can exercise a large part of the software from a Windows PC running WSL or a normal Linux PC. No Linux real-time extensions are required.
 
-There are two steps to get started in simulation mode:
+# Step 1 - Installing the front-end components
 
-1. Download & run the front-end components
-1. Download & run GBC (the core control)
+We provide a CRA custom template as a useful starting point for your toolkit project which helps to cut out setup and configuration work needed to get started.
 
-TODO instructions
+This can be run either on Windows or Linux.
+
+To get going, you need to:
+
+````shell
+npx create-react-app your-project-name --template [gb-starter]
+cd your-project-name
+npm start
+````
+
+This will run the gb-starter React application under a local dev server which can be accessed from the browser under `localhost:xxxx`
+
+You can also now open this project in your IDE.
+
+This application needs to connect to GBC (the real-time control component of the toolkit). Installing and running this is the next step.
+
+# Step 2 - Installing and running GBC
+
+GBC needs to run under Linux. WSL 1 or 2 is adequate.
+
+GBC is supplied as a pre-compiled binary which can be downloaded from `https://download.glowbuzzer.com/gbc/gbc-amd64.tar.xz`.
+
+so use a `wget https://download.glowbuzzer.com/gbc/gbc-amd64.tar.xz`
+
+and a `tar xf gbc-amd64.tar.xz` to unpack
+
+
+`./GBC`
+
+explain GBC command line options
+
+explain what they see
+
+## Step 3 - Test
+
+Inside the browser, you should now be able to use the connect button to connect to GBC
+
+You will need to stay in sim mode.
+
+
+
+jog
+io toggle
+etc.
+
 

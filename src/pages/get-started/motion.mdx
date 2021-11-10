@@ -10,7 +10,7 @@ import {Tldr} from "../../framework/components/Tldr"
 # How do I get a drive moving?
 <Tldr>
     - Use the getting started hardware to get a drive moving
-    - Commission and EtherCAT master
+    - Commission an EtherCAT master
     - Use the web-front-end to jog the drives
     - Interact with the EtherCAT IO
 </Tldr>
@@ -18,21 +18,40 @@ import {Tldr} from "../../framework/components/Tldr"
 <Alert message="Caution" description="This guide assumes you are working with the single axis EtherCAT starter kit hardware and it have it fully assembled" type="warning" showIcon style={{margin: '20px 0 20px 0'}} />
 
 
-## Step 1 - Download the generic front-end application to your PC
+## Step 1 - Use the create react app custom template to create
 ````shell
-npm i
+insert cra commands
 ````
-## Step 2 - Download and run GBC on the Raspberry Pi
-Connect to the pi with ssh and password `raspberry`
+## Step 2 - install Raspberry Pi OS
+
+We need a Raspberry Pi with a pre-empt patched kernel.
+
+The easiest way to install this is to use our image.
+
+Download from `https://download.glowbuzzer.com/pi-rt-image.img.z
+
+Uncompress
+
+Write to a 32gb sd card with  win32 disk imager or sketcher
+
+Log onto pi with ssh
+
+
 ````shell
 ssh root@rpi-gb
 ````
-Download GBC from GitHub?
-````shell
-mkdir glowbuzzer_toolkit
-````
 
-## Step 3 - Download GBEM configure it for the test machine hardware
+password - `raspberry`
+
+## Step 3 - Download GBC on the Raspberry Pi
+
+`https://download.glowbuzzer.com/gbc-armv7.tar.xz`
+
+ncompresss
+
+
+
+## Step 4 - Download GBEM configure it for the test machine hardware
 Download from GitHub
 ````shell
 git clone https://gitgub.com/glowbuzzer/GBEM
@@ -47,19 +66,22 @@ machine config
 ````shell
 ````
 
-## Step 4 - Run GBEM and make sure it connected to both GBC and the test hardware
+## Step 5 - Run GBEM and make sure it connected to both GBC and the test hardware
 ````shell
 ./GBEM -c -ieth0
 ````
 
-You should see lots of output but xxxx ius the key
+You should see lots of output but xxxx is the key
 
 
-## Step 5 - Connect the browser to GBC
+## Step 6 - Connect the browser to GBC
 
 `localhost:`
 
 ## Step 6 - Jog a motor!
 
 screen-shot
+
+
+
 

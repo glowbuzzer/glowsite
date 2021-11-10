@@ -1,17 +1,21 @@
 Nav
 * implement mobile navs 
 * min width on all left navs doesn't work?
+* breadcrumb for when nav expands
 
 Style
 * few pixel error on top nav bar
 * how to chunk home page
+  * try full width different colours - keep fixed width content ala trimanic - have heaidngs
 * choose base font size - p too small by 10%?
 * home page top nav bold?
 * padding / margin after headings - i like lots
 * indent on privacy and legal - see hack in legal
 * max width not respected on all pages - see docs/gbc/misc - this is wide codeblock not wrapping have to decide what to do here...white-space : pre-wrap !important;?
+* ak doesnt like the slider dots and they do expand wierdly
+* top nav background col ak disike
 
-markdown
+* markdown
 * definition lists
 * 
 
@@ -20,7 +24,6 @@ Images
 
 meta
 * Add a new description bit of front matter into helmet - is this sub-title or longer para?
-* add google analytics tag after head tag
 
 links
 * react-router Link takes us to bottom of pages - higher order component
@@ -37,9 +40,8 @@ functionality
 * add gdpr cookies thingymajig
 
 responsive
-* lose or inline tildr on mobile?
+* lose or inline tldr on mobile?
 * make hex lose text on mobile
-* max width of page doesnt work everywhere?
 * do mobile home page carousel images
 
 
