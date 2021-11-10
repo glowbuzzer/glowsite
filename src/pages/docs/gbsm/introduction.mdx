@@ -1,0 +1,57 @@
+---
+title: Introduction to GBSM
+sort: 1
+---
+
+
+
+
+# Introduction to GBSM
+
+## Introduction
+
+GBSM is software for communicating with motor driver ICs over SPI from Linux.
+
+GBSM talks to GBC over shared memory and, at bus cycle speed (1ms, 2ms , 4ms etc.), it receives commands to control motors and IO from GBC. It translates these high-level commands into those needed by the motor drivers and sends them out over SPI. It also receives position and status information over SPI from the motor drivers and passes this back over shared memory to GBC.
+
+```mermaid
+ flowchart LR
+    id1[Front-end] <-->|websockets|id2[GBC];
+    id2 <-->|shared mem| id3[GBSM];
+    id3 <-->|SPI|id4[Motor Drivers];
+    id4 -->id5[Motors];
+
+
+```
+
+## What motor driver chips does GBSM work with?
+
+We mainly work with the [Trinamic](www.trinamic.com) motor driver ICs .
+
+The reference hardware platform for GBSM consists of the Trinamic TMC4361A and TMC1560/TMC5130 but other combinations of Trinamic chips (e.g. TMC4361A+TMC2130) can be supported.
+
+We also have prototypes working with ICs from other chip vendors such as
+
+## What platforms does GBSM run on?
+
+The reference version of GBSM is based of the Raspberry Pi.
+
+We also have versions available that use the Linux Kernel SPI and GPIO drivers and can be used on embedded Linux.
+
+There is also a port to STM32 for embedded microcontroller applications
+
+On Linux this requires a real-time patched kernel (pre-emmpt).
+
+Can dev on WSL/virtual
+
+## Docs
+
+* Description of the drvier ICs and how we use them - [TMC4361A and TMC5160](tmc4361_and_tmc5160.md)
+* Compiling GBSM
+* Running GBSM
+* Organisation of the code
+* Evolving the prototype into a production design
+
+## Key functions
+
+* R

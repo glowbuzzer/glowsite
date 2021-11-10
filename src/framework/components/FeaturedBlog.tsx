@@ -27,7 +27,8 @@ export const CarouselSettings = {
             }
         }
     ],
-    speed: 10000,
+    speed: 2000,
+    autoplaySpeed: 10000,
     centerMode: false,
     centerPadding: "50px",
     autoplay: true,
@@ -90,6 +91,7 @@ const CarouselDiv = styled.div`
         display: flex;
         flex-direction: column;
         height: 100%;
+        color: black !important;
     }
 
     figure {

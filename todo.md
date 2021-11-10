@@ -40,7 +40,6 @@ functionality
 * add gdpr cookies thingymajig
 
 responsive
-* lose or inline tldr on mobile?
 * make hex lose text on mobile
 * do mobile home page carousel images
 

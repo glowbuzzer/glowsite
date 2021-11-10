@@ -1,0 +1,54 @@
+---
+title: Compiling GBSM
+sort: 3
+---
+
+# Compiling GBSM
+
+## Raspberry Pi
+
+### pipgio
+
+Install pigpio
+
+https://github.com/joan2937/pigpio
+
+````shell
+wget https://github.com/joan2937/pigpio/archive/master.zip
+unzip master.zip
+cd pigpio-master
+make
+sudo make install
+
+````
+
+### GBSM
+
+cmake
+
+
+
+## Other Linux varients
+
+Depends on how SPI and GPIO work
+
+userspace
+
+
+
+libgpiod
+
+
+
+https://embeddedbits.org/new-linux-kernel-gpio-user-space-interface/
+
+
+
+spi
+
+
+
+obvious can write kernel spi drivers too - full access to IRQs etc
+
+## embedded (microcontroller)
+

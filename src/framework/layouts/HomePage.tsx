@@ -67,9 +67,9 @@ export const HomePage = () => {
                             Get started
                         </h1>
                         <p style={{ color: "white", paddingBottom: "20px" }}>
-                            With our starter-kit and easy to follow instructions, it is easy to
-                            quickly build a React application to control motors and IO and get
-                            started controlling with machines with web-tech
+                            With our starter-kits and easy to follow instructions, you can quickly
+                            build a React application to control motors and IO and get started
+                            controlling with machines with web-tech
                         </p>
                         <p>
                             <Button
