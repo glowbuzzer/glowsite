@@ -22,7 +22,15 @@ let tagColors: string[] = [
 export const PageTag = ({ tags }) => {
     return (
         <StyledPageTag>
-            {tags.map((tag, index) => index <= 10 && <Tag color={tagColors[index]}> {tag}</Tag>)}
+            {tags.map(
+                (tag, index) =>
+                    index <= 10 && (
+                        <Tag key={index} color={tagColors[index]}>
+                            {" "}
+                            {tag}
+                        </Tag>
+                    )
+            )}
         </StyledPageTag>
     )
 }

@@ -3,6 +3,7 @@ title: Overview
 sort: 1
 ---
 import {Tldr} from "../../../framework/components/Tldr"
+import { Link } from "react-router-dom"
 
 # GBC overview
 
@@ -64,7 +65,7 @@ GBC can be integrated with the downstream (fieldbuses and IO and motors) in a nu
  flowchart LR
     id1[Front-end] <-->|websockets|id2{GBC}
     id2 <-->|SPI| id3[EtherCAT slave]
-    id3 <-->|EtherACT|id4[EtherCAT master]
+    id3 <-->|EtherCAT|id4[EtherCAT master]
 
 ```
 
@@ -85,7 +86,7 @@ The platform GBC runs on will need al least two Ethernet/Wi-Fi ports if GBC is b
 
 ### Microcontroller
 
-We test GBC the STM32 platform. This is using ST's dual core ARM M7 / M4 range of microcontrollers. 
+We test GBC on the STM32 platform. This is using ST's dual core ARM M7 / M4 range of microcontrollers.
 
 We see no difficulties getting GBC working on other manufacturers microcontrollers but it will likely need to be a dual-core microcontroller, though there may be an option to use two discrete microcontrollers connected over a high speed SPI interface. Either way, for a reasonable number of axes, the microcontroller will need to be in the highest performance range and support hardware floating point. GBC needs two cores because the web sockets server runs on one core and the real time control & fieldbus interface run on the other core. On Linux we use threads to distribute this workload but on slower speed microcontrollers this just isn't possible.
 
@@ -101,17 +102,14 @@ If you have an embedded requirement then please get in touch to talk further abo
 
 ## Running GBC
 
-To run GBC usually `../GBC` is enough. You can optionally specify command line arguments of:
+See <Link to = "/docs/gbc/running">Running GBC</Link>
 
-`-pPORT` and `-sSHARED_MEMORY_NAME` -`gSIGNAL` as command line arguments. Usually the default HTTP server `PORT` of 9001 and `SHARED_MEMORY_NAME` of "gbc_shared_mem" and `SIGNAL` of 29 (SIG I/O POSSIBLE) can be used.
-
-To use GBC to control machines requires that the version of Linux used has the preempt patch must be installed on Linux. This is not needed to use GBC in simulation mode. Similarly GBC will not run in real-time on virtual machines but these can be used in simulation mode for development.
 
 ## Configuration of GBC
 
 The configuration for GBC takes the form of a number JSON files placed in the same directory as the GBC binary. 
 
-See [Configuration of GBC](configuration.md)
+See <Link to = "/docs/gbc/configuration">Configuration of GBC</Link>
 
 ## Interfaces to GBC
 

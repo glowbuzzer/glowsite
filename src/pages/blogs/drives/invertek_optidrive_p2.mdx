@@ -6,7 +6,17 @@ sort: 2
 featuredBlog: true
 ---
 
+import invertek_optidrive_p2 from "./invertek_optidrive_p2_product_shot.png?glowsite"
+export const heroImage=invertek_optidrive_p2
+import {PageTag} from "../../../framework/components/PageTags"
+export const ContentTags =  ["drives", "Invertek", "Optidrive", "VFD", "Inverter"]
+import {TitleImage} from "../../../framework/components/TitleImage"
+import {ReadingTime} from "../../../framework/components/ReadingTime";
+
 # Getting the Invertek Optidrive P2 VFD working
+<ReadingTime time="5"/>
+<PageTag tags={ContentTags}/>
+<TitleImage image={invertek_optidrive_p2} alt="Optidrive P2"/>
 
 ## Introduction
 
@@ -15,6 +25,8 @@ Inverters or VFDs are used to control AC motors where the precise positioning co
 They control AC motor speed and torque by varying the motor input frequency and voltage.
 
 This blog entry records the process of integrating an Invertek Optidrive P2 VFD with the glowbuzzer toolkit.
+
+
 
 ## OptiDrive P2
 

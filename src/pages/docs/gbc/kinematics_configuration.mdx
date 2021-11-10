@@ -3,9 +3,10 @@ title: Kinematics configurations
 sort: 12
 ---
 import {Tldr} from "../../../framework/components/Tldr"
+import {Image} from "../../../framework/components/Image"
+import lefty_righty from "./lefty_righty.png?glowsite"
 
-
-# Kinematics configuration
+# Kinematics configurations
 
 <Tldr>
      - blah
@@ -13,11 +14,38 @@ import {Tldr} from "../../../framework/components/Tldr"
 
 In GBC a kinematics configuration is a collection of joints that are controlled in concert to produce motion.
 
-A six DOF robot has six joints (motors) these six joints are 
+A six DOF robot has six joints (motors) these six joints are members of the kinematics configuration.
 
 A three axis cartesian milling machine has 3 joints (XYZ) and these three joints are members of the kinematics configuration
 
+Kinematics configurations need to have mathematical model attached to them and often these models are parameterised (Kinematics chain parameters).
+
+The toolkit contains mathematical kinematics models for common types of robots and, we add can more on customer request depending on what you need.
+
+# Forward kinematics
+This maps the angles of a robot's joints to the cartesian position and orinetation of the tool.
+```mermaid
+graph LR
+    id1["Joint angles"] -->id2["TCP xyz and orientation"]
+```
+
+There is always one solution to the forward kinematics as if you fix the angles of all of a robot's joints then the tool will be in a defined position and pointing in a defined direction - there is no ambiguity.
+
+# Inverse kinematics
+This maps a robot's tool cartesian position and orientation to the angle of the joints.
+```mermaid
+graph LR
+    id1["TCP xyz and orientation"] -->id2["Joint angles"]
+```
+There are often multiple solutions to the inverse kinematics (multiple configurations)
+
+# Robot configurations
+
+Where a robot can have multiple sets of joint angles that result in the same tool centre point (TCP) cartesian position and orientation, the robot has multiple configurations.
+
+For example, for a standard industrial robot arm, one of their configurations is known as lefty and righty.
+
+<Image meta={lefty_righty} alt="Robot lefty righty configurations"/>
 
 
-Kinematics configurations need to have mathematical mode attached to them and the params for the chain 
 

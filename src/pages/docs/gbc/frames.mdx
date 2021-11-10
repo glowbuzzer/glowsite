@@ -16,7 +16,7 @@ Frames are name attached to the different coordinate systems used for different 
 
 The classic chain of frames for a robot is as follows.
 
-```xxmermaid
+```mermaid
 graph TD
     id1["W (world)"] <-->id2["R (robot)"]
     id2 <-->id3["TF (tool flange)"]
@@ -28,7 +28,7 @@ The world frame W
 
   Between these frames transformations exist so that given a set of coordinates in (say) the work frame we want work out the equivalent coordinates in the (say) the world frame
 
-```mermaidxx
+```mermaid
    graph TD
    id1["W (world)"] <-->id2["R (robot)"]
     id2 <-->id3["TF (tool flange)"]

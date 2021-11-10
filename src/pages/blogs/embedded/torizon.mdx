@@ -6,10 +6,15 @@ import verdin_board from "./verdin_board.png?glowsite"
 export const heroImage=verdin_board
 import {TitleImage} from "../../../framework/components/TitleImage";
 
+import {PageTag} from"../../../framework/components/PageTags"
+export const ContentTags =  ["Embedded", "SoM", "Toradex", "Verizon", "Linux", "NXP", "iMX8M Plus", "Arm", "Yocto"]
+import {ReadingTime} from "../../../framework/components/ReadingTime";
+
 # Embedded Linux - getting Linux working on a Toradex iMX8M Plus
 
 ## Introduction
-
+<PageTag tags={ContentTags}/>
+<ReadingTime time="7"/>
 <TitleImage image={verdin_board} alt="Verdin carrier board"/>
 
 This blog describes the process of getting embedded Linux working on a Toradex iMX8M Plus SoM.

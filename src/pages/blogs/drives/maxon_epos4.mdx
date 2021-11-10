@@ -5,14 +5,17 @@ description: The Maxon EPOS4 is EtherCAT drive for brushed DC and BLDC motors up
 sort: 1
 featuredBlog: true
 ---
-
 import epos4_compact_50_5 from "./epos4_compact_50_5.png?glowsite"
 export const heroImage=epos4_compact_50_5
-
-import {TitleImage} from "../../../framework/components/TitleImage";
-
+import {PageTag} from "../../../framework/components/PageTags"
+export const ContentTags =  ["drives", "maxon", "BLDC"]
+import {TitleImage} from "../../../framework/components/TitleImage"
+import {ReadingTime} from "../../../framework/components/ReadingTime"
 
 # Working with the Maxon EPOS4 positioning controller for brushed DC motors and brushless BLDC motors
+
+<ReadingTime time="5"/>
+<PageTag tags={ContentTags}/>
 
 EPOS4 Connector Board 50/5
 EPOS4 Module 50/5, digital positioning controller, 5 A, 10 - 50 VDC

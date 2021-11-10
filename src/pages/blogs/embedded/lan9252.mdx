@@ -7,13 +7,17 @@ sort: 1
 ---
 import lan9252 from "./lan9252.png?glowsite"
 export const heroImage=lan9252
+import {PageTag} from"../../../framework/components/PageTags"
+export const ContentTags =  ["Embedded", "EtherCAT Slave", "Fieldbus", "Microchip"]
+import {ReadingTime} from "../../../framework/components/ReadingTime";
 
 import {TitleImage} from "../../../framework/components/TitleImage";
 
 # Getting the Microchip LAN9252/53 working with glowbuzzer toolkit
 
 ## Introduction
-
+<PageTag tags={ContentTags}/>
+<ReadingTime time="7"/>
 <TitleImage image={lan9252} alt="LAN9252"/>
 
 This blog describes the process of getting the Microchip LAN9252/52 EtherCAT slave controller working with the glowbuzzer toolkit.

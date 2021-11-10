@@ -1,0 +1,32 @@
+---
+title: Running GBC
+sort: 1
+---
+import {Tldr} from "../../../framework/components/Tldr"
+
+# Running GBC
+<Tldr>
+    - Usually just `./GBC is enough to run GBC
+    - Command line options are used to vary defaults
+    - GBC must run on a pre-empted kernel for real-time performance
+    - Real time kernel is not needed for sim mode or development
+</Tldr>
+
+To run GBC, usually `./GBC` is enough.
+
+You can optionally specify command line arguments of:
+
+`-pPORT` and `-sSHARED_MEMORY_NAME` -`gSIGNAL`.
+
+Usually the default HTTP server `PORT` of 9001 and `SHARED_MEMORY_NAME` of "gbc_shared_mem" and `SIGNAL` of 29 (SIG I/O POSSIBLE) will be used but you can vary these if needed.
+
+To use GBC to control actual machines, requires that the version of Linux used has the preempt patch installed.
+
+This is not needed to use GBC in simulation mode.
+
+Similarly, GBC will not run in real-time on virtual machines (on Windows) but these can be used in simulation mode for development.
+
+Once run, GBC will output to the console, various logging information about what it is up to. In the case you are having issues, picking carefully through this output is recommended as a good starting point to fault diagnosis.
+
+
+TODO screen shot of GBC startup
