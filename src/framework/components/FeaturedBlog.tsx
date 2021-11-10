@@ -1,11 +1,10 @@
-import { Link } from "react-router-dom"
 import * as React from "react"
-import { Row, Col, Button, Carousel } from "antd"
-// @ts-ignore because globEager is not defined
-const imports = import.meta.globEager("../../pages/blogs/**/*.{md,mdx}")
-
+import { Button, Carousel } from "antd"
 import { RightCircleOutlined } from "@ant-design/icons"
 import styled from "@emotion/styled"
+import { usePages } from "../providers/NavProvider"
+import { Image } from "./Image"
+import { Link } from "react-router-dom"
 
 export const CarouselSettings = {
     arrows: false,
@@ -14,17 +13,35 @@ export const CarouselSettings = {
     infinite: true,
     slidesToScroll: 1,
     slidesToShow: 3,
-    speed: 10000,
+    responsive: [
+        {
+            breakpoint: 975,
+            settings: {
+                slidesToShow: 2
+            }
+        },
+        {
+            breakpoint: 575,
+            settings: {
+                slidesToShow: 1
+            }
+        }
+    ],
+    speed: 2000,
     centerMode: false,
     centerPadding: "50px",
-    autoplay: true,
+    // autoplay: true,
     fade: false,
     adaptiveHeight: false,
     variableWidth: false,
-    cssEase: "cubic-bezier(0.65, 0, 0.35, 1)"
+    cssEase: "cubic-bezier(0.420, 0.000, 1.000, 1.000)"
 }
 
 const CarouselWrapper = styled(Carousel)`
+    .slick-dots {
+        padding-top: 10px;
+    }
+
     > .slick-dots li button {
         width: 6px !important;
         height: 6px !important;
@@ -36,72 +53,119 @@ const CarouselWrapper = styled(Carousel)`
         width: 7px !important;
         height: 7px !important;
         border-radius: 100% !important;
-        background: ${props => props.theme.color.MainPurple}!important;
+        background: ${props => props.theme.color.MainPurple} !important;
+    }
+
+    .slick-track {
+        display: flex !important;
+        background: rgba(0, 0, 0, 0.01);
     }
 
     .slick-slide {
+        height: inherit !important;
+        margin: 20px 10px;
+
+        > div {
+            height: 100%;
+        }
     }
-`
-
-const CarouselTitle = styled.h2`
-    // color: white;
-    font-weight: bold;
-`
-
-const CarouselSubTitle = styled.h3`
-    // color: white;
-    padding: 10px 0 10px 0;
 `
 
 const CarouselDiv = styled.div`
-    display: block;
-    width: 300px;
+    height: 100%;
     padding: 10px;
-    height: 300px;
     text-align: center;
+    color: rgba(0, 0, 0, 0.9);
+    background: white;
+
+    :hover {
+        background: rgba(0, 0, 0, 0.05);
+    }
+
+    a {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+    }
+
+    figure {
+        flex-grow: 1;
+        padding: 20px;
+    }
+
+    .missing {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin: 0 30px;
+        font-weight: bold;
+        font-size: 1.2em;
+        height: 200px;
+        background: rgba(0, 0, 0, 0.05);
+    }
+
+    header {
+        font-weight: bold;
+        font-size: 1.1em;
+    }
+
+    .content {
+    }
+
+    footer {
+        padding: 10px;
+    }
 `
 
-const entries = Object.entries<any>(imports)
+// const entries = Object.entries<any>(imports)
 
-interface FeaturedBlogProps {
-    blogTitle: string
-    blogSubtitle: string
-    blogUrl: string
-}
+// interface FeaturedBlogProps {
+//     blogTitle: string
+//     blogSubtitle: string
+//     blogUrl: string
+// }
 
-function GetFeaturedBlogList(): FeaturedBlogProps[] {
-    let FeaturedBlogList: FeaturedBlogProps[] = []
-    for (const entry of entries) {
-        if (entry[1].featuredBlog) {
-            console.log(entry[1].title)
-            console.log(entry[1].subtitle)
-            console.log(entry[0])
-            FeaturedBlogList.push({
-                blogTitle: entry[1].title,
-                blogSubtitle: entry[1].subtitle,
-                blogUrl: entry[0]
-            })
-        }
-    }
-    return FeaturedBlogList
-}
+// function GetFeaturedBlogList(): FeaturedBlogProps[] {
+//     let FeaturedBlogList: FeaturedBlogProps[] = []
+//     for (const entry of entries) {
+//         if (entry[1].featuredBlog) {
+//             console.log(entry[1].title)
+//             console.log(entry[1].subtitle)
+//             console.log(entry[0])
+//             FeaturedBlogList.push({
+//                 blogTitle: entry[1].title,
+//                 blogSubtitle: entry[1].subtitle,
+//                 blogUrl: entry[0]
+//             })
+//         }
+//     }
+//     return FeaturedBlogList
+// }
 
-export const FeaturedBlog = props => {
-    const list = GetFeaturedBlogList()
+export const FeaturedBlog = () => {
+    const featured = usePages(/blogs/, node => node.featuredBlog)
+    // const list = GetFeaturedBlogList()
 
     return (
         <CarouselWrapper {...CarouselSettings}>
-            {list.map(list => (
-                <CarouselDiv key="{list.blogTitle}">
-                    <CarouselTitle>{list.blogTitle}</CarouselTitle>
-                    <CarouselSubTitle>{list.blogSubtitle}</CarouselSubTitle>
-                    <Button
-                        type="primary"
-                        href={list.blogUrl.replace("../../pages", "").replace(".mdx", "")}
-                        icon={<RightCircleOutlined />}
-                    >
-                        Read more{" "}
-                    </Button>
+            {featured.map(item => (
+                <CarouselDiv key="{item.path}">
+                    <Link to={item.path}>
+                        <header>{item.title}</header>
+                        <div className="content">{item.subtitle}</div>
+                        <figure>
+                            {item.heroImage ? (
+                                <Image meta={item.heroImage} preset="narrow" alt="item.title" />
+                            ) : (
+                                <div className="missing">NO IMAGE</div>
+                            )}
+                        </figure>
+                        <footer>
+                            <Button type="primary" icon={<RightCircleOutlined />}>
+                                Read more{" "}
+                            </Button>
+                        </footer>
+                    </Link>
                 </CarouselDiv>
             ))}
         </CarouselWrapper>

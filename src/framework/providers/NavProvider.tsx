@@ -145,3 +145,9 @@ export function useRoutes() {
     // and use _meta.ts to control the rendering, eg. layout component
     return all
 }
+
+export function usePages(re: RegExp, filter?: (unknown) => boolean) {
+    return all
+        .filter(node => node.path.match(re) && (!filter || filter(node))) // filter
+        .map(({ component, children, parent, ...props }) => props) // remove some props
+}
