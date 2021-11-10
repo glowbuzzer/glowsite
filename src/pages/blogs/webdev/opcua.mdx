@@ -2,10 +2,20 @@
 title: Working with OPC/UA
 sort: 2
 ---
+import opc_logo from "./opc_logo.png?glowsite"
+export const heroImage=opc_logo
+import {TitleImage} from "../../../framework/components/TitleImage";
+import {PageTag} from "../../../framework/components/PageTags";
+import {ReadingTime} from "../../../framework/components/ReadingTime";
 
 # Working with OPC
 
+<ReadingTime time="5"/>
+<PageTag tags={["wed-dev", "OPC-UA", "node.js", "PLC", "pub/sub"]}/>
+
 ## Introduction
+
+<TitleImage image={opc_logo} alt="OPC Logo"/>
 
 OPC/UA’s origins lie with the original OPC Specification which back in 1996 laid out a framework for using the proprietary Microsoft OLE, COM, and DCOM component interfaces to bridge between Windows-based software applications and process control hardware. OPC UA was developed in 2006 to eliminate the need to use a Microsoft-Windows-based platform of earlier OPC versions - i.e., it moved away from COM/DCOM. In addition, DCOM, whilst a good idea in theory, was painful even when both operating systems were exactly the same version but became nearly impossible if the versions were different. Many technicians still bear scars from working with DCOM.
 At its simplest, an OPC UA server runs on your PLC and you expose a set of your PLC code’s symbols (variables) and then you can read/write to the symbols from an OPC UA client over a network connection. This is very handy: a non-proprietary way to interact with your PLC including ease of integration with a web stack.

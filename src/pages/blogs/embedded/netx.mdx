@@ -5,21 +5,32 @@ description: The Hilscher netX 51 is a real-Time Ethernet network controller IC.
 featuredBlog: true
 sort: 1
 ---
+
 import netx52 from "./netx52.png?glowsite"
 export const heroImage=netx52
 import {TitleImage} from "../../../framework/components/TitleImage";
+import {PageTag} from"../../../framework/components/PageTags"
+import {ReadingTime} from "../../../framework/components/ReadingTime";
+import {Typography} from "antd";
+export const { Text } = Typography;
+
 
 # Getting the Hilscher netX 51 working with glowbuzzer toolkit
+<ReadingTime time="3"/>
+<PageTag tags={["Embedded", "EtherCAT Slave", "Ethernet/IP Slave", "Fieldbus", "Hilscher"]}/>
 
 ## Introduction
 <TitleImage image={netx52} alt="netx52"/>
+
+
+
 
 This blog describes the process of getting the Hilscher netX 51 Network controller for fieldbus and Real-Time Ethernet slaves working with the glowbuzzer toolkit
 
 
 Hilscher produce a range of real time fieldbus communication chips.
 
-The series we work with primarily are the NETX51/52.
+The series we work with primarily are the <Text mark>NETX51/52</Text>.
 
 
 There are available as a SoM or more complete modules or discrete ICs in a PBGA, with a 1 mm raster and 244 Pins. The SoM delivers a very low BoM count - just connectors and leds and a couple of filtering capacitors.

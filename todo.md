@@ -24,6 +24,9 @@ Images
 
 meta
 * Add a new description bit of front matter into helmet - is this sub-title or longer para?
+* we have title, sub-title, description
+* description in meta is 155 chars - only longer descriptions are about this long so we should use them in meta
+* hieriachey sub-itle if desc not available
 
 links
 * react-router Link takes us to bottom of pages - higher order component
@@ -31,12 +34,12 @@ links
 
 functionality
 
+* char count on mdx files
 * get the example ui components docs fired up again @glowbuzzer/controls
 * codeblocks with aliased imports
-* featured blog image cant think how to do this - need kirky inspi
 * https://chatlio.com/ integration
 * github int - something about pulling release info from github - github issues link - pulse
-* make blogs look a bit more bloggy - mins to read, links, date - highlight component
+* make blogs look a bit more bloggy - links, date - highlight component
 * add gdpr cookies thingymajig
 
 responsive
