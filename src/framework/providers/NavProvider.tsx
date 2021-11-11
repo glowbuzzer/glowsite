@@ -12,7 +12,7 @@ import { createContext, FC } from "react"
 // @ts-ignore because globEager is not defined
 const imports = import.meta.globEager("../../pages/**/*.{jsx,tsx,md,mdx,ts}")
 // const imports = import.meta.globEager("../../pages/playground/**/*.{jsx,tsx,md,mdx,ts}")
-
+// const imports = import.meta.globEager("../../.test/**/*.{jsx,tsx,md,mdx,ts}")
 // console.log("IMPORTS", imports)
 
 export type Node = {
@@ -47,7 +47,9 @@ const root = Object.entries<any>(imports)
     .sort(([a], [b]) => a.localeCompare(b))
     .reduce(
         (r, [fullPath, page]) => {
-            const [, dirPath, ext] = fullPath.match(/\.\/pages(.*)\.(jsx|tsx|md|mdx|ts)$/)
+            const [, , dirPath, ext] = fullPath.match(
+                /\.\/(pages|\.test)(.*)\.(jsx|tsx|md|mdx|ts)$/
+            )
 
             const path = dirPath.split("/")
             if (ext === "ts") {
@@ -127,7 +129,7 @@ export const NavProvider: FC = ({ children }) => {
 export function useOuterNav(path: string): [Node, Node] {
     // console.log("Find nav for", path, "in", all)
     const node = all.find(n => n.path === path)
-    if (node.parent.parent.section) {
+    if (node.parent.parent?.section) {
         return [node, node.parent.parent]
     }
     return [node, node.parent]
