@@ -52,7 +52,7 @@ export const HomePage = () => {
                 <img src={HexImage} alt="hex image" />
             </Section>
 
-            <Section>
+            <Section background={"White"} spaced>
                 <YoutubeEmbed embedId="VnhS6107czk" />
             </Section>
 
