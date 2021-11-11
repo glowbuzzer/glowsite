@@ -1,6 +1,6 @@
 import { useRootNav } from "../providers/NavProvider"
 import { Link, useLocation } from "react-router-dom"
-import { Layout, Menu, Space } from "antd"
+import { Menu, Space } from "antd"
 import * as React from "react"
 import styled from "@emotion/styled"
 
@@ -8,10 +8,30 @@ import { ReactComponent as StandardLogo } from "../../images/logos/small-logo.sv
 import { ReactComponent as SmallLogo } from "../../images/logos/tiny-logo.svg?inline"
 
 import { GithubOutlined, MenuOutlined, YoutubeOutlined } from "@ant-design/icons"
+import { Section } from "../components/Section"
 
 const StyledTopNav = styled.div`
+    .logo {
+        display: block;
+        padding-top: 10px;
+    }
+
+    .ant-menu {
+        padding-top: 5px;
+        flex-grow: 1;
+        font-size: 1.1em;
+    }
+
+    .ant-menu-submenu {
+        padding-bottom: 10px !important;
+    }
+
     .nav-narrow {
         display: none;
+    }
+
+    .nav-wide {
+        display: flex;
     }
 
     @media (max-width: 950px) {
@@ -34,9 +54,6 @@ const StyledTopNav = styled.div`
     }
 
     .ant-menu-submenu-title {
-        :hover {
-        }
-
         margin: 0 20px 0 20px;
 
         @media (max-width: 1080px) {
@@ -44,15 +61,12 @@ const StyledTopNav = styled.div`
         }
     }
 
-    .ant-layout-header {
-        background: ${props => props.theme.color.TopNav};
-    }
-
     .ant-menu {
-        background: ${props => props.theme.color.TopNav};
+        background: none;
+        border: none;
     }
 
-    height: 66px;
+    //height: 66px;
 `
 
 // doesn't work when placed in component above, I think because menu items are created dynamically
@@ -80,18 +94,6 @@ const StyledMenuItem = styled(Menu.Item)`
     }
 `
 
-const StyleOffsiteLinks = styled.div`
-    float: right;
-`
-
-const StyledNavLogo = styled.div`
-    float: left;
-    padding: 10px 20px 10px 0;
-    height: 64px;
-`
-
-const { Header } = Layout
-
 export const TopNav = () => {
     const { pathname } = useLocation()
     const nav = useRootNav()
@@ -99,66 +101,49 @@ export const TopNav = () => {
     // we are expecting each node in the top nav to have children
 
     return (
-        <StyledTopNav>
-            <Layout>
-                <Header>
-                    <div className="nav-wide">
-                        <StyledNavLogo>
-                            <a href="/">
-                                <StandardLogo height={"43px"} width={"139px"} />
-                            </a>
-                        </StyledNavLogo>
-                        <StyleOffsiteLinks>
-                            <Space size="middle">
-                                <a href={"https://www.github.com/glowbuzzer"}>
-                                    <GithubOutlined
-                                        style={{ fontSize: "24px", color: "#9254de" }}
-                                    />
-                                </a>
-                                <a
-                                    href={
-                                        "https://www.youtube.com/channel/UCd5lSqWK5Ep4su1sHx6kkUA"
-                                    }
-                                >
-                                    <YoutubeOutlined
-                                        style={{ fontSize: "24px", color: "#9254de" }}
-                                    />
-                                </a>
-                            </Space>
-                        </StyleOffsiteLinks>
-
-                        <Menu mode="horizontal" selectedKeys={[pathname]}>
-                            {nav.children.map(({ path, title, children }) =>
-                                children?.length ? (
-                                    <Menu.SubMenu key={path} title={title}>
-                                        {children.map(({ path, title, subtitle, children }) => {
-                                            const to = children.length ? children[0].path : path
-                                            return (
-                                                <StyledMenuItem key={path}>
-                                                    <Link to={to}>
-                                                        <div className="title">{title}</div>
-                                                        <div className="subtitle">{subtitle}</div>
-                                                    </Link>
-                                                </StyledMenuItem>
-                                            )
-                                        })}
-                                    </Menu.SubMenu>
-                                ) : (
-                                    <Menu.SubMenu key={path}>NO CHILDREN</Menu.SubMenu>
-                                )
-                            )}
-                        </Menu>
-                    </div>
-                    <div className="nav-narrow">
-                        <StyledNavLogo>
-                            <a href="/">
-                                <SmallLogo height={"43px"} width={"43px"} />
-                            </a>
-                        </StyledNavLogo>
-                        <MenuOutlined onClick={() => alert("todo")} />
-                    </div>
-                </Header>
-            </Layout>
-        </StyledTopNav>
+        <Section background={"BackgroundGrey"}>
+            <StyledTopNav>
+                <div className="nav-wide">
+                    <Link className="logo" to="/">
+                        <StandardLogo height={"43px"} width={"139px"} />
+                    </Link>
+                    <Menu mode="horizontal" selectedKeys={[pathname]} forceSubMenuRender>
+                        {nav.children.map(({ path, title, children }) =>
+                            children?.length ? (
+                                <Menu.SubMenu key={path} title={title} popupOffset={[0, 20]}>
+                                    {children.map(({ path, title, subtitle, children }) => {
+                                        const to = children.length ? children[0].path : path
+                                        return (
+                                            <StyledMenuItem key={path}>
+                                                <Link to={to}>
+                                                    <div className="title">{title}</div>
+                                                    <div className="subtitle">{subtitle}</div>
+                                                </Link>
+                                            </StyledMenuItem>
+                                        )
+                                    })}
+                                </Menu.SubMenu>
+                            ) : (
+                                <Menu.SubMenu key={path}>NO CHILDREN</Menu.SubMenu>
+                            )
+                        )}
+                    </Menu>
+                    <Space size="middle">
+                        <a href={"https://www.github.com/glowbuzzer"}>
+                            <GithubOutlined style={{ fontSize: "24px", color: "#9254de" }} />
+                        </a>
+                        <a href={"https://www.youtube.com/channel/UCd5lSqWK5Ep4su1sHx6kkUA"}>
+                            <YoutubeOutlined style={{ fontSize: "24px", color: "#9254de" }} />
+                        </a>
+                    </Space>
+                </div>
+                <div className="nav-narrow">
+                    <a href="/">
+                        <SmallLogo height={"43px"} width={"43px"} />
+                    </a>
+                    <MenuOutlined onClick={() => alert("todo")} />
+                </div>
+            </StyledTopNav>
+        </Section>
     )
 }

@@ -2,10 +2,12 @@ import { ContexualLeftNav } from "../nav/ContexualLeftNav"
 import styled from "@emotion/styled"
 import { BaseLayout } from "./BaseLayout"
 import { MenuUnfoldOutlined } from "@ant-design/icons"
+import { Section } from "../components/Section"
 
 const StyledDiv = styled.div`
+    label: DocumentationPage;
     display: flex;
-    height: 100%;
+    flex-grow: 1;
 
     .left {
         flex-grow: 20;
@@ -21,7 +23,7 @@ const StyledDiv = styled.div`
         @media (max-width: 768px) {
             flex-basis: 50px;
             flex-grow: 0;
-          
+
             .full {
                 display: none;
             }
@@ -33,9 +35,11 @@ const StyledDiv = styled.div`
     }
 
     .content {
-        margin: 20px;
+        padding: 20px;
         flex-basis: 0;
         flex-grow: 80;
+
+        background: ${props => props.theme.color.LightGrey};
     }
 
     // only format code elements outside of pre block
@@ -50,17 +54,19 @@ const StyledDiv = styled.div`
 export const DocumentationPage = ({ children }) => {
     return (
         <BaseLayout>
-            <StyledDiv>
-                <div className="left">
-                    <div className="full">
-                        <ContexualLeftNav />
+            <Section background={"White"} expand>
+                <StyledDiv>
+                    <div className="left">
+                        <div className="full">
+                            <ContexualLeftNav />
+                        </div>
+                        <div className="collapsed">
+                            <MenuUnfoldOutlined onClick={() => alert("TODO")} />
+                        </div>
                     </div>
-                    <div className="collapsed">
-                        <MenuUnfoldOutlined onClick={() => alert("TODO")} />
-                    </div>
-                </div>
-                <div className="content">{children}</div>
-            </StyledDiv>
+                    <div className="content">{children}</div>
+                </StyledDiv>
+            </Section>
         </BaseLayout>
     )
 }
