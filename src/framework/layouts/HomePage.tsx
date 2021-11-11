@@ -44,9 +44,7 @@ const HeroSection = styled.div`
 export const HomePage = () => {
     return (
         <BaseLayout>
-            <Section background={"White"}>
-                <HomeCarousel desktop={true} />
-            </Section>
+            <HomeCarousel desktop={true} />
 
             <Section>
                 <img src={HexImage} alt="hex image" />

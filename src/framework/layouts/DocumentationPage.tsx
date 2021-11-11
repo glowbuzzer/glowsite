@@ -12,8 +12,8 @@ const StyledDiv = styled.div`
     .left {
         flex-grow: 20;
         flex-basis: 0;
-        background: white;
-
+        border-left: 1px solid rgba(0,0,0,0.05);
+      
         .collapsed {
             display: none;
             font-size: 2em;

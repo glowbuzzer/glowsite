@@ -101,7 +101,7 @@ export const TopNav = () => {
     // we are expecting each node in the top nav to have children
 
     return (
-        <Section background={"BackgroundGrey"}>
+        <Section background={"BackgroundGrey"} guttered>
             <StyledTopNav>
                 <div className="nav-wide">
                     <Link className="logo" to="/">

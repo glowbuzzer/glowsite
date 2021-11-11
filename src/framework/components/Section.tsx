@@ -27,11 +27,11 @@ const StyledSection = styled.div<{
         max-width: 1400px;
         margin: 0 auto;
         flex-grow: 1;
-      
+
         ${props =>
             props.dataGuttered &&
             css`
-                max-width: min(1400px, 90vw);
+                max-width: 1400px;
             `}
 
         ${props =>
@@ -41,25 +41,23 @@ const StyledSection = styled.div<{
                 padding: 40px 0;
             `}
 
-        ${props =>
-                props.dataExpand &&
-                css`
-            display: flex;
-            align-items: stretch;
-            flex-grow: 1;
-        `}
-
+    ${props =>
+            props.dataExpand &&
+            css`
+                display: flex;
+                align-items: stretch;
+                flex-grow: 1;
+            `}
     }
 
-    ${props =>
-        props.dataExpand &&
-        css`
-            display: flex;
-            align-items: stretch;
-            flex-grow: 1;
-        `}
+  ${props =>
+          props.dataGuttered &&
+          css`
+                padding: 0 40px;
+            `}
 
-    ${props =>
+
+  ${props =>
         props.dataInverted &&
         css`
             color: white;
