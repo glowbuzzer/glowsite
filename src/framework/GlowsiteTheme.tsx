@@ -34,6 +34,9 @@ const AppStyle = styled.div`
 const AppTheme = {
     color: {
         ...GbColours
+    },
+    breaks: {
+        leftNavCollapse: "768px"
     }
 }
 

@@ -24,6 +24,7 @@ const StyledMenu = styled.div`
         height: 100%;
     }
 `
+
 export const ContexualLeftNav = () => {
     const { pathname } = useLocation()
 

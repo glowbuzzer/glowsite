@@ -8,6 +8,7 @@
  */
 
 import { createContext, FC } from "react"
+import { useLocation } from "react-router-dom"
 
 // @ts-ignore because globEager is not defined
 const imports = import.meta.globEager("../../pages/**/*.{jsx,tsx,md,mdx,ts}")
@@ -137,6 +138,21 @@ export function useOuterNav(path: string): [Node, Node] {
 
 export function useRootNav() {
     return root
+}
+
+export function useNav() {
+    const { pathname } = useLocation()
+    return all.find(r => r.path === pathname)
+}
+
+export function useNavCrumbs() {
+    const current = useNav()
+
+    function ancestors(node: Node): Node[] {
+        return node ? [...ancestors(node.parent), node] : []
+    }
+
+    return ancestors(current).slice(2) // remove empty root node, home and current node
 }
 
 // console.log("ALL", all)

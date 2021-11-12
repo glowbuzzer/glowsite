@@ -1,6 +1,7 @@
 import { TopNav } from "../nav/TopNav"
 import styled from "@emotion/styled"
 import { GlowsiteFooter } from "../footer/GlowsiteFooter"
+import {BreadcrumbNav} from "../components/BreadcrumbNav";
 
 const StyledLayout = styled.div`
     display: flex;
@@ -33,6 +34,7 @@ export const BaseLayout = ({ children }) => (
                 <TopNav />
             </nav>
             <div className="body">
+                <BreadcrumbNav/>
                 {children}
             </div>
         </div>

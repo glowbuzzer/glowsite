@@ -60,9 +60,11 @@ export const DocumentationPage = ({ children }) => {
                         <div className="full">
                             <ContexualLeftNav />
                         </div>
+{/*
                         <div className="collapsed">
                             <MenuUnfoldOutlined onClick={() => alert("TODO")} />
                         </div>
+*/}
                     </div>
                     <div className="content">{children}</div>
                 </StyledDiv>
