@@ -46,9 +46,14 @@ const StyledSection = styled.div<{
             css`
                 display: flex;
                 align-items: stretch;
-                flex-grow: 1;
             `}
     }
+
+  ${props =>
+          props.dataExpand &&
+          css`
+                flex-grow: 1;
+            `}
 
   ${props =>
           props.dataGuttered &&

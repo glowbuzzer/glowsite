@@ -29,6 +29,22 @@ const AppStyle = styled.div`
     h2 {
         margin: 20px 0 0 0;
     }
+
+    // only format code elements outside of pre block
+    *:not(pre) > code {
+        //background: #d9d9d9;
+        border: 1px solid #d9d9d9;
+        border-radius: 5px;
+        padding: 0 3px 0 3px;
+    }
+
+    pre {
+        display: block;
+        width: 100%;
+        max-width: 100%;
+        overflow-x: auto;
+        white-space: pre;
+    }
 `
 
 const AppTheme = {
