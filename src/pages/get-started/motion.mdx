@@ -6,6 +6,7 @@ sort: 3
 
 import {Alert} from "antd";
 import {Tldr} from "../../framework/components/Tldr"
+import { Link } from "react-router-dom"
 
 # How do I get a drive moving?
 <Tldr>
@@ -18,23 +19,37 @@ import {Tldr} from "../../framework/components/Tldr"
 <Alert message="Caution" description="This guide assumes you are working with the single axis EtherCAT starter kit hardware and it have it fully assembled" type="warning" showIcon style={{margin: '20px 0 20px 0'}} />
 
 
-## Step 1 - Use the create react app custom template to create
-````shell
-insert cra commands
-````
+## Step 1 - Use the create react app custom template to create your getting started project
+
+You will perform this step on your PC (Windows or Linux or WSL).
+
+```shell
+npx create-react-app your-project-name --template [gb-starter]
+cd your-project-name
+npm start
+```
+
+If that completes successfully, that is it for this step.
+
 ## Step 2 - install Raspberry Pi OS
 
-We need a Raspberry Pi with a pre-empt patched kernel.
+We need a Raspberry Pi with a preempt patched kernel on which to run the core control. The front-end React application will talk to this over web-sockets.
 
 The easiest way to install this is to use our image.
 
-Download from `https://download.glowbuzzer.com/pi-rt-image.img.z
+Download from `https://download.glowbuzzer.com/pi-rt-image.img.z`
 
-Uncompress
+(We do provide instructions on how to build the kernel yourself if your feel inclined - see <Link to="/docs/gbem/compiling_and_running"> here.</Link>)
 
-Write to a 32gb sd card with  win32 disk imager or sketcher
+Next, uncompress the downloaded image either with a Linux `uncompress` command or using the Windows tools.
 
-Log onto pi with ssh
+Next, the 32gb SD card must have the image written to it. On Windows use <a href="https://sourceforge.net/projects/win32diskimager/">Win32 Disk imager</a> or <a href="https://www.balena.io/etcher/"> Etcher</a>.
+
+On Linux, google "Writing an SD Card Image Using Linux Command Line Tools" and follow the instructions from a good source.
+
+Once the image is written, you can plug in to your Raspberry Pi and the power it up.
+
+If all is well, log onto the pi with ssh:
 
 
 ````shell
@@ -44,19 +59,30 @@ ssh root@rpi-gb
 password - `raspberry`
 
 ## Step 3 - Download GBC on the Raspberry Pi
+While your are logged into the pi, in your home directory, download GBC from `https://download.glowbuzzer.com/gbc-armv7.tar.xz`.
 
-`https://download.glowbuzzer.com/gbc-armv7.tar.xz`
+If `wget` needs installing, install with:
+```shell
+sudo apt install wget
+```
+Otherwise, just run:
 
-ncompresss
+```shell
+wget https://download.glowbuzzer.com/gbc-armv7.tar.gz
+```
 
-
+Then uncompresss with:
+```shell
+tar -xzf gbc-armv7.tar.gz
+```
+That's it for this step.
 
 ## Step 4 - Download GBEM configure it for the test machine hardware
-Download from GitHub
+Download GBEM from GitHub
 ````shell
-git clone https://gitgub.com/glowbuzzer/GBEM
-
+git clone https://gitgub.com/glowbuzzer/gbem
 ````
+
 Open in your IDE and edit the following files:
 
 machine config
@@ -66,21 +92,40 @@ machine config
 ````shell
 ````
 
-## Step 5 - Run GBEM and make sure it connected to both GBC and the test hardware
+## Step 5 - Run GBC & GBEM and make sure it connected to both GBC and the test hardware
+
+Run GBC:
+```shell
+cd ..
+cd GBC
+./GBEM -c -ieth0
+```
+
+And then run GBEM:
+
 ````shell
+cd GBEM
 ./GBEM -c -ieth0
 ````
-
 You should see lots of output but xxxx is the key
-
 
 ## Step 6 - Connect the browser to GBC
 
-`localhost:`
+First, run `npm start` in the directory into which you CRA React application is located.
+
+Then, connect your browser, to the React dev server with:
+
+`localhost:4000`
+
+(adjust the port as needed)
+
+Then click connect in the glowbuzzer generic application:
+
+TODO screen shot of connect
 
 ## Step 6 - Jog a motor!
 
-screen-shot
+TODO screen-shot
 
 
 

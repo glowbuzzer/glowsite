@@ -1,6 +1,7 @@
 Nav
 * fine tune - 
 * decide what happens on 404 privacy etc
+* tier 2 top nav headings gone
 
 Widths
 * top, nav, margin, footer line ups on mobile
@@ -28,6 +29,7 @@ Style
 * markdown
 * definition lists
 * in code filename
+
 
 
 meta

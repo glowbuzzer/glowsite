@@ -54,6 +54,15 @@ GBC runs on low-end hardware but needs multiple cores. The lowest specification 
 
 # Drive and IO interfacing (GBEM/GBSM)
 
-GBEM and GBSM run on Linux or on a microcontroller.
+GBEM and GBSM (the EtherCAT master and stepper motor IC control components) run on Linux or on a microcontroller.
 
-Interfaces with GBC over shared memory on Linux or through SPI on embedded platforms.
+These interfaces with GBC (the core control) over shared memory on Linux or through SPI on embedded platforms.
+
+The required interfaces vary by platform/function:
+
+* Linux EtherCAT/Step master - requires access to the POSIX shared memory API which allows processes to communicate information by sharing a region of memory. This is available across a wide variety of different Linux platforms.
+* Linux EtherCAT master - requires a RAW sockets network interface again this is widely available.
+* Linux Step master - requires a GPIO/SPI interface. Linux has spidev and libgpiod and we often use these interfaces but on some variants of Linux (.e.g Raspberry Pi) other libraries are needed
+* Microcontroller EtherCAT/Step master - requires a GPIO / SPI interface. Microcontrollers are pretty good at GPIO and SPI so this is not an issue!
+* Microcontroller EtherCAT master - requires a custom network driver. We have ported this to STM32/lwIP but for different microcontrollers porting work would be needed
+

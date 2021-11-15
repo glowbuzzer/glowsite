@@ -4,8 +4,11 @@ subtitle: Clone and modify a front-end template
 sort: 5
 ---
 import {Tldr} from "../../framework/components/Tldr"
+import { Link } from "react-router-dom"
+import {Image} from "../../framework/components/Image"
 
-# Use a custom create react app template to
+
+# Use a custom create react app template to create your starter project
 <Tldr>
     - Blah
     - Blah, blah
@@ -13,33 +16,28 @@ import {Tldr} from "../../framework/components/Tldr"
     - Blah, blah, blah blah
 </Tldr>
 
-````shell
-npx blag
-````
+```shell
+npx create-react-app your-project-name --template [gb-starter]
+cd your-project-name
+npm start
+```
 
-Open in IDE
-
-# Structure of project
-tiles - dont have to use our tiles gframeowkr menu
-
-but can use this
-
-app.tsx
-
-simple tile definition - shotrthand was of defining tiles
+Open the project in your IDE. We use JetBrains but Visual Studio Code will do fine.
 
 
+# Structure of the project
+We provide a little framework that enables a Tiled UI to be created.
 
+You don't have to use this framework, we use it because often machine control user interfaces contain discrete "pockets" of functionality laid out on the screen.
 
+For this tutorial, we will assume that you are using the Tiles.
 
+# Create new tile that toggles a Digital Output - Front-end Tutorial 1
 
-store
-
-
-# Create new tile that toggles a Digital Output
-
+## Introduction
 Let's create the simplest possible machine control function. A button to toggle a digital output. This is the "hello world" equivalent in automation land.
 
+## Create the tile
 Start by creating a new tsx file `TutorialDoToggleTile.tsx`.
 
 In this file we need to import the components we will need for our new tile.
@@ -54,17 +52,31 @@ import { useDigitalOutput} from "@glowbuzzer/store"
 
 ```
 
-React, styled-components, Tile are boilerplate
+`React` & `styled-components` are the React and <a href="https://styled-components.com/"> styled-components</a> are the imports for the React components and styled-components is a handy way of styling a React application that we use widely.
 
-useDigitalOutput is the glowbuzzer toolkit component
+`Tile` is the component we provide to help assemble tiled user interfaces.
+
+useDigitalOutput is the glowbuzzer toolkit component that integrates with the Digital IO.
 
 Switch is the component we will use for our switch from the Ant Design framework (<a href="https://ant.design/components/switch/">Switch Component</a>)
 
-We will use the `useDigitalOutput` component from the glowbuzzer toolkit. the signature for this component is:
+The `useDigitalOutput` component from the glowbuzzer toolkit has the following signature:
 
 ````jsx
 function useDigitalOutput(index: number): {set(state: number, override?: boolean): void, actState: number, state: number, override?: boolean): void, actState: number, state: number, override: boolean}
 ````
+
+It enables you to both set the state of a digital output and also provides its state (i.e. if it is set or unset).
+
+So, we need to write a component that sets the state of the digital output when the toggle switch is manipulated.
+
+For this tutorial we will use digital ouput number 1.
+
+A little function handles the state change and applies the new state to the digital output.
+
+The tile's user interface is as simple as it gets, it is just the Ant Design Switch component.
+
+The code for this is as follows:
 
 ```tsx
 export const TutorialDoToggleTile = ({ labels=[] }) => {
@@ -78,15 +90,16 @@ export const TutorialDoToggleTile = ({ labels=[] }) => {
     return (
        <Tile title="Tutorial Digital Output Toggle">
            <StyledDiv>
+                Turn on my digital output
                 <Switch checked={dout.state && true} onChange={handle_state_change}/>
            </StyledDiv>
        </Tile>
     )
 }
+````
 
 
-
-The final code is
+The final code is:
 
 ```tsx
 import React from "react"
@@ -103,6 +116,10 @@ padding-top: 20px;
         display: flex;
         gap: 10px;
     }
+     .ant-switch {
+        flex-grow: 1;
+        margin: 10px 20px;
+    }
 `
 
 export const TutorialDoToggleTile = ({ labels=[] }) => {
@@ -116,6 +133,7 @@ export const TutorialDoToggleTile = ({ labels=[] }) => {
     return (
        <Tile title="Tutorial Digital Output Toggle">
            <StyledDiv>
+                Turn on my digital output
                 <Switch checked={dout.state && true} onChange={handle_state_change}/>
            </StyledDiv>
        </Tile>
@@ -123,14 +141,14 @@ export const TutorialDoToggleTile = ({ labels=[] }) => {
 }
 ```
 
+## Add the tile to the UI
 
-
-In app.tsx, import the component you just wrote
+In app.tsx, import the component you just wrote:
 ```tsx
 import {TutorialDoToggleTile} from "./tutorial/TutorialDoToggleTile";
 ```
 
-then render on the page
+Then render it on the page at the appropriate point:
 
 ```tsx
 //app.tsx
@@ -138,25 +156,45 @@ then render on the page
 ```
 
 
-Now when you look at localhost:xxxx you will see your tile and the toggle swithc.
+Now when you look at localhost:xxxx you will see your tile and the toggle switch.
+
+import step1_add_switch from "./front_end_tutorial_images/step1_add_switch.png?glowsite"
+
+<Image meta={step1_add_switch} alt="front-end switch" maxWidth={400}/>
 
 
-The next step is to make the toggle switch actually trigger a digital ouput.
+## Test the toggle switch
 
+The next step is to make the toggle switch actually trigger a digital output.
 
-You will need to run GBC and connect the front-end application to teh GBC websockets server for this step.
+You will need to run GBC and connect the front-end application to the GBC websockets server for this step.
 
+(GBC can be dowloaded from `https://downloads.glowbuzzer.com/?????`)
 
-./GBC
+Run GBC with: `./GBC`
 
-Then click connect in connect til
+Then, in the browser, click connect to establish a connection to GBC.
+
+import step2_connect_tile from "./front_end_tutorial_images/step2_connect_tile.png?glowsite"
+
+<Image meta={step2_connect_tile} alt="front-end connect tile" maxWidth={400}/>
 
 preferences `ws://localhost:9001/ws`
 
+We will be running in `Simulation Mode` as we have not integrated GBC with any hardware (e.g. an EtherCAT master).
+
+Now, in the UI, the glowbuzzer provided Digital Outputs tile reflects the state of all the digital outputs and you will be able to see Digital Output 1 toggle as your move your switch.
 
 
+That is it. It shows how simple it is to create React components to control machine functions.
 
-# Make a drive move - an oscillating move
+
+# Make a drive move - an oscillating move -  Front-end Tutorial 2
+
+## Introduction
+The next example in showing how easy it is to write React machine control functions is to make a drive move. In this case we want to make a drive perform an oscillating move.
+
+## Create the tile
 
 Create `TutorialOscillatingMoveTile.tsx`
 

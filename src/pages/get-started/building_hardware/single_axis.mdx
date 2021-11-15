@@ -6,6 +6,7 @@ sort: 1
 
 import { Link } from "react-router-dom"
 import {Row, Col, Alert} from 'antd'
+import {Image} from "../../../framework/components/Image"
 
 
 # Assembling the single axis starter kit
@@ -27,6 +28,22 @@ The drive requires two 24V connections: one for the motor power and one for the 
 The larger MDR-100-24 power supply is used for the motor power and the smaller MDR-20-24 power supply is used for the logic power.
 
 The power cables for motor power is a pre-assembled cable from Oriental motor. The ends of this cable must be crimped with bootlace ferrules. This will mean cutting off the ring terminals and crimping them with a bootlace ferrule.
+
+Power cable before crimping:
+
+import single_axis_motor_power_cable_raw from "./single_axis_motor_power_cable_raw.jpg?glowsite"
+
+<Image meta={single_axis_motor_power_cable_raw} alt="Single axis motor power cable unprocessed" maxWidth={400}/>
+
+Power cable after crimping:
+
+TODO
+
+Next, mount the PSUs and drive to the DIN rail by clipping them on;
+
+import single_axis_psus_and_drive_on_din_rail from "./single_axis_psus_and_drive_on_din_rail.jpg?glowsite"
+
+<Image meta={single_axis_psus_and_drive_on_din_rail} alt="Single axis PSUs and drive on rail" maxWidth={500}/>
 
 For the logic power 0.5mm2 wires are needed. The ends of these wires must be crimped.
 
