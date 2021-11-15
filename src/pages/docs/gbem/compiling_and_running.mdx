@@ -7,7 +7,9 @@ import { Image } from "../../../framework/components/Image"
 
 # Compiling & Running GBEM
 <Tldr>
-    -
+    - Uses cmake for Linux build
+    - Need to get the code in your IDE
+    - Separate build for Linux vs. Raspberry Pi
 </Tldr>
 
 ## Compiling
@@ -37,21 +39,6 @@ Also specific modes
 
 1. EEPROM
 2. (AG something missing?)
-
-> GBC (AG something missing?)
-
-## gbemi.ini file
-
-This file sets key GBEM parameters needed at start-up.
-
-````shs
-[Platform]
-platform = rpi
-
-````
-
-Tell GBEM what platform you are running on.
-
 
 
 ## ramdisk directory

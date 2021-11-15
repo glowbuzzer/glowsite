@@ -3,6 +3,7 @@ title: Configuring machines
 sort: 6
 ---
 import {Tldr} from "../../../framework/components/Tldr"
+import { Link } from "react-router-dom"
 
 # Configuring machines
 
@@ -20,10 +21,10 @@ import {Tldr} from "../../../framework/components/Tldr"
 You can use GBEM without writing any new c code if you work with the types of drives/slaves we have pre-configured.
 
 These include a range of slaves from Beckhoff, Oriental Motor, JVL, Kollmorgen, Panasonic, Omron, Delta, Cannon, nanotec,
-Trinamic, Delta etc. (see [DRIVE SUPPORT](/docs/gbem/drive_support_overview)).
+Trinamic, Delta etc. (see <Link to="/docs/gbem/drive_support_overview">DRIVE SUPPORT</Link>).
 
 If you want to add support for new slaves from different manufacturers then some very basic c programming know-how is needed.
-See [ADDING A NEW SLAVE](/docs/gbem/adding_a_new_slave) &  [ADDING A NEW DRIVE](/docs/gbem/adding_a_new_drive).
+See <Link to="/docs/gbem/adding_a_new_slave"> ADDING A NEW SLAVE</Link> & <Link to="/docs/gbem/adding_a_new_drive"> ADDING A NEW DRIVE</Link>.
 
 If you are using the pre-configured drives/slaves (or have already written your drive / slave interfaces) the steps
 involved in creating a machine configuration are:

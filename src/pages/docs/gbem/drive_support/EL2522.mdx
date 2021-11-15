@@ -196,19 +196,26 @@ CH1
 
 ## Testing
 
-## Oscilloscope
+## Oscilloscope tests
 
 We connected the A+ output of the EL2522's first channel to an oscilloscope. A- (the complimentary output) is left disconnected. The B+ and B- outputs just signal the direction and these were also left disconnected.
 
 First at constant velocity:
 
-![oscilloscope EL2522 at constant velocity](/tek_el2522_cv.png)
+
+import tek_el2522_cv from "./tek_el2522_cv.png?glowsite"
+
+<Image meta={tek_el2522_cv} alt="Oscilloscope CV" />
+
 
 This is exactly what we would expect. A steady stream of pulses at a frequency that corresponds to our maximum velocity.
 
 Secondly during an acceleration ramp:
 
-![oscilloscope EL2522 during acceleration ramp](/tek_el2522_ramp.png)
+import tek_el2522_ramp from "./tek_el2522_ramp.png?glowsite"
+
+<Image meta={tek_el2522_ramp} alt="Oscilloscope ramp" />
+
 
 Again this is what we would expect. There slight discontinuities in the increase in frequency at around 170ms probably caused by the cyclic setting of position and Beckhoff's algorithm for calculating the frequency for the next period but we wouldn't expect this to be audibly noticeable on the motor but these could cause slight path variation if the drive was used for precision synchronised motion. 
 

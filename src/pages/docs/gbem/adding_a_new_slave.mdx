@@ -3,6 +3,7 @@ title: Adding slaves
 sort: 7
 ---
 import {Tldr} from "../../../framework/components/Tldr"
+import { Link } from "react-router-dom"
 
 # Adding a new slave
 
@@ -36,7 +37,7 @@ MAP_SLAVE_STANDARD_SDO_FUNCTIONS -> ec_standard_sdos_myslave
 MAP_SLAVE_INITIAL_PDO_FUNCTIONS -> ec_initial_pdo_myslave
 ````
 
-If the slave is a drive, then more functions will be needed - see the [ADDING A NEW DRIVE](adding_a_new_drive.md) documentation.
+If the slave is a drive, then more functions will be needed - see the <Link to="/docs/gbem/adding_a_new_drive">ADDING A NEW DRIVE</Link> documentation.
 
 `ec_pdo_map_myslave` - executes SDO writes at start-up to PDO map the slave
 
@@ -52,7 +53,7 @@ The examples below explain how to write these functions and the circumstances in
 
 PDO mapping is the process by which the slave is told which objects we want to appear in the Tx and Rx PDOs. 
 
-See the examples below and the [ADDING A NEW DRIVE](addind_a_new_drive.md) for more information on how to implement this function.
+See the examples below and the <Link to="/docs/gbem/adding_a_new_drive">ADDING A NEW DRIVE</Link> for more information on how to implement this function.
 
 ### STANDARD_SDO_FUNCTIONS 
 
@@ -72,13 +73,13 @@ The function takes as parameters a `unit16_t` Slave number, `uint16_t` Index and
 
 ### NVRAM_SDO_FUNCTIONS
 
-These are usually used for drives - see [ADDING_A_NEW_DRIVE](adding_a_new_drive.md) for more details of their use in the context of drives.
+These are usually used for drives - see <Link to="/docs/gbem/adding_a_new_drive">ADDING A NEW DRIVE</Link> for more details of their use in the context of drives.
 
 There are scenarios where they might be of use for a non-drive slave where the slave has configuration parameters that need to be written to the slave's NVRAM. The function performs a series of SDO writes and then a SDO write to the register that triggers a write to NVRAM. The slave usually needs a power cycle for the settings to take effect.
 
 ### INITIAL_PDO_FUNCTIONS
 
-These are usually used for drives - see [ADDING_A_NEW_DRIVE](adding_a_new_drive.md) for more details of their use in the context of drives.
+These are usually used for drives - see <Link to="/docs/gbem/adding_a_new_drive">ADDING A NEW DRIVE</Link> for more details of their use in the context of drives.
 
 There are scenarios where they might be of use for a non-drive slave where the slave wants one or more PDOs written during the first cycle of execution. If this behaviour is needed then this function can be written and it will be called once at the start of cyclic data exchange with the EtherCAT network.
 

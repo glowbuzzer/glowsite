@@ -20,10 +20,153 @@ npx blag
 Open in IDE
 
 # Structure of project
+tiles - dont have to use our tiles gframeowkr menu
+
+but can use this
+
+app.tsx
+
+simple tile definition - shotrthand was of defining tiles
+
+
+
+
+
 
 store
-b
 
-# Example create a new component
+
+# Create new tile that toggles a Digital Output
+
+Let's create the simplest possible machine control function. A button to toggle a digital output. This is the "hello world" equivalent in automation land.
+
+Start by creating a new tsx file `TutorialDoToggleTile.tsx`.
+
+In this file we need to import the components we will need for our new tile.
+
+```tsx
+//TutorialDoToggleTile.tsx
+import React from "react"
+import { Tile } from "@glowbuzzer/layout"
+import { Switch} from "antd"
+import styled from "styled-components"
+import { useDigitalOutput} from "@glowbuzzer/store"
+
+```
+
+React, styled-components, Tile are boilerplate
+
+useDigitalOutput is the glowbuzzer toolkit component
+
+Switch is the component we will use for our switch from the Ant Design framework (<a href="https://ant.design/components/switch/">Switch Component</a>)
+
+We will use the `useDigitalOutput` component from the glowbuzzer toolkit. the signature for this component is:
+
+````jsx
+function useDigitalOutput(index: number): {set(state: number, override?: boolean): void, actState: number, state: number, override?: boolean): void, actState: number, state: number, override: boolean}
+````
+
+```tsx
+export const TutorialDoToggleTile = ({ labels=[] }) => {
+    const dout = useDigitalOutput(1)
+
+    function handle_state_change() {
+        const new_state = 1 - dout.state
+        dout.set(new_state, true)
+    }
+
+    return (
+       <Tile title="Tutorial Digital Output Toggle">
+           <StyledDiv>
+                <Switch checked={dout.state && true} onChange={handle_state_change}/>
+           </StyledDiv>
+       </Tile>
+    )
+}
+
+
+
+The final code is
+
+```tsx
+import React from "react"
+import { Tile } from "@glowbuzzer/layout"
+import { Select, Switch, Tag } from "antd"
+import styled from "styled-components"
+import { useDigitalOutput, useDigitalOutputList } from "@glowbuzzer/store"
+
+
+const StyledDiv = styled.div`
+padding-top: 20px;
+
+    > div {
+        display: flex;
+        gap: 10px;
+    }
+`
+
+export const TutorialDoToggleTile = ({ labels=[] }) => {
+    const dout = useDigitalOutput(1)
+
+    function handle_state_change() {
+        const new_state = 1 - dout.state
+        dout.set(new_state, true)
+    }
+
+    return (
+       <Tile title="Tutorial Digital Output Toggle">
+           <StyledDiv>
+                <Switch checked={dout.state && true} onChange={handle_state_change}/>
+           </StyledDiv>
+       </Tile>
+    )
+}
+```
+
+
+
+In app.tsx, import the component you just wrote
+```tsx
+import {TutorialDoToggleTile} from "./tutorial/TutorialDoToggleTile";
+```
+
+then render on the page
+
+```tsx
+//app.tsx
+{ render: <TutorialDoToggleTile />, height: 4, title: "Tutorial Digital Output Toggle" }
+```
+
+
+Now when you look at localhost:xxxx you will see your tile and the toggle swithc.
+
+
+The next step is to make the toggle switch actually trigger a digital ouput.
+
+
+You will need to run GBC and connect the front-end application to teh GBC websockets server for this step.
+
+
+./GBC
+
+Then click connect in connect til
+
+preferences `ws://localhost:9001/ws`
+
+
+
+
+# Make a drive move - an oscillating move
+
+Create `TutorialOscillatingMoveTile.tsx`
+
+
+
+use solo actity
+
+everythig get back is promise
+
+use effect
+
 
 

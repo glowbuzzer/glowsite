@@ -1,30 +1,38 @@
 Nav
-* implement mobile navs 
-* min width on all left navs doesn't work?
-* breadcrumb for when nav expands
+* fine tune - 
+* decide what happens on 404 privacy etc
+
+Widths
+* top, nav, margin, footer line ups on mobile
+
+Routing
+* privacy and legal stopped working
+
+Home page
+* play with home page chunking
+* enlarge top slider foreground image
+* fine tune  get started rocket bar
+* add padding to featured blog images
+* dots of featured blog
+* top carosuel doesnt repsond to dots - speed
+
+footer
+* alfie suggested something and i forgot what he said
 
 Style
-* few pixel error on top nav bar
-* how to chunk home page
-  * try full width different colours - keep fixed width content ala trimanic - have heaidngs
 * choose base font size - p too small by 10%?
-* home page top nav bold?
 * padding / margin after headings - i like lots
 * indent on privacy and legal - see hack in legal
 * max width not respected on all pages - see docs/gbc/misc - this is wide codeblock not wrapping have to decide what to do here...white-space : pre-wrap !important;?
-* ak doesnt like the slider dots and they do expand wierdly
-* top nav background col ak disike
 
 * markdown
 * definition lists
-* 
+* in code filename
 
-Images
-* How do we blow the image cache? if you change an imagetools image it doesnt update
 
 meta
 * Add a new description bit of front matter into helmet - is this sub-title or longer para?
-* we have title, sub-title, description
+  * we have title, sub-title, description
 * description in meta is 155 chars - only longer descriptions are about this long so we should use them in meta
 * hieriachey sub-itle if desc not available
 
@@ -39,7 +47,6 @@ functionality
 * codeblocks with aliased imports
 * https://chatlio.com/ integration
 * github int - something about pulling release info from github - github issues link - pulse
-* make blogs look a bit more bloggy - links, date - highlight component
 * add gdpr cookies thingymajig
 
 responsive
@@ -66,3 +73,13 @@ content
 * drives tidy up
 * gbem finish off
 
+
+
+5 slots to xmas
+
+wk1 - nav - front-end compopnents back - motion getting started - everythign lining up - 
+wk2 - gbc docs week
+wk3 - home page week - cookies - meta
+wk4 - gbem week - tweek week
+wk5 - tutorials
+ak blog

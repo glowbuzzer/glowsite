@@ -3,6 +3,8 @@ title: Adding drives
 sort: 8
 ---
 import {Tldr} from "../../../framework/components/Tldr"
+import { Link } from "react-router-dom"
+
 
 # Adding a new drive
 
@@ -16,7 +18,7 @@ Adding support for a new type of drive requires the implementation of a set of C
 
 If the drive follows the CiA 402 specification closely, implementing these functions a trivial exercise and the existing examples can just be largely copied and pasted. However, if your drive supports more exotic interfaces or has fancy extra features which you want to use, then this may be more complicated. 
 
-In GBEM adding a new drive a set of extra steps on top of those required to add a new slave, so it is worth reviewing the documentation for adding a new slave as well as the instructions in this section - [ADDING A NEW SLAVE](adding_a_new_slave.md).
+In GBEM adding a new drive a set of extra steps on top of those required to add a new slave, so it is worth reviewing the documentation for adding a new slave as well as the instructions in this section - <Link to="/docs/gbem/adding_a_new_slave">ADDING A NEW SLAVE</Link>.
 
 ## First steps
 If you have ever commissioned a fieldbus drive before, you will already know that it is a bit of a painful process irrespective of the software you are integrating it with. There is, working out the wiring for the safety features to get it to move at all, a slightly baffling tuning process, a dense forest of configuration options to wade through and a "helpful" 500 page manual.
@@ -27,11 +29,11 @@ These are the steps we suggest you follow to implement a new drive interface for
 1. Implement the most basic possible wiring scheme required to get the drive to an operational state. (Obviously the drive will be outside the machine just sitting on the workbench at this stage).
 1. Use the drive manufacturer's configuration software to try and get the drive to move (if the manufacturer provides such software).
 1. Plug the drive into an EtherCAT network and run the GBEM with the netscan option to see if it can be seen and to have a look at its default PDO mapping.
-1. Dive into the manufacturer's drive documentation to work out the PDO mapping you want to use, [see here](#Write the slave functions).
+1. Dive into the manufacturer's drive documentation to work out the PDO mapping you want to use, [see here](#Write_slave_functions).
 1. Dive into the manufacturer's docs to work out the start-up SDOs and any initial PDO writes that are needed.
-1. Write the functions to perform the initial SDO writes, [see here](#) .
-1. Write the cyclic functions to communicate with the drives PDOs, [see here](#Write the cyclic functions).
-1. Test the drive, [see here](#Test the drive).
+1. Write the functions to perform the initial SDO writes, [see here](#Initial_sdos) .
+1. Write the cyclic functions to communicate with the drives PDOs, [see here](#Cyclic_functions).
+1. Test the drive, [see here](#Test_drive).
 
 ## What are the key functions provided by GBEM that you will need to use?
 
@@ -69,6 +71,8 @@ There are two types of drive functions that have to be written:
 We discuss how to write these sets of functions in the next sections of this document.
 
 There is also the drive's header file that will need writing. This contains mainly #defines for constants and functions declarations for the functions above.
+
+<a id={"Write_slave_functions"}/>
 
 ## Write the slave functions
 
@@ -109,19 +113,19 @@ There are also some useful things that it makes it easier to use GBEM so if thes
 
  Some drives require the drive manufacturer's configuration software to be used to create the PDO map and save it to the drive's NVRAM. In this case you can't configure the PDO mapping through GBEM and the functions to do the PDO mapping are not needed.
 
-To create the PDO mapping see the section in the slave document [ADDING A NEW SLAVE](adding_a_new_slave.md)
+To create the PDO mapping see the section in the slave document <Link to="/docs/gbem/adding_a_new_slave">ADDING A NEW SLAVE</Link>)
 
 If you are using the drive's default PDO mapping this function won't be needed and its entry in the machine map will be NULL.
 
 If you want (or have) to create PDO map using the drive then this function will need to be written. 
 
-See the section in the slave document [ADDING A NEW SLAVE](adding_a_new_slave.md) for more information on how to write the `ec_pdo_map_mydrive` function.
+See the section in the slave document <Link to="/docs/gbem/adding_a_new_slave">ADDING A NEW SLAVE</Link> for more information on how to write the `ec_pdo_map_mydrive` function.
 
-> This function is optional - if you are using the default PDO mapping for the drive then this function is not needed and the entry in the machine map will be NULL
+**This function is optional - if you are using the default PDO mapping for the drive then this function is not needed and the entry in the machine map will be NULL**
 
 ### `ec_nvram_sdo_mydrive`
 
-> If you don't want to use the drive manufacturer's software to configure things like soft-limits, directions etc. which need writing to NVRAM then this function is not needed and can be a NULL in the machine map.
+**If you don't want to use the drive manufacturer's software to configure things like soft-limits, directions etc. which need writing to NVRAM then this function is not needed and can be a NULL in the machine map.**
 
 
 This function performs a series of SDO writes to slave objects that are subsequently saved to the slave's NVRAM.
@@ -170,11 +174,11 @@ If an `ec_sdo_Owrite_xxxx` call fails we return `E_SDO_WRITE_FAILURE` (an error 
 
 After doing the SDO writes, it calls a function `ec_write_nvram_akd(slave)` (which you need to provide) which triggers the saving of the previously written parameters to NVRAM with another SDO write.
 
-> This function is optional - if you don't need to save particular configuration settings to the drive's NVRAM then this function it is not needed and the entry in the machine map will be NULL
+**This function is optional - if you don't need to save particular configuration settings to the drive's NVRAM then this function it is not needed and the entry in the machine map will be NULL**
 
 ### `ec_nvram_write_mydrive`
 
-> If you don't want to use the drive manufacturer's software to configure things like soft-limits, directions etc. which need writing to NVRAM then this function is not needed and can be a NULL in the machine map
+**If you don't want to use the drive manufacturer's software to configure things like soft-limits, directions etc. which need writing to NVRAM then this function is not needed and can be a NULL in the machine map**
 
 This function performs an SDO write that triggers an NVRAM write on the drive to save certain objects to NVRAM. Usually this is just a single SDO. Usually after writing this SDO the drive will need to be power cycled before the saved settings take effect but this behaviour varies by drive.
 
@@ -192,7 +196,10 @@ gberror_t ec_write_nvram_mydrive(const uint16_t slave) {
 }
 ```
 
-> This functional is optional - if you don't need to save particular configuration settings to the drive's NVRAM then this function it is not needed
+**This functional is optional - if you don't need to save particular configuration settings to the drive's NVRAM then this function it is not needed**
+
+
+<a id={"Initial_sdos"}/>
 
 ### `ec_standard_sdo_mydrive`
 
@@ -220,7 +227,7 @@ gberror_t ec_standard_sdos_mydrive(const uint16_t slave) {
 
 `MYDRIVE_MOO_SET_SDO_INDEX` will be the hex address for the SDO and `MYDRIVE_MOO_SET_SDO_SUB_INDEX` will be uint of the SDO's sub-index. `CIA_MOO_CSP` is a CiA 402 defined uint8_t and the #define lives in the cia402.h file in the cia402 library.
 
-> This function is optional - if you don't need to set specific configuration settings on a drive as it starts up  then this function it is not needed and the entry in the machine map will be NULL Most drives will need some initial SDOs setting.
+**This function is optional - if you don't need to set specific configuration settings on a drive as it starts up  then this function it is not needed and the entry in the machine map will be NULL Most drives will need some initial SDOs setting.**
 
 ### `ec_initial_pdo_mydrive`
 
@@ -237,7 +244,9 @@ gberror_t ec_initial_pdo_mydrive(const uint16_t slave) {
 }
 ```
 
-> This function is optional - if you don't need to perform some initial PDO writes at start-up then this function it is not needed and the entry in the machine map will be NULL.
+This function is optional - if you don't need to perform some initial PDO writes at start-up then this function it is not needed and the entry in the machine map will be NULL.
+
+<a id={"Cyclic_functions"}/>
 
 ## Write the cyclic functions
 
@@ -287,7 +296,7 @@ int8_t ec_get_moo_sdo_mydrive(const uint16_t drive) {
 
 The function is very simple, it reads the SDO using the `ec_sdo_read_int8` function and returns the value.
 
-> This function is mandatory - GBEM needs some way to determine the Modes of Operation for a drive. If your drive doesn't need this feature you will still have to write the function and return the correct mode. There will always need to be an entry in the machine map for either the SDO or PDO version of this function.
+**This function is mandatory - GBEM needs some way to determine the Modes of Operation for a drive. If your drive doesn't need this feature you will still have to write the function and return the correct mode. There will always need to be an entry in the machine map for either the SDO or PDO version of this function.**
 
 ### `get_follow_error_mydrive`
 
@@ -315,7 +324,7 @@ bool ec_get_follow_error_mydrive(const uint16_t drive) {
 
 The drive gets the status word (using a function we write as part of drive interface) and checks the follow error bit and returns true/false accordingly.
 
-> This function is mandatory - GBEM needs some way to determine whether a drive has a follow error. If your drive doesn't need this feature you will still have to write the function and return false. There will always need to be an entry in the machine map for this function.
+**This function is mandatory - GBEM needs some way to determine whether a drive has a follow error. If your drive doesn't need this feature you will still have to write the function and return false. There will always need to be an entry in the machine map for this function.**
 
 ### `get_remote_mydrive` 
 
@@ -335,7 +344,7 @@ bool ec_get_remote_mydrive(const uint16_t drive) {
 }
 ```
 
-> This functional is mandatory - GBEM needs some way to determine whether a drive has the remote set. If your drive doesn't need this feature you will still have to write the function and return true. There will always need to be an entry in the machine map for this function.
+**This functional is mandatory - GBEM needs some way to determine whether a drive has the remote set. If your drive doesn't need this feature you will still have to write the function and return true. There will always need to be an entry in the machine map for this function.**
 
 ### `get_error_string_pdo_mydrive` & `get_error_string_sdo_mydrive`
 
@@ -372,7 +381,7 @@ const mydrive_error_string_t  mydrive_alarm_code[NUM_OF_MYDRIVE_ERROR_STRINGS] =
 
 There has been work done by the ETG and there is a library etg (AG - some missing text here?)
 
-> This function is mandatory.  GBEM needs some way to determine a drive's error message. If your drive doesn't need this feature you will still have to write the function and return some kind of string e.g. "Error messages not supported". There will always need to be an entry in the machine map for this function.
+**This function is mandatory.  GBEM needs some way to determine a drive's error message. If your drive doesn't need this feature you will still have to write the function and return some kind of string e.g. "Error messages not supported". There will always need to be an entry in the machine map for this function.**
 
 ### `set_ctrl_wrd_mydrive`
 
@@ -387,7 +396,7 @@ gberror_t ec_set_ctrl_wrd_mydrive(const uint16_t drive, const uint16_t ctrlwrd) 
 }
 ````
 
-> This function is mandatory - GBEM needs some way to set the control word. There will always need to be an entry in the machine map for this function.
+**This function is mandatory - GBEM needs some way to set the control word. There will always need to be an entry in the machine map for this function.**
 
 ### `get_stat_wrd_mydrive`
 
@@ -397,7 +406,7 @@ Again, this function is very simple. It reads the status word from the drive.
 
 It is assumed that the status word is a `uint16_t`. If the drive returns a longer status word it can be cast to a uint16_t in this function preserving the CiA 402 elements we need to drive the GBEM state machine. 
 
-> This function is mandatory - GBEM needs some way to get the status word. There will always need to be an entry in the machine map for this function.
+**This function is mandatory - GBEM needs some way to get the status word. There will always need to be an entry in the machine map for this function.**
 
 ### `get_actpos_wrd_mydrive`
 
@@ -413,7 +422,7 @@ There can be extra complexities such as when one actual drive slave supports mul
 
 We assume that drives take a int32_t setpos and actpos.
 
-> This function is mandatory - GBEM needs some way to get the actpos. There will always need to be an entry in the machine map for this function.
+**This function is mandatory - GBEM needs some way to get the actpos. There will always need to be an entry in the machine map for this function.**
 
 ### `set_setpos_wrd_mydrive`
 
@@ -423,7 +432,9 @@ It is often going to be a one line function:
 
 `ec_pdo_set_output_int32(map_drive_to_slave[drive], MYDRIVE_ACTPOS_DRIVE_INDEX, setpos);`
 
->  This functional is mandatory - GBEM needs some way to set the setpos. There will always need to be an entry in the machine map for this function.
+**This functional is mandatory - GBEM needs some way to set the setpos. There will always need to be an entry in the machine map for this function.**
+
+<a id={"Test_drive"}/>
 
 ## Test the drive
 

@@ -8,81 +8,17 @@ import { Link } from "react-router-dom"
 import {Row, Col, Divider} from 'antd';
 import {Table, Tag, Space} from 'antd';
 import {Tldr} from "../../framework/components/Tldr"
-
-
-
-export const dataSource = [
-    {
-        key: '1',
-        part_number: 'gb_pi_4b_4gb',
-        qty: 1,
-        item_description: 'Raspberry Pi 4 GB',
-        manufacturer: 'Raspberry Pi Foundation'
-    },
-    {
-        key: '2',
-        part_number: 'gb_32gb_sdcard',
-        qty: 1,
-        item_description: 'SanDisk Ultra 32 GB microSDHC Memory Card',
-        manufacturer: 'SanDisk',
-    },
-    {
-        key: '3',
-        part_number: 'gb_akd_ked',
-        qty: 1,
-        item_description: 'Oriental motor EtherCAT drive AKD-KED',
-        manufacturer: 'Oriental motor',
-    },
-    {
-        key: '4',
-        part_number: 'gb_azm48k',
-        qty: 1,
-        item_description: 'Oriental motor closed loop absolute encoder motor AZM48AK',
-        manufacturer: 'Oriental motor',
-    },
-    {
-        key: '5',
-        part_number: 'gb_cc02d010-3',
-        qty: 1,
-        item_description: 'Oriental motor AZD-KED motor cable CC02D010-3',
-        manufacturer: 'Oriental motor',
-    },
-    {
-        key: '6',
-        part_number: 'gb_cc025vzr2',
-        qty: 1,
-        item_description: 'Oriental motor AZD-KED motor cable CC025VZR2',
-        manufacturer: 'Oriental motor',
-    },
-    {
-        key: '7',
-        part_number: 'gb_24v_psu_dr_3a',
-        qty: 2,
-        item_description: 'Din rail 24v 3A PSU',
-        manufacturer: 'Meanwell',
-    },
-    {
-        key: '8',
-        part_number: 'gb_din_rail_300mm',
-        qty: 1,
-        item_description: 'Din rail 300mm',
-        manufacturer: 'Generic',
-    },
-    {
-        key: '9',
-        part_number: 'gb_rj45_cable_2m',
-        qty: 1,
-        item_description: '2m Ethernet cable RJ45',
-        manufacturer: 'Generic',
-    },
-];
+import {Image} from "../../framework/components/Image"
+import {SingleAxisKitDataSource} from "./SingleAxisKit"
+import {ThreeAxisKitDataSource} from "./ThreeAxisKit"
+import {EmbeddedLinuxKitDataSource} from "./EmbeddedLinuxKit"
 
 
 export const columns = [
     {
-        title: 'Part number',
-        dataIndex: 'part_number',
-        key: 'part_number',
+        title: 'GB part number',
+        dataIndex: 'gb_part_number',
+        key: 'gb_part_number',
     },
     {
         title: 'Quantity',
@@ -93,6 +29,11 @@ export const columns = [
         title: 'Item description',
         dataIndex: 'item_description',
         key: 'item_description',
+    },
+    {
+        title: 'Manufacturer part number',
+        dataIndex: 'mfr_part_number',
+        key: 'mfr_part_number',
     },
     {
         title: 'Manufacturer',
@@ -114,7 +55,7 @@ export const columns = [
 ## Introduction
 You don't need any hardware to test the glowbuzzer toolkit in *simulation mode*. Everything can be run under WSL on a Windows PC or on Linux and no drives or IO is needed.
 
-This will allow you to test out the front-end React components and see how GBC behaves and test out writing your own React components to control machines.
+This will allow you to test out the front-end React components and see how the control behaves and test out writing your own React components to control machines.
 
 See <Link to="/get-started/simulation">simulation mode</Link> for more details on how to run the toolkit without any drives and IO.
 
@@ -126,38 +67,61 @@ You will then develop the control application using react on your PC (Windows, M
 
 Finally, you will need an EtherCAT servo or stepper drive and some EtherCAT IO - you need something to move and some IO to test.
 
-You can provide your own hardware to get started or we have packages available to order of all the items, cables, power supplier etc. you need.
+You can provide your own hardware to get started, or we have packages available to order of all the items, cables, power supplier etc. you need.
 
 All the components are common off the shelf, so you can easily order them directly from the manufacturers.
 
-If you use identical hardware to our suggestion then following the tutorials is straight forward, if you use your own hardware then there will be additional configuration steps.
+If you use identical hardware to our suggestion, following the tutorials is straight forward, if you use your own hardware then there will be additional configuration steps.
 
 ## Starter packages
 
+If your desk is currently piled high with different drives and IO slices, then you are probably going to want to source your own hardware.
+
+If however, you are more of a software person, and drives and IO are a bit alien to you, then the starter kits are a great place to begin and we can provide all the help you need to get things wired up and working.
+
 We offer 3 starter packages:
 
-1. **single axis starter package - GS_SP_01** - a single Oriental Motor AZD drive (with an absolute encoder motor) using with drive based IO with the Raspberry Pi 4 platform - €800?
-1. **three axis starter package - GS_SP_02** - three axis Oriental Motor AZD drive with three motors plus 8 channels of Beckhoff digital in/out (EK1100, EL1008, EL2008) plus Raspberry Pi 4 platform- €1800?
-1. **embedded Linux starter - GS_SP_03** - Toradex imx8plus on Verdin carrier board plus single Oriental Motor AZD drive (with an absolute encoder motor) - €1300?
+1. **single axis starter kit - GS_SK_01** - a single Oriental Motor AZD drive (with an absolute encoder motor) with the Raspberry Pi 4 platform - €900
+1. **three axis starter kit - GS_SK_02** - three axis Oriental Motor AZD drive with three motors plus 8 channels of Beckhoff digital in/out (EK1100, EL1008, EL2008) plus Raspberry Pi 4 platform- €2300
+1. **embedded Linux starter kit - GS_SK_03** - Toradex imx8plus on a Toradex Verdin carrier board plus single Oriental Motor AZD drive (with an absolute encoder motor) - €1300
 
 We build starter packages to order, so adjustments to the bill-of-materials e.g. motor shaft options, IO etc. are possible.
 
-TODO pictures of packages
+For example, with the single axis & embedded Linux starter kits it is highly desirable to have some Beckhoff digital IO available, so we usually add this to this package for customers. This adds around €250 to the price.
+
+### Single-axis starter kit
+
+import gb_sk_01 from "./photo_single_axis_starter_kit_contents.jpg?glowsite"
+
+<Image meta={gb_sk_01} alt="gb_sk_01 contents"/>
 
 
-## Bill-of-materials for single axis starter package - GS_SP_01
+### Bill-of-materials for single axis starter package - GS_SK_01
 
-<Table dataSource={dataSource} columns={columns} bordered={true} pagination={{ defaultPageSize: 5, showSizeChanger: true, pageSizeOptions: ['5', '10', '15']}}/>
+<Table dataSource={SingleAxisKitDataSource} columns={columns} bordered={true} pagination={{ defaultPageSize: 5, showSizeChanger: true, pageSizeOptions: ['5', '10', '15']}}/>
 
-## Bill-of-materials for three axis starter package - GS_SP_02
 
-TODO
+See <Link to="/get-started/building_hardware/single_axis"> building the single axis starter kit</Link> for assembly instructions.
 
-## Bill-of-materials for embedded Linux starter - GS_SP_03
 
-TODO
+### Three-axis starter kit
 
-##Assembling the Single axis starter kit
+TODO picture
 
-TODO
+### Bill-of-materials for three axis starter package - GS_SK_02
+
+<Table dataSource={ThreeAxisKitDataSource} columns={columns} bordered={true} pagination={{ defaultPageSize: 5, showSizeChanger: true, pageSizeOptions: ['5', '10', '15']}}/>
+
+See <Link to="/get-started/building_hardware/three_axis"> building the three axis starter kit</Link> for assembly instructions.
+
+### Embedded Linux starter kit
+
+TODO picture
+
+### Bill-of-materials for embedded Linux starter - GS_SK_03
+
+<Table dataSource={EmbeddedLinuxKitDataSource} columns={columns} bordered={true} pagination={{ defaultPageSize: 5, showSizeChanger: true, pageSizeOptions: ['5', '10', '15']}}/>
+
+See <Link to="/get-started/building_hardware/embedded_linux_axis"> building the embedded Linux starter kit</Link> for assembly instructions.
+
 
