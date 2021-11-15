@@ -6,12 +6,12 @@ import styled from "@emotion/styled"
 
 function* ancestors(node: Node): IterableIterator<Node> {
     yield node
-    if (node.parent) {
+    if (node?.parent) {
         yield* ancestors(node.parent)
     }
 }
 
-const StyledMenu = styled.div`
+export const StyledLeftNavMenu = styled.div`
     background: white;
   
     .title {
@@ -29,14 +29,13 @@ export const ContexualLeftNav = () => {
     const { pathname } = useLocation()
 
     const [current, node] = useOuterNav(pathname)
-    const { title, children } = node
-    const open = Array.from(ancestors(current.parent)).map(n => n.path)
+    const open = Array.from(ancestors(current?.parent)).map(n => n?.path)
 
     return (
-        <StyledMenu>
-            <div className="title">{title}</div>
+        <StyledLeftNavMenu>
+            <div className="title">{node?.title}</div>
             <Menu mode="inline" defaultSelectedKeys={[pathname]} defaultOpenKeys={open}>
-                {children.map(({ name, title, path, children }) => {
+                {node?.children.map(({ name, title, path, children }) => {
                     if (children?.length) {
                         return (
                             <Menu.SubMenu key={path} title={title}>
@@ -55,6 +54,6 @@ export const ContexualLeftNav = () => {
                     )
                 })}
             </Menu>
-        </StyledMenu>
+        </StyledLeftNavMenu>
     )
 }

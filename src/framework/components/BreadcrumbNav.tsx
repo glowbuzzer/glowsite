@@ -10,6 +10,10 @@ const StyledDiv = styled.div`
     @media (min-width: ${props => props.theme.breaks.leftNavCollapse}) {
         display: none;
     }
+
+    .ant-dropdown-trigger:focus {
+        background: red !important;
+    }
 `
 
 export const BreadcrumbNav = () => {
@@ -17,27 +21,12 @@ export const BreadcrumbNav = () => {
 
     const current = crumbs.pop() // we want to display crumb as menu
 
-    console.log("CRUMBS", crumbs)
-
     if (!current) {
         return null
     }
 
     const last = crumbs[crumbs.length - 1]
 
-    const menu = (
-        <Menu
-            key={"crumb:" + current.path}
-            selectedKeys={["crumb:" + current.path]}
-            forceSubMenuRender
-        >
-            {last.children.map(node => (
-                <Menu.Item key={"crumb:" + node.path}>
-                    <Link to={node.path}>{node.title}</Link>
-                </Menu.Item>
-            ))}
-        </Menu>
-    )
     return (
         <StyledDiv>
             <Breadcrumb>
@@ -53,8 +42,19 @@ export const BreadcrumbNav = () => {
                         </Breadcrumb.Item>
                     )
                 })}
-                <Breadcrumb.Item key={current.path} overlay={menu}>
-                    <Link to={current.path}>{current.title}</Link>
+                <Breadcrumb.Item
+                    key={current.path}
+                    overlay={
+                        <Menu defaultSelectedKeys={["crumb:" + current.path]}>
+                            {last.children.map(node => (
+                                <Menu.Item key={"crumb:" + node.path}>
+                                    <Link to={node.path}>{node.title}</Link>
+                                </Menu.Item>
+                            ))}
+                        </Menu>
+                    }
+                >
+                    {current.title}
                 </Breadcrumb.Item>
             </Breadcrumb>
         </StyledDiv>

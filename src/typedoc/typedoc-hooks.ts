@@ -19,5 +19,5 @@ export function useGbcSchema(): { [index: string]: GbcSchemaItem[] } {
 }
 
 export function useTypedocItem(name: string) {
-    return gbcschema.find(i => i.slug === name)
+    return gbcschema.find(i => i.name === name)
 }

@@ -35,8 +35,6 @@ export default function GbcSchema() {
         })
     }, [])
 
-    console.log("GROUPS", groups)
-
     return (
         <StyledDiv>
             {Object.keys(groups).map(k => (
@@ -44,8 +42,8 @@ export default function GbcSchema() {
                     <h2>{k}</h2>
                     <div className="group">
                         {groups[k].map(item => (
-                            <div className="item" key={item.slug}>
-                                <Link to={item.slug}>{item.slug}</Link>
+                            <div className="item" key={item.name}>
+                                <Link to={"/docs/gbc/schema/"+item.name}>{item.name}</Link>
                             </div>
                         ))}
                     </div>

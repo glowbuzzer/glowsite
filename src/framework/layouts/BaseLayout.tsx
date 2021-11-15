@@ -1,7 +1,8 @@
 import { TopNav } from "../nav/TopNav"
 import styled from "@emotion/styled"
 import { GlowsiteFooter } from "../footer/GlowsiteFooter"
-import {BreadcrumbNav} from "../components/BreadcrumbNav";
+import { BreadcrumbNav } from "../components/BreadcrumbNav"
+import * as React from "react"
 
 const StyledLayout = styled.div`
     display: flex;
@@ -28,18 +29,20 @@ const StyledLayout = styled.div`
 `
 
 export const BaseLayout = ({ children }) => (
-    <StyledLayout>
-        <div className="main">
-            <nav>
-                <TopNav />
-            </nav>
-            <div className="body">
-                <BreadcrumbNav/>
-                {children}
+    <>
+        <StyledLayout>
+            <div className="main">
+                <nav>
+                    <TopNav />
+                </nav>
+                <div className="body">
+                    <BreadcrumbNav/>
+                    {children}
+                </div>
             </div>
-        </div>
-        <div className="footer">
-            <GlowsiteFooter />
-        </div>
-    </StyledLayout>
+            <div className="footer">
+                <GlowsiteFooter />
+            </div>
+        </StyledLayout>
+    </>
 )

@@ -13,8 +13,8 @@ import { useLocation } from "react-router-dom"
 // @ts-ignore because globEager is not defined
 const imports = import.meta.globEager("../../pages/**/*.{jsx,tsx,md,mdx,ts}")
 // const imports = import.meta.globEager("../../pages/playground/**/*.{jsx,tsx,md,mdx,ts}")
+// const imports = import.meta.globEager("../../pages/docs/gbc/**/*.{jsx,tsx,md,mdx,ts}")
 // const imports = import.meta.globEager("../../.test/**/*.{jsx,tsx,md,mdx,ts}")
-// console.log("IMPORTS", imports)
 
 export type Node = {
     parent?: Node
@@ -130,10 +130,10 @@ export const NavProvider: FC = ({ children }) => {
 export function useOuterNav(path: string): [Node, Node] {
     // console.log("Find nav for", path, "in", all)
     const node = all.find(n => n.path === path)
-    if (node.parent.parent?.section) {
+    if (node?.parent?.parent?.section) {
         return [node, node.parent.parent]
     }
-    return [node, node.parent]
+    return [node, node?.parent]
 }
 
 export function useRootNav() {
