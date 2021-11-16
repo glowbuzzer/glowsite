@@ -81,7 +81,7 @@ const StyledTopNav = styled.div`
 
 // doesn't work when placed in component above, I think because menu items are created dynamically
 const StyledMenuItem = styled(Menu.Item)`
-    &.horizontal {
+    &&&.horizontal {
         padding: 8px 12px;
         height: auto;
         line-height: 20px;
@@ -135,11 +135,12 @@ const NavMenu = ({ mode }) => {
             openKeys={openKeys}
             defaultSelectedKeys={[...ancestors, mode + ":" + pathname]}
             onOpenChange={onOpenChange}
+            forceSubMenuRender
         >
             {nav.children
                 .filter(node => node.children.length) // don't include nodes like 404 that have no children
                 .map(({ path, title, children }) => (
-                    <Menu.SubMenu key={mode + ":" + path} title={title} popupOffset={[0, 20]}>
+                    <Menu.SubMenu key={mode + ":" + path}  title={<span>{title}</span>} popupOffset={[0, 20]}>
                         {children.map(({ path, title, subtitle, children }) => {
                             const to = children.length ? children[0].path : path
                             return (
