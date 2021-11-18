@@ -10,7 +10,7 @@ import { Link } from "react-router-dom"
 <Tldr>
     - Real-time control component of toolkit
     - Exposes websockets interface to React components
-    - POSIX sharedmemory or SPI interface to downstream
+    - POSIX shared memory or SPI interface to downstream
     - Includes trajectory planner and all low-level control primitives
 </Tldr>
 
@@ -18,7 +18,7 @@ import { Link } from "react-router-dom"
 
 GBC is the real-time control element of the glowbuzzer control suite.
 
-GBC sends status messages and receives commands over websockets to/from the front-end control application.
+GBC sends status messages and receives commands over websockets to/from the front-end control application (React components).
 
 The commands GBC receives are instructions to control the machine. A simple example would be `MoveLine` command which would be the instruction for a cartesian move on a machine. GBC receives this command and then computes the position commands that are needed to be sent to the motors (joints) using its trajectory planner. These joint commands are written to a shared memory region. 
 
@@ -31,17 +31,15 @@ For most scenarios GBC can be treated as a black box, websockets commands are se
 The key functions of GBC are:
 
 * Reception and transmission of websocket messages
-* Executing Tasks and Activities
-* Some Activities Trajectory planning
-* Forward & inverse kinematics
+* Executing Tasks and Activities (things that cause the machine to do something)
+* Trajectory planning (for activities that move motors, trajectories need calculating)
+* Forward & inverse kinematics (for robots to calculate positions of the end-effector)
 * Reading and writing to shared memory
 * Processing inbound and outbound IO (digital ins / outs, integer ins / outs, float ins / outs)
 
 ## Deployment models for GBC
 
 GBC can be integrated with the downstream (fieldbuses and IO and motors) in a number of different ways. These are illustrated below.
-
-
 
 (A) GBC communicating with an EtherCAT slaves over an EtherCAT network through the GBEM EtherCAT master
 ```mermaid
@@ -71,7 +69,7 @@ GBC can be integrated with the downstream (fieldbuses and IO and motors) in a nu
 
 ## Licensing
 
-Many elements of the glowbuzzer control suite are supplied under an Open Source license but GBC is not. This is our licensed software and it may not be used without the customer entering into a license agreement with glowbuzzer. As we are independent of any hardware, licensing GBC is the company's main revenue stream.
+Many elements of the glowbuzzer control suite are supplied under an Open Source license but GBC is not. This is our licensed software, and it may not be used without the customer entering into a license agreement with glowbuzzer. As we are independent of any hardware, licensing GBC is the company's main revenue stream.
 
 ## Supported platforms
 GBC is written in plain c code. It has been tested on different 32-bit and 64-bit Linux versions and also on STM32 microcontrollers. We can compile libraries for different platforms such as QNX, VxWorks, INtime  and different microcontrollers on request.
@@ -80,21 +78,27 @@ GBC is written in plain c code. It has been tested on different 32-bit and 64-bi
 
 On Linux, GBC needs a multi-core processor. Pretty much any desktop Intel/AMD processor will be sufficient and for embedded Linux a multi-core ARM Cortex-A series based SoC with the cores running at 1GHz will be adequate.
 
-The platform GBC runs on will need al least two Ethernet/Wi-Fi ports if GBC is being combined with GBEM (EtherCAT master). One for websockets and one for EtherCAT (two needed for cable redundant EtherCAT).
+The platform GBC runs on will need at least two Ethernet/Wi-Fi ports if GBC is being combined with GBEM (EtherCAT master). One for websockets and one for EtherCAT (two needed for cable redundant EtherCAT).
 
- If GBC is being used in an embedded Linux environment with motor driver ICs then only one Ethernet/Wi-Fi port will be needed which is used to communicate over websockets to the front-end control (browser).
+If GBC is being used in an embedded Linux environment with motor driver ICs then only one Ethernet/Wi-Fi port will be needed which is used to communicate over websockets to the front-end control (browser).
 
 ### Microcontroller
 
-We test GBC on the STM32 platform. This is using ST's dual core ARM M7 / M4 range of microcontrollers.
+We test GBC on the STM32 platform. This is using ST's dual-core ARM M7 / M4 range of microcontrollers.
 
-We see no difficulties getting GBC working on other manufacturers microcontrollers but it will likely need to be a dual-core microcontroller, though there may be an option to use two discrete microcontrollers connected over a high speed SPI interface. Either way, for a reasonable number of axes, the microcontroller will need to be in the highest performance range and support hardware floating point. GBC needs two cores because the web sockets server runs on one core and the real time control & fieldbus interface run on the other core. On Linux we use threads to distribute this workload but on slower speed microcontrollers this just isn't possible.
+We see no difficulties getting GBC working on other manufacturers microcontrollers, but it will likely need to be a dual-core microcontroller, though there may be an option to use two discrete microcontrollers connected over a high speed SPI interface. Either way, for a reasonable number of axes, the microcontroller will need to be in the highest performance range and support hardware floating point. GBC needs two cores because the web sockets server runs on one core and the real time control & fieldbus interface run on the other core. On Linux we use threads to distribute this workload but on slower speed microcontrollers this just isn't possible.
 
 ## Installation
 
 ### Linux
 
-We provide binaries for 64-bit Linux and the Raspberry Pi for evaluation. These binaries can be found here [downloads](www.glowbuzzer.com/downloads).
+We provide binaries for 64-bit Linux and the Raspberry Pi for evaluation. Other platforms can be supplied on request.
+
+Raspberry PI (arm7 32 bit)
+`https://downloads.glowbuzzer.com/gbc-armv7.tar.gz`
+
+Linux (64 bit)
+`https://download.glowbuzzer.com/gbc/gbc-amd64.tar.gz`
 
 ### embedded
 
@@ -115,7 +119,7 @@ See <Link to = "/docs/gbc/configuration">Configuration of GBC</Link>
 
 ### Shared memory
 
-The shared memory is small in size (by default 200 bytes in /out though can be larger if needed) and contains the following data. 
+The shared memory region is small in size (by default 200 bytes in /out though can be larger if needed) and contains the following data.
 
 IN region
 
@@ -175,7 +179,7 @@ On Linux, as well as the shared memory interface, GBC requires either a POSIX si
 ```
 ### Cyclic trigger - microcontroller
 
-This is usually an interrupt handler.
+This is usually an interrupt handler on a GPIO pin.
 
 ### Websockets interface
 

@@ -15,20 +15,21 @@ import { ReactComponent as Html5Icon } from "../../images/home_icons/html5-icon.
 import * as React from "react"
 import { Section } from "../components/Section"
 import { ReactComponent as RocketIcon } from "../../home/rocket.svg?inline"
-import {HomeCarousel} from "../components/HomeCarousel";
-import {YoutubeEmbed} from "../components/Video";
+import { HomeCarousel } from "../components/HomeCarousel"
+import { YoutubeEmbed } from "../components/Video"
 import HexImage from "../../home/hex_components.svg"
 
 const HeroSection = styled.div`
     position: relative;
     display: flex;
     align-items: stretch;
+    max-height: 300px;
 
     main {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 20px 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 50px 100px;
     }
 
     h1 {
@@ -37,7 +38,8 @@ const HeroSection = styled.div`
 
     .hero-image {
         min-height: 100%;
-        max-height: 200px;
+        margin-left: 100px;
+        margin-right: 100px;
     }
 `
 

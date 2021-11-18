@@ -29,6 +29,16 @@ const StyledDocumentationPage = styled.div`
         min-width: 0; // as above
 
         background: ${props => props.theme.color.LightGrey};
+
+        h3 {
+            padding-top: 5px;
+            padding-bottom: 5px;
+        }
+
+        h2 {
+            padding-top: 5px;
+            padding-bottom: 5px;
+        }
     }
 `
 

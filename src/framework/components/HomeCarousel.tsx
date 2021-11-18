@@ -70,7 +70,7 @@ const CarouselItem = styled(CarouselDiv)<{ backgroundImage: string }>`
         }
 
         img {
-            height: 300px;
+            height: 500px;
         }
     }
 `

@@ -35,9 +35,13 @@ import single_axis_motor_power_cable_raw from "./single_axis_motor_power_cable_r
 
 <Image meta={single_axis_motor_power_cable_raw} alt="Single axis motor power cable unprocessed" maxWidth={400}/>
 
-Power cable after crimping:
+The drive end of the power cable needs uninsulated ferrules to make it easier to get into the AZD-KED connectors. The power supply ends can use insulated ferrules.
 
-TODO
+The power cables after crimping:
+
+import single_axis_crimped_power_cable from "./single_axis_crimped_power_cable.jpg?glowsite"
+
+<Image meta={single_axis_crimped_power_cable} alt="Single axis crimped power cable" maxWidth={400}/>
 
 Next, mount the PSUs and drive to the DIN rail by clipping them on;
 
@@ -58,8 +62,19 @@ Logic power can be routed via a Wago terminal blocks if you want access to 24V a
 
 Mains power needs to be safely provided to the power supplies through any filters and protection devices that you or your local regulations may deem appropriate and with any additional secondary mechanical elctrical protection.
 
+This is what the fully wired singled axis starter kit should look like:
 
-Motors connected
+import single_axis_wired from "./single_axis_wired.jpg?glowsite"
+
+<Image meta={single_axis_wired} alt="Single axis wired" />
+
+
+Finally, plug in the motor to the drive and connect the Raspberry Pi 4 with the Ethernet cable.
+
+import single_axis_fully_assembled from "./single_axis_fully_assembled.jpg?glowsite"
+
+<Image meta={single_axis_fully_assembled} alt="Single axis fully assembled"/>
+
 
 
 White = 0.5m^2

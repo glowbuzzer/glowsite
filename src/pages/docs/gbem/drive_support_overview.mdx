@@ -3,6 +3,9 @@ title: Supported drives overview
 sort: 3
 ---
 import {Tldr} from "../../../framework/components/Tldr"
+import { Link } from "react-router-dom"
+import {BogStandardCol, BogStandardHeaderRow, BogStandardRow} from "../../../framework/components/BogStandardTable"
+
 
 # Overview of drive support
 <Tldr>
@@ -10,6 +13,7 @@ import {Tldr} from "../../../framework/components/Tldr"
     - Covers open loop stepper, closed loop stepper, servo, BLDC
     - Easy to integrate new drives
 </Tldr>
+
 ## What drives does GBEM support?
 
 We have written the drivers for and tested with a wide variety of EtherCAT drives from different manufacturers.
@@ -22,80 +26,210 @@ All drives listed as tested have been
 
 ### Oriental Motor
 
-| Model     | Documentation            | Driver  software                               | Test machine  |
-| --------- | ------------------------ | ---------------------------------------------- | ------------- |
-| AZD2A-KED | See AZD3A                | library `oriental_motor` code in `azdxa-ked.c` | see AZD3A     |
-| AZD3A-KED | [AZD3A](om_azd3a_ked.md) | library `oriental_motor` code in `azdxa-ked.c` | cartesian_map |
-| AZD4A-KED | See AZD3A                | library `oriental_motor` code in `azdxa-ked.c` | see AZD3A     |
-| AZD-KED   | ?                        | library `oriental_motor` code in `azd-ked.c`   | ?             |
+<BogStandardHeaderRow>
+    <BogStandardCol span={3}>Model</BogStandardCol>
+    <BogStandardCol span={4}>Documentation</BogStandardCol>
+    <BogStandardCol span={12}>Driver  software</BogStandardCol>
+    <BogStandardCol span={5}>Test machine</BogStandardCol>
+</BogStandardHeaderRow>
+<BogStandardRow>
+<BogStandardCol span={3}>AZD2A-KED</BogStandardCol>
+    <BogStandardCol span={4}><Link to={"/docs/gbem/drive_support/om_azd3a_ked"}>See AZD3A</Link></BogStandardCol>
+<BogStandardCol span={12}>library `oriental_motor` code in `azdxa-ked.c`</BogStandardCol>
+<BogStandardCol span={5}>see AZD3A</BogStandardCol>
+</BogStandardRow>
+<BogStandardRow>
+    <BogStandardCol span={3}>AZD3A</BogStandardCol>
+    <BogStandardCol span={4}><Link to={"/docs/gbem/drive_support/om_azd3a_ked"}>See AZD3A</Link></BogStandardCol>
+    <BogStandardCol span={12}>library `oriental_motor` code in `azdxa-ked.c`</BogStandardCol>
+    <BogStandardCol span={5}>cartesian_map</BogStandardCol>
+</BogStandardRow>
+<BogStandardRow>
+    <BogStandardCol span={3}>AZD4A-KED</BogStandardCol>
+    <BogStandardCol span={4}><Link to={"/docs/gbem/drive_support/om_azd3a_ked"}>See AZD3A</Link></BogStandardCol>
+    <BogStandardCol span={12}>library `oriental_motor` code in `azdxa-ked.c`</BogStandardCol>
+    <BogStandardCol span={5}>see AZD3A</BogStandardCol>
+</BogStandardRow>
+<BogStandardRow>
+    <BogStandardCol span={3}>AZD-KED</BogStandardCol>
+    <BogStandardCol span={4}><Link to={"/docs/gbem/drive_support/om_azd3a_ked"}>See AZD3A</Link></BogStandardCol>
+    <BogStandardCol span={12}>library `oriental_motor` code in `azd-ked.c`</BogStandardCol>
+    <BogStandardCol span={5}>?</BogStandardCol>
+</BogStandardRow>
+
+
 
 ### Beckhoff
 
-| Model  | Documentation       | Driver  software                      | Test machine    |
-| ------ | ------------------- | ------------------------------------- | --------------- |
-| EL7031 | [EL7031](el7031.md) | library `beckhoff` code in `el7031.c` | EL7031_test_map |
-| EL7041 | [EL7041](el7041.md) | library `beckhoff` code in `el7041.c` | EL7041_test_map |
-| EL7037 | [EL7037](el7037.md) | library `beckhoff` code in `el7037.c` | EL7037_test_map |
-| EL7047 | [EL7047](el7047.md) | library `beckhoff` code in `el7047.c` | none            |
-| EL7211 | [EL7211](el7211.md) | library `beckhoff` code in `el7211.c` |                 |
-| EL2522 | [EL2522](el2522.md) | library `beckhoff` code in `el2522.c` | EL2522_test_map |
-| AX5101 |                     | library `beckhoff` code in `ax5101.c` |                 |
+<BogStandardHeaderRow>
+    <BogStandardCol span={3}>Model</BogStandardCol>
+    <BogStandardCol span={4}>Documentation</BogStandardCol>
+    <BogStandardCol span={12}>Driver  software</BogStandardCol>
+    <BogStandardCol span={5}>Test machine</BogStandardCol>
+</BogStandardHeaderRow>
+<BogStandardRow>
+    <BogStandardCol span={3}>EL7037</BogStandardCol>
+    <BogStandardCol span={4}><Link to={"/docs/gbem/drive_support/EL7037"}>See EL7037</Link> </BogStandardCol>
+    <BogStandardCol span={12}>library `beckhoff` code in `el7037.c`</BogStandardCol>
+    <BogStandardCol span={5}>EL7037_test_map</BogStandardCol>
+</BogStandardRow>
+<BogStandardRow>
+    <BogStandardCol span={3}>EL7047</BogStandardCol>
+    <BogStandardCol span={4}><Link to={"/docs/gbem/drive_support/EL7037"}>See EL7037</Link> </BogStandardCol>
+    <BogStandardCol span={12}>library `beckhoff` code in `el7047.c`</BogStandardCol>
+    <BogStandardCol span={5}>N/A</BogStandardCol>
+</BogStandardRow>
+<BogStandardRow>
+    <BogStandardCol span={3}>EL7031</BogStandardCol>
+    <BogStandardCol span={4}><Link to={"/docs/gbem/drive_support/EL7031"}>See EL7031</Link> </BogStandardCol>
+    <BogStandardCol span={12}>library `beckhoff` code in `el7031.c`</BogStandardCol>
+    <BogStandardCol span={5}>EL7031_test_map</BogStandardCol>
+</BogStandardRow>
+<BogStandardRow>
+    <BogStandardCol span={3}>EL7041</BogStandardCol>
+    <BogStandardCol span={4}><Link to={"/docs/gbem/drive_support/EL7041"}>See EL7041</Link> </BogStandardCol>
+    <BogStandardCol span={12}>library `beckhoff` code in `el7041.c`</BogStandardCol>
+    <BogStandardCol span={5}>N/A</BogStandardCol>
+</BogStandardRow>
+<BogStandardRow>
+    <BogStandardCol span={3}>EL7211</BogStandardCol>
+    <BogStandardCol span={4}><Link to={"/docs/gbem/drive_support/EL7211"}>See EL7211</Link> </BogStandardCol>
+    <BogStandardCol span={12}>library `beckhoff` code in `el7211.c`</BogStandardCol>
+    <BogStandardCol span={5}>?</BogStandardCol>
+</BogStandardRow>
+<BogStandardRow>
+    <BogStandardCol span={3}>EL2522</BogStandardCol>
+    <BogStandardCol span={4}><Link to={"/docs/gbem/drive_support/EL2522"}>See EL2522</Link> </BogStandardCol>
+    <BogStandardCol span={12}>library `beckhoff` code in `el2522.c`</BogStandardCol>
+    <BogStandardCol span={5}>EL2522_test_map</BogStandardCol>
+</BogStandardRow>
+<BogStandardRow>
+    <BogStandardCol span={3}>AX5101 </BogStandardCol>
+    <BogStandardCol span={4}><Link to={"/docs/gbem/drive_support/beckhoff_ax5101"}>See AX5101</Link> </BogStandardCol>
+    <BogStandardCol span={12}>library `beckhoff` code in `ax5101.c`</BogStandardCol>
+    <BogStandardCol span={5}>?</BogStandardCol>
+</BogStandardRow>
+
+
+
+
 
 ## Delta
 
-| Model | Documentation | Driver  software | Test machine |
-| ----- | ------------- | ---------------- | ------------ |
-| ASDA  |               |                  |              |
+<BogStandardHeaderRow>
+    <BogStandardCol span={3}>Model</BogStandardCol>
+    <BogStandardCol span={4}>Documentation</BogStandardCol>
+    <BogStandardCol span={12}>Driver software</BogStandardCol>
+    <BogStandardCol span={5}>Test machine</BogStandardCol>
+</BogStandardHeaderRow>
+<BogStandardRow>
+    <BogStandardCol span={3}>ASD-A2</BogStandardCol>
+    <BogStandardCol span={4}><Link to={"/docs/gbem/drive_support/delta_asd-a2"}>See Delta ASD-A2</Link> </BogStandardCol>
+    <BogStandardCol span={12}>?</BogStandardCol>
+    <BogStandardCol span={5}>?</BogStandardCol>
+</BogStandardRow>
+
 
 ## Omron
 
-| Model      | Documentation | Driver  software      | Test machine |
-| ---------- | ------------- | --------------------- | ------------ |
-| Accurax G5 |               | library `omoron` in ? |              |
-|            |               |                       |              |
-|            |               |                       |              |
-|            |               |                       |              |
+<BogStandardHeaderRow>
+    <BogStandardCol span={3}>Model</BogStandardCol>
+    <BogStandardCol span={4}>Documentation</BogStandardCol>
+    <BogStandardCol span={12}>Driver  software</BogStandardCol>
+    <BogStandardCol span={5}>Test machine</BogStandardCol>
+</BogStandardHeaderRow>
+<BogStandardRow>
+    <BogStandardCol span={3}>Accurax G5 </BogStandardCol>
+    <BogStandardCol span={4}><Link to={"/docs/gbem/drive_support/omron_accurax_g5"}>See Omron G5</Link> </BogStandardCol>
+    <BogStandardCol span={12}>?</BogStandardCol>
+    <BogStandardCol span={5}>?</BogStandardCol>
+</BogStandardRow>
+
 
 Based on panasonic
 
 ### JVL
 
-| Model      | Documentation | Driver  software   | Test machine |
-| ---------- | ------------- | ------------------ | ------------ |
-| MIS series |               | library `jvl` in ? |              |
+<BogStandardHeaderRow>
+    <BogStandardCol span={3}>Model</BogStandardCol>
+    <BogStandardCol span={4}>Documentation</BogStandardCol>
+    <BogStandardCol span={12}>Driver  software</BogStandardCol>
+    <BogStandardCol span={5}>Test machine</BogStandardCol>
+</BogStandardHeaderRow>
+<BogStandardRow>
+    <BogStandardCol span={3}>MIS series</BogStandardCol>
+    <BogStandardCol span={4}><Link to={"/docs/gbem/adding_jvl_mis_drive"}>See JVL MIS</Link> </BogStandardCol>
+    <BogStandardCol span={12}>?</BogStandardCol>
+    <BogStandardCol span={5}>?</BogStandardCol>
+</BogStandardRow>
 
 
 
 ### Cannon automata
 
-| Model | Documentation | Driver  software | Test machine |
-| ----- | ------------- | ---------------- | ------------ |
-| SMC3  |               |                  |              |
+<BogStandardHeaderRow>
+    <BogStandardCol span={3}>Model</BogStandardCol>
+    <BogStandardCol span={4}>Documentation</BogStandardCol>
+    <BogStandardCol span={12}>Driver software</BogStandardCol>
+    <BogStandardCol span={5}>Test machine</BogStandardCol>
+</BogStandardHeaderRow>
+<BogStandardRow>
+    <BogStandardCol span={3}>SMC3 </BogStandardCol>
+    <BogStandardCol span={4}><Link to={"/docs/gbem/drive_support/cannon_automata_smc3"}>See SMC3</Link> </BogStandardCol>
+    <BogStandardCol span={12}>?</BogStandardCol>
+    <BogStandardCol span={5}>?</BogStandardCol>
+</BogStandardRow>
 
 
 
 ### Nanotec
+<BogStandardHeaderRow>
+    <BogStandardCol span={3}>Model</BogStandardCol>
+    <BogStandardCol span={4}>Documentation</BogStandardCol>
+    <BogStandardCol span={12}>Driver software</BogStandardCol>
+    <BogStandardCol span={5}>Test machine</BogStandardCol>
+</BogStandardHeaderRow>
+<BogStandardRow>
+    <BogStandardCol span={3}>N5-1-1</BogStandardCol>
+    <BogStandardCol span={4}><Link to={"/docs/gbem/drive_support/nanotec_n5"}>See N5</Link> </BogStandardCol>
+    <BogStandardCol span={12}>?</BogStandardCol>
+    <BogStandardCol span={5}>?</BogStandardCol>
+</BogStandardRow>
 
-| Model  | Documentation | Driver  software | Test machine |
-| ------ | ------------- | ---------------- | ------------ |
-| N5-1-1 |               |                  |              |
 
 
 
 ### Kollmorgen
 
-| Model | Documentation | Driver  software                 | Test machine |
-| ----- | ------------- | -------------------------------- | ------------ |
-| AKD   |               | library `kollmorgen` code in ?.c |              |
+<BogStandardHeaderRow>
+    <BogStandardCol span={3}>Model</BogStandardCol>
+    <BogStandardCol span={4}>Documentation</BogStandardCol>
+    <BogStandardCol span={12}>Driver software</BogStandardCol>
+    <BogStandardCol span={5}>Test machine</BogStandardCol>
+</BogStandardHeaderRow>
+<BogStandardRow>
+    <BogStandardCol span={3}>AKD</BogStandardCol>
+    <BogStandardCol span={4}><Link to={"/docs/gbem/drive_support/kollmorgen_akd"}>See AKD</Link> </BogStandardCol>
+    <BogStandardCol span={12}>?</BogStandardCol>
+    <BogStandardCol span={5}>?</BogStandardCol>
+</BogStandardRow>
 
 ### Trinamic
+<BogStandardHeaderRow>
+    <BogStandardCol span={3}>Model</BogStandardCol>
+    <BogStandardCol span={4}>Documentation</BogStandardCol>
+    <BogStandardCol span={12}>Driver software</BogStandardCol>
+    <BogStandardCol span={5}>Test machine</BogStandardCol>
+</BogStandardHeaderRow>
+<BogStandardRow>
+    <BogStandardCol span={3}>?</BogStandardCol>
+    <BogStandardCol span={4}>?</BogStandardCol>
+    <BogStandardCol span={12}>?</BogStandardCol>
+    <BogStandardCol span={5}>?</BogStandardCol>
+</BogStandardRow>
 
-| Model | Documentation | Driver  software | Test machine |
-| ----- | ------------- | ---------------- | ------------ |
-| ?     |               |                  |              |
 
 ## BLDC drives
-
 
 
 
@@ -104,14 +238,22 @@ Based on panasonic
 
 ### invertek
 
-| Model | Documentation | Driver  software | Test machine |
-| ----- | ------------- | ---------------- | ------------ |
-|       |               |                  |              |
+<BogStandardHeaderRow>
+    <BogStandardCol span={3}>Model</BogStandardCol>
+    <BogStandardCol span={4}>Documentation</BogStandardCol>
+    <BogStandardCol span={12}>Driver software</BogStandardCol>
+    <BogStandardCol span={5}>Test machine</BogStandardCol>
+</BogStandardHeaderRow>
+<BogStandardRow>
+    <BogStandardCol span={3}>? </BogStandardCol>
+    <BogStandardCol span={4}><Link to={"/docs/gbem/drive_support/invertek_optidrive_p2"}>See Optidrive P2</Link> </BogStandardCol>
+    <BogStandardCol span={12}>?</BogStandardCol>
+    <BogStandardCol span={5}>?</BogStandardCol>
+</BogStandardRow>
 
 ## Drives we would like to get hold of to test
 
 * Bosch Rexroth IndraDrive CoE
-
 - Schneider Electric Lexium32
 - Newer Kollmorgen
 - maxpos bldc or EL7411

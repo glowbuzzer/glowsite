@@ -1,13 +1,23 @@
 Nav
-* fine tune - 
-* decide what happens on 404 privacy etc
-* tier 2 top nav headings gone
+  * remove popover
+  * focus issue
+  * thin down padding top nav
+  * tier 2 top nav headings gone
 
-Widths
-* top, nav, margin, footer line ups on mobile
+Templates
+* different template for 404 prvacy etc
+
+
+preview
+* cant refresh
+* 
+
+mdx
+* method to tidy up imports of std components in mdx files
 
 Routing
 * privacy and legal stopped working
+
 
 Home page
 * play with home page chunking
@@ -17,38 +27,35 @@ Home page
 * dots of featured blog
 * top carosuel doesnt repsond to dots - speed
 
-footer
-* alfie suggested something and i forgot what he said
 
 Style
 * choose base font size - p too small by 10%?
 * padding / margin after headings - i like lots
-* indent on privacy and legal - see hack in legal
-* max width not respected on all pages - see docs/gbc/misc - this is wide codeblock not wrapping have to decide what to do here...white-space : pre-wrap !important;?
 
-* markdown
+markdown
 * definition lists
-* in code filename
 
+
+code blocks
+* filename for code blocks
 
 
 meta
 * Add a new description bit of front matter into helmet - is this sub-title or longer para?
-  * we have title, sub-title, description
+* we have title, sub-title, description
 * description in meta is 155 chars - only longer descriptions are about this long so we should use them in meta
 * hieriachey sub-itle if desc not available
 
 links
 * react-router Link takes us to bottom of pages - higher order component
-* maybe remark up mdx links to avoid import of Link in any mdx file and no links in md files
+
 
 functionality
 
 * char count on mdx files
 * get the example ui components docs fired up again @glowbuzzer/controls
-* codeblocks with aliased imports
 * https://chatlio.com/ integration
-* github int - something about pulling release info from github - github issues link - pulse
+* github releases drop down on top nav hand authored - version number of latest front end release next to octocat 
 * add gdpr cookies thingymajig
 
 responsive
@@ -66,7 +73,7 @@ frip
 
 content
 * starter kit photos and BoMs
-* getting started espe
+* getting started
 * front-end
 * gbc
   * autogen

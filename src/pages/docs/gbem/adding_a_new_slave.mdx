@@ -8,8 +8,12 @@ import { Link } from "react-router-dom"
 # Adding a new slave
 
 <Tldr>
-    - blah
+    - adding a new type of slave require a set of #defines
+    - for more complex slaves c functions may need to be written
+    - many examples of different types of slaves provided
+    - a one-off exercise that you do to support any non-standard slaves used by your machine
 </Tldr>
+
 ## Where to put the code
 
 We add new slaves and drives as a static library per manufacturer. This means you create a new directory in `/libs` called `bandr` or `wago`  and create a `/src` and `/inc` sub-directories inside it. These directories will hold the .h and .c files for the slave (`myslave.c` & `myslave.h`). This static library will need its own basic CMakeLists.txt file and will need adding to root CMakeLists.txt file. You can follow the pattern used for the other slave libraries. 
@@ -170,8 +174,6 @@ Yes, that is all there is to it - just a single header with some simple #defines
 ### Medium difficulty example - Beckhoff EL3001 slave  
 
 The EL3001 is a single channel analog input module.
-
-(AG something missing here??)
 
 
 

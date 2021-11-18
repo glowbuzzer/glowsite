@@ -5,9 +5,9 @@ sort: 2
 ---
 
 
-import {Avatar, Col, Divider, List, Row} from 'antd';
-import {Tldr} from "../../framework/components/Tldr";
-import {DesktopOutlined} from "@ant-design/icons"
+import {Avatar, Col, Divider, List, Row} from 'antd'
+import {Tldr} from "../../framework/components/Tldr"
+import {ApiOutlined, FieldBinaryOutlined,DesktopOutlined, ApartmentOutlined, StepForwardOutlined, DownloadOutlined, DashboardOutlined, EyeOutlined} from "@ant-design/icons"
 import TiersImage1 from './tiers-GBEM.svg'
 import TiersImage2 from './tiers-GBSM.svg'
 
@@ -45,17 +45,17 @@ When you want to integrate with motor driver ICs (usually in an embedded environ
 
 <img src={TiersImage2} alt="GBSM tiers"/>
 
-<Divider orientation="left"><h1>LAYER 1 - Front-end React components</h1></Divider>
+# LAYER 1 - Front-end React components
 
-We supply a comprehensive set of components to perform the fundamental machine control functions:
+We supply a comprehensive set of components to perform the fundamental machine control functions. Some examples of these components include:
 
-<List bordered style={{width: '500px'}}>
+<List bordered style={{width: '700px', margin: '20px'}}>
     <List.Item>
         <List.Item.Meta
             title="Connect to a machine"
             description="Establish a websockets connection to GBC"
             avatar={<Avatar
-                icon={<DesktopOutlined/>}
+                icon={<ApiOutlined/>}
                 size={"large"}
                 style={{backgroundColor: "#f0f0f0", color: "black"}}
             />}
@@ -64,57 +64,59 @@ We supply a comprehensive set of components to perform the fundamental machine c
     <List.Item>
         <List.Item.Meta
             avatar={<Avatar
-                icon={<DesktopOutlined/>} size={"large"} style={{backgroundColor: "#f0f0f0", color: "black"}}/>}
+                icon={<FieldBinaryOutlined/>} size={"large"} style={{backgroundColor: "#f0f0f0", color: "black"}}/>}
             title="Manage digital and analogue inputs and outputs"
-            description="Establish a websockets connection to GBC"
+            description="Control and monitor the state of digital and analog inputs and outputs on the machine"
         />
     </List.Item>
     <List.Item>
         <List.Item.Meta
             avatar={<Avatar
-                icon={<DesktopOutlined/>} size={"large"} style={{backgroundColor: "#f0f0f0", color: "black"}}/>}
-            title="managed the machine's state (switched on, faults)"
-            description="Establish a websockets connection to GBC"
+                icon={<ApartmentOutlined/>} size={"large"} style={{backgroundColor: "#f0f0f0", color: "black"}}/>}
+            title="Manage the machine's state (switched on, faults)"
+            description="The state of the machine is a superimposed state of underlying drives and sub-systems"
         />
     </List.Item>
     <List.Item>
         <List.Item.Meta
             avatar={<Avatar
-                icon={<DesktopOutlined/>} size={"large"} style={{backgroundColor: "#f0f0f0", color: "black"}}/>}
+                icon={<StepForwardOutlined />} size={"large"} style={{backgroundColor: "#f0f0f0", color: "black"}}/>}
             title="Make a machine move - jogging"
-            description="Establish a websockets connection to GBC"
+            description="Jogging a machine is a basic machine function to move axes in concert or individually"
         />
     </List.Item>
     <List.Item>
         <List.Item.Meta
             avatar={<Avatar
-                icon={<DesktopOutlined/>} size={"large"} style={{backgroundColor: "#f0f0f0", color: "black"}}/>}
+                icon={<DashboardOutlined />} size={"large"} style={{backgroundColor: "#f0f0f0", color: "black"}}/>}
             title="See the machine’s position (DRO)"
-            description="Establish a websockets connection to GBC"
+            description="Machines with motors have a position. This can be the position of the motors themselves or the end-effector/tool if the motors act in concert"
         />
     </List.Item>
     <List.Item>
         <List.Item.Meta
             avatar={<Avatar
-                icon={<DesktopOutlined/>} size={"large"} style={{backgroundColor: "#f0f0f0", color: "black"}}/>}
+                icon={<DownloadOutlined />} size={"large"} style={{backgroundColor: "#f0f0f0", color: "black"}}/>}
             title="Send gcode to a machine"
-            description="Establish a websockets connection to GBC"
+            description="gcode is an easy to use way to control machines. We supply the components to interpret and transmit this gcode to a machine"
         />
     </List.Item>
     <List.Item>
         <List.Item.Meta
             avatar={<Avatar
-                icon={<DesktopOutlined/>} size={"large"} style={{backgroundColor: "#f0f0f0", color: "black"}}/>}
+                icon={<EyeOutlined />} size={"large"} style={{backgroundColor: "#f0f0f0", color: "black"}}/>}
             title="See the path on which a machine moves"
-            description="Establish a websockets connection to GBC"
+            description="Plot the path the machine's end-effector or tool follows"
         />
     </List.Item>
 </List>
 
 
+
 These components are all published under an open - source license agreement and are fully customisable.You can also, of course, tap in the vast ecosystem of components & code available in the wider React / JavaScript ecosystem.When FE components need the machine to do something, they send high - level commands to the machine control over a WebSocket interface.They also receive messages containing the state of the machine over this connection.
 
-<Divider orientation="left"><h1>LAYER 2 - Real-time core control (GBC)</h1></Divider>
+
+# LAYER 2 - Real-time core control (GBC)
 
 This is the only closed source component of the glowbuzzer toolkit.
 
@@ -126,7 +128,7 @@ When running on a Linux platform, the process image is available via a shared me
 
 GBC calculates the trajectories for any motion commands issued and performs the forward and inverse kinematics for different machine configurations.
 
-<Divider orientation="left"><h1>LAYER 3 - Motor and IO control (GBEM or GBSM)</h1></Divider>
+# LAYER 3 - Motor and IO control (GBEM or GBSM)
 
 The process image generated by GBC needs to be written to and read from drives & IO.We provide a number of options to provide this:
 
@@ -134,4 +136,5 @@ The process image generated by GBC needs to be written to and read from drives &
 * (Linux or embedded microcontroller) An interface layer to integrate with common EtherCAT slave ICs(E.g.Microchip's LAN9252/3) to provide an EtherCAT slave interface.
 * (Linux or embedded microcontroller) e Hilscher netX chipset.
 * (Linux or embedded microcontroller) GBSM to communciate(our reference design for this uses the Trinamic chip set)
+
 

@@ -8,22 +8,21 @@ import { Link } from "react-router-dom"
 import {Image} from "../../framework/components/Image"
 
 
-# Use a custom create react app template to create your starter project
+# Start by using our custom create react app template to create your starter project
 <Tldr>
-    - Blah
-    - Blah, blah
-    - Blah, blah, blah
-    - Blah, blah, blah blah
+    - Short guide to building React components to control machines
+    - Tutorial 1 - Toggle a digital output
+    - Tutorial 2 - Oscillating move on a drive
 </Tldr>
 
+Create your project using a custom template. (Install npm with for example `sudo apt install nodejs npm` and  `npm install -g npx` if you don't have it installed)
 ```shell
 npx create-react-app your-project-name --template [gb-starter]
 cd your-project-name
 npm start
 ```
 
-Open the project in your IDE. We use JetBrains but Visual Studio Code will do fine.
-
+Then, open the project in your IDE. We use JetBrains but Visual Studio Code will do fine.
 
 # Structure of the project
 We provide a little framework that enables a Tiled UI to be created.
@@ -62,7 +61,7 @@ Switch is the component we will use for our switch from the Ant Design framework
 
 The `useDigitalOutput` component from the glowbuzzer toolkit has the following signature:
 
-````jsx
+````jsx title="/src/components/HelloCodeTitle.js"
 function useDigitalOutput(index: number): {set(state: number, override?: boolean): void, actState: number, state: number, override?: boolean): void, actState: number, state: number, override: boolean}
 ````
 
@@ -196,7 +195,7 @@ The next example in showing how easy it is to write React machine control functi
 
 ## Create the tile
 
-Create `TutorialOscillatingMoveTile.tsx`
+Create `TutorialOscillatingMoveTile.tsx` in the project you created with the custom template.
 
 
 

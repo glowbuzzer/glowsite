@@ -42,7 +42,7 @@ export const Image = ({ meta, maxWidth, alt, preset = "default" }: ImageProps) =
     return (
         // <picture>
         //     <source srcSet={srcset} type="image/webp" width={maxWidth || "100%"} />
-            <img srcSet={srcset} width={maxWidth || "100%"} alt={alt} />
+        <img srcSet={srcset} width={maxWidth || "100%"} alt={alt} />
         // </picture>
     )
 }
