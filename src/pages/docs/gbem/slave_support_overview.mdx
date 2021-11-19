@@ -1,0 +1,398 @@
+---
+title: Supported slaves overview
+sort: 3
+---
+import {Tldr} from "../../../framework/components/Tldr"
+import { Link } from "react-router-dom"
+import {BogStandardCol, BogStandardHeaderRow, BogStandardRow} from "../../../framework/components/BogStandardTable"
+
+# Overview of slave support
+<Tldr>
+    - Many different EtherCAT slaves integrated
+    - Covers mainly the Beckhoff product line
+    - Easy to integrate different slaves
+</Tldr>
+
+## What slaves does GBEM support?
+
+We have written the drivers for and tested with a wide variety of EtherCAT slaves from different manufacturers.
+
+# Beckhoff
+
+## EK1xxx - EtherCAT couplers
+
+<BogStandardHeaderRow>
+    <BogStandardCol span={5}>Model</BogStandardCol>
+    <BogStandardCol span={9}>Type</BogStandardCol>
+    <BogStandardCol span={10}>Driver software</BogStandardCol>
+</BogStandardHeaderRow>
+<BogStandardRow>
+    <BogStandardCol span={5}>EK1100</BogStandardCol>
+    <BogStandardCol span={9}>EtherCAT coupler</BogStandardCol>
+    <BogStandardCol span={10}>library `beckhoff` code in `ek1100.c/h`</BogStandardCol>
+</BogStandardRow>
+
+
+
+
+## EL1xxx - EtherCAT digital input
+
+<BogStandardHeaderRow>
+    <BogStandardCol span={5}>Model</BogStandardCol>
+    <BogStandardCol span={9}>Type</BogStandardCol>
+    <BogStandardCol span={10}>Driver software</BogStandardCol>
+</BogStandardHeaderRow>
+
+<BogStandardRow>
+    <BogStandardCol span={5}>EL1002</BogStandardCol>
+    <BogStandardCol span={9}>2Ch. Dig. Input 24V, 3ms</BogStandardCol>
+    <BogStandardCol span={10}>library `beckhoff` code in `el1002.c/h`</BogStandardCol>
+</BogStandardRow>
+
+<BogStandardRow>
+    <BogStandardCol span={5}>EL1004</BogStandardCol>
+    <BogStandardCol span={9}>4Ch. Dig. Input 24V, 3ms</BogStandardCol>
+    <BogStandardCol span={10}>library `beckhoff` code in `el1004.c/h`</BogStandardCol>
+</BogStandardRow>
+
+<BogStandardRow>
+    <BogStandardCol span={5}>EL1008</BogStandardCol>
+    <BogStandardCol span={9}>8Ch. Dig. Input 24V, 3ms</BogStandardCol>
+    <BogStandardCol span={10}>library `beckhoff` code in `el1008.c/h`</BogStandardCol>
+</BogStandardRow>
+
+<BogStandardRow>
+    <BogStandardCol span={5}>EL1012</BogStandardCol>
+    <BogStandardCol span={9}>2Ch. Dig. Input 24V, 10µs</BogStandardCol>
+    <BogStandardCol span={10}>library `beckhoff` code in `el1012.c/h`</BogStandardCol>
+</BogStandardRow>
+
+
+<BogStandardRow>
+    <BogStandardCol span={5}>EL1014</BogStandardCol>
+    <BogStandardCol span={9}>4Ch. Dig. Input 24V, 10µs</BogStandardCol>
+    <BogStandardCol span={10}>library `beckhoff` code in `el1014.c/h`</BogStandardCol>
+</BogStandardRow>
+
+<BogStandardRow>
+    <BogStandardCol span={5}>EL1018</BogStandardCol>
+    <BogStandardCol span={9}>8Ch. Dig. Input 24V, 10µs</BogStandardCol>
+    <BogStandardCol span={10}>library `beckhoff` code in `el1018.c/h`</BogStandardCol>
+</BogStandardRow>
+
+<BogStandardRow>
+    <BogStandardCol span={5}>EL1024</BogStandardCol>
+    <BogStandardCol span={9}>4Ch. Dig. Input 24V, Type 2, 3ms</BogStandardCol>
+    <BogStandardCol span={10}>library `beckhoff` code in `el1024.c/h`</BogStandardCol>
+</BogStandardRow>
+
+<BogStandardRow>
+    <BogStandardCol span={5}>EL1034</BogStandardCol>
+    <BogStandardCol span={9}>4Ch. Dig. Input 24V, potential-free, 10µs</BogStandardCol>
+    <BogStandardCol span={10}>library `beckhoff` code in `el1034.c/h`</BogStandardCol>
+</BogStandardRow>
+
+<BogStandardRow>
+    <BogStandardCol span={5}>EL1084</BogStandardCol>
+    <BogStandardCol span={9}>4Ch. Dig. Input 24V, 3ms, negative</BogStandardCol>
+    <BogStandardCol span={10}>library `beckhoff` code in `el1084.c/h`</BogStandardCol>
+</BogStandardRow>
+
+<BogStandardRow>
+    <BogStandardCol span={5}>EL1088</BogStandardCol>
+    <BogStandardCol span={9}>8Ch. Dig. Input 24V, 3ms, negative</BogStandardCol>
+    <BogStandardCol span={10}>library `beckhoff` code in `el1088.c/h`</BogStandardCol>
+</BogStandardRow>
+
+<BogStandardRow>
+    <BogStandardCol span={5}>EL1094</BogStandardCol>
+    <BogStandardCol span={9}>4Ch. Dig. Input 24V, 10µs, negative</BogStandardCol>
+    <BogStandardCol span={10}>library `beckhoff` code in `el1084.c/h`</BogStandardCol>
+</BogStandardRow>
+
+<BogStandardRow>
+    <BogStandardCol span={5}>EL1098</BogStandardCol>
+    <BogStandardCol span={9}>8Ch. Dig. Input 24V, 10µs, negative</BogStandardCol>
+    <BogStandardCol span={10}>library `beckhoff` code in `el1098.c/h`</BogStandardCol>
+</BogStandardRow>
+
+<BogStandardRow>
+    <BogStandardCol span={5}>EL1104</BogStandardCol>
+    <BogStandardCol span={9}>4Ch. Dig. Input 24V, 3ms, Sensor Power</BogStandardCol>
+    <BogStandardCol span={10}>library `beckhoff` code in `el1104.c/h`</BogStandardCol>
+</BogStandardRow>
+
+<BogStandardRow>
+    <BogStandardCol span={5}>EL1114</BogStandardCol>
+    <BogStandardCol span={9}>4Ch. Dig. Input 24V, 10µs, Sensor Power</BogStandardCol>
+    <BogStandardCol span={10}>library `beckhoff` code in `el1114.c/h`</BogStandardCol>
+</BogStandardRow>
+
+<BogStandardRow>
+    <BogStandardCol span={5}>EL1124</BogStandardCol>
+    <BogStandardCol span={9}>4Ch. Dig. Input 5V, 10µs, Sensor Power</BogStandardCol>
+    <BogStandardCol span={10}>library `beckhoff` code in `el1124.c/h`</BogStandardCol>
+</BogStandardRow>
+
+<BogStandardRow>
+    <BogStandardCol span={5}>EL1134</BogStandardCol>
+    <BogStandardCol span={9}>4Ch. Dig. Input 48V, 10µs, Sensor Power</BogStandardCol>
+    <BogStandardCol span={10}>library `beckhoff` code in `el1134.c/h`</BogStandardCol>
+</BogStandardRow>
+
+<BogStandardRow>
+    <BogStandardCol span={5}>EL1144</BogStandardCol>
+    <BogStandardCol span={9}>4Ch. Dig. Input 12V, 10µs, Sensor Power</BogStandardCol>
+    <BogStandardCol span={10}>library `beckhoff` code in `el1144.c/h`</BogStandardCol>
+</BogStandardRow>
+
+<BogStandardRow>
+    <BogStandardCol span={5}>EL1808</BogStandardCol>
+    <BogStandardCol span={9}>8Ch. Dig. Input 24V, 3ms</BogStandardCol>
+    <BogStandardCol span={10}>library `beckhoff` code in `el1808.c/h`</BogStandardCol>
+</BogStandardRow>
+
+
+<BogStandardRow>
+    <BogStandardCol span={5}>EL1094</BogStandardCol>
+    <BogStandardCol span={9}>4Ch. Dig. Input 24V, 10µs, negative</BogStandardCol>
+    <BogStandardCol span={10}>library `beckhoff` code in `el1094.c/h`</BogStandardCol>
+</BogStandardRow>
+
+<BogStandardRow>
+    <BogStandardCol span={5}>EL1098</BogStandardCol>
+    <BogStandardCol span={9}>8Ch. Dig. Input 24V, 10µs, negative</BogStandardCol>
+    <BogStandardCol span={10}>library `beckhoff` code in `el1098.c/h`</BogStandardCol>
+</BogStandardRow>
+
+<BogStandardRow>
+    <BogStandardCol span={5}>EL1114</BogStandardCol>
+    <BogStandardCol span={9}>4Ch. Dig. Input 24V, 10µs, Sensor Power</BogStandardCol>
+    <BogStandardCol span={10}>library `beckhoff` code in `el1114.c/h`</BogStandardCol>
+</BogStandardRow>
+
+<BogStandardRow>
+    <BogStandardCol span={5}>EL1124</BogStandardCol>
+    <BogStandardCol span={9}>4Ch. Dig. Input 5V, 10µs, Sensor Power</BogStandardCol>
+    <BogStandardCol span={10}>library `beckhoff` code in `el1124.c/h`</BogStandardCol>
+</BogStandardRow>
+
+<BogStandardRow>
+    <BogStandardCol span={5}>EL1134</BogStandardCol>
+    <BogStandardCol span={9}>4Ch. Dig. Input 48V, 10µs, Sensor Power</BogStandardCol>
+    <BogStandardCol span={10}>library `beckhoff` code in `el1134.c/h`</BogStandardCol>
+</BogStandardRow>
+
+<BogStandardRow>
+    <BogStandardCol span={5}>EL1144</BogStandardCol>
+    <BogStandardCol span={9}>44Ch. Dig. Input 12V, 10µs, Sensor Power</BogStandardCol>
+    <BogStandardCol span={10}>library `beckhoff` code in `el1144.c/h`</BogStandardCol>
+</BogStandardRow>
+
+<BogStandardRow>
+    <BogStandardCol span={5}>EL1144</BogStandardCol>
+    <BogStandardCol span={9}>4Ch. Dig. Input 12V, 10µs, Sensor Power</BogStandardCol>
+    <BogStandardCol span={10}>library `beckhoff` code in `el1144.c/h`</BogStandardCol>
+</BogStandardRow>
+
+
+<BogStandardRow>
+    <BogStandardCol span={5}>EL1808</BogStandardCol>
+    <BogStandardCol span={9}>8Ch. Dig. Input 24V, 3ms</BogStandardCol>
+    <BogStandardCol span={10}>library `beckhoff` code in `el1808.c/h`</BogStandardCol>
+</BogStandardRow>
+
+<BogStandardRow>
+    <BogStandardCol span={5}>EL1809</BogStandardCol>
+    <BogStandardCol span={9}>16Ch. Dig. Input 24V, 3ms</BogStandardCol>
+    <BogStandardCol span={10}>library `beckhoff` code in `el1809.c/h`</BogStandardCol>
+</BogStandardRow>
+
+
+## EL2xxx - EtherCAT digital output
+
+<BogStandardHeaderRow>
+    <BogStandardCol span={5}>Model</BogStandardCol>
+    <BogStandardCol span={9}>Type</BogStandardCol>
+    <BogStandardCol span={10}>Driver software</BogStandardCol>
+</BogStandardHeaderRow>
+
+<BogStandardRow>
+    <BogStandardCol span={5}>EL1002</BogStandardCol>
+    <BogStandardCol span={9}></BogStandardCol>
+    <BogStandardCol span={10}>library `beckhoff` code in `.c/h`</BogStandardCol>
+</BogStandardRow>
+<BogStandardRow>
+    <BogStandardCol span={5}>EL2004</BogStandardCol>
+    <BogStandardCol span={9}></BogStandardCol>
+    <BogStandardCol span={10}>library `beckhoff` code in `.c/h`</BogStandardCol>
+</BogStandardRow>
+<BogStandardRow>
+    <BogStandardCol span={5}>EL2008</BogStandardCol>
+    <BogStandardCol span={9}></BogStandardCol>
+    <BogStandardCol span={10}>library `beckhoff` code in `.c/h`</BogStandardCol>
+</BogStandardRow>
+<BogStandardRow>
+    <BogStandardCol span={5}>EL2022</BogStandardCol>
+    <BogStandardCol span={9}></BogStandardCol>
+    <BogStandardCol span={10}>library `beckhoff` code in `.c/h`</BogStandardCol>
+</BogStandardRow>
+<BogStandardRow>
+    <BogStandardCol span={5}>EL2024</BogStandardCol>
+    <BogStandardCol span={9}></BogStandardCol>
+    <BogStandardCol span={10}>library `beckhoff` code in `.c/h`</BogStandardCol>
+</BogStandardRow>
+<BogStandardRow>
+    <BogStandardCol span={5}>EL2032</BogStandardCol>
+    <BogStandardCol span={9}></BogStandardCol>
+    <BogStandardCol span={10}>library `beckhoff` code in `.c/h`</BogStandardCol>
+</BogStandardRow>
+<BogStandardRow>
+    <BogStandardCol span={5}>EL2034</BogStandardCol>
+    <BogStandardCol span={9}></BogStandardCol>
+    <BogStandardCol span={10}>library `beckhoff` code in `.c/h`</BogStandardCol>
+</BogStandardRow>
+<BogStandardRow>
+    <BogStandardCol span={5}>EL2042</BogStandardCol>
+    <BogStandardCol span={9}></BogStandardCol>
+    <BogStandardCol span={10}>library `beckhoff` code in `.c/h`</BogStandardCol>
+</BogStandardRow>
+<BogStandardRow>
+    <BogStandardCol span={5}>EL2084</BogStandardCol>
+    <BogStandardCol span={9}></BogStandardCol>
+    <BogStandardCol span={10}>library `beckhoff` code in `.c/h`</BogStandardCol>
+</BogStandardRow>
+<BogStandardRow>
+    <BogStandardCol span={5}>EL2088</BogStandardCol>
+    <BogStandardCol span={9}></BogStandardCol>
+    <BogStandardCol span={10}>library `beckhoff` code in `.c/h`</BogStandardCol>
+</BogStandardRow>
+<BogStandardRow>
+    <BogStandardCol span={5}>EL2124</BogStandardCol>
+    <BogStandardCol span={9}></BogStandardCol>
+    <BogStandardCol span={10}>library `beckhoff` code in `.c/h`</BogStandardCol>
+</BogStandardRow>
+<BogStandardRow>
+    <BogStandardCol span={5}>EL2521</BogStandardCol>
+    <BogStandardCol span={9}></BogStandardCol>
+    <BogStandardCol span={10}>library `beckhoff` code in `.c/h`</BogStandardCol>
+</BogStandardRow>
+<BogStandardRow>
+    <BogStandardCol span={5}>EL2622</BogStandardCol>
+    <BogStandardCol span={9}></BogStandardCol>
+    <BogStandardCol span={10}>library `beckhoff` code in `.c/h`</BogStandardCol>
+</BogStandardRow>
+<BogStandardRow>
+    <BogStandardCol span={5}>EL2808</BogStandardCol>
+    <BogStandardCol span={9}></BogStandardCol>
+    <BogStandardCol span={10}>library `beckhoff` code in `.c/h`</BogStandardCol>
+</BogStandardRow>
+<BogStandardRow>
+    <BogStandardCol span={5}>EL2809</BogStandardCol>
+    <BogStandardCol span={9}></BogStandardCol>
+    <BogStandardCol span={10}>library `beckhoff` code in `.c/h`</BogStandardCol>
+</BogStandardRow>
+
+
+
+
+## EL3xxx - EtherCAT analog input
+<BogStandardHeaderRow>
+    <BogStandardCol span={5}>Model</BogStandardCol>
+    <BogStandardCol span={9}>Type</BogStandardCol>
+    <BogStandardCol span={10}>Driver software</BogStandardCol>
+</BogStandardHeaderRow>
+<BogStandardRow>
+    <BogStandardCol span={5}></BogStandardCol>
+    <BogStandardCol span={9}></BogStandardCol>
+    <BogStandardCol span={10}>library `beckhoff` code in `.c/h`</BogStandardCol>
+</BogStandardRow>
+
+
+EL3001
+EL3102
+EL3112
+EL3122
+EL3142
+EL3152
+EL3162
+
+## EL4xxx - EtherCAT analog output
+<BogStandardHeaderRow>
+    <BogStandardCol span={5}>Model</BogStandardCol>
+    <BogStandardCol span={9}>Type</BogStandardCol>
+    <BogStandardCol span={10}>Driver software</BogStandardCol>
+</BogStandardHeaderRow>
+<BogStandardRow>
+    <BogStandardCol span={5}></BogStandardCol>
+    <BogStandardCol span={9}></BogStandardCol>
+    <BogStandardCol span={10}>library `beckhoff` code in `.c/h`</BogStandardCol>
+</BogStandardRow>
+
+EL4001
+EL4102
+EL4012
+EL4022
+EL4032
+EL4102
+EL4112
+EL4122
+EL4132
+
+## EL5xxx - EtherCAT position measurement
+<BogStandardHeaderRow>
+    <BogStandardCol span={5}>Model</BogStandardCol>
+    <BogStandardCol span={9}>Type</BogStandardCol>
+    <BogStandardCol span={10}>Driver software</BogStandardCol>
+</BogStandardHeaderRow>
+<BogStandardRow>
+    <BogStandardCol span={5}></BogStandardCol>
+    <BogStandardCol span={9}></BogStandardCol>
+    <BogStandardCol span={10}>library `beckhoff` code in `.c/h`</BogStandardCol>
+</BogStandardRow>
+
+EL5101
+EL5151
+EL5152
+
+## EL6xxx - EtherCAT communication */
+
+
+## EL7xxx - EtherCAT drives
+<BogStandardHeaderRow>
+    <BogStandardCol span={5}>Model</BogStandardCol>
+    <BogStandardCol span={9}>Type</BogStandardCol>
+    <BogStandardCol span={10}>Driver software</BogStandardCol>
+</BogStandardHeaderRow>
+<BogStandardRow>
+    <BogStandardCol span={5}></BogStandardCol>
+    <BogStandardCol span={9}></BogStandardCol>
+    <BogStandardCol span={10}>library `beckhoff` code in `.c/h`</BogStandardCol>
+</BogStandardRow>
+
+
+EL7211
+EL7342
+EL7031
+EL7041
+
+
+## EL9xxx - EtherCAT system
+<BogStandardHeaderRow>
+    <BogStandardCol span={5}>Model</BogStandardCol>
+    <BogStandardCol span={9}>Type</BogStandardCol>
+    <BogStandardCol span={10}>Driver software</BogStandardCol>
+</BogStandardHeaderRow>
+<BogStandardRow>
+    <BogStandardCol span={5}></BogStandardCol>
+    <BogStandardCol span={9}></BogStandardCol>
+    <BogStandardCol span={10}>library `beckhoff` code in `.c/h`</BogStandardCol>
+</BogStandardRow>
+
+EL9505
+EL9508
+EL9510
+EL9512
+EL9515
+
+

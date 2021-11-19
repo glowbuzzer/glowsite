@@ -12,13 +12,25 @@ import { Rate, Row, Col } from 'antd';
 
 This short guide reviews the Cannon Automata SMC3 drive and discusses how to get it working with GBEM. 
 
+The SMC3 is a basic stepper drive with an encoder interface.
 
-
-
+Its basic features include:
+* upto 48V supply
+* 6A max current per phase
+* 256 microstepping
+* encoder interface (5V or 24V encoder supply)
+* 4 digital inputs and outputs
+* various homing modes
 
 import smc3_product_shot from "./smc3_product_shot.png?glowsite"
 
 <Image meta={smc3_product_shot} alt="SMC3 product" />
+
+The drives worked well when we tested them, and they were straight forward to commission.
+
+There is no drive commissioning software provided by Cannon automata, but they are straight forward enough to integrate without this.
+
+
 
 
 <div style={{margin:"20px"}}>
@@ -30,27 +42,27 @@ import smc3_product_shot from "./smc3_product_shot.png?glowsite"
 
     <Row>
         <Col span={6}>Drive configuration software rating</Col>
-        <Col span={4}><Rate disabled defaultValue={5}/></Col>
-        <Col span={14}>Kollmorgen studio is pretty damn good</Col>
+        <Col span={4}><Rate disabled defaultValue={0}/></Col>
+        <Col span={14}>None provided</Col>
     </Row>
     <Row>
         <Col span={6}>Drive features rating</Col>
-        <Col span={4}><Rate disabled defaultValue={3}/></Col>
-        <Col span={14}>Does the basics but low on fancy features - bit outdated</Col>
+        <Col span={4}><Rate disabled defaultValue={2}/></Col>
+        <Col span={14}>Does the basics - bit outdated</Col>
     </Row>
     <Row>
         <Col span={6}>Motors rating</Col>
-        <Col span={4}><Rate disabled defaultValue={4}/></Col>
-        <Col span={14}>Bit short on shaft options for the motors, outdated motor connectors, hard to make custom cables</Col>
+        <Col span={4}><Rate disabled defaultValue={0}/></Col>
+        <Col span={14}>N/A you use third-party motors with this drive </Col>
     </Row>
     <Row>
         <Col span={6}>Gearbox option</Col>
-        <Col span={4}><Rate disabled defaultValue={5}/></Col>
-        <Col span={14}>Excellent</Col>
+        <Col span={4}><Rate disabled defaultValue={0}/></Col>
+        <Col span={14}>N/A you use third-party motors with this drive</Col>
     </Row>
     <Row>
         <Col span={6}>Price</Col>
         <Col span={4}><Rate disabled defaultValue={3}/></Col>
-        <Col span={14}>Roughly €800 for 3A drive excluding cables and moto</Col>
+        <Col span={14}>Roughly €400</Col>
     </Row>
 </div>

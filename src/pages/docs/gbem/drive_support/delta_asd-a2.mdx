@@ -14,7 +14,7 @@ This short guide reviews the Delta ASD-A2-0421-E drive and discusses how to get 
 
 ## Overview of drive range
 
-The drive range covers 50W-to-15kW in single and three phase models.
+The drive range covers 50W-to-15kW in single and three-phase models.
 
 Motors are the ECMA series in frames of size 40mm, 60mm, 80mm 86mm, 100mm, 130mm, 180mm & 220mm.
 
@@ -23,9 +23,6 @@ The motor options are somewhat limited but the basics in terms of electromagneti
 Encoders are just a 20-bit incremental, 17 bit absolute single turn and 16-bit multi-turn.
 
 The usual connectors are in the form of leads out of the motor to TE MATE-N-LOK connector though an IP67 barrel connector option is available.
-
-
-
 
 
 import asd_a2_0421_e_product_shot from "./asd_a2_0421_e_product_shot.png?glowsite"
@@ -42,8 +39,6 @@ They do though support most of the essential features:
 * Two notch filters for blocking resonances are available
 * Absolute encoders are supported (think 17 bit only and 16 bit on multi-turn)
 * STO (dual channel)
-
-
 
 The motor encoder and digital IO connectors are of the SCSI type. Terminating these yourself without the proper crimp tool is a right pain in the arse.
 
@@ -104,14 +99,14 @@ The ASDA-Soft drive commissioning software is available free of charge. It comes
 <div style={{margin:"20px"}}>
     <Row>
         <Col span={6}>Overall rating</Col>
-        <Col span={4}><Rate disabled defaultValue={4}/></Col>
-        <Col span={14}>Really good, </Col>
+        <Col span={4}><Rate disabled defaultValue={3}/></Col>
+        <Col span={14}>ok for the price</Col>
     </Row>
 
     <Row>
         <Col span={6}>Drive configuration software rating</Col>
-        <Col span={4}><Rate disabled defaultValue={5}/></Col>
-        <Col span={14}>Kollmorgen studio is pretty damn good</Col>
+        <Col span={4}><Rate disabled defaultValue={2}/></Col>
+        <Col span={14}>From the dark ages of computing...</Col>
     </Row>
     <Row>
         <Col span={6}>Drive features rating</Col>
@@ -120,17 +115,17 @@ The ASDA-Soft drive commissioning software is available free of charge. It comes
     </Row>
     <Row>
         <Col span={6}>Motors rating</Col>
-        <Col span={4}><Rate disabled defaultValue={4}/></Col>
-        <Col span={14}>Bit short on shaft options for the motors, outdated motor connectors, hard to make custom cables</Col>
+        <Col span={4}><Rate disabled defaultValue={2}/></Col>
+        <Col span={14}>Limited on brakes, shaft options</Col>
     </Row>
     <Row>
         <Col span={6}>Gearbox option</Col>
-        <Col span={4}><Rate disabled defaultValue={5}/></Col>
-        <Col span={14}>Excellent</Col>
+        <Col span={4}><Rate disabled defaultValue={2}/></Col>
+        <Col span={14}>Limited range and quality of gearboxes</Col>
     </Row>
     <Row>
         <Col span={6}>Price</Col>
-        <Col span={4}><Rate disabled defaultValue={3}/></Col>
-        <Col span={14}>Roughly €800 for 3A drive excluding cables and moto</Col>
+        <Col span={4}><Rate disabled defaultValue={5}/></Col>
+        <Col span={14}>Roughly €300 for 3A drive excluding cables and moto</Col>
     </Row>
 </div>

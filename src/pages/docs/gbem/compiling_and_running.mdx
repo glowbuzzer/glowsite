@@ -4,6 +4,7 @@ sort: 2
 ---
 import {Tldr} from "../../../framework/components/Tldr"
 import { Image } from "../../../framework/components/Image"
+import { Link } from "react-router-dom"
 
 # Compiling & Running GBEM
 <Tldr>
@@ -13,16 +14,20 @@ import { Image } from "../../../framework/components/Image"
 </Tldr>
 
 ## Compiling
-To compile and run outside of an IDE. The steps are:
+On Linux, there is a single executable, GBEM, which is run with a number of command line options.
 
-```text
+This must be compiled before you can run it using the source code from GitHub.
+
+Clone with: `git clone https://github.com/glowbuzzer/gbem`
+
+Assuming you are doing a local compilation then to compile and run, outside of an IDE, the steps are:
+
+```shell
 mkdir build
 cd build
 cmake ..
 make
 ```
-
-There is a single main executable, GBEM, which is run with a number of command line options.
 
 To do any substantial development with GBEM, the code will need to be imported into your IDE of choice (for example [JetBrains CLion](https://www.jetbrains.com/clion) ). The provided CMakeLists files provides a basis for IDEs that use CMake but the code is simple and should be easy to import into any IDE.
 
@@ -31,14 +36,43 @@ To do any substantial development with GBEM, the code will need to be imported i
 The main command line modes are:
 
 1. cyclic "-c" - run GBEM in cyclic mode (normal)
-2. netscan "-n" - run GBEM in netscan mode (**without** applying PDO mapping)
-3. netscan "-m" - run GBEM in netscan mode (**with** applying PDO mapping
-4. machine config - "" - run GBEM to check and print machine configuration
+1. netscan "-n" - run GBEM in netscan mode (**without** applying PDO mapping)
+1. netscan "-m" - run GBEM in netscan mode (**with** applying PDO mapping
+1. machine config - "-d" - run GBEM to check and print machine configuration
 
 Also specific modes
 
 1. EEPROM
-2. (AG something missing?)
+
+
+
+## Running for real
+
+This assumes you have:
+
+* GBEM installed on a Linux platform with a preempted kernel
+* Have the right NIC connected to an EtherCAT network with one or more slaves on it which are powered up
+* Have configured a machine see <Link to="/docs/gbem/configuring_machines">CONFIGURING MACHINES</Link>
+
+Start out by doing a netscan. This is `./gbem -n -ieth0`. This will send out on the EtherCAT network a BRD (Broadcast Read) of address 0, and all fully functional slaves in the network will respond to this request.
+
+The netscan will either produce an error message 😕 or a blizzard of config information ​🙂.​
+
+If you get an error message then it is time to read the troubleshooting guide. If you have found some slaves, the next step is check the machine config by running `./gbem -d -ith0`. This will either confirm that the machine configuration is valid or will produce error messages explaining where the misconfiguration lies.
+
+Finally, you can run GBEM in cyclic mode with `./gbem -c -ieth0`. This will boot the EtherCAT network and then try and connect over shared memory to GBC (or a program you write to control GBEM over shared memory).
+
+## GBEM config
+
+**`gbem_config.h` & `map_config.h` && `log.h`**
+
+As well as the configuration for machines and the configuration and code for drives and slaves, GBEM has three config files:
+
+`gbem_config.h` contains  compile time #defines it is well commented and self-explanatory
+
+`map_config.h`contains the #defines to control which machine target GBEM is being compiled for and some #defines for things like the maximum length of drive error messages
+
+`log.h` xxxxx
 
 
 ## ramdisk directory
@@ -68,36 +102,6 @@ This allows you to save 50 MB of data to `/mnt/ramdisk`. After a restart, you ca
 ````shell
 sudo df -h
 ````
-
-
-
-## Running for the first time
-
-> This assumes you have:
->
-> * GBEM installed on a Linux platform with a preempt kernel
-> * Have the right NIC connected to an EtherCAT network with one or more slaves on it which are powered up
-> * Have configured a machine see [CONFIGURING MACHINES](configuring_machines.md) or have following [GETTING STARTED WITH EXAMPLE HARDWARE](getting_started_with_example_hardware.md)
-
-Start out by doing a netscan. This is `./gbem -n -ieth0`. This will send out on the EtherCAT network a BRD (Broadcast Read) of address 0, and all fully functional slaves in the network will respond to this request.
-
-The netscan will either produce an error message 😕 or a blizzard of config information ​🙂.​
-
-If you get an error message then it is time to read the troubleshooting guide. If you have found some slaves, the next step is check the machine config by running `./gbem -d -ith0`. This will either confirm that the machine configuration is valid or will produce error messages explaining where the misconfiguration lies.
-
-Finally, you can run GBEM in cyclic mode with `./gbem -c -ieth0`. This will boot the EtherCAT network and then try and connect over shared memory to GBC (or a program you write to control GBEM over shared memory).
-
-## GBEM config
-
-**`gbem_config.h` & `map_config.h` && `log.h`**
-
-As well as the configuration for machines and the configuration and code for drives and slaves, GBEM has three config files:
-
-`gbem_config.h` contains  compile time #defines it is well commented and self-explanatory
-
-`map_config.h`contains the #defines to control which machine target GBEM is being compiled for and some #defines for things like the maximum length of drive error messages
-
-`log.h` xxxxx
 
 ## Preempt-RT kernel patching
 

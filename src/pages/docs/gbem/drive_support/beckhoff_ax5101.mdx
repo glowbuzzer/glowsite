@@ -12,31 +12,30 @@ import { Rate, Row, Col } from 'antd';
 
 This short guide reviews the Beckhoff AX5101 drive and discusses how to get it working with GBEM. 
 
-AX5000 drives are available with current capacities from 1.5 A to 170 A. They are a sophisticated EtherCAT servo drive.
+AX5000 drives are available with current capacities from 1.5 A to 170 A. They are a sophisticated EtherCAT servo drives.
 
-Drives support a nice feature that they support a wide range of input voltages - 1 x 100 VAC - 1 x
+The drives have a nice feature that they support a wide range of input voltages - 1 x 100 VAC - 1 x
 240 VAC - 3 x 100 VAC - 3 x 480 VAC.
 
-Has built in intergaces to teh common encoder interfaces (Sin/Cos, EnDAT, Hiperface, BiSS, Resolver etc.)
+They have built in interfaces to the common encoder interfaces (Sin/Cos, EnDAT, Hiperface, BiSS, Resolver etc.)
+
+??Range of encoder option cards EnDat 2.1 , Hiperface , BiSS B , SinCos 1 Vpp , Resolver, EnDat 2.2 , BiSS C
 
 
-
-he AX-Bridge quick-connect system is pretty handy to speed and tidy up the connection for multiple axes.
-
-also do dual channel drives
-
-£1200 roughly
-
-raneg fo encoder option cards EnDat 2.1 , Hiperface , BiSS B , SinCos 1 Vpp , Resolver, EnDat 2.2 , BiSS C
-
+The AX-Bridge quick-connect system is pretty handy to speed and tidy up the connection for multiple axes.
 
 import ax5000_bridge from "./ax5000_bridge.png?glowsite"
 
 <Image meta={ax5000_bridge} alt="AX5000 bridge" maxWidth={500}/>
 
 
+Beckhoff also do dual channel drives in the series.
 
- multi-axis systems the drives can be coupled in the DC link, so that they can exchange energy
+The smallest AX5101 drive is £1200 roughly.
+
+In multi-axis systems the drives can be coupled in the DC link, so that they can exchange energy
+
+
 
 itec plugs or m23 speedtec on motors
 
@@ -71,23 +70,23 @@ devloped by fertig a jv between beckhoff and ex ELAU people.
     <Row>
         <Col span={6}>Overall rating</Col>
         <Col span={4}><Rate disabled defaultValue={4}/></Col>
-        <Col span={14}>Really good, </Col>
+        <Col span={14}>Excellent high-end drives </Col>
     </Row>
 
     <Row>
         <Col span={6}>Drive configuration software rating</Col>
-        <Col span={4}><Rate disabled defaultValue={5}/></Col>
-        <Col span={14}>Kollmorgen studio is pretty damn good</Col>
+        <Col span={4}><Rate disabled defaultValue={3}/></Col>
+        <Col span={14}>Good if you are using TwinCAT, poor if you are not</Col>
     </Row>
     <Row>
         <Col span={6}>Drive features rating</Col>
-        <Col span={4}><Rate disabled defaultValue={3}/></Col>
-        <Col span={14}>Does the basics but low on fancy features - bit outdated</Col>
+        <Col span={4}><Rate disabled defaultValue={4}/></Col>
+        <Col span={14}>Limited on the autotuning options</Col>
     </Row>
     <Row>
         <Col span={6}>Motors rating</Col>
         <Col span={4}><Rate disabled defaultValue={4}/></Col>
-        <Col span={14}>Bit short on shaft options for the motors, outdated motor connectors, hard to make custom cables</Col>
+        <Col span={14}>Nice OCT single cable option, motor are excellent quality</Col>
     </Row>
     <Row>
         <Col span={6}>Gearbox option</Col>
@@ -97,6 +96,6 @@ devloped by fertig a jv between beckhoff and ex ELAU people.
     <Row>
         <Col span={6}>Price</Col>
         <Col span={4}><Rate disabled defaultValue={3}/></Col>
-        <Col span={14}>Roughly €800 for 3A drive excluding cables and moto</Col>
+        <Col span={14}>Roughly €1200 for 3A drive excluding cables and motor</Col>
     </Row>
 </div>
