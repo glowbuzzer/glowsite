@@ -5,6 +5,8 @@ sort: 8
 
 import { Image } from "../../../../framework/components/Image"
 import { Rate, Row, Col } from 'antd';
+import {YoutubeEmbed} from "../../../../framework/components/Video"
+
 
 # EL7211
 
@@ -37,55 +39,45 @@ import el7211_product_shot from "./el7211_product_shot.png?glowsite"
 
 
 
-## Our ratings for the EL7211
+
+# Ratings
 
 We really like these drives. If you are happy with the "io slice" physical format then as a compact DC servo drive they are fantastic.
 
 Gte hot under heavy loads, the fan cartridges are essential
 
-
-
-
-
-````shell
-Ease of use :						★★★★☆ ()
-Drive configuration software :		★★★★☆ (Pretty damn good)
-Features :							★★★☆☆ (Does the basics but low on fancy features)
-Range of motors :					★★★☆☆ ()	
-Motors :							★★★☆☆ ()
-Price :								★★★☆☆ (Roughly €800 for 3A drive excluding cables and motor)
-````
-
 <div style={{margin:"20px"}}>
     <Row>
         <Col span={6}>Overall rating</Col>
         <Col span={4}><Rate disabled defaultValue={4}/></Col>
-        <Col span={14}>Really good, </Col>
+        <Col span={14}>Really good, compact DC servo drive </Col>
     </Row>
 
     <Row>
         <Col span={6}>Drive configuration software rating</Col>
-        <Col span={4}><Rate disabled defaultValue={5}/></Col>
-        <Col span={14}>Kollmorgen studio is pretty damn good</Col>
+        <Col span={4}><Rate disabled defaultValue={2}/></Col>
+        <Col span={14}>Good if you are using TwinCAT - nothing if you are not</Col>
     </Row>
     <Row>
         <Col span={6}>Drive features rating</Col>
         <Col span={4}><Rate disabled defaultValue={3}/></Col>
-        <Col span={14}>Does the basics but low on fancy features - bit outdated</Col>
+        <Col span={14}>Excellent</Col>
     </Row>
     <Row>
         <Col span={6}>Motors rating</Col>
-        <Col span={4}><Rate disabled defaultValue={4}/></Col>
-        <Col span={14}>Bit short on shaft options for the motors, outdated motor connectors, hard to make custom cables</Col>
+        <Col span={4}><Rate disabled defaultValue={3}/></Col>
+        <Col span={14}>A little limited</Col>
     </Row>
     <Row>
         <Col span={6}>Gearbox option</Col>
-        <Col span={4}><Rate disabled defaultValue={5}/></Col>
-        <Col span={14}>Excellent</Col>
+        <Col span={4}><Rate disabled defaultValue={3}/></Col>
+        <Col span={14}>A littel limited</Col>
     </Row>
     <Row>
         <Col span={6}>Price</Col>
         <Col span={4}><Rate disabled defaultValue={3}/></Col>
-        <Col span={14}>Roughly €800 for 3A drive excluding cables and moto</Col>
+        <Col span={14}>Roughly €400</Col>
     </Row>
 </div>
+
+

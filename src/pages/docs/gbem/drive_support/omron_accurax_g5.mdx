@@ -1,29 +1,32 @@
 ---
-title: OMROM ACCURAX G5
+title: OMRON ACCURAX G5
 sort: 13
 ---
 
 import { Image } from "../../../../framework/components/Image"
 import { Rate, Row, Col } from 'antd';
+import {YoutubeEmbed} from "../../../../framework/components/Video"
 
-# OMROM ACCURAX G5
+
+# OMRON ACCURAX G5
 
 ## Introduction
 
-This short guide reviews the Omrom Accurax G5 range of drives and discusses how to get them worikng with GBEM.
-
-
+This short guide reviews the Omron Accurax G5 range of drives and discusses how to get them working with GBEM.
 
 import omron_g5_product_shot from "./omron_g5_product_shot.png?glowsite"
 
 <Image meta={omron_g5_product_shot} alt="G5 product" maxWidth={500} />
 
+Manuals, downloads etc. are available on the Omron website <a href="https://industrial.omron.eu/en/products/accurax-g5-drives">here</a>.
 
 ## Overview of the G5 drive range
 
-The range extends from 0.1kW to 7.5kW with both single phase and three phase models. The available fieldbus interfaces are EtherCAT interfaces and MECHATROLINK II (a 10Mbs serial protocol originally developed by Yaskawa). 
+The range extends from 0.1kW to 7.5kW with both single phase and three-phase models. The available fieldbus interfaces are EtherCAT interfaces and MECHATROLINK II (a 10Mbs serial protocol originally developed by Yaskawa).
 
-The model we are are working with is the R88D-KN01H-ECT which is a 230v single phase 0.1KW with an EtherCAT interface
+The model we are working with is the R88D-KN01H-ECT which is a 230v single phase 0.1KW with an EtherCAT interface
+
+It is nicely compact and feels very professionally put-together.
 
 There is a pretty good range of motors available for these drives with the usual options of brakes and battery backed absolute encoders.
 
@@ -32,16 +35,53 @@ They include an ISO13849-1 Performance Level C/D STO facility to integrate with 
 Fancy features these drive support that we like:
 
 * Notch filters / Damping filters - all mechanical systems have a natural resonant frequency and if you excite it you get nasty vibrations that are compounded by the servo loops. Notch filters are a good way to reduce this effect by placing a band rejection filter around the troublesome frequencies.
-* Real time auto tuning - is a very powerful feature that estimates in real-time the load characteristic according to the motor speed and the
+* Real time auto-tuning - is a very powerful feature that estimates in real-time the load characteristic according to the motor speed and the
   force command and operates the machine by automatically setting the gain according to the result of the estimation
 * Backlash compensation - is a common feature on drives but the Omron implementation is particularly well done. It on triggers on any changes in direction the motor incurs.
 * Fully closed loop (encoder on load) - again a common feature on drives 
 
-In our opinion these are really nicely designed drives. With many drives, if feels like the design engineers have done the minimum necessary to get a "just about working" product whereas with the Omron drives they feel polished, well thought through and they have actually thought about what a user would need.
+In our opinion these are really nicely designed drives. With many drives, it feels like the design engineers have done the minimum necessary to get a "just about working" product whereas with the Omron drives they feel polished, well thought through, and they have actually thought about what a user would need.
 
-Has a proper 64 bit DC reference clock register.
+
+They have a proper 64 bit DC reference clock register.
 
 These drives are based on the Panasonic Minas drives now (Omron drives used to be Yaskawa drives re-badged).
+
+## Our ratings for the Omron G5
+<div style={{margin:"20px"}}>
+    <Row>
+        <Col span={6}>Overall rating</Col>
+        <Col span={4}><Rate disabled defaultValue={4}/></Col>
+        <Col span={14}>Really good, </Col>
+    </Row>
+
+    <Row>
+        <Col span={6}>Drive configuration software rating</Col>
+        <Col span={4}><Rate disabled defaultValue={1}/></Col>
+        <Col span={14}>Fiddly to install, no support for high-res screens, 1990s feel to it</Col>
+    </Row>
+    <Row>
+        <Col span={6}>Drive features rating</Col>
+        <Col span={4}><Rate disabled defaultValue={5}/></Col>
+        <Col span={14}>Excellent, they have covered pretty much everything in these drives</Col>
+    </Row>
+    <Row>
+        <Col span={6}>Motors rating</Col>
+        <Col span={4}><Rate disabled defaultValue={4}/></Col>
+        <Col span={14}>Bit short on shaft options for the motors, outdated motor connectors, hard to make custom cables</Col>
+    </Row>
+    <Row>
+        <Col span={6}>Gearbox option</Col>
+        <Col span={4}><Rate disabled defaultValue={5}/></Col>
+        <Col span={14}>Excellent</Col>
+    </Row>
+    <Row>
+        <Col span={6}>Price</Col>
+        <Col span={4}><Rate disabled defaultValue={3}/></Col>
+        <Col span={14}>Roughly €700 for 3A drive excluding cables and motor</Col>
+    </Row>
+</div>
+
 
 ## BoM used for our testing
 
@@ -50,15 +90,13 @@ The components we used for our testing were:
 * R88D-KN01H-EC - drive
 * R88A-CRKA003CR-E - Encoder cable
 * R88A-CAKA003SR-E - Motor power cable
-*  R88M - ??? - G5 series AC servo motor (in this case a dinky little motor)
-
+* R88M-K10030H-S2 - G5 series AC servo motor (in this case a dinky little 0.1kW 3Φ motor)
 
 Omron G5 motor power cable:
 
 import omron_g5_motor from "./omron_g5_motor.jpg?glowsite"
 
 <Image meta={omron_g5_motor} alt="G5 motor cable" maxWidth={500} />
-
 
 Omron G5 encoder cable:
 
@@ -99,115 +137,89 @@ XW2Z-100J-B24  Terminal block cable
 
 ## Wiring up
 
-For testing the drive, the wiring is very simple. There is a small plug supplied with the drive to disable the STO feature which makes things a bit easier. 
+For testing the drive, the wiring is very simple. There is a small plug supplied with the drive to disable the STO feature which makes things a bit easier (this goes in CN8-SAFE).
 
-The drive just needs a 200-240VAC power supply. There is no 24v "logic power" supply needed. 200-240VAC is supplied to both 
+The drive just needs a 200-240VAC power supply. There is no 24v "logic power" supply needed. 200-240VAC is supplied to both which is a useful feature.
 
-L1 & L3 - live and neutral for motor power
+This does mean that two mains voltage connections are needed:
 
-L1C & L2C - live and neutral for control power (converted to DC control voltages internally)
+1. L1 & L3 - live and neutral for motor power
+1. L1C & L2C - live and neutral for control power (converted to DC control voltages internally)
 
+CN1 provides access to Digital Ins and Outs but isn't needed for our basic tests.
 
+Ground terminals are screw ring terminals which give a nice feeling of security of your earth connections versus spring level terminals but the vibration performance of spring lever terminals is a possible issue.
 
-CN1 provides access to Digital Ins and Outs but isn;t needed for a basic test.
+CN7 is the USB connector, and a MICRO usb cable is needed which is a touch unfortunate given these are increasingly rare these days but everyone has them in their big-box of random cables.
 
-Ground terminals are screw ring terminals
+Production wiring will need the usual range of filters, breakers/isolators, contactors with surge suppression and the usual gubbins needed. The drive's manual provides details.
 
+Omron G5 wired for testing:
 
+import omron_g5_wired from "./omron_g5_wired.jpg?glowsite"
 
-CN7 is the usb connector a MICRO usb cable is needed which is a touch unfortunate given these are increasingly rare these days.
-
-
-
-Production wiring will need the usual range of filters, breakers/isolators, contactors with surge supression and the usual gubbins needed. The drive's manual provides detaills.
-
+<Image meta={omron_g5_wired} alt="G5 wired for testing" maxWidth={500} />
 
 
 ## Omron drive configuration software
 
 ### Introduction
 
-Omrom provide a drive configuration utility called CX-DRIVE. This can be purchased either as a stand-alone piece of software or it is included in the CX-ONE automation suite. This is available on a 30 day free trial. This software is not essential but is handy to initially test the drive and in scenarios where you want to do custom tuning of the servo's loops, update the firmware or if you are having issues and want to do diagnosis / testing.
+Omron provide a drive configuration utility called CX-DRIVE. This can be purchased either as a stand-alone piece of software or it is included in the CX-ONE automation suite. This is available on a 30-day free trial. This software is not essential but is handy to initially test the drive and in scenarios where you want to do custom tuning of the servo's loops, update the firmware or if you are having issues and want to do diagnosis / testing.
 
 The CX-Drive software has a vintage feel to it - it is a trip back in time to Neolithic era software applications. If you are running a high resolution screen you are going to need to get the magnifying glass out.
 
 We had to do a bit of USB driver jigger-pokery to get the software to see our drive. This is involved manually installing the USB drives from `C:\Program Files (x86)\OMRON\CX-One\CX-Drive\DRIVERS\G5-Series`.
 
+## Initial power on
+
+If you power up the drive with no configuration.
+
+The first thing we see is an 87 alarm.
+
+This is alarm 0x87.0 `{0x87, 0, "Immediate Stop Input Error"}`
+
+This needs the CX-Drive configuration software to disable it.
+
 ### Create a new config
+
+Make sure the drive is powered up and the USB cable is connected to your PC.
+
+Then, in CX-Drive:
 
 File menu -> New drive
 
 
+import omron_g5_cxdrive_new_drive from "./omron_g5_cxdrive_new_drive.png?glowsite"
 
-* Plug-in the drive
+<Image meta={omron_g5_cxdrive_new_drive} alt="CX one new drive" maxWidth={500} />
 
+Select the model of the drive you are using and click ok.
 
+Or, you can try an auto-detect:
 
+import omron_g5_cxdrive_autodetect from "./omron_g5_cxdrive_autodetect.png?glowsite"
 
-
-Plug in and run
-
-Power up and the first thing we see is a 87 alarm - 
-
-this is 0x87.0 `{0x87, 0, "Immediate Stop Input Error"}`
-
-We can disable this 
-
-
-
-## Our ratings for the Omron G5
-<div style={{margin:"20px"}}>
-<Row>
-    <Col span={6}>Overall rating</Col>
-    <Col span={4}><Rate disabled defaultValue={4}/></Col>
-    <Col span={14}>Really good, </Col>
-</Row>
-
-<Row>
-    <Col span={6}>Drive configuration software rating</Col>
-    <Col span={4}><Rate disabled defaultValue={1}/></Col>
-    <Col span={14}>Fiddly to install, no support for high-res screens, 1990s feel to it</Col>
-</Row>
-<Row>
-    <Col span={6}>Drive features rating</Col>
-    <Col span={4}><Rate disabled defaultValue={5}/></Col>
-    <Col span={14}>Excellent, they have covered pretty much everything in these drives</Col>
-</Row>
-<Row>
-    <Col span={6}>Motors rating</Col>
-    <Col span={4}><Rate disabled defaultValue={4}/></Col>
-    <Col span={14}>Bit short on shaft options for the motors, outdated motor connectors, hard to make custom cables</Col>
-</Row>
-<Row>
-    <Col span={6}>Gearbox option</Col>
-    <Col span={4}><Rate disabled defaultValue={5}/></Col>
-    <Col span={14}>Excellent</Col>
-</Row>
-<Row>
-    <Col span={6}>Price</Col>
-    <Col span={4}><Rate disabled defaultValue={3}/></Col>
-    <Col span={14}>Roughly €700 for 3A drive excluding cables and motor</Col>
-</Row>
-</div>
-
-
-## Titbits
-
-The overrun limit protection function only works in fully closed loop mode (encoder on load) don't mistake this for 
-
-If you are using a single phase drive, rather than a three phase model, wire live and neutral to L1 and L3. 
-
-
+<Image meta={omron_g5_cxdrive_autodetect} alt="CX one autodetect" maxWidth={500} />
 
 ## Essential config in CX-Drive to get the drive moving
 
 Pn400.0  -> 0 disabled - power cycle
 
-(This is accessible through 3400 hex 00 hex Input Signal Selection 1 4 bytes (INT32) )
+import omron_g5_cxdrive_disable_sto from "./omron_g5_cxdrive_disable_sto.png?glowsite"
+
+<Image meta={omron_g5_cxdrive_disable_sto} alt="CX one disable STO" maxWidth={800} />
+
+IMPORTANT: for production use when you are using STO this will need re-enabling!
 
 
+(This is register is also accessible through 0x3400 0x0 "Input Signal Selection 1 4 bytes (INT32)" if you wish to set this register without using CX-Drive).
 
-## nescan (gbem -n -ieth0)
+## Titbits
+
+The overrun limit protection function only works in fully closed loop mode (encoder on load) don't mistake this for 
+
+## netscan (gbem -n -ieth0)
 
 ````c
 Slave: 1

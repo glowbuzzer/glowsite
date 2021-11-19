@@ -6,18 +6,22 @@ sort: 4
 import { Image } from "../../../../framework/components/Image"
 import { Rate, Row, Col } from 'antd';
 
+import {YoutubeEmbed} from "../../../../framework/components/Video"
+
+
 # EL2522
 
 ## Introduction
 
-This short guide reviews the Beckhoff EL2522 terminal and discusses how to get them working with GBEM.
+This short guide reviews the Beckhoff EL2522 terminal and discusses how to get it working with GBEM.
 
-The EL2522 is a Beckhoff io terminal that performs incremental encoder simulation. This means it outputs a frequency modulated signal (for example step/direction) that can be used to control motor drivers. Each terminal can support outputs. The outputs can be step/direction or an encoder simulation signal.
+The EL2522 is a Beckhoff IO terminal that performs incremental encoder simulation. This means it outputs a frequency modulated signal (for example step/direction) that can be used to control motor drivers.
+
+Each terminal can support two outputs. The outputs can be step/direction or an encoder simulation signal.
 
 The EL2522 supports an enhanced operating mode which allows continuous positioning with output pulses that cycle-synchronously. This means we can cyclically write a position to the device and it will output pulses to reflect that position updating its internal counter to reflect position.
 
-This terminal is useful, if for example, we have a driver for a motor that supports step/direction that we want to use with our control. 
-
+*This terminal is useful, if for example, we have a driver for a motor that supports step/direction that we want to use with our control.*
 
 
 import el2522_product_shot from "./el2522_product_shot.png?glowsite"
@@ -25,9 +29,45 @@ import el2522_product_shot from "./el2522_product_shot.png?glowsite"
 <Image meta={el2522_product_shot} alt="EL2522 product" />
 
 
+The output stage allows a maximum frequency of 500 kHz to be output. 500kHz when used with a 200 steps / rev  motor = 2500 rps = 150k rpm. 500kHz when used with a 200 steps / rev motor and the drive is using 128 microstepping = 20 rps = 1200 rpm. So the 500KHz is sufficient for most usage scenarios.
+
+## Review
+
+<div style={{margin:"20px"}}>
+    <Row>
+        <Col span={6}>Overall rating</Col>
+        <Col span={4}><Rate disabled defaultValue={4}/></Col>
+        <Col span={14}>If you want to control step-direction drivers from EtherCAT it is very useful</Col>
+    </Row>
+
+    <Row>
+        <Col span={6}>Drive configuration software rating</Col>
+        <Col span={4}><Rate disabled defaultValue={2}/></Col>
+        <Col span={14}>Good if you are using TwinCAT - nothing if you are not</Col>
+    </Row>
+    <Row>
+        <Col span={6}>Drive features rating</Col>
+        <Col span={4}><Rate disabled defaultValue={3}/></Col>
+        <Col span={14}>Does the basics but low on fancy features - bit outdated</Col>
+    </Row>
+    <Row>
+        <Col span={6}>Motors rating</Col>
+        <Col span={4}><Rate disabled defaultValue={0}/></Col>
+        <Col span={14}>N/A</Col>
+    </Row>
+    <Row>
+        <Col span={6}>Gearbox option</Col>
+        <Col span={4}><Rate disabled defaultValue={0}/></Col>
+        <Col span={14}>N/A</Col>
+    </Row>
+    <Row>
+        <Col span={6}>Price</Col>
+        <Col span={4}><Rate disabled defaultValue={3}/></Col>
+        <Col span={14}>Roughly €200</Col>
+    </Row>
+</div>
 
 
-The output stage allows a maximum frequency of 500 kHz to be output. 500KHz when used with a 200 steps / rev  motor = 2500 rps = 150k rpm. 500LHz when used with a 200 steps / rev motor and the drive is using 128 microstepping = 20 rps = 1200 rpm. So the 500KHz is sufficient for most usage scenarios.
 
 ## Configuration
 
@@ -224,37 +264,3 @@ Again this is what we would expect. There slight discontinuities in the increase
 
 We connected the EL2522 to a 
 
-
-<div style={{margin:"20px"}}>
-    <Row>
-        <Col span={6}>Overall rating</Col>
-        <Col span={4}><Rate disabled defaultValue={4}/></Col>
-        <Col span={14}>Really good, </Col>
-    </Row>
-
-    <Row>
-        <Col span={6}>Drive configuration software rating</Col>
-        <Col span={4}><Rate disabled defaultValue={5}/></Col>
-        <Col span={14}>Kollmorgen studio is pretty damn good</Col>
-    </Row>
-    <Row>
-        <Col span={6}>Drive features rating</Col>
-        <Col span={4}><Rate disabled defaultValue={3}/></Col>
-        <Col span={14}>Does the basics but low on fancy features - bit outdated</Col>
-    </Row>
-    <Row>
-        <Col span={6}>Motors rating</Col>
-        <Col span={4}><Rate disabled defaultValue={4}/></Col>
-        <Col span={14}>Bit short on shaft options for the motors, outdated motor connectors, hard to make custom cables</Col>
-    </Row>
-    <Row>
-        <Col span={6}>Gearbox option</Col>
-        <Col span={4}><Rate disabled defaultValue={5}/></Col>
-        <Col span={14}>Excellent</Col>
-    </Row>
-    <Row>
-        <Col span={6}>Price</Col>
-        <Col span={4}><Rate disabled defaultValue={3}/></Col>
-        <Col span={14}>Roughly €800 for 3A drive excluding cables and moto</Col>
-    </Row>
-</div>

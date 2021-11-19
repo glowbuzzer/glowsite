@@ -18,6 +18,7 @@ import { ReactComponent as RocketIcon } from "../../home/rocket.svg?inline"
 import { HomeCarousel } from "../components/HomeCarousel"
 import { YoutubeEmbed } from "../components/Video"
 import HexImage from "../../home/hex_components.svg"
+import { ReactComponent as BlogIcon } from "../../home/blog.svg?inline"
 
 const HeroSection = styled.div`
     position: relative;
@@ -38,8 +39,9 @@ const HeroSection = styled.div`
 
     .hero-image {
         min-height: 100%;
-        margin-left: 100px;
+        margin-left: auto;
         margin-right: 100px;
+        fill: white;
     }
 `
 
@@ -165,6 +167,7 @@ export const HomePage = () => {
             <Section background={"BackgroundDarkSection"} inverted spaced guttered>
                 <HeroSection>
                     <h1>Blogs that might interest you</h1>
+                    <BlogIcon className="hero-image" style={{ height: "50px" }} />
                 </HeroSection>
             </Section>
             <Section>

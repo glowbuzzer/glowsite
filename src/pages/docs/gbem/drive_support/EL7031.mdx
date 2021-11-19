@@ -5,41 +5,73 @@ sort: 5
 
 import { Image } from "../../../../framework/components/Image"
 import { Rate, Row, Col } from 'antd';
+import {YoutubeEmbed} from "../../../../framework/components/Video"
+
 
 # EL7031
 
 ## Introduction
 
-This short guide reviews the Beckhoff EL7031drive and discusses how to get them working with GBEM.
+This short guide reviews the Beckhoff EL7031 drive and discusses how to get them working with GBEM.
 
 The Beckhoff EL7031 is a EtherCAT terminal that provides a drive for small stepper motors. 
 
 The output stage voltage is fixed at 24V and maximum current of 1.5A (per phase) so you are looking at NEMA 17 and possibly NEMA 23 sized motors.
 
-The terminal has two digital inputs, usually for limit switches.
+The terminal has two digital inputs, usually used for limit switches.
 
-64 fold micro-stepping is fixed.
+Its 64-fold micro-stepping is fixed.
 
 The terminal does not support an encoder.
 
-DC support
-
-
-
-
-
+The terminal has DC support.
 
 import el7031_product_shot from "./el7031_product_shot.png?glowsite"
 
 <Image meta={el7031_product_shot} alt="EL7031 product" p />
 
+## Review
+
+<div style={{margin:"20px"}}>
+    <Row>
+        <Col span={6}>Overall rating</Col>
+        <Col span={4}><Rate disabled defaultValue={4}/></Col>
+        <Col span={14}>Cheap, useful "slice" form-factor, basic </Col>
+    </Row>
+
+    <Row>
+        <Col span={6}>Drive configuration software rating</Col>
+        <Col span={4}><Rate disabled defaultValue={2}/></Col>
+        <Col span={14}>Good if you are using TwinCAT - nothing if you are not</Col>
+    </Row>
+    <Row>
+        <Col span={6}>Drive features rating</Col>
+        <Col span={4}><Rate disabled defaultValue={3}/></Col>
+        <Col span={14}>Does the basics but no advanced features - bit outdated</Col>
+    </Row>
+    <Row>
+        <Col span={6}>Motors rating</Col>
+        <Col span={4}><Rate disabled defaultValue={0}/></Col>
+        <Col span={14}>N/A - uses standard bi-polar stepper motors</Col>
+    </Row>
+    <Row>
+        <Col span={6}>Gearbox option</Col>
+        <Col span={4}><Rate disabled defaultValue={0}/></Col>
+        <Col span={14}>N/A - uses standard bi-polar stepper motors</Col>
+    </Row>
+    <Row>
+        <Col span={6}>Price</Col>
+        <Col span={4}><Rate disabled defaultValue={3}/></Col>
+        <Col span={14}>Roughly €200</Col>
+    </Row>
+</div>
 
 
 ## Wiring up
 
 The wiring up the EL7031 could not be much simpler. The motor connects to A1, A2, B1 & B2 and the motor power supply is fed through the terminals power contacts.
 
-So the simplest set-up for a single stepper motor, is an EK1100 bus coupler with the EL7031 connected to it as follows:
+So, the simplest set-up for a single stepper motor, is an EK1100 bus coupler with the EL7031 connected to it as follows:
 
 
 import EK1100_EL7031 from "./EK1100_EL7031.png?glowsite"
@@ -51,16 +83,19 @@ import EK1100_EL7031 from "./EK1100_EL7031.png?glowsite"
 
 ### Overview
 
-We want to control the motor using the cyclic setting of positions. Beckhoff refer to this as "STM Control". Two fixed PDOs are available for STM Control, 0x1602 & 0x1603 on SM2 and 0x1a03 & 0x1a07.
+We want to control the motor using the cyclic setting of positions. Beckhoff refer to this as "STM Control".
 
+Two fixed PDOs are available for STM Control, 0x1602 & 0x1603 on SM2 and 0x1a03 & 0x1a07 on SM3.
+
+**SM2**
 * 0x1602 - contains bits for Enable, reset and reduce torque
-
 * 0x1603 - contains a uint32 for set position
 
 
-
+**SM3**
 * 0x1a03 - contains bits for the status of the drive (error, warning, digitals inputs)
 * 0x1a07 - contains a unit32 for actual position
+
 
 So our PDO mapping objects are:
 
@@ -168,7 +203,7 @@ After applying our PDO mapping this is the netscan output:
 ````c
 PDO mapping according to CoE :
   SM2 outputs
-        [byte_offset] [addr b  ] [index:sub  ] [bitl] [data_type   ] [name                                    ]
+        [byte_offset] [addr b  ] [index:sub  ]     [bitl] [data_type   ] [name                                    ]
         [0          ] [0xFFF89E60.0] [0x7010:0x01] [0x01] [BOOLEAN     ] [Enable                                  ]
         [0          ] [0xFFF89E60.1] [0x7010:0x02] [0x01] [BOOLEAN     ] [Reset                                   ]
         [0          ] [0xFFF89E60.2] [0x7010:0x03] [0x01] [BOOLEAN     ] [Reduce torque                           ]
@@ -184,7 +219,7 @@ PDO mapping according to CoE :
         [12         ] [0xFFF89E6C.0] [0x7020:0x23] [0x10] [UNSIGNED16  ] [Acceleration                            ]
         [14         ] [0xFFF89E6E.0] [0x7020:0x24] [0x10] [UNSIGNED16  ] [Deceleration                            ]
   SM3 inputs
-        [byte_offset] [addr b  ] [index: sub ] [bitl] [data_type   ] [name                                    ]
+        [byte_offset] [addr b  ] [index: sub ]     [bitl] [data_type   ] [name                                    ]
         [0          ] [0xFFF89E60.0] [0x6010:0x01] [0x01] [BOOLEAN     ] [Ready to enable                         ]
         [0          ] [0xFFF89E60.1] [0x6010:0x02] [0x01] [BOOLEAN     ] [Ready                                   ]
         [0          ] [0xFFF89E60.2] [0x6010:0x03] [0x01] [BOOLEAN     ] [Warning                                 ]
@@ -204,44 +239,15 @@ PDO mapping according to CoE :
 
 
 
-    ## CiA 402
+## CiA 402
 
-This simple stepper drive does not support the CiA402 drive profile it just contains a bit to enable the motor and a set of of bits that signal if teh drive is ready to enable, enabled or has and error and warning. 
+This simple stepper drive does not support the CiA402 drive profile it just contains a bit to enable the motor and a set of bits that signal if the drive is ready to enable, enabled or has and error and warning.
 
 This means we have to write code to emulate the CiA 402 statemachine in our driver code. This is not very complicated.
 
 
 
-<div style={{margin:"20px"}}>
-    <Row>
-        <Col span={6}>Overall rating</Col>
-        <Col span={4}><Rate disabled defaultValue={4}/></Col>
-        <Col span={14}>Really good, </Col>
-    </Row>
 
-    <Row>
-        <Col span={6}>Drive configuration software rating</Col>
-        <Col span={4}><Rate disabled defaultValue={5}/></Col>
-        <Col span={14}>Kollmorgen studio is pretty damn good</Col>
-    </Row>
-    <Row>
-        <Col span={6}>Drive features rating</Col>
-        <Col span={4}><Rate disabled defaultValue={3}/></Col>
-        <Col span={14}>Does the basics but low on fancy features - bit outdated</Col>
-    </Row>
-    <Row>
-        <Col span={6}>Motors rating</Col>
-        <Col span={4}><Rate disabled defaultValue={4}/></Col>
-        <Col span={14}>Bit short on shaft options for the motors, outdated motor connectors, hard to make custom cables</Col>
-    </Row>
-    <Row>
-        <Col span={6}>Gearbox option</Col>
-        <Col span={4}><Rate disabled defaultValue={5}/></Col>
-        <Col span={14}>Excellent</Col>
-    </Row>
-    <Row>
-        <Col span={6}>Price</Col>
-        <Col span={4}><Rate disabled defaultValue={3}/></Col>
-        <Col span={14}>Roughly €800 for 3A drive excluding cables and moto</Col>
-    </Row>
-</div>
+# Testing
+
+<YoutubeEmbed embedId="xXf0xaqh7o0" />

@@ -4,15 +4,15 @@ sort: 10
 ---
 
 import { Image } from "../../../../framework/components/Image"
-import { Rate, Row, Col } from 'antd';
+import { Rate, Row, Col, Card } from 'antd';
+import {YoutubeEmbed} from "../../../../framework/components/Video"
+import {PdoCard} from "../../../../framework/components/PdoCard";
 
 # Kollmorgen AKD
 
 ## Introduction
 
 This short guide reviews the Kollmorgen AKD range of drives and discusses how to get them working with GBEM.
-
-
 
 import kollmorgen_akd_product_shot from "./kollmorgen_akd_product_shot.png?glowsite"
 
@@ -46,21 +46,11 @@ For the purpose of this review we used a standard AKD-x00306 drive with an AKM m
 
 ## Our ratings for the Kollmorgen AKD (not AKD2G)
 
-````shell
-Overall ease of use :				★★★☆☆ ()
-Drive configuration software :		★★★★☆ (Kollmorgen studio is pretty damn good)
-Drive features :					★★★☆☆ (Does the basics but low on fancy features)
-Range of motors :					★★★★★ (There is a very good range of motors)	
-Quality of Motors :					★★★★★ (Hard to fault the quality of the Kollmorgen motors)
-Gearbox options :					★★★★★ (Excellent,)
-Price :								★★★☆☆ (Roughly €800 for 3A drive excluding cables and motor)
-````
-
 <div style={{margin:"20px"}}>
     <Row>
         <Col span={6}>Overall rating</Col>
-        <Col span={4}><Rate disabled defaultValue={4}/></Col>
-        <Col span={14}>Really good, </Col>
+        <Col span={4}><Rate disabled defaultValue={3}/></Col>
+        <Col span={14}>Overall very good but showing their age</Col>
     </Row>
 
     <Row>
@@ -76,7 +66,7 @@ Price :								★★★☆☆ (Roughly €800 for 3A drive excluding cables and
     <Row>
         <Col span={6}>Motors rating</Col>
         <Col span={4}><Rate disabled defaultValue={4}/></Col>
-        <Col span={14}>Bit short on shaft options for the motors, outdated motor connectors, hard to make custom cables</Col>
+        <Col span={14}></Col>
     </Row>
     <Row>
         <Col span={6}>Gearbox option</Col>
@@ -86,7 +76,7 @@ Price :								★★★☆☆ (Roughly €800 for 3A drive excluding cables and
     <Row>
         <Col span={6}>Price</Col>
         <Col span={4}><Rate disabled defaultValue={3}/></Col>
-        <Col span={14}>Roughly €800 for 3A drive excluding cables and moto</Col>
+        <Col span={14}>Roughly €800 for 3A drive excluding cables and motor</Col>
     </Row>
 </div>
 
@@ -120,6 +110,137 @@ Free
 quite good
 
 
+## netscan
 
 
+## Getting working with the glowbuzzer toolkit
+
+The driver code is located at `/libs/kollmorgen/kollmorgen.c/h`.
+
+## PDO mapping
+
+The PDO mapping is straight-forward. We use a pre-defined set of maps.
+
+**0x1b26** This predefined PDO mapping is the ds402 scaled actpos version (later AZD firmware only). It includes:
+
+ * status word (2 bytes), Position actual internal value ( 4 bytes),torque actual value (2bytes),digital inputs (4 bytes),
+ *  analog input value (2 bytes), follow error actual value (2 bytes)
+
+**0x1724** Target position for cyclic synchronous position mode (4 bytes - DINT), Control word (2byte), Torque feed forward (2 bytes)
+
+So in the code, we create two arrays containing the map we want to apply.
+
+```c
+uint16_t map_SM3_index_of_assigned_PDO_akd[ECM_MAX_PDO_MAPPING_ENTRIES] = {
+        0x1b26};
+uint16_t map_SM2_index_of_assigned_PDO_akd[ECM_MAX_PDO_MAPPING_ENTRIES] = {
+        0x1724};
+```
+
+The code use to apply these can be found in the library
+
+## Initial PDOs
+
+
+
+<PdoCard size="small" title="Interpolation time index">
+    <p>Address: 0x60C:0x2</p>
+    <p>Value: 3 (a -3 exponent to the interpolation time period)</p>
+</PdoCard>
+
+<PdoCard size="small" title="Interpolation time period">
+    <p>Address: 0x60C2:0x1</p>
+    <p>Value: Set to our cycle time (1ms, 2ms, 4ms)</p>
+</PdoCard>
+
+Subindex 2, known as the interpolation time index, defines the power of ten of the time value
+(e.g. -3 means 10-3 or milliseconds) while subindex 1, known as interpolation time units, gives the number of units (e.g. 4 means 4 units).
+You can run a 2 ms cycle using various combinations. For example,
+* Index = -3, Units = 2 or
+* Index = -4, Units = 20 etc.
+
+
+
+<PdoCard size="small" title="Activate fieldbus synchronisation">
+    <p>Address: 0x36E6:0x0</p>
+    <p>Value: 1 (activate)</p>
+</PdoCard>
+
+
+<PdoCard size="small" title="Synchronization supervision of the EtherCAT fieldbus">
+    <p>Address: 0x36E8:0x0</p>
+    <p>Value: 1 (activate - this will error the drive if the sync. fails - turn off when commissioning)</p>
+</PdoCard>
+
+<PdoCard size="small" title="Scaling is done using special DS402 - objects (independent on units)">
+    <p>Address: 0x36E9:0x0</p>
+    <p>Value: set bit 4</p>
+</PdoCard>
+
+<PdoCard size="small" title="drv.opmode">
+    <p>Address: 0x35B4:0x0</p>
+    <p>Value: 2</p>
+</PdoCard>
+
+
+<PdoCard size="small" title="Motor revolutions">
+    <p>Address: 0x6091:0x1</p>
+    <p>Value: 1</p>
+</PdoCard>
+
+<PdoCard size="small" title="Shaft revolutions">
+    <p>Address: 0x6091:0x2</p>
+    <p>Value: 1</p>
+</PdoCard>
+
+<PdoCard size="small" title="Feed">
+    <p>Address: 0x6092:0x1</p>
+    <p>Value: 655,360</p>
+</PdoCard>
+
+<PdoCard size="small" title="shaft revolutions">
+    <p>Address: 0x6092:0x2</p>
+    <p>Value: 1</p>
+</PdoCard>
+
+
+## MOO
+
+SDO read
+
+```c
+if (!ec_sdo_read_int8(map_drive_to_slave[drive], AKD_MOO_GET_SDO_INDEX, AKD_MOO_GET_SDO_SUB_INDEX, &ib8))
+```
+
+
+## Follow-error
+
+```c
+    if (ec_pdo_get_input_uint32(map_drive_to_slave[drive], AKD_FOLLOWERROR_ACTVAL_PDO_INDEX) > AKD_FOLLOW_ERROR_TOLLERANCE){
+        return true;
+    }
+    return false;
+```
+
+
+## Error code
+
+sdo read look at code
+
+
+
+## remote
+
+remote bit is provided is the status word.
+
+Read with: `drive_stat_wrd = ec_get_stat_wrd_akd(drive)` and check with `(BIT_CHECK(drive_stat_wrd, CIA_REMOTE_BIT_NUM))`
+
+## actpos
+Simple read from PDO:
+
+```c
+int32_t ec_get_actpos_wrd_akd(const uint16_t drive) {
+return ec_pdo_get_input_int32(map_drive_to_slave[drive], AKD_ACTPOS_PDO_INDEX);
+}
+```
 

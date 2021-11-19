@@ -5,6 +5,8 @@ sort: 7
 
 import { Image } from "../../../../framework/components/Image"
 import { Rate, Row, Col } from 'antd';
+import {YoutubeEmbed} from "../../../../framework/components/Video"
+
 
 # EL7041
 
@@ -45,6 +47,9 @@ noe24-k06 - NOE2 – OPTICAL 3-CHANNEL ENCODER
 4000 CPR
 
 
+import el7041_product_shot from "./el7041_product_shot.png?glowsite"
+
+<Image meta={el7041_product_shot} alt="EL7041 product" />
 
 
 
@@ -122,21 +127,18 @@ ec_pdo_info_t EL7031_pdos[] = {
 	
 
 
-import el7041_product_shot from "./el7041_product_shot.png?glowsite"
-
-<Image meta={el7041_product_shot} alt="EL7041 product" />
 
 <div style={{margin:"20px"}}>
     <Row>
         <Col span={6}>Overall rating</Col>
-        <Col span={4}><Rate disabled defaultValue={4}/></Col>
-        <Col span={14}>Really good, </Col>
+        <Col span={4}><Rate disabled defaultValue={3}/></Col>
+        <Col span={14}>A little dated but does the job</Col>
     </Row>
 
     <Row>
         <Col span={6}>Drive configuration software rating</Col>
-        <Col span={4}><Rate disabled defaultValue={5}/></Col>
-        <Col span={14}>Kollmorgen studio is pretty damn good</Col>
+        <Col span={4}><Rate disabled defaultValue={2}/></Col>
+        <Col span={14}>Good if you are using TwinCAT - nothing if you are not</Col>
     </Row>
     <Row>
         <Col span={6}>Drive features rating</Col>
@@ -145,17 +147,17 @@ import el7041_product_shot from "./el7041_product_shot.png?glowsite"
     </Row>
     <Row>
         <Col span={6}>Motors rating</Col>
-        <Col span={4}><Rate disabled defaultValue={4}/></Col>
-        <Col span={14}>Bit short on shaft options for the motors, outdated motor connectors, hard to make custom cables</Col>
+        <Col span={4}><Rate disabled defaultValue={0}/></Col>
+        <Col span={14}>N/A - uses standard bi-polar stepper motors</Col>
     </Row>
     <Row>
         <Col span={6}>Gearbox option</Col>
-        <Col span={4}><Rate disabled defaultValue={5}/></Col>
-        <Col span={14}>Excellent</Col>
+        <Col span={4}><Rate disabled defaultValue={0}/></Col>
+        <Col span={14}>N/A - uses standard bi-polar stepper motors</Col>
     </Row>
     <Row>
         <Col span={6}>Price</Col>
         <Col span={4}><Rate disabled defaultValue={3}/></Col>
-        <Col span={14}>Roughly €800 for 3A drive excluding cables and moto</Col>
+        <Col span={14}>Roughly €300</Col>
     </Row>
 </div>
