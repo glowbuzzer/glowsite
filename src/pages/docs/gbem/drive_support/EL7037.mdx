@@ -6,9 +6,14 @@ sort: 6
 import { Image } from "../../../../framework/components/Image"
 import { Rate, Row, Col } from 'antd';
 import {YoutubeEmbed} from "../../../../framework/components/Video"
-
+import {GitHubLink} from "../../../../framework/components/GitHubLink";
 
 # EL7037
+
+<GitHubLink title={"Drive interface code"} repo={"gbem"} directory={"/libs/beckhoff"}/>
+
+<GitHubLink title={"Example machine configuration"} repo={"gbem"} directory={"/libs/machine_map/src"} file={"el7037_test_map.c"} />
+
 
 ## Introduction
 
@@ -33,8 +38,7 @@ Vector control (a.k.a Field-orientated control) is a "modern" (1970s) technique 
 
 The drive is 64 micro-stepping which is permanently fixed.
 
-It is suggested by Beckhoff to use a brake chopper terminal (EL9576) and/or PSU buffer capacitor terminal (EL9570) for short deceleration ramps though with small motors we have not found any discernible difference. At some point we will do some tests with larger motors.
-
+It is suggested by Beckhoff to use a brake chopper terminal (EL9576) and/or PSU buffer capacitor terminal (EL9570) for short deceleration ramps though with small motors we have not found any discernible difference. At some point we will do some tests with larger motors/loads.
 
 
 import el7037_product_shot from "./el7037_product_shot.png?glowsite"
@@ -42,32 +46,15 @@ import el7037_product_shot from "./el7037_product_shot.png?glowsite"
 <Image meta={el7037_product_shot} alt="EL7037 product"  />
 
 
-
-
 ## Extended mode
 
-The terminal supports extended control modes. 
-
-field orientated control
-
-only for Beckhoff motors
-
-current adjusted depending on load - very nice
+The terminal supports extended control modes. These offer field orientated control but are only for use when the driver is connected to Beckhoff stepper motors.
 
 Extended modes require a commutation determination cycle when the drive is enabled. This motor turns a few degrees CW and CCW which for some applications is a pain in the arse.
 
-## Basics
 
 ## Our ratings for the EL7037
 
-````shell
-Ease of use :						★★★★☆ ()
-Drive configuration software :		★☆☆☆☆ (have to run up TwinCAT )
-Features :							★★★★★ (excellent)
-Range of motors :					★★★☆☆ (You can use )	
-Motors (Beckhoff) :					★★★☆☆ (AS10xx are dated but the new AS20xx motors look very good)
-Price :								★★★☆☆ (Roughly €200 excluding motor)
-````
 
 <div style={{margin:"20px"}}>
     <Row>
@@ -84,7 +71,7 @@ Price :								★★★☆☆ (Roughly €200 excluding motor)
     <Row>
         <Col span={6}>Drive features rating</Col>
         <Col span={4}><Rate disabled defaultValue={4}/></Col>
-        <Col span={14}>Cover pretty much everythign you need</Col>
+        <Col span={14}>Cover pretty much everything you need</Col>
     </Row>
     <Row>
         <Col span={6}>Motors rating</Col>
@@ -99,15 +86,12 @@ Price :								★★★☆☆ (Roughly €200 excluding motor)
     <Row>
         <Col span={6}>Price</Col>
         <Col span={4}><Rate disabled defaultValue={3}/></Col>
-        <Col span={14}>Roughly 3800</Col>
+        <Col span={14}>Roughly €250</Col>
     </Row>
 </div>
 
 
-
-
 ## Plug-in and run a netscan
-
 
 
 ````C
@@ -160,7 +144,7 @@ Price :								★★★☆☆ (Roughly €200 excluding motor)
         [11         ] [0xFFF89E43.7] [0x6010:0x10] [0x01] [BOOLEAN     ] [TxPDO Toggle                            ]
 ````
 
+## Testing
 
-
-<video src="E:\video\Drives\el7037\EL7037_2.mp4"/>
+<YoutubeEmbed embedId="" />
 

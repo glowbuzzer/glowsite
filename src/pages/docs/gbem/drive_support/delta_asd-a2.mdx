@@ -6,9 +6,13 @@ sort: 3
 import { Image } from "../../../../framework/components/Image"
 import { Rate, Row, Col } from 'antd';
 import {YoutubeEmbed} from "../../../../framework/components/Video"
-
+import {GitHubLink} from "../../../../framework/components/GitHubLink";
 
 # Delta ASD-A2
+<GitHubLink title={"Drive interface code"} repo={"gbem"} directory={"/libs/delta"} />
+
+<GitHubLink title={"Example machine configuration"} repo={"gbem"} directory={"/libs/machine_map/src"} file={"asda2_test_map.c"} />
+
 
 ## Introduction
 
@@ -132,3 +136,6 @@ P1-01 to 0x0Ch for EtherCAT communication and CANopen as the application layer.
 
 The ASDA-Soft drive commissioning software is available free of charge. It comes from the dark ages of computing but just about functions. It needs a USB standard A (the square one) to standard B (to go in your laptop) cable.
 
+## Testing
+
+<YoutubeEmbed embedId="" />

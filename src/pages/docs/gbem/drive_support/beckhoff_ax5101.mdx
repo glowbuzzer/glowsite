@@ -6,13 +6,17 @@ sort: 1
 import { Image } from "../../../../framework/components/Image"
 import { Rate, Row, Col } from 'antd';
 import {YoutubeEmbed} from "../../../../framework/components/Video"
-
+import {GitHubLink} from "../../../../framework/components/GitHubLink";
 
 # Beckhoff AX5101
 
+<GitHubLink title={"Drive interface code"} repo={"gbem"} directory={"/libs/beckhoff"} />
+
+<GitHubLink title={"Example machine configuration"} repo={"gbem"} directory={"/libs/machine_map/src"} file={"ax5101_test_map.c"} />
+
 ## Introduction
 
-This short guide reviews the Beckhoff AX5101 drive and discusses how to get it working with GBEM. 
+This short guide reviews the Beckhoff AX5101 drive and discusses how to get it working with GBEM.
 
 AX5000 drives are available with current capacities from 1.5 A to 170 A. They are a sophisticated EtherCAT servo drives.
 
@@ -52,10 +56,12 @@ electromagntic brake options
 bit limite on shaft options
 
 
+This range of motors has been developed by Fertig in a joint-venture between Beckhoff and ex. ELAU people so you would expect they really know what they are doing.
 
-oct one cable technology - pretty handy motors have one combined feedback/power connector not the usual two
+The drives offer the Beckhoff "OCT One Cable Technology". Which while we can't consider combining the motor power and encoder cables as revolutionary, it is pretty handy to have a single connector on motors not the usual two.
 
-AM8xxx series motors - flanges 40mm-to-194mm - torque 0.2Nm-to129Nm
+
+The drives use the Beckhoff AM8xxx series motors with flanges from 40mm-to-194mm and  torque 0.2Nm-to129Nm
 
 
 
@@ -63,9 +69,6 @@ import ax5151_product_shot from "./ax5151_product_shot.png?glowsite"
 
 <Image meta={ax5151_product_shot} alt="AX5151 product" maxWidth={500}/>
 
-
-
-devloped by fertig a jv between beckhoff and ex ELAU people.
 
 
 <div style={{margin:"20px"}}>
@@ -101,3 +104,8 @@ devloped by fertig a jv between beckhoff and ex ELAU people.
         <Col span={14}>Roughly €1200 for 3A drive excluding cables and motor</Col>
     </Row>
 </div>
+
+
+## Testing
+
+<YoutubeEmbed embedId="" />

@@ -5,11 +5,15 @@ sort: 4
 
 import { Image } from "../../../../framework/components/Image"
 import { Rate, Row, Col } from 'antd';
-
+import {GitHubLink} from "../../../../framework/components/GitHubLink";
 import {YoutubeEmbed} from "../../../../framework/components/Video"
-
+import {SdoCard} from "../../../../framework/components/SdoCard";
 
 # EL2522
+<GitHubLink title={"Drive interface code"} repo={"gbem"} directory={"/libs/beckhoff"}/>
+
+<GitHubLink title={"Example machine configuration"} repo={"gbem"} directory={"/libs/machine_map/src"} file={"el2522_test_map.c"} />
+
 
 ## Introduction
 
@@ -23,11 +27,9 @@ The EL2522 supports an enhanced operating mode which allows continuous positioni
 
 *This terminal is useful, if for example, we have a driver for a motor that supports step/direction that we want to use with our control.*
 
-
 import el2522_product_shot from "./el2522_product_shot.png?glowsite"
 
 <Image meta={el2522_product_shot} alt="EL2522 product" />
-
 
 The output stage allows a maximum frequency of 500 kHz to be output. 500kHz when used with a 200 steps / rev  motor = 2500 rps = 150k rpm. 500kHz when used with a 200 steps / rev motor and the drive is using 128 microstepping = 20 rps = 1200 rpm. So the 500KHz is sufficient for most usage scenarios.
 
@@ -47,8 +49,8 @@ The output stage allows a maximum frequency of 500 kHz to be output. 500kHz when
     </Row>
     <Row>
         <Col span={6}>Drive features rating</Col>
-        <Col span={4}><Rate disabled defaultValue={3}/></Col>
-        <Col span={14}>Does the basics but low on fancy features - bit outdated</Col>
+        <Col span={4}><Rate disabled defaultValue={4}/></Col>
+        <Col span={14}>Waveforms not perfect</Col>
     </Row>
     <Row>
         <Col span={6}>Motors rating</Col>
@@ -69,11 +71,16 @@ The output stage allows a maximum frequency of 500 kHz to be output. 500kHz when
 
 
 
-## Configuration
+## Initial SDO writes
 
-0x8000:0xe operating mode
-
-  
+<SdoCard name="Operating mode - CH1" index="0x8000" subindex="0x0e" value="1" notes="1 is pulse/dir"/>
+<SdoCard name="Operating mode - CH2" index="0x8010" subindex="0x0e" value="1" notes="1 is pulse/dir"/>
+<SdoCard name="Base frequency 1 - CH1" index="0x8000" subindex="0x12" value="50000" notes="unit is Hertz"/>
+<SdoCard name="Base frequency 1 - CH2" index="0x8010" subindex="0x12" value="50000" notes="unit is Hertz"/>
+<SdoCard name="Base frequency 2 - CH1" index="0x8000" subindex="0x13" value="100000" notes="unit is Hertz"/>
+<SdoCard name="Base frequency 2 - CH2" index="0x8010" subindex="0x13" value="100000" notes="unit is Hertz"/>
+<SdoCard name="Negative logic - CH1" index="0x8000" subindex="0x10" value="100000" />
+<SdoCard name="Negative logic - CH2" index="0x8010" subindex="0x10" value="100000" />
 
 ## PDO mapping
 
@@ -96,24 +103,6 @@ The output stage allows a maximum frequency of 500 kHz to be output. 500kHz when
 0x1a03,
 
 0x1a05
-
-## SDOs
-
-CH1
-
-8000:12 Base frequency 1 Base frequency 1 = 50000 Hz UINT32
-
-8000:13 Base frequency 2 Base frequency 2 = 100000 Hz UINT32 
-
-8000:0E Operating mode permitted values: BIT2 1 pulse dir
-
-8000:10 Negative logic TRUE Negative logic FALSE Positive logic BOOLEAN
-
-## 
-
-8010 for CH2
-
-
 
 ## Default netscan
 
@@ -184,8 +173,6 @@ CH1
 
 ## Netscan after PDO mapping
 
-
-
 ````c
   SM2 outputs
         [byte_offset] [addr b  ] [index:sub  ] [bitl] [data_type   ] [name                                    ]
@@ -233,6 +220,8 @@ CH1
         [8          ] [0xFFF89DF0.0] [0x6030:0x11] [0x20] [UNSIGNED32  ] [Counter value                           ]
 ````
 
+## Writing the driver code
+
 
 
 ## Testing
@@ -243,11 +232,9 @@ We connected the A+ output of the EL2522's first channel to an oscilloscope. A- 
 
 First at constant velocity:
 
-
 import tek_el2522_cv from "./tek_el2522_cv.png?glowsite"
 
 <Image meta={tek_el2522_cv} alt="Oscilloscope CV" />
-
 
 This is exactly what we would expect. A steady stream of pulses at a frequency that corresponds to our maximum velocity.
 
@@ -257,10 +244,138 @@ import tek_el2522_ramp from "./tek_el2522_ramp.png?glowsite"
 
 <Image meta={tek_el2522_ramp} alt="Oscilloscope ramp" />
 
+Again this is what we would expect. There slight discontinuities in the increase in frequency at around 170ms probably caused by the cyclic setting of position and Beckhoff's algorithm for calculating the frequency for the next period but we wouldn't expect this to be audibly noticeable on the motor but these could cause slight path variation if the drive was used for precision synchronised motion.
 
-Again this is what we would expect. There slight discontinuities in the increase in frequency at around 170ms probably caused by the cyclic setting of position and Beckhoff's algorithm for calculating the frequency for the next period but we wouldn't expect this to be audibly noticeable on the motor but these could cause slight path variation if the drive was used for precision synchronised motion. 
+## Testing EL2522 + driver + motor
 
-## Drive + motor
+We connected the EL2522 to a generic Chinese stepper motor driver output stage.
 
-We connected the EL2522 to a 
 
+
+
+<YoutubeEmbed embedId="" />
+
+
+
+
+```c
+Slave: 1
+Name: R88D-KN01H-ECT
+Output size: 96bits
+Input size: 224bits
+State: 18
+Delay: 0[ns]
+Has DC: 1
+DCParentport: 0
+Activeports: 1.0.0.0
+Configured address: 1001
+Man: 00000083 ID: 00000005 Rev: 00020001
+SM0 A:1800 L: 256 F:00010026 Type:1
+SM1 A:1c00 L: 256 F:00010022 Type:2
+SM2 A:1100 L:  12 F:00010064 Type:3
+SM3 A:1200 L:  28 F:00010022 Type:4
+FMMU0 Ls:00000000 Ll:  12 Lsb:0 Leb:7 Ps:1100 Psb:0 Ty:02 Act:01
+FMMU1 Ls:0000000c Ll:  28 Lsb:0 Leb:7 Ps:1200 Psb:0 Ty:01 Act:01
+FMMUfunc 0:1 1:2 2:0 3:0
+MBX length wr: 256 rd: 256 MBX protocols : 04
+CoE details: 2f FoE details: 00 EoE details: 00 SoE details: 00
+Ebus current: 0[mA]
+only LRD/LWR:0
+PDO mapping according to CoE :
+SM2 outputs
+[byte_offset] [addr b  ] [index:sub  ] [bitl] [data_type   ] [name                                    ]
+[0          ] [0x0000.0] [0x6040:0x00] [0x10] [UNSIGNED16  ] [Controlword                             ]
+[2          ] [0x0002.0] [0x607A:0x00] [0x20] [INTEGER32   ] [Target position                         ]
+[6          ] [0x0006.0] [0x60B8:0x00] [0x10] [UNSIGNED16  ] [Touch probe function                    ]
+[8          ] [0x0008.0] [0x60FE:0x01] [0x20] [UNSIGNED32  ] [Physical outputs                        ]
+SM3 inputs
+[byte_offset] [addr b  ] [index: sub ] [bitl] [data_type   ] [name                                    ]
+[0          ] [0x000C.0] [0x603F:0x00] [0x10] [UNSIGNED16  ] [Error code                              ]
+[2          ] [0x000E.0] [0x6041:0x00] [0x10] [UNSIGNED16  ] [Statusword                              ]
+[4          ] [0x0010.0] [0x6064:0x00] [0x20] [INTEGER32   ] [Position actual value                   ]
+[8          ] [0x0014.0] [0x6077:0x00] [0x10] [INTEGER16   ] [Torque actual value                     ]
+[10         ] [0x0016.0] [0x60F4:0x00] [0x20] [INTEGER32   ] [Following error actual value            ]
+[14         ] [0x001A.0] [0x60B9:0x00] [0x10] [UNSIGNED16  ] [Touch probe status                      ]
+[16         ] [0x001C.0] [0x60BA:0x00] [0x20] [INTEGER32   ] [Touch probe pos1 pos value              ]
+[20         ] [0x0020.0] [0x60BC:0x00] [0x20] [INTEGER32   ] [Touch probe pos2 pos value              ]
+[24         ] [0x0024.0] [0x60FD:0x00] [0x20] [UNSIGNED32  ] [Digital inputs                          ]
+*** End of network scanning output ***
+*** Start of eeprom output ***
+1 slaves found.
+Slave 1 data
+PDI Control      : 0C08
+PDI Config       : 0C00
+Config Alias     : 0000
+Checksum         : 00A9
+calculated     : 00A9
+Vendor ID        : 00000083
+Product Code     : 00000005
+Revision Number  : 00020001
+Serial Number    : 11020083
+Mailbox Protocol : 0041
+Size             : 000F = 2048 bytes
+Version          : 0001
+*** End of eeprom output ***
+```
+
+
+
+```c
+Slave: 1
+ Name: R88D-KN01H-ECT
+ Output size: 96bits
+ Input size: 224bits
+ State: 18
+ Delay: 0[ns]
+ Has DC: 1
+ DCParentport: 0
+ Activeports: 1.0.0.0
+ Configured address: 1001
+ Man: 00000083 ID: 00000005 Rev: 00020001
+ SM0 A:1800 L: 256 F:00010026 Type:1
+ SM1 A:1c00 L: 256 F:00010022 Type:2
+ SM2 A:1100 L:  12 F:00010064 Type:3
+ SM3 A:1200 L:  28 F:00010022 Type:4
+ FMMU0 Ls:00000000 Ll:  12 Lsb:0 Leb:7 Ps:1100 Psb:0 Ty:02 Act:01
+ FMMU1 Ls:0000000c Ll:  28 Lsb:0 Leb:7 Ps:1200 Psb:0 Ty:01 Act:01
+ FMMUfunc 0:1 1:2 2:0 3:0
+ MBX length wr: 256 rd: 256 MBX protocols : 04
+ CoE details: 2f FoE details: 00 EoE details: 00 SoE details: 00
+ Ebus current: 0[mA]
+ only LRD/LWR:0
+PDO mapping according to CoE :
+  SM2 outputs
+        [byte_offset] [addr b  ] [index:sub  ] [bitl] [data_type   ] [name                                    ]
+        [0          ] [0x0000.0] [0x6040:0x00] [0x10] [UNSIGNED16  ] [Controlword                             ]
+        [2          ] [0x0002.0] [0x607A:0x00] [0x20] [INTEGER32   ] [Target position                         ]
+        [6          ] [0x0006.0] [0x60B8:0x00] [0x10] [UNSIGNED16  ] [Touch probe function                    ]
+        [8          ] [0x0008.0] [0x60FE:0x01] [0x20] [UNSIGNED32  ] [Physical outputs                        ]
+  SM3 inputs
+        [byte_offset] [addr b  ] [index: sub ] [bitl] [data_type   ] [name                                    ]
+        [0          ] [0x000C.0] [0x603F:0x00] [0x10] [UNSIGNED16  ] [Error code                              ]
+        [2          ] [0x000E.0] [0x6041:0x00] [0x10] [UNSIGNED16  ] [Statusword                              ]
+        [4          ] [0x0010.0] [0x6064:0x00] [0x20] [INTEGER32   ] [Position actual value                   ]
+        [8          ] [0x0014.0] [0x6077:0x00] [0x10] [INTEGER16   ] [Torque actual value                     ]
+        [10         ] [0x0016.0] [0x60F4:0x00] [0x20] [INTEGER32   ] [Following error actual value            ]
+        [14         ] [0x001A.0] [0x60B9:0x00] [0x10] [UNSIGNED16  ] [Touch probe status                      ]
+        [16         ] [0x001C.0] [0x60BA:0x00] [0x20] [INTEGER32   ] [Touch probe pos1 pos value              ]
+        [20         ] [0x0020.0] [0x60BC:0x00] [0x20] [INTEGER32   ] [Touch probe pos2 pos value              ]
+        [24         ] [0x0024.0] [0x60FD:0x00] [0x20] [UNSIGNED32  ] [Digital inputs                          ]
+*** End of network scanning output ***
+*** Start of eeprom output ***
+1 slaves found.
+Slave 1 data
+ PDI Control      : 0C08
+ PDI Config       : 0C00
+ Config Alias     : 0000
+ Checksum         : 00A9
+   calculated     : 00A9
+ Vendor ID        : 00000083
+ Product Code     : 00000005
+ Revision Number  : 00020001
+ Serial Number    : 11020083
+ Mailbox Protocol : 0004
+ Size             : 000F = 2048 bytes
+ Version          : 0001
+*** End of eeprom output ***
+```

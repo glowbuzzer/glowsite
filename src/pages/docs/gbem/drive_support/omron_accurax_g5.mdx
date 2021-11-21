@@ -6,9 +6,14 @@ sort: 13
 import { Image } from "../../../../framework/components/Image"
 import { Rate, Row, Col } from 'antd';
 import {YoutubeEmbed} from "../../../../framework/components/Video"
-
+import {GitHubLink} from "../../../../framework/components/GitHubLink";
 
 # OMRON ACCURAX G5
+
+<GitHubLink title={"Drive interface code"}  repo={"gbem"} directory={"/libs/omron"}/>
+
+<GitHubLink title={"Example machine configuration"} repo={"gbem"} directory={"/libs/machine_map/src"} file={"g5_test_map.c"} />
+
 
 ## Introduction
 
@@ -283,3 +288,6 @@ Slave 1 data
 
 R88D-KN01H-ECT
 
+## Testing
+
+<YoutubeEmbed embedId="" />

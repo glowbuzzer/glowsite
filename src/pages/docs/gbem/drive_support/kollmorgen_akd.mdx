@@ -6,9 +6,16 @@ sort: 10
 import { Image } from "../../../../framework/components/Image"
 import { Rate, Row, Col, Card } from 'antd';
 import {YoutubeEmbed} from "../../../../framework/components/Video"
+import {GitHubLink} from "../../../../framework/components/GitHubLink";
 import {PdoCard} from "../../../../framework/components/PdoCard";
+import {SdoCard} from "../../../../framework/components/SdoCard";
 
 # Kollmorgen AKD
+
+<GitHubLink title={"Drive interface code"} repo={"gbem"} directory={"/libs/kollmorgen"}/>
+
+<GitHubLink title={"Example machine configuration"} repo={"gbem"} directory={"/libs/machine_map/src"} file={"single_akd.c"} />
+
 
 ## Introduction
 
@@ -139,19 +146,12 @@ uint16_t map_SM2_index_of_assigned_PDO_akd[ECM_MAX_PDO_MAPPING_ENTRIES] = {
 
 The code use to apply these can be found in the library
 
-## Initial PDOs
+## Initial SDO writes
+
+<SdoCard name={"Interpolation time index"} index={"0x60C"} subindex={"0x2"} value={"3"} notes={"a -3 exponent to the interpolation time period"}/>
 
 
-
-<PdoCard size="small" title="Interpolation time index">
-    <p>Address: 0x60C:0x2</p>
-    <p>Value: 3 (a -3 exponent to the interpolation time period)</p>
-</PdoCard>
-
-<PdoCard size="small" title="Interpolation time period">
-    <p>Address: 0x60C2:0x1</p>
-    <p>Value: Set to our cycle time (1ms, 2ms, 4ms)</p>
-</PdoCard>
+<SdoCard name={"Interpolation time period"} index={"0x60C2"} subindex={"0x1"} value={"MAP_CYCLE_TIME"} notes={"Set to our cycle time (1ms, 2ms, 4ms"}/>
 
 Subindex 2, known as the interpolation time index, defines the power of ten of the time value
 (e.g. -3 means 10-3 or milliseconds) while subindex 1, known as interpolation time units, gives the number of units (e.g. 4 means 4 units).
@@ -161,47 +161,21 @@ You can run a 2 ms cycle using various combinations. For example,
 
 
 
-<PdoCard size="small" title="Activate fieldbus synchronisation">
-    <p>Address: 0x36E6:0x0</p>
-    <p>Value: 1 (activate)</p>
-</PdoCard>
+<SdoCard name={"Activate fieldbus synchronisation"} index={"0x36E6"} subindex={"0x0"} value={"1"} />
 
+<SdoCard name={"Synchronization supervision of the EtherCAT fieldbus"} index={"0x36E8"} subindex={"0x0"} value={"1"} notes={"This will error the drive if the sync. fails - turn off when commissioning"}/>
 
-<PdoCard size="small" title="Synchronization supervision of the EtherCAT fieldbus">
-    <p>Address: 0x36E8:0x0</p>
-    <p>Value: 1 (activate - this will error the drive if the sync. fails - turn off when commissioning)</p>
-</PdoCard>
+<SdoCard name={"Scaling is done using special DS402 - objects (independent on units)"} index={"0x36E9"} subindex={"0x0"} value={"set bit 4"}/>
 
-<PdoCard size="small" title="Scaling is done using special DS402 - objects (independent on units)">
-    <p>Address: 0x36E9:0x0</p>
-    <p>Value: set bit 4</p>
-</PdoCard>
+<SdoCard name={"drv.opmode"} index={"0x35B4"} subindex={"0x0"} value={"2"} />
 
-<PdoCard size="small" title="drv.opmode">
-    <p>Address: 0x35B4:0x0</p>
-    <p>Value: 2</p>
-</PdoCard>
+<SdoCard name={"Motor revolutions"} index={"0x6091"} subindex={"0x1"} value={"1"} />
 
+<SdoCard name={"Shaft revolutions"} index={"0x6091"} subindex={"0x2"} value={"1"} />
 
-<PdoCard size="small" title="Motor revolutions">
-    <p>Address: 0x6091:0x1</p>
-    <p>Value: 1</p>
-</PdoCard>
+<SdoCard name={"Feed"} index={"0x6092"} subindex={"0x1"} value={"655,360"}/>
 
-<PdoCard size="small" title="Shaft revolutions">
-    <p>Address: 0x6091:0x2</p>
-    <p>Value: 1</p>
-</PdoCard>
-
-<PdoCard size="small" title="Feed">
-    <p>Address: 0x6092:0x1</p>
-    <p>Value: 655,360</p>
-</PdoCard>
-
-<PdoCard size="small" title="shaft revolutions">
-    <p>Address: 0x6092:0x2</p>
-    <p>Value: 1</p>
-</PdoCard>
+<SdoCard name={"shaft revolutions"} index={"0x6092"} subindex={"0x2"} value={"1"} />
 
 
 ## MOO
@@ -244,3 +218,6 @@ return ec_pdo_get_input_int32(map_drive_to_slave[drive], AKD_ACTPOS_PDO_INDEX);
 }
 ```
 
+## Testing
+
+<YoutubeEmbed embedId="" />

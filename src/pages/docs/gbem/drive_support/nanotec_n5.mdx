@@ -6,19 +6,70 @@ sort: 11
 import { Image } from "../../../../framework/components/Image"
 import { Rate, Row, Col } from 'antd';
 import {YoutubeEmbed} from "../../../../framework/components/Video"
-
+import {GitHubLink} from "../../../../framework/components/GitHubLink";
 
 # Nanotec N5
+
+<GitHubLink title={"Drive interface code"} repo={"gbem"} directory={"/libs/nanotec"}/>
+
+<GitHubLink title={"Example machine configuration"} repo={"gbem"} directory={"/libs/machine_map/src"} file={"n5_test_map.c"} />
+
 
 ## Introduction
 
 This short guide reviews the Nanotec N5 range of drives and discusses how to get them working with GBEM.
 
+The manufacturer documentation for the drive is available <a href="https://en.nanotec.com/products/1597-1597-n5-motor-controller-a-vdc"> here</a>.
 
+The drive is designed for both BLDC motors and stepper motors.
+
+Nanotec are known for their high-quality range of motors and so there are many options available to pair with this drive.
+
+They are available in a low-current version with 12-72 V operating voltage and 10 A rated current/10 A peak current as well as in a high-current version with 12-48 V operating voltage and 18 rated current/40 A peak current.
+
+They have an encoder interface and hall sensor interface and work in a closed loop.
+
+They have a brake output to control brakes for gravity hold applications.
 
 import nanotec_n5_product_shot from "./nanotec_n5_product_shot.png?glowsite"
 
 <Image meta={nanotec_n5_product_shot} alt="Nanotec N5 AKD product"  maxWidth={800} />
+
+## Our ratings for the Nanotec N5
+
+<div style={{margin:"20px"}}>
+    <Row>
+        <Col span={6}>Overall rating</Col>
+        <Col span={4}><Rate disabled defaultValue={4}/></Col>
+        <Col span={14}>Good closed loop stepper drives with great range of motors</Col>
+    </Row>
+
+    <Row>
+        <Col span={6}>Drive configuration software rating</Col>
+        <Col span={4}><Rate disabled defaultValue={4}/></Col>
+        <Col span={14}>Plug & Drive Studio is good commissioning software </Col>
+    </Row>
+    <Row>
+        <Col span={6}>Drive features rating</Col>
+        <Col span={4}><Rate disabled defaultValue={4}/></Col>
+        <Col span={14}>Pretty good</Col>
+    </Row>
+    <Row>
+        <Col span={6}>Motors rating</Col>
+        <Col span={4}><Rate disabled defaultValue={4}/></Col>
+        <Col span={14}>The nanotec motors are excellent quality and have a wide range</Col>
+    </Row>
+    <Row>
+        <Col span={6}>Gearbox option</Col>
+        <Col span={4}><Rate disabled defaultValue={5}/></Col>
+        <Col span={14}>Excellent both in terms of quality and range for small motors</Col>
+    </Row>
+    <Row>
+        <Col span={6}>Price</Col>
+        <Col span={4}><Rate disabled defaultValue={2}/></Col>
+        <Col span={14}>Roughly €350 (excluding motors and cables)</Col>
+    </Row>
+</div>
 
 
 
@@ -43,26 +94,20 @@ X8 - EtherCAT OUT
 X9 - External logic supply, input voltage +24 V DC Voltage supply for encoder, input voltage +24 V DC
 
 
+X6,  For the version N5-1 (low current) that we are using takes 12 V - 72 V ±5% DC.
 
-
-
-X6 - For version N5-1 (low current): 12 V - 72 V ±5% DC
-
+The pinout for X6 is as follows:
 * 1 -  shield
-
 * 2 - +ve
-
 * 3 - gnd
 
+To connect the nanotec plug-and-drive studio you use connector X1, either with Ethernet DHCP or your need to set your PC's IP address to 192.168.2.1
 
+## BoM for our testing
 
-X1 - Ethernet DHCP or set your PC to 192.168.2.1
+* Encoder - noe2-050k14
+* Motor - st41442l-0804-b and st4118-k2v1825 - NEMA 17
 
-## BoM
-
-encoder noe2-050k14
-
-motor st41442l-0804-b
 
 ## Drive commissioning software
 
@@ -72,8 +117,7 @@ Install
 
 
 
-0x60C2 Interpolation Time Period can be 4ms - sync time always 1ms &lt;&lt; this is important
-
+0x60C2 Interpolation Time Period can be 4ms - sync time always 1ms - this is important
 
 
 0x603f error code uint16 -
@@ -83,16 +127,6 @@ Install
 in 0x1003
 
 upper 8 bits = error number
-
-
-
-
-
-
-
-## motor
-
-st4118-k2v1825 - NEMA 17
 
 
 
@@ -152,38 +186,6 @@ Slave 1 data
 ````
 
 
+## Testing
 
-## Our ratings for the Nanotec N5
-<div style={{margin:"20px"}}>
-    <Row>
-        <Col span={6}>Overall rating</Col>
-        <Col span={4}><Rate disabled defaultValue={4}/></Col>
-        <Col span={14}>Really good, </Col>
-    </Row>
-
-    <Row>
-        <Col span={6}>Drive configuration software rating</Col>
-        <Col span={4}><Rate disabled defaultValue={1}/></Col>
-        <Col span={14}>Fiddly to install, no support for high-res screens, 1990s feel to it</Col>
-    </Row>
-    <Row>
-        <Col span={6}>Drive features rating</Col>
-        <Col span={4}><Rate disabled defaultValue={5}/></Col>
-        <Col span={14}>Excellent, they have covered pretty much everything in these drives</Col>
-    </Row>
-    <Row>
-        <Col span={6}>Motors rating</Col>
-        <Col span={4}><Rate disabled defaultValue={4}/></Col>
-        <Col span={14}>Bit short on shaft options for the motors, outdated motor connectors, hard to make custom cables</Col>
-    </Row>
-    <Row>
-        <Col span={6}>Gearbox option</Col>
-        <Col span={4}><Rate disabled defaultValue={5}/></Col>
-        <Col span={14}>Excellent</Col>
-    </Row>
-    <Row>
-        <Col span={6}>Price</Col>
-        <Col span={4}><Rate disabled defaultValue={3}/></Col>
-        <Col span={14}>Roughly €700 for 3A drive excluding cables and motor</Col>
-    </Row>
-</div>
+<YoutubeEmbed embedId="" />

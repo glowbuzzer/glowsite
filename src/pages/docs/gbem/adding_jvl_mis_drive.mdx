@@ -5,6 +5,8 @@ sort: 9
 
 import { Image } from "../../../framework/components/Image"
 import {Tldr} from "../../../framework/components/Tldr";
+import {YoutubeEmbed} from "../../../framework/components/Video"
+import {GitHubLink} from "../../../framework/components/GitHubLink";
 
 # Adding support for JVL MIS drive - a blow-by-blow account
 
@@ -69,7 +71,7 @@ import jvl_m12_rj45 from "./jvl_m12_rj45.png?glowsite"
 
 ### Miscellaneous items needed
 
-Single 3A 24V PSU - for testing pretty much anything will do (switched mode or linear).  For desktop testing we use a MEANWELL GS220A24/GST220A24."brick" power supply.
+Single 3A 24V PSU - for testing pretty much anything will do (switched mode or linear).  For desktop testing we use a MEANWELL GS220A24/GST220A24 "brick" power supply.
 
 Bootlace ferrules for the PSU wires.
 
@@ -94,7 +96,7 @@ JVL provide a piece of drive configuration software called MacTalk. This softwar
 
 The MacTalk software talks to the drives through the RS485 serial protocol on the CN4 connector. This means the M12 17 pin cable connects to a RS485-to-USB converter and hence to the USB port on your PC.
 
-MacTalk is supplied by JVL on a USB stick and you will need to install it on your PC. This is Windows only software. We had a bit of trouble with our anti-virus software falsely flagging one of the MacTalk files and had to add it to the whitelist.
+MacTalk is supplied by JVL on a USB stick, and you will need to install it on your PC. This is Windows only software. We had a bit of trouble with our anti-virus software falsely flagging one of the MacTalk files and had to add it to the whitelist.
 
 ## Step 1 - Wiring up the motor
 
@@ -105,7 +107,7 @@ The drive has two power supply connections:
 * CVI - logic power - 7-30V - 200mA
 * P+ motor power - 7-72V - 24v @ 70w = 3A
 
-The power supply connector wiring coluors (using the JVL manufactured power cable) are as follows
+The power supply connector wiring colours (using the JVL manufactured power cable) are as follows
 
 * Brown and white = p+
 
@@ -115,7 +117,7 @@ The power supply connector wiring coluors (using the JVL manufactured power cabl
 
 JVL make their own PSU and you can use these or for testing, we can get away with using a single power supply, in this case we used a 24v 9A "brick" switch mode power supply that is handy for desktop use (MEANWELL GS220A24/GST220A24 ) and we can get away with using one power supply for both CV and P+.
 
-For production use an use with multiple drives you are going to need to have separate PSUs for motor and logic power and you need to consult the JVL manual for details of the power supply characteristics.
+For production use and use with multiple drives you are going to need to have separate PSUs for motor and logic power and you need to consult the JVL manual for details of the power supply characteristics.
 
 ### Power cable preparation
 
@@ -146,7 +148,7 @@ import jvl_scan from "./jvl_scan.png?glowsite"
 <Image meta={jvl_scan} alt="JVL scan" preset="wide" />
 
 
-The first test involved turning the motor shaft by hand. The Actual Position value shown in the right hand panel should change. That is pretty good confirmation that MacTalk is talking to the drive.
+The first test involved turning the motor shaft by hand. The Actual Position value shown in the right-hand panel should change. That is pretty good confirmation that MacTalk is talking to the drive.
 
 The next steps involve making sure the drive is configured the correct way to support the rest of our configuration steps.
 
@@ -159,6 +161,12 @@ import jvl_ethercat from "./jvl_ethercat.png?glowsite"
 
 
 It is also useful but not essential to upgrade the firmware on the drive. This is accessed through the "Updates" top drop down menu.
+
+## Driver code
+
+The next steps cover how to the write the driver code. If you want to spoil all the fun and jump to the end and just look at the code it is available here:
+
+<GitHubLink title={"Drive interface code"} repo={"gbem"} directory={"/libs/JVL"}/>
 
 ## Step 3 - connect the drive to GBEM and run netscan
 
@@ -816,3 +824,7 @@ Using the SDO objects on the drive:
 
 
 In the CMakeList.txt for machine_mapping add the JVL to the target_link_libraries() section
+
+
+<YoutubeEmbed embedId="Z3Ixc7kfLDM" />
+
