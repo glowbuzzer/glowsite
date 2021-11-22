@@ -3,7 +3,7 @@ title: Configuration of GBC
 sort: 2
 ---
 import {Tldr} from "../../../framework/components/Tldr"
-
+import { Link } from "react-router-dom"
 
 # Configuration of GBC
 
@@ -16,6 +16,18 @@ import {Tldr} from "../../../framework/components/Tldr"
 </Tldr>
 
 ## Introduction
+
+GBC is configured with a set of JSON files.
+
+These files are placed on the filesystem in the same directory as the GBC executable and are read during the start-up process.
+
+If the files are not present, GBC uses a default configuration "baked into" the executable.
+
+The configuration files cover:
+
+* the machine configuration - configuration for the joints and IO that make up the machine
+* fieldbus layout - the layout of the fieldbus (shared memory) (advanced users only)
+* tasks definitions - definitions of tasks that are to be run on GBC
 
 The`default.json` file includes a number of other JSON files that together define the configuration of the machine. These files (with the exception of fieldbus.json) need to be edited to suit your machine.
 
@@ -35,7 +47,7 @@ The sections of this document correspond to Config sections of the schema.
 
 ### machine
 
-`machine` maps to `MachineConfig` - add_link
+`machine` maps to `MachineConfig` - see <Link to="/docs/gbc/schema/MachineConfig">here</Link>
 
 Bus cycle time needs to be 1, 2, 4 and must match the bus cycle time in GBEM or GBSM and is needed to ensure the calculated trajectories match the actual cycle at which they are sent to motors
 
@@ -49,7 +61,7 @@ Bus cycle time needs to be 1, 2, 4 and must match the bus cycle time in GBEM or 
 
 ### stream
 
-`stream` maps to `StreamConfig` - add_link
+`stream` maps to `StreamConfig` - see <Link to="/docs/gbc/schema/StreamConfig">here</Link>
 
 ```json
 "stream": {
@@ -60,7 +72,7 @@ Bus cycle time needs to be 1, 2, 4 and must match the bus cycle time in GBEM or 
 
 ### joint
 
-`joint` maps to `JointConfig` - add_link
+`joint` maps to `JointConfig` - see <Link to="/docs/gbc/schema/JointConfig">here</Link>
 
 Joints correspond to the axes or motors on your machine and in this section we define their kinematic limits vmax, amax and jmax.
 
@@ -95,9 +107,9 @@ These need to correspond to the joints defined in GBEM or GBSM
 
 ### jog
 
-`jog` maps to `JogConfig` - add_link
+`jog` maps to `JogConfig` - see <Link to="/docs/gbc/schema/JogConfig">here</Link>
 
-````  json
+```json
 "jog": {
     "0": {
       	"kinematicsConfigurationIndex": 0
@@ -106,6 +118,8 @@ These need to correspond to the joints defined in GBEM or GBSM
 ````
 
 ### kinematicsConfiguration
+
+`kinematicsConfiguration` maps to `KinematicsConfigurationConfig` - see <Link to="/docs/gbc/schema/KinematicsConfigurationConfig">here</Link>
 
 ````json
 "kinematicsConfiguration": {
@@ -186,7 +200,14 @@ These need to correspond to the joints defined in GBEM or GBSM
 
 ### din, dout, ain, aout, iin, iout
 
-These map to DinConfig
+These map to:
+
+* din - DinConfig - see <Link to="/docs/gbc/schema/DinConfig">here</Link>
+* dout - DoutConfig - see <Link to="/docs/gbc/schema/DoutConfig">here</Link>
+* ain - AinConfig - see <Link to="/docs/gbc/schema/AinConfig">here</Link>
+* aout - AoutConfig - see <Link to="/docs/gbc/schema/AoutConfig">here</Link>
+* iin - IinConfig - see <Link to="/docs/gbc/schema/IinConfig">here</Link>
+* iout - IoutConfig - see <Link to="/docs/gbc/schema/IoutConfig">here</Link>
 
 
 

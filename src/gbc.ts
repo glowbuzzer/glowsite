@@ -1,1455 +1,1259 @@
 // ENUMS
 export enum ONOFF {
-OFF,ON
+    OFF,
+    ON
 }
 export enum MACHINETARGET {
-MACHINETARGET_NONE,MACHINETARGET_FIELDBUS,MACHINETARGET_SIMULATION
+    MACHINETARGET_NONE,
+    MACHINETARGET_FIELDBUS,
+    MACHINETARGET_SIMULATION
 }
 export enum POSITIONREFERENCE {
-ABSOLUTE,RELATIVE,MOVESUPERIMPOSED
+    ABSOLUTE,
+    RELATIVE,
+    MOVESUPERIMPOSED
 }
 export enum LINECIRCLESPLINE {
-LINE,CIRCLE,SPLINE
+    LINE,
+    CIRCLE,
+    SPLINE
 }
 export enum FRAME_ABSRELATIVE {
-FRAME_ABSOLUTE,FRAME_RELATIVE
+    FRAME_ABSOLUTE,
+    FRAME_RELATIVE
 }
 export enum TASK_STATE {
-TASK_NOTSTARTED,TASK_RUNNING,TASK_FINISHED,TASK_PAUSED,TASK_STOPPING,TASK_CANCELLED,TASK_ERROR
+    TASK_NOTSTARTED,
+    TASK_RUNNING,
+    TASK_FINISHED,
+    TASK_PAUSED,
+    TASK_STOPPING,
+    TASK_CANCELLED,
+    TASK_ERROR
 }
 export enum TASK_COMMAND {
-TASK_IDLE,TASK_RUN,TASK_CANCEL,TASK_PAUSE,TASK_RESUME
+    TASK_IDLE,
+    TASK_RUN,
+    TASK_CANCEL,
+    TASK_PAUSE,
+    TASK_RESUME
 }
 export enum GTLT {
-GREATERTHAN,LESSTHAN
+    GREATERTHAN,
+    LESSTHAN
 }
 export enum ACTIVITYTYPE {
-ACTIVITYTYPE_NONE,ACTIVITYTYPE_MOVEJOINTS,ACTIVITYTYPE_MOVEJOINTSATVELOCITY,ACTIVITYTYPE_MOVELINE,ACTIVITYTYPE_MOVELINEATVELOCITY,ACTIVITYTYPE_MOVEARC,ACTIVITYTYPE_MOVESPLINE,ACTIVITYTYPE_MOVETOPOSITION,ACTIVITYTYPE_MOVELINEWITHFORCE,ACTIVITYTYPE_MOVETOPOSITIONWITHFORCE,ACTIVITYTYPE_GEARINPOS,ACTIVITYTYPE_GEARINVELO,ACTIVITYTYPE_GEARINDYN,ACTIVITYTYPE_SETDOUT,ACTIVITYTYPE_SETAOUT,ACTIVITYTYPE_DWELL,ACTIVITYTYPE_WAITON,ACTIVITYTYPE_SWITCHPOSE,ACTIVITYTYPE_LATCH,ACTIVITYTYPE_STRESSTEST,ACTIVITYTYPE_ENDPROGRAM,ACTIVITYTYPE_SETIOUT
+    ACTIVITYTYPE_NONE,
+    ACTIVITYTYPE_MOVEJOINTS,
+    ACTIVITYTYPE_MOVEJOINTSATVELOCITY,
+    ACTIVITYTYPE_MOVELINE,
+    ACTIVITYTYPE_MOVELINEATVELOCITY,
+    ACTIVITYTYPE_MOVEARC,
+    ACTIVITYTYPE_MOVESPLINE,
+    ACTIVITYTYPE_MOVETOPOSITION,
+    ACTIVITYTYPE_MOVELINEWITHFORCE,
+    ACTIVITYTYPE_MOVETOPOSITIONWITHFORCE,
+    ACTIVITYTYPE_GEARINPOS,
+    ACTIVITYTYPE_GEARINVELO,
+    ACTIVITYTYPE_GEARINDYN,
+    ACTIVITYTYPE_SETDOUT,
+    ACTIVITYTYPE_SETAOUT,
+    ACTIVITYTYPE_DWELL,
+    ACTIVITYTYPE_WAITON,
+    ACTIVITYTYPE_SWITCHPOSE,
+    ACTIVITYTYPE_LATCH,
+    ACTIVITYTYPE_STRESSTEST,
+    ACTIVITYTYPE_ENDPROGRAM,
+    ACTIVITYTYPE_SETIOUT
 }
 export enum ACTIVITYSTATE {
-ACTIVITY_INACTIVE,ACTIVITY_ACTIVE,ACTIVITY_COMPLETED,ACTIVITY_BLEND_ACTIVE,ACTIVITY_CANCELLED
+    ACTIVITY_INACTIVE,
+    ACTIVITY_ACTIVE,
+    ACTIVITY_COMPLETED,
+    ACTIVITY_BLEND_ACTIVE,
+    ACTIVITY_CANCELLED
 }
 export enum STRATEGYGEARINPOS {
-PHASESHIFT,EARLY,LATE,SLOW
+    PHASESHIFT,
+    EARLY,
+    LATE,
+    SLOW
 }
 export enum TRIGGERTYPE {
-TRIGGERTYPE_RISING,TRIGGERTYPE_FALLING,TRIGGERTYPE_NONE
+    TRIGGERTYPE_RISING,
+    TRIGGERTYPE_FALLING,
+    TRIGGERTYPE_NONE
 }
 export enum ARCTYPE {
-ARCTYPE_CENTRE,ARCTYPE_RADIUS
+    ARCTYPE_CENTRE,
+    ARCTYPE_RADIUS
 }
 export enum ARCDIRECTION {
-ARCDIRECTION_CW,ARCDIRECTION_CCW
+    ARCDIRECTION_CW,
+    ARCDIRECTION_CCW
 }
 export enum JOINT_TYPE {
-JOINT_REVOLUTE,JOINT_PRISMATIC,JOINT_SPHERICAL,JOINT_SCREW
+    JOINT_REVOLUTE,
+    JOINT_PRISMATIC,
+    JOINT_SPHERICAL,
+    JOINT_SCREW
 }
 export enum JOINT_CONTROLMODE {
-JOINT_TORQ_CTRL,JOINT_VEL_CTRL,JOINT_POS_CTRL
+    JOINT_TORQ_CTRL,
+    JOINT_VEL_CTRL,
+    JOINT_POS_CTRL
 }
 export enum JOINT_FINITECONTINUOUS {
-JOINT_FINITE,JOINT_CONTINUOUS
+    JOINT_FINITE,
+    JOINT_CONTINUOUS
 }
 export enum KC_KINEMATICSCONFIGURATIONTYPE {
-KC_SIXDOF,KC_IGUS,KC_SCARA,KC_CARTESIAN,KC_CARTESIAN_SLAVED,KC_NAKED
+    KC_SIXDOF,
+    KC_IGUS,
+    KC_SCARA,
+    KC_CARTESIAN,
+    KC_CARTESIAN_SLAVED,
+    KC_NAKED
 }
 export enum KC_SHOULDERCONFIGURATION {
-KC_LEFTY,KC_RIGHTY
+    KC_LEFTY,
+    KC_RIGHTY
 }
 export enum KC_ELBOWCONFIGURATION {
-KC_EPOSITIVE,KC_ENEGATIVE
+    KC_EPOSITIVE,
+    KC_ENEGATIVE
 }
 export enum KC_WRISTCONFIGURATION {
-KC_WPOSITIVE,KC_WNEGATIVE
+    KC_WPOSITIVE,
+    KC_WNEGATIVE
 }
 export enum BLENDTYPE {
-BLENDTYPE_NONE,BLENDTYPE_OVERLAPPED
+    BLENDTYPE_NONE,
+    BLENDTYPE_OVERLAPPED
 }
 export enum JOGMODE {
-JOGMODE_NONE,JOGMODE_JOINT,JOGMODE_CARTESIAN,JOGMODE_JOINT_STEP,JOGMODE_CARTESIAN_STEP,JOGMODE_REF_POSITION
+    JOGMODE_NONE,
+    JOGMODE_JOINT,
+    JOGMODE_CARTESIAN,
+    JOGMODE_JOINT_STEP,
+    JOGMODE_CARTESIAN_STEP,
+    JOGMODE_REF_POSITION
 }
 export enum JOGSTATE {
-JOGSTATE_NONE,JOGSTATE_STEP_ACTIVE,JOGSTATE_STEP_COMPLETE
+    JOGSTATE_NONE,
+    JOGSTATE_STEP_ACTIVE,
+    JOGSTATE_STEP_COMPLETE
 }
 export enum OPENCLOSED {
-OPEN,CLOSED
+    OPEN,
+    CLOSED
 }
 export enum STREAMCOMMAND {
-STREAMCOMMAND_RUN,STREAMCOMMAND_PAUSE,STREAMCOMMAND_STOP
+    STREAMCOMMAND_RUN,
+    STREAMCOMMAND_PAUSE,
+    STREAMCOMMAND_STOP
 }
 export enum STREAMSTATE {
-STREAMSTATE_IDLE,STREAMSTATE_ACTIVE,STREAMSTATE_PAUSED,STREAMSTATE_STOPPING,STREAMSTATE_STOPPED
+    STREAMSTATE_IDLE,
+    STREAMSTATE_ACTIVE,
+    STREAMSTATE_PAUSED,
+    STREAMSTATE_STOPPING,
+    STREAMSTATE_STOPPED
 }
-
 
 // STRUCTS
 
-        export type Header = {
+export type Header = {
+    updated?: boolean
+}
 
-                    updated?:boolean;
-        }
+export type MachineConfig = {
+    busCycleTime?: number
+}
 
+export type MachineStatus = {
+    statusWord?: number
 
-        export type MachineConfig = {
+    activeFault?: number
 
-                    busCycleTime?:number;
-        }
+    faultHistory?: number
 
+    heartbeat?: number
 
-        export type MachineStatus = {
+    target?: MACHINETARGET
 
-                    statusWord?:number;
+    targetConnectRetryCnt?: number
+}
 
-                    activeFault?:number;
+export type MachineCommand = {
+    controlWord?: number
 
-                    faultHistory?:number;
+    hlcControlWord?: number
 
-                    heartbeat?:number;
+    heartbeat?: number
 
-                    target?:MACHINETARGET;
+    target?: MACHINETARGET
+}
 
-                    targetConnectRetryCnt?:number;
-        }
+export type StreamConfig = {}
 
+export type StreamStatus = {
+    streamState?: STREAMSTATE
 
-        export type MachineCommand = {
+    tag?: number
 
-                    controlWord?:number;
+    time?: number
+}
 
-                    hlcControlWord?:number;
+export type StreamCommand = {
+    streamCommand?: STREAMCOMMAND
+}
 
-                    heartbeat?:number;
+export type FieldbusTxPdoLayout = {
+    machineControlWordOffset?: number
 
-                    target?:MACHINETARGET;
-        }
+    gbcControlWordOffset?: number
 
+    hlcControlWordOffset?: number
 
-        export type StreamConfig = {
-        }
+    jointControlwordOffset?: number
 
+    jointSetPositionOffset?: number
 
-        export type StreamStatus = {
+    jointSetVelocityOffset?: number
 
-                    streamState?:STREAMSTATE;
+    jointSetTorqueOffset?: number
 
-                    tag?:number;
+    heartbeatOffset?: number
 
-                    time?:number;
-        }
+    digitalOffset?: number
 
+    digitalCount?: number
 
-        export type StreamCommand = {
+    analogOffset?: number
 
-                    streamCommand?:STREAMCOMMAND;
-        }
+    analogCount?: number
 
+    integerOffset?: number
 
-        export type FieldbusTxPdoLayout = {
+    integerCount?: number
+}
 
-                    machineControlWordOffset?:number;
+export type FieldbusRxPdoLayout = {
+    machineStatusWordOffset?: number
 
-                    gbcControlWordOffset?:number;
+    activeFaultOffset?: number
 
-                    hlcControlWordOffset?:number;
+    faultHistoryOffset?: number
 
-                    jointControlwordOffset?:number;
+    jointStatuswordOffset?: number
 
-                    jointSetPositionOffset?:number;
+    jointActualPositionOffset?: number
 
-                    jointSetVelocityOffset?:number;
+    jointActualVelocityOffset?: number
 
-                    jointSetTorqueOffset?:number;
+    jointActualTorqueOffset?: number
 
-                    heartbeatOffset?:number;
+    heartbeatOffset?: number
 
-                    digitalOffset?:number;
+    digitalOffset?: number
 
-                    digitalCount?:number;
+    digitalCount?: number
 
-                    analogOffset?:number;
+    analogOffset?: number
 
-                    analogCount?:number;
+    analogCount?: number
 
-                    integerOffset?:number;
+    integerOffset?: number
 
-                    integerCount?:number;
-        }
+    integerCount?: number
+}
 
+export type FieldbusConfig = {
+    jointCount?: number
 
-        export type FieldbusRxPdoLayout = {
+    TxPdo?: FieldbusTxPdoLayout
 
-                    machineStatusWordOffset?:number;
+    RxPdo?: FieldbusRxPdoLayout
+}
 
-                    activeFaultOffset?:number;
+export type MoveParametersConfig = {
+    vmax?: number
 
-                    faultHistoryOffset?:number;
+    vmaxPercentage?: number
 
-                    jointStatuswordOffset?:number;
+    amaxPercentage?: number
 
-                    jointActualPositionOffset?:number;
+    jmaxPercentage?: number
 
-                    jointActualVelocityOffset?:number;
+    blendType?: BLENDTYPE
 
-                    jointActualTorqueOffset?:number;
+    blendTimePercentage?: number
 
-                    heartbeatOffset?:number;
+    blendTolerance?: number
 
-                    digitalOffset?:number;
+    toolIndex?: number
+}
 
-                    digitalCount?:number;
+export type Vector3 = {
+    x?: number
 
-                    analogOffset?:number;
+    y?: number
 
-                    analogCount?:number;
+    z?: number
+}
 
-                    integerOffset?:number;
+export type Quat = {
+    w?: number
 
-                    integerCount?:number;
-        }
+    x?: number
 
+    y?: number
 
-        export type FieldbusConfig = {
+    z?: number
+}
 
-                    jointCount?:number;
+export type CartesianPosition = {
+    positionReference?: POSITIONREFERENCE
 
-                    TxPdo?:FieldbusTxPdoLayout;
+    position?: Vector3
 
-                    RxPdo?:FieldbusRxPdoLayout;
-        }
+    orientation?: Quat
 
+    frameIndex?: number
+}
 
-        export type MoveParametersConfig = {
+export type PositionAbsRel = {
+    positionReference?: POSITIONREFERENCE
 
-                    vmax?:number;
+    position?: Vector3
+}
 
-                    vmaxPercentage?:number;
+export type CartesianVector = {
+    vector?: Vector3
 
-                    amaxPercentage?:number;
+    frameIndex?: number
+}
 
-                    jmaxPercentage?:number;
+export type DoubleValue = {
+    value?: number
+}
 
-                    blendType?:BLENDTYPE;
+export type JointPosition = {
+    positionReference?: POSITIONREFERENCE
 
-                    blendTimePercentage?:number;
+    value?: number
+}
 
-                    blendTolerance?:number;
+export type JointVelocity = {
+    value?: number
+}
 
-                    toolIndex?:number;
-        }
+export type JointVelocityArray = {
+    value?: number[]
+}
 
+export type JointAcceleration = {
+    value?: number
+}
 
-        export type Vector3 = {
+export type JointAccelerationArray = {
+    value?: number[]
+}
 
-                    x?:number;
+export type Cartesian3dPosition = {
+    x?: number
 
-                    y?:number;
+    y?: number
 
-                    z?:number;
-        }
+    z?: number
+}
 
+export type ListOfJoints = {
+    joint?: boolean[]
+}
 
-        export type Quat = {
+export type ListofKinematicsConfigurations = {
+    kinematicsConfiguration?: boolean[]
+}
 
-                    w?:number;
+export type Circle = {
+    acw?: boolean
 
-                    x?:number;
+    radius?: number
 
-                    y?:number;
+    destinationPosition?: CartesianPosition
+}
 
-                    z?:number;
-        }
+export type Spline = {
+    point?: number[]
+}
 
+export type LinesConfig = {
+    destination?: CartesianPosition
+}
 
-        export type CartesianPosition = {
+export type ArcsConfig = {
+    arcType?: ARCTYPE
 
-                    positionReference?:POSITIONREFERENCE;
+    arcDirection?: ARCDIRECTION
 
-                    position?:Vector3;
+    destination?: CartesianPosition
+    //              Start of Union
+    centre?: PositionAbsRel
+    radius?: DoubleValue
+    //              End of Union
+}
 
-                    orientation?:Quat;
+export type CartesianPositionsConfig = {
+    position?: CartesianPosition
 
-                    frameIndex?:number;
-        }
+    configuration?: number
+}
 
+export type TaskConfig = {
+    activityCount?: number
 
-        export type PositionAbsRel = {
+    firstActivityIndex?: number
 
-                    positionReference?:POSITIONREFERENCE;
+    cancelTriggerOnIndex?: number
 
-                    position?:Vector3;
-        }
+    startTriggerOnIndex?: number
+}
 
+export type TaskStatus = {
+    taskState?: TASK_STATE
 
-        export type CartesianVector = {
+    currentActivityIndex?: number
+}
 
-                    vector?:Vector3;
+export type TaskCommand = {
+    taskCommand?: TASK_COMMAND
+}
 
-                    frameIndex?:number;
-        }
+export type JogConfig = {
+    kinematicsConfigurationIndex?: number
+}
 
+export type JogStatus = {
+    state?: JOGSTATE
+}
 
-        export type DoubleValue = {
+export type JogCommand = {
+    mode?: JOGMODE
 
-                    value?:number;
-        }
+    stepSize?: number
 
+    speedPercentage?: number
 
-        export type JointPosition = {
+    jogFlags?: number
 
-                    positionReference?:POSITIONREFERENCE;
+    position?: CartesianPosition
+}
 
-                    value?:number;
-        }
+export type JointConfig = {
+    jointType?: JOINT_TYPE
 
+    jointControlMode?: JOINT_CONTROLMODE
 
-        export type JointVelocity = {
+    vmax?: number
 
-                    value?:number;
-        }
+    amax?: number
 
+    jmax?: number
 
-        export type JointVelocityArray = {
+    jogVmax?: number
 
-                    value?:number[];
-        }
+    jogAmax?: number
 
+    jogJmax?: number
 
-        export type JointAcceleration = {
+    scale?: number
 
-                    value?:number;
-        }
+    pow10?: number
 
+    negLimit?: number
 
-        export type JointAccelerationArray = {
+    posLimit?: number
 
-                    value?:number[];
-        }
+    hasBrake?: boolean
 
+    isInverted?: boolean
 
-        export type Cartesian3dPosition = {
+    finiteContinuous?: JOINT_FINITECONTINUOUS
 
-                    x?:number;
+    isVirtualInternal?: boolean
 
-                    y?:number;
+    isVirtualFromEncoder?: boolean
 
-                    z?:number;
-        }
+    correspondingJointNumberOnPhysicalFieldbus?: number
 
+    correspondingJointNumberOnVirtualFieldbus?: number
+}
 
-        export type ListOfJoints = {
+export type JointStatus = {
+    statusWord?: number
 
-                    joint?:boolean[];
-        }
+    actPos?: number
 
+    actVel?: number
 
-        export type ListofKinematicsConfigurations = {
+    actAcc?: number
+}
 
-                    kinematicsConfiguration?:boolean[];
-        }
+export type JointCommand = {
+    doHoming?: boolean
 
+    controlWord?: number
+}
 
-        export type Circle = {
+export type SixDofJointConfiguration = {
+    shoulderConfiguration?: KC_SHOULDERCONFIGURATION
 
-                    acw?:boolean;
+    elbowConfiguration?: KC_ELBOWCONFIGURATION
 
-                    radius?:number;
+    wristConfiguration?: KC_WRISTCONFIGURATION
+}
 
-                    destinationPosition?:CartesianPosition;
-        }
+export type ScaraJointConfiguration = {
+    shoulderConfiguration?: KC_SHOULDERCONFIGURATION
 
+    elbowConfiguration?: KC_ELBOWCONFIGURATION
+}
 
-        export type Spline = {
+export type JointConfiguration = {
+    kinematicsConfigurationType?: KC_KINEMATICSCONFIGURATIONTYPE
+    //              Start of Union
+    sixDofConfiguration?: SixDofJointConfiguration
+    scaraConfiguration?: ScaraJointConfiguration
+    //              End of Union
+}
 
-                    point?:number[];
-        }
+export type CartesianKinematicsParameters = {
+    scaleX?: number
 
+    scaleY?: number
 
-        export type LinesConfig = {
+    scaleZ?: number
 
-                    destination?:CartesianPosition;
-        }
+    linearVmax?: number
 
+    linearAmax?: number
 
-        export type ArcsConfig = {
+    linearJmax?: number
 
-                    arcType?:ARCTYPE;
+    jogVmax?: number
 
-                    arcDirection?:ARCDIRECTION;
+    jogAmax?: number
 
-                    destination?:CartesianPosition;
-//              Start of Union
-                    centre?: PositionAbsRel,
-                    radius?: DoubleValue,
-//              End of Union
-        }
+    jogJmax?: number
 
+    tcpRotationalVmax?: number
 
-        export type CartesianPositionsConfig = {
+    tcpRotationalAmax?: number
 
-                    position?:CartesianPosition;
+    tcpRotationalJmax?: number
+}
 
-                    configuration?:number;
-        }
+export type SixDofKinematicsParameters = {
+    linearVmax?: number
 
+    linearAmax?: number
 
-        export type TaskConfig = {
+    linearJax?: number
 
-                    activityCount?:number;
+    jogVax?: number
 
-                    firstActivityIndex?:number;
+    jogAmax?: number
 
-                    cancelTriggerOnIndex?:number;
+    jogJmax?: number
 
-                    startTriggerOnIndex?:number;
-        }
+    tcpRotationalVmax?: number
 
+    tcpRotationalAmax?: number
 
-        export type TaskStatus = {
+    tcpRotationalJmax?: number
+}
 
-                    taskState?:TASK_STATE;
+export type ScaraKinematicsParameters = {
+    linearVmax?: number
 
-                    currentActivityIndex?:number;
-        }
+    linearAmax?: number
 
+    linearJax?: number
 
-        export type TaskCommand = {
+    jogVax?: number
 
-                    taskCommand?:TASK_COMMAND;
-        }
+    jogAmax?: number
 
+    jogJmax?: number
+}
 
-        export type JogConfig = {
+export type MatrixInstanceDouble = {
+    numRows?: number
 
-                    kinematicsConfigurationIndex?:number;
-        }
+    numCols?: number
 
+    data?: number[]
+}
 
-        export type JogStatus = {
+export type KinematicsParameters = {
+    kinematicsConfigurationType?: KC_KINEMATICSCONFIGURATIONTYPE
 
-                    state?:JOGSTATE;
-        }
+    xExtents?: number[]
 
+    yExtents?: number[]
 
-        export type JogCommand = {
+    zExtents?: number[]
+    //              Start of Union
+    scaraParameters?: ScaraKinematicsParameters
+    sixDofsParameters?: SixDofKinematicsParameters
+    cartesianParameters?: CartesianKinematicsParameters
+    //              End of Union
 
-                    mode?:JOGMODE;
+    kinChainParams?: MatrixInstanceDouble
+}
 
-                    stepSize?:number;
+export type KinematicsConfigurationConfig = {
+    kinematicsConfigurationIndex?: number
 
-                    speedPercentage?:number;
+    frameIndex?: number
 
-                    jogFlags?:number;
+    participatingJoints?: number[]
 
-                    position?:CartesianPosition;
-        }
+    participatingJointsCount?: number
 
+    kinematicsParameters?: KinematicsParameters
+}
 
-        export type JointConfig = {
+export type KinematicsConfigurationStatus = {
+    froTarget?: number
 
-                    jointType?:JOINT_TYPE;
+    froActual?: number
 
-                    jointControlMode?:JOINT_CONTROLMODE;
+    atSpeed?: boolean
 
-                    vmax?:number;
+    currentJointConfiguration?: number
 
-                    amax?:number;
+    cartesianActPos?: Vector3
 
-                    jmax?:number;
+    cartesianActOrientation?: Quat
 
-                    jogVmax?:number;
+    cartesianActVel?: Vector3
 
-                    jogAmax?:number;
+    cartesianActAcc?: Vector3
 
-                    jogJmax?:number;
+    isHomed?: boolean
 
-                    scale?:number;
+    isStopping?: boolean
 
-                    pow10?:number;
+    isMoving?: boolean
 
-                    negLimit?:number;
+    isNearSingularity?: boolean
+}
 
-                    posLimit?:number;
+export type KinematicsConfigurationCommand = {
+    doStop?: boolean
 
-                    hasBrake?:boolean;
+    froPercentage?: number
+}
 
-                    isInverted?:boolean;
+export type DinConfig = {
+    inverted?: boolean
+}
 
-                    finiteContinuous?:JOINT_FINITECONTINUOUS;
+export type DinStatus = {
+    actState?: ONOFF
+}
 
-                    isVirtualInternal?:boolean;
+export type DoutConfig = {
+    inverted?: boolean
+}
 
-                    isVirtualFromEncoder?:boolean;
+export type DoutStatus = {
+    actState?: ONOFF
+}
 
-                    correspondingJointNumberOnPhysicalFieldbus?:number;
+export type DoutCommand = {
+    override?: boolean
 
-                    correspondingJointNumberOnVirtualFieldbus?:number;
-        }
+    state?: ONOFF
+}
 
+export type AinConfig = {
+    useForVirtualAxis?: boolean
 
-        export type JointStatus = {
+    jointIndexForVirtualAxis?: number
+}
 
-                    statusWord?:number;
+export type AinStatus = {
+    actValue?: number
+}
 
-                    actPos?:number;
+export type AoutConfig = {}
 
-                    actVel?:number;
+export type AoutStatus = {
+    actValue?: number
+}
 
-                    actAcc?:number;
-        }
+export type AoutCommand = {
+    override?: boolean
 
+    value?: number
+}
 
-        export type JointCommand = {
+export type IinConfig = {}
 
-                    doHoming?:boolean;
+export type IinStatus = {
+    actValue?: number
+}
 
-                    controlWord?:number;
-        }
+export type IoutConfig = {}
 
+export type IoutStatus = {
+    actValue?: number
+}
 
-        export type SixDofJointConfiguration = {
+export type IoutCommand = {
+    override?: boolean
 
-                    shoulderConfiguration?:KC_SHOULDERCONFIGURATION;
+    value?: number
+}
 
-                    elbowConfiguration?:KC_ELBOWCONFIGURATION;
+export type MoveJointsConfig = {
+    kinematicsConfigurationIndex?: number
+}
 
-                    wristConfiguration?:KC_WRISTCONFIGURATION;
-        }
+export type MoveJointsStatus = {
+    percentageComplete?: number
+}
 
+export type MoveJointsCommand = {
+    jointPositionArray?: number[]
 
-        export type ScaraJointConfiguration = {
+    positionReference?: POSITIONREFERENCE
 
-                    shoulderConfiguration?:KC_SHOULDERCONFIGURATION;
+    moveParamsIndex?: number
 
-                    elbowConfiguration?:KC_ELBOWCONFIGURATION;
-        }
+    skipToNext?: boolean
+}
 
+export type MoveJointsStream = {
+    kinematicsConfigurationIndex?: number
 
-        export type JointConfiguration = {
+    positionReference?: POSITIONREFERENCE
 
-                    kinematicsConfigurationType?:KC_KINEMATICSCONFIGURATIONTYPE;
-//              Start of Union
-                    sixDofConfiguration?: SixDofJointConfiguration,
-                    scaraConfiguration?: ScaraJointConfiguration,
-//              End of Union
-        }
+    jointPositionArray?: number[]
 
+    moveParams?: MoveParametersConfig
+}
 
-        export type CartesianKinematicsParameters = {
+export type MoveJointsAtVelocityConfig = {
+    kinematicsConfigurationIndex?: number
+}
 
-                    scaleX?:number;
+export type MoveJointsAtVelocityStatus = {
+    atSpeed?: boolean
+}
 
-                    scaleY?:number;
+export type MoveJointsAtVelocityCommand = {
+    moveParamsIndex?: number
 
-                    scaleZ?:number;
+    jointVelocityArray?: number[]
 
-                    linearVmax?:number;
+    skipToNext?: boolean
+}
 
-                    linearAmax?:number;
+export type MoveJointsAtVelocityStream = {
+    kinematicsConfigurationIndex?: number
 
-                    linearJmax?:number;
+    moveParams?: MoveParametersConfig
 
-                    jogVmax?:number;
+    jointVelocityArray?: number[]
+}
 
-                    jogAmax?:number;
+export type MoveLineConfig = {
+    kinematicsConfigurationIndex?: number
 
-                    jogJmax?:number;
+    superimposedIndex?: number
+}
 
-                    tcpRotationalVmax?:number;
+export type MoveLineStatus = {
+    percentageComplete?: number
+}
 
-                    tcpRotationalAmax?:number;
+export type MoveLineCommand = {
+    moveParamsIndex?: number
 
-                    tcpRotationalJmax?:number;
-        }
+    lineIndex?: number
 
+    skipToNext?: boolean
+}
 
-        export type SixDofKinematicsParameters = {
-
-                    linearVmax?:number;
-
-                    linearAmax?:number;
-
-                    linearJax?:number;
-
-                    jogVax?:number;
-
-                    jogAmax?:number;
-
-                    jogJmax?:number;
-
-                    tcpRotationalVmax?:number;
-
-                    tcpRotationalAmax?:number;
-
-                    tcpRotationalJmax?:number;
-        }
-
-
-        export type ScaraKinematicsParameters = {
-
-                    linearVmax?:number;
-
-                    linearAmax?:number;
-
-                    linearJax?:number;
-
-                    jogVax?:number;
-
-                    jogAmax?:number;
-
-                    jogJmax?:number;
-        }
-
-
-        export type MatrixInstanceDouble = {
-
-                    numRows?:number;
-
-                    numCols?:number;
-
-                    data?:number[];
-        }
-
-
-        export type KinematicsParameters = {
-
-                    kinematicsConfigurationType?:KC_KINEMATICSCONFIGURATIONTYPE;
-
-                    xExtents?:number[];
-
-                    yExtents?:number[];
-
-                    zExtents?:number[];
-//              Start of Union
-                    scaraParameters?: ScaraKinematicsParameters,
-                    sixDofsParameters?: SixDofKinematicsParameters,
-                    cartesianParameters?: CartesianKinematicsParameters,
-//              End of Union
-
-                    kinChainParams?:MatrixInstanceDouble;
-        }
-
-
-        export type KinematicsConfigurationConfig = {
-
-                    kinematicsConfigurationIndex?:number;
-
-                    frameIndex?:number;
-
-                    participatingJoints?:number[];
-
-                    participatingJointsCount?:number;
-
-                    kinematicsParameters?:KinematicsParameters;
-        }
-
-
-        export type KinematicsConfigurationStatus = {
-
-                    froTarget?:number;
-
-                    froActual?:number;
-
-                    atSpeed?:boolean;
-
-                    currentJointConfiguration?:number;
-
-                    cartesianActPos?:Vector3;
-
-                    cartesianActOrientation?:Quat;
-
-                    cartesianActVel?:Vector3;
-
-                    cartesianActAcc?:Vector3;
-
-                    isHomed?:boolean;
-
-                    isStopping?:boolean;
-
-                    isMoving?:boolean;
-
-                    isNearSingularity?:boolean;
-        }
-
-
-        export type KinematicsConfigurationCommand = {
-
-                    doStop?:boolean;
-
-                    froPercentage?:number;
-        }
-
-
-        export type DinConfig = {
-
-                    inverted?:boolean;
-        }
-
-
-        export type DinStatus = {
-
-                    actState?:ONOFF;
-        }
-
-
-        export type DoutConfig = {
-
-                    inverted?:boolean;
-        }
-
-
-        export type DoutStatus = {
-
-                    actState?:ONOFF;
-        }
-
-
-        export type DoutCommand = {
-
-                    override?:boolean;
-
-                    state?:ONOFF;
-        }
-
-
-        export type AinConfig = {
-
-                    useForVirtualAxis?:boolean;
-
-                    jointIndexForVirtualAxis?:number;
-        }
-
-
-        export type AinStatus = {
-
-                    actValue?:number;
-        }
-
-
-        export type AoutConfig = {
-        }
-
-
-        export type AoutStatus = {
-
-                    actValue?:number;
-        }
-
-
-        export type AoutCommand = {
-
-                    override?:boolean;
-
-                    value?:number;
-        }
-
-
-        export type IinConfig = {
-        }
-
-
-        export type IinStatus = {
-
-                    actValue?:number;
-        }
-
-
-        export type IoutConfig = {
-        }
-
-
-        export type IoutStatus = {
-
-                    actValue?:number;
-        }
-
-
-        export type IoutCommand = {
-
-                    override?:boolean;
-
-                    value?:number;
-        }
-
-
-        export type MoveJointsConfig = {
-
-                    kinematicsConfigurationIndex?:number;
-        }
-
-
-        export type MoveJointsStatus = {
-
-                    percentageComplete?:number;
-        }
-
-
-        export type MoveJointsCommand = {
-
-                    jointPositionArray?:number[];
-
-                    positionReference?:POSITIONREFERENCE;
-
-                    moveParamsIndex?:number;
-
-                    skipToNext?:boolean;
-        }
-
-
-        export type MoveJointsStream = {
-
-                    kinematicsConfigurationIndex?:number;
-
-                    positionReference?:POSITIONREFERENCE;
-
-                    jointPositionArray?:number[];
-
-                    moveParams?:MoveParametersConfig;
-        }
-
-
-        export type MoveJointsAtVelocityConfig = {
-
-                    kinematicsConfigurationIndex?:number;
-        }
-
-
-        export type MoveJointsAtVelocityStatus = {
-
-                    atSpeed?:boolean;
-        }
-
-
-        export type MoveJointsAtVelocityCommand = {
-
-                    moveParamsIndex?:number;
-
-                    jointVelocityArray?:number[];
-
-                    skipToNext?:boolean;
-        }
-
-
-        export type MoveJointsAtVelocityStream = {
-
-                    kinematicsConfigurationIndex?:number;
-
-                    moveParams?:MoveParametersConfig;
-
-                    jointVelocityArray?:number[];
-        }
-
-
-        export type MoveLineConfig = {
-
-                    kinematicsConfigurationIndex?:number;
-
-                    superimposedIndex?:number;
-        }
-
-
-        export type MoveLineStatus = {
-
-                    percentageComplete?:number;
-        }
-
-
-        export type MoveLineCommand = {
-
-                    moveParamsIndex?:number;
-
-                    lineIndex?:number;
-
-                    skipToNext?:boolean;
-        }
-
-        /**
+/**
             Execute a cartesian straight line move.
 
-            Please note the following:
+            Pllease note the following:
+
             - Bullet 1
             - Bullet 2
 
             See also [MoveLineCommand](MoveLineCommand)
          */
-        export type MoveLineStream = {
-                    /** The kinematics configuration to use for the move */
-                    kinematicsConfigurationIndex?:number;
+export type MoveLineStream = {
+    /** The kinematics configuration to use for the move */
+    kinematicsConfigurationIndex?: number
 
-                    moveParams?:MoveParametersConfig;
+    moveParams?: MoveParametersConfig
 
-                    line?:CartesianPosition;
+    line?: CartesianPosition
 
-                    superimposedIndex?:number;
-        }
+    superimposedIndex?: number
+}
 
+export type MoveLineAtVelocityConfig = {
+    kinematicsConfigurationIndex?: number
+}
 
-        export type MoveLineAtVelocityConfig = {
+export type MoveLineAtVelocityStatus = {
+    atSpeed?: boolean
+}
 
-                    kinematicsConfigurationIndex?:number;
-        }
+export type MoveLineAtVelocityCommand = {
+    moveParamsIndex?: number
 
+    line?: CartesianVector
 
-        export type MoveLineAtVelocityStatus = {
+    skipToNext?: boolean
+}
 
-                    atSpeed?:boolean;
-        }
+export type MoveLineAtVelocityStream = {
+    kinematicsConfigurationIndex?: number
 
+    moveParams?: MoveParametersConfig
 
-        export type MoveLineAtVelocityCommand = {
+    line?: CartesianVector
+}
 
-                    moveParamsIndex?:number;
+export type MoveArcConfig = {
+    kinematicsConfigurationIndex?: number
 
-                    line?:CartesianVector;
+    superimposedIndex?: number
+}
 
-                    skipToNext?:boolean;
-        }
+export type MoveArcStatus = {
+    percentageComplete?: number
+}
 
+export type MoveArcCommand = {
+    moveParamsIndex?: number
 
-        export type MoveLineAtVelocityStream = {
+    arcIndex?: number
 
-                    kinematicsConfigurationIndex?:number;
+    skipToNext?: boolean
+}
 
-                    moveParams?:MoveParametersConfig;
+export type MoveArcStream = {
+    kinematicsConfigurationIndex?: number
 
-                    line?:CartesianVector;
-        }
+    moveParams?: MoveParametersConfig
 
+    arc?: ArcsConfig
 
-        export type MoveArcConfig = {
+    superimposedIndex?: number
+}
 
-                    kinematicsConfigurationIndex?:number;
+export type MoveSplineConfig = {
+    kinematicsConfigurationIndex?: number
+}
 
-                    superimposedIndex?:number;
-        }
+export type MoveSplineStatus = {
+    percentageComplete?: number
+}
 
+export type MoveSplineCommand = {
+    moveParamsIndex?: number
 
-        export type MoveArcStatus = {
+    splineIndex?: number
 
-                    percentageComplete?:number;
-        }
+    skipToNext?: boolean
+}
 
+export type MoveToPositionConfig = {
+    kinematicsConfigurationIndex?: number
+}
 
-        export type MoveArcCommand = {
+export type MoveToPositionStatus = {
+    percentageComplete?: number
+}
 
-                    moveParamsIndex?:number;
+export type MoveToPositionCommand = {
+    cartesianPositionIndex?: number
 
-                    arcIndex?:number;
+    moveParamsIndex?: number
 
-                    skipToNext?:boolean;
-        }
+    skipToNext?: boolean
+}
 
+export type MoveToPositionStream = {
+    kinematicsConfigurationIndex?: number
 
-        export type MoveArcStream = {
+    moveParams?: MoveParametersConfig
 
-                    kinematicsConfigurationIndex?:number;
+    cartesianPosition?: CartesianPositionsConfig
+}
 
-                    moveParams?:MoveParametersConfig;
+export type SetDoutConfig = {}
 
-                    arc?:ArcsConfig;
+export type SetDoutStatus = {}
 
-                    superimposedIndex?:number;
-        }
+export type SetDoutCommand = {
+    doutToSet?: number
 
+    valueToSet?: boolean
+}
 
-        export type MoveSplineConfig = {
+export type SetAoutConfig = {}
 
-                    kinematicsConfigurationIndex?:number;
-        }
+export type SetAoutStatus = {}
 
+export type SetAoutCommand = {
+    aoutToSet?: number
 
-        export type MoveSplineStatus = {
+    valueToSet?: number
+}
 
-                    percentageComplete?:number;
-        }
+export type SetIoutConfig = {}
 
+export type SetIoutStatus = {}
 
-        export type MoveSplineCommand = {
+export type SetIoutCommand = {
+    ioutToSet?: number
 
-                    moveParamsIndex?:number;
+    valueToSet?: number
+}
 
-                    splineIndex?:number;
+export type WaitOnConfig = {
+    waitOnTriggerIndex?: number
+}
 
-                    skipToNext?:boolean;
-        }
+export type WaitOnStatus = {
+    waiting?: boolean
+}
 
+export type WaitOnCommand = {
+    skipToNext?: boolean
+}
 
-        export type MoveToPositionConfig = {
+export type DwellConfig = {
+    ticksToDwell?: number
+}
 
-                    kinematicsConfigurationIndex?:number;
-        }
+export type DwellStatus = {
+    remainingTicks?: number
+}
 
+export type DwellCommand = {
+    skipToNext?: boolean
+}
 
-        export type MoveToPositionStatus = {
+export type LatchPosConfig = {
+    cartesianLatch?: boolean
 
-                    percentageComplete?:number;
-        }
+    kinematicsConfigurationIndex?: number
 
+    jointLatch?: boolean
 
-        export type MoveToPositionCommand = {
+    latchTriggerIndex?: number
+}
 
-                    cartesianPositionIndex?:number;
+export type LatchPosStatus = {
+    latched?: boolean
 
-                    moveParamsIndex?:number;
+    latchedCartesianPosition?: CartesianPosition
 
-                    skipToNext?:boolean;
-        }
+    latchedJointArray?: JointPosition[]
+}
 
+export type LatchPosCommand = {
+    skipToNext?: boolean
+}
 
-        export type MoveToPositionStream = {
+export type SwitchPoseConfig = {
+    kinematicsConfigurationIndex?: number
 
-                    kinematicsConfigurationIndex?:number;
+    newJointConfiguration?: number
 
-                    moveParams?:MoveParametersConfig;
+    moveParamsIndex?: number
+}
 
-                    cartesianPosition?:CartesianPositionsConfig;
-        }
+export type SwitchPoseStatus = {
+    percentageComplete?: number
+}
 
+export type SwitchPoseCommand = {
+    skipToNext?: boolean
+}
 
-        export type SetDoutConfig = {
-        }
+export type GearInVeloConfig = {
+    masterKinematicsConfigurationIndex?: number
 
+    slaveKinematicsConfigurationIndex?: number
 
-        export type SetDoutStatus = {
-        }
+    gearingFrameIndex?: number
 
+    gearRatio?: number
 
-        export type SetDoutCommand = {
+    syncActivationDelay?: number
+}
 
-                    doutToSet?:number;
+export type GearInVeloStatus = {
+    percentageComplete?: number
 
-                    valueToSet?:boolean;
-        }
+    gearInFailed?: boolean
 
+    gearedIn?: boolean
+}
 
-        export type SetAoutConfig = {
-        }
+export type GearInVeloCommand = {
+    skipToNext?: boolean
 
+    updatedRatio?: number
 
-        export type SetAoutStatus = {
-        }
+    updateRation?: boolean
+}
 
+export type GearInPosConfig = {
+    masterKinematicsConfigurationIndex?: number
 
-        export type SetAoutCommand = {
+    slaveKinematicsConfigurationIndex?: number
 
-                    aoutToSet?:number;
+    gearingFrameIndex?: number
 
-                    valueToSet?:number;
-        }
+    gearRatio?: number
 
+    strategyToUse?: STRATEGYGEARINPOS
 
-        export type SetIoutConfig = {
-        }
+    gearRatioMaster?: number
 
+    gearRatioSlave?: number
 
-        export type SetIoutStatus = {
-        }
+    masterSyncPosition?: CartesianPosition
 
+    slaveSyncPosition?: CartesianPosition
 
-        export type SetIoutCommand = {
+    syncActivationDelay?: number
+}
 
-                    ioutToSet?:number;
+export type GearInPosStatus = {
+    percentageComplete?: number
 
-                    valueToSet?:number;
-        }
+    gearInFailed?: boolean
 
+    gearedIn?: boolean
+}
 
-        export type WaitOnConfig = {
+export type GearInPosCommand = {
+    skipToNext?: boolean
 
-                    waitOnTriggerIndex?:number;
-        }
+    updatedRatioMaster?: number
 
+    updatedRatioSlave?: number
 
-        export type WaitOnStatus = {
+    updatedMasterSyncPosition?: CartesianPosition
 
-                    waiting?:boolean;
-        }
+    updatedSlaveSyncPosition?: CartesianPosition
+}
 
+export type GearInDynConfig = {
+    masterKinematicsConfigurationIndex?: number
 
-        export type WaitOnCommand = {
+    slaveKinematicsConfigurationIndex?: number
 
-                    skipToNext?:boolean;
-        }
+    gearingFrameIndex?: number
 
+    gearRatio?: number
+}
 
-        export type DwellConfig = {
+export type GearInDynStatus = {
+    gearInFailed?: boolean
 
-                    ticksToDwell?:number;
-        }
+    gearedIn?: boolean
+}
 
+export type GearInDynCommand = {
+    skipToNext?: boolean
+}
 
-        export type DwellStatus = {
+export type GearInDynMetrics = {
+    timeToGearIn?: number
+}
 
-                    remainingTicks?:number;
-        }
+export type StressTestConfig = {}
 
+export type StressTestStatus = {}
 
-        export type DwellCommand = {
+export type StressTestCommand = {}
 
-                    skipToNext?:boolean;
-        }
+export type StressTestStream = {}
 
+export type ActivityConfig = {
+    activityType?: ACTIVITYTYPE
 
-        export type LatchPosConfig = {
+    skipToNextTriggerIndex?: number
 
-                    cartesianLatch?:boolean;
+    skipToNextTriggerType?: TRIGGERTYPE
+    //              Start of Union
+    moveJoints?: MoveJointsConfig
+    moveJointsAtVelocity?: MoveJointsAtVelocityConfig
+    moveLine?: MoveLineConfig
+    moveLineAtVelocity?: MoveLineAtVelocityConfig
+    moveArc?: MoveArcConfig
+    moveSpline?: MoveSplineConfig
+    moveToPosition?: MoveToPositionConfig
+    gearInPos?: GearInPosConfig
+    gearInVelo?: GearInVeloConfig
+    gearInDyn?: GearInDynConfig
+    setDout?: SetDoutConfig
+    setAout?: SetAoutConfig
+    setIout?: SetIoutConfig
+    dwell?: DwellConfig
+    waitOn?: WaitOnConfig
+    switchPose?: SwitchPoseConfig
+    latchPos?: LatchPosConfig
+    stressTest?: StressTestConfig
+    //              End of Union
+}
 
-                    kinematicsConfigurationIndex?:number;
+export type ActivityStatus = {
+    state?: ACTIVITYSTATE
 
-                    jointLatch?:boolean;
+    tag?: number
+    //              Start of Union
+    moveJoints?: MoveJointsStatus
+    moveJointsAtVelocity?: MoveJointsAtVelocityStatus
+    moveLine?: MoveLineStatus
+    moveLineAtVelocity?: MoveLineAtVelocityStatus
+    moveArc?: MoveArcStatus
+    moveSpline?: MoveSplineStatus
+    moveToPosition?: MoveToPositionStatus
+    gearInPos?: GearInPosStatus
+    gearInVelo?: GearInVeloStatus
+    gearInDyn?: GearInDynStatus
+    setDout?: SetDoutStatus
+    setAout?: SetAoutStatus
+    setIout?: SetIoutStatus
+    dwell?: DwellStatus
+    waitOn?: WaitOnStatus
+    switchPose?: SwitchPoseStatus
+    latchPos?: LatchPosStatus
+    stressTest?: StressTestStatus
+    //              End of Union
+}
 
-                    latchTriggerIndex?:number;
-        }
+export type ActivityCommand = {
+    //              Start of Union
+    moveJoints?: MoveJointsCommand
+    moveJointsAtVelocity?: MoveJointsAtVelocityCommand
+    moveLine?: MoveLineCommand
+    moveLineAtVelocity?: MoveLineAtVelocityCommand
+    moveArc?: MoveArcCommand
+    moveSpline?: MoveSplineCommand
+    moveToPosition?: MoveToPositionCommand
+    gearInPos?: GearInPosCommand
+    gearInVelo?: GearInVeloCommand
+    gearInDyn?: GearInDynCommand
+    setDout?: SetDoutCommand
+    setAout?: SetAoutCommand
+    setIout?: SetIoutCommand
+    dwell?: DwellCommand
+    waitOn?: WaitOnCommand
+    switchPose?: SwitchPoseCommand
+    latchPos?: LatchPosCommand
+    stressTest?: StressTestCommand
+    //              End of Union
 
+    skipToNext?: boolean
+}
 
-        export type LatchPosStatus = {
+export type ActivityStreamItem = {
+    activityType?: ACTIVITYTYPE
 
-                    latched?:boolean;
+    tag?: number
+    //              Start of Union
+    moveJoints?: MoveJointsStream
+    moveJointsAtVelocity?: MoveJointsAtVelocityStream
+    moveLine?: MoveLineStream
+    moveLineAtVelocity?: MoveLineAtVelocityStream
+    moveArc?: MoveArcStream
+    moveToPosition?: MoveToPositionStream
+    setDout?: SetDoutCommand
+    setAout?: SetAoutCommand
+    setIout?: SetIoutCommand
+    dwell?: DwellConfig
+    stressTest?: StressTestStream
+    //              End of Union
+}
 
-                    latchedCartesianPosition?:CartesianPosition;
+export type ActivityMetrics = {
+    //              Start of Union
+    gearInDyn?: GearInDynMetrics
+    //              End of Union
+}
 
-                    latchedJointArray?:JointPosition[];
-        }
+export type SoloActivityConfig = {}
 
+export type SoloActivityStatus = ActivityStatus
+export type SoloActivityCommand = ActivityStreamItem
 
-        export type LatchPosCommand = {
+export type FramesConfig = {
+    translation?: Vector3
 
-                    skipToNext?:boolean;
-        }
+    rotation?: Quat
 
+    parent?: number
 
-        export type SwitchPoseConfig = {
+    absRel?: FRAME_ABSRELATIVE
+}
 
-                    kinematicsConfigurationIndex?:number;
+export type FramesCommand = {
+    translation?: Vector3
 
-                    newJointConfiguration?:number;
+    rotation?: Quat
 
-                    moveParamsIndex?:number;
-        }
+    override?: boolean
+}
 
+export type FramesStatus = {}
 
-        export type SwitchPoseStatus = {
+export type ToolConfig = {
+    toolIndex?: number
 
-                    percentageComplete?:number;
-        }
+    frameIndex?: number
+}
 
+export type ToolStatus = {
+    openOrClosed?: OPENCLOSED
+}
 
-        export type SwitchPoseCommand = {
+export type ToolCommand = {
+    openOrClose?: OPENCLOSED
+}
 
-                    skipToNext?:boolean;
-        }
+export type TriggerOnConfig = {
+    aiIndex?: number
 
+    vaiIndex?: number
 
-        export type GearInVeloConfig = {
+    threshold?: number
 
-                    masterKinematicsConfigurationIndex?:number;
+    aiThreholdGreaterLessThan?: GTLT
 
-                    slaveKinematicsConfigurationIndex?:number;
+    diIndex?: number
 
-                    gearingFrameIndex?:number;
+    vdiIndex?: number
 
-                    gearRatio?:number;
+    diTriggerState?: ONOFF
 
-                    syncActivationDelay?:number;
-        }
-
-
-        export type GearInVeloStatus = {
-
-                    percentageComplete?:number;
-
-                    gearInFailed?:boolean;
-
-                    gearedIn?:boolean;
-        }
-
-
-        export type GearInVeloCommand = {
-
-                    skipToNext?:boolean;
-
-                    updatedRatio?:number;
-
-                    updateRation?:boolean;
-        }
-
-
-        export type GearInPosConfig = {
-
-                    masterKinematicsConfigurationIndex?:number;
-
-                    slaveKinematicsConfigurationIndex?:number;
-
-                    gearingFrameIndex?:number;
-
-                    gearRatio?:number;
-
-                    strategyToUse?:STRATEGYGEARINPOS;
-
-                    gearRatioMaster?:number;
-
-                    gearRatioSlave?:number;
-
-                    masterSyncPosition?:CartesianPosition;
-
-                    slaveSyncPosition?:CartesianPosition;
-
-                    syncActivationDelay?:number;
-        }
-
-
-        export type GearInPosStatus = {
-
-                    percentageComplete?:number;
-
-                    gearInFailed?:boolean;
-
-                    gearedIn?:boolean;
-        }
-
-
-        export type GearInPosCommand = {
-
-                    skipToNext?:boolean;
-
-                    updatedRatioMaster?:number;
-
-                    updatedRatioSlave?:number;
-
-                    updatedMasterSyncPosition?:CartesianPosition;
-
-                    updatedSlaveSyncPosition?:CartesianPosition;
-        }
-
-
-        export type GearInDynConfig = {
-
-                    masterKinematicsConfigurationIndex?:number;
-
-                    slaveKinematicsConfigurationIndex?:number;
-
-                    gearingFrameIndex?:number;
-
-                    gearRatio?:number;
-        }
-
-
-        export type GearInDynStatus = {
-
-                    gearInFailed?:boolean;
-
-                    gearedIn?:boolean;
-        }
-
-
-        export type GearInDynCommand = {
-
-                    skipToNext?:boolean;
-        }
-
-
-        export type GearInDynMetrics = {
-
-                    timeToGearIn?:number;
-        }
-
-
-        export type StressTestConfig = {
-        }
-
-
-        export type StressTestStatus = {
-        }
-
-
-        export type StressTestCommand = {
-        }
-
-
-        export type StressTestStream = {
-        }
-
-
-        export type ActivityConfig = {
-
-                    activityType?:ACTIVITYTYPE;
-
-                    skipToNextTriggerIndex?:number;
-
-                    skipToNextTriggerType?:TRIGGERTYPE;
-//              Start of Union
-                    moveJoints?: MoveJointsConfig,
-                    moveJointsAtVelocity?: MoveJointsAtVelocityConfig,
-                    moveLine?: MoveLineConfig,
-                    moveLineAtVelocity?: MoveLineAtVelocityConfig,
-                    moveArc?: MoveArcConfig,
-                    moveSpline?: MoveSplineConfig,
-                    moveToPosition?: MoveToPositionConfig,
-                    gearInPos?: GearInPosConfig,
-                    gearInVelo?: GearInVeloConfig,
-                    gearInDyn?: GearInDynConfig,
-                    setDout?: SetDoutConfig,
-                    setAout?: SetAoutConfig,
-                    setIout?: SetIoutConfig,
-                    dwell?: DwellConfig,
-                    waitOn?: WaitOnConfig,
-                    switchPose?: SwitchPoseConfig,
-                    latchPos?: LatchPosConfig,
-                    stressTest?: StressTestConfig,
-//              End of Union
-        }
-
-
-        export type ActivityStatus = {
-
-                    state?:ACTIVITYSTATE;
-
-                    tag?:number;
-//              Start of Union
-                    moveJoints?: MoveJointsStatus,
-                    moveJointsAtVelocity?: MoveJointsAtVelocityStatus,
-                    moveLine?: MoveLineStatus,
-                    moveLineAtVelocity?: MoveLineAtVelocityStatus,
-                    moveArc?: MoveArcStatus,
-                    moveSpline?: MoveSplineStatus,
-                    moveToPosition?: MoveToPositionStatus,
-                    gearInPos?: GearInPosStatus,
-                    gearInVelo?: GearInVeloStatus,
-                    gearInDyn?: GearInDynStatus,
-                    setDout?: SetDoutStatus,
-                    setAout?: SetAoutStatus,
-                    setIout?: SetIoutStatus,
-                    dwell?: DwellStatus,
-                    waitOn?: WaitOnStatus,
-                    switchPose?: SwitchPoseStatus,
-                    latchPos?: LatchPosStatus,
-                    stressTest?: StressTestStatus,
-//              End of Union
-        }
-
-
-        export type ActivityCommand = {
-//              Start of Union
-                    moveJoints?: MoveJointsCommand,
-                    moveJointsAtVelocity?: MoveJointsAtVelocityCommand,
-                    moveLine?: MoveLineCommand,
-                    moveLineAtVelocity?: MoveLineAtVelocityCommand,
-                    moveArc?: MoveArcCommand,
-                    moveSpline?: MoveSplineCommand,
-                    moveToPosition?: MoveToPositionCommand,
-                    gearInPos?: GearInPosCommand,
-                    gearInVelo?: GearInVeloCommand,
-                    gearInDyn?: GearInDynCommand,
-                    setDout?: SetDoutCommand,
-                    setAout?: SetAoutCommand,
-                    setIout?: SetIoutCommand,
-                    dwell?: DwellCommand,
-                    waitOn?: WaitOnCommand,
-                    switchPose?: SwitchPoseCommand,
-                    latchPos?: LatchPosCommand,
-                    stressTest?: StressTestCommand,
-//              End of Union
-
-                    skipToNext?:boolean;
-        }
-
-
-        export type ActivityStreamItem = {
-
-                    activityType?:ACTIVITYTYPE;
-
-                    tag?:number;
-//              Start of Union
-                    moveJoints?: MoveJointsStream,
-                    moveJointsAtVelocity?: MoveJointsAtVelocityStream,
-                    moveLine?: MoveLineStream,
-                    moveLineAtVelocity?: MoveLineAtVelocityStream,
-                    moveArc?: MoveArcStream,
-                    moveToPosition?: MoveToPositionStream,
-                    setDout?: SetDoutCommand,
-                    setAout?: SetAoutCommand,
-                    setIout?: SetIoutCommand,
-                    dwell?: DwellConfig,
-                    stressTest?: StressTestStream,
-//              End of Union
-        }
-
-
-        export type ActivityMetrics = {
-//              Start of Union
-                    gearInDyn?: GearInDynMetrics,
-//              End of Union
-        }
-
-
-        export type SoloActivityConfig = {
-        }
-
-        export type SoloActivityStatus = ActivityStatus
-        export type SoloActivityCommand = ActivityStreamItem
-
-        export type FramesConfig = {
-
-                    translation?:Vector3;
-
-                    rotation?:Quat;
-
-                    parent?:number;
-
-                    absRel?:FRAME_ABSRELATIVE;
-        }
-
-
-        export type FramesCommand = {
-
-                    translation?:Vector3;
-
-                    rotation?:Quat;
-
-                    override?:boolean;
-        }
-
-
-        export type FramesStatus = {
-        }
-
-
-        export type ToolConfig = {
-
-                    toolIndex?:number;
-
-                    frameIndex?:number;
-        }
-
-
-        export type ToolStatus = {
-
-                    openOrClosed?:OPENCLOSED;
-        }
-
-
-        export type ToolCommand = {
-
-                    openOrClose?:OPENCLOSED;
-        }
-
-
-        export type TriggerOnConfig = {
-
-                    aiIndex?:number;
-
-                    vaiIndex?:number;
-
-                    threshold?:number;
-
-                    aiThreholdGreaterLessThan?:GTLT;
-
-                    diIndex?:number;
-
-                    vdiIndex?:number;
-
-                    diTriggerState?:ONOFF;
-
-                    numberofTicksBeforeTrigger?:number;
-        }
-
-
+    numberofTicksBeforeTrigger?: number
+}
