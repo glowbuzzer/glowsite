@@ -6,14 +6,14 @@ import {Tldr} from "../../../framework/components/Tldr"
 
 # Which files do I need to edit in the GBEM codebase?
 <Tldr>
-    - libs/machine mapping for your custom machine
+    - libs/machine_mapping for your custom machine
     - create your own libs for custom slaves and drives
     - `gbem_config.h for general compile time parameters
 </Tldr>
 
 ## Adding new machines using existing slaves and drives
 
-You are going to be working in the `/libs/machine_mapping` static lib.
+If you are looking to configure a new machine (using slaves and drives that you have defined) then you are going to be working in the `/libs/machine_mapping` static lib.
 
 You will create two files for your machine to hold your machine configuration:
 
@@ -21,21 +21,48 @@ You will create two files for your machine to hold your machine configuration:
 
 ` /libs/machine_mapping/src/my_machine_map.c`
 
-And in `/libs/machine_mapping/inc/map_config.h` you will add in a new #define for your new machine 
+And in `/libs/machine_mapping/inc/map_config.h` you will add in a new #define for your new machine.
+
+`/libs/machine_mapping/inc/map_config.h` is where there is a single location to switch between machines you have defined.
+
+This is very useful in development where you might have different test machines, or different machines in different places you work and want to easily swap between them.
+
+Also in `/libs/machine_mapping/inc/map_config.h` you have to complete a set of conditional includes to include the header file for your machine.
+
+Also in `/libs/machine_mapping/src/map_config.c` & `/libs/machine_mapping/inc/map_config.h` also are where the names of machines are stored which are used to print to console the name of the machine at GBEM start-up (very useful when you are developing to make sure you are working with the right machine!).
 
 ## Adding a new drive
 
-Your will create a new static library inside a new directory you will create. `/libs/my_drive_mfr`
+If you are adding a new drive (one which is not supported already), you will create a new static library.
 
-Inside 
+We tend to use a directory per manufacturer.
 
-The header file you create will need to include in your my_machine_map.h file.
+This will be for example, `/libs/my_drive_mfr`.
+
+You will need to add a CMakeLists.txt to this - or add to your build system if not using cmake.
+
+Adding a new drive requires at least a .c and .h file containing the code for your drive. These should be named after the model of the drive. E.g. `libs/my_drive_mfr/my_drive_model.c`.
+
+The header file you create will need to include in your `my_machine_map.h` file.
 
 ## Adding new slaves
 
-Your will create a new static library inside a new directory you will create. `/libs/my_slave_mfr`
+If you are adding a new slave (one which is not supported already), you will create a new static library.
+
+We tend to use a directory per manufacturer.
+
+This will be for example, `/libs/my_slave_mfr`
+
+You will need to add a CMakeLists.txt to this - or add to your build system if not using cmake.
+
+Adding a new slave requires at least a .c and .h file containing the code for your slave. These should be named after the model of the slave. E.g. `libs/my_slave_mfr/my_slave_model.c`.
+
+The header file you create will need to include in your `my_machine_map.h` file.
 
 ## Changing general config
 
+General GBEM configuration options are contained in:
+
 `/apps/GEBM/shared/inc/gbem_config.h`
 
+Some options are configurable from with the CMake build system - see `gbem_defs_linux.cmake`.

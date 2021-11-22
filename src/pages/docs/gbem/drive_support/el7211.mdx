@@ -4,9 +4,10 @@ sort: 8
 ---
 
 import { Image } from "../../../../framework/components/Image"
-import { Rate, Row, Col } from 'antd';
+import { Rate, Row, Col, Alert } from 'antd';
 import {YoutubeEmbed} from "../../../../framework/components/Video"
 import {GitHubLink} from "../../../../framework/components/GitHubLink";
+import {SdoCard} from "../../../../framework/components/SdoCard";
 
 # EL7211
 
@@ -17,22 +18,15 @@ import {GitHubLink} from "../../../../framework/components/GitHubLink";
 
 ## Introduction
 
-This short guide reviews the Beckhoff EL7211drive and discusses how to get them working with GBEM.
+This short guide reviews the Beckhoff EL7211 drive and discusses how to get them working with GBEM.
 
-48V 4.5A servo motor terminal from beckhoff
+This is a 48V 4.5A servo motor terminal from Beckhoff. It is for DC servo motors from the Beckhoff  AM8100 and AM3100 series.
 
-supports brakes
+It has a built in integrated resolver interface. It supports brakes.
 
-OCT - one connector technology
+It uses the Beckhoff OCT - "One Connector Technology" where the motor power and encoder signals are combined in a singel cable. Not exactly revolutionary, but pretty handy.
 
-needs fan uint for max current capability
-
-working with beckhoff DC servo motors  
-
-
-
-
-
+The drive needs the Beckhoff fan unit to utilise its max current capability.
 
 
 import el7211_product_shot from "./el7211_product_shot.png?glowsite"
@@ -40,14 +34,9 @@ import el7211_product_shot from "./el7211_product_shot.png?glowsite"
 <Image meta={el7211_product_shot} alt="EL7211 product" />
 
 
-
-
-
 # Ratings
 
 We really like these drives. If you are happy with the "io slice" physical format then as a compact DC servo drive they are fantastic.
-
-Gte hot under heavy loads, the fan cartridges are essential
 
 <div style={{margin:"20px"}}>
     <Row>
@@ -63,27 +52,250 @@ Gte hot under heavy loads, the fan cartridges are essential
     </Row>
     <Row>
         <Col span={6}>Drive features rating</Col>
-        <Col span={4}><Rate disabled defaultValue={3}/></Col>
+        <Col span={4}><Rate disabled defaultValue={5}/></Col>
         <Col span={14}>Excellent</Col>
     </Row>
     <Row>
         <Col span={6}>Motors rating</Col>
         <Col span={4}><Rate disabled defaultValue={3}/></Col>
-        <Col span={14}>A little limited</Col>
+        <Col span={14}>A little limited in range but excellent quality</Col>
     </Row>
     <Row>
         <Col span={6}>Gearbox option</Col>
         <Col span={4}><Rate disabled defaultValue={3}/></Col>
-        <Col span={14}>A littel limited</Col>
+        <Col span={14}>Again a little limited in range</Col>
     </Row>
     <Row>
         <Col span={6}>Price</Col>
-        <Col span={4}><Rate disabled defaultValue={3}/></Col>
+        <Col span={4}><Rate disabled defaultValue={4}/></Col>
         <Col span={14}>Roughly €400</Col>
     </Row>
 </div>
+
+## Wiring up
+
+The EL7211 wiring is straight forward.
+
+The OCT cable is connected between the single connector on the drive and is directly wired to the spring contacts on the EL7211.
+
+The cable we used was the ZK47404-0421-2050:
+
+import ZK47404_0421_2050 from "./ZK47404-0421-2050.png?glowsite"
+
+<Image meta={ZK47404_0421_2050} alt="ZK47404-0421-2050 cable" maxWidth={500} />
+
+It is very useful to use a 10x3 bus bar with a combined strain relief and ground contact.
+
+We use these Phoenix Contact clamps:
+
+import busbar_clamp from "./busbar_clamp.png?glowsite"
+
+<Image meta={busbar_clamp} alt="busbar clamp" maxWidth={200} />
+
+The next photograph shows the fully wired EL7211 connected to a series of Beckhoff EtherCAT terminals.
+
+import el7211_wiring from "./EL7211_wiring.jpg?glowsite"
+
+<Image meta={el7211_wiring} alt="EL7211 wiring" />
+
+The drives need chunky power supplies. At 4.5A rms and 9A peak if you are using 3 drives with the larger motors then a 48V 15A PSU will be needed.
+
+We have used the Meanwell SDR-960 successfully in such applications and indeed this is what we used for this single axis test.
+
+
+## Startup SDOs
+The following SDOs are needed to be applied at startup to configure the drive:
+
+<SdoCard name="fault reaction option code" index="0x8010" subindex="0x52" value="1" notes="value 0 disable drive function 1 slow down ramp"/>
+<SdoCard name="Siag message flags" index="0x10F3" subindex="0x05" value="1" notes="value 0x1 - send emergency messages over CoE"/>
+<SdoCard name="Modes of operation" index="0x7010" subindex="0x3" value="CIA_MOO_CSP" notes=""/>
+<SdoCard name="Rated current" index="0x8011" subindex="0x12" value="0x00001F4" notes=""/>
+<SdoCard name="Position loop proportional gain" index="0x8010" subindex="0x17" value="0xa=10" notes=""/>
+<SdoCard name="Torque limitation" index="0x7010" subindex="0xb" value="0xbb8" notes=""/>
+<SdoCard name="Velocity limitation" index="0x8010" subindex="0x31" value="0x00040000" notes=""/>
+<SdoCard name="Motor pole pairs" index="0x8011" subindex="0x13" value="0x4" notes=""/>
+<SdoCard name="Max current" index="0x8011" subindex="0x11" value="0x00008D68 =36000 (mA)" notes=""/>
+<SdoCard name="Torque constant" index="0x8011" subindex="0x16" value="0x0000012C" notes=""/>
+<SdoCard name="Winding inductance" index="0x8011" subindex="0x19" value="0x0023" notes=""/>
+<SdoCard name="Rotor moment of inertia" index="0x8011" subindex="0x18" value="0x442)" notes=""/>
+<SdoCard name="Motor thermal time constant" index="0x8011" subindex="0x2d" value="0x04CE" notes=""/>
+<SdoCard name="Commutation offset" index="0x8011" subindex="0x15" value="0x010E" notes="0x010E = 270 (degrees)"/>
+<SdoCard name="Motor speed limitation" index="0x8011" subindex="0x1b" value="0x483 (1155)" notes=""/>
+<SdoCard name="Current loop proportional gain - Kp" index="0x8010" subindex="0x13" value="0x064" notes=""/>
+<SdoCard name="Current loop integral time - Tn" index="0x8010" subindex="0x12" value="0x000A" notes=""/>
+<SdoCard name="Velocity loop proportional gain - Kp" index="0x8010" subindex="0x14" value="0x96" notes=""/>
+<SdoCard name="Velocity loop integral time" index="0x8010" subindex="0x15" value="0x000032" notes=""/>
+
+
+## Commissioning software
+
+
+It is useful to use the Beckhoff TwinCAT 3 Drive Manager 2 software to help comission the drive.
+
+This is part of TwinCAT. TwinCAT will need to be installed (it is free) and you will need to disable Hyper-v (and loseDocker Desktop...) which is a pain in the arse.
+
+The software provides a number of functions that are useful to us:
+
+* easy view of all the available settings especially for example things like the scaling parameters
+* a relatively easy way to tune the drive
+* a way to read all the diagnostic codes (before you get your own diagnostic reading code working)
+
+For example, here is a view Drive Manager provides of the AM814 motor we used in our testing:
+
+import drive_manager_am8141 from "./drive_manager_am8141.png?glowsite"
+
+<Image meta={drive_manager_am8141} alt="TwinCAT Drive Manager" />
+
+
+And here we can see the tuning interface:
+
+import drive_manager_tuning from "./drive_manager_tuning.png?glowsite"
+
+<Image meta={drive_manager_tuning} alt="TwinCAT Drive Manager tuning" />
+
+
+## PDO mapping
+The default provides an interface that is pretty close to what we want but we can enhance it a little by applying a custom mapping.
+
+SM2
+* 0x1600 - Control word (uint16)
+* 0x1606 - Target position (uint32) (note the unsigned)
+
+SM3
+* 0x1a00 - act pos (uint32) (note the unsigned)
+* 0x1a01 - status word (uint16)
+* 0x1a02 - act vel (int32)
+* 0x1a03 - act torque (int16)
+* 0x1a04 - info data 1 (uint16)
+* 0x1a05 - info data 2 (unit16)
+* 0x1a06 - act follow error (int32)
+
+
+We add these entries to our standard PDO mapping arrays:
+
+```c
+uint16_t map_SM2_index_of_assigned_PDO_EL7211[ECM_MAX_PDO_MAPPING_ENTRIES] = {
+        0x1600,
+        0x1606,
+};
+```
+
+```c
+uint16_t map_SM3_index_of_assigned_PDO_EL7211[ECM_MAX_PDO_MAPPING_ENTRIES] = {
+        0x1a00,
+        0x1a01,
+        0x1a02,
+        0x1a03,
+        0x1a04,
+        0x1a05,
+        0x1a06};
+```
+
+
+## Default netscan
+
+
+```c
+Slave: 2
+ Name: EL7211-9014
+ Output size: 48bits
+ Input size: 80bits
+ State: 18
+ Delay: 0[ns]
+ Has DC: 1
+ DCParentport: 0
+ Activeports: 1.1.0.0
+ Configured address: 1002
+ Man: 00000002 ID: 1c2b3052 Rev: 001b2336
+ SM0 A:1000 L: 128 F:00010026 Type:1
+ SM1 A:1080 L: 128 F:00010022 Type:2
+ SM2 A:1100 L:   6 F:00010024 Type:3
+ SM3 A:1180 L:  10 F:00010020 Type:4
+ FMMU0 Ls:00000000 Ll:   6 Lsb:0 Leb:7 Ps:1100 Psb:0 Ty:02 Act:01
+ FMMU1 Ls:00000007 Ll:  10 Lsb:0 Leb:7 Ps:1180 Psb:0 Ty:01 Act:01
+ FMMUfunc 0:1 1:2 2:3 3:0
+ MBX length wr: 128 rd: 128 MBX protocols : 0c
+ CoE details: 27 FoE details: 01 EoE details: 00 SoE details: 00
+ Ebus current: 120[mA]
+ only LRD/LWR:0
+PDO mapping according to CoE :
+  SM2 outputs
+        [byte_offset] [addr b  ] [index:sub  ] [bitl] [data_type   ] [name                                    ]
+        [0          ] [0x0000.0] [0x7010:0x01] [0x10] [UNSIGNED16  ] [Controlword                             ]
+        [2          ] [0x0002.0] [0x7010:0x06] [0x20] [INTEGER32   ] [Target velocity                         ]
+  SM3 inputs
+        [byte_offset] [addr b  ] [index: sub ] [bitl] [data_type   ] [name                                    ]
+        [0          ] [0x0007.0] [0x6000:0x11] [0x20] [UNSIGNED32  ] [Position                                ]
+        [4          ] [0x000B.0] [0x6010:0x01] [0x10] [UNSIGNED16  ] [Statusword                              ]
+        [6          ] [0x000D.0] [0x6010:0x07] [0x20] [INTEGER32   ] [Velocity actual value                   ]
+
+Slave 2 data
+ PDI Control      : 0405
+ PDI Config       : CC03
+ Config Alias     : 0000
+ Checksum         : 00D8
+   calculated     : 00D8
+ Vendor ID        : 00000002
+ Product Code     : 1C2B3052
+ Revision Number  : 001B2336
+ Serial Number    : 00000000
+ Mailbox Protocol : 000C
+ Size             : 000F = 2048 bytes
+ Version          : 0001
+```
+
+## Netscan post PDO mapping
+
+```c
+Slave: 2
+ Name: EL7211-9014
+ Output size: 48bits
+ Input size: 80bits
+ State: 18
+ Delay: 0[ns]
+ Has DC: 1
+ DCParentport: 0
+ Activeports: 1.1.0.0
+ Configured address: 1002
+ Man: 00000002 ID: 1c2b3052 Rev: 001b2336
+ SM0 A:1000 L: 128 F:00010026 Type:1
+ SM1 A:1080 L: 128 F:00010022 Type:2
+ SM2 A:1100 L:   6 F:00010024 Type:3
+ SM3 A:1180 L:  10 F:00010020 Type:4
+ FMMU0 Ls:00000000 Ll:   6 Lsb:0 Leb:7 Ps:1100 Psb:0 Ty:02 Act:01
+ FMMU1 Ls:00000007 Ll:  10 Lsb:0 Leb:7 Ps:1180 Psb:0 Ty:01 Act:01
+ FMMUfunc 0:1 1:2 2:3 3:0
+ MBX length wr: 128 rd: 128 MBX protocols : 0c
+ CoE details: 27 FoE details: 01 EoE details: 00 SoE details: 00
+ Ebus current: 120[mA]
+ only LRD/LWR:0
+PDO mapping according to CoE :
+  SM2 outputs
+        [byte_offset] [addr b  ] [index:sub  ] [bitl] [data_type   ] [name                                    ]
+        [0          ] [0x0000.0] [0x7010:0x01] [0x10] [UNSIGNED16  ] [Controlword                             ]
+        [2          ] [0x0002.0] [0x7010:0x05] [0x20] [UNSIGNED32  ] [Target position                         ]
+  SM3 inputs
+        [byte_offset] [addr b  ] [index: sub ] [bitl] [data_type   ] [name                                    ]
+        [0          ] [0x0007.0] [0x6000:0x11] [0x20] [UNSIGNED32  ] [Position                                ]
+        [4          ] [0x000B.0] [0x6010:0x01] [0x10] [UNSIGNED16  ] [Statusword                              ]
+        [6          ] [0x000D.0] [0x6010:0x07] [0x20] [INTEGER32   ] [Velocity actual value                   ]
+        [10         ] [0x0011.0] [0x6010:0x08] [0x10] [INTEGER16   ] [Torque actual value                     ]
+        [12         ] [0x0013.0] [0x6010:0x12] [0x10] [UNSIGNED16  ] [Info data 1                             ]
+        [14         ] [0x0015.0] [0x6010:0x13] [0x10] [UNSIGNED16  ] [Info data 2                             ]
+        [16         ] [0x0017.0] [0x6010:0x06] [0x20] [INTEGER32   ] [Following error actual value            ]
+```
+
+## Writing the driver code
+
+This drive does follow the CiA 402 specification pretty closely which makes it easy to integrate the drive with GBEM.
+
+You can see how we do it in the `EL7211.c` file.
 
 
 ## Testing
 
 <YoutubeEmbed embedId="" />
+
+## More information
+
+<Alert message="Information" description="A more detailed guide to integrating this motor driver with the glowbuzzer toolkit is available to our customers - please contact us" type="info" showIcon style={{margin: '20px 0 20px 0'}} />

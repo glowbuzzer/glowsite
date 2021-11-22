@@ -4,9 +4,10 @@ sort: 6
 ---
 
 import { Image } from "../../../../framework/components/Image"
-import { Rate, Row, Col } from 'antd';
+import { Rate, Row, Col, Alert } from 'antd';
 import {YoutubeEmbed} from "../../../../framework/components/Video"
 import {GitHubLink} from "../../../../framework/components/GitHubLink";
+import {SdoCard} from "../../../../framework/components/SdoCard";
 
 # EL7037
 
@@ -21,7 +22,7 @@ This short guide reviews the Beckhoff EL7037 drive and discusses how to get them
 
 ## Product features
 
-The EL7031 is an updated version of the venerable EL7031 stepper motor terminal.
+The EL7037 is an updated version of the venerable EL7031 stepper motor terminal.
 
 It supports a fixed 24V motor supply voltage and has 1.5A maximum current.
 
@@ -37,6 +38,10 @@ Vector control (a.k.a Field-orientated control) is a "modern" (1970s) technique 
 * less resonance
 
 The drive is 64 micro-stepping which is permanently fixed.
+
+The drive has two digital inputs.
+
+The output current of the terminal can be increased to 3 A in conjunction with the ZB8610 fan cartridge (continuous operation and under full load).
 
 It is suggested by Beckhoff to use a brake chopper terminal (EL9576) and/or PSU buffer capacitor terminal (EL9570) for short deceleration ramps though with small motors we have not found any discernible difference. At some point we will do some tests with larger motors/loads.
 
@@ -54,7 +59,6 @@ Extended modes require a commutation determination cycle when the drive is enabl
 
 
 ## Our ratings for the EL7037
-
 
 <div style={{margin:"20px"}}>
     <Row>
@@ -91,11 +95,179 @@ Extended modes require a commutation determination cycle when the drive is enabl
 </div>
 
 
-## Plug-in and run a netscan
+
+## Wiring up
+
+Wiring up the EL7037, could not be simpler.
+
+The terminal has outputs A1, A2, B1 & B2 for connection to the motor.
+
++24V is applied through terminals 6 or 7 or the power contacts.
+
+0V is applied through terminals 14 or 15 or the power contacts.
+
+Encoder power is +24V.
+
+For testing, we used a generic bi-polar stepper motor.
+
+## Third-party motors
+
+<Alert message="Caution" description="This guide assumes you are using a third-party motor rather than the Beckhoff AS10xx and AS20xx motors. If using the Beckhoff motors a slightly different config. is needed" type="warning" showIcon style={{margin: '20px 0 20px 0'}} />
 
 
-````C
-  SM2 outputs  
+## Startup SDOs
+The following SDOs are needed to be applied at startup to configure the drive:
+
+<SdoCard name="Speed range" index="0x8012" subindex="0x5" value="1" notes="speed range = 0=1000 steps/sec, 1=2000 steps/sec, 2=4000 steps/sec, 3=8000 steps/sec, 4=16000 steps/sec, 5=32000 steps/sec"/>
+<SdoCard name="Feedback type" index="0x8012" subindex="0x8" value="1" notes="Feedback type = 0=Encoder, 1= Internal counter (default)"/>
+<SdoCard name="Nominal voltage " index="0x8010" subindex="0x3" value="0x960 (24000)" notes="2400 = 24V"/>
+<SdoCard name="Motor coil resistance" index="0x8010" subindex="0x4" value="0x64 (100)" notes="0x64 = 100 = 100 ohms"/>
+<SdoCard name="Kp factor current" index="0x8011" subindex="0x1" value="0x96 (150)" notes="default = 0x96 = 150"/>
+<SdoCard name="Ki factor current " index="0x8011" subindex="0x2" value="0xa (10)" notes="default = 0xa = 10"/>
+<SdoCard name="Feed forward pos" index="0x8014" subindex="0x1" value="10000" notes="default is 100,000"/>
+<SdoCard name="Kp factor pos" index="0x8014" subindex="0x2" value="0x1f4 (500)" notes="default is 500"/>
+<SdoCard name="Operation mode" index="0x8012" subindex="0x1" value="3" notes="operation mode = 3 = position controller - 5 = ext pos controller"/>
+<SdoCard name="Max current" index="0x8010" subindex="0x1" value="0x5dc (1500)" notes="1500 = 1500mA - 1.5A"/>
+<SdoCard name="Reduced current " index="0x8010" subindex="0x2" value="0x2ee (750)" notes="750 = 750mA = 0.75A"/>
+<SdoCard name="Motor full steps" index="0x8010" subindex="0x6" value="0xc8  (200)" notes="Set motor full steps"/>
+<SdoCard name="Invert motor polarity " index="0x8012" subindex="0x9" value="0" notes="0 or 1"/>
+
+## PDO mapping
+
+The default PDO mapping is not suitable for position control. So we will need apply a custom mapping.
+
+Diving into the drive's documentation shows us that the following PDOs will give us position control using 32 bit position registers.
+
+We need to apply three SM2 mappings and two SM3 mappings.
+
+SM2
+* 0x1601 - ENC control
+* 0x1602 - STM control
+* 0x1603 - STM position
+
+SM3
+* 0x1A01 - ENC status
+* 0x1A03 - STM status
+
+This is termed "Position control" in the Beckhoff documentation.
+
+If Beckhoff motors are being used then a different PDO mapping is used.
+
+## Default netscan
+
+The default PDO mapping configures the drive for velocity control. This is not suitable for the glowbuzzer toolkit's cyclic synchronous position control strategy. Thus, a change to the PDO mapping must be applied.
+
+```c
+Slave: 2
+ Name: EL7037
+ Output size: 64bits
+ Input size: 64bits
+ State: 18
+ Delay: 0[ns]
+ Has DC: 1
+ DCParentport: 0
+ Activeports: 1.0.0.0
+ Configured address: 1002
+ Man: 00000002 ID: 1b7d3052 Rev: 00130000
+ SM0 A:1000 L: 128 F:00010026 Type:1
+ SM1 A:1080 L: 128 F:00010022 Type:2
+ SM2 A:1100 L:   8 F:00010024 Type:3
+ SM3 A:1180 L:   8 F:00010020 Type:4
+ FMMU0 Ls:00000000 Ll:   8 Lsb:0 Leb:7 Ps:1100 Psb:0 Ty:02 Act:01
+ FMMU1 Ls:00000008 Ll:   8 Lsb:0 Leb:7 Ps:1180 Psb:0 Ty:01 Act:01
+ FMMUfunc 0:1 1:2 2:3 3:0
+ MBX length wr: 128 rd: 128 MBX protocols : 0c
+ CoE details: 27 FoE details: 01 EoE details: 00 SoE details: 00
+ Ebus current: 100[mA]
+ only LRD/LWR:0
+PDO mapping according to CoE :
+  SM2 outputs
+        [byte_offset] [addr b  ] [index:sub  ] [bitl] [data_type   ] [name                                    ]
+        [0          ] [0x0000.0] [0x7000:0x01] [0x01] [BOOLEAN     ] [Enable latch C                          ]
+        [0          ] [0x0000.1] [0x7000:0x02] [0x01] [BOOLEAN     ] [Enable latch extern on positive edge    ]
+        [0          ] [0x0000.2] [0x7000:0x03] [0x01] [BOOLEAN     ] [Set counter                             ]
+        [0          ] [0x0000.3] [0x7000:0x04] [0x01] [BOOLEAN     ] [Enable latch extern on negative edge    ]
+        [0          ] [0x0000.4] [0x0000:0x00] [0x0C]
+        [2          ] [0x0002.0] [0x7000:0x11] [0x10] [UNSIGNED32  ] [Set counter value                       ]
+        [4          ] [0x0004.0] [0x7010:0x01] [0x01] [BOOLEAN     ] [Enable                                  ]
+        [4          ] [0x0004.1] [0x7010:0x02] [0x01] [BOOLEAN     ] [Reset                                   ]
+        [4          ] [0x0004.2] [0x7010:0x03] [0x01] [BOOLEAN     ] [Reduce torque                           ]
+        [4          ] [0x0004.3] [0x0000:0x00] [0x08]
+        [5          ] [0x0005.3] [0x7010:0x0C] [0x01] [BOOLEAN     ] [Digital output 1                        ]
+        [5          ] [0x0005.4] [0x0000:0x00] [0x04]
+        [6          ] [0x0006.0] [0x7010:0x21] [0x10] [INTEGER16   ] [Velocity                                ]
+  SM3 inputs
+        [byte_offset] [addr b  ] [index: sub ] [bitl] [data_type   ] [name                                    ]
+        [0          ] [0x0008.0] [0x6000:0x01] [0x01] [BOOLEAN     ] [Latch C valid                           ]
+        [0          ] [0x0008.1] [0x6000:0x02] [0x01] [BOOLEAN     ] [Latch extern valid                      ]
+        [0          ] [0x0008.2] [0x6000:0x03] [0x01] [BOOLEAN     ] [Set counter done                        ]
+        [0          ] [0x0008.3] [0x6000:0x04] [0x01] [BOOLEAN     ] [Counter underflow                       ]
+        [0          ] [0x0008.4] [0x6000:0x05] [0x01] [BOOLEAN     ] [Counter overflow                        ]
+        [0          ] [0x0008.5] [0x0000:0x00] [0x02]
+        [0          ] [0x0008.7] [0x6000:0x08] [0x01] [BOOLEAN     ] [Extrapolation stall                     ]
+        [1          ] [0x0009.0] [0x6000:0x09] [0x01] [BOOLEAN     ] [Status of input A                       ]
+        [1          ] [0x0009.1] [0x6000:0x0A] [0x01] [BOOLEAN     ] [Status of input B                       ]
+        [1          ] [0x0009.2] [0x6000:0x0B] [0x01] [BOOLEAN     ] [Status of input C                       ]
+        [1          ] [0x0009.3] [0x0000:0x00] [0x01]
+        [1          ] [0x0009.4] [0x6000:0x0D] [0x01] [BOOLEAN     ] [Status of extern latch                  ]
+        [1          ] [0x0009.5] [0x6000:0x0E] [0x01] [BOOLEAN     ] [Sync error                              ]
+        [1          ] [0x0009.6] [0x0000:0x00] [0x01]
+        [1          ] [0x0009.7] [0x6000:0x10] [0x01] [BOOLEAN     ] [TxPDO Toggle                            ]
+        [2          ] [0x000A.0] [0x6000:0x11] [0x10] [UNSIGNED32  ] [Counter value                           ]
+        [4          ] [0x000C.0] [0x6000:0x12] [0x10] [UNSIGNED32  ] [Latch value                             ]
+        [6          ] [0x000E.0] [0x6010:0x01] [0x01] [BOOLEAN     ] [Ready to enable                         ]
+        [6          ] [0x000E.1] [0x6010:0x02] [0x01] [BOOLEAN     ] [Ready                                   ]
+        [6          ] [0x000E.2] [0x6010:0x03] [0x01] [BOOLEAN     ] [Warning                                 ]
+        [6          ] [0x000E.3] [0x6010:0x04] [0x01] [BOOLEAN     ] [Error                                   ]
+        [6          ] [0x000E.4] [0x6010:0x05] [0x01] [BOOLEAN     ] [Moving positive                         ]
+        [6          ] [0x000E.5] [0x6010:0x06] [0x01] [BOOLEAN     ] [Moving negative                         ]
+        [6          ] [0x000E.6] [0x6010:0x07] [0x01] [BOOLEAN     ] [Torque reduced                          ]
+        [6          ] [0x000E.7] [0x6010:0x08] [0x01] [BOOLEAN     ] [Motor stall                             ]
+        [7          ] [0x000F.0] [0x0000:0x00] [0x03]
+        [7          ] [0x000F.3] [0x6010:0x0C] [0x01] [BOOLEAN     ] [Digital input 1                         ]
+        [7          ] [0x000F.4] [0x6010:0x0D] [0x01] [BOOLEAN     ] [Digital input 2                         ]
+        [7          ] [0x000F.5] [0x6010:0x0E] [0x01] [BOOLEAN     ] [Sync error                              ]
+        [7          ] [0x000F.6] [0x0000:0x00] [0x01]
+        [7          ] [0x000F.7] [0x6010:0x10] [0x01] [BOOLEAN     ] [TxPDO Toggle                            ]
+*** End of network scanning output ***
+*** Start of eeprom output ***
+2 slaves found.
+Slave 1 data
+ PDI Control      : 0D00
+ PDI Config       : 0000
+ Config Alias     : 0000
+ Checksum         : 0046
+   calculated     : 0046
+ Vendor ID        : 00000002
+ Product Code     : 044C2C52
+ Revision Number  : 00110000
+ Serial Number    : 00000000
+ Mailbox Protocol : 0000
+ Size             : 000F = 2048 bytes
+ Version          : 0001
+2 slaves found.
+Slave 2 data
+ PDI Control      : 0405
+ PDI Config       : CC03
+ Config Alias     : 0000
+ Checksum         : 003D
+   calculated     : 003D
+ Vendor ID        : 00000002
+ Product Code     : 1B7D3052
+ Revision Number  : 00130000
+ Serial Number    : 00000000
+ Mailbox Protocol : 000C
+ Size             : 000F = 2048 bytes
+ Version          : 0001
+*** End of eeprom output ***
+```
+
+## Netscan post PDO mapping
+
+After applying the PDO mapping, we can see that we have a position control interface available.
+
+````c
+  SM2 outputs
 		[0          ] [0xFFF89E38.0] [0x7000:0x01] [0x01] [BOOLEAN     ] [Enable latch C                          ]
         [0          ] [0xFFF89E38.1] [0x7000:0x02] [0x01] [BOOLEAN     ] [Enable latch extern on positive edge    ]
         [0          ] [0xFFF89E38.2] [0x7000:0x03] [0x01] [BOOLEAN     ] [Set counter                             ]
@@ -144,7 +316,31 @@ Extended modes require a commutation determination cycle when the drive is enabl
         [11         ] [0xFFF89E43.7] [0x6010:0x10] [0x01] [BOOLEAN     ] [TxPDO Toggle                            ]
 ````
 
-## Testing
 
+## Writing the driver code
+
+So, from the netscan, we can see that this simple stepper drive does not support the CiA402 drive profile.
+
+It is has bits that signal: `Ready to enable`, `Ready`, `Warning`.
+
+And bits that change the drive's state: `Control_enable`, `Control_reset`, `Control_reduce_torque`.
+
+GBEM expects drives to follow the CiA 402 state machine and provide an interface that mirrors this standard.
+
+This means we have to write code in our driver software to emulate the CiA 402 statemachine in our driver code. This is not very complicated.
+
+We have to maintain the CiA state of the drive in our driver code and map the very simple states of the El7037 onto the CiA 402 states.
+
+You can see how we do it in the `EL7037.c` file.
+
+
+## Testing
+Here you can see us jogging the EL7037 from the glowbuzzer's toolkit web front-end.
 <YoutubeEmbed embedId="" />
 
+
+
+
+## More information
+
+<Alert message="Information" description="A more detailed guide to integrating this motor driver with the glowbuzzer toolkit is available to our customers - please contact us" type="info" showIcon style={{margin: '20px 0 20px 0'}} />

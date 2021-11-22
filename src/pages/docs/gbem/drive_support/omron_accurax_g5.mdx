@@ -4,9 +4,10 @@ sort: 13
 ---
 
 import { Image } from "../../../../framework/components/Image"
-import { Rate, Row, Col } from 'antd';
+import { Rate, Row, Col, Alert } from 'antd';
 import {YoutubeEmbed} from "../../../../framework/components/Video"
 import {GitHubLink} from "../../../../framework/components/GitHubLink";
+import {SdoCard} from "../../../../framework/components/SdoCard";
 
 # OMRON ACCURAX G5
 
@@ -110,37 +111,22 @@ import omron_g5_encoder from "./omron_g5_encoder.jpg?glowsite"
 <Image meta={omron_g5_encoder} alt="G5 encoder cable" maxWidth={500} />
 
 
-## Connectors
-
-R88A-CNK81S safety connector CN8
-
-R88A-CNW01C control io connector CN1
-
-I/O connector kit -50 pins-(for CN1) R88A-CNU11C
-
-
-
-CN1 = control io
-
-CN2 = encoder connection
-
-CN4 = external encoder connector
-
-CN5 = analog monitor
-
-CN8 = safety connector
-
-CN7 - usb to CX-drive
-
-
-
-**CN1**
-
-General purpose cable R88A-CPG002S
-
-XW2Z-100J-B24  Terminal block cable
-
 ## Wiring up
+
+Part numbers for the connectors:
+* R88A-CNK81S safety connector CN8
+* R88A-CNW01C control IO connector CN1
+* I/O connector kit -50 pins-(for CN1) R88A-CNU11C
+
+The connectors on the drive are:
+* CN1 - control io
+* CN2 - encoder connection
+* CN4 - external encoder connector
+* CN5 - analog monitor
+* CN8 - safety connector
+* CN7 - USB to CX-drive
+
+CN1 takes either a general purpose cable R88A-CPG002S or XW2Z-100J-B24 is a terminal block cable.
 
 For testing the drive, the wiring is very simple. There is a small plug supplied with the drive to disable the STO feature which makes things a bit easier (this goes in CN8-SAFE).
 
@@ -165,10 +151,7 @@ import omron_g5_wired from "./omron_g5_wired.jpg?glowsite"
 
 <Image meta={omron_g5_wired} alt="G5 wired for testing" maxWidth={500} />
 
-
 ## Omron drive configuration software
-
-### Introduction
 
 Omron provide a drive configuration utility called CX-DRIVE. This can be purchased either as a stand-alone piece of software or it is included in the CX-ONE automation suite. This is available on a 30-day free trial. This software is not essential but is handy to initially test the drive and in scenarios where you want to do custom tuning of the servo's loops, update the firmware or if you are having issues and want to do diagnosis / testing.
 
@@ -186,14 +169,12 @@ This is alarm 0x87.0 `{0x87, 0, "Immediate Stop Input Error"}`
 
 This needs the CX-Drive configuration software to disable it.
 
-### Create a new config
 
 Make sure the drive is powered up and the USB cable is connected to your PC.
 
 Then, in CX-Drive:
 
 File menu -> New drive
-
 
 import omron_g5_cxdrive_new_drive from "./omron_g5_cxdrive_new_drive.png?glowsite"
 
@@ -217,14 +198,31 @@ import omron_g5_cxdrive_disable_sto from "./omron_g5_cxdrive_disable_sto.png?glo
 
 IMPORTANT: for production use when you are using STO this will need re-enabling!
 
-
 (This is register is also accessible through 0x3400 0x0 "Input Signal Selection 1 4 bytes (INT32)" if you wish to set this register without using CX-Drive).
 
 ## Titbits
 
-The overrun limit protection function only works in fully closed loop mode (encoder on load) don't mistake this for 
+The overrun limit protection function only works in fully closed loop mode (encoder on load) don't mistake this for software position limits.
 
-## netscan (gbem -n -ieth0)
+## Startup SDOs
+
+The following SDOs are needed to be applied at startup to configure the drive:
+
+<SdoCard name={"Motor revolutions Set the numerator of the electronic gear"} index={"0x6091"} subindex={"0x1"} value={"10000000"} notes={""}/>
+<SdoCard name={"Shaft revolutions Set the denominator of the electronic gear"} index={"0x6091"} subindex={"0x2"} value={"1"} notes={""}/>
+<SdoCard name={"Prohibition input"} index={"0x3504"} subindex={"0x0"} value={"1"} notes={""}/>
+<SdoCard name={"Software min pos limit"} index={"0x607d"} subindex={"0x1"} value={"Value from machine config."} notes={""}/>
+<SdoCard name={"Software max pos limit"} index={"0x607d"} subindex={"0x2"} value={"Value from machine config."} notes={""}/>
+<SdoCard name={"Modes of operation set"} index={"0x6060"} subindex={"0x0"} value={"CIA_MOO_CSP"} notes={""}/>
+
+
+## PDO mapping
+
+None needed.
+
+
+## Default netscan (and as we are not doing any PDO mapping the actual PDO map used)
+
 
 ````c
 Slave: 1
@@ -285,9 +283,19 @@ Slave 1 data
 ````
 
 
+## Writing the driver code
 
-R88D-KN01H-ECT
+The G5 drive follows the CiA 402 specification closely.
+
+Writing the drive software is straight forward.
+
+You can see how we do it in the `g5.c` file.
 
 ## Testing
 
 <YoutubeEmbed embedId="" />
+
+## More information
+
+<Alert message="Information" description="A more detailed guide to integrating this motor driver with the glowbuzzer toolkit is available to our customers - please contact us" type="info" showIcon style={{margin: '20px 0 20px 0'}} />
+

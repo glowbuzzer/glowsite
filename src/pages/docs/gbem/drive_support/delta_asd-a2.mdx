@@ -4,9 +4,10 @@ sort: 3
 ---
 
 import { Image } from "../../../../framework/components/Image"
-import { Rate, Row, Col } from 'antd';
+import { Rate, Row, Col, Alert } from 'antd';
 import {YoutubeEmbed} from "../../../../framework/components/Video"
 import {GitHubLink} from "../../../../framework/components/GitHubLink";
+import {SdoCard} from "../../../../framework/components/SdoCard";
 
 # Delta ASD-A2
 <GitHubLink title={"Drive interface code"} repo={"gbem"} directory={"/libs/delta"} />
@@ -22,7 +23,7 @@ This short guide reviews the Delta ASD-A2-0421-E drive and discusses how to get 
 
 The drive range covers 50W-to-15kW in single and three-phase models.
 
-Motors are the ECMA series in frames of size 40mm, 60mm, 80mm 86mm, 100mm, 130mm, 180mm & 220mm.
+Motors are the ECMA series in frames of size 40 mm, 60 mm, 80 mm 86 mm, 100 mm, 130 mm, 180 mm & 220 mm.
 
 The motor options are somewhat limited but the basics in terms of electromagnetic brakes, different shaft options etc. 
 
@@ -30,14 +31,12 @@ Encoders are just a 20-bit incremental, 17 bit absolute single turn and 16-bit m
 
 The usual connectors are in the form of leads out of the motor to TE MATE-N-LOK connector though an IP67 barrel connector option is available.
 
-
 import asd_a2_0421_e_product_shot from "./asd_a2_0421_e_product_shot.png?glowsite"
 
 <Image meta={asd_a2_0421_e_product_shot} alt="ASD-A2-0421 product" maxWidth={500} />
 
 
-
-The drive features are pretty basic but this is reflected in the price with for example the ASD-A2-0421-E model being about €400 (excluding cables and motor).
+The drive features are pretty basic but this is reflected in the price with for example the ASD-A2-0421-E model being about €300 (excluding cables and motor).
 
 They do though support most of the essential features:
 
@@ -48,15 +47,13 @@ They do though support most of the essential features:
 
 The motor encoder and digital IO connectors are of the SCSI type. Terminating these yourself without the proper crimp tool is a right pain in the arse.
 
+## Testing BoM
 For the purposes of our evaluation we are using:
 
-ASD-A2-0421-E - A2 series - 400W - Single Phase - EtherCAT,  
-
-Motor xxx
-
-Drive cable ASD-ABPW0003
-
-Encoder cable ASD-ABEN0003
+* ASD-A2-0421-E - A2 series - 400W - Single Phase - EtherCAT,
+* Motor xxx
+* Drive cable ASD-ABPW0003
+* Encoder cable ASD-ABEN0003
 
 
 ## Review
@@ -98,7 +95,7 @@ Encoder cable ASD-ABEN0003
 
 ## Wiring
 
-Single phase models derive their internal control volatge from a mains volatge applied to L1C and L2C. 3 phase versions need a separate 24V control voltage supply.
+Single phase models derive their internal control voltage from a mains voltage applied to L1C and L2C. 3 phase versions need a separate 24V control voltage supply.
 
 
 
@@ -116,7 +113,7 @@ STO - comes with a handy PCB  you can slot into CN-STO to disable this function.
 
 
 
-CN1 - 26 pin SCSI - IO - 4x DO, 7 x DI also encoder out (differntial) signals + power 24v
+CN1 - 26 pin SCSI - IO - 4x DO, 7 x DI also encoder out (differential) signals + power 24v
 
 CN2 - 20 pin SCSI - motor encoder connector 
 
@@ -136,6 +133,16 @@ P1-01 to 0x0Ch for EtherCAT communication and CANopen as the application layer.
 
 The ASDA-Soft drive commissioning software is available free of charge. It comes from the dark ages of computing but just about functions. It needs a USB standard A (the square one) to standard B (to go in your laptop) cable.
 
+
+## SDOs
+
+The following startup SDOs are required:
+
+
 ## Testing
 
 <YoutubeEmbed embedId="" />
+
+## More information
+
+<Alert message="Information" description="A more detailed guide to integrating this motor driver with the glowbuzzer toolkit is available to our customers - please contact us" type="info" showIcon style={{margin: '20px 0 20px 0'}} />

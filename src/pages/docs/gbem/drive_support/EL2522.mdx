@@ -4,7 +4,7 @@ sort: 4
 ---
 
 import { Image } from "../../../../framework/components/Image"
-import { Rate, Row, Col } from 'antd';
+import { Rate, Row, Col, Alert } from 'antd';
 import {GitHubLink} from "../../../../framework/components/GitHubLink";
 import {YoutubeEmbed} from "../../../../framework/components/Video"
 import {SdoCard} from "../../../../framework/components/SdoCard";
@@ -71,7 +71,8 @@ The output stage allows a maximum frequency of 500 kHz to be output. 500kHz when
 
 
 
-## Initial SDO writes
+## Startup SDOs
+The following SDOs are needed to be applied at startup to configure the drive:
 
 <SdoCard name="Operating mode - CH1" index="0x8000" subindex="0x0e" value="1" notes="1 is pulse/dir"/>
 <SdoCard name="Operating mode - CH2" index="0x8010" subindex="0x0e" value="1" notes="1 is pulse/dir"/>
@@ -84,25 +85,24 @@ The output stage allows a maximum frequency of 500 kHz to be output. 500kHz when
 
 ## PDO mapping
 
-### SM2
+The default PDO mapping is not suitable for position control. So we will need apply a custom mapping.
 
-0x1601,
+Diving into the drive's documentation shows us that the following PDOs will give us position control using 32 bit position registers.
 
-0x1606,
 
-0x160b,
 
-0x160d
+SM2
+* 0x1601 - PTO control position channel 1
+* 0x1606 - PTO control position channel 2
+* 0x160b - ENC control channel 1
+* 0x160d - ENC control channel 2
 
-### SM3
+SM3
+* 0x1a03 - ENC status channel 1
+* 0x1a05 - ENC status channel 2
 
-0x1a00,
+(PTO = Pulse Train Output)
 
-0x1a01,
-
-0x1a03,
-
-0x1a05
 
 ## Default netscan
 
@@ -173,6 +173,13 @@ The output stage allows a maximum frequency of 500 kHz to be output. 500kHz when
 
 ## Netscan after PDO mapping
 
+We can see that we have very little control of the start-up and enabling of this drive. It starts up in enabled mode.
+
+When you write a value to the `Target counter value` it will output the number of pulses to reach this target. Its internal counter can be read in `Counter value`.
+
+There are two channels available.
+
+
 ````c
   SM2 outputs
         [byte_offset] [addr b  ] [index:sub  ] [bitl] [data_type   ] [name                                    ]
@@ -222,11 +229,15 @@ The output stage allows a maximum frequency of 500 kHz to be output. 500kHz when
 
 ## Writing the driver code
 
+GBEM expects drives to follow the CiA 402 state machine and provide an interface that mirrors this standard.
 
+This means we have to write code in our driver software to emulate the CiA 402 statemachine in our driver code. This is not very complicated especially as this drive doesn't have any internal states of its own.
+
+You can see how we do it in the `EL72522.c` file.
 
 ## Testing
 
-## Oscilloscope tests
+### Oscilloscope tests
 
 We connected the A+ output of the EL2522's first channel to an oscilloscope. A- (the complimentary output) is left disconnected. The B+ and B- outputs just signal the direction and these were also left disconnected.
 
@@ -246,136 +257,30 @@ import tek_el2522_ramp from "./tek_el2522_ramp.png?glowsite"
 
 Again this is what we would expect. There slight discontinuities in the increase in frequency at around 170ms probably caused by the cyclic setting of position and Beckhoff's algorithm for calculating the frequency for the next period but we wouldn't expect this to be audibly noticeable on the motor but these could cause slight path variation if the drive was used for precision synchronised motion.
 
-## Testing EL2522 + driver + motor
+### Testing EL2522 + driver + motor
 
 We connected the EL2522 to a generic Chinese stepper motor driver output stage.
 
+The EL2521-0000 has 2 RS422 outputs (A, B) or a single channel (A, B, C) which gives a max. differential voltage of -6V to +6V which works fine with the 5V inputs of the generic stepper output stages.
 
+In step direction mode, channel A becomes step and channel B becomes direction.
 
+These are wired to the output stage's inputs:
+
+* A+ -> PUL+
+* A- -> PUL-
+* B+ -> DIR+
+* B- -> DIR-
+
+import EL2522_wired_with_op_stage from "./EL2522_wired_with_op_stage.jpg?glowsite"
+
+<Image meta={EL2522_wired_with_op_stage} alt="Wired EL2522" />
+
+Here you can see us jogging the EL2522 from the glowbuzzer's toolkit web front-end.
 
 <YoutubeEmbed embedId="" />
 
 
+## More information
 
-
-```c
-Slave: 1
-Name: R88D-KN01H-ECT
-Output size: 96bits
-Input size: 224bits
-State: 18
-Delay: 0[ns]
-Has DC: 1
-DCParentport: 0
-Activeports: 1.0.0.0
-Configured address: 1001
-Man: 00000083 ID: 00000005 Rev: 00020001
-SM0 A:1800 L: 256 F:00010026 Type:1
-SM1 A:1c00 L: 256 F:00010022 Type:2
-SM2 A:1100 L:  12 F:00010064 Type:3
-SM3 A:1200 L:  28 F:00010022 Type:4
-FMMU0 Ls:00000000 Ll:  12 Lsb:0 Leb:7 Ps:1100 Psb:0 Ty:02 Act:01
-FMMU1 Ls:0000000c Ll:  28 Lsb:0 Leb:7 Ps:1200 Psb:0 Ty:01 Act:01
-FMMUfunc 0:1 1:2 2:0 3:0
-MBX length wr: 256 rd: 256 MBX protocols : 04
-CoE details: 2f FoE details: 00 EoE details: 00 SoE details: 00
-Ebus current: 0[mA]
-only LRD/LWR:0
-PDO mapping according to CoE :
-SM2 outputs
-[byte_offset] [addr b  ] [index:sub  ] [bitl] [data_type   ] [name                                    ]
-[0          ] [0x0000.0] [0x6040:0x00] [0x10] [UNSIGNED16  ] [Controlword                             ]
-[2          ] [0x0002.0] [0x607A:0x00] [0x20] [INTEGER32   ] [Target position                         ]
-[6          ] [0x0006.0] [0x60B8:0x00] [0x10] [UNSIGNED16  ] [Touch probe function                    ]
-[8          ] [0x0008.0] [0x60FE:0x01] [0x20] [UNSIGNED32  ] [Physical outputs                        ]
-SM3 inputs
-[byte_offset] [addr b  ] [index: sub ] [bitl] [data_type   ] [name                                    ]
-[0          ] [0x000C.0] [0x603F:0x00] [0x10] [UNSIGNED16  ] [Error code                              ]
-[2          ] [0x000E.0] [0x6041:0x00] [0x10] [UNSIGNED16  ] [Statusword                              ]
-[4          ] [0x0010.0] [0x6064:0x00] [0x20] [INTEGER32   ] [Position actual value                   ]
-[8          ] [0x0014.0] [0x6077:0x00] [0x10] [INTEGER16   ] [Torque actual value                     ]
-[10         ] [0x0016.0] [0x60F4:0x00] [0x20] [INTEGER32   ] [Following error actual value            ]
-[14         ] [0x001A.0] [0x60B9:0x00] [0x10] [UNSIGNED16  ] [Touch probe status                      ]
-[16         ] [0x001C.0] [0x60BA:0x00] [0x20] [INTEGER32   ] [Touch probe pos1 pos value              ]
-[20         ] [0x0020.0] [0x60BC:0x00] [0x20] [INTEGER32   ] [Touch probe pos2 pos value              ]
-[24         ] [0x0024.0] [0x60FD:0x00] [0x20] [UNSIGNED32  ] [Digital inputs                          ]
-*** End of network scanning output ***
-*** Start of eeprom output ***
-1 slaves found.
-Slave 1 data
-PDI Control      : 0C08
-PDI Config       : 0C00
-Config Alias     : 0000
-Checksum         : 00A9
-calculated     : 00A9
-Vendor ID        : 00000083
-Product Code     : 00000005
-Revision Number  : 00020001
-Serial Number    : 11020083
-Mailbox Protocol : 0041
-Size             : 000F = 2048 bytes
-Version          : 0001
-*** End of eeprom output ***
-```
-
-
-
-```c
-Slave: 1
- Name: R88D-KN01H-ECT
- Output size: 96bits
- Input size: 224bits
- State: 18
- Delay: 0[ns]
- Has DC: 1
- DCParentport: 0
- Activeports: 1.0.0.0
- Configured address: 1001
- Man: 00000083 ID: 00000005 Rev: 00020001
- SM0 A:1800 L: 256 F:00010026 Type:1
- SM1 A:1c00 L: 256 F:00010022 Type:2
- SM2 A:1100 L:  12 F:00010064 Type:3
- SM3 A:1200 L:  28 F:00010022 Type:4
- FMMU0 Ls:00000000 Ll:  12 Lsb:0 Leb:7 Ps:1100 Psb:0 Ty:02 Act:01
- FMMU1 Ls:0000000c Ll:  28 Lsb:0 Leb:7 Ps:1200 Psb:0 Ty:01 Act:01
- FMMUfunc 0:1 1:2 2:0 3:0
- MBX length wr: 256 rd: 256 MBX protocols : 04
- CoE details: 2f FoE details: 00 EoE details: 00 SoE details: 00
- Ebus current: 0[mA]
- only LRD/LWR:0
-PDO mapping according to CoE :
-  SM2 outputs
-        [byte_offset] [addr b  ] [index:sub  ] [bitl] [data_type   ] [name                                    ]
-        [0          ] [0x0000.0] [0x6040:0x00] [0x10] [UNSIGNED16  ] [Controlword                             ]
-        [2          ] [0x0002.0] [0x607A:0x00] [0x20] [INTEGER32   ] [Target position                         ]
-        [6          ] [0x0006.0] [0x60B8:0x00] [0x10] [UNSIGNED16  ] [Touch probe function                    ]
-        [8          ] [0x0008.0] [0x60FE:0x01] [0x20] [UNSIGNED32  ] [Physical outputs                        ]
-  SM3 inputs
-        [byte_offset] [addr b  ] [index: sub ] [bitl] [data_type   ] [name                                    ]
-        [0          ] [0x000C.0] [0x603F:0x00] [0x10] [UNSIGNED16  ] [Error code                              ]
-        [2          ] [0x000E.0] [0x6041:0x00] [0x10] [UNSIGNED16  ] [Statusword                              ]
-        [4          ] [0x0010.0] [0x6064:0x00] [0x20] [INTEGER32   ] [Position actual value                   ]
-        [8          ] [0x0014.0] [0x6077:0x00] [0x10] [INTEGER16   ] [Torque actual value                     ]
-        [10         ] [0x0016.0] [0x60F4:0x00] [0x20] [INTEGER32   ] [Following error actual value            ]
-        [14         ] [0x001A.0] [0x60B9:0x00] [0x10] [UNSIGNED16  ] [Touch probe status                      ]
-        [16         ] [0x001C.0] [0x60BA:0x00] [0x20] [INTEGER32   ] [Touch probe pos1 pos value              ]
-        [20         ] [0x0020.0] [0x60BC:0x00] [0x20] [INTEGER32   ] [Touch probe pos2 pos value              ]
-        [24         ] [0x0024.0] [0x60FD:0x00] [0x20] [UNSIGNED32  ] [Digital inputs                          ]
-*** End of network scanning output ***
-*** Start of eeprom output ***
-1 slaves found.
-Slave 1 data
- PDI Control      : 0C08
- PDI Config       : 0C00
- Config Alias     : 0000
- Checksum         : 00A9
-   calculated     : 00A9
- Vendor ID        : 00000083
- Product Code     : 00000005
- Revision Number  : 00020001
- Serial Number    : 11020083
- Mailbox Protocol : 0004
- Size             : 000F = 2048 bytes
- Version          : 0001
-*** End of eeprom output ***
-```
+<Alert message="Information" description="A more detailed guide to integrating this motor driver with the glowbuzzer toolkit is available to our customers - please contact us" type="info" showIcon style={{margin: '20px 0 20px 0'}} />

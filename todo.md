@@ -2,11 +2,9 @@ Nav
   * remove popover
   * focus issue
   * thin down padding top nav
-  * tier 2 top nav headings gone
 
 Templates
 * different template for 404 prvacy etc
-
 
 preview
 * cant refresh
@@ -21,9 +19,7 @@ Routing
 
 Home page
 * play with home page chunking
-* enlarge top slider foreground image
-* fine tune  get started rocket bar
-* add padding to featured blog images
+* add padding to featured blog images - i have forgotten what we said here
 * dots of featured blog
 * top carosuel doesnt repsond to dots - speed
 
@@ -39,6 +35,8 @@ markdown
 code blocks
 * filename for code blocks
 
+gists - react-gist - organising - do we like ? i am meh
+
 
 meta
 * Add a new description bit of front matter into helmet - is this sub-title or longer para?
@@ -52,6 +50,7 @@ links
 
 functionality
 
+* blog keyword nav page
 * char count on mdx files
 * get the example ui components docs fired up again @glowbuzzer/controls
 * https://chatlio.com/ integration

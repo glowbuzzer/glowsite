@@ -4,9 +4,10 @@ sort: 11
 ---
 
 import { Image } from "../../../../framework/components/Image"
-import { Rate, Row, Col } from 'antd';
+import { Rate, Row, Col, Alert } from 'antd';
 import {YoutubeEmbed} from "../../../../framework/components/Video"
 import {GitHubLink} from "../../../../framework/components/GitHubLink";
+import {SdoCard} from "../../../../framework/components/SdoCard";
 
 # Nanotec N5
 
@@ -71,28 +72,25 @@ import nanotec_n5_product_shot from "./nanotec_n5_product_shot.png?glowsite"
     </Row>
 </div>
 
+## BoM for our testing
+
+* Encoder - noe2-050k14
+* Motor - st41442l-0804-b and st4118-k2v1825 - NEMA 17
 
 
-## Connectors
+## Wiring
 
-X1 - Ethernet
+The connectors on the N5 are as follows:
 
-X2 - Encoder and Hall sensor connection
-
-X3 - Digital/analog inputs and outputs
-
-X4 - Brake connection
-
-X5 - Motor connection
-
-X6 - Voltage supply
-
-X7 - EtherCAT IN
-
-X8 - EtherCAT OUT
-
-X9 - External logic supply, input voltage +24 V DC Voltage supply for encoder, input voltage +24 V DC
-
+* X1 - Ethernet
+* X2 - Encoder and Hall sensor connection
+* X3 - Digital/analog inputs and outputs
+* X4 - Brake connection
+* X5 - Motor connection
+* X6 - Voltage supply
+* X7 - EtherCAT IN
+* X8 - EtherCAT OUT
+* X9 - External logic supply, input voltage +24 V DC Voltage supply for encoder, input voltage +24 V DC
 
 X6,  For the version N5-1 (low current) that we are using takes 12 V - 72 V ±5% DC.
 
@@ -101,36 +99,88 @@ The pinout for X6 is as follows:
 * 2 - +ve
 * 3 - gnd
 
-To connect the nanotec plug-and-drive studio you use connector X1, either with Ethernet DHCP or your need to set your PC's IP address to 192.168.2.1
+A 24V 5A power supply was used for our testing.
 
-## BoM for our testing
-
-* Encoder - noe2-050k14
-* Motor - st41442l-0804-b and st4118-k2v1825 - NEMA 17
+To connect the nanotec plug-and-drive studio you use connector X1, either with Ethernet DHCP or your need to set your PC's IP address to 192.168.2.1.
 
 
 ## Drive commissioning software
 
-Plug-n-drive studio
+Plug-n-drive studio is Nanotec's drive commissioning software. It is rather good.
 
-Install
+It is free and can be downloaded from their website and installed.
+
+Next connect to the drive:
+
+import nanotec_pandd_connect from "./nanotec_pandd_connect.png?glowsite"
+
+<Image meta={nanotec_pandd_connect} alt="Nanotec plug-and-drive connect"  maxWidth={800} />
+
+The nanotec drives have a natty webinterface called NanoIP. Juts point a browser at the drive and hey-presto you can configure and test the drive!
+
+N.B. 0x60C2 Interpolation Time Period can be 4ms - sync time always 1ms - this is important
+
+## Error codes
+The register `0x603f` provides a `uint16` error code.
+
+Register `0x1003` provides an error code stack with 8 errors using an `uint32`. In `0x1003` the upper 8 bits are the error number
 
 
+## Startup SDOs
 
-0x60C2 Interpolation Time Period can be 4ms - sync time always 1ms - this is important
+The following SDOs are needed to be applied at startup to configure the drive:
 
+<SdoCard name={"Min position limit"} index={"0x607d"} subindex={"0x1"} value={"Taken from machine config file"} notes={""} />
+<SdoCard name={"Max position limit"} index={"0x607d"} subindex={"0x2"} value={"Taken from machine config file"} notes={""} />
+<SdoCard name={"Polarity (direction of rotation)"} index={"0x607e"} subindex={"0x0"} value={"Taken from machine config file"} notes={""} />
+<SdoCard name={"Quick stop option code"} index={"0x605a"} subindex={"0x0"} value={"1"} notes={"0 = immediate stop, 1 = braking with slow down ramp then change to switch on disabled (default), 2 = braking with quick stop ramp then change to switch on disabled"} />
+<SdoCard name={"Motor revolutions (numerator for gear ratio)"} index={"0x6091"} subindex={"0x1"} value={"0x1"} notes={""} />
+<SdoCard name={"Shaft revolutions (denominator for gear ratio)"} index={"0x6091"} subindex={"0x2"} value={""} notes={"1"} />
+<SdoCard name={"Feed constant"} index={"0x6092"} subindex={"0x1"} value={"1"} notes={""} />
+<SdoCard name={"Feed shaft revolutions"} index={"0x6092"} subindex={"0x2"} value={"1"} notes={""} />
+<SdoCard name={"Interpolation time period"} index={"0x60c2"} subindex={"0x1"} value={"CYLCE_TIME"} notes={""} />
 
-0x603f error code uint16 -
+## PDO mapping
 
-0x1003 error stack with 8 errors uint32
+Looking at the drive's documentation we can see:
 
-in 0x1003
+0x1600:
+* Controlword
+* TargetPosition
+* Motordrivesubmodeselect
+* Modes of operation
 
-upper 8 bits = error number
+0x1601:
+* TargetPosition
+* Profilevelocity
 
+0x1602:
+* vi target velocity
 
+0x1a00:
+* Statusword
+* Position actual value
+* Modes of operation display
 
-## netscan
+0x1a01:
+* Position actual value
+* vi velocity actual value
+
+0x1a03:
+* Digital inputs
+* Read analogue input
+* Read analogue input
+
+The default PDO mapping is just 0x1600 and 0x1a00.
+
+If you don't want to use the digital and analogue inputs then the default PDO will be fine for our purposes as we have access to:
+* position (target and actual)
+* controlword and statusword
+* modes of operation
+
+Which is sufficient to write our drive interface.
+
+## Default netscan (and as we are not doing any PDO mapping the actual PDO map used)
 
 ````c
 *** Starting network scanning output ***
@@ -185,7 +235,20 @@ Slave 1 data
 *** End of eeprom output ***
 ````
 
+In this scan the EEPROM does not contain friendly strings for the register names.
+
+## Writing the driver code
+
+The Nanotec drive follows the CiA 402 specification closely.
+
+Writing the drive software is straight forward.
+
+You can see how we do it in the `n5.c` file.
 
 ## Testing
 
 <YoutubeEmbed embedId="" />
+
+## More information
+
+<Alert message="Information" description="A more detailed guide to integrating this motor driver with the glowbuzzer toolkit is available to our customers - please contact us" type="info" showIcon style={{margin: '20px 0 20px 0'}} />
