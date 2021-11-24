@@ -110,11 +110,47 @@ For the purpose of this review we used a standard AKD-x00306 drive with an AKM m
 
 ## Drive commissioning software
 
-Kollmorgen workbench
+Kollmorgen workbench is the software used to commission the drives.
 
-Free
+It is free and you can download it from the Kollmorgen website.
 
-Wuite good
+First you must install the software. It is Windows only software.
+
+In the software, first select "Project New".
+
+Then click "Add new device".
+
+import kollmorgen_workbench_connect from "./kollmorgen_workbench_connect.png?glowsite"
+
+<Image meta={kollmorgen_workbench_connect} alt="Kollmorgen workbench connect" maxWidth={600}  />
+
+
+The software uses network discovery to find any connected AKD drives.
+
+Your drive must be on the same subnet as your PC. You can find the IP address of the drive by using the little button on the top by the Ethernet port.
+
+You need to make sure the cable to your PC is connected to the service Ethernet port (on the top of the drive) NOT the EtherCAT ports on the front as these definitely will not work..
+
+Once Workbench has found the drive, click ok to initialise the session.
+
+Down the left-hand side of the screen you will be able to see the available options.
+
+import kollmorgen_workbench_options from "./kollmorgen_workbench_options.png?glowsite"
+
+<Image meta={kollmorgen_workbench_options} alt="Kollmorgen workbench options" maxWidth={600}  />
+
+
+Options that are relevant include:
+
+* Performance servo tuner - tune motor (when connected to load)
+* Configure filters etc on digital outputs
+* Configure units for the drive
+* Perform service motion (jog a drive)
+
+import kollmorgen_workbench_service_motion from "./kollmorgen_workbench_service_motion.png?glowsite"
+
+<Image meta={kollmorgen_workbench_service_motion} alt="Kollmorgen workbench service motion" maxWidth={600}  />
+
 
 ## Startup SDOs
 
@@ -162,6 +198,64 @@ The code used to apply these can be found in the library.
 ## Default netscan
 
 ```c
+Slave: 1
+ Name: AKD
+ Output size: 136bits
+ Input size: 136bits
+ State: 2
+ Delay: 0[ns]
+ Has DC: 1
+ DCParentport: 0
+ Activeports: 1.0.0.0
+ Configured address: 1001
+ Man: 0000006a ID: 00414b44 Rev: 00000002
+ SM0 A:1800 L:1024 F:00010026 Type:1
+ SM1 A:1c00 L:1024 F:00010022 Type:2
+ SM2 A:1100 L:  17 F:00010024 Type:3
+ SM3 A:1140 L:  17 F:00010020 Type:4
+ FMMU0 Ls:00000000 Ll:  17 Lsb:0 Leb:7 Ps:1100 Psb:0 Ty:02 Act:01
+ FMMU1 Ls:00000011 Ll:  17 Lsb:0 Leb:7 Ps:1140 Psb:0 Ty:01 Act:01
+ FMMUfunc 0:1 1:2 2:3 3:0
+ MBX length wr: 1024 rd: 1024 MBX protocols : 0e
+ CoE details: 0d FoE details: 01 EoE details: 03 SoE details: 00
+ Ebus current: 0[mA]
+ only LRD/LWR:0
+PDO mapping according to CoE :
+  SM2 outputs
+        [byte_offset] [addr b  ] [index:sub  ] [bitl] [data_type   ] [name                                    ]
+        [0          ] [0x0000.0] [0x6040:0x00] [0x10]
+        [2          ] [0x0002.0] [0x6040:0x00] [0x10]
+        [4          ] [0x0004.0] [0x6060:0x00] [0x08]
+        [5          ] [0x0005.0] [0x6040:0x00] [0x10]
+        [7          ] [0x0007.0] [0x607A:0x00] [0x20]
+        [11         ] [0x000B.0] [0x6040:0x00] [0x10]
+        [13         ] [0x000D.0] [0x60FF:0x00] [0x20]
+  SM3 inputs
+        [byte_offset] [addr b  ] [index: sub ] [bitl] [data_type   ] [name                                    ]
+        [0          ] [0x0011.0] [0x6041:0x00] [0x10]
+        [2          ] [0x0013.0] [0x6041:0x00] [0x10]
+        [4          ] [0x0015.0] [0x6061:0x00] [0x08]
+        [5          ] [0x0016.0] [0x6041:0x00] [0x10]
+        [7          ] [0x0018.0] [0x6064:0x00] [0x20]
+        [11         ] [0x001C.0] [0x6041:0x00] [0x10]
+        [13         ] [0x001E.0] [0x606C:0x00] [0x20]
+*** End of network scanning output ***
+*** Start of eeprom output ***
+1 slaves found.
+Slave 1 data
+ PDI Control      : 0009
+ PDI Config       : 0800
+ Config Alias     : 0004
+ Checksum         : 00B4
+   calculated     : 00B4
+ Vendor ID        : 0000006A
+ Product Code     : 00414B44
+ Revision Number  : 00000002
+ Serial Number    : 85068177
+ Mailbox Protocol : 000E
+ Size             : 000F = 2048 bytes
+ Version          : 0001
+*** End of eeprom output ***
 ```
 
 ## Netscan post PDO mapping
@@ -169,6 +263,42 @@ The code used to apply these can be found in the library.
 After applying our PDO mapping this is the netscan output:
 
 ```c
+Slave: 1
+ Name: AKD
+ Output size: 136bits
+ Input size: 136bits
+ State: 18
+ Delay: 0[ns]
+ Has DC: 1
+ DCParentport: 0
+ Activeports: 1.0.0.0
+ Configured address: 1001
+ Man: 0000006a ID: 00414b44 Rev: 00000002
+ SM0 A:1800 L:1024 F:00010026 Type:1
+ SM1 A:1c00 L:1024 F:00010022 Type:2
+ SM2 A:1100 L:  17 F:00010024 Type:3
+ SM3 A:1140 L:  17 F:00010020 Type:4
+ FMMU0 Ls:00000000 Ll:  17 Lsb:0 Leb:7 Ps:1100 Psb:0 Ty:02 Act:01
+ FMMU1 Ls:00000011 Ll:  17 Lsb:0 Leb:7 Ps:1140 Psb:0 Ty:01 Act:01
+ FMMUfunc 0:1 1:2 2:3 3:0
+ MBX length wr: 1024 rd: 1024 MBX protocols : 0e
+ CoE details: 0d FoE details: 01 EoE details: 03 SoE details: 00
+ Ebus current: 0[mA]
+ only LRD/LWR:0
+PDO mapping according to CoE :
+  SM2 outputs
+        [byte_offset] [addr b  ] [index:sub  ] [bitl] [data_type   ] [name                                    ]
+        [0          ] [0x0000.0] [0x607A:0x00] [0x20]
+        [4          ] [0x0004.0] [0x6040:0x00] [0x10]
+        [6          ] [0x0006.0] [0x60B2:0x00] [0x10]
+  SM3 inputs
+        [byte_offset] [addr b  ] [index: sub ] [bitl] [data_type   ] [name                                    ]
+        [0          ] [0x0011.0] [0x6041:0x00] [0x10]
+        [2          ] [0x0013.0] [0x6064:0x00] [0x20]
+        [6          ] [0x0017.0] [0x6077:0x00] [0x10]
+        [8          ] [0x0019.0] [0x60FD:0x00] [0x20]
+        [12         ] [0x001D.0] [0x3470:0x04] [0x10]
+        [14         ] [0x001F.0] [0x60F4:0x00] [0x20]
 ```
 
 

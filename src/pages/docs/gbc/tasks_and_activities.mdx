@@ -44,6 +44,49 @@ Activities can be invoked in three different ways:
 2. As a `streamed activity` used for continuous motion. E.g. streaming a gcode program - support blending - pause and resume - classic queue for flow control - capacity to check so don't overfil - front end code handles this for you. Send end program activity to kick it off if you dfont fill buffer  if you fill buffer will kick off acutomaically - gcode reference impl for this - not exclusively
 3. From a Task executing on GBC that either cyclically or in response to an event executes the Activity)
 
+
+### Sending activities to GBC
+
+`SoloActivity`
+```tsx
+soloActivity.moveJoints([1000,0,0]).promise()
+```
+
+`Websockets message`
+
+```tsx
+const connection = useConnect()
+        moveLine(pos: Vector3) {
+            const currentTag = tag.current++
+            return new Promise<void>((resolve, reject) => {
+                // store the functions for later resolution/rejection
+                promisesRef.current[currentTag] = { resolve, reject }
+                connection.send(
+                    JSON.stringify({
+                        command: {
+                            soloActivity: {
+                                0: {
+                                    command: {
+                                        activityType: 2,
+                                        tag: currentTag,
+                                        moveLine: {
+                                            line: {
+                                                position: pos
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    })
+                )
+            })
+
+```
+
+
+
+
 ### The set of Activities
 
 * MoveJoints
