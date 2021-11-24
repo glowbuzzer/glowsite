@@ -28,9 +28,11 @@ jobs:
 
             -   name: Install packages
                 run: pnpm install # --no-optional
+                env:
+                    NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
             -   name: Build site
-                run: pnpm run build
+                run: pnpm run build:csr
 
             -   name: Deploy site
                 run: ./deploy-site.sh preview.glowbuzzer.com E284GBH6OG76DV
