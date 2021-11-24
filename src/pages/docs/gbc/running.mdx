@@ -28,5 +28,40 @@ Similarly, GBC will not run in real-time on virtual machines (on Windows) but th
 
 Once run, GBC will output to the console, various logging information about what it is up to. In the case you are having issues, picking carefully through this output is recommended as a good starting point to fault diagnosis.
 
+The first output should look something like this.
 
-TODO screen shot of GBC startup
+```text
+[INFO  ] GBC: **************************************************************************
+[INFO  ] GBC: ***                         Starting GB Control                        ***
+[INFO  ] GBC: **************************************************************************
+[WARN  ] GBC: No valid port was specified on the command line. Will use the default [9001]
+[WARN  ] GBC: No valid signal was specified on the command line. Will use the default [29]
+[WARN  ] GBC: No valid shared memory name was specified on the command line. Will use the default [gbc_shared_memory]
+[INFO  ] GBC: Software project name [GBC]
+[INFO  ] GBC: Software project version [0.0.1]
+[INFO  ] GBC: Release Git Tag [0.0.0]
+```
+
+Key things to look out for in the console output.
+
+
+```text
+[WARN  ] GBC-JS: File not found [configs/machine_el7211_test.json], loading file [configs/machine_el7211_test.json] from fsdata
+```
+
+
+```text
+[INFO  ] GBC-M7: Machine bus cycle time is [4] ms
+```
+
+
+```text
+
+[INFO  ] GBC-M7: Configured joint [0], vmax [50.000000], amax [200.000000], jmax [400.000000], scale [1000000.000000]
+[INFO  ] GBC-M7: Configured joint [1], vmax [50.000000], amax [200.000000], jmax [400.000000], scale [1000000.000000]
+[INFO  ] GBC-M7: Configured joint [2], vmax [50.000000], amax [200.000000], jmax [400.000000], scale [1000000.000000]
+[INFO  ] GBC-M7: Configured KC [0], linear vmax [50.000000], linear amax [200.000000], linear jmax [400.000000]
+[INFO  ] GBC-M7: Configured KC [0], jog vmax [0.000000], jog amax [0.000000], jog jmax [0.000000]
+[INFO  ] GBC-M7: Configured KC [0], cartesian scale x [0.000000], cartesian scale y [0.000000], cartesian scale z [0.000000]
+[INFO  ] GBC-M7: Configured KC [0], extents x [-100.000000,100.000000], extents y [0.000000,0.000000], extents z [0.000000,0.000000]
+```

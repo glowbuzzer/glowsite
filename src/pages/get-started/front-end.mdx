@@ -184,9 +184,7 @@ We will be running in `Simulation Mode` as we have not integrated GBC with any h
 
 Now, in the UI, the glowbuzzer provided Digital Outputs tile reflects the state of all the digital outputs and you will be able to see Digital Output 1 toggle as your move your switch.
 
-
 That is it. It shows how simple it is to create React components to control machine functions.
-
 
 # Make a drive move - an oscillating move -  Front-end Tutorial 2
 
@@ -197,13 +195,81 @@ The next example in showing how easy it is to write React machine control functi
 
 Create `TutorialOscillatingMoveTile.tsx` in the project you created with the custom template.
 
+We will use a `soloActivity` to perform the move. Everything you get back is promise based so to create and oscillating move, we can `await` the completion of a move.
 
 
-use solo actity
 
-everythig get back is promise
+```tsx
+//TutorialOscillatingMoveTile.tsx
+// import React, {createContext, FC, useContext, useRef, useState} from "react"
+import { useSoloActivity } from '@glowbuzzer/store';
+import {Tile} from "@glowbuzzer/layout";
+import {Button} from "antd";
 
-use effect
+export const TutorialOscillatingMoveTile = () => {
+    const [complete, setComplete] = useState(false)
+    const soloActivity = useSoloActivity(0)
+
+    async function do_promise() {
+        setComplete(false)
+        await soloActivity.moveJoints([1000,0,0]).promise()
+        await soloActivity.moveJoints([0,0,0]).promise()
+        await soloActivity.moveJoints([1000,0,0]).promise()
+        await soloActivity.moveJoints([0,0,0]).promise()
+        setComplete(true)
+    }
+
+    return (
+        <Tile title="Test Oscillating move">
+            <Button onClick={do_promise}>Start Move</Button>
+            {complete ? "Move complete" : ""}
+        </Tile>
+    )
+}
+```
+
+## Add the tile to the UI
+
+In app.tsx, import the component you just wrote:
+```tsx
+import {TutorialDoToggleTile} from "./tutorial/TutorialOscillatingMoveTile";
+```
+
+Then render it on the page at the appropriate point:
 
 
+```tsx
+//app.tsx
+{ render: <TutorialOscillatingMoveTile />, height: 4, title: "Tutorial Oscillating Move" }
+```
+
+
+
+When you view your site you should now see your tile.
+
+import oscillating_move_tile from "./front_end_tutorial_images/oscillating_move_tile.png?glowsite"
+
+<Image meta={oscillating_move_tile} alt="Oscillating move tile" maxWidth={400}/>
+
+
+
+## Test the oscillating move
+
+The next step is to test the move.
+
+You will need to run GBC and connect the front-end application to the GBC websockets server for this step.
+
+(GBC can be dowloaded from `https://downloads.glowbuzzer.com/?????`)
+
+Run GBC with: `./GBC`
+
+Then, in the browser, click connect to establish a connection to GBC.
+
+Then make sure the machine state is "Operation Enabled" by clicking the `Operate` button (after clearing any faults).
+
+Now when we click the Start move button, in the Joints Tile, we will see our drive spinning.
+
+import oscillating_move_running from "./front_end_tutorial_images/oscillating_move_running.png?glowsite"
+
+<Image meta={oscillating_move_running} alt="Oscillating move running"/>
 

@@ -17,6 +17,7 @@ Routing
 * privacy and legal stopped working
 
 
+
 Home page
 * play with home page chunking
 * add padding to featured blog images - i have forgotten what we said here
@@ -35,7 +36,10 @@ markdown
 code blocks
 * filename for code blocks
 
-gists - react-gist - organising - do we like ? i am meh
+
+HMR on gbc.ts -watch whatever - quite important
+
+we use reactmarkdown in gbc schema - links need proper Link to avoid reloadery
 
 
 meta

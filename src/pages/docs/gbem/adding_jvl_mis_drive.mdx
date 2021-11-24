@@ -7,6 +7,7 @@ import { Image } from "../../../framework/components/Image"
 import {Tldr} from "../../../framework/components/Tldr";
 import {YoutubeEmbed} from "../../../framework/components/Video"
 import {GitHubLink} from "../../../framework/components/GitHubLink";
+import {BogStandardCol, BogStandardRow, BogStandardHeaderRow} from "../../../framework/components/BogStandardTable";
 
 # Adding support for JVL MIS drive - a blow-by-blow account
 
@@ -60,14 +61,91 @@ import jvl_m12_rj45 from "./jvl_m12_rj45.png?glowsite"
 
 ### From JVL
 
-| Part Number          | Short description | Long Description                                             |
-| -------------------- | ----------------- | ------------------------------------------------------------ |
-| MIS176S35ECH466      | Motor             | Int.Step 12-72VDC, EtherCAT, AbsC-L, Serie Nr.: 250690, 4xM12. 2x4pF:EtherCAT 17pF:8xDIO/AI+RS422+RS485, High Resolution: 409.600 step/rev. ±0.01 RPM, Programmable (incl. current, position & velocity), C-L + Abs Multiturn Enc. 4096/1024 CPR ± 5245, Revs, 8x24 w/ 3x10 KeyShaft: IP42 Motor: IP42, 43.1x106.0 mm Holding Torque: 0.80 Nm Radial, Connector 12-72 VDC Mechanical Power: 134 W |
-| RS485-M12-1-5-17     | RS485 cable       | RS485 M12-17pin DSub, 5m v1.1, For ServoStep MIS17x...43x + SMC66/85 w/Ethernet, and MAC motor® w/Ethernet, MAC00-Ex41 |
-| WI1000-M12F5T05N     | Power cable       | M12 Shl Cable 5m 5 pin Fem 0°, Power                         |
-| WI1046-M12M4T05TRJ45 | Ethernet cable    | M12 Cab D-code Ethernet M0°-RJ45, 5m, Ø5                     |
-| RS485-USB-ATC-820    | USB-RS485 adapter | USB to RS485 non-isolated adapter. 0,5m                      |
-| MACTALK_USB_OEM      | MacTalk software  | MAC/MIS/SMC Win software+manuals USB8G                       |
+<BogStandardHeaderRow>
+    <BogStandardCol span={4}>
+        Part Number
+    </BogStandardCol>
+    <BogStandardCol span={4}>
+        Short description
+    </BogStandardCol>
+    <BogStandardCol span={16}>
+        Long Description
+    </BogStandardCol>
+</BogStandardHeaderRow>
+
+<BogStandardRow>
+    <BogStandardCol span={4}>
+        MIS176S35ECH466
+    </BogStandardCol>
+    <BogStandardCol span={4}>
+        Motor
+    </BogStandardCol>
+    <BogStandardCol span={16}>
+        Int.Step 12-72VDC, EtherCAT, AbsC-L, Serie Nr.: 250690, 4xM12. 2x4pF:EtherCAT 17pF:8xDIO/AI+RS422+RS485, High Resolution: 409.600 step/rev. ±0.01 RPM, Programmable (incl. current, position & velocity), C-L + Abs Multiturn Enc. 4096/1024 CPR ± 5245, Revs, 8x24 w/ 3x10 KeyShaft: IP42 Motor: IP42, 43.1x106.0 mm Holding Torque: 0.80 Nm Radial, Connector 12-72 VDC Mechanical Power: 134 W
+    </BogStandardCol>
+</BogStandardRow>
+
+
+<BogStandardRow>
+    <BogStandardCol span={4}>
+        RS485-M12-1-5-17
+    </BogStandardCol>
+    <BogStandardCol span={4}>
+        RS485 cable
+    </BogStandardCol>
+    <BogStandardCol span={16}>
+        RS485 M12-17pin DSub, 5m v1.1, For ServoStep MIS17x...43x + SMC66/85 w/Ethernet, and MAC motor® w/Ethernet, MAC00-Ex41
+    </BogStandardCol>
+</BogStandardRow>
+
+
+<BogStandardRow>
+    <BogStandardCol span={4}>
+        WI1000-M12F5T05N
+    </BogStandardCol>
+    <BogStandardCol span={4}>
+        Power cable
+    </BogStandardCol>
+    <BogStandardCol span={16}>
+        M12 Shl Cable 5m 5 pin Fem 0°, Power
+    </BogStandardCol>
+</BogStandardRow>
+
+<BogStandardRow>
+    <BogStandardCol span={4}>
+        WI1046-M12M4T05TRJ45
+    </BogStandardCol>
+    <BogStandardCol span={4}>
+        Ethernet cable
+    </BogStandardCol>
+    <BogStandardCol span={16}>
+        M12 Cab D-code Ethernet M0°-RJ45, 5m, Ø5
+    </BogStandardCol>
+</BogStandardRow>
+
+<BogStandardRow>
+    <BogStandardCol span={4}>
+        RS485-USB-ATC-820
+    </BogStandardCol>
+    <BogStandardCol span={4}>
+        USB-RS485 adapter
+    </BogStandardCol>
+    <BogStandardCol span={16}>
+        USB to RS485 non-isolated adapter. 0,5m
+    </BogStandardCol>
+</BogStandardRow>
+
+<BogStandardRow>
+    <BogStandardCol span={4}>
+        MACTALK_USB_OEM
+    </BogStandardCol>
+    <BogStandardCol span={4}>
+        MacTalk software
+    </BogStandardCol>
+    <BogStandardCol span={16}>
+        MAC/MIS/SMC Win software+manuals USB8G
+    </BogStandardCol>
+</BogStandardRow>
 
 ### Miscellaneous items needed
 

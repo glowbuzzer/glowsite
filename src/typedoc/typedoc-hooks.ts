@@ -12,7 +12,7 @@ const groups = {
     "Type alias": [] as GbcSchemaItem[]
 }
 
-gbcschema.forEach((source) => groups[source.kindString]?.push(source))
+gbcschema.forEach(source => groups[source.kindString]?.push(source))
 
 export function useGbcSchema(): { [index: string]: GbcSchemaItem[] } {
     return groups
