@@ -186,15 +186,9 @@ const nav = {
                             component: () => import("./pages/docs/gbc/running.mdx")
                         },
                         {
-                            slug: "activities",
-                            title: "Activities",
-                            children: [
-                                {
-                                    slug: "intro",
-                                    title: "Introduction",
-                                    component: () => import("./pages/docs/gbc/activities/intro.mdx")
-                                }
-                            ]
+                            slug: "tasks_and_activities",
+                            title: "Tasks and activities",
+                            component: () => import("./pages/docs/gbc/tasks_and_activities.mdx")
                         },
                         {
                             slug: "configuration",
@@ -266,7 +260,7 @@ const nav = {
                         {
                             slug: "overview",
                             title: "Overview of GBEM",
-                            component: () => import("./pages/docs/gbem/introduction.mdx")
+                            component: () => import("./pages/docs/gbem/overview.mdx")
                         },
                         {
                             slug: "compiling_and_running",
@@ -459,7 +453,7 @@ const nav = {
                         {
                             slug: "overview",
                             title: "Overview of GBSM",
-                            component: () => import("./pages/docs/gbsm/introduction.mdx")
+                            component: () => import("./pages/docs/gbsm/overview.mdx")
                         },
                         {
                             slug: "tmc4361_and_tmc5160",
@@ -518,12 +512,12 @@ const nav = {
                         {
                             slug: "overview",
                             title: "Overview of front-end components",
-                            component: () => import("./pages/docs/ui/introduction.mdx")
+                            component: () => import("./pages/docs/ui/overview.mdx")
                         },
                         {
                             slug: "starter_project",
                             title: "Creating a starter project",
-                            component: () => import("./pages/docs/ui/getting_started.mdx")
+                            component: () => import("./pages/docs/ui/starter_project.mdx")
                         },
                         {
                             slug: "controls",

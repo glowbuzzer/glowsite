@@ -9,7 +9,7 @@
     "serve": "node serve-dist.js",
     "build:server": "root build --ssr src/_render.jsx --outDir dist/server",
     "build": "root build --outDir dist/static && npm run build:server && node prerender.mjs",
-    "build:csr": "vite build --outDir dist/static",
+    "build:csr": "vite build root/csr",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
