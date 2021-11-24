@@ -1,12 +1,7 @@
----
-title: Front-end components
-subtitle: Building a machine control in React
-sort: 9
----
-
 import {Tabs} from "antd"
 import {Tldr} from "../../framework/components/Tldr";
 import {Link} from "react-router-dom"
+import { GlowbuzzerApp } from "@glowbuzzer/controls/app"
 
 # Front-end components
 
@@ -34,21 +29,45 @@ We have selected a handful of the components here to give you a flavour of what'
 * **Robot/machine view** - for machines with non-trivial kinematics (robots) shows a 3d view of the machine
 * **Telemetry** - shows the trajectories that are sent to drives (for diagnostic purposes)
 
+
+Here you can see the documentation for a few components:
+
 <Tabs defaultActiveKey="1">
+    <Tabs.TabPane tab="Cartesian DRO" key="1" >
+        <GlowbuzzerApp minWidth={"1px"}>
+        ```jsx demo
+        import * as React from "react";
+        import {CartesianDro} from '@glowbuzzer/controls';
+        export default () => <CartesianDro kinematicsConfigurationIndex={0}/>
+        ```
+        </GlowbuzzerApp>
 
-    <Tabs.TabPane tab="Machine connection" key="1">
-        The machine connection
     </Tabs.TabPane>
+    <Tabs.TabPane tab="Frame view" key="2">
 
-    <Tabs.TabPane tab="Joint DRO" key="2">
-        Content of Tab Pane 2
+        <GlowbuzzerApp minWidth={"1px"}>
+        ```jsx demo
+            import * as React from "react";
+            import {FrameView} from "@glowbuzzer/controls";
+            export default () => <FrameView/>
+            ```
+        </GlowbuzzerApp>
+
     </Tabs.TabPane>
-
     <Tabs.TabPane tab="Bit Field Display" key="3">
-        The bitfield display is used
-    </Tabs.TabPane>
 
+        ```jsx demo
+        import * as React from "react";
+        import {BitFieldDisplay} from "@glowbuzzer/controls";
+        export default () => <BitFieldDisplay value={111} bitCount={16}/>
+        ```
+
+    </Tabs.TabPane>
 </Tabs>
+
+
+
+
 
 You will import the controls you need into your project:
 

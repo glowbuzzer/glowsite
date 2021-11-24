@@ -8,21 +8,28 @@ import { Link } from "react-router-dom"
 import { GbcSchemaLeftNav } from "../framework/components/GbcSchemaLeftNav"
 import ReactMarkdown from "react-markdown"
 
+// const transformLinkUri = (uri) => (
+// deafult link transformer does fancy xss filter
+// access here require('react-markdown').uriTransformer
+// )
+
 const TypeAlias = ({ item }) => {
     const props = item.type.declaration.children.map(p => ({
         key: p.name,
         name: { name: p.name, required: false },
         type: p.type.id ? <Link to={"./" + p.type.name}>{p.type.name}</Link> : p.type.name,
-        description: <ReactMarkdown children={p.comment?.shortText || " "} />
+        description: <ReactMarkdown children={p.comment?.shortText || "Not available"} />
     }))
-    console.log(item)
+    console.log(props)
     //undefined type for arrays
     // need fancier in type:
 
     return (
         <>
             <h1>{item.name}</h1>
-            <div className="shortText">{item.comment?.shortText}</div>
+            <div className="shortText">
+                <ReactMarkdown children={item.comment?.shortText || "Not available"} />
+            </div>
             <div className="text">{item.comment?.text}</div>
             <ComponentProps displayName={item.name} properties={props} showDefaults={false} />
         </>
@@ -34,7 +41,7 @@ const Enumeration = ({ item }) => {
         key: p.name,
         name: { name: p.name, required: false },
         type: item.kindString,
-        description: <ReactMarkdown children={p.comment?.shortText || " "} />
+        description: p.comment?.shortText || "Not available"
     }))
     return (
         <>

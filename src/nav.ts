@@ -56,13 +56,13 @@ const nav = {
                 {
                     slug: "platforms",
                     title: "Platforms",
-                    subtitle: "What platforms does it run on",
+                    subtitle: "What platforms does it run on?",
                     component: () => import("./pages/how-it-works/platforms.mdx")
                 },
                 {
                     slug: "drives",
                     title: "Drives",
-                    subtitle: "How does it integrate with drives",
+                    subtitle: "How does it integrate with drives?",
                     component: () => import("./pages/how-it-works/drives.mdx")
                 },
                 {
@@ -558,6 +558,108 @@ const nav = {
                 }
             ]
         },
+        {
+            slug: "blogs",
+            title: "Blogs",
+            layout: DefaultDocumentationPage,
+            children: [
+                {
+                    slug: "webdev",
+                    title: "Web-dev",
+                    subtitle: "Blogs about web development",
+                    children: [
+                        {
+                            slug: "reactnative",
+                            title: "React native",
+                            subtitle: "Getting started with React Native",
+                            component: () => import("./pages/blogs/webdev/react_native.mdx")
+                        },
+                        {
+                            slug: "three",
+                            title: "three.js",
+                            subtitle: "Introduction to three.js",
+                            component: () => import("./pages/blogs/webdev/threejs.mdx")
+                        },
+                        {
+                            slug: "opcua",
+                            title: "OPC/UA",
+                            subtitle: "Working with OPC/UA",
+                            component: () => import("./pages/blogs/webdev/opcua.mdx")
+                        }
+                    ]
+                },
+                {
+                    slug: "drives",
+                    title: "Drives",
+                    subtitle: "Blogs about drives",
+                    children: [
+                        {
+                            slug: "optidrive",
+                            title: "Invertek Optidrive P3",
+                            subtitle: "Getting the Invertek Optidrive P2 VFD working",
+                            description:
+                                "The Optidrive P2 is a variable frequency drive (VFD) for controlling 3-phase AC motors. It has an EtherCAT communications option and we use this to control the drive's start/stop speed etc.",
+                            component: () =>
+                                import("./pages/blogs/drives/invertek_optidrive_p2.mdx")
+                        },
+                        {
+                            slug: "maxon",
+                            title: "Maxon EPOS 4",
+                            subtitle:
+                                "Firing up the Maxon EPOS4 positioning controller for brushed and brushless DC motors",
+                            description:
+                                "The Maxon EPOS4 is EtherCAT drive for brushed DC and BLDC motors upto 250W. In this blog we commission the drive using EPOS/IDX software explore its features and integrate into our EtherCAT master.",
+                            component: () =>
+                                import("./pages/blogs/drives/invertek_optidrive_p2.mdx")
+                        }
+                    ]
+                },
+                {
+                    slug: "embedded",
+                    title: "Embedded development",
+                    subtitle: "Blogs about embedded development",
+                    children: [
+                        {
+                            slug: "netx",
+                            title: "Hilscher netX 51 & the glowbuzzer toolkit",
+                            subtitle: "Exploring the Hilscher netX 51 multi-protocol slave",
+                            description:
+                                "The Hilscher netX 51 is a real-Time Ethernet network controller IC. In this blog we integrate the netX chip with our software over SPI to exchange data with an EtherCAT master.",
+                            component: () => import("./pages/blogs/embedded/netx.mdx")
+                        },
+                        {
+                            slug: "lan9252",
+                            title: "LAN9252 investigation",
+                            subtitle: "Investigating the Microchip LAN9252/53 EtherCAT slave IC",
+                            description:
+                                "The Microchip LAN925253 chip is an EtherCAT slave controller that presents a relatively easy to use interface over SPI. Here we get the chip up and running and integrated with our software to communicate with an EtherCAT master.",
+                            component: () => import("./pages/blogs/embedded/lan9252.mdx")
+                        },
+                        {
+                            slug: "torizon",
+                            title: "Linux on a Toradex iMX8M Plus",
+                            subtitle:
+                                "Using the Toradex iMX8M Plus as a platform for the glowbuzzer toolkit",
+                            component: () => import("./pages/blogs/embedded/torizon.mdx")
+                        }
+                    ]
+                },
+                {
+                    slug: "robotics",
+                    title: "Robotics",
+                    subtitle: "Blogs about robotics",
+                    children: [
+                        {
+                            slug: "staubli_commission",
+                            title: "Commissioning a Stabli TX robot",
+                            subtitle: "Wiring up a Staubli TX robot",
+                            component: () => import("./pages/blogs/robotics/staubli_wiring.mdx")
+                        }
+                    ]
+                }
+            ]
+        },
+
         {
             slug: "about",
             title: "About",

@@ -6,6 +6,10 @@ pnpm i
 pnpm run dev
 ```
 
+```
+vite root/csr
+```
+
 To build for prod:
 ```
 pnpm run generate
