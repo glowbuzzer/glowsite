@@ -21,6 +21,7 @@ const StyledSection = styled.div<{
     dataExpand: boolean
 }>`
     label: Section;
+    display: flex;
     background: ${props => props.theme.color[props.dataColor] || "inherit"};
 
     > .section {
@@ -49,17 +50,17 @@ const StyledSection = styled.div<{
             `}
     }
 
-  ${props =>
-          props.dataExpand &&
-          css`
-                flex-grow: 1;
-            `}
+    ${props =>
+        props.dataExpand &&
+        css`
+            flex-grow: 1;
+        `}
 
-  ${props =>
-          props.dataGuttered &&
-          css`
-                padding: 0 40px;
-            `}
+    ${props =>
+        props.dataGuttered &&
+        css`
+            padding: 0 40px;
+        `}
 
 
   ${props =>

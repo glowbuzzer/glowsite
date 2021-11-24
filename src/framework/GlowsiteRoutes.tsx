@@ -1,25 +1,49 @@
 import { Route, Switch } from "react-router"
 import { TypedocItem } from "../typedoc/TypedocItem"
 import * as React from "react"
-import { useRoutes } from "./providers/NavProvider"
+import { Suspense, useEffect, useState } from "react"
+import { useRoutes } from "./nav"
 import { Helmet } from "react-helmet"
 import { FallbackLayout } from "./layouts/FallbackLayout"
 import * as NotFound from "../pages/404.mdx"
 import { BaseLayout } from "./layouts/BaseLayout"
-import {BreadcrumbNav} from "./components/BreadcrumbNav";
+import { Spin } from "antd"
+import styled from "@emotion/styled"
+
+const StyledSpin = styled(Spin)`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    height: 100%;
+    text-align: center;
+`
+
+const Loading = () => {
+    const [show, setShow] = useState(false)
+    useEffect(() => {
+        const timer = setTimeout(() => setShow(true), 1000)
+        return () => clearTimeout(timer)
+    }, [])
+
+    return show ? <StyledSpin size="large" /> : null
+}
 
 /**
  * Emits all site routes
  */
 
-export const GlowsiteRouter = () => {
+export const GlowsiteRoutes = () => {
     const routes = useRoutes()
+
+    console.log("ROUTES", routes)
 
     return (
         <>
             <Switch>
-                {routes.map(({ path, title, layout, component: RouteComp }) => {
+                {routes.map(({ path, title, layout, component }) => {
                     const Layout = layout || FallbackLayout
+                    const Component = component && React.lazy(component)
                     return (
                         <Route key={path} path={path} exact={true}>
                             <Helmet>
@@ -28,7 +52,11 @@ export const GlowsiteRouter = () => {
                                 {title && <title>{title}</title>}
                             </Helmet>
                             <Layout>
-                                {RouteComp && <RouteComp />}
+                                {Component && (
+                                    <Suspense fallback={<Loading />}>
+                                        <Component />
+                                    </Suspense>
+                                )}
                             </Layout>
                         </Route>
                     )

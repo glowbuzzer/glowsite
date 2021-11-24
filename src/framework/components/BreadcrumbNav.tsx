@@ -1,7 +1,7 @@
-import { useNavCrumbs } from "../providers/NavProvider"
 import { Breadcrumb, Menu } from "antd"
 import { Link } from "react-router-dom"
 import styled from "@emotion/styled"
+import {useNavCrumbs} from "../nav";
 
 const StyledDiv = styled.div`
     padding: 10px 20px;
@@ -21,7 +21,7 @@ export const BreadcrumbNav = () => {
 
     const current = crumbs.pop() // we want to display crumb as menu
 
-    if (!current) {
+    if (!crumbs.length || !current) {
         return null
     }
 

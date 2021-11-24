@@ -46,11 +46,11 @@ function createValue(val) {
  * @param attributes Name/value pairs, where value can be plain string or identifier (see above)
  * @returns
  */
-export function createElement(name, attributes) {
+export function createElement(name, attributes = {}, children = []) {
     return {
         type: "mdxJsxFlowElement",
         name,
-        children: [],
+        children,
         attributes: Object.entries(attributes).map(([name, value]) => ({
             type: "mdxJsxAttribute",
             name,
@@ -182,15 +182,25 @@ export function handler(prefix, sourcePath) {
                     })
             )
         },
-        component(node, parent, index, promise) {
+        component(node, parent, index, promise, wrapperClass = undefined) {
             promises.push(
                 promise
                     .then(({ unique, relative }) => {
-                        // result of the promise on success
+                        // default without wrapper
+                        let componentElement = createElement(`${prefix}_${unique}`)
+                        if (wrapperClass) {
+                            componentElement = createElement(
+                                "div",
+                                {
+                                    className: wrapperClass
+                                },
+                                [componentElement] // add actual component as child of wrapper
+                            )
+                        }
                         return {
                             parent,
                             index,
-                            insert: createElement(`${prefix}_${unique}`, {}),
+                            insert: componentElement,
                             import: createImport(`${prefix}_${unique}`, relative)
                         }
                     })
@@ -206,12 +216,16 @@ export function handler(prefix, sourcePath) {
             const success = result.filter(r => !r.error) // get the successful renders
             const imports = success.map(r => r.import) // gather imports
 
+            // keep a count of the inserts done per parent to avoid insert 'drift'
+            const insert_counts = Object.fromEntries(success.map(({ parent }) => [parent, 0]))
+
             for (const { parent, index, replace, insert } of success) {
                 if (replace) {
-                    parent.children[index] = replace // mutate the nodes
+                    parent.children[index + insert_counts[parent]] = replace // mutate the nodes
                 } else {
                     // must be insert
-                    parent.children.splice(index, 0, insert)
+                    parent.children.splice(index + insert_counts[parent], 0, insert)
+                    insert_counts[parent]++
                 }
             }
 

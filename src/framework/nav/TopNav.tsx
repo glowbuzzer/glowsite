@@ -1,4 +1,4 @@
-import { useRootNav } from "../providers/NavProvider"
+import { useRootNav } from "../nav"
 import { Link, useLocation } from "react-router-dom"
 import { Menu, Space } from "antd"
 import * as React from "react"

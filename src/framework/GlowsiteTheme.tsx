@@ -45,6 +45,11 @@ const AppStyle = styled.div`
         overflow-x: auto;
         white-space: pre;
     }
+
+    .codeblock-demo {
+      padding: 8px;
+        border: 1px solid rgba(0, 0, 0, 0.5);
+    }
 `
 
 const AppTheme = {

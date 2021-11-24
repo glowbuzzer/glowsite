@@ -1,6 +1,7 @@
 import { Link, useLocation } from "react-router-dom"
 import * as React from "react"
-import { Node, useOuterNav } from "../providers/NavProvider"
+import { Node } from "../providers/NavProvider"
+import { useOuterNav } from "../nav"
 import { Menu } from "antd"
 import styled from "@emotion/styled"
 

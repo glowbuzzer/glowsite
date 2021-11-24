@@ -38,7 +38,7 @@ export default function remarkCodeblock() {
                 delete node.meta
 
                 const source = node.value
-                future.component(node, parent, index, cache(source, sourcePath))
+                future.component(node, parent, index, cache(source, sourcePath), "codeblock-demo")
 
                 //
                 // cache(source, sourcePath).then(({ relative, unique }) => {

@@ -2,7 +2,7 @@ import * as React from "react"
 import { Button, Carousel } from "antd"
 import { RightCircleOutlined } from "@ant-design/icons"
 import styled from "@emotion/styled"
-import { usePages } from "../providers/NavProvider"
+import { usePages } from "../nav"
 import { Image } from "./Image"
 import { Link } from "react-router-dom"
 
