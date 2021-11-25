@@ -6,7 +6,7 @@ import { DocumentationPage } from "../framework/layouts/DocumentationPage"
 import { ComponentProps } from "../framework/components/ComponentProps"
 import { Link } from "react-router-dom"
 import { GbcSchemaLeftNav } from "../framework/components/GbcSchemaLeftNav"
-import ReactMarkdown from "react-markdown"
+
 
 // const transformLinkUri = (uri) => (
 // deafult link transformer does fancy xss filter

@@ -1,19 +1,17 @@
+
 Nav
   * remove popover
   * focus issue
   * thin down padding top nav
 
 Templates
-* different template for 404 prvacy etc
-
+* different layout for 404 privacy etc - maybe not layout but home page container&&
 
 mdx
 * method to tidy up imports of std components in mdx files
 
 Routing
-* privacy and legal stopped working
-
-
+* privacy and legal stopped working - add to nav.ts "menu=false" &&
 
 Home page
 * play with home page chunking
@@ -22,23 +20,33 @@ Home page
 * top carosuel doesnt repsond to dots - speed
 
 
+featured blog
+* array at the blogs level of nav.ts - orders blah &&
+
+
+
+docs
+
+* link in IDE that works in markdown
+
 Style
 * choose base font size - p too small by 10%?
 * padding / margin after headings - i like lots
 
 markdown
-* definition lists
+* definition lists &&
 
 
 code blocks
 * filename for code blocks
 
-HMR on gbc.ts -watch whatever - quite important
+HMR on gbc.ts -watch whatever
 
-we use reactmarkdown in gbc schema - links need proper Link to avoid reloadery
+gbc schema
+* we use reactmarkdown in gbc schema - links need proper Link to avoid reloadery
 
 
-meta
+meta&&
 * Add a new description bit of front matter into helmet - is this sub-title or longer para?
 * we have title, sub-title, description
 * description in meta is 155 chars - only longer descriptions are about this long so we should use them in meta
@@ -46,17 +54,17 @@ meta
 * log meta to console
 
 links
-* react-router Link takes us to bottom of pages - higher order component
+* react-router Link takes us to bottom of pages - higher order component try goto top on all pages&&
 
 
 functionality
 
-* blog keyword nav page - click on keyword get page of links to others blogs
+* blog keyword nav page - click on keyword get page of links to others blogs &&
 * char count on mdx files
 * get the example ui components docs fired up again @glowbuzzer/controls
 * https://chatlio.com/ integration
 * github releases drop down on top nav hand authored - version number of latest front end release next to octocat 
-* add gdpr cookies thingymajig
+* add gdpr cookies thingymajig&&
 
 responsive
 * make hex lose text on mobile
