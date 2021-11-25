@@ -2,6 +2,8 @@ import { Node } from "./framework/providers/NavProvider"
 import { HomePage } from "./framework/layouts/HomePage"
 import { DefaultDocumentationPage } from "./framework/layouts/DocumentationPage"
 import { ControlsDocumentationPage } from "./framework/layouts/ControlsDocumentationPage"
+import {BaseLayout} from "./framework/layouts/BaseLayout";
+import {SimpleLayout} from "./framework/layouts/SimpleLayout";
 
 function process(node: Omit<Node, "path">, parentPaths: string[], parent: Node): Node {
     const slug = node.slug
@@ -695,6 +697,16 @@ const nav = {
                 // @ts-ignore
                 import.meta.glob("./pages/playground/*.{jsx,tsx,md,mdx,ts}")
             )
+        },
+        {
+            slug: "privacy",
+            layout: SimpleLayout,
+            component: () => import("./pages/privacy.mdx")
+        },
+        {
+            slug: "legal",
+            layout: SimpleLayout,
+            component: () => import("./pages/legal.mdx")
         }
     ]
 }
