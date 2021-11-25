@@ -45,6 +45,7 @@ specifiers:
   react-three-fiber: ^5.3.22
   react-zoom-pan-pinch: ^2.1.3
   redux: ^4.1.1
+  remark-deflist: ^1.0.0
   remark-gfm: ^3.0.1
   remark-prism: ^1.3.6
   serve-static: ^1.14.1
@@ -107,6 +108,7 @@ devDependencies:
   react-redux: 7.2.3_434726e11c657a6e290147c590dfd17f
   react-three-fiber: 5.3.22_2264487932416a55241492f0d55afda2
   redux: 4.1.2
+  remark-deflist: 1.0.0
   remark-gfm: 3.0.1
   remark-prism: 1.3.6
   serve-static: 1.14.1
@@ -6950,6 +6952,17 @@ packages:
     hasBin: true
     dependencies:
       jsesc: 0.5.0
+    dev: true
+
+  /remark-deflist/1.0.0:
+    resolution: {integrity: sha512-sDHM+ZbgWC6wwaxltMdH5x+XYMW8VpjyeHyC2ZCI106+iYgbPv8lBYKiNqdW0Cs0FVox/LysYhb3qIZe1b0cmg==}
+    dependencies:
+      mdast-util-from-markdown: 1.0.4
+      mdast-util-to-markdown: 1.2.4
+      mdast-util-to-string: 3.1.0
+      unist-util-visit: 4.1.0
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /remark-gfm/3.0.1:
