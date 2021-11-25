@@ -3,6 +3,7 @@ import styled from "@emotion/styled"
 import { GlowsiteFooter } from "../footer/GlowsiteFooter"
 import { BreadcrumbNav } from "../components/BreadcrumbNav"
 import * as React from "react"
+import {ScrollToTopOnMount} from "../components/ScrollToTopOnMount";
 
 const StyledLayout = styled.div`
     display: flex;
@@ -31,6 +32,7 @@ const StyledLayout = styled.div`
 export const BaseLayout = ({ children }) => (
     <>
         <StyledLayout>
+            <ScrollToTopOnMount/>
             <div className="main">
                 <nav>
                     <TopNav />
