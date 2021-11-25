@@ -8,12 +8,20 @@ import { Link } from "react-router-dom"
 import { GbcSchemaLeftNav } from "../framework/components/GbcSchemaLeftNav"
 import { Markdown } from "../framework/components/Markdown"
 
+function generateType(p) {
+    console.log(p)
+    if (p.type.type == "array") {
+        return "Array<" + p.type.elementType.name + ">"
+    }
+    return p.type.id ? <Link to={"./" + p.type.name}>{p.type.name}</Link> : p.type.name
+}
+
 const TypeAlias = ({ item }) => {
     const defaultItem = item.type.declaration.children || []
     const props = defaultItem.map(p => ({
         key: p.name,
         name: { name: p.name, required: false },
-        type: p.type.id ? <Link to={"./" + p.type.name}>{p.type.name}</Link> : p.type.name,
+        type: generateType(p),
         description: <Markdown children={p.comment?.shortText || "Not available"} />
     }))
 
