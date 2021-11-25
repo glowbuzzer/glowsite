@@ -47,8 +47,16 @@ const AppStyle = styled.div`
     }
 
     .codeblock-demo {
-      padding: 8px;
+        padding: 8px;
         border: 1px solid rgba(0, 0, 0, 0.5);
+    }
+
+    dt {
+        font-weight: bold;
+    }
+
+    dd {
+        margin-left: 20px;
     }
 `
 

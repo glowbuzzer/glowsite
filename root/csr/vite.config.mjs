@@ -16,6 +16,7 @@ import remarkCodeblock from "../../plugins/remark-codeblock.mjs"
 import remarkGlowbuzzerFrontmatter from "../../plugins/remark-frontmatter.mjs"
 import { svgWrapper as svgr } from "../../plugins/svr-plugin-wrapper.mjs"
 import { mdxWrapper as mdx } from "../../plugins/mdx-plugin-wrapper.mjs"
+import remarkDl from "remark-deflist"
 
 //
 // not sure why we need this hack, their ESM module looks okay
@@ -43,6 +44,7 @@ export default defineConfig(({ mode }) => {
                 remarkPlugins: [
                     remarkGfm,
                     remarkMermaid,
+                    remarkDl,
                     remarkCodeblock,
                     remarkGlowbuzzerFrontmatter,
                     remarkPrism
