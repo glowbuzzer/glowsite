@@ -170,6 +170,8 @@ export const FeaturedBlog = () => {
         return <Loading/>
     }
 
+
+
     return (
         <CarouselWrapper {...CarouselSettings}>
             {featured.map((item, index) => {
