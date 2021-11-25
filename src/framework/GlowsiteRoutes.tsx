@@ -1,33 +1,13 @@
-import { Route, Switch } from "react-router"
-import { TypedocItem } from "../typedoc/TypedocItem"
+import {Route, Switch} from "react-router"
+import {TypedocItem} from "../typedoc/TypedocItem"
 import * as React from "react"
-import { Suspense, useEffect, useState } from "react"
-import { useRoutes } from "./nav"
-import { Helmet } from "react-helmet"
-import { FallbackLayout } from "./layouts/FallbackLayout"
+import {Suspense} from "react"
+import {useRoutes} from "./nav"
+import {Helmet} from "react-helmet"
+import {FallbackLayout} from "./layouts/FallbackLayout"
 import * as NotFound from "../pages/404.mdx"
-import { BaseLayout } from "./layouts/BaseLayout"
-import { Spin } from "antd"
-import styled from "@emotion/styled"
-
-const StyledSpin = styled(Spin)`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-grow: 1;
-    height: 100%;
-    text-align: center;
-`
-
-const Loading = () => {
-    const [show, setShow] = useState(false)
-    useEffect(() => {
-        const timer = setTimeout(() => setShow(true), 1000)
-        return () => clearTimeout(timer)
-    }, [])
-
-    return show ? <StyledSpin size="large" /> : null
-}
+import {BaseLayout} from "./layouts/BaseLayout"
+import {Loading} from "./components/Loading";
 
 /**
  * Emits all site routes
@@ -36,12 +16,10 @@ const Loading = () => {
 export const GlowsiteRoutes = () => {
     const routes = useRoutes()
 
-    console.log("ROUTES", routes)
-
     return (
         <>
             <Switch>
-                {routes.map(({ path, title, layout, component }) => {
+                {routes.map(({ path, title, layout, component, ...props }) => {
                     const Layout = layout || FallbackLayout
                     const Component = component && React.lazy(component)
                     return (
@@ -54,7 +32,7 @@ export const GlowsiteRoutes = () => {
                             <Layout>
                                 {Component && (
                                     <Suspense fallback={<Loading />}>
-                                        <Component />
+                                        <Component title={title} {...props} />
                                     </Suspense>
                                 )}
                             </Layout>

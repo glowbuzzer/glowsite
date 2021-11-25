@@ -17,14 +17,14 @@ export function useRootNav() {
     return root
 }
 
-export function useNav() {
-    const { pathname } = useLocation()
+export function useNavNode(location: string) {
     const { all } = useContext(navContext)
-    return all.find(r => r.path === pathname)
+    return all.find(r => r.path === location)
 }
 
 export function useNavCrumbs() {
-    const current = useNav()
+    const { pathname } = useLocation()
+    const current = useNavNode(pathname)
 
     function ancestors(node: Node): Node[] {
         return node ? [...ancestors(node.parent), node] : []
@@ -33,18 +33,9 @@ export function useNavCrumbs() {
     return ancestors(current).slice(2) // remove empty root node, home and current node
 }
 
-// console.log("ALL", all)
-
 export function useRoutes() {
     const { all } = useContext(navContext)
     // all routes are created even for paths not of type "page", because we can navigate to things like the homepage at "/"
     // and use _meta.ts to control the rendering, eg. layout component
     return all
-}
-
-export function usePages(re: RegExp, filter?: (unknown) => boolean) {
-    const { all } = useContext(navContext)
-    return all
-        .filter(node => node.path.match(re) && (!filter || filter(node))) // filter
-        .map(({ component, children, parent, ...props }) => props) // remove some props
 }

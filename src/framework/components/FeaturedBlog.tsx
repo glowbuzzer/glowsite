@@ -1,10 +1,12 @@
 import * as React from "react"
+import { useEffect, useState } from "react"
 import { Button, Carousel } from "antd"
 import { RightCircleOutlined } from "@ant-design/icons"
 import styled from "@emotion/styled"
-import { usePages } from "../nav"
+import { useNavNode } from "../nav"
 import { Image } from "./Image"
 import { Link } from "react-router-dom"
+import {Loading} from "./Loading";
 
 export const CarouselSettings = {
     arrows: false,
@@ -155,32 +157,49 @@ const CarouselDiv = styled.div`
 // }
 
 export const FeaturedBlog = () => {
-    const featured = usePages(/blogs/, node => node.featuredBlog)
-    // const list = GetFeaturedBlogList()
+    const [components, setComponents] = useState<any[]>()
+
+    const blogs = useNavNode("/blogs")
+    const featured = blogs?.featured?.map(path => useNavNode("/blogs/" + path)) || []
+
+    useEffect(() => {
+        Promise.all(featured.map(node => node.component())).then(setComponents)
+    }, [])
+
+    if (!components) {
+        return <Loading/>
+    }
 
     return (
         <CarouselWrapper {...CarouselSettings}>
-            {featured.map(item => (
-                <CarouselDiv key="{item.path}">
-                    <Link to={item.path}>
-                        <header>{item.title}</header>
-                        <div className="content">{item.subtitle}</div>
-                        <figure>
-                            {item.heroImage ? (
-                                <Image meta={item.heroImage} preset="narrow" alt="item.title" />
-                            ) : (
-                                <div className="missing">NO IMAGE</div>
-                            )}
-                        </figure>
-                        <p>{item.description}</p>
-                        <footer>
-                            <Button type="primary" icon={<RightCircleOutlined />}>
-                                Read more{" "}
-                            </Button>
-                        </footer>
-                    </Link>
-                </CarouselDiv>
-            ))}
+            {featured.map((item, index) => {
+                const component = components[index]
+                return (
+                    <CarouselDiv key="{item.path}">
+                        <Link to={item.path}>
+                            <header>{item.title}</header>
+                            <div className="content">{item.subtitle}</div>
+                            <figure>
+                                {component.heroImage ? (
+                                    <Image
+                                        meta={component.heroImage}
+                                        preset="narrow"
+                                        alt="item.title"
+                                    />
+                                ) : (
+                                    <div className="missing">NO IMAGE</div>
+                                )}
+                            </figure>
+                            <p>{item.description}</p>
+                            <footer>
+                                <Button type="primary" icon={<RightCircleOutlined />}>
+                                    Read more{" "}
+                                </Button>
+                            </footer>
+                        </Link>
+                    </CarouselDiv>
+                )
+            })}
         </CarouselWrapper>
     )
 }

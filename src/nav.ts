@@ -562,6 +562,7 @@ const nav = {
             slug: "blogs",
             title: "Blogs",
             layout: DefaultDocumentationPage,
+            featured: ["webdev/reactnative", "drives/optidrive", "embedded/netx"],
             children: [
                 {
                     slug: "webdev",
@@ -572,6 +573,7 @@ const nav = {
                             slug: "reactnative",
                             title: "React native",
                             subtitle: "Getting started with React Native",
+                            tags: ["web-dev", "React", "HMI", "Android", "React Native", "iOS"],
                             component: () => import("./pages/blogs/webdev/react_native.mdx")
                         },
                         {

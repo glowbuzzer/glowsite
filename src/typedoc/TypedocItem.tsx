@@ -45,7 +45,7 @@ const TypeAlias = ({ item }) => {
             <div className="shortText">
                 <ReactMarkdown children={item.comment?.shortText || "Not available"} />
             </div>
-            <div className="text">{item.comment?.text}</div>
+            <div className="text">{item.comment?.text && <ReactMarkdown children={item.comment.text} />}</div>
             <ComponentProps displayName={item.name} properties={props} showDefaults={false} />
         </>
     )
