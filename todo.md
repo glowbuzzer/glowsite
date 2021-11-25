@@ -6,9 +6,6 @@ Nav
 Templates
 * different template for 404 prvacy etc
 
-preview
-* cant refresh
-* 
 
 mdx
 * method to tidy up imports of std components in mdx files
@@ -36,7 +33,6 @@ markdown
 code blocks
 * filename for code blocks
 
-
 HMR on gbc.ts -watch whatever - quite important
 
 we use reactmarkdown in gbc schema - links need proper Link to avoid reloadery
@@ -47,6 +43,7 @@ meta
 * we have title, sub-title, description
 * description in meta is 155 chars - only longer descriptions are about this long so we should use them in meta
 * hieriachey sub-itle if desc not available
+* log meta to console
 
 links
 * react-router Link takes us to bottom of pages - higher order component
@@ -54,7 +51,7 @@ links
 
 functionality
 
-* blog keyword nav page
+* blog keyword nav page - click on keyword get page of links to others blogs
 * char count on mdx files
 * get the example ui components docs fired up again @glowbuzzer/controls
 * https://chatlio.com/ integration

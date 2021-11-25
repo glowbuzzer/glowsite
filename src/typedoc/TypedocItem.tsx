@@ -14,13 +14,28 @@ import ReactMarkdown from "react-markdown"
 // )
 
 const TypeAlias = ({ item }) => {
-    const props = item.type.declaration.children.map(p => ({
-        key: p.name,
-        name: { name: p.name, required: false },
-        type: p.type.id ? <Link to={"./" + p.type.name}>{p.type.name}</Link> : p.type.name,
-        description: <ReactMarkdown children={p.comment?.shortText || "Not available"} />
-    }))
-    console.log(props)
+    let props
+    if (!item.type.declaration.children) {
+        console.log("EMPTY!")
+        console.log(item)
+        props = [
+            {
+                key: item.name,
+                name: { name: "NULL", required: false },
+                type: "no type",
+                description: `${item.name} has no properties `
+            }
+        ]
+    } else {
+        console.log(item)
+        props = item.type.declaration.children.map(p => ({
+            key: p.name,
+            name: { name: p.name, required: false },
+            type: p.type.id ? <Link to={"./" + p.type.name}>{p.type.name}</Link> : p.type.name,
+            description: <ReactMarkdown children={p.comment?.shortText || "Not available"} />
+        }))
+    }
+    // console.log(props)
     //undefined type for arrays
     // need fancier in type:
 
