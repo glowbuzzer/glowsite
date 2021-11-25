@@ -22,6 +22,11 @@ export function useNavNode(location: string) {
     return all.find(r => r.path === location)
 }
 
+export function useNavTaggedNodes(tag: string) {
+    const { all } = useContext(navContext)
+    return all.filter(r => r.tags?.includes(tag))
+}
+
 export function useNavCrumbs() {
     const { pathname } = useLocation()
     const current = useNavNode(pathname)

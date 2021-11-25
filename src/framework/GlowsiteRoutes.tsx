@@ -1,13 +1,14 @@
-import {Route, Switch} from "react-router"
-import {TypedocItem} from "../typedoc/TypedocItem"
+import { Route, Switch } from "react-router"
+import { TypedocItem } from "../typedoc/TypedocItem"
 import * as React from "react"
-import {Suspense} from "react"
-import {useRoutes} from "./nav"
-import {Helmet} from "react-helmet"
-import {FallbackLayout} from "./layouts/FallbackLayout"
+import { Suspense } from "react"
+import { useRoutes } from "./nav"
+import { Helmet } from "react-helmet"
+import { FallbackLayout } from "./layouts/FallbackLayout"
 import * as NotFound from "../pages/404.mdx"
-import {BaseLayout} from "./layouts/BaseLayout"
-import {Loading} from "./components/Loading";
+import { BaseLayout } from "./layouts/BaseLayout"
+import { Loading } from "./components/Loading"
+import { BlogListByTag } from "../pages/blogs/BlogListByTag"
 
 /**
  * Emits all site routes
@@ -40,6 +41,7 @@ export const GlowsiteRoutes = () => {
                     )
                 })}
                 <Route path={"/docs/gbc/schema/:name"} component={TypedocItem} />
+                <Route path={"/blogs/tag/:tag"} component={BlogListByTag} />
                 <Route>
                     {/* 404 route */}
                     <Helmet>
