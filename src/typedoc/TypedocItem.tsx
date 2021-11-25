@@ -6,47 +6,27 @@ import { DocumentationPage } from "../framework/layouts/DocumentationPage"
 import { ComponentProps } from "../framework/components/ComponentProps"
 import { Link } from "react-router-dom"
 import { GbcSchemaLeftNav } from "../framework/components/GbcSchemaLeftNav"
-
-
-// const transformLinkUri = (uri) => (
-// deafult link transformer does fancy xss filter
-// access here require('react-markdown').uriTransformer
-// )
+import { Markdown } from "../framework/components/Markdown"
 
 const TypeAlias = ({ item }) => {
-    let props
-    if (!item.type.declaration.children) {
-        console.log("EMPTY!")
-        console.log(item)
-        props = [
-            {
-                key: item.name,
-                name: { name: "NULL", required: false },
-                type: "no type",
-                description: `${item.name} has no properties `
-            }
-        ]
-    } else {
-        console.log(item)
-        props = item.type.declaration.children.map(p => ({
-            key: p.name,
-            name: { name: p.name, required: false },
-            type: p.type.id ? <Link to={"./" + p.type.name}>{p.type.name}</Link> : p.type.name,
-            description: <ReactMarkdown children={p.comment?.shortText || "Not available"} />
-        }))
-    }
-    // console.log(props)
-    //undefined type for arrays
-    // need fancier in type:
+    const defaultItem = item.type.declaration.children || []
+    const props = defaultItem.map(p => ({
+        key: p.name,
+        name: { name: p.name, required: false },
+        type: p.type.id ? <Link to={"./" + p.type.name}>{p.type.name}</Link> : p.type.name,
+        description: <Markdown children={p.comment?.shortText || "Not available"} />
+    }))
 
     return (
         <>
             <h1>{item.name}</h1>
             <div className="shortText">
-                <ReactMarkdown children={item.comment?.shortText || "Not available"} />
+                <Markdown children={item.comment?.shortText || "Not available"} />
             </div>
-            <div className="text">{item.comment?.text && <ReactMarkdown children={item.comment.text} />}</div>
-            <ComponentProps displayName={item.name} properties={props} showDefaults={false} />
+            <div className="text">
+                {item.comment?.text && <Markdown children={item.comment.text} />}
+            </div>
+            {<ComponentProps displayName={item.name} properties={props} showDefaults={false} />}
         </>
     )
 }

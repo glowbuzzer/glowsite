@@ -8,7 +8,7 @@ Templates
 * different layout for 404 privacy etc - maybe not layout but home page container&&
 
 mdx
-* method to tidy up imports of std components in mdx files
+* method to tidy up imports of std components in mdx files - now is the time to do this or its too late and i can;t be arsed &&
 
 Routing
 * privacy and legal stopped working - add to nav.ts "menu=false" &&
@@ -20,10 +20,6 @@ Home page
 * top carosuel doesnt repsond to dots - speed
 
 
-featured blog
-* array at the blogs level of nav.ts - orders blah &&
-
-
 
 docs
 
@@ -33,8 +29,6 @@ Style
 * choose base font size - p too small by 10%?
 * padding / margin after headings - i like lots
 
-markdown
-* definition lists &&
 
 
 code blocks
@@ -59,7 +53,7 @@ links
 
 functionality
 
-* blog keyword nav page - click on keyword get page of links to others blogs &&
+* blog keyword nav page - click on keyword get page of links to others blogs - dg to work up now
 * char count on mdx files
 * get the example ui components docs fired up again @glowbuzzer/controls
 * https://chatlio.com/ integration

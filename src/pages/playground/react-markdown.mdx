@@ -1,0 +1,31 @@
+import {Markdown} from "../../framework/components/Markdown";
+import ReactMarkdown from "react-markdown"
+import { Link } from "react-router-dom"
+
+export function RouterLink(props) {
+    return props.href.match(/^(https?:)?\/\//) ? (
+        <a href={props.href}>{props.children}</a>
+    ) : (
+        <Link to={props.href}>{props.children}</Link>
+    )
+}
+
+
+
+
+# react-markdown test
+
+<ReactMarkdown children="hello **alfie** [link text](/docs/gbem/overview)" renderers={{ link: RouterLink }}/>
+
+<ReactMarkdown children="hello **morty** [link text](/docs/gbem/overview)" components={{
+    a: ({node, ...props}) => <Link to={props.href}{...props} />
+}}/>
+
+
+<ReactMarkdown children="hello **ep**
+### hello" components={{
+    h3: ({node, ...props}) => <i style={{color: 'red'}} {...props} />
+}}/>
+
+
+<Markdown children={"hello **david** [link text](/docs/gbem/overview)"}/>

@@ -940,7 +940,7 @@
 
         /** 
         Configuration parameters for moveJoints
-        (
+        &lt;Ref&gt;{@link JogCommand}&lt;/Ref&gt;
          */
         export type MoveJointsConfig = {
                     /**  Index of the Kinematics Configuration (KC) to use */
