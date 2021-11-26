@@ -1,7 +1,3 @@
----
-title: Introduction to three.js
-sort: 2
----
 import three_logo from "./three_logo.png?glowsite"
 export const heroImage=three_logo
 import {TitleImage} from "../../../framework/components/TitleImage"
@@ -9,10 +5,10 @@ import {PageTag} from "../../../framework/components/PageTags"
 import {ReadingTime} from "../../../framework/components/ReadingTime"
 export const ContentTags =  ["web-dev", "three.js", "3D", "animation", "WebGL"]
 
-# Introduction to three.js
+# {props.subtitle}
 
 <ReadingTime time="5"/>
-<PageTag tags={ContentTags}/>
+<PageTag tags={props.tags}/>
 
 ## Introduction
 

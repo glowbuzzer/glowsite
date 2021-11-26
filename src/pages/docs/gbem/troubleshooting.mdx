@@ -1,11 +1,6 @@
----
-title: Troubleshooting
-sort: 14
----
 import {Tldr} from "../../../framework/components/Tldr"
 
-# Troubleshooting GBEM
-
+# {props.subtitle}
 ## What do I do if netscan fails to find any slaves of the EtherCAT network?
 
 netscan doesn't actually do very much. It makes a call to the `sys/socket.h` `socket` to create a RAW packet socket then connects the socket to the NIC using the NIC's name. Then it does a BRD call on the EtherCAT network which all slaves are expected to respond to. So there isn't a huge amount to go wrong in this chain and if it isn't something obvious then it is likely to be pretty low level.

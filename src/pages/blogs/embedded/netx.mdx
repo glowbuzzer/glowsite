@@ -1,24 +1,15 @@
----
-title: Hilscher netX 51 & the glowbuzzer toolkit
-subtitle: Exploring the Hilscher netX 51 multi-protocol slave
-description: The Hilscher netX 51 is a real-Time Ethernet network controller IC. In this blog we integrate the netX chip with our software over SPI to exchange data with an EtherCAT master.
-featuredBlog: true
-sort: 1
----
-
 import netx52 from "./netx52.png?glowsite"
 export const heroImage=netx52
 import {TitleImage} from "../../../framework/components/TitleImage";
 import {PageTag} from"../../../framework/components/PageTags"
-export const ContentTags =  ["Embedded", "EtherCAT Slave", "Ethernet/IP Slave", "Fieldbus", "Hilscher"]
 import {ReadingTime} from "../../../framework/components/ReadingTime";
 import {Typography} from "antd";
 export const { Text } = Typography;
 
 
-# Getting the Hilscher netX 51 working with glowbuzzer toolkit
+# {props.subtitle}
 <ReadingTime time="3"/>
-<PageTag tags={ContentTags}/>
+<PageTag tags={props.tags}/>
 
 ## Introduction
 <TitleImage image={netx52} alt="netx52"/>

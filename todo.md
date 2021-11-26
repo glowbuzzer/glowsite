@@ -1,75 +1,66 @@
-
 Nav
-  * remove popover
-  * focus issue
-  * thin down padding top nav
+  * focus issue&&
+  * thin down padding top nav&&&
 
 Templates
-* different layout for 404 privacy etc - maybe not layout but home page container&&
+* different layout for 404 privacy etc - maybe not layout but home page container <- still not fixed look at privacy margin&&
 
 mdx
-* method to tidy up imports of std components in mdx files - now is the time to do this or its too late and i can;t be arsed &&
-
-Routing
-* privacy and legal stopped working - add to nav.ts "menu=false" &&
+* method to tidy up imports of std components in mdx files - now is the time to do this or its too late and i can;t be arsed &
 
 Home page
-* play with home page chunking
+* play with home page chunking - dg
 * add padding to featured blog images - i have forgotten what we said here
-* dots of featured blog
-* top carosuel doesnt repsond to dots - speed
+* dots of featured blog in wrong place - dg &&&
+* top carosuel doesnt repsond to dots - speed - dg &&&
 
-
-
-docs
-
-* link in IDE that works in markdown
+Docs
+* link in IDE that works in markdown - double up or spit out different tsx for ide use&
 
 Style
 * choose base font size - p too small by 10%?
 * padding / margin after headings - i like lots
 
+Code blocks
+* filename for code blocks &
 
 
-code blocks
-* filename for code blocks
-
-HMR on gbc.ts -watch whatever
-
-gbc schema
-* we use reactmarkdown in gbc schema - links need proper Link to avoid reloadery
-
-
-meta&&
-* Add a new description bit of front matter into helmet - is this sub-title or longer para?
-* we have title, sub-title, description
+meta
+* Add a new description bit of front matter into helmet - is this sub-title or longer para?&&&
 * description in meta is 155 chars - only longer descriptions are about this long so we should use them in meta
 * hieriachey sub-itle if desc not available
 * log meta to console
 
-links
-* react-router Link takes us to bottom of pages - higher order component try goto top on all pages&&
-
 
 functionality
 
-* blog keyword nav page - click on keyword get page of links to others blogs - dg to work up now
-* char count on mdx files
-* get the example ui components docs fired up again @glowbuzzer/controls
-* https://chatlio.com/ integration
-* github releases drop down on top nav hand authored - version number of latest front end release next to octocat 
-* add gdpr cookies thingymajig&&
+* blog keyword nav page - click on keyword get page of links to others blogs - dg to work up now&
+* https://chatlio.com/ integration &&&
+* add in releases page &&& 
+* add gdpr cookies thingymajig&&&
 
 responsive
-* make hex lose text on mobile
-* do mobile home page carousel images
+* make hex lose text on mobile &&&
+* do mobile home page carousel images &&&
 
+downloads page??
 
 frip
 * change svg icon colour on hover
 * footer change text colour on hover
-* integrate trajectory planner from internal
 * little bits of motion - 
+
+
+AK
+* cra template&&&
+* downloads site&
+* monorepo split&
+* gcode working&&&
+* thomas internal move grid down&&&
+* dev video&&&
+* integrate trajectory planner from internal&
+
+
 
 
 
