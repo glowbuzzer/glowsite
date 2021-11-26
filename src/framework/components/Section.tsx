@@ -25,15 +25,9 @@ const StyledSection = styled.div<{
     background: ${props => props.theme.color[props.dataColor] || "inherit"};
 
     > .section {
-        max-width: 1400px;
+        max-width: ${props => props.theme.breaks.mainWidth};
         margin: 0 auto;
         flex-grow: 1;
-
-        ${props =>
-            props.dataGuttered &&
-            css`
-                max-width: 1400px;
-            `}
 
         ${props =>
             props.dataSpaced &&
@@ -42,7 +36,7 @@ const StyledSection = styled.div<{
                 padding: 40px 0;
             `}
 
-    ${props =>
+        ${props =>
             props.dataExpand &&
             css`
                 display: flex;

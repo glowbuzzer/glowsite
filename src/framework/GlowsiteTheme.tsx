@@ -65,6 +65,7 @@ const AppTheme = {
         ...GbColours
     },
     breaks: {
+        mainWidth: "1400px",
         leftNavCollapse: "768px"
     }
 }

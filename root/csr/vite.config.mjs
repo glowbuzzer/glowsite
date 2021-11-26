@@ -61,10 +61,13 @@ export default defineConfig(({ mode }) => {
                 "virtual:gbcschema": gbcschema
             }),
             // tsconfigPaths(),
-            // radar.default({
-            //     analytics: { id: env.VITE_GA_TRACKING_ID },
-            //     enableDev: true
-            // })
+            radar.default({
+                analytics: {
+                    id: env.VITE_GA_TRACKING_ID,
+                    // disable: true
+                },
+                enableDev: true
+            })
         ],
         resolve: {
             alias: {

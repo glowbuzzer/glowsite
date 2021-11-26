@@ -10,14 +10,17 @@ import { root } from "../../src/nav"
 
 import "prismjs/themes/prism-tomorrow.css"
 import "../../src/glowsite-theme.css"
+import { CookieConsentProvider } from "../../src/framework/providers/CookieConsentProvider"
 
 ReactDOM.render(
     <BrowserRouter>
-        <GlowsiteTheme>
-            <NavProvider root={root}>
-                <GlowsiteRoutes />
-            </NavProvider>
-        </GlowsiteTheme>
+        <CookieConsentProvider>
+            <GlowsiteTheme>
+                <NavProvider root={root}>
+                    <GlowsiteRoutes />
+                </NavProvider>
+            </GlowsiteTheme>
+        </CookieConsentProvider>
     </BrowserRouter>,
     document.getElementById("app")
 )

@@ -1,8 +1,9 @@
-import { Row, Col } from "antd"
+import { Col, Modal, Row } from "antd"
 import styled from "@emotion/styled"
 import * as React from "react"
 import { GithubOutlined, YoutubeOutlined } from "@ant-design/icons"
 import { Link } from "react-router-dom"
+import { useCookieConsent } from "../providers/CookieConsentProvider"
 
 const StyledFooter = styled.div`
     padding: 20px 100px;
@@ -12,6 +13,16 @@ const StyledFooter = styled.div`
 
 const StyledLink = styled(Link)`
     color: ${props => props.theme.color.MainPurple};
+
+    &:hover {
+        color: #391085;
+    }
+`
+
+const StyledLinkLookalike = styled.div`
+    color: ${props => props.theme.color.MainPurple};
+    cursor: pointer;
+
     &:hover {
         color: #391085;
     }
@@ -37,64 +48,97 @@ const MobileFooter = ({}) => (
     </div>
 )
 
-const DesktopFooter = ({}) => (
-    <div>
-        <Row>
-            <Col span={3}></Col>
-            <Col span={5}>
-                <h3>How it works</h3>
-                <p />
-                <p>
-                    <StyledLink to="/how-it-works/basics">Basics</StyledLink>
-                </p>
-                <p>
-                    <StyledLink to="/how-it-works/detail">More detail</StyledLink>
-                </p>
-                <p>
-                    <StyledLink to="/how-it-works/platforms">Supported platforms</StyledLink>
-                </p>
-            </Col>
-            <Col span={5}>
-                <h3>Get started</h3>
-                <p />
-                <p>
-                    <StyledLink to="/get-started/hardware">Required hardware</StyledLink>
-                </p>
-                <p>
-                    <StyledLink to="/get-started/motion">Make a drive move</StyledLink>
-                </p>
-                <p>
-                    <StyledLink to="/get-started/how_to_buy">How to buy</StyledLink>
-                </p>
-            </Col>
-            <Col span={5}>
-                <h3>Legal</h3>
-                <p />
-                <p>
-                    <StyledLink to="/privacy">Privacy policy</StyledLink>
-                </p>
-                <p>
-                    <StyledLink to="/legal">Legal notice</StyledLink>
-                </p>
-            </Col>
-            <Col span={5}>
-                <h3>github & youtube</h3>
-                <p />
-                <p>
-                    <a href={"https://www.github.com/glowbuzzer"}>
-                        <GithubOutlined style={{ fontSize: "24px", color: "#9254de" }} />
-                    </a>
-                </p>
-                <p>
-                    <a href={"https://www.youtube.com/glowbuzzer"}>
-                        <YoutubeOutlined style={{ fontSize: "24px", color: "#9254de" }} />
-                    </a>
-                </p>
-            </Col>
-        </Row>
-        <span>©2022 by glowbuzzer All Rights Reserved </span>
-    </div>
-)
+const DesktopFooter = ({}) => {
+    const [modal, modalContext] = Modal.useModal()
+    const cookieConsent = useCookieConsent()
+
+    function show_cookie_settings() {
+        modal.confirm({
+            title: "Cookie Settings",
+            onOk: cookieConsent.accept,
+            onCancel: cookieConsent.reject,
+            okText: "Accept",
+            cancelText: "Reject",
+
+            content: (
+                <div>
+                    <p>
+                        We use tracking cookies to understand how people use our site so we can
+                        improve our services.
+                    </p>
+                    <p>
+                        For more information see our <Link to="/privacy">privacy policy</Link>
+                    </p>
+                </div>
+            )
+        })
+    }
+
+    return (
+        <div>
+            <Row>
+                <Col span={3}></Col>
+                <Col span={5}>
+                    <h3>How it works</h3>
+                    <p />
+                    <p>
+                        <StyledLink to="/how-it-works/basics">Basics</StyledLink>
+                    </p>
+                    <p>
+                        <StyledLink to="/how-it-works/detail">More detail</StyledLink>
+                    </p>
+                    <p>
+                        <StyledLink to="/how-it-works/platforms">Supported platforms</StyledLink>
+                    </p>
+                </Col>
+                <Col span={5}>
+                    <h3>Get started</h3>
+                    <p />
+                    <p>
+                        <StyledLink to="/get-started/hardware">Required hardware</StyledLink>
+                    </p>
+                    <p>
+                        <StyledLink to="/get-started/motion">Make a drive move</StyledLink>
+                    </p>
+                    <p>
+                        <StyledLink to="/get-started/how_to_buy">How to buy</StyledLink>
+                    </p>
+                </Col>
+                <Col span={5}>
+                    <h3>Legal</h3>
+                    <p />
+                    <p>
+                        <StyledLink to="/privacy">Privacy policy</StyledLink>
+                    </p>
+                    <p>
+                        <StyledLink to="/legal">Legal notice</StyledLink>
+                    </p>
+                    <p>
+                        {modalContext}
+                        <StyledLinkLookalike onClick={show_cookie_settings}>
+                            Cookie settings
+                        </StyledLinkLookalike>
+                    </p>
+                </Col>
+                <Col span={5}>
+                    <h3>github & youtube</h3>
+                    <p />
+                    <p>
+                        <a href={"https://www.github.com/glowbuzzer"}>
+                            <GithubOutlined style={{ fontSize: "24px", color: "#9254de" }} />
+                        </a>
+                    </p>
+                    <p>
+                        <a href={"https://www.youtube.com/glowbuzzer"}>
+                            <YoutubeOutlined style={{ fontSize: "24px", color: "#9254de" }} />
+                        </a>
+                    </p>
+                </Col>
+            </Row>
+            <span>©2022 by glowbuzzer All Rights Reserved </span>
+        </div>
+    )
+}
 
 export const GlowsiteFooter = () => {
     return (
