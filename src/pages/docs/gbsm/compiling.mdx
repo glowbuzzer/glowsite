@@ -1,13 +1,20 @@
+import {Tldr} from "../../../framework/components/Tldr";
 
 # {props.subtitle}
 
 ## Raspberry Pi
+<Tldr>
+    - Needs pigpio library installing
+    - Clone GBSM from GitHub
+</Tldr>
 
 ### pipgio
 
-Install pigpio
+pigpio is a library for the Raspberry Pi which allows control of the General Purpose Input Outputs (GPIO) pins.
 
-https://github.com/joan2937/pigpio
+pigpio is available on GitHub at: <a href="https://github.com/joan2937/pigpio">https://github.com/joan2937/pigpio</a>
+
+To install:
 
 ````shell
 wget https://github.com/joan2937/pigpio/archive/master.zip
@@ -22,29 +29,4 @@ sudo make install
 
 cmake
 
-
-
-## Other Linux varients
-
-Depends on how SPI and GPIO work
-
-userspace
-
-
-
-libgpiod
-
-
-
-https://embeddedbits.org/new-linux-kernel-gpio-user-space-interface/
-
-
-
-spi
-
-
-
-obvious can write kernel spi drivers too - full access to IRQs etc
-
-## embedded (microcontroller)
 

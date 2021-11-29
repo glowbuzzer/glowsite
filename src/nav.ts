@@ -80,19 +80,19 @@ const nav = {
                     component: () => import("./pages/how-it-works/fieldbus.mdx")
                 },
                 {
-                    slug: "realtime",
+                    slug: "real_time",
                     title: "Real-time communication",
                     subtitle: "How we get fast reaction to events?",
                     component: () => import("./pages/how-it-works/real_time.mdx")
                 },
                 {
-                    slug: "frontend",
+                    slug: "front_end_components",
                     title: "Front-end components",
                     subtitle: "Building a machine control in React",
                     component: () => import("./pages/how-it-works/front_end_components.mdx")
                 },
                 {
-                    slug: "otp",
+                    slug: "motion",
                     title: "Motion - trajectory planning",
                     subtitle: "The algorithms to make things move",
                     component: () => import("./pages/how-it-works/motion.mdx")
@@ -157,7 +157,7 @@ const nav = {
                     component: () => import("./pages/get-started/front-end.mdx")
                 },
                 {
-                    slug: "pricing",
+                    slug: "how_to-buy",
                     title: "How to buy",
                     subtitle: "How to buy the Glowbuzzer toolkit",
                     component: () => import("./pages/get-started/how_to_buy.mdx")
@@ -229,7 +229,7 @@ const nav = {
                             component: () => import("./pages/docs/gbc/orientation.mdx")
                         },
                         {
-                            slug: "response-times",
+                            slug: "response_times",
                             title: "Response times",
                             subtitle: "Response times in GBC",
                             component: () => import("./pages/docs/gbc/response_times.mdx")
@@ -259,7 +259,7 @@ const nav = {
                             component: () => import("./pages/docs/gbc/frames.mdx")
                         },
                         {
-                            slug: "kinematics",
+                            slug: "kinematics_configuration",
                             title: "Kinematics configurations",
                             subtitle: "Kinematics configurations in GBC",
                             component: () => import("./pages/docs/gbc/kinematics_configuration.mdx")
@@ -534,6 +534,12 @@ const nav = {
                             component: () => import("./pages/docs/gbsm/gbsm_config.mdx")
                         },
                         {
+                            slug: "gpio_and_spi_on_linux",
+                            title: "GPIO and SPI on Linux",
+                            subtitle: "Using GPIO and SPI on Linux",
+                            component: () => import("./pages/docs/gbsm/gpio_and_spi_on_linux.mdx")
+                        },
+                        {
                             slug: "io",
                             title: "IO in GBSM",
                             subtitle: "IO in GBSM",
@@ -594,6 +600,12 @@ const nav = {
                                 // @ts-ignore
                                 import.meta.glob("./pages/docs/ui/tiles/*.mdx")
                             )
+                        },
+                        {
+                            slug: "imports",
+                            title: "Imports",
+                            subtitle: "Imported components in the front-end",
+                            component: () => import("./pages/docs/ui/imports.mdx")
                         }
                     ]
                 },
@@ -624,7 +636,7 @@ const nav = {
             slug: "blogs",
             title: "Blogs",
             layout: DefaultDocumentationPage,
-            featured: ["webdev/reactnative", "drives/optidrive", "embedded/netx"],
+            featured: ["webdev/react_native", "drives/invertek_optidrive_p2", "embedded/netx"],
             children: [
                 {
                     slug: "webdev",
@@ -632,14 +644,14 @@ const nav = {
                     subtitle: "Blogs about web development",
                     children: [
                         {
-                            slug: "reactnative",
+                            slug: "react_native",
                             title: "React native",
                             subtitle: "Getting started with React Native",
                             tags: ["web-dev", "React", "HMI", "Android", "React Native", "iOS"],
                             component: () => import("./pages/blogs/webdev/react_native.mdx")
                         },
                         {
-                            slug: "three",
+                            slug: "threejs",
                             title: "three.js",
                             subtitle: "Introduction to three.js",
                             tags: ["web-dev", "React"],
@@ -660,8 +672,8 @@ const nav = {
                     subtitle: "Blogs about drives",
                     children: [
                         {
-                            slug: "optidrive",
-                            title: "Invertek Optidrive P3",
+                            slug: "invertek_optidrive_p2",
+                            title: "Invertek Optidrive P2",
                             subtitle: "Getting the Invertek Optidrive P2 VFD working",
                             description:
                                 "The Optidrive P2 is a variable frequency drive (VFD) for controlling 3-phase AC motors. It has an EtherCAT communications option and we use this to control the drive's start/stop speed etc.",
@@ -670,15 +682,14 @@ const nav = {
                                 import("./pages/blogs/drives/invertek_optidrive_p2.mdx")
                         },
                         {
-                            slug: "maxon",
+                            slug: "maxon_epos4",
                             title: "Maxon EPOS 4",
                             subtitle:
                                 "Firing up the Maxon EPOS4 positioning controller for brushed and brushless DC motors",
                             description:
                                 "The Maxon EPOS4 is EtherCAT drive for brushed DC and BLDC motors upto 250W. In this blog we commission the drive using EPOS/IDX software explore its features and integrate into our EtherCAT master.",
                             tags: ["drives", "maxon", "BLDC"],
-                            component: () =>
-                                import("./pages/blogs/drives/invertek_optidrive_p2.mdx")
+                            component: () => import("./pages/blogs/drives/maxon_epos4.mdx")
                         }
                     ]
                 },
@@ -743,7 +754,7 @@ const nav = {
                     subtitle: "Blogs about robotics",
                     children: [
                         {
-                            slug: "staubli_commission",
+                            slug: "staubli_wiring",
                             title: "Commissioning a Stabli TX robot",
                             subtitle: "Wiring up a Staubli TX robot",
                             component: () => import("./pages/blogs/robotics/staubli_wiring.mdx")
@@ -796,6 +807,11 @@ const nav = {
             slug: "legal",
             layout: SimpleLayout,
             component: () => import("./pages/legal.mdx")
+        },
+        {
+            slug: "releases",
+            layout: SimpleLayout,
+            component: () => import("./pages/releases.mdx")
         }
     ]
 }

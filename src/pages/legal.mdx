@@ -1,25 +1,26 @@
-import {BaseLayout} from "../framework/layouts/BaseLayout";
-
-export const layout=BaseLayout
-
 import { Card} from 'antd'
+import styled from "@emotion/styled"
 
-<h1 style={{marginLeft:"30px"}}>Legal Notice</h1>
+export const CardWrapper = styled(Card)`
+.ant-card-head-title{
+    font-weight: bold;
+}
+`
 
-<div style={{margin:"60px"}}>
-<Card title="Address:" bordered={false} style={{ width: 300 }}>
+<h1>Legal Notice</h1>
+
+<CardWrapper title="Address:" bordered={false} style={{ width: 300}}>
     <p>glowbuzzer Ltd.</p>
     <p>31 Hercules Way</p>
     <p>Farnborough Aerospace Centre</p>
     <p>GU14 6UU</p>
     <p>UK</p>
-</Card>
+</CardWrapper>
 <p/>
-<Card title="VAT number:" bordered={false} style={{ width: 300 }}>
+<CardWrapper title="VAT number:" bordered={false} style={{ width: 300 }}>
     <p>GB:???</p>
-</Card>
+</CardWrapper>
     <p/>
-<Card title="Company number:" bordered={false} style={{ width: 300 }}>
+<CardWrapper title="Company number:" bordered={false} style={{ width: 300 }}>
     <p>???</p>
-</Card>
-</div>
+</CardWrapper>

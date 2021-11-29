@@ -4,7 +4,10 @@ import {Tldr} from "../../../framework/components/Tldr"
 # {props.subtitle}
 
 <Tldr>
-     - Blah
+    - Position is straight forward  (x,y,z)
+    - Orientation is more complicated
+    - Either quaternion (w, x, y, z)
+    - Or Euler angles (alpha, beta, gamma)
 </Tldr>
 
 ## Introduction
@@ -20,12 +23,31 @@ Orientation in geometry can be represented in large number of different ways inc
 * Euler angles
 * rotation matrices
 
-GBC uses a rotation quaternion to represent orientation.
+GBC uses a rotation quaternion to represent orientation internally because of the ease of working with these in code.
 
 ## Rotation quaternions
 
+Your best primer is: <a href="https://wikipedia.com/wiki/quaternions"> quaternions</a>. Make a strong cup of coffee first.
 
+Compared to rotation matrices, quaternions are a more compact representation or orientation.
 
+Compared to Euler angles, they are simpler to compose and avoid the problem of gimbal lock (see https://en.wikipedia.org/wiki/Gimbal_lock).
 
+However, they are not as intuitive and easy to understand as Euler angles. And, due to the periodic nature of sine and cosine, rotation angles recovered angles will be limited to 2 π (in radians).
 
-Compared to rotation matrices, quaternions are a more compact representation or orientation. Compared to Euler angles, they are simpler to compose and avoid the problem of gimbal lock (see https://en.wikipedia.org/wiki/Gimbal_lock). However, they are not as intuitive and easy to understand as Euler angles. And, due to the periodic nature of sine and cosine, rotation angles recovered angles will be limited to 2 π (in radians).
+## Euler angles
+Here again, your best primer is: <a href="https://wikipedia.com/wiki/Euler_angles"> Euler angles</a>. Make a strong cup of coffee first.
+
+Euler Angles consists of three numbers which each describe a rotation around one axis.
+
+There are different Euler Angle conventions depending on the order of rotations.
+
+The simplest way to think about them is to use the aircraft example and think of them as roll, pitch yaw.
+
+## Rotation matrix
+
+Here your primer is: <a href="https://wikipedia.com/wiki/Rotation_matrix">rotation matrix</a>
+
+Rotation matrices transform the coordinate axes (e.g. x, y, and z) representing the orientation of a 3D object in one frame to the coordinate axes of  another frame.
+
+In 3D space they are a 3x3 matrix.

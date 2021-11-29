@@ -1,12 +1,12 @@
+bugs
+* 404 on file with suffix
+
 Nav
   * focus issue&&
   * thin down padding top nav&&&
 
-Templates
-* different layout for 404 privacy etc - maybe not layout but home page container <- still not fixed look at privacy margin&&
-
 mdx
-* method to tidy up imports of std components in mdx files - now is the time to do this or its too late and i can;t be arsed &
+* method to tidy up imports of std components in mdx files - now is the time to do this or its too late and i can't be arsed &
 
 Home page
 * play with home page chunking - dg
@@ -36,8 +36,7 @@ functionality
 
 * blog keyword nav page - click on keyword get page of links to others blogs - dg to work up now&
 * https://chatlio.com/ integration &&&
-* add in releases page &&& 
-* add gdpr cookies thingymajig&&&
+* add in releases page maybe just top nav react style link to releases page &&& 
 
 responsive
 * make hex lose text on mobile &&&
@@ -81,7 +80,7 @@ content
 
 wk1 - nav - front-end compopnents back - motion getting started - everythign lining up - 
 wk2 - gbc docs week
-wk3 - home page week - cookies - meta
+wk3 - home page week - cookies - meta <<<
 wk4 - gbem week - tweek week
 wk5 - tutorials
 ak blog

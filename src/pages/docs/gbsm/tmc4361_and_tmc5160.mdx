@@ -1,6 +1,15 @@
-# # {props.subtitle}
+import {Tldr} from "../../../framework/components/Tldr";
+
+# {props.subtitle}
 
 ## Introduction
+
+<Tldr>
+    - TMC4361 uses as a motion controller
+    - TMC5160 used as a (pre)driver
+    - ICs picked for their synchronisation capabilities
+    - ICs can be daisy chained together for multiple axes
+</Tldr>
 
 Cyclic synchronous positioning of motors drivers is where the input to the motor driver hardware is a position value which changes every 1ms, 2ms, 4ms etc.
 
@@ -14,27 +23,33 @@ It is suitable for use both in an embedded Linux or microcontroller environment 
 
 The TMC4351 & TMC5160 have been chosen very carefully for this application. It is not possible to pick up any stepper driver chip and expect it to easily integrate in this way.
 
+## Data sheets
+
+The data sheets for the two ICs can be downloaded from the Trinamic website:
+* <a href ="https://www.trinamic.com/fileadmin/assets/Products/ICs_Documents/TMC4361A_datasheet_rev1.26_01.pdf"> TMC4361A</a>
+* <a href ="https://www.trinamic.com/fileadmin/assets/Products/ICs_Documents/TMC5160A_Datasheet_Rev1.15.pdf"> TMC5160</a>
+
+
+
 ## TMC4361
 
 TMC4361 is a motion controller but we don't use its ability to generate trajectories (ramps) but use its synchronisation capabilities to generate a train of high speed step/direction signals in response to the positions that we provide it with each millisecond.
 
 The TMC4361 supports the following features that are key:
-* suppports incremental and absolute encoders over a ABN, SSI or SPI interface.
+* supports incremental and absolute encoders over a ABN, SSI or SPI interface.
 * supports closed loop operation
 * supports software limits to travel
 
 
-It has a freeze capability but this is done in software and can't provide a  safety rated STO solution. So for applications requring proper functional satefy it is probably best to implement STO using driver supply switching (smart high-side power switch - for example the TPS27S100).
+It has a freeze capability but this is done in software and can't provide a  safety rated STO solution. So for applications requiring proper functional safety it is probably best to implement STO using driver supply switching (smart high-side power switch - for example the TPS27S100).
 
 ## TMC5160
 
 TMC5160 is a motion controller/driver. We just use its (pre)driver capabilities with the motion controller side of the chip disabled. 
 
-two-phase bipolar stepper motor.
-External MOSFETs for up to 20A motor current per coil
+It supports two-phase bipolar stepper motors and with external MOSFETs can support up to 20A motor current per coil.
 
-8-60v
-256 microsteps
+It supports 8-60v supply voltages and upto 256 microstepping.
 
 They contain all the Trinamic fancy features: StallGuard2, CoolStep,
 DcStep, SpreadCycle, and StealthChop.
@@ -47,20 +62,18 @@ DcStep, SpreadCycle, and StealthChop.
 * **MicroPlyer** - Microstep interpolator for obtaining full 256 microstep smoothness with lower resolution step inputs starting from fullstep
 
 
-Can also use the TMC5130 with an integrated 1.4A driver for smaller motors or the TMC5160 with external mosfets for higher power apps
+You, can also use the TMC5130 with an integrated 1.4A driver for smaller motors or the TMC5160 with external mosfets for higher power applications.
 
+We use its step /direction interface with the TMC4361 generating the steps.
 
-we use its step /direction interface with the TMC4361 generating the steps
-
-8 mosfets are needed for the drive. If you don't use the suggested components, you will need to do some careful selection and a bit of tuning for which is a bit fiddly and you may need to fire up your oscilloscope. The probing is a bit fiddly but nothing too challenging if you have some skills. Top tip: use pig tails not rat tails with your probes - it makes a substantial difference.   
+Eight MOSFETs are needed for the drive. If you don't use the suggested components, you will need to do some careful selection and a bit of tuning for which is a bit fiddly, and you may need to fire up your oscilloscope. The probing is a bit fiddly but nothing too challenging if you have some skills. Top tip: use pig tails not rat tails with your probes - it makes a substantial difference.
 
 ## Notes
 
 * Encoders connect to the TMC4361 not TMC5160
-* Ref switches connect to the TMC4361 not TMC5160
+* Reference switches connect to the TMC4361 not TMC5160
 * TMC5160 either has an internal clock (?MHz) (tie clock pin to ground) or can take an external clock from the TMC4361A
-* TMC5160 reset is via VCC_IO pin (low current can be driven from GPIO)
-* 
+* TMC5160 reset is via VCC_IO pin (low current can be driven from GPIO) see data sheet
 
 ## TMC4361 to TMC5160 connection
 
@@ -82,16 +95,23 @@ The TMC4361 to TMC5160 connection is via both SPI for exchanging configuration a
 
 ## Daisy chaining
 
+The TMC ICs can be connected in a daisy-chain configuration.
+
+Most SPI devices are not individually addressable and instead use a chip select (CS) pin. This becomes as pain in the arse when you want to connect lots of SPI slaves as you need to have a GPIO output for each
+SPI slave which ties up microcontroller resources.
+
+Daisy-chaining will not work with just any SPI slave. The slaves need to have an internal shift register. Fortunately the Trinamic slaves implement thsi feature.
+
+How daisy-chains are connected:
+
 ```mermaid
 flowchart BT
 subgraph host
     mosi_h["MOSI"]
     miso_h["MOSI"]
-
     end
-    
     subgraph TMC4361-1
-    
+
     mosi_1["MOSI"]
     miso_1["MISO"]
     

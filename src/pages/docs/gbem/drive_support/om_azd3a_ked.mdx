@@ -132,6 +132,112 @@ import om_azd3a_product_shot from "./om_azd3a_product_shot.png?glowsite"
 </div>
 
 
+# AZD3A-KED
+
+import azd3a_ked_connectors from './azd3a_ked_connectors.svg'
+
+<img src={azd3a_ked_connectors} alt="AZD3A-KED connector diagram"/>
+
+CN1 is the motor power - 24V 0V and Earth
+CN2 is the logic power - 24V and 0V
+
+CN7 is the motor connector (one for each axis)
+
+The connector branches into two - encoder and motor power
+
+
+USB mini to connect the Oriental Motor commissioning software (MEXE02)
+
+See the Oriental Motor drive manual for more guidance on EMI
+
+Connect the regeneration resistor if gravitational operation or other operations involving up/down movement, or
+sudden starting/stopping of a large inertial load, will be repeated frequently.
+Always connect the regeneration resistor if an overvoltage protection alarm generates.
+
+
+also can connect a fan and regen resistor
+
+import mexe02_1 from "./mexe02_1.png?glowsite"
+import mexe02_2 from "./mexe02_2.png?glowsite"
+import mexe02_3 from "./mexe02_3.png?glowsite"
+import mexe02_4 from "./mexe02_4.png?glowsite"
+import mexe02_5 from "./mexe02_5.png?glowsite"
+import mexe02_6 from "./mexe02_6.png?glowsite"
+import mexe02_7 from "./mexe02_7.png?glowsite"
+import mexe02_8 from "./mexe02_8.png?glowsite"
+
+
+
+
+## MEXE02
+
+### Establish connection
+1. Connect the mini-USB cable from the AZD3A-KED to your PC.
+1. Turn on both power supplies (logic and motor power)
+1. Start the MEX02 software.
+1. Select COM port
+<Image meta={mexe02_1} alt="mexe02_1" maxWidth={400}/>
+5. Select the "Virtual COM port option"
+<Image meta={mexe02_2} alt="mexe02_2" maxWidth={400}/>
+6. Click the [New] icon in the top toolbar then click [Search model]
+<Image meta={mexe02_3} alt="mexe02_3" maxWidth={600}/>
+7. Select AZD-KED in the list of products
+<Image meta={mexe02_4} alt="mexe02_4" maxWidth={600}/>
+
+## Copy from AZBO sensor to drive
+1. Click the [Communication] menu of the MEXE02, and select [Copy the ABZO (fixed) information to the driver in a lump].
+<Image meta={mexe02_5} alt="mexe02_5" maxWidth={400}/>
+2. Select the axis that the motorized actuator is connected, and click [OK].
+<Image meta={mexe02_6} alt="mexe02_6" maxWidth={400}/>
+3. Click [Yes]. The ABZO information (fixed value) of the motorized actuator is copied to the driver.
+<Image meta={mexe02_7} alt="mexe02_7" maxWidth={600}/>
+4. After it is completed, click [OK].
+<Image meta={mexe02_8} alt="mexe02_8" maxWidth={600}/>
+5. Cycle the driver power and check whether the copied value is applied on the unit information monitor window
+
+
+## Home position setting
+
+1. Switch all power supplies
+1. Move the motor shaft to a desired home position by hand
+1. Find teh extension switch (little button next to the axis' motor cable connector)
+1. Turn on the main power supply and keep the extension switch depressed for one second (the POWER LED (green) and ALARM LED (red) blinks)
+1. Release within three seconds of the POWER LED and ALARM LED started blinking, and press the extension switch again within three seconds
+1. The home position is now set
+
+## Set limits (Software position limit)
+
+Set in MEX
+
+import mexe02_9 from "./mexe02_9.png?glowsite"
+import mexe02_10 from "./mexe02_10.png?glowsite"
+import mexe02_11 from "./mexe02_11.png?glowsite"
+import mexe02_12 from "./mexe02_12.png?glowsite"
+import mexe02_13 from "./mexe02_13.png?glowsite"
+import mexe02_14 from "./mexe02_14.png?glowsite"
+import mexe02_15 from "./mexe02_15.png?glowsite"
+
+## Test operation in MEX
+
+1. Click [Remote operation] to select [Remote operation (Axis1)].
+<Image meta={mexe02_9} alt="mexe02_9" maxWidth={400}/>
+2. Click "Start the remote operation (Axis1)."
+<Image meta={mexe02_10} alt="mexe02_10" maxWidth={400}/>
+3. Click [Yes].
+<Image meta={mexe02_11} alt="mexe02_11" maxWidth={400}/>
+
+4. Select "Reading of all data (product −> PC)"
+<Image meta={mexe02_12} alt="mexe02_12" maxWidth={400}/>
+5. Click [Current ON] to excite the motor.
+<Image meta={mexe02_13} alt="mexe02_13" maxWidth={400}/>
+6. Click [Yes].
+<Image meta={mexe02_14} alt="mexe02_14" maxWidth={400}/>
+7. Jog the drive
+<Image meta={mexe02_15} alt="mexe02_15" maxWidth={400}/>
+
+
+
+
 ## Testing
 
 <YoutubeEmbed embedId="" />

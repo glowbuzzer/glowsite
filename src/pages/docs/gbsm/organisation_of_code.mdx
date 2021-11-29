@@ -1,13 +1,118 @@
+import {BogStandardCol, BogStandardRow, BogStandardHeaderRow} from "../../../framework/components/BogStandardTable";
 
 # {props.subtitle}
 
+The GBSM code base is not particularly complicated and it should not be too hard for you to get to grips with it.
 
 
-Fiddle with parameters:
+We use the TMC-API (<a href="https://github.com/trinamic/TMC-API">https://github.com/trinamic/TMC-API</a>) for the definitions of the registers on the two ICS. These are included in the project in:
+
+`libs/TMC-API`
 
 
 
-IO
+<BogStandardHeaderRow>
+    <BogStandardCol span={9}>
+        File
+    </BogStandardCol>
+    <BogStandardCol span={15}>
+        Function
+    </BogStandardCol>
+</BogStandardHeaderRow>
+<BogStandardRow>
+    <BogStandardCol span={9}>
+        `command_line.c`
+    </BogStandardCol>
+    <BogStandardCol span={15}>
+        Handles the processing of the command line arguments
+    </BogStandardCol>
+</BogStandardRow>
+<BogStandardRow>
+    <BogStandardCol span={9}>
+        `cyclic_message.c`
+    </BogStandardCol>
+    <BogStandardCol span={15}>
+        Handles the printing of messages to console as GBSM is cyclically executing
+    </BogStandardCol>
+</BogStandardRow>
+
+<BogStandardRow>
+    <BogStandardCol span={9}>
+        `drives.c`
+    </BogStandardCol>
+    <BogStandardCol span={15}>
+        This is where the main action takes place. It provides the functions to initialised and control the two motor drive ICs.
+    </BogStandardCol>
+</BogStandardRow>
+
+
+<BogStandardRow>
+    <BogStandardCol span={9}>
+        `gpio.c`
+    </BogStandardCol>
+    <BogStandardCol span={15}>
+        Handles the configuration of the GPIO pins for communicating with the motor drives ICs including SPI.
+    </BogStandardCol>
+</BogStandardRow>
+
+<BogStandardRow>
+    <BogStandardCol span={9}>
+        `io.c`
+    </BogStandardCol>
+    <BogStandardCol span={15}>
+        Handles the configuration and read/write to GPIOs used as digital inputs and outputs as part of the control.
+    </BogStandardCol>
+</BogStandardRow>
+
+<BogStandardRow>
+    <BogStandardCol span={9}>
+        `read_register.c`
+    </BogStandardCol>
+    <BogStandardCol span={15}>
+        Provides the function for dumping the register contents of the motor driver ICs.
+    </BogStandardCol>
+</BogStandardRow>
+
+<BogStandardRow>
+    <BogStandardCol span={9}>
+        `step_control.c`
+    </BogStandardCol>
+    <BogStandardCol span={15}>
+        Provides the main state machine for controlling machines.
+    </BogStandardCol>
+</BogStandardRow>
+
+<BogStandardRow>
+    <BogStandardCol span={9}>
+        `SPI_TMC.c`
+    </BogStandardCol>
+    <BogStandardCol span={15}>
+        Provides the SPI read/write functions.
+    </BogStandardCol>
+</BogStandardRow>
+
+<BogStandardRow>
+    <BogStandardCol span={9}>
+        `stepper_routines.c`
+    </BogStandardCol>
+    <BogStandardCol span={15}>
+        Provides functions to support miscellaneous operations such as test moves.
+    </BogStandardCol>
+</BogStandardRow>
+<BogStandardRow>
+    <BogStandardCol span={9}>
+        `tmc4361a_status.c`
+    </BogStandardCol>
+    <BogStandardCol span={15}>
+        Provides functions to interpret the tmc4261a status event and flags.
+    </BogStandardCol>
+</BogStandardRow>
+
+
+
+
+
+
 
 
 

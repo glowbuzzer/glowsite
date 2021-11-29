@@ -9,7 +9,7 @@ import {Image} from "../../../framework/components/Image"
 
 ## Tools required
 
-* Wire cutters - e.g. Kinpex 78 61 125
+* Wire cutters - e.g. <a href="https://www.knipex.com/en-uk/products/electronics-pliers/electronic-super-knips/electronic-super-knips/7861125">Knipex 78 61 125</a>
 * Crimping pliers - e.g. <a href="https://www.rennsteig.com/en/products/crimping/198-ferrule-crimping-tool-pew-8-184-8-185-8-186"> Rennsteig 610 186 3</a>
 * Screwdriver - Blade (Bar) 2.5 x 0.4mm e.g. Wago 210-719
 
@@ -43,16 +43,15 @@ import single_axis_psus_and_drive_on_din_rail from "./single_axis_psus_and_drive
 
 <Image meta={single_axis_psus_and_drive_on_din_rail} alt="Single axis PSUs and drive on rail" maxWidth={500}/>
 
-For the logic power 0.5mm2 wires are needed. The ends of these wires must be crimped.
+Next, plug the power cable wires into the drives connectors.
 
-
-CN4 -Motor power - 24v 0v earth
-CN1 - 24v 0v
+* CN4 - Motor power - 24v 0v earth
+* CN1 - Logic power - 24v 0v
 
 Motor power connects directly to the MDR-100-24 power supply's 24v/0v terminals.
 Logic power connects directly to the MDR-20-24 power supply's terminals.
 
-Logic power can be routed via a Wago terminal blocks if you want access to 24V and 0V for IO.
+Logic power can be routed via the Wago terminal blocks if you want access to 24V and 0V.
 
 Mains power needs to be safely provided to the power supplies through any filters and protection devices that you or your local regulations may deem appropriate and with any additional secondary mechanical elctrical protection.
 
@@ -69,29 +68,13 @@ import single_axis_fully_assembled from "./single_axis_fully_assembled.jpg?glows
 
 <Image meta={single_axis_fully_assembled} alt="Single axis fully assembled"/>
 
+Now, you can switch on the power supplies and the Raspberry Pi. You should be rewarded with lots of flashing LEDs.
 
+You are now ready for the next step, which would be to run up the front-end, GCB and GBEM and jog a drive. See <Link to="/get-started/motion"> for details on how to do this</Link>.
 
-White = 0.5m^2
-Red = 1mm^2
-
+## Reference diagram - the ADK-KED connector layout
 
 import azd_ked_connectors from './azd_ked_connectors.svg'
 
 <img src={azd_ked_connectors} alt="AKD-KED connector diagram"/>
-
-## Wiring the PSUs
-
-
-##Pi
-
-PSU
-
-Wi-Fi
-
-Ethernet to drive
-
-
-
-## Accessing the drive's IO
-
 

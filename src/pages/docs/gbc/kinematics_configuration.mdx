@@ -5,7 +5,11 @@ import lefty_righty from "./lefty_righty.png?glowsite"
 # {props.subtitle}
 
 <Tldr>
-     - blah
+    - GBC includes forward and inverse kinematics models for common machine structures
+    - Forward kinematics = angle of joints -> position and orientation of tool
+    - Inverse kinematics = position and orientation of tool -> angle of joints
+    - Multiple solutions to inverse kinematics
+    - Different solution sets = robot configurations
 </Tldr>
 
 In GBC a kinematics configuration is a collection of joints that are controlled in concert to produce motion.
@@ -19,7 +23,7 @@ Kinematics configurations need to have mathematical model attached to them and o
 The toolkit contains mathematical kinematics models for common types of robots and, we add can more on customer request depending on what you need.
 
 # Forward kinematics
-This maps the angles of a robot's joints to the cartesian position and orinetation of the tool.
+This maps the angles of a robot's joints to the cartesian position and orientation of the tool.
 ```mermaid
 graph LR
     id1["Joint angles"] -->id2["TCP xyz and orientation"]

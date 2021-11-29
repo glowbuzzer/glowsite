@@ -1,7 +1,11 @@
 import { Table } from "antd"
-import styled from "@emotion/styled";
+import styled from "@emotion/styled"
 
 const StyledDiv = styled.div`
+    p {
+        font-size: 14px;
+        margin: auto;
+    }
     .props-table {
         max-width: 800px;
 

@@ -1,7 +1,59 @@
-
 import {Tldr} from "../../../framework/components/Tldr"
 import { Link } from "react-router-dom"
 
 # {props.subtitle}
 
-`/src/io.c`
+## Introduction
+<Tldr>
+    - Just digital IO is implemented in the reference code base
+    - Easy to extend to analog IO
+    - Simple mapping between Linux GPIO and GBC IO is provided
+</Tldr>
+The GBC and the front-end React components in the glowbuzzer toolkit provide support for:
+
+* Digital IO
+* Analog IO
+* Integer IO
+
+The reference codebase for GBSM is written for the Raspberry Pi. The Raspberry Pi does not have any DACs/ADCs on the board only GPIO.
+
+Hence, the only types of IO supported by the codebase are digital IOs.
+
+For a real production use of GBSM, if analog inputs and outputs are required, custom electronics will be developed that delivers the isolated analog IO required.
+
+This could take the form of 4-20mA communication systems or 0-10V IO or whatever your design needs.
+
+This would likely take the form (for input) of an isolated, single or multi-channel ADC that provides an SPI interface that would be integrated with the embedded Linux or micrcontroller running GBCSM.
+
+## The digital IO implementation in the GBSM reference code
+
+The code pages the Pi's GPIO pins onto the GBC digital inputs and outputs.
+
+The mapping is configured using the following array (in `io.c`):
+```c
+io_map_t io_map[NUM_PI_GPIO] = {
+[1] = {GPIO_NOT_USED, 0},
+[26] = {GPIO_OUT, 3}
+};
+```
+
+The array's index is the PI's GPIO number and the second element of the array is the GBC IO number.
+
+They can be defined as inputs or outputs using the enum:
+
+`typedef enum {GPIO_NOT_USED, GPIO_IN, GPIO_OUT} gpio_function_t;`
+
+* GPIO_NOT_USED - not used
+* GPIO_IN - GPIO is used as an input
+* GPIO_OUT - GPIO is used as an ouput
+
+
+Two functions are provided to read and write the GPIOs.
+
+`void io_set_dout(uint8_t gbc_dout_num, bool value, gberror_t *rc)`
+This sets the Pi GPIO pin corresponding to the GBC IO number.
+
+`bool io_get_din(uint8_t gbc_din_num, gberror_t *rc)`
+This reads a Pi GPIO pin corresponding to the GBC IO number.
+
+On different embedded Linux environments to the Pi, these can be easily adapted to how they control their GPIO pins.
