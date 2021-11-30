@@ -153,7 +153,7 @@ const nav = {
                 {
                     slug: "frontend",
                     title: "Front-end",
-                    subtitle: "Use our custom create react app template",
+                    subtitle: "Easy create a front-end React machine controls",
                     component: () => import("./pages/get-started/front-end.mdx")
                 },
                 {

@@ -62,13 +62,13 @@ const DesktopFooter = ({}) => {
 
             content: (
                 <div>
-                    <p>
+                    <div>
                         We use tracking cookies to understand how people use our site so we can
                         improve our services.
-                    </p>
-                    <p>
+                    </div>
+                    <div>
                         For more information see our <Link to="/privacy">privacy policy</Link>
-                    </p>
+                    </div>
                 </div>
             )
         })
@@ -80,59 +80,59 @@ const DesktopFooter = ({}) => {
                 <Col span={3}></Col>
                 <Col span={5}>
                     <h3>How it works</h3>
-                    <p />
-                    <p>
+                    <div />
+                    <div>
                         <StyledLink to="/how-it-works/basics">Basics</StyledLink>
-                    </p>
-                    <p>
+                    </div>
+                    <div>
                         <StyledLink to="/how-it-works/detail">More detail</StyledLink>
-                    </p>
-                    <p>
+                    </div>
+                    <div>
                         <StyledLink to="/how-it-works/platforms">Supported platforms</StyledLink>
-                    </p>
+                    </div>
                 </Col>
                 <Col span={5}>
                     <h3>Get started</h3>
-                    <p />
-                    <p>
+                    <div />
+                    <div>
                         <StyledLink to="/get-started/hardware">Required hardware</StyledLink>
-                    </p>
-                    <p>
+                    </div>
+                    <div>
                         <StyledLink to="/get-started/motion">Make a drive move</StyledLink>
-                    </p>
-                    <p>
+                    </div>
+                    <div>
                         <StyledLink to="/get-started/how_to_buy">How to buy</StyledLink>
-                    </p>
+                    </div>
                 </Col>
                 <Col span={5}>
                     <h3>Legal</h3>
-                    <p />
-                    <p>
+                    <div />
+                    <div>
                         <StyledLink to="/privacy">Privacy policy</StyledLink>
-                    </p>
-                    <p>
+                    </div>
+                    <div>
                         <StyledLink to="/legal">Legal notice</StyledLink>
-                    </p>
-                    <p>
+                    </div>
+                    <div>
                         {modalContext}
                         <StyledLinkLookalike onClick={show_cookie_settings}>
                             Cookie settings
                         </StyledLinkLookalike>
-                    </p>
+                    </div>
                 </Col>
                 <Col span={5}>
                     <h3>github & youtube</h3>
-                    <p />
-                    <p>
+                    <div />
+                    <div>
                         <a href={"https://www.github.com/glowbuzzer"}>
                             <GithubOutlined style={{ fontSize: "24px", color: "#9254de" }} />
                         </a>
-                    </p>
-                    <p>
+                    </div>
+                    <div>
                         <a href={"https://www.youtube.com/glowbuzzer"}>
                             <YoutubeOutlined style={{ fontSize: "24px", color: "#9254de" }} />
                         </a>
-                    </p>
+                    </div>
                 </Col>
             </Row>
             <span>©2022 by glowbuzzer All Rights Reserved </span>

@@ -1,6 +1,7 @@
 import {Tldr} from "../../../framework/components/Tldr"
 import { Image } from "../../../framework/components/Image"
 import { Link } from "react-router-dom"
+import InstallGbem from "../../fragments/install_gbem.mdx"
 
 # {props.subtitle}
 <Tldr>
@@ -12,18 +13,7 @@ import { Link } from "react-router-dom"
 ## Compiling
 On Linux, there is a single executable, GBEM, which is run with a number of command line options.
 
-This must be compiled before you can run it using the source code from GitHub.
-
-Clone with: `git clone https://github.com/glowbuzzer/gbem`
-
-Assuming you are doing a local compilation then to compile and run, outside of an IDE, the steps are:
-
-```shell
-mkdir build
-cd build
-cmake ..
-make
-```
+<InstallGbem/>
 
 To do any substantial development with GBEM, the code will need to be imported into your IDE of choice (for example [JetBrains CLion](https://www.jetbrains.com/clion) ). The provided CMakeLists files provides a basis for IDEs that use CMake but the code is simple and should be easy to import into any IDE.
 

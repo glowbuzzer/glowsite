@@ -1,5 +1,7 @@
 bugs
 * 404 on file with suffix
+  warning ../package.json: No license field
+
 
 Nav
   * focus issue&&
@@ -43,6 +45,8 @@ responsive
 * do mobile home page carousel images &&&
 
 downloads page??
+
+site map??
 
 frip
 * change svg icon colour on hover

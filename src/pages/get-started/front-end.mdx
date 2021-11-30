@@ -1,7 +1,10 @@
 import {Tldr} from "../../framework/components/Tldr"
 import { Link } from "react-router-dom"
 import {Image} from "../../framework/components/Image"
-
+import CraTemplate from "../fragments/cra_template.mdx"
+import InstallGbc from "../fragments/install_gbc.mdx"
+import RunGbc from "../fragments/run_gbc_short.mdx"
+import FrontendConnect from "../fragments/frontend_connect.mdx"
 
 # {props.subtitle}
 
@@ -11,28 +14,26 @@ import {Image} from "../../framework/components/Image"
     - Tutorial 2 - Oscillating move on a drive
 </Tldr>
 
-Create your project using a custom template. (Install npm with for example `sudo apt install nodejs npm` and  `npm install -g npx` if you don't have it installed)
-```shell
-npx create-react-app your-project-name --template [gb-starter]
-cd your-project-name
-npm start
-```
+## Introduction
+This document takes you though installing the glowbuzzer's toolkit React components and creating some simple machine control functions of your own.
 
-Then, open the project in your IDE. We use JetBrains but Visual Studio Code will do fine.
+## Use the CRA template to create your own starter project
 
-# Structure of the project
+<CraTemplate/>
+
+## Structure of the project
 We provide a little framework that enables a Tiled UI to be created.
 
 You don't have to use this framework, we use it because often machine control user interfaces contain discrete "pockets" of functionality laid out on the screen.
 
 For this tutorial, we will assume that you are using the Tiles.
 
-# Create new tile that toggles a Digital Output - Front-end Tutorial 1
+## Create new tile that toggles a Digital Output - Front-end Tutorial 1
 
-## Introduction
+### Introduction
 Let's create the simplest possible machine control function. A button to toggle a digital output. This is the "hello world" equivalent in automation land.
 
-## Create the tile
+### Create the tile
 Start by creating a new tsx file `TutorialDoToggleTile.tsx`.
 
 In this file we need to import the components we will need for our new tile.
@@ -136,7 +137,7 @@ export const TutorialDoToggleTile = ({ labels=[] }) => {
 }
 ```
 
-## Add the tile to the UI
+### Add the tile to the UI
 
 In app.tsx, import the component you just wrote:
 ```tsx
@@ -158,23 +159,21 @@ import step1_add_switch from "./front_end_tutorial_images/step1_add_switch.png?g
 <Image meta={step1_add_switch} alt="front-end switch" maxWidth={400}/>
 
 
-## Test the toggle switch
+### Test the toggle switch
 
 The next step is to make the toggle switch actually trigger a digital output.
 
-You will need to run GBC and connect the front-end application to the GBC websockets server for this step.
+To do this we need to install GBC.
 
-(GBC can be dowloaded from `https://downloads.glowbuzzer.com/?????`)
+<InstallGbc/>
 
-Run GBC with: `./GBC`
+And then run GBC/
 
-Then, in the browser, click connect to establish a connection to GBC.
+<RunGbc/>
 
-import step2_connect_tile from "./front_end_tutorial_images/step2_connect_tile.png?glowsite"
+And finally connect the front-end to GBC.
 
-<Image meta={step2_connect_tile} alt="front-end connect tile" maxWidth={400}/>
-
-preferences `ws://localhost:9001/ws`
+<FrontendConnect/>
 
 We will be running in `Simulation Mode` as we have not integrated GBC with any hardware (e.g. an EtherCAT master).
 
@@ -182,12 +181,12 @@ Now, in the UI, the glowbuzzer provided Digital Outputs tile reflects the state 
 
 That is it. It shows how simple it is to create React components to control machine functions.
 
-# Make a drive move - an oscillating move -  Front-end Tutorial 2
+## Make a drive move - an oscillating move -  Front-end Tutorial 2
 
-## Introduction
+### Introduction
 The next example in showing how easy it is to write React machine control functions is to make a drive move. In this case we want to make a drive perform an oscillating move.
 
-## Create the tile
+### Create the tile
 
 Create `TutorialOscillatingMoveTile.tsx` in the project you created with the custom template.
 
@@ -224,7 +223,7 @@ export const TutorialOscillatingMoveTile = () => {
 }
 ```
 
-## Add the tile to the UI
+### Add the tile to the UI
 
 In app.tsx, import the component you just wrote:
 ```tsx
@@ -249,15 +248,11 @@ import oscillating_move_tile from "./front_end_tutorial_images/oscillating_move_
 
 
 
-## Test the oscillating move
+### Test the oscillating move
 
 The next step is to test the move.
 
-You will need to run GBC and connect the front-end application to the GBC websockets server for this step.
-
-(GBC can be dowloaded from `https://downloads.glowbuzzer.com/?????`)
-
-Run GBC with: `./GBC`
+You will need to run GBC (see the previous Tutorial for details on how to do this).
 
 Then, in the browser, click connect to establish a connection to GBC.
 

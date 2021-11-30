@@ -5,3 +5,38 @@ import {Tldr} from "../../../framework/components/Tldr"
 <Tldr>
     - Blah
 </Tldr>
+
+Scaling of joints is always a thorny issue.
+
+This is because there are multiple places scales can be set and because most drives use a inteteger representation for position, you have to be aware of overflows and loss of resolution.
+
+The good news is
+
+
+If you are using an EtherCAT drive there are three places you can apply a scale:
+
+1. Drives themselves
+2. Joint scale
+3. Kc scale
+
+GBC uses a `int32_t` for the position it passes to the drive
+
+Example
+
+drive does not scale
+drive has a 10,000 ppr encoder
+
+set scale to be
+
+kc scale = 1
+joint scale = 300
+
+
+If we put "10" into fron-end we want motor to turn 1/4 of rev = 2,500
+
+set joint scale to 250
+
+If we put 0.01 into front-end we will get 0.01 x 250 = 2.5
+
+So we have a "resolution of 0.004mm
+
