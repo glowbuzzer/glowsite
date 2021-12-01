@@ -53,6 +53,7 @@ specifiers:
   three-stdlib: ^2.5.9
   typedoc: ^0.22.6
   typescript: ^4.4.4
+  unist-util-flatmap: ^1.0.0
   unist-util-visit: ^4.1.0
   vite: 2.6.14
   vite-imagetools: ^3.9.0
@@ -116,6 +117,7 @@ devDependencies:
   three-stdlib: 2.5.9_three@0.125.2
   typedoc: 0.22.6_typescript@4.4.4
   typescript: 4.4.4
+  unist-util-flatmap: 1.0.0
   unist-util-visit: 4.1.0
   vite: 2.6.14_less@4.1.2
   vite-imagetools: 3.9.0
@@ -1824,16 +1826,24 @@ packages:
   /@glowbuzzer/controls/0.0.22:
     resolution: {integrity: sha512-1DEQ9yoxjLGPH8PTptJqgGotVX499Ob0tHpSldqfntJ5rQ7cN8TA4mPRh0m4YF2KqDubdGGdmqPYklfBRapyeA==}
     dependencies:
-      '@glowbuzzer/layout': 0.0.5
-      '@glowbuzzer/store': 0.0.6
+      '@glowbuzzer/layout': 1.0.0-alpha.4
+      '@glowbuzzer/store': 1.0.0-alpha.4
     dev: true
 
   /@glowbuzzer/layout/0.0.5:
     resolution: {integrity: sha512-tSzGc9tDJGo8E6Qg0NEYIeuX18wQB6xZCEHN2mlGbfyepvh/oCQT4Geg190NddEC6g9akxaqZ400wOIcGPbQyQ==}
     dev: true
 
+  /@glowbuzzer/layout/1.0.0-alpha.4:
+    resolution: {integrity: sha512-TcdrBpmj7yoraWdUhiWJvMg3vLadOseKX7fuwZbwrtZXsuNPgay91AkdAEdE6ik+MFGFdxs/tZXFu9GdvtlGnA==}
+    dev: true
+
   /@glowbuzzer/store/0.0.6:
     resolution: {integrity: sha512-Xl0n9jWbXPOMZgqjdrIBybmN2AQH1dv+3J8TxXrBTS3SPqiSO1i2VE6NRzC1MMcuGX7jMQJdr+H89EF6Y22HOw==}
+    dev: true
+
+  /@glowbuzzer/store/1.0.0-alpha.4:
+    resolution: {integrity: sha512-1hYjNwW2FmMOH7po6kY6wDYElH72XH2kSP0/Q9dC4sbifql+SRjkdb3O+VJSFNdBcU7NVNcRWOJTWGV+n5HMRg==}
     dev: true
 
   /@mdx-js/mdx/2.0.0-rc.1:
@@ -7693,6 +7703,10 @@ packages:
     resolution: {integrity: sha512-GFxmfEAa0vi9i5sd0R2kcrI9ks0r82NasRq5QHh2ysGngrc6GiqD5CDf1FjPenY4vApmFASBIIlk/jj5J5YbmQ==}
     dependencies:
       '@types/unist': 2.0.6
+
+  /unist-util-flatmap/1.0.0:
+    resolution: {integrity: sha512-IG32jcKJlhARCYT2LsYPJWdoXYkzz3ESAdl1aa2hn9Auh+cgUmU6wgkII4yCc/1GgeWibRdELdCZh/p3QKQ1dQ==}
+    dev: true
 
   /unist-util-generated/2.0.0:
     resolution: {integrity: sha512-TiWE6DVtVe7Ye2QxOVW9kqybs6cZexNwTwSMVgkfjEReqy/xwGpAXb99OxktoWwmL+Z+Epb0Dn8/GNDYP1wnUw==}

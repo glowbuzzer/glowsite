@@ -67,6 +67,7 @@
     "three-stdlib": "^2.5.9",
     "typedoc": "^0.22.6",
     "typescript": "^4.4.4",
+    "unist-util-flatmap": "^1.0.0",
     "unist-util-visit": "^4.1.0",
     "vite": "2.6.14",
     "vite-imagetools": "^3.9.0",

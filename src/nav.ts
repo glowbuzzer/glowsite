@@ -2,7 +2,6 @@ import { Node } from "./framework/providers/NavProvider"
 import { HomePage } from "./framework/layouts/HomePage"
 import { DefaultDocumentationPage } from "./framework/layouts/DocumentationPage"
 import { ControlsDocumentationPage } from "./framework/layouts/ControlsDocumentationPage"
-import { BaseLayout } from "./framework/layouts/BaseLayout"
 import { SimpleLayout } from "./framework/layouts/SimpleLayout"
 
 function process(node: Omit<Node, "path">, parentPaths: string[], parent: Node): Node {
@@ -809,9 +808,9 @@ const nav = {
             component: () => import("./pages/legal.mdx")
         },
         {
-            slug: "releases",
+            slug: "downloads",
             layout: SimpleLayout,
-            component: () => import("./pages/releases.mdx")
+            component: () => import("./pages/DownloadsPage")
         }
     ]
 }

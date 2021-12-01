@@ -108,6 +108,9 @@ const DesktopFooter = ({}) => {
                     <h3>Legal</h3>
                     <div />
                     <div>
+                        <StyledLink to="/downloads">Downloads</StyledLink>
+                    </div>
+                    <div>
                         <StyledLink to="/privacy">Privacy policy</StyledLink>
                     </div>
                     <div>
