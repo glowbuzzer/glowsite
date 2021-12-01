@@ -108,9 +108,6 @@ const DesktopFooter = ({}) => {
                     <h3>Legal</h3>
                     <div />
                     <div>
-                        <StyledLink to="/downloads">Downloads</StyledLink>
-                    </div>
-                    <div>
                         <StyledLink to="/privacy">Privacy policy</StyledLink>
                     </div>
                     <div>
@@ -124,7 +121,7 @@ const DesktopFooter = ({}) => {
                     </div>
                 </Col>
                 <Col span={5}>
-                    <h3>github & youtube</h3>
+                    <h3>Resources</h3>
                     <div />
                     <div>
                         <a href={"https://www.github.com/glowbuzzer"}>
@@ -135,6 +132,9 @@ const DesktopFooter = ({}) => {
                         <a href={"https://www.youtube.com/glowbuzzer"}>
                             <YoutubeOutlined style={{ fontSize: "24px", color: "#9254de" }} />
                         </a>
+                    </div>
+                    <div>
+                        <StyledLink to="/downloads">Downloads</StyledLink>
                     </div>
                 </Col>
             </Row>

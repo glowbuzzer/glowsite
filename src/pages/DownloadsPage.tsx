@@ -36,8 +36,17 @@ export default () => {
 
     return (
         <Section>
-            <h1>Glowbuzzer Releases</h1>
-            <p>Blah blah</p>
+            <h1>Toolkit releases & downloads</h1>
+            <p>Here we highlight the latest releases of the glowbuzzer toolkit's components.</p>
+            <p>
+                Components like GBR (React components), GBEM (EtherCAT Master), GBSM (Step Master)
+                are supplied as source code and you need to download and compile these yourself from
+                Github.
+            </p>
+            <p>
+                GBC, the core real-time control, is the closed source licensed component of the
+                toolkit and an evaluation version (time limited) is available for download.
+            </p>
             {projects.map(project => (
                 <div key={project.github || project.name}>
                     <h2>{project.name}</h2>
