@@ -10,6 +10,7 @@ import { ReactComponent as SmallLogo } from "../../images/logos/tiny-logo.svg?in
 
 import { CloseOutlined, GithubOutlined, MenuOutlined, YoutubeOutlined } from "@ant-design/icons"
 import { Section } from "../components/Section"
+import { projects } from "../../pages/versions"
 
 const StyledTopNav = styled.div`
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
@@ -57,6 +58,12 @@ const StyledTopNav = styled.div`
     .nav-wide {
         display: flex;
         gap: 20px;
+    }
+
+    .latest-release {
+        color: ${props => props.theme.color.MainPurple};
+        border: 1px dashed ${props => props.theme.color.MainPurple};
+        padding: 2px 5px;
     }
 
     @media (max-width: 950px) {
@@ -140,7 +147,11 @@ const NavMenu = ({ mode }) => {
             {nav.children
                 .filter(node => node.children.length) // don't include nodes like 404 that have no children
                 .map(({ path, title, children }) => (
-                    <Menu.SubMenu key={mode + ":" + path}  title={<span>{title}</span>} popupOffset={[0, 20]}>
+                    <Menu.SubMenu
+                        key={mode + ":" + path}
+                        title={<span>{title}</span>}
+                        popupOffset={[0, 20]}
+                    >
                         {children.map(({ path, title, subtitle, children }) => {
                             const to = children.length ? children[0].path : path
                             return (
@@ -162,6 +173,7 @@ export const TopNav = () => {
     const [showMenu, setShowMenu] = useState(false)
 
     // we are expecting each node in the top nav to have children
+    const gbr_version = projects.find(p => p.github === "gbr").releases[0].tag
 
     return (
         <StyledTopNav>
@@ -172,6 +184,9 @@ export const TopNav = () => {
                     </Link>
                     <NavMenu mode="horizontal" />
                     <Space size="middle">
+                        <Link className="latest-release" to="/downloads">
+                            {gbr_version}
+                        </Link>
                         <a href={"https://www.github.com/glowbuzzer"}>
                             <GithubOutlined style={{ fontSize: "24px", color: "#9254de" }} />
                         </a>
