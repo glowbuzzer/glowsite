@@ -153,7 +153,7 @@ const nav = {
                 {
                     slug: "frontend",
                     title: "Front-end",
-                    subtitle: "Easy create a front-end React machine controls",
+                    subtitle: "Easily create a React machine control",
                     component: () => import("./pages/get-started/front-end.mdx")
                 },
                 {
@@ -569,25 +569,25 @@ const nav = {
                 },
                 {
                     slug: "ui",
-                    title: "Front-end",
+                    title: "Front-end (GBR)",
                     subtitle: "React component documentation",
                     layout: ControlsDocumentationPage, // so that Redux context is created
                     children: [
                         {
                             slug: "overview",
-                            title: "Overview of front-end components",
-                            subtitle: "Overview of the toolkit's front-end components",
+                            title: "Overview of the GBR components",
+                            subtitle: "Overview of the toolkit's front-end components (GBR)",
                             component: () => import("./pages/docs/ui/overview.mdx")
                         },
                         {
                             slug: "starter_project",
                             title: "Creating a starter project",
-                            subtitle: "Creating a React starter project",
+                            subtitle: "Creating a React starter project with GBR",
                             component: () => import("./pages/docs/ui/starter_project.mdx")
                         },
                         {
                             slug: "controls",
-                            title: "Front-end controls",
+                            title: "GBR controls",
                             children: auto(
                                 // @ts-ignore
                                 import.meta.glob("./pages/docs/ui/controls/*.mdx")
@@ -595,7 +595,7 @@ const nav = {
                         },
                         {
                             slug: "tiles",
-                            title: "Front-end tiles",
+                            title: "GBR tiles",
                             children: auto(
                                 // @ts-ignore
                                 import.meta.glob("./pages/docs/ui/tiles/*.mdx")
@@ -603,7 +603,7 @@ const nav = {
                         },
                         {
                             slug: "imports",
-                            title: "Imports",
+                            title: "GBR Imports",
                             subtitle: "Imported components in the front-end",
                             component: () => import("./pages/docs/ui/imports.mdx")
                         }

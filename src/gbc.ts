@@ -63,26 +63,38 @@
   ACTIVITYTYPE_MOVEJOINTS ,
         /**  Move a set of joints at a given velocity */
   ACTIVITYTYPE_MOVEJOINTSATVELOCITY ,
-        /**  Move a kinematics configuration&#x27;s terminal joint along a line in cartesian space to a given position (with orientation) */
+        /**  Move a kinematics configuration&#x27;s tool along a line in cartesian space to a given position (with orientation) */
   ACTIVITYTYPE_MOVELINE ,
-        ACTIVITYTYPE_MOVELINEATVELOCITY,
-        ACTIVITYTYPE_MOVEARC,
-        ACTIVITYTYPE_MOVESPLINE,
-        ACTIVITYTYPE_MOVETOPOSITION,
-        ACTIVITYTYPE_MOVELINEWITHFORCE,
-        ACTIVITYTYPE_MOVETOPOSITIONWITHFORCE,
-        ACTIVITYTYPE_GEARINPOS,
-        ACTIVITYTYPE_GEARINVELO,
-        ACTIVITYTYPE_GEARINDYN,
-        ACTIVITYTYPE_SETDOUT,
-        ACTIVITYTYPE_SETAOUT,
-        ACTIVITYTYPE_DWELL,
-        ACTIVITYTYPE_WAITON,
-        ACTIVITYTYPE_SWITCHPOSE,
-        ACTIVITYTYPE_LATCH,
-        ACTIVITYTYPE_STRESSTEST,
-        ACTIVITYTYPE_ENDPROGRAM,
-        ACTIVITYTYPE_SETIOUT,
+        /**  Move a kinematics configuration&#x27;s tool along a line in cartesian space to a given position (with orientation) at a given velocity */
+  ACTIVITYTYPE_MOVELINEATVELOCITY ,
+        /**  Move a kinematics configuration&#x27;s tool along an arc in cartesian space to a given position (with orientation) */
+  ACTIVITYTYPE_MOVEARC ,
+        /**  Move a kinematics configuration&#x27;s tool along a spline in cartesian space to a given position (with orientation) */
+  ACTIVITYTYPE_MOVESPLINE ,
+        /**  Move a kinematics configuration&#x27;s tool to given position (with orientation) in joint space */
+  ACTIVITYTYPE_MOVETOPOSITION ,
+        /**  Gear in a master and slave specifying position */
+  ACTIVITYTYPE_GEARINPOS ,
+        /**  Gear in a master and slave specifying velocity */
+  ACTIVITYTYPE_GEARINVELO ,
+        /**  Set a digital out  */
+  ACTIVITYTYPE_SETDOUT ,
+        /**  Set an analog out */
+  ACTIVITYTYPE_SETAOUT ,
+        /**  Dwell (wait) for a period of time */
+  ACTIVITYTYPE_DWELL ,
+        /**  Wait for a trigger */
+  ACTIVITYTYPE_WAITON ,
+        /**  Switch a robot&#x27;s configuration */
+  ACTIVITYTYPE_SWITCHPOSE ,
+        /**  Latch the value of a position */
+  ACTIVITYTYPE_LATCH ,
+        /**  Internal stress test activity */
+  ACTIVITYTYPE_STRESSTEST ,
+        /**  End program activity (steamed) */
+  ACTIVITYTYPE_ENDPROGRAM ,
+        /**  Set an integer out */
+  ACTIVITYTYPE_SETIOUT ,
     }
     export enum ACTIVITYSTATE {
         /**  Activity is inactive (not being executed) */
@@ -573,6 +585,8 @@
                     jogJmax?:number;
                     /**  scale factor to be applied to a joint&#x27;s position for transfer to the fieldbus */
                     scale?:number;
+                    /**  TODO */
+                    pow10?:number;
                     /**  negative soft limit for the travel of the joint */
                     negLimit?:number;
                     /**  positive soft limit for the travel of the joint */

@@ -1,7 +1,11 @@
+import { Link } from "react-router-dom"
 
+To run GBEM, usually `./GBEM -c -ieth0` is enough.
 
-`./GBEM`
+`eth0` refers to the name of Ethernet interface which will be used for EtherCAT traffic and if your Linux platform's interface is named differently, then this will need adjusting.
 
-explain GBC command line options
+The `-c` refers to cyclic mode where GBEM runs cyclically at the specified fieldbus bus cycle period.
 
-explain what they see
+Before, GBEM can be run.
+
+More information on the command line options and configuration options can be found in <Link to="/docs/gbem/overview"> GBEM Documentation</Link>

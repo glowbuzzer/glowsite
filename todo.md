@@ -1,7 +1,5 @@
-bugs
-* 404 on file with suffix
-  warning ../package.json: No license field
 
+* bit of html for downloads page
 
 Nav
   * focus issue&&
@@ -16,8 +14,6 @@ Home page
 * dots of featured blog in wrong place - dg &&&
 * top carosuel doesnt repsond to dots - speed - dg &&&
 
-Docs
-* link in IDE that works in markdown - double up or spit out different tsx for ide use&
 
 Style
 * choose base font size - p too small by 10%?
@@ -25,7 +21,6 @@ Style
 
 Code blocks
 * filename for code blocks &
-
 
 meta
 * Add a new description bit of front matter into helmet - is this sub-title or longer para?&&&
@@ -38,7 +33,7 @@ functionality
 
 * blog keyword nav page - click on keyword get page of links to others blogs - dg to work up now&
 * https://chatlio.com/ integration &&&
-* add in releases page maybe just top nav react style link to releases page &&& 
+
 
 responsive
 * make hex lose text on mobile &&&
@@ -46,37 +41,20 @@ responsive
 
 downloads page??
 
-site map??
 
 frip
 * change svg icon colour on hover
-* footer change text colour on hover
 * little bits of motion - 
 
 
 AK
-* cra template&&&
-* downloads site&
-* monorepo split&
 * gcode working&&&
-* thomas internal move grid down&&&
 * dev video&&&
-* integrate trajectory planner from internal&
 
 
 
 
 
-content
-* starter kit photos and BoMs
-* getting started
-* front-end
-* gbc
-  * autogen
-  * surround
-* tutorials
-* drives tidy up
-* gbem finish off
 
 
 

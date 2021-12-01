@@ -3,6 +3,7 @@ import {CheckCircleOutlined} from '@ant-design/icons'
 import {Tldr} from "../../framework/components/Tldr";
 import { Image } from "../../framework/components/Image"
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
+import {LinkPreview} from "../../framework/components/LinkPreview";
 
 # {props.subtitle}
 
@@ -16,6 +17,12 @@ import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 A motion control calculates the trajectories that the motors follow in order to meet the desired commanded movement.
 
 At the heart of the glowbuzzer tool kit is our own innovative trajectory planner that computes time optimal and time synchronised multi-dimensional third-order trajectories complying maximal asymmetric motion limits on velocity, acceleration and jerk. This provides the core of our 3D-axis, synchronised axis and single-axis motion control capabilities.
+
+import preview_img from "./link_preview_otg.png?glowsite"
+
+<LinkPreview link ={"https://otg.glowbuzzer.com"} title={"glowbuzzer online trajectory planner"} description={"Our trajectory planner is available online for you to test out here:"} image={preview_img} alt={"online trajectory planner"}/>
+
+
 
 A trajectory is often composed as a sequence of positions over time. These sequences tell the motors where to position itself at a certain time. Implicitly this gives how fast the motor will move.
 
