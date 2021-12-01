@@ -63,7 +63,8 @@ const StyledTopNav = styled.div`
     .latest-release {
         color: ${props => props.theme.color.MainPurple};
         border: 1px dashed ${props => props.theme.color.MainPurple};
-        padding: 2px 5px;
+        border-radius: 14px;
+        padding: 2px 8px;
     }
 
     @media (max-width: 950px) {
