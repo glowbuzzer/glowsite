@@ -1,6 +1,5 @@
 import { defineConfig, loadEnv } from "vite"
 import react from "@vitejs/plugin-react"
-import tsconfigPaths from "vite-tsconfig-paths"
 import { imagetools } from "vite-imagetools"
 import radar from "vite-plugin-radar"
 import vx from "vite-plugin-virtual"
@@ -17,6 +16,7 @@ import remarkGlowbuzzerFrontmatter from "../../plugins/remark-frontmatter.mjs"
 import { svgWrapper as svgr } from "../../plugins/svr-plugin-wrapper.mjs"
 import { mdxWrapper as mdx } from "../../plugins/mdx-plugin-wrapper.mjs"
 import remarkDl from "remark-deflist"
+import { remarkEntities } from "../../plugins/remark-entities.mjs"
 
 //
 // not sure why we need this hack, their ESM module looks okay
@@ -43,6 +43,7 @@ export default defineConfig(({ mode }) => {
             mdx({
                 remarkPlugins: [
                     remarkGfm,
+                    remarkEntities,
                     remarkMermaid,
                     remarkDl,
                     remarkCodeblock,
@@ -63,7 +64,7 @@ export default defineConfig(({ mode }) => {
             // tsconfigPaths(),
             radar.default({
                 analytics: {
-                    id: env.VITE_GA_TRACKING_ID,
+                    id: env.VITE_GA_TRACKING_ID
                     // disable: true
                 },
                 enableDev: true

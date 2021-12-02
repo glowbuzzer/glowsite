@@ -1,0 +1,69 @@
+import {BogStandardCol, BogStandardHeaderRow, BogStandardRow} from "../../framework/components/BogStandardTable";
+import {Markdown} from "../../framework/components/Markdown"
+
+# Pre-defined entities
+
+Add to this list in `plugins/remark-entities.mjs`.
+
+This is &gb;.
+
+<BogStandardHeaderRow>
+    <BogStandardCol span={3}>
+        Entity
+    </BogStandardCol>
+    <BogStandardCol span={21}>
+        Replacement
+    </BogStandardCol>
+</BogStandardHeaderRow>
+<BogStandardRow>
+    <BogStandardCol span={3}>
+        `&gb`
+    </BogStandardCol>
+    <BogStandardCol span={21}>
+        &gb
+    </BogStandardCol>
+    <BogStandardCol span={3}>
+        `&fe`
+    </BogStandardCol>
+    <BogStandardCol span={21}>
+        &fe
+    </BogStandardCol>
+    <BogStandardCol span={3}>
+        `&gbc`
+    </BogStandardCol>
+    <BogStandardCol span={21}>
+        &gbc
+    </BogStandardCol>
+    <BogStandardCol span={3}>
+        `&gbem`
+    </BogStandardCol>
+    <BogStandardCol span={21}>
+        &gbem
+    </BogStandardCol>
+    <BogStandardCol span={3}>
+        `&gbsm`
+    </BogStandardCol>
+    <BogStandardCol span={21}>
+        &gbsm
+    </BogStandardCol>
+    <BogStandardCol span={3}>
+        `&ecat`
+    </BogStandardCol>
+    <BogStandardCol span={21}>
+        &ecat
+    </BogStandardCol>
+</BogStandardRow>
+
+## In markdown component
+
+They also work in `Markdown` component, but we probably shouldn't use them in Typedoc comments.
+
+<Markdown>This is &gb.</Markdown>
+
+## In codeblocks
+
+They don't work in codeblocks.
+
+```
+This is &gb;
+```
