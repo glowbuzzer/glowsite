@@ -1,9 +1,15 @@
 
-* bit of html for downloads page
 
 Nav
   * focus issue&&
   * thin down padding top nav&&&
+
+
+Github and download icon on downloads page to mark items
+
+
+otg - logo plus purple plus copyright footer
+downloads.glowbuzzer.com logo and copyright
 
 mdx
 * method to tidy up imports of std components in mdx files - now is the time to do this or its too late and i can't be arsed &
@@ -14,6 +20,14 @@ Home page
 * dots of featured blog in wrong place - dg &&&
 * top carosuel doesnt repsond to dots - speed - dg &&&
 
+
+front-end
+bootstrap redux store
+
+blogs
+left nav
+
+* copyright headers in code
 
 Style
 * choose base font size - p too small by 10%?
@@ -39,7 +53,6 @@ responsive
 * make hex lose text on mobile &&&
 * do mobile home page carousel images &&&
 
-downloads page??
 
 
 frip

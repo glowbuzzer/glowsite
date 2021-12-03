@@ -117,9 +117,9 @@ export const columns = [
 
 If you are building your own custom electronics which incorporates motion and machine control functions then you are building an embedded motion control.
 
-The glowbuzzer toolkit will run on either a microcontroller or embedded Linux allowing you to embed a sophisticated motion/machine control into your product.
+The &gbt will run on either a microcontroller or embedded Linux allowing you to embed a sophisticated motion/machine control into your product.
 
-## How does the glowbuzzer toolkit help with embedded machine control development?
+## How does the &gbt help with embedded machine control development?
 
 <Timeline style={{paddingTop: '20px', paddingLeft: '10px'}}>
     <Timeline.Item>Develop your machine control application using our web stack based toolkit of components (React)</Timeline.Item>
@@ -152,32 +152,32 @@ The chip set we have developed on is the STM32H7 with ST Arm Cortex-M7 and Corte
 
 Other chip manufacturers provide M4/M7 dual-core microcontrollers. E.g. NXP with the i.MX RT1170 and these would likely prove a suitable platform.
 
-The glowbuzzer toolkit needs a set of uC middleware to operate:
+The &gbtt needs a set of uC middleware to operate:
 * RTOS - e.g. freertos
 * FS - e.g. littleFs
 * Network - e.g. LWIP (the toolkit includes the embedded websockets, ftp  and http servers)
 * Screen - e.g.
 The requirement for dual-core microcontroller platform relates to how we distribute the application over the cores:
 * M4
-    * websockets & http server
+    * Websockets & http server
     * JavaScript interpreter
     * Message translation (JSON->C & C->JSON)
 * M7
-    * real time control functions
-    * trajectory planner
-    * SPI master to talk to hardware slave controller chips or to the GBEM (EtherCAT master) or to EtherCAT slave chips (e.g. LAN9252) or mult-protocol slave chips (e.g. Netx 51)
+    * Real time control functions
+    * Trajectory planner
+    * SPI master to talk to hardware slave controller chips or to the &gbem or to EtherCAT slave chips (e.g. LAN9252) or mult-protocol slave chips (e.g. Netx 51)
 
 Communication between the M7 and M4 cores is based on shared memory as in the Arm dual-core architecture memory sits either on the 64-bit AXI or 32 AHB busses with the bus masters and slaves interconnected with bus bridges.
 
-There are two choices regarding how the glowbuzzer toolkit communicates with drives and IO:
+There are two choices regarding how the &gbt communicates with drives and IO:
 1. Drives are embedded into your board - using the like of Trinamic (https://www.trinamic.com/products/integrated-circuits/), TI (https://www.ti.com/motor-drivers/overview.html), ST (https://www.st.com/en/motor-drivers.html) etc. with their stepper or BLDC driver chip sets. Or it is possible to use semi-embedded drives like  technosoft (https://technosoftmotion.com/en/intelligent-drives/) or Elmo (https://www.elmomc.com/servo-drives/)
 1. Drives are external to the board, and you communicate with them over industrial ethernet (feldbus). E.g. the huge range of EtherCAT drives from the likes of Kollmorgen, Omron, Beckhoff, Panasonic etc.
 
-In the case of the of embedded drives (option 1 above) usually the communication is via SPI between GBC and the drive controller ICs and IO electronics. GBC will pass position commands every cycle to the drives.
+In the case of the of embedded drives (option 1 above) usually the communication is via SPI between &gbc and the drive controller ICs and IO electronics. &gbc will pass position commands every cycle to the drives.
 
 <Image meta={EmbeddedArch} alt="Embedded architecture"/>
 
-In the case of using industrial ethernet drives, assuming we are using EtherCAT, we need to provide an EtherCAT master. GBEM runs on a STM32 H7 microcontroller and acts as an SPI slave providing an interface to GBC to send drive commands. In these case commercial packaged EtherCAT drives and io modules would be distributed around the machine.
+In the case of using industrial ethernet drives, assuming we are using EtherCAT, we need to provide an EtherCAT master. &gbem runs on a STM32 H7 microcontroller and acts as an SPI slave providing an interface to &gbc to send drive commands. In these case commercial packaged EtherCAT drives and io modules would be distributed around the machine.
 
 
 When using embedded EtherCAT, the io and drives could take different physical forms depending on which is easier to integrate with your machine.
@@ -185,7 +185,7 @@ When using embedded EtherCAT, the io and drives could take different physical fo
 
 ## Embedded development environment
 
-If you are using STM32, the recommended development environment just uses the standard ST development boards. The Nucleo for developing the EtherCAT or Step Master (GBEM / GBSM) and the Discovery board for developing GBC (real-time control).
+If you are using STM32, the recommended development environment just uses the standard ST development boards. The Nucleo for developing the EtherCAT or Step Master (&gbem / &gbsm) and the Discovery board for developing &gbc (real-time control).
 
 <Row>
     <Col span={12}>

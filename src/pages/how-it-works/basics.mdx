@@ -17,15 +17,15 @@ import ImageBbd from './bbd3.svg'
 
 A machine is a combination of motors and IO. It could be an industrial robot arm, a cutting machine, a piece of laboratory equipment, whatever your machine is.
 
-At a high level, you take the glowbuzzer toolkit’s React components and use them either unchanged, extended or added to with your own custom components to build the visual front-end and control logic for your machine control.
+At a high level, you take the &gbt’s React components and use them either unchanged, extended or added to with your own custom components to build the visual front-end and control logic for your machine control.
 
 This user interface and control logic code runs: in the browser (including HMIs), or as a desktop application, or on a mobile device (tablet, phone).
 
-The glowbuzzer toolkit allows you to build machine control applications using a web stack.
+The &gbt allows you to build machine control applications using a web stack.
 
 Where a front-end component needs to make the machine perform an action (move a motor or turn something on or off) it issues commands over a WebSocket interface. When a front-end component needs to interact with the state of the machine it reads from a WebSocket interface.
 
-The WebSockets interface used by the front-end, is provided by the glowbuzzer toolkit’s real-time control software that runs either on Linux or on an embedded microcontroller.
+The WebSockets interface used by the front-end, is provided by the &gbt’s real-time control software that runs either on Linux or on an embedded microcontroller.
 
 It is this software’s responsibility to translate the high-level instructions received over the WebSockets interface into the low-level commands that can issued over the fieldbus (or SPI bus in embedded applications) to control IO and drives to make the machine move and perform actions. This is where the “heavy lifting” takes place: synchronised multi-axis trajectories are planned, kinematics functions are run, tasks and activities are executed and the state of the machine is calculated. These functions run in real-time.
 
@@ -72,7 +72,7 @@ The current control software you ship with the machines was written a good few y
 
 You want to update the control software & electronics but don’t know what to base your new development on. There are no easy choices. You want to write as little low-level code as possible.
 
-With the glowbuzzer toolkit, you can write the new control software as a React web application, using the glowbuzzer library of components for standard functions (connecting to the machine, io, g-code support, jogging etc.) and write you own new components where needed for your application.
+With the &gbt, you can write the new control software as a React web application, using the &gb library of components for standard functions (connecting to the machine, io, g-code support, jogging etc.) and write you own new components where needed for your application.
 
 The React application can run in the browser or on a PC / Mac as an electron application or on a mobile device with React native.
 

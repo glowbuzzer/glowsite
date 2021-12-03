@@ -13,7 +13,7 @@ import {Tldr} from "../../../framework/components/Tldr";
 
 Cyclic synchronous positioning of motors drivers is where the input to the motor driver hardware is a position value which changes every 1ms, 2ms, 4ms etc.
 
-This can be done on a microcontroller in software (see the glowbuzzer ST- STEP implementation) but there are some challenges in this implementation:
+This can be done on a microcontroller in software (see the &gb ST- STEP implementation) but there are some challenges in this implementation:
 * needs to run as a high speed SPI slave which is always tricky in microcontrollers
 * the timing requirements need hardware timer resources and so you often end up with multiple microcontrollers for multiple axes and often the interrupt load is high making it difficult to utilise the microcontrollers for other tasks
 

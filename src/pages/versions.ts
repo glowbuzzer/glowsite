@@ -34,8 +34,13 @@ export const projects: Project[] = [
         base: "gbc",
         defaultFiles: [
             {
-                name: "gbc-linux",
-                description: "GBC for Linux amd64",
+                name: "gbc-linux-amd64",
+                description: "GBC for am64 (normal Linux)",
+                type: "tgz"
+            },
+            {
+                name: "gbc-linux-armv7",
+                description: "GBC for armv7 (Raspberry Pi)",
                 type: "tgz"
             }
         ],
@@ -46,16 +51,12 @@ export const projects: Project[] = [
                 files: [
                     {
                         name: "gbc-linux-amd64",
-                        description: "GBC for am64 (normal Linux)",
                         size: 12345,
-                        type: "tgz",
                         checksum: "123abc456def"
                     },
                     {
                         name: "gbc-linux-armv7",
-                        description: "GBC for armv7 (Raspberry Pi)",
                         size: 3145,
-                        type: "tgz",
                         checksum: "123ab"
                     }
                 ]
@@ -64,7 +65,7 @@ export const projects: Project[] = [
     },
     {
         name: "Glowbuzzer EtherCAT Master (GBEM)",
-        base: "gbem",
+        github: "gbem",
         releases: [
             {
                 tag: "0.0.1-alpha-1",
@@ -74,7 +75,7 @@ export const projects: Project[] = [
     },
     {
         name: "Glowbuzzer Step Master (GBSM)",
-        base: "gbsm",
+        github: "gbsm",
         releases: [
             {
                 tag: "0.0.1-alpha-1",

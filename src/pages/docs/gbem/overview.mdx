@@ -8,17 +8,17 @@ import gbem_bbd from "./gbem_bbd.svg"
 - Open source EtherCAT master
 - CiA 402 based state machine framework
 - Runs on Linux & Microcontroller
-- Interfaces GBC to EtherCAT network
+- Interfaces &gbc to EtherCAT network
 </Tldr>
 
 
 ## License
 
-GBEM is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License version 2 as published by the Free Software Foundation.
+&gbem is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License version 2 as published by the Free Software Foundation.
 
-## What does GBEM do?
+## What does &gbem do?
 
-GBEM provides a **framework to control EtherCAT slaves**. It allows you to easily configure a *machine* (a combination of EtherCAT IO devices and servo and stepper drives) and provides a simple interface through which you can interact with that machine without worrying about the nitty-gritty details of how EtherCAT drives and IO devices work.
+&gbem provides a **framework to control EtherCAT slaves**. It allows you to easily configure a *machine* (a combination of EtherCAT IO devices and servo and stepper drives) and provides a simple interface through which you can interact with that machine without worrying about the nitty-gritty details of how EtherCAT drives and IO devices work.
 
 It is designed to be used by programmers who want to build applications to control machines.
 
@@ -34,7 +34,7 @@ It is designed to be used by programmers who want to build applications to contr
 * An EtherCAT master (based on SOEM)
 * Open Source code base
 
-A simple view of how GBEM operates is encapsulated in the following diagram.
+A simple view of how &gbem operates is encapsulated in the following diagram.
 
 > Diagram changes:
 > make clear what is in dpm
@@ -44,50 +44,49 @@ A simple view of how GBEM operates is encapsulated in the following diagram.
 
 <img src={gbem_bbd} alt="GBEM Big Block Diagram" width={"100%"}/>
 
-GBEM is written exclusively in the C (C99) programming language and designed to be highly portable across different platforms. For example, we offer a version running on the STM32 microcontroller chipset.
+&gbem is written exclusively in the C (C99) programming language and designed to be highly portable across different platforms. For example, we offer a version running on the STM32 microcontroller chipset.
 
-The EtherCAT master communication layers within GBEM are based on the SOEM (Simple Open EtherCAT master) code base from the [Open EtherCAT Society](https://github.com/OpenEtherCATsociety/SOEM).
+The EtherCAT master communication layers within &gbem are based on the SOEM (Simple Open EtherCAT master) code base from the [Open EtherCAT Society](https://github.com/OpenEtherCATsociety/SOEM).
 
-## How GBEM fits into the GB Control chain
+## How &gbem fits into the GB Control chain
 
-GBEM allows you to interface GBC with EtherCAT devices (slaves) like servo and stepper drives and different types of IO
+&gbem allows you to interface &gbc with EtherCAT devices (slaves) like servo and stepper drives and different types of IO
 such as digital and analog in/outs, encoder interfaces etc.
 
 
 ```mermaid
 graph LR
-    id1["Front-end"]<-->|websockets|id2[GBC];
+    id1["Front-end (GBR)"]<-->|websockets|id2[GBC];
     id2 <--> |shared mem| id3[GBEM];
     id3<-->|EtherCAT|id4[Slaves];
 ```
 
-We have the [Front-end] which is your browser-based control application that talks over websockets to [GBC] which is the realtime control that talks over shared memory to [GBEM] which talks over EtherCAT to your [slaves] hardware.
+We have the [Front-end (GBR)] which is your browser-based control application that talks over websockets to [&gbc] which is the realtime control that talks over shared memory to [&gbem] which talks over EtherCAT to your [slaves] hardware.
 
-GBEM doesn't *have* to be interfaced with GBC. It provides a very simple shared memory interface over which xx see GBC_sim project for a simple example of how to interface with GBEM without GBC.
+&gbem doesn't *have* to be interfaced with &gbc. It provides a very simple shared memory interface over which processes can communicate with it.
 
 ## Docs structure
 
 The documentation is structured around the main tasks that users undertake:
-1. Compiling and running GBEM - <Link to="/docs/gbem/compiling_and_running">COMPILING AND RUNNING</Link>
-1. Getting started with the example hardware - <Link to="/docs/gbem/getting_started_with_example_hardware">GETTING STARTED WITH EXAMPLE HARDWARE</Link>
-1. What drives are pre-configured to work with GBEM? - <Link to="/docs/gbem/drive_support_overview">DRIVE SUPPORT</Link>
-1. Configuring machines drives and slaves already supported by GBEM - <Link to="/docs/gbem/configuring_machines">CONFIGURING MACHINES</Link>
-1. Adding support for new EtherCAT slaves (IO) - <Link to="/docs/gbem/adding_a_new_slave">ADDING A NEW SLAVE</Link>
-1. Adding support for new EtherCAT drives - <Link to="/docs/gbem/adding_a_new_drive">ADDING A NEW DRIVE</Link>
-1. Adding PLC functions to GBEM - <Link to="/docs/gbem/plc">PLC</Link>
-1. Understanding which files to edit - <Link to="/docs/gbem/which_files_do_i_edit">WHICH FILES DO I EDIT</Link>
-1. Deeper understanding of how GBEM works - <Link to="/docs/gbem/internals">INTERNALS</Link>
-1. Troubleshooting issues in the different layers - <Link to="/docs/gbem/troubleshooting">TROUBLESHOOTING</Link>
-1. A guide to which files to edit inside GBEM - <Link to="/docs/gbem/which_files_do_i_edit">WHICH FILES DO I EDIT</Link>
-1. The status web interface to GBEM - <Link to="/docs/gbem/emstat">EMSTAT</Link>
-1. Troubleshooting GBEM -  <Link to="/docs/gbem/troubleshooting">TROUBLESHOOTING</Link>
-1. The main GBEM configuration parameters - <Link to="/docs/gbem/gbem_config">gbem_config.h</Link>
+1. Compiling and running &gbem - <Link to="/docs/gbem/compiling_and_running">Compiling and running</Link>
+1. Getting started with the example hardware - <Link to="/docs/gbem/getting_started_with_example_hardware">Getting started with example hardware</Link>
+1. What drives are pre-configured to work with &gbem? - <Link to="/docs/gbem/drive_support_overview">Drive support</Link>
+1. Configuring machines drives and slaves already supported by &gbem - <Link to="/docs/gbem/configuring_machines">Configuring machines</Link>
+1. Adding support for new EtherCAT slaves (IO) - <Link to="/docs/gbem/adding_a_new_slave">Adding a new slave</Link>
+1. Adding support for new EtherCAT drives - <Link to="/docs/gbem/adding_a_new_drive">Adding a new drive</Link>
+1. Blow-by-blow guide to adding a JVL MIS drive - <Link to="/docs/gbem/adding_jvl_mis_drive">Blow-by-blow guide to adding a JVL MIS drive</Link>
+1. Adding PLC functions to &gbem - <Link to="/docs/gbem/plc">PLC</Link>
+1. Understanding which files to edit - <Link to="/docs/gbem/which_files_do_i_edit">Which files do I edit?</Link>
+1. Deeper understanding of how &gbem works - <Link to="/docs/gbem/internals">Internals</Link>
+1. Troubleshooting issues in the different layers - <Link to="/docs/gbem/troubleshooting">Troubleshooting</Link>
+1. The status web interface to &gbem - <Link to="/docs/gbem/emstat">EMSTAT</Link>
+1. The main &gbem configuration parameters - <Link to="/docs/gbem/gbem_config">gbem_config.h</Link>
 
-There is also a <Link to="/docs/gbem/faq">FAQ</Link> and <Link to="/docs/gbem/terminology_guide">TERMINOLOGY GUIDE</Link>
+There is also a <Link to="/docs/gbem/faq">FAQ</Link> and <Link to="/docs/gbem/terminology_guide">Terminology guide</Link>
 
-## What skills do I need to work with GBEM?
+## What skills do I need to work with &gbem?
 
-**Basic C programming know-how** - we have tried to keep the code-base as simple as possible and so to work with GBEM you definitely don't need to be the world's best c programmer, but you do need to know how to create and debug simple c applications.
+**Basic C programming know-how** - we have tried to keep the code-base as simple as possible and so to work with &gbem you definitely don't need to be the world's best c programmer, but you do need to know how to create and debug simple c applications.
 
 **Basic understanding of EtherCAT** - you do need to understand basically how EtherCAT slaves work. The documents and examples we have provided help to explain a lot of this but it would be helpful to read background information. You need to example know what an SDO and PDO object is, what Distributed Clocks (DC) do etc. There is oodles of information available on EtherCAT online but a lot of it has been written from a very protocol orientated perspective which is just not needed to work with EtherCAT in practice.
 
@@ -95,15 +94,15 @@ There is also a <Link to="/docs/gbem/faq">FAQ</Link> and <Link to="/docs/gbem/te
 
 **Basic understanding of Drives** - we are going to be interacting with fieldbus interfaced drives. They can be quite intimidating with instruction manuals weighing in at 100s or 1000s of pages. If you don't feel confident integrating you own drives then simply use one of the many types we have already integrated. We provide pointers to how to get them set-up in our range of drive guides.
 
-**Understanding of machine safety** - if you are using GBEM to control machines you need to understand how to implement the safety features machines require.
+**Understanding of machine safety** - if you are using &gbem to control machines you need to understand how to implement the safety features machines require.
 
 ## Why not just use a conventional PLC?
 
-You absolutely can use a conventional PLC as part of the glowbuzzer control chain instead of GBEM. GBEM and PLCs are functionally equivalent - functions you can implement on a PLC can equally be implemented in GBEM and vice-versa.
+You absolutely can use a conventional PLC as part of the &gbt chain instead of &gbem. &gbem and PLCs are functionally equivalent - functions you can implement on a PLC can equally be implemented in &gbem and vice-versa.
 
-However, as we are specifically seeking to support software developers write machine control, GBEM provides a way for them to do that without knowing anything about PLCs.
+However, as we are specifically seeking to support software developers write machine control, &gbem provides a way for them to do that without knowing anything about PLCs.
 
-Also, GBEM does offer some advantages over conventional PLCs in some circumstances:
+Also, &gbem does offer some advantages over conventional PLCs in some circumstances:
 
 * You can use a proper IDE to develop software
 * You can hook in traditional unit test frameworks to your code easily

@@ -4,26 +4,26 @@ import { Link } from "react-router-dom"
 # {props.subtitle}
 
 <Tldr>
-    - GBC is configured with a set of JSON files
+    - &gbc is configured with a set of JSON files
     - These configure things like:
-        - number of joints in your machine
+        - Number of joints in your machine
         - amax, jmax, vmax for the joints
-        - bus cycle time
+        - Bus cycle time
 </Tldr>
 
 ## Introduction
 
-GBC is configured with a set of JSON files.
+&gbc is configured with a set of JSON files.
 
-These files are placed on the filesystem in the same directory as the GBC executable and are read during the start-up process.
+These files are placed on the filesystem in the same directory as the &gbc executable and are read during the start-up process.
 
-If the files are not present, GBC uses a default configuration "baked into" the executable.
+If the files are not present, &gbc uses a default configuration "baked into" the executable.
 
 The configuration files cover:
 
-* the machine configuration - configuration for the joints and IO that make up the machine
-* fieldbus layout - the layout of the fieldbus (shared memory) (advanced users only)
-* tasks definitions - definitions of tasks that are to be run on GBC
+* The machine configuration - configuration for the joints and IO that make up the machine
+* Fieldbus layout - the layout of the fieldbus (shared memory) (advanced users only)
+* Tasks definitions - definitions of tasks that are to be run on &gbc
 
 The`default.json` file includes a number of other JSON files that together define the configuration of the machine. These files (with the exception of fieldbus.json) need to be edited to suit your machine.
 
@@ -37,7 +37,7 @@ The`default.json` file includes a number of other JSON files that together defin
 
 ### Introduction
 
-This is the most important file and defines the machine that GBC is interacting with.
+This is the most important file and defines the machine that &gbc is interacting with.
 
 The sections of this document correspond to Config sections of the schema.
 
@@ -45,7 +45,7 @@ The sections of this document correspond to Config sections of the schema.
 
 `machine` maps to `MachineConfig` - see <Link to="/docs/gbc/schema/MachineConfig">here</Link>
 
-Bus cycle time needs to be 1, 2, 4 and must match the bus cycle time in GBEM or GBSM and is needed to ensure the calculated trajectories match the actual cycle at which they are sent to motors
+Bus cycle time needs to be 1, 2, 4 and must match the bus cycle time in &gbem or &gbsm and is needed to ensure the calculated trajectories match the actual cycle at which they are sent to motors
 
 ```json
 "machine": {
@@ -74,7 +74,7 @@ Joints correspond to the axes or motors on your machine and in this section we d
 
 We also need to scale the position sent to the joints - see [scaling](scaling.md) for more details on how to set the scale factor.
 
-These need to correspond to the joints defined in GBEM or GBSM
+These need to correspond to the joints defined in &gbem or &gbsm
 
 ````json
 "joint": {

@@ -2,9 +2,9 @@ import {Tldr} from "../../../framework/components/Tldr"
 
 # {props.subtitle}
 <Tldr>
-    - libs/machine_mapping for your custom machine
-    - create your own libs for custom slaves and drives
-    - `gbem_config.h for general compile time parameters
+    - Go to libs/machine_mapping for your custom machine
+    - Create your own libs for custom slaves and drives
+    - The file `gbem_config.h contains general compile time parameters
 </Tldr>
 
 ## Adding new machines using existing slaves and drives
@@ -25,7 +25,7 @@ This is very useful in development where you might have different test machines,
 
 Also in `/libs/machine_mapping/inc/map_config.h` you have to complete a set of conditional includes to include the header file for your machine.
 
-Also in `/libs/machine_mapping/src/map_config.c` & `/libs/machine_mapping/inc/map_config.h` also are where the names of machines are stored which are used to print to console the name of the machine at GBEM start-up (very useful when you are developing to make sure you are working with the right machine!).
+Also in `/libs/machine_mapping/src/map_config.c` & `/libs/machine_mapping/inc/map_config.h` also are where the names of machines are stored which are used to print to console the name of the machine at &gbem start-up (very useful when you are developing to make sure you are working with the right machine!).
 
 ## Adding a new drive
 
@@ -57,7 +57,7 @@ The header file you create will need to include in your `my_machine_map.h` file.
 
 ## Changing general config
 
-General GBEM configuration options are contained in:
+General &gbem configuration options are contained in:
 
 `/apps/GEBM/shared/inc/gbem_config.h`
 

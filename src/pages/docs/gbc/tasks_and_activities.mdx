@@ -4,7 +4,7 @@ import {BogStandardHeaderRow, BogStandardCol, BogStandardRow} from "../../../fra
 
 # {props.subtitle}
 <Tldr>
-    - Tasks and activities are key concepts in GBC
+    - Tasks and activities are key concepts in &gbc
     - Task is a collection of activities
     - Activity is a machine control primitive (e.g. moveLine, setDout)
 </Tldr>
@@ -13,11 +13,11 @@ import {BogStandardHeaderRow, BogStandardCol, BogStandardRow} from "../../../fra
 
 ## Tasks
 
-Within GBC, Tasks are an assembly of Activities that are executed in sequence in response to an event occurring.
+Within &gbc, Tasks are an assembly of Activities that are executed in sequence in response to an event occurring.
 
-GBC can have multiple Tasks defined and tasks can contain multiple Activities.
+&gbc can have multiple Tasks defined and tasks can contain multiple Activities.
 
-GBC will execute a Task based on its current state (E.g. whether it is already running or has finished) and whether the task's Trigger has fired.
+&gbc will execute a Task based on its current state (E.g. whether it is already running or has finished) and whether the task's Trigger has fired.
 
 The trigger for a task would typically be an event like a IO being set or tasks can be triggered from front-end code.
 
@@ -29,7 +29,7 @@ Tasks can have trigger to start them running. This could be a digital input or a
 
 ### Introduction
 
-Within GBC, an Activity is a machine control primitive. They generally do one of two things:
+Within &gbc, an Activity is a machine control primitive. They generally do one of two things:
 
 * Read and write to the machine's IO. E.g. set a Digital Out or read an Analogue Input)
 * Move joints (motors) either individually or as a set in concert. E.g. rotate a motor at 50rpm or move a robot along a path)
@@ -37,7 +37,7 @@ Within GBC, an Activity is a machine control primitive. They generally do one of
 Activities can be invoked in three different ways:
 
 1. As a`solo activity`
-   - this is invoked by sending a websockets message from the front-end control JavaScript to GBC
+   - this is invoked by sending a websockets message from the front-end control JavaScript to &gbc
    - all the activities are given a solo activity "wrappper"
    - essentially they become commands that can invoked through the websockets interface
    - you can have banks of solo activities these are not queued
@@ -51,10 +51,10 @@ Activities can be invoked in three different ways:
    - capacity to check so don't overfill - front end code handles this for you.
    - Send end program activity to kick it off if you dfont fill buffer  if you fill buffer will kick off acutomaically
    - gcode reference impl for this - not exclusively
-3. From a Task executing on GBC that either cyclically or in response to an event executes the Activity
+3. From a Task executing on &gbc that either cyclically or in response to an event executes the Activity
 
 
-### Sending activities to GBC
+### Sending activities to &gbc
 
 `SoloActivity`
 ```tsx

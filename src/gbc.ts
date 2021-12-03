@@ -869,7 +869,7 @@
         export type AinConfig = {
                     /**  Flag to indicate this analog input should control the position of a virtual axis (joint) */
                     useForVirtualAxis?:boolean;
-                    /**  Index of joint used for virtual axis */
+                    /**  Index of joint used for virtual axis (sim) */
                     jointIndexForVirtualAxis?:number;
         }
 
