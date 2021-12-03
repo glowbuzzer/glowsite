@@ -9,5 +9,5 @@ EOF
 
 export AWS_PROFILE=gb-deploy
 
-aws s3 sync --quiet --delete --acl public-read ./root/csr/dist "s3://$1" && \
-aws cloudfront create-invalidation --paths "/*" --distribution-id $2
+aws s3 sync --quiet --delete --acl public-read ./root/$1/dist "s3://$2" && \
+aws cloudfront create-invalidation --paths "/*" --distribution-id $3

@@ -35,7 +35,7 @@ jobs:
                 run: pnpm run build:csr
 
             -   name: Deploy site
-                run: ./deploy-site.sh preview.glowbuzzer.com E284GBH6OG76DV
+                run: ./deploy-site.sh csr preview.glowbuzzer.com E284GBH6OG76DV
                 env:
                     AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
                     AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -71,7 +71,7 @@ jobs:
                 run: pnpm run build:downloads
 
             -   name: Deploy site
-                run: ./deploy-site.sh downloads.glowbuzzer.com E36QR0RH2CR6EK
+                run: ./deploy-site.sh downloads downloads.glowbuzzer.com E36QR0RH2CR6EK
                 env:
                     AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
                     AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
