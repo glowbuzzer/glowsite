@@ -7,71 +7,76 @@ import InstallGbem from "../../fragments/install_gbem.mdx"
 <Tldr>
     - Uses cmake for Linux build
     - Need to get the code in your IDE
-    - Separate build for Linux vs. Raspberry Pi
+    - cmake handles differences to generic Linux vs. Raspberry Pi
 </Tldr>
 
 ## Compiling
-On Linux, there is a single executable, GBEM, which is run with a number of command line options.
+On Linux, there is a single executable, &gbem, which is run with a number of command line options.
 
 <InstallGbem/>
 
-To do any substantial development with GBEM, the code will need to be imported into your IDE of choice (for example [JetBrains CLion](https://www.jetbrains.com/clion) ). The provided CMakeLists files provides a basis for IDEs that use CMake but the code is simple and should be easy to import into any IDE.
+To do any substantial development with &gbem, the code will need to be imported into your IDE of choice (for example [JetBrains CLion](https://www.jetbrains.com/clion) ).
+
+The provided `CMakeLists.txt` files provides a basis for IDEs that use CMake but the code is simple and should be easy to import into any IDE/build system.
 
 ## Command line options
 
 The main command line modes are:
 
-1. cyclic "-c" - run GBEM in cyclic mode (normal)
-1. netscan "-n" - run GBEM in netscan mode (**without** applying PDO mapping)
-1. netscan "-m" - run GBEM in netscan mode (**with** applying PDO mapping
-1. machine config - "-d" - run GBEM to check and print machine configuration
+1. cyclic `-c` - run &gbem in cyclic mode (normal)
+1. netscan `-n` - run &gbem in netscan mode (**without** applying PDO mapping)
+1. netscan `-m` - run &gbem in netscan mode (**with** applying PDO mapping
+1. machine config - `-d` - run &gbem to check and print machine configuration
+1. version - `-v` - print version of &gbem
+1. write - `-w` - write a set of SDOs and trigger a write to slave's NVRAM
+1. interface - `-i` - interface to use - this is a NIC interface, e.g. eth0
+1. process - `-p` - the process name to send signals to
 
-Also specific modes
+Normally, you will run &gbem with: `./GBEM -c -ieth0`. Obviously, change `eth0` to the name of the network interface connected to the EtherCAT network.
 
-1. EEPROM
+When you want to scan the EtherCAT network you will run &gbem with: `./GBEM -n -ieth0`.
 
-
-
-## Running for real
+## Running with a real-time connection to the EtherCAT network
 
 This assumes you have:
 
-* GBEM installed on a Linux platform with a preempted kernel
-* Have the right NIC connected to an EtherCAT network with one or more slaves on it which are powered up
-* Have configured a machine see <Link to="/docs/gbem/configuring_machines">CONFIGURING MACHINES</Link>
+* &gbem installed on a Linux platform with a preempted kernel
+* Have the correct NIC connected to an EtherCAT network with one or more slaves on it which are powered up
+* Have configured a machine see <Link to="/docs/gbem/configuring_machines">Configuring machines</Link>
 
-Start out by doing a netscan. This is `./gbem -n -ieth0`. This will send out on the EtherCAT network a BRD (Broadcast Read) of address 0, and all fully functional slaves in the network will respond to this request.
+Start out by doing a netscan. This is `./gbem -n -ieth0`.
+
+This will send out on the EtherCAT network a BRD (Broadcast Read) of address 0, and all functional slaves in the network will respond to this request.
 
 The netscan will either produce an error message 😕 or a blizzard of config information ​🙂.​
 
 If you get an error message then it is time to read the troubleshooting guide. If you have found some slaves, the next step is check the machine config by running `./gbem -d -ith0`. This will either confirm that the machine configuration is valid or will produce error messages explaining where the misconfiguration lies.
 
-Finally, you can run GBEM in cyclic mode with `./gbem -c -ieth0`. This will boot the EtherCAT network and then try and connect over shared memory to GBC (or a program you write to control GBEM over shared memory).
+Finally, you can run &gbem in cyclic mode with `./gbem -c -ieth0`. This will boot the EtherCAT network and then try and connect over shared memory to &gbc (or a program you write to control &gbem over shared memory).
 
-## GBEM config
+## &gbem config
 
-**`gbem_config.h` & `map_config.h` && `log.h`**
+**`gbem_config.h` & `map_config.h`**
 
-As well as the configuration for machines and the configuration and code for drives and slaves, GBEM has three config files:
+As well as the configuration for machines and the configuration and code for drives and slaves, &gbem has three config files:
 
 `gbem_config.h` contains  compile time #defines it is well commented and self-explanatory
 
-`map_config.h`contains the #defines to control which machine target GBEM is being compiled for and some #defines for things like the maximum length of drive error messages
+`map_config.h`contains the #defines to control which machine target &gbem is being compiled for and some #defines for things like the maximum length of drive error messages
 
-`log.h` xxxxx
-
+Unless the `map_config.h` has the correct machine configuration enabled, and that machine configuration matches the slaves on the EtherCAT network GBEM will fail to boot.
 
 ## ramdisk directory
 
-If running on Linux platforms that use an SD card or eMMC as its filesystem, and you want to use emstat to write a json file each  xxxx
+If running on Linux platforms that use an SD card or eMMC as its filesystem, and you want to use emstat (<Link to="/docs/gbem/emstat">docs here</Link>) to write a JSON file each containing that status of the &gbem then it is useful to store files in RAM based storage rather than on storage that may have limited write/cycles.
 
-Create a mount point:
+To do this under Linux, first create a mount point:
 
 ```shell
 sudo mkdir /mnt/ramdisk
 ```
 
-Enter it in `/etc/fstab`, so that a RAM disk is automatically generated upon start-up. First edit the `fstab` file
+Then, we need to enter it in `/etc/fstab`, so that a RAM disk is automatically generated upon start-up. So, edit the `fstab` file
 
 ````shell
 sudo nano /etc/fstab
@@ -91,7 +96,7 @@ sudo df -h
 
 ## Preempt-RT kernel patching
 
-GBEM needs a low latency kernel. The Linux preempt-RT kernel patch can provide this.
+&gbem needs a low latency kernel. The Linux preempt-RT kernel patch can provide this.
 
 These instructions perform a **cross-compile** i.e. the kernel is compiled on a host and transferred to target. This example is for the Raspberry Pi 4B but a similar approach can be taken for other targets.
 
@@ -207,8 +212,6 @@ uname -r
 If enabled with the #defines `CTRL_ENABLE_FORCING` (force EtherCAT PDO variables) and PLC_ENABLE_FORCING (force PLC variables) in `GBEM_config.h` you can force the value of a variable using the debugger. Most debuggers/IDEs offer the capability to pause the execution of a running program under the debugger and once paused give you the ability to change the value of a variable whilst the code is executing under the debugger.
 
 In the following screen-shot (taken from the JetBrains CLion IDE) shows that we have navigated to our machine map .c file whilst the debugger is paused and clicked on the `map_iomap[]` variable and then navigated to the line in the iomap we want to force and can set a value and a Boolean active flag to force the val to our desired value. The value is a union of the available types, so you will need to select the one that corresponds to type you want to force.
-
-
 
 import forcing_a_variable from "./forcing_a_variable.png?glowsite"
 

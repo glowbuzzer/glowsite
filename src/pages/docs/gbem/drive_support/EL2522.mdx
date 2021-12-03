@@ -13,7 +13,7 @@ import {SdoCard} from "../../../../framework/components/SdoCard";
 
 ## Introduction
 
-This short guide reviews the Beckhoff EL2522 terminal and discusses how to get it working with GBEM.
+This short guide reviews the Beckhoff EL2522 terminal and discusses how to get it working with &gbeml.
 
 The EL2522 is a Beckhoff IO terminal that performs incremental encoder simulation. This means it outputs a frequency modulated signal (for example step/direction) that can be used to control motor drivers.
 
@@ -225,7 +225,7 @@ There are two channels available.
 
 ## Writing the driver code
 
-GBEM expects drives to follow the CiA 402 state machine and provide an interface that mirrors this standard.
+&gbem expects drives to follow the CiA 402 state machine and provide an interface that mirrors this standard.
 
 This means we have to write code in our driver software to emulate the CiA 402 statemachine in our driver code. This is not very complicated especially as this drive doesn't have any internal states of its own.
 
@@ -272,7 +272,7 @@ import EL2522_wired_with_op_stage from "./EL2522_wired_with_op_stage.jpg?glowsit
 
 <Image meta={EL2522_wired_with_op_stage} alt="Wired EL2522" />
 
-Here you can see us jogging the EL2522 from the glowbuzzer's toolkit web front-end.
+Here you can see us jogging the EL2522 from the &gbt's web front-end.
 
 <YoutubeEmbed embedId="" />
 

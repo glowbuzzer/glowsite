@@ -2,20 +2,20 @@ import {Tldr} from "../../../framework/components/Tldr"
 
 # {props.subtitle}
 <Tldr>
-    - `gbsm_config.h` is the main config. file
-    - some config. parameters set with cmake -`gbsm_defs_pi.cmake`
+    - The main config. file is `gbsm_config.h`
+    - Some config. parameters set with cmake -`gbsm_defs_pi.cmake`
     - These parameters will need to be adapted to your environment
 </Tldr>
 
 `gbsm_config` is a static library in which is the `gbsm_config.h` file.
 
-This is where the primary compile time configuration parameters for GBSM are set.
+This is where the primary compile time configuration parameters for &gbsm are set.
 
 The file is well commented.
 
 The type of configuration parameters that can be set in the file include:
 
-`BUS_CYCLE_TIME` - the cyclic period that GBSM executes at
+`BUS_CYCLE_TIME` - the cyclic period that &gbsm executes at
 `DISABLE_ESTOP_CHECKING` - estop checking is disabled
 `GBSM_ENABLE_VSTOPS` - enables the soft limit checking on the driver ICs
 

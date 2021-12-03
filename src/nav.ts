@@ -429,7 +429,7 @@ const nav = {
                         {
                             slug: "adding_a_new_slave",
                             title: "Adding a new slave",
-                            subtitle: "Adding a new slave in GBCEM",
+                            subtitle: "Adding a new slave in GBEM",
                             component: () => import("./pages/docs/gbem/adding_a_new_slave.mdx")
                         },
                         {
@@ -445,13 +445,11 @@ const nav = {
                             component: () => import("./pages/docs/gbem/adding_jvl_mis_drive.mdx")
                         },
                         {
-                            slug: "getting_started_with_example_hardware",
-                            title: "Getting started with example hardware",
-                            subtitle: "Getting started with the example hardware",
+                            slug: "getting_started_with_hardware",
+                            title: "Getting started with hardware",
+                            subtitle: "Getting started with hardware",
                             component: () =>
-                                import(
-                                    "./pages/docs/gbem/getting_started_with_example_hardware.mdx"
-                                )
+                                import("./pages/docs/gbem/getting_started_with_hardware.mdx")
                         },
                         {
                             slug: "plc",
@@ -599,6 +597,24 @@ const nav = {
                                 // @ts-ignore
                                 import.meta.glob("./pages/docs/ui/tiles/*.mdx")
                             )
+                        },
+                        {
+                            slug: "hooks",
+                            title: "GBR hooks",
+                            subtitle: "Hooks in the front-end",
+                            component: () => import("./pages/docs/ui/hooks.mdx")
+                        },
+                        {
+                            slug: "redux",
+                            title: "GBR redux",
+                            subtitle: "Redux in the front-end",
+                            component: () => import("./pages/docs/ui/redux.mdx")
+                        },
+                        {
+                            slug: "skeleton",
+                            title: "GBR skeleton app.",
+                            subtitle: "Building a skeleton GBR application",
+                            component: () => import("./pages/docs/ui/skeleton.mdx")
                         },
                         {
                             slug: "imports",

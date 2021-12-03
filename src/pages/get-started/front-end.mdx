@@ -15,7 +15,7 @@ import FrontendConnect from "../fragments/frontend_connect.mdx"
 </Tldr>
 
 ## Introduction
-This document takes you though installing the glowbuzzer's toolkit React components and creating some simple machine control functions of your own.
+This document takes you though installing the &gbt React components and creating some simple machine control functions of your own.
 
 ## Use the CRA template to create your own starter project
 
@@ -52,11 +52,11 @@ import { useDigitalOutput} from "@glowbuzzer/store"
 
 `Tile` is the component we provide to help assemble tiled user interfaces.
 
-useDigitalOutput is the glowbuzzer toolkit component that integrates with the Digital IO.
+useDigitalOutput is the &gbt component that integrates with the Digital IO.
 
 Switch is the component we will use for our switch from the Ant Design framework (<a href="https://ant.design/components/switch/">Switch Component</a>)
 
-The `useDigitalOutput` component from the glowbuzzer toolkit has the following signature:
+The `useDigitalOutput` component from the &gbt has the following signature:
 
 ````jsx title="/src/components/HelloCodeTitle.js"
 function useDigitalOutput(index: number): {set(state: number, override?: boolean): void, actState: number, state: number, override?: boolean): void, actState: number, state: number, override: boolean}
@@ -171,13 +171,13 @@ And then run GBC/
 
 <RunGbc/>
 
-And finally connect the front-end to GBC.
+And finally connect the &gbr tiles to &gbc.
 
 <FrontendConnect/>
 
-We will be running in `Simulation Mode` as we have not integrated GBC with any hardware (e.g. an EtherCAT master).
+We will be running in `Simulation Mode` as we have not integrated &gbc with any hardware (e.g. an EtherCAT master).
 
-Now, in the UI, the glowbuzzer provided Digital Outputs tile reflects the state of all the digital outputs and you will be able to see Digital Output 1 toggle as your move your switch.
+Now, in the UI, the &gb provided Digital Outputs tile reflects the state of all the digital outputs and you will be able to see Digital Output 1 toggle as your move your switch.
 
 That is it. It shows how simple it is to create React components to control machine functions.
 
@@ -252,9 +252,9 @@ import oscillating_move_tile from "./front_end_tutorial_images/oscillating_move_
 
 The next step is to test the move.
 
-You will need to run GBC (see the previous Tutorial for details on how to do this).
+You will need to run &gbc (see the previous Tutorial for details on how to do this).
 
-Then, in the browser, click connect to establish a connection to GBC.
+Then, in the browser, click connect to establish a connection to &gbc.
 
 Then make sure the machine state is "Operation Enabled" by clicking the `Operate` button (after clearing any faults).
 

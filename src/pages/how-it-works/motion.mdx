@@ -8,7 +8,7 @@ import {LinkPreview} from "../../framework/components/LinkPreview";
 # {props.subtitle}
 
 <Tldr>
-- Includes sophisticated trajectory planner
+- Includes sophisticated trajectory planner (&gbotg)
 - Time synchronised multi-dimensional trajectories
 - Jerk limited
 - Multiple pre-built and custom kinematics models
@@ -16,7 +16,7 @@ import {LinkPreview} from "../../framework/components/LinkPreview";
 
 A motion control calculates the trajectories that the motors follow in order to meet the desired commanded movement.
 
-At the heart of the glowbuzzer tool kit is our own innovative trajectory planner that computes time optimal and time synchronised multi-dimensional third-order trajectories complying maximal asymmetric motion limits on velocity, acceleration and jerk. This provides the core of our 3D-axis, synchronised axis and single-axis motion control capabilities.
+At the heart of the &gbt is our own innovative trajectory planner that computes time optimal and time synchronised multi-dimensional third-order trajectories complying maximal asymmetric motion limits on velocity, acceleration and jerk. This provides the core of our 3D-axis, synchronised axis and single-axis motion control capabilities.
 
 import preview_img from "./link_preview_otg.png?glowsite"
 
@@ -34,7 +34,7 @@ These trajectories are sent to the drives which control the motors. The trajecto
 
 Each drive must receive the trajectory at precisely the same movement if you want to execute synchronised movements using multiple motors. Hence, the need for real-time execution and time synchronised fieldbusses.
 
-The following screen show the clever calculation that occurs inside the glowbuzzer trajectory planner each cycle.
+The following screen show the clever calculation that occurs inside the &gb trajectory planner each cycle.
 
 Using limits of (amax = 3300, jmax = 314800, vmax = 1040) with initial conditions of (astart = 100, vstart = 0) calculate a trajectory to a position (pwayp = 1000) arriving at the waypoint with a velocity (vwayp = 0) and arriving at time (twayp = 10).
 
@@ -52,7 +52,7 @@ import screenshot_raw_planner from "./trajectory_images/screenshot_raw_planner.p
 
 
 # Features
-The glowbuzzer trajectory planner includes the following features:
+The &gb trajectory planner includes the following features:
 
 
 <Row >

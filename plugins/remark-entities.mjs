@@ -3,11 +3,15 @@ import { visit } from "unist-util-visit"
 const entities = {
     gb: "glowbuzzer",
     fe: "front-end",
-    gbc: "GBC (Core Control)",
-    gbr: "Glowbuzzer for React",
-    gbem: "GBEM (EtherCAT Master)",
-    gbsm: "GBSM (Step Master)",
-    ecat: "EtherCAT"
+    gbc: "GBC",
+    gbcl: "GBC (Core control)",
+    gbr: "glowbuzzer for React",
+    gbem: "GBEM",
+    gbeml: "GBEM (EtherCAT master)",
+    gbsm: "GBSM",
+    gbsml: "GBSM (Step Master)",
+    gbt: "glowbuzzer toolkit",
+    gbotg: "globuzzer online trajectory planner"
 }
 
 export function remarkEntities() {

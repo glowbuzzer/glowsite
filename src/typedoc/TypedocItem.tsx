@@ -17,7 +17,26 @@ function generateType(p) {
 }
 
 const TypeAlias = ({ item }) => {
-    const defaultItem = item.type.declaration.children || []
+    const defaultItem = item.type?.declaration?.children || []
+
+    if (!item.type.declaration) {
+        console.log("No declaration")
+        console.log(item.type.name)
+        return (
+            <>
+                <h1>{item.name}</h1>
+                <div className="shortText">
+                    <Markdown children={item.comment?.shortText || "Not available"} />
+                </div>
+                <div className="text">
+                    {item.comment?.text && <Markdown children={item.comment.text} />}
+                </div>
+                <div>
+                    Reference to: <a href={item.type.name}>{item.type.name}</a>
+                </div>
+            </>
+        )
+    }
     const props = defaultItem.map(p => ({
         key: p.name,
         name: { name: p.name, required: false },
@@ -59,6 +78,7 @@ export const TypedocItem = () => {
     const { params } = useRouteMatch<{ name: string }>()
 
     const item = useTypedocItem(params.name)
+
     // const item=useTypedocItem(params.name)
     // const item={kindString: "TODO"}
     return (

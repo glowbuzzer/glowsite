@@ -13,7 +13,7 @@ import {SdoCard} from "../../../../framework/components/SdoCard";
 
 ## Introduction
 
-This short guide reviews the Beckhoff EL7037 drive and discusses how to get them working with GBEM.
+This short guide reviews the Beckhoff EL7037 drive and discusses how to get them working with &gbem.
 
 ## Product features
 
@@ -150,7 +150,7 @@ If Beckhoff motors are being used then a different PDO mapping is used.
 
 ## Default netscan
 
-The default PDO mapping configures the drive for velocity control. This is not suitable for the glowbuzzer toolkit's cyclic synchronous position control strategy. Thus, a change to the PDO mapping must be applied.
+The default PDO mapping configures the drive for velocity control. This is not suitable for the &gbt's cyclic synchronous position control strategy. Thus, a change to the PDO mapping must be applied.
 
 ```c
 Slave: 2
@@ -320,7 +320,7 @@ It is has bits that signal: `Ready to enable`, `Ready`, `Warning`.
 
 And bits that change the drive's state: `Control_enable`, `Control_reset`, `Control_reduce_torque`.
 
-GBEM expects drives to follow the CiA 402 state machine and provide an interface that mirrors this standard.
+&gbem expects drives to follow the CiA 402 state machine and provide an interface that mirrors this standard.
 
 This means we have to write code in our driver software to emulate the CiA 402 statemachine in our driver code. This is not very complicated.
 
@@ -330,7 +330,7 @@ You can see how we do it in the `EL7037.c` file.
 
 
 ## Testing
-Here you can see us jogging the EL7037 from the glowbuzzer's toolkit web front-end.
+Here you can see us jogging the EL7037 from the &gbt's web front-end.
 <YoutubeEmbed embedId="" />
 
 

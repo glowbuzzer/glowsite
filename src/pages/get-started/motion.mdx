@@ -21,7 +21,6 @@ import Jog from "../fragments/jog.mdx"
 
 <Alert message="Caution" description="This guide assumes you are working with the single axis EtherCAT starter kit hardware and it have it fully assembled" type="warning" showIcon style={{margin: '20px 0 20px 0'}} />
 
-
 ## Step 1 - Use the create react app custom template to create your getting started project
 
 <CraTemplate/>
@@ -30,11 +29,11 @@ import Jog from "../fragments/jog.mdx"
 
 <InstallPi/>
 
-## Step 3 - Download GBC on the Raspberry Pi
+## Step 3 - Download &gbc on the Raspberry Pi
 
 <InstallGBC/>
 
-## Step 4 - Download GBEM configure it for the test machine hardware
+## Step 4 - Download &gbem configure it for the test machine hardware
 
 <InstallGBEM/>
 
@@ -51,17 +50,25 @@ In the file there will be a #define matching you starter kit.
 
 Set the matching #define to `1` and make sure all the others are set to `0`.
 
-## Step 5 - Run GBC & GBEM and make sure it connected to both GBC and the test hardware
+You can check that $gbem can connect to the slaves on your EtherCAT network using:
 
-Run GBC:
+````shell
+./gbem -n -ieth0
+````
+
+This should return a long set of output, but within this you should see the details of the slaves on the network.
+
+## Step 5 - Run &gbc & &gbem and make sure it connected to both &gbc and the test hardware
+
+Run &gbc:
 
 <RunGbc/>
 
-And then run GBEM:
+And then run &gbem:
 
 <RunGbem/>
 
-## Step 6 - Connect the browser to GBC
+## Step 6 - Connect the browser to &gbc
 
 <FrontendConnect/>
 

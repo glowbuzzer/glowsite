@@ -10,14 +10,14 @@ import {BogStandardCol, BogStandardRow, BogStandardHeaderRow} from "../../../fra
 <Tldr>
     - Integrate JVL MIS drive with the toolkit
     - Use MacTalk to test drive
-    - Scan drive with GBEM
+    - Scan drive with &gbem
     - Write drive interface functions
     - Handle 32-bit reference clocks (DC)
 </Tldr>
 
 ## Introduction
 
-This tutorial will describe the process for adding support for a JVL MIS176S35ECH466 drive to GBEM.
+This tutorial will describe the process for adding support for a JVL MIS176S35ECH466 drive to &gbem.
 
 The JVL MIS drives are integrated closed loop stepper motors. This means it has the motor drive electronics integrated into an enclosure built around the motor. 
 
@@ -242,9 +242,9 @@ The next steps cover how to the write the driver code. If you want to spoil all 
 
 <GitHubLink title={"Drive interface code"} repo={"gbem"} directory={"/libs/JVL"}/>
 
-## Step 3 - connect the drive to GBEM and run netscan
+## Step 3 - connect the drive to &gbem and run netscan
 
-Now we disconnect the RS485-to-USB converter and connect the drive to GBEM running on a Linux platform with an M12-Ethernet cable from the CN2/3 to the Ethernet port on the Linux host. Power up the drive again.
+Now we disconnect the RS485-to-USB converter and connect the drive to &gbem running on a Linux platform with an M12-Ethernet cable from the CN2/3 to the Ethernet port on the Linux host. Power up the drive again.
 
 Then we run `gbem -n -ieth0`. And this should produce the following output:
 
@@ -327,7 +327,7 @@ target_link_libraries(JVL common-misc Logging machine_mapping EtherCAT)
 target_include_directories(JVL PUBLIC inc)
 ````
 
-Also add the `add_subdirectory("libs/JVL")` to root `CMakeLists.txt` and add `JVL` to the `target_link_libraries` in GBEM's `CMakeLists.txt`
+Also add the `add_subdirectory("libs/JVL")` to root `CMakeLists.txt` and add `JVL` to the `target_link_libraries` in &gbem's `CMakeLists.txt`
 
 SM2 is the RxPDO and is Outputs (things like Control Word and setPos)
 
@@ -420,7 +420,7 @@ gberror_t ec_pdo_map_jvl_mis(const uint16_t slave) {
 }
 ```
 
-Next we need to create a new machine inside GBEM with which to test the motor. Inside `/libs/machine_mapping/src/machines` create a c file called `jvl_mis_test_map.c` and inside `/libs/machine_mapping/inc/machines` create a c file called `jvl_mis_test_map.h`.
+Next we need to create a new machine inside &gbem with which to test the motor. Inside `/libs/machine_mapping/src/machines` create a c file called `jvl_mis_test_map.c` and inside `/libs/machine_mapping/inc/machines` create a c file called `jvl_mis_test_map.h`.
 
 Inside `jvl_mis_test_map.c` we can start by defining the slave functions and parameters. We only have one slave / drive in our test machine just the JVL drive. We will add the link PDO mapping function we just wrote in `MAP_SLAVE_PDO_MAPPING_FUNCTIONS` .
 
@@ -529,7 +529,7 @@ And finally conditionally include the header file we created when the #define ==
 #endif
 ```
 
-In `main.c`, add a new entry so that the variable map_machine_type is set to value of the machine type enum when the machine is #defined. This is only so that when GBEM starts the machine type is outputted to console. This is surprisingly useful as many an hour has been lost trying to diagnose problems when the wrong machine has been #defined...
+In `main.c`, add a new entry so that the variable map_machine_type is set to value of the machine type enum when the machine is #defined. This is only so that when &gbem starts the machine type is outputted to console. This is surprisingly useful as many an hour has been lost trying to diagnose problems when the wrong machine has been #defined...
 
 ```c
 #if MACHINE_JVL_MIS_TEST == 1
@@ -815,7 +815,7 @@ add this to`jvl_mis.h`
 
 
 
-## GBC config
+## &gbc config
 
 Need to create a JSON file
 
@@ -856,7 +856,7 @@ This needs fixing!
 
 The origin of the problem is the drive's support for a 32-bit DC reference clock rather than the more usual 64 bits
 
-During GBEM boot you may have noticed a warning from the function `check_dc_clock_type` saying the JVL drive only supported a 32 bit DC reference clock. A 32 bit register holding a nanoseconds time overflows in 4-or-so seconds and this is causing the juddering issue.
+During &gbem boot you may have noticed a warning from the function `check_dc_clock_type` saying the JVL drive only supported a 32 bit DC reference clock. A 32 bit register holding a nanoseconds time overflows in 4-or-so seconds and this is causing the juddering issue.
 
 GBEM establishes synchronisation with slave number 1 on EtherCAT network. If this slave supports a 64 bit clock then the other slaves will sync with this. So the easiest fix is to have slave number 1 support a 64 clock. Inserting say an EK1100 module into the network in position 1 and having the drive as slave number 2 fixes the issue.
 

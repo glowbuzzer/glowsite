@@ -11,9 +11,9 @@ What is the "Slave Information Interface" (SII)?
 
 : This contains nearly the same information as is available in the  slave device description XML file and is the way for a master to discover a slave's configuration. It is possible to generate the slave's SII contents (EEPROM) from the slave's XML file. https://github.com/synapticon/siitool 
 
-Why doesn't GBEM "ingest" the slave ESI files?
+Why doesn't &gbem "ingest" the slave ESI files?
 
-: Some EtherCAT masters ingest the slave ESI files of the slaves that you are going to use, then you scan the network to see what slaves are on the network, and then you select which you want adding to the device tree in the master's GUI and hey-presto the slaves appear, and you can edit their PDOs, set their SDOs and configure other settings. That is great but GBEM is for programmers, and they want to express things in code not in a GUI integrated with a strange IDE so GBEM expresses the EtherCAT configuration as code.
+: Some EtherCAT masters ingest the slave ESI files of the slaves that you are going to use, then you scan the network to see what slaves are on the network, and then you select which you want adding to the device tree in the master's GUI and hey-presto the slaves appear, and you can edit their PDOs, set their SDOs and configure other settings. That is great but &gbem is for programmers, and they want to express things in code not in a GUI integrated with a strange IDE so &gbem expresses the EtherCAT configuration as code.
 
 ## Stepper motors
 
@@ -21,7 +21,7 @@ What is the difference between unipolar and bipolar stepper motors?
 
 : Bipolar stepper motors have 4 connections Uinpolar stepper motors have 5, 6, or 8 connections. Bipolar stepper motors are "better" in that they have more torque and are more efficient but are more complicated to drive. 6 or 8 connection motors can have their coils joined to make bipolar motors.
 
-What types of EtherCAT slaves work with GBEM?
+What types of EtherCAT slaves work with &gbem?
 
 : Any
 
@@ -44,7 +44,7 @@ How do I handle slaves with 32-bit time register?
 
 What does the slave watchdog do?
 
-: if GBEM doesn't chat with the slaves every x ms their watchdogs will kick in.
+: if &gbem doesn't chat with the slaves every x ms their watchdogs will kick in.
 
 Why don't you SDO write to the slaves using complete access mode?
 
@@ -52,7 +52,7 @@ Why don't you SDO write to the slaves using complete access mode?
 
 What is the EtherCAT state machine?
 
-: EtherCAT slaves have their own internal state machine. As GBEM boots the network it takes each of the slaves on the network up through their state machine to the OP state.
+: EtherCAT slaves have their own internal state machine. As &gbem boots the network it takes each of the slaves on the network up through their state machine to the OP state.
 
 ````mermaid
 stateDiagram-v2
@@ -79,7 +79,7 @@ How do you read is slave's "register"?
 
 : `ec_FPRD(ec_slave[1].configadr, ECT_REG_XXXX, sizeof(myvar), &myvar, EC_TIMEOUTRET);`
 
-Can I run GBEM without patching the kernel?
+Can I run &gbem without patching the kernel?
 
 : Yes it should just about work, but you will need a long (4ms+) bus cycle time. As you can see in the graphs below the standard Linux kernel gives latencies of around 300us. ![Raspberry Pi 4b kernel latency](pi4b_latency.png)
 

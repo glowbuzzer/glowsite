@@ -3,10 +3,10 @@ import { Link } from "react-router-dom"
 
 # {props.subtitle}
 <Tldr>
-    - adding a new type of slave require a set of #defines
-    - for more complex slaves c functions may need to be written
-    - many examples of different types of slaves provided
-    - a one-off exercise that you do to support any non-standard slaves used by your machine
+    - Adding a new type of slave require a set of #defines
+    - For more complex slaves c functions may need to be written
+    - Many examples of different types of slaves provided
+    - A one-off exercise that you do to support any non-standard slaves used by your machine
 </Tldr>
 
 ## Where to put the code
@@ -36,7 +36,7 @@ MAP_SLAVE_STANDARD_SDO_FUNCTIONS -> ec_standard_sdos_myslave
 MAP_SLAVE_INITIAL_PDO_FUNCTIONS -> ec_initial_pdo_myslave
 ````
 
-If the slave is a drive, then more functions will be needed - see the <Link to="/docs/gbem/adding_a_new_drive">ADDING A NEW DRIVE</Link> documentation.
+If the slave is a drive, then more functions will be needed - see the <Link to="/docs/gbem/adding_a_new_drive">Adding a new drive</Link> documentation.
 
 `ec_pdo_map_myslave` - executes SDO writes at start-up to PDO map the slave
 
@@ -48,17 +48,17 @@ If the slave is a drive, then more functions will be needed - see the <Link to="
 
 The examples below explain how to write these functions and the circumstances in which they are needed.
 
-### PDO_MAPPING_FUNCTIONS
+### pdo_mapping_functions
 
 PDO mapping is the process by which the slave is told which objects we want to appear in the Tx and Rx PDOs. 
 
-See the examples below and the <Link to="/docs/gbem/adding_a_new_drive">ADDING A NEW DRIVE</Link> for more information on how to implement this function.
+See the examples below and the <Link to="/docs/gbem/adding_a_new_drive">Adding a new drive</Link> for more information on how to implement this function.
 
-### STANDARD_SDO_FUNCTIONS 
+### standard_sdo_functions
 
 Slaves often need to be configured before they start-up. What needs to be configured is obviously highly dependent on the type of slave. The configuration of slaves is performed with writes to their SDO objects.  
 
-A hook mechanism is provided by GBEM to call a function that you write to perform these SDO writes during the start-up phase.
+A hook mechanism is provided by &gbem to call a function that you write to perform these SDO writes during the start-up phase.
 
 To perform the actual SO writes we will use the `ethercatgetset.c` `gb_ec_sdo_write_xxxx` functions.
 
@@ -70,15 +70,15 @@ bool ec_sdo_write_uint16(uint16_t Slave, uint16_t Index, uint8_t SubIndex, uint1
 
 The function takes as parameters a `unit16_t` Slave number, `uint16_t` Index and a `unit8_t` sub-Index and in this case a `uint16_t` value to be written to the object with an SDO write.
 
-### NVRAM_SDO_FUNCTIONS
+### nvram_sdo_functions
 
-These are usually used for drives - see <Link to="/docs/gbem/adding_a_new_drive">ADDING A NEW DRIVE</Link> for more details of their use in the context of drives.
+These are usually used for drives - see <Link to="/docs/gbem/adding_a_new_drive">Adding a new drive</Link> for more details of their use in the context of drives.
 
 There are scenarios where they might be of use for a non-drive slave where the slave has configuration parameters that need to be written to the slave's NVRAM. The function performs a series of SDO writes and then a SDO write to the register that triggers a write to NVRAM. The slave usually needs a power cycle for the settings to take effect.
 
-### INITIAL_PDO_FUNCTIONS
+### initial_pdo_functions
 
-These are usually used for drives - see <Link to="/docs/gbem/adding_a_new_drive">ADDING A NEW DRIVE</Link> for more details of their use in the context of drives.
+These are usually used for drives - see <Link to="/docs/gbem/adding_a_new_drive">Adding a new drive</Link> for more details of their use in the context of drives.
 
 There are scenarios where they might be of use for a non-drive slave where the slave wants one or more PDOs written during the first cycle of execution. If this behaviour is needed then this function can be written and it will be called once at the start of cyclic data exchange with the EtherCAT network.
 
@@ -88,7 +88,7 @@ There are scenarios where they might be of use for a non-drive slave where the s
 
 The simplest example is a slave like the EL1008. This is a Beckhoff 8 channel digital input.
 
-Let's start by having a look at the GBEM netscan output for an EL1008.
+Let's start by having a look at the &gbem netscan output for an EL1008.
 
 ```c
 PDO mapping according to SII :
@@ -170,11 +170,13 @@ Yes, that is all there is to it - just a single header with some simple #defines
 
 The EL3001 is a single channel analog input module.
 
+The first bit of the driver code for the EL3001 is the #defines for the EEPROM information. These can be read off the netscan's output.
 
+Next we create the #defines for the locations of the data in the slave's PDO.
 
-read pdo layout off add #defines
+The value which is a `int16` is located at position `2` and the 8 bits
 
-
+TODO
 
 ````c
 //EL3001 1Ch. Ana. Input +/-10V
@@ -212,7 +214,6 @@ read pdo layout off add #defines
 // Bit toggles everytime when new value available
 #define EL3001_STATUS_TXPDO_TOGGLE_BIT_NUM_8 14
 
-
 ````
 
 
@@ -220,7 +221,7 @@ read pdo layout off add #defines
 
 ## Complex example - Kollmorgen AKD drive
 
-### PDO_MAPPING_FUNCTIONS
+### pdo_mapping_functions
 
 #### Deciding what mapping to use
 
@@ -246,7 +247,7 @@ In the manual we saw that in the list of ready-to-use PDO mapping that Kollmorge
 
 Remapping the slave is accomplished by writing a series of SDOs to the slave a start-up.
 
-GBEM provides a struct to help with the PDO mapping. This is :
+&gbem provides a struct to help with the PDO mapping. This is :
 
 ```c
 typedef struct {
@@ -374,7 +375,7 @@ On the left hand side of the netscan output we can see the `byte_offset` values 
 #define AKD_FOLLOWERROR_ACTVAL_PDO_INDEX        14 //4bytes
 ````
 
-### STANDARD_SDO_FUNCTIONS
+### standard_sdo_functions
 
 For the example AKD drive we have a considerable number of SDOs to write at start-up. We will write a function called `ec_standard_sdos_akd` which will be linked into the array of functions in the machine map file.
 
@@ -415,11 +416,11 @@ gberror_t ec_standard_sdos_akd(const uint16_t slave) {
 
 ````
 
-### INITIAL_PDO_FUNCTIONS
+### initial_pdo_functions
 
 For the AKD drive, we are setting the Modes of Operation using an SDO write in the STANDARD_SDO_FUNCTIONS so there is no need for any initial PDO writes. 
 
-### MAP_SLAVE_NVRAM_SDO_FUNCTIONS
+### map_slave_nvram_sdo_functions
 
 For the AKD drive, will use the Kollmorgen workbench software to configure and save the drive soft-limits and directions so we will not write a NVRAM function.
 
