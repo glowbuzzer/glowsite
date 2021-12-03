@@ -3,7 +3,7 @@ import { Link, useLocation } from "react-router-dom"
 import { Menu, Space } from "antd"
 import * as React from "react"
 import { useState } from "react"
-import styled from "@emotion/styled"
+import styled from "styled-components"
 
 import { ReactComponent as StandardLogo } from "../../images/logos/small-logo.svg?inline"
 import { ReactComponent as SmallLogo } from "../../images/logos/tiny-logo.svg?inline"
@@ -170,7 +170,7 @@ const NavMenu = ({ mode }) => {
     )
 }
 
-export const TopNav = () => {
+export const TopNav = ({hideVersionLink}: {hideVersionLink?: boolean}) => {
     const [showMenu, setShowMenu] = useState(false)
 
     // we are expecting each node in the top nav to have children
@@ -185,9 +185,9 @@ export const TopNav = () => {
                     </Link>
                     <NavMenu mode="horizontal" />
                     <Space size="middle">
-                        <Link className="latest-release" to="/downloads">
+                        {hideVersionLink || <Link className="latest-release" to="/downloads">
                             {gbr_version}
-                        </Link>
+                        </Link>}
                         <a href={"https://www.github.com/glowbuzzer"}>
                             <GithubOutlined style={{ fontSize: "24px", color: "#9254de" }} />
                         </a>

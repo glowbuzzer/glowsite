@@ -1,6 +1,6 @@
 import { Row, Col } from "antd"
 import { GithubOutlined } from "@ant-design/icons"
-import styled from "@emotion/styled"
+import styled from "styled-components"
 
 type GitHubLinkProps = {
     title: string

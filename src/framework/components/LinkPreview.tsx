@@ -1,4 +1,4 @@
-import styled from "@emotion/styled"
+import styled from "styled-components"
 import * as React from "react"
 import { Image } from "./Image"
 import { LinkOutlined } from "@ant-design/icons"

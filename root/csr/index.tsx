@@ -11,13 +11,20 @@ import { root } from "../../src/nav"
 import "prismjs/themes/prism-tomorrow.css"
 import "../../src/glowsite-theme.css"
 import { CookieConsentProvider } from "../../src/framework/providers/CookieConsentProvider"
+import { Route } from "react-router"
+import { TypedocItem } from "../../src/typedoc/TypedocItem"
+import { BlogListByTag } from "../../src/pages/blogs/BlogListByTag"
 
 ReactDOM.render(
     <BrowserRouter>
         <CookieConsentProvider>
             <GlowsiteTheme>
                 <NavProvider root={root}>
-                    <GlowsiteRoutes />
+                    <GlowsiteRoutes>
+                        {/* These are additional to the nav provided routes */}
+                        <Route path={"/docs/gbc/schema/:name"} component={TypedocItem} />
+                        <Route path={"/blogs/tag/:tag"} component={BlogListByTag} />
+                    </GlowsiteRoutes>
                 </NavProvider>
             </GlowsiteTheme>
         </CookieConsentProvider>

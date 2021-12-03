@@ -1,6 +1,6 @@
 import { BaseLayout } from "./BaseLayout"
 import { Button, Col, Row } from "antd"
-import styled from "@emotion/styled"
+import styled from "styled-components"
 import { RightCircleOutlined } from "@ant-design/icons"
 import { FeaturedBlog } from "../components/FeaturedBlog"
 import { ReactComponent as CoordinatedIcon } from "../../images/home_icons/coordinated-icon.svg?inline"

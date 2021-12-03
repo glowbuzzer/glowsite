@@ -1,5 +1,5 @@
 import { TopNav } from "../nav/TopNav"
-import styled from "@emotion/styled"
+import styled from "styled-components"
 import { GlowsiteFooter } from "../footer/GlowsiteFooter"
 import { BreadcrumbNav } from "../components/BreadcrumbNav"
 import * as React from "react"
@@ -8,7 +8,7 @@ import { Button } from "antd"
 import { Link } from "react-router-dom"
 import { useCookieConsent } from "../providers/CookieConsentProvider"
 
-const StyledLayout = styled.div`
+export const StyledLayout = styled.div`
     display: flex;
     flex-direction: column;
     align-items: stretch;
@@ -62,7 +62,15 @@ const StyledLayout = styled.div`
     }
 `
 
-export const BaseLayout = ({ children }) => {
+export const BaseLayout = ({
+    children,
+    hideVersionLink,
+    singleColumn
+}: {
+    children
+    hideVersionLink?: boolean
+    singleColumn?: boolean
+}) => {
     const cookieConsent = useCookieConsent()
 
     return (
@@ -71,9 +79,9 @@ export const BaseLayout = ({ children }) => {
                 <ScrollToTopOnMount />
                 <div className="main">
                     <nav>
-                        <TopNav />
+                        <TopNav hideVersionLink={hideVersionLink} />
                     </nav>
-                    <div className="body">
+                    <div className={singleColumn ? "single-body" : "body"}>
                         <BreadcrumbNav />
                         {children}
                     </div>

@@ -1,6 +1,6 @@
 import { Breadcrumb, Menu } from "antd"
 import { Link } from "react-router-dom"
-import styled from "@emotion/styled"
+import styled from "styled-components"
 import {useNavCrumbs} from "../nav";
 
 const StyledDiv = styled.div`

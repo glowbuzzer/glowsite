@@ -1,11 +1,14 @@
+import {GithubSourceLink} from "../../../../framework/components";
+
 # BitFieldDisplay
+
+<GithubSourceLink project="gbr" lib="controls" path="dro/BitFieldDisplay.tsx"/>
 
 Displays a numeric values as bits, either read-only or editable. Bits are displayed most significant bit first.
 
 ## Simple example
 
 ```jsx demo
-import * as React from "react";
 import {BitFieldDisplay} from "@glowbuzzer/controls";
 
 export default () => <BitFieldDisplay value={111} bitCount={16}/>
@@ -16,7 +19,7 @@ export default () => <BitFieldDisplay value={111} bitCount={16}/>
 Set `editable` to true and provide `onChange` handler.
 
 ```jsx demo
-import * as React from "react";
+import React from "react"
 import {BitFieldDisplay} from "@glowbuzzer/controls";
 
 export default () => {
@@ -31,7 +34,6 @@ export default () => {
 You can add vertical labels to the display by providing an array of strings, least significant bit first.
 
 ```jsx demo
-import * as React from "react";
 import {BitFieldDisplay} from "@glowbuzzer/controls";
 
 export default () => <BitFieldDisplay value={111} bitCount={8} labels={['ENABLE', , 'POWER', , , , , 'FAULT']}/>

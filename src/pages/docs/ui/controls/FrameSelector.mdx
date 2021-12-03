@@ -1,9 +1,12 @@
+import {GithubSourceLink} from "../../../../framework/components";
+
 # FrameSelector
+
+<GithubSourceLink project="gbr" lib="controls" path="misc/FrameSelector.tsx"/>
 
 Provides a way to select preferred frame of reference (normally used in combination with a digital readout component).
 
 ```jsx demo
-import * as React from "react";
 import {FrameSelector} from "@glowbuzzer/controls";
 
 export default () => {
@@ -11,7 +14,7 @@ export default () => {
         console.log("Frame changed: ", v);
     }
 
-    return <FrameSelector onChange={onChange} defaultFrame={2}/>;
+    return <FrameSelector onChange={onChange} defaultFrame={1}/>;
 }
 ```
 

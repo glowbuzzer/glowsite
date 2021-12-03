@@ -1,7 +1,7 @@
 import coming_soon from "./images/coming_soon.png?glowsite"
 import { Image } from "./Image"
 import { Col, Row } from "antd"
-import styled from "@emotion/styled"
+import styled from "styled-components"
 
 const StyledDiv = styled.div`
     .div-text {

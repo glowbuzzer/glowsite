@@ -3,7 +3,7 @@ import * as React from "react"
 import { Node } from "../providers/NavProvider"
 import { useOuterNav } from "../nav"
 import { Menu } from "antd"
-import styled from "@emotion/styled"
+import styled from "styled-components"
 
 function* ancestors(node: Node): IterableIterator<Node> {
     yield node

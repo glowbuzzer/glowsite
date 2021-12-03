@@ -1,5 +1,4 @@
-import { ThemeProvider } from "@emotion/react"
-import styled from "@emotion/styled"
+import styled, { ThemeProvider } from "styled-components"
 
 export const GbColours = {
     White: "#ffffff",
@@ -58,6 +57,19 @@ const AppStyle = styled.div`
     dd {
         margin-left: 20px;
     }
+
+    a {
+        color: ${props => props.theme.color.MainPurple};
+    }
+
+    .codeblock-toolpath {
+        // hack to make toolpath tile taller
+        height: 600px;
+    }
+
+    .codeblock-tasks {
+        height: 400px;
+    }
 `
 
 const AppTheme = {
@@ -70,8 +82,8 @@ const AppTheme = {
     }
 }
 
-declare module "@emotion/react" {
-    export interface Theme extends Readonly<typeof AppTheme> {}
+declare module "styled-components" {
+    interface DefaultTheme extends Readonly<typeof AppTheme> {}
 }
 
 export const GlowsiteTheme = ({ children }) => (

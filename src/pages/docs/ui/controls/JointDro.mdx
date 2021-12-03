@@ -1,4 +1,8 @@
+import {GithubSourceLink} from "../../../../framework/components";
+
 # JointDro
+
+<GithubSourceLink project="gbr" lib="controls" path="dro/JointDro.tsx"/>
 
 Displays values of joints. By default will display all configured joints. If joints specify minimum and maximum values,
 a gauge will be displayed showing the range of motion.
@@ -6,7 +10,6 @@ a gauge will be displayed showing the range of motion.
 ## Simple example
 
 ```jsx demo
-import * as React from "react";
 import {JointDro} from "@glowbuzzer/controls";
 
 export default () => <JointDro/>
@@ -17,7 +20,6 @@ export default () => <JointDro/>
 Use the `joints` parameter to specify which joints should be displayed.
 
 ```jsx demo
-import * as React from "react";
 import {JointDro} from "@glowbuzzer/controls";
 
 const joints_to_display={

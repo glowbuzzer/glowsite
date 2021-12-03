@@ -10,25 +10,26 @@
     "build:server": "root build --ssr src/_render.jsx --outDir dist/server",
     "build": "root build --outDir dist/static && npm run build:server && node prerender.mjs",
     "build:csr": "vite build root/csr",
+    "build:downloads": "vite build root/downloads",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
+    "@types/styled-components": "^5.1.16",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-markdown": "^7.1.0",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
-    "react-zoom-pan-pinch": "^2.1.3"
+    "react-zoom-pan-pinch": "^2.1.3",
+    "styled-components": "^5.3.3"
   },
   "devDependencies": {
     "@ant-design/icons": "^4.7.0",
     "@babel/core": "^7.0.0",
     "@emeks/antd-custom-theme-generator": "^0.2.0",
-    "@emotion/react": "^11.5.0",
-    "@emotion/styled": "^11.3.0",
-    "@glowbuzzer/controls": "0.0.22",
-    "@glowbuzzer/layout": "^0.0.5",
-    "@glowbuzzer/store": "^0.0.6",
+    "@glowbuzzer/controls": "1.0.1-alpha.8",
+    "@glowbuzzer/layout": "1.0.1-alpha.8",
+    "@glowbuzzer/store": "1.0.1-alpha.8",
     "@mdx-js/mdx": "^2.0.0-rc.1",
     "@mdx-js/react": "^1.6.22",
     "@mdx-js/rollup": "^2.0.0-rc.1",

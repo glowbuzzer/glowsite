@@ -1,7 +1,7 @@
 import { FC } from "react"
 import { GbColours } from "../GlowsiteTheme"
-import styled from "@emotion/styled"
-import { css } from "@emotion/react"
+import styled from "styled-components"
+import { css } from "styled-components"
 
 type Colors = keyof typeof GbColours
 
@@ -39,7 +39,8 @@ const StyledSection = styled.div<{
         ${props =>
             props.dataExpand &&
             css`
-                display: flex;
+                //display: flex;
+              flex-grow: 1;
                 align-items: stretch;
             `}
     }

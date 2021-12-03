@@ -1,5 +1,5 @@
 import { Card, Avatar } from "antd"
-import styled from "@emotion/styled"
+import styled from "styled-components"
 
 import { ReactComponent as SdoIcon } from "./images/sdo_icon.svg?inline"
 const { Meta } = Card

@@ -1,4 +1,4 @@
-import styled from "@emotion/styled"
+import styled from "styled-components"
 
 const StyledReadingTime = styled.div`
     font-size: 0.7em;

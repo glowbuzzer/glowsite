@@ -31,14 +31,22 @@ export default function remarkCodeblock() {
         //     console.log("COMMENTS TREE", JSON.stringify(tree, null, 2))
         // }
 
-        const future=handler("CodeBlock", sourcePath)
+        const future = handler("CodeBlock", sourcePath)
 
         visit(tree, "code", (node, index, parent) => {
-            if (node.meta === "demo") {
+            if (node.meta?.startsWith("demo")) {
+                // meta can be 'demo' followed by list of classes, eg. "demo toolpath", see ToolPathTile.mdx (to control height, etc)
+                const classes = node.meta.split(" ")
                 delete node.meta
 
                 const source = node.value
-                future.component(node, parent, index, cache(source, sourcePath), "codeblock-demo")
+                future.component(
+                    node,
+                    parent,
+                    index,
+                    cache(source, sourcePath),
+                    classes.map(c => `codeblock-${c}`).join(" ")
+                )
 
                 //
                 // cache(source, sourcePath).then(({ relative, unique }) => {

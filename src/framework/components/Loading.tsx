@@ -1,4 +1,4 @@
-import styled from "@emotion/styled"
+import styled from "styled-components"
 import { Spin } from "antd"
 import * as React from "react"
 import { useEffect, useState } from "react"

@@ -2,7 +2,7 @@ import * as React from "react"
 
 import { Card, Avatar, Divider } from "antd"
 import { CheckCircleOutlined } from "@ant-design/icons"
-import styled from "@emotion/styled"
+import styled from "styled-components"
 
 const StyledTldr = styled.div`
     @media (max-width: 950px) {

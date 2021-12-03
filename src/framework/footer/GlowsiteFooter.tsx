@@ -1,5 +1,5 @@
 import { Col, Modal, Row } from "antd"
-import styled from "@emotion/styled"
+import styled from "styled-components"
 import * as React from "react"
 import { GithubOutlined, YoutubeOutlined } from "@ant-design/icons"
 import { Link } from "react-router-dom"
