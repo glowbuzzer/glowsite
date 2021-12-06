@@ -170,24 +170,35 @@ const NavMenu = ({ mode }) => {
     )
 }
 
-export const TopNav = ({hideVersionLink}: {hideVersionLink?: boolean}) => {
+export const TopNav = ({ hideVersionLink }: { hideVersionLink?: boolean }) => {
     const [showMenu, setShowMenu] = useState(false)
 
     // we are expecting each node in the top nav to have children
     const gbr_version = projects.find(p => p.github === "gbr").releases[0].tag
 
+    const downloads_site = window.location.href.indexOf("downloads.glowbuzzer.com") >= 0
+
     return (
         <StyledTopNav>
             <Section background={"BackgroundGrey"} guttered>
                 <div className="nav-wide">
-                    <Link className="logo" to="/">
-                        <StandardLogo height={"43px"} width={"139px"} />
-                    </Link>
+                    {downloads_site ? (
+                        <a href="https://www.glowbuzzer.com">
+                            <StandardLogo height={"43px"} width={"139px"} />
+                        </a>
+                    ) : (
+                        <Link className="logo" to="/">
+                            <StandardLogo height={"43px"} width={"139px"} />
+                        </Link>
+                    )}
+
                     <NavMenu mode="horizontal" />
                     <Space size="middle">
-                        {hideVersionLink || <Link className="latest-release" to="/downloads">
-                            {gbr_version}
-                        </Link>}
+                        {hideVersionLink || (
+                            <Link className="latest-release" to="/downloads">
+                                {gbr_version}
+                            </Link>
+                        )}
                         <a href={"https://www.github.com/glowbuzzer"}>
                             <GithubOutlined style={{ fontSize: "24px", color: "#9254de" }} />
                         </a>
