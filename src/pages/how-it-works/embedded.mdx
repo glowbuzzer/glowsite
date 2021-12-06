@@ -26,7 +26,7 @@ export const dataSourceMicrocontroller = [
     {
         key: '4',
         pros: "Good reliability - simple bullet proof chips",
-        cons: "License fee for libs - can end up paying for basic libs e.g. network stack, filesystem",
+        cons: "License fee for libs - can end up paying for basic libs for example, network stack, filesystem",
     },
     {
         key: '5',
@@ -49,7 +49,7 @@ export const dataSourceEmbeddedLinux = [
     {
         key: '1',
         pros: 'Performance - high-end Linux SoMs are much quicker than the fastest microcontroller',
-        cons: "Missing useful features e.g. hardware timers, proper interrupts are harder to use inside Linux - usually kernel module development which is always a chew",
+        cons: "Missing useful features for example, hardware timers, proper interrupts are harder to use inside Linux - usually kernel module development which is always a chew",
     },
     {
         key: '2',
@@ -63,7 +63,7 @@ export const dataSourceEmbeddedLinux = [
     },
     {
         key: '4',
-        pros: "Ease e.g. spin up a websockets server on Linux = five minute job where as on a microcontroller it is a bit of mission, filesystem",
+        pros: "Ease, for example, spin up a websockets server on Linux = five minute job where as on a microcontroller it is a bit of mission, filesystem",
         cons: "SoM is really SoC performance with uC h/w design simplicity. If you can design a microcontroller board then you can design a SoM carrier board.",
     },
     {
@@ -147,56 +147,79 @@ There are pros and cons to each approach. Anyone, who has worked in this area kn
 
 ## Running on a microcontroller
 
-The toolkit’s real-time core (GBC) needs a high-performance dual-core microcontroller. This needs to run at as high a clock speed as possible (500 Mhz +) and with as much memory (1Mbyte +) and flash as possible (2Mbyte +).
-The chip set we have developed on is the STM32H7 with ST Arm Cortex-M7 and Cortex-M4 cores running up to 480 MHz and 240 MHz(respectively).
+The toolkit’s real-time core (GBC) needs a high-performance dual-core microcontroller.
+
+This needs to run at as high a clock speed as possible (500 Mhz +) and with as much memory (1Mbyte +) and flash as possible (2Mbyte +).
+
+The chip set we have developed on is the STM32H7 with ST Arm Cortex-M7 and Cortex-M4 cores running up to 480 MHz and 240 MHz (respectively).
 
 Other chip manufacturers provide M4/M7 dual-core microcontrollers. E.g. NXP with the i.MX RT1170 and these would likely prove a suitable platform.
 
-The &gbtt needs a set of uC middleware to operate:
-* RTOS - e.g. freertos
-* FS - e.g. littleFs
-* Network - e.g. LWIP (the toolkit includes the embedded websockets, ftp  and http servers)
-* Screen - e.g.
+The &gbt needs a set of microcontroller middleware to operate. This middleware needs to provide:
+
+* RTOS functions - for example,  <a href="https://www.freertos.org/">FreeRTOS</a>
+* Filesystem functions - for example, <a href="https://github.com/littlefs-project">littleFs</a>
+* Network (TCP/IP) - for example,  <a href="https://savannah.nongnu.org/projects/lwip/">LWIP</a> (the &gbt includes the embedded websockets, FTP  and HTTP servers)
+* If you want screen output then you will need a screen driving library
+
+
 The requirement for dual-core microcontroller platform relates to how we distribute the application over the cores:
-* M4
+* On the M4 core we run:
     * Websockets & http server
     * JavaScript interpreter
     * Message translation (JSON->C & C->JSON)
-* M7
+* On the M7 core we run:
     * Real time control functions
     * Trajectory planner
-    * SPI master to talk to hardware slave controller chips or to the &gbem or to EtherCAT slave chips (e.g. LAN9252) or mult-protocol slave chips (e.g. Netx 51)
+    * SPI master to talk to hardware slave controller chips or to the &gbem or to EtherCAT slave chips (e.g. LAN9252) or multi-protocol slave chips (e.g. Netx 51)
 
-Communication between the M7 and M4 cores is based on shared memory as in the Arm dual-core architecture memory sits either on the 64-bit AXI or 32 AHB busses with the bus masters and slaves interconnected with bus bridges.
+The communication between the M7 and M4 cores is based on shared memory. In the Arm dual-core architecture, memory sits either on the 64-bit AXI or 32 AHB busses with the bus masters and slaves interconnected with bus bridges. This allows us to easily share memory across the cores.
 
 There are two choices regarding how the &gbt communicates with drives and IO:
-1. Drives are embedded into your board - using the like of Trinamic (https://www.trinamic.com/products/integrated-circuits/), TI (https://www.ti.com/motor-drivers/overview.html), ST (https://www.st.com/en/motor-drivers.html) etc. with their stepper or BLDC driver chip sets. Or it is possible to use semi-embedded drives like  technosoft (https://technosoftmotion.com/en/intelligent-drives/) or Elmo (https://www.elmomc.com/servo-drives/)
-1. Drives are external to the board, and you communicate with them over industrial ethernet (feldbus). E.g. the huge range of EtherCAT drives from the likes of Kollmorgen, Omron, Beckhoff, Panasonic etc.
+
+1. Drives are embedded into your board - using the likes of Trinamic (https://www.trinamic.com/products/integrated-circuits/), TI (https://www.ti.com/motor-drivers/overview.html), ST (https://www.st.com/en/motor-drivers.html) etc. with their stepper or BLDC driver chip sets. Or it is possible to use semi-embedded drives like  technosoft (https://technosoftmotion.com/en/intelligent-drives/) or Elmo (https://www.elmomc.com/servo-drives/)
+1. Drives are external to the board, and you communicate with them over industrial Ethernet (feldbus). There are a huge range of EtherCAT drives from the likes of Kollmorgen, Omron, Beckhoff, Panasonic etc.
 
 In the case of the of embedded drives (option 1 above) usually the communication is via SPI between &gbc and the drive controller ICs and IO electronics. &gbc will pass position commands every cycle to the drives.
 
+This is sketched out in the following diagram:
+
 <Image meta={EmbeddedArch} alt="Embedded architecture"/>
 
-In the case of using industrial ethernet drives, assuming we are using EtherCAT, we need to provide an EtherCAT master. &gbem runs on a STM32 H7 microcontroller and acts as an SPI slave providing an interface to &gbc to send drive commands. In these case commercial packaged EtherCAT drives and io modules would be distributed around the machine.
+In the case of using industrial Ethernet drives, assuming we are using EtherCAT, we need to provide an EtherCAT master. &gbem runs on a STM32 H7 microcontroller and acts as an SPI slave providing an interface to &gbc to send drive commands. In these case commercial packaged EtherCAT drives and IO modules would be distributed around the machine.
 
-
-When using embedded EtherCAT, the io and drives could take different physical forms depending on which is easier to integrate with your machine.
-
+When using embedded EtherCAT, the IO and drives could take different physical forms depending on which is easier to integrate with your machine.
 
 ## Embedded development environment
 
-If you are using STM32, the recommended development environment just uses the standard ST development boards. The Nucleo for developing the EtherCAT or Step Master (&gbem / &gbsm) and the Discovery board for developing &gbc (real-time control).
+If you are using STM32, the recommended development environment just uses the standard ST development boards.
+
+The Nucleo board for developing the EtherCAT or Step Master (&gbem / &gbsm) and the Discovery board for developing &gbcl.
 
 <Row>
-    <Col span={12}>
-        <Image meta={nucleo} alt="STM32 H7 Nucleo" preset="narrow"/>
+    <Col span={9}>
+        <Image meta={nucleo} alt="STM32 H7 Nucleo" maxWidth={300}/>
         <h3>STM32 H7 Nucleo dev. board</h3>
     </Col>
-    <Col span={12}>
-         <Image meta={disco} alt="STM32 H7 Discovery" preset="narrow"/>
+    <Col span={9}>
+         <Image meta={disco} alt="STM32 H7 Discovery" maxWidth={300}/>
         <h3>STM32 H7 Discovery dev. board</h3>
     </Col>
 </Row>
 
 
-IO options images
+## IO options
+
+In the embedded environment there are many options with regards to how to provide machine IO capabilities.
+
+Usually you are looking to provide:
+
+* A number of 24V inputs and 24V outputs of varying current drive capabilities
+* A range of analog inputs of specific voltage ranges, differential/single-ended inputs, tolerance, sample rates etc.
+* A range of analog outputs with specific characteristics
+
+These inputs and outputs need to be isolated.
+
+These need to be integrated to the microcontroller usually through SPI.
+
+Many of the major chip manufacturers have solutions in this area. We usually work with the Maxim integrated range. <a href="https://www.maximintegrated.com/en/products/interface/industrial-digital-io.html"> see here</a>

@@ -13,50 +13,32 @@ import {Tldr} from "../../../framework/components/Tldr"
 
 With &gbc we can control:
 
-* Single joint motion control - e.g. move a joint to a position, move a joint at velocity
+* Single joint motion control - for example, move a joint to a position, move a joint at velocity
 
-* Multiple joints in master/slave - e.g. move joint 1 at twice the velocity of joint 2
+* Multiple joints in master/slave - for example, move joint 1 at twice the velocity of joint 2
 
-* Multiple joints in co-ordinated motion in 3D space - e.g. move a tool through 3D space along a line or arc
+* Multiple joints in co-ordinated motion in 3D space - for example, move a tool through 3D space along a line or arc
 
 ## Single joint motion control
 
-This is the most basic form of motion control.
+This is the most basic form of motion control. It allows you control a joint in the following ways:
 
-
-
-move to a position
-
-move at velocity
-
-move superimpose
-
-stop
-
+* Move to a position specified either relative to current position or absolutely
+* Move at velocity when the joint ramps up speed to a given velocity
+* Move superimpose where a relative movement is superimposed on top of a current move
 
 ## Multiple joints in master slave
 
-
+Joints can be slaved together. This is a master/slave arrangement where
 
 ## Multiple joints in co-ordinated motion in 3D space
 
+Moving in 3D cartesian
 
-
-Move Line
-
-Move Arc
-
-
-
-
-
-
-
-
+* Move Line
+* Move Arc
 
 ## Activities that perform motion
-
-
 
 For moves planned in cartesian space with cartesian space targets:
 
@@ -76,4 +58,4 @@ Gearing...
 
 Move splines...
 
-Relatio
+Relative moves

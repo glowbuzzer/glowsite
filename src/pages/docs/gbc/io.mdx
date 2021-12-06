@@ -11,16 +11,15 @@ import {Tldr} from "../../../framework/components/Tldr"
 
 Machines contain different types of IO.
 
-* **Digital Inputs** - e.g. a position sensing switch, float sensor
-* **Digital Outputs** - e.g. a pump, indicator lamp, pneumatic valve
-* **Analog Inputs** - e.g. signals from pressure transducers and temperature from thermocouples
-* **Analog Outputs** - e.g. a speed control signal for a Variable Frequency Drive
+* **Digital Inputs** - for example, a position sensing switch, float sensor
+* **Digital Outputs** - for example, a pump, indicator lamp, pneumatic valve
+* **Analog Inputs** - for example, signals from pressure transducers and temperature from thermocouples
+* **Analog Outputs** - for example, a speed control signal for a Variable Frequency Drive
 
 IO can be manipulated in a number of different ways:
 
 * gcode using m codes
-* In a react component itself
-* In an activity - setDout
-
-pass through from &gbc
-or override
+* In streamed activities with, for example, the setDout Activity
+* In a React component itself with a soloActivity
+* Directly in the front-end
+* By sending a raw websockets message

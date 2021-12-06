@@ -17,13 +17,14 @@ import Image4Platform from './platform_images/platform_stm32.svg'
 </Tldr>
 
 
-## Front-end (GBR)
+## &gbrl
 
 The front-end is a set of react components called GBR. The React components can run in web browsers or with React Native on Android/IoS or Windows/macOS (or Electron).
 
 This means the &gbr components can be deployed on a range of devices either in the browser or natively - Windows PCs, Macs, Tablets, Phones, different HMIs.
 
-## &gbc
+## &gbcl
+
 The core control is written in vanilla c code and is written to be highly portable.
 
 The core supported platforms are real-time Linux & embedded STM32 but no issues are likely to be found deploying on platforms such as VxWorks, QNX, Xenomai or different high-end dual-core (cortex M4/M7) microcontrollers running FreeRTOS.
@@ -46,7 +47,7 @@ To use either option will require multiple Ethernet ports or Ethernet+Wi-Fi. One
 
 <StandardCarousel width={"500px"} height={"200px"} fade={true} dotsTop={'480px'} dotsOn={false} labelsOn={true} pauseOnHover={false} imgdata={[[`${Image1Platform}`, "Linux IPC"],[`${Image2Platform}`, "Linux SBC"],[`${Image3Platform}`, "Linux SoM"],[`${Image4Platform}`,"STM32 Microcontroller"]]} />
 
-# Drive and IO interfacing (&gbem/&gbsm)
+## (&gbem/&gbsm)
 
 &gbem and &gbsm (the EtherCAT master and stepper motor IC control components) run on Linux or on a microcontroller.
 
@@ -58,5 +59,5 @@ The required interfaces vary by platform/function:
 * Linux EtherCAT master - requires a RAW sockets network interface again this is widely available.
 * Linux Step master - requires a GPIO/SPI interface. Linux has spidev and libgpiod and we often use these interfaces but on some variants of Linux (.e.g Raspberry Pi) other libraries are needed
 * Microcontroller EtherCAT/Step master - requires a GPIO / SPI interface. Microcontrollers are pretty good at GPIO and SPI so this is not an issue!
-* Microcontroller EtherCAT master - requires a custom network driver. We have ported this to STM32/lwIP but for different microcontrollers porting work would be needed
+* Microcontroller EtherCAT master - requires a custom network driver. We have ported this to STM32/lwIP but for different microcontrollers using different middleware porting work would be needed
 

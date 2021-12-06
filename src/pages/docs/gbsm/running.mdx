@@ -1,3 +1,6 @@
+import { Link } from "react-router-dom"
+
+
 # {props.subtitle}
 
 &gbsm takes a single optional command line argument `-p` which denotes the program within &gbsm to run.
@@ -15,5 +18,16 @@ Available programs:
 * `-pHYST_TUNE` to execute hysteresis tuning on the motors
 
 
+When you run &gbsm, the first thing you will see is the welcome banner like this:
+
+```shell
+[INFO  ] GBSM: **************************************************************************
+[INFO  ] GBSM: ***                  Starting GB Stepper Controller                    ***
+[INFO  ] GBSM: **************************************************************************
+[INFO  ] GBSM: Software project name [GBSM]
+[INFO  ] GBSM: Software project version [0.0.1]
+```
+
+Then, &gbsm will need to connect to &gbc and the motor driver ICs over SPI to continue its execution so make sure &gbc is running and the SPI bus is connected.
 
 

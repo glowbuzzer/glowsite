@@ -17,8 +17,6 @@ When everything is up and running we will have the following threads running:
 * ec_check - `void ec_check(void *argument)`checks for slaves that are raising errors or have dropped off the network
 * n x PLC threads - each PLC task that the user creates becomes a pthread 
 
-
-
 ## gberror
 
 Simple mechanism to centralise the error codes returned from functions.
@@ -58,11 +56,11 @@ The **machine state** implements the full CiA 402 state machine as illustrated i
 The interface between &gbc is very simple. It consists of two things:
 
 1. 200 bytes x 2 (In and Out) of dual port memory (shared mem)
-1. a signal (POSIX) sent synchronously from &gbem to &gbc each busy cycle to trigger a cycle of execution
+1. A signal (POSIX) sent synchronously from &gbem to &gbc each busy cycle to trigger a cycle of execution
 
 The IN and OUT global buffers are:
-storage : `in`
-struct overlay : `dpm_in_t` & `dpm_out_t` in `dpm.c`
+* storage : `in`
+* struct overlay : `dpm_in_t` & `dpm_out_t` in `dpm.c`
 
 &gbem needs to know the Process ID (PID) of &gbc in order to send signals to it. There is a default process name #pr? and it can be specified optionally on the &gbem command line -p[name].
 

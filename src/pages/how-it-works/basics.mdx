@@ -1,6 +1,6 @@
 import { Row, Col, Divider} from 'antd';
 import {CheckCircleOutlined} from '@ant-design/icons'
-import {Tldr} from "../../framework/components/Tldr"
+import {Tldr} from "../../framework/components"
 import {YoutubeEmbed} from "../../framework/components/Video";
 
 import ImageBbd from './bbd3.svg'
@@ -29,7 +29,7 @@ The WebSockets interface used by the front-end, is provided by the &gbt’s real
 
 It is this software’s responsibility to translate the high-level instructions received over the WebSockets interface into the low-level commands that can issued over the fieldbus (or SPI bus in embedded applications) to control IO and drives to make the machine move and perform actions. This is where the “heavy lifting” takes place: synchronised multi-axis trajectories are planned, kinematics functions are run, tasks and activities are executed and the state of the machine is calculated. These functions run in real-time.
 
-At is simplest, a browser running your React machine control application is talking WebSockets over an Ethernet or Wi-Fi network to the real-time control running on a Linux platform. The real-time control then talks to the EtherCAT master which is connected to a fieldbus network and contains drives and IO).
+At is simplest, a browser running your React machine control application is talking WebSockets over an Ethernet or Wi-Fi network to the real-time control running on a Linux platform. The real-time control then talks to the EtherCAT master which is connected to a fieldbus network and contains drives and IO.
 
 This gives you the ability to build a sophisticated control for complex machines and robots using a modern web and open software stack with absolutely no proprietary hardware required.
 
@@ -46,7 +46,7 @@ This gives you the ability to build a sophisticated control for complex machines
 </Row>
 <Row style={{ margin: '10px 10px 10px 10px'}}>
     <Col span={1}> <CheckCircleOutlined/> </Col>
-    <Col span={11}><b>Work with the main industrial fieldbusses e.g. EtherCAT</b></Col>
+    <Col span={11}><b>Work with the main industrial fieldbusses for example, EtherCAT</b></Col>
     <Col span={1}> <CheckCircleOutlined/> </Col>
     <Col span={11}><b>Deliver rich user interfaces to HMIs, tablets with React Native</b></Col>
 </Row>

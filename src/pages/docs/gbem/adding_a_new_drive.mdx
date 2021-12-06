@@ -40,9 +40,9 @@ In the functions you write to support a new drive, you will need to read and wri
 
 Inside the EtherCAT library of &gbem, there are the files `ethercatgetset.h` and `ethercatgetset.c`. These files define and implement the functions you need to perform SDO and PDO reads and writes.
 
-SDO read/write function names follow the pattern `ec_sdo_write_xxxx` & `ec_sdo_read_xxxx` where `xxxx` is the type e.g. `uint16`.
+SDO read/write function names follow the pattern `ec_sdo_write_xxxx` & `ec_sdo_read_xxxx` where `xxxx` is the type for example, `uint16`.
 
-PDO get/set function names follow the pattern `ec_pdo_set_output_xxxx` & `ec_pdo_get_input_xxxx` where `xxxx` is the type e.g. `uint16`.
+PDO get/set function names follow the pattern `ec_pdo_set_output_xxxx` & `ec_pdo_get_input_xxxx` where `xxxx` is the type for example, `uint16`.
 
 SDO functions take three parameters: the slave number, the index and the sub-index you want to read from or write to.
 
@@ -102,24 +102,24 @@ PDO mapping is deciding what data is included in the cyclic exchange between mas
 
 There are three options:
 
-1. take the default that the drive manufacturer has decided the drive will start-up with
-1. request a pre-defined PDO configuration from the list the manufacturer provides
-1. go &aacute; la carte where you pick objects from the slave's object dictionary individually
+1. Take the default that the drive manufacturer has decided the drive will start-up with
+1. Request a pre-defined PDO configuration from the list the manufacturer provides
+1. Go &aacute; la carte where you pick objects from the slave's object dictionary individually
 
 Which option you do pick? There are some mandatory objects &gbem needs mapping. These are the core CiA 402 objects:
 
-* drive status word (uint16_t encoding of the status of the drive)
-* drive control word (uint16_t encoding that allow us to interact with the drive)
-* actual position (int32_t) the position of drive
-* set position (int32_t) the position we want the drive to be in
-* modes of operation (get/set) (if you want to access them with an PDO rather than SDO)
+* Drive status word (uint16_t encoding of the status of the drive)
+* Drive control word (uint16_t encoding that allow us to interact with the drive)
+* Actual position (int32_t) the position of drive
+* Set position (int32_t) the position we want the drive to be in
+* Modes of operation (get/set) (if you want to access them with an PDO rather than SDO)
 
 There are also some useful things that it makes it easier to use &gbem so if these can be provided in the PDO mapping then it is good to configure the PDO in such a way as to provide them:
 
-* follow error indication 
-* error code
+* Follow error indication
+* Error code
 
- Some drives require the drive manufacturer's configuration software to be used to create the PDO map and save it to the drive's NVRAM. In this case you can't configure the PDO mapping through &gbem and the functions to do the PDO mapping are not needed.
+Some drives require the drive manufacturer's configuration software to be used to create the PDO map and save it to the drive's NVRAM. In this case you can't configure the PDO mapping through &gbem and the functions to do the PDO mapping are not needed.
 
 To create the PDO mapping see the section in the slave document <Link to="/docs/gbem/adding_a_new_slave">Adding a new slave</Link>)
 
@@ -140,9 +140,9 @@ This function performs a series of SDO writes to slave objects that are subseque
 
 What objects a drive stores in NVRAM is very dependent on the drive manufacturer but usually this is:
 
-* limits applied to the movement of the drive (often expressed as a +ve rotation limit and a -ve rotation limit)
-* direction the drive moves in
-* sometimes specific motor parameters are stored in the NVRAM
+* Limits applied to the movement of the drive (often expressed as a +ve rotation limit and a -ve rotation limit)
+* Direction the drive moves in
+* Sometimes specific motor parameters are stored in the NVRAM
 
 The objects:
 
@@ -356,7 +356,7 @@ bool ec_get_remote_mydrive(const uint16_t drive) {
 
 ### `get_error_string_pdo_mydrive` & `get_error_string_sdo_mydrive`
 
-This function is called when an error occurs. What we want to return from this function is a string that describes what is wrong with the drive - e.g. "Motor overheat".
+This function is called when an error occurs. What we want to return from this function is a string that describes what is wrong with the drive, for example, "Motor overheat".
 
 Now, the drive manufacturers have come up with every imaginable scheme to represent error codes and error strings within their drives so this function can take a wide variety of forms.
 
@@ -389,7 +389,7 @@ const mydrive_error_string_t  mydrive_alarm_code[NUM_OF_MYDRIVE_ERROR_STRINGS] =
 
 There has been work done by the ETG and there is a library etg (AG - some missing text here?)
 
-**This function is mandatory.  &gbem needs some way to determine a drive's error message. If your drive doesn't need this feature you will still have to write the function and return some kind of string e.g. "Error messages not supported". There will always need to be an entry in the machine map for this function.**
+**This function is mandatory.  &gbem needs some way to determine a drive's error message. If your drive doesn't need this feature you will still have to write the function and return some kind of string, for example, "Error messages not supported". There will always need to be an entry in the machine map for this function.**
 
 ### `set_ctrl_wrd_mydrive`
 
@@ -466,9 +466,9 @@ If the boot is successful, the next step is to run up &gbc and the front-end and
 
 Most of the drives we use when we need referenced positioning have absolute encoders fitted that remember their position over a power cycle. The cost of the encoder now tends to be less than the cost of the mechanical arrangements needed to support limit and/or homing switches. However, if you do need to home a drive with switches then there are a number of possible approaches:
 
-1. use the drive's own in built-in homing functions where the limit switches are connected to the drives own inputs (this is recommended)
-2. write code in the front-end (react.js) to home the drive
-3. write c code in the &gbem PLC to home the drive
+1. Use the drive's own in built-in homing functions where the limit switches are connected to the drives own inputs (this is recommended)
+2. Write code in the front-end (react.js) to home the drive
+3. Write c code in the &gbem PLC to home the drive
 
 If the suggested approach is taken then the steps that need to be followed are: 
 

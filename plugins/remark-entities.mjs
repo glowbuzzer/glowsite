@@ -6,6 +6,7 @@ const entities = {
     gbc: "GBC",
     gbcl: "GBC (Core control)",
     gbr: "glowbuzzer for React",
+    gbrl: "glowbuzzer for React (front-end)",
     gbem: "GBEM",
     gbeml: "GBEM (EtherCAT master)",
     gbsm: "GBSM",

@@ -86,26 +86,38 @@ import {
 
 ## HMI options
 
-### React on mobile
+### Browser based HMIs
 
-Front-ends built with the &gbt are web applications and any device running a modern browser that uses the V8 engine (Chrome, and Chromium based browsers e.g., Microsoft Edge, Opera etc.) can happily display the applications. This includes many HMI panels available.
+Machine control applications built with the &gbt are web applications and any device running a modern browser that uses the V8 engine (Chrome, and Chromium based browsers for example, Microsoft Edge, Opera etc.) can happily display the applications.
+
+This includes many HMI panels available from manufacturers like Phoenix Contact, Beijer Electronics, ABB, Exor etc.
+
+### React on mobile
 
 However, sometimes you need your application to run as a proper application on the mobile device (phone/tablet running Android or IoS). Most of the time you interact with an app on your phone or tablet (banking, facebook etc.) it is with an app actually running on the device, not through the browser, as it gives the developers the mechanisms to build a much better user experience.
 
-You can use React Native to develop both Android and iOS apps. This means, you don’t have to use Android Studio with Java/Kotlin or Xcode with Swift. Instead, you can use your usual IDE and use JavaScript/TypeScript. (You just need the Google/apple IDEs to upload the finished application to the stores).
+You can use React Native to develop both Android and iOS apps.
 
-Distribution. Obviously for end customers, a public app store is best. For example, with Apple you need to register for the iOS Developer license which costs $99 per year and enables you to publish apps to the public store. Apple also have their B2B Apps Program for $299 per year which allows for apps that are not available on the public app store and your customer use a coupon to install the app. There are various other mechanisms to distribute apps for testing purposes outside of the store (e.g. TestFlight). Similar arrangements exist with Google and the Play store.
+This means, you don’t have to use Android Studio with Java/Kotlin or Xcode with Swift. Instead, you can use your usual IDE and use JavaScript/TypeScript. (You just need the Google/apple IDEs to upload the finished application to the stores).
 
-You can have a shared codebase between Android and iOS apps. Huge number of libraries. Don’t need to develop on a Mac for iOS.
+In terms of how to distribute the app, obviously for end customers, a public app. store is best.
 
-Downsides: slightly less performance especially for data-heavy apps. But it’s good enough for most of Facebook though!
+For example, with Apple you need to register for the iOS Developer license which costs $99 per year and enables you to publish apps to the public store. Apple also have their B2B Apps Program for $299 per year which allows for apps that are not available on the public app. store and your customer use a coupon to install the app.
+
+There are also various other mechanisms to distribute apps for testing purposes outside of the store (e.g. TestFlight).
+
+Similar arrangements exist with Google and the Play store.
+
+With React native, you can have a shared codebase between Android and iOS apps.
+
+The downsides of React Native are slightly less performance, especially for data-heavy apps. But, it’s good enough for most of Facebook though!
 
 ### Android on embedded
 
-Can run android on non-phone devices e.g. HMIs
+You can run Android on non-phone devices for example, HMIs.
 
-Industrial Android, as the name suggests, is a great option for customers looking to introduce innovation to their factories, plants and devices through user-friendly, familiar-looking HMIs.
+Industrial Android, as the name suggests, is a great option for HMIs.
 
 Android is not only the most popular OS for mobile devices today, but also broadly deployed in different industrial use cases. It provides a great user interface and a stack of reusable software components, simplifying development and maintaining millions of existing applications and libraries.
 
-additional features which are not available on the stock Android like full kiosk mode, extended connectivity with device management and integrated FOTA support.
+Industrial Android offers additional features which are not available on the stock Android like: full kiosk mode, extended connectivity with device management and integrated FOTA support.
