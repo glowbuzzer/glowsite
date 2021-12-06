@@ -24,7 +24,7 @@ For most scenarios &gbc can be treated as a black box, websockets commands are s
 
 ## Responsibilities of &gbc
 
-The key functions of &gbc are:
+The key functions performed by &gbc are:
 
 * Reception and transmission of websocket messages
 * Executing Tasks and Activities (things that cause the machine to do something)
@@ -170,32 +170,27 @@ On Linux, as well as the shared memory interface, &gbc requires either a POSIX s
 ```
 ### Cyclic trigger - microcontroller
 
-This is usually an interrupt handler on a GPIO pin.
+As in the Linux case, &gbc needs a trigger to advance its cycle. On microcontroller platforms this is usually an interrupt handler on a GPIO pin. See the source code for how we implemented this.
 
 ### Websockets interface
 
 The websockets interface to &gbc is used to issue commands and read status information from &gbc.
 
-This is documented here add_link.
+The wire format of &gbc is documented <Link to="/docs/gbc/schema">here</Link>.
 
 ## Javascript and &gbc
 
-&gbc includes a JavaScript interpreter.
+&gbc includes a JavaScript interpreter. This uses the <a href="https://duktape.org/">Duktape</a> embeddable Javascript engine.
 
-This allows end-user provided JavaScript to be executed cyclically, in near real-time.
+This allows you to provide JavaScript code which will be executed cyclically, in near real-time within &gbc.
 
 This is a powerful feature of &gbc. Examples of how it can be used include:
 
-* (on a laser cutting machine) if the velocity of the TCP falls to zero automatically turn off the Digital Out controlling the laser
-* di changes exec code
+* (On say a laser cutting machine) if the velocity of the TCP falls to zero automatically turn off the Digital Out controlling the laser
+* If a digital input changes, then exe
 
-currently has task status change
+This code is provided in the `user.js` file placed in the same directory as the &gbc executable. This file is loaded (if present) and should contain the JavaScript functions.
 
-`user.js` file is loaded if present and contains the JavaScript functions
+The main benefit of this Javascript code is that it provided faster response to events than React code. Around a 10ms response time is expected for this code.
 
-faster response to events than the front-end code - 10-20ms
-
-100ms front end
-
-GBEM PLC functions
 

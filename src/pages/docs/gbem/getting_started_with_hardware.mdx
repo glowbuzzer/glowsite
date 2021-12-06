@@ -3,15 +3,24 @@ import { Link } from "react-router-dom"
 
 # {props.subtitle}
 <Tldr>
-    -
+    - Using the recommended hardware is the easiest way to get started
+    - Next easiest is to use a combination of the slaves/drives we already support
+    - Writing slave and drive interfaces is not hard to supporting any EtherCAT device is not hard
 </Tldr>
 
-## Introduction
+If you are using the recommended starter hardware, a guide to getting a drive moving can be found here: <Link to="/get-started/motion"> Get a drive moving </Link>.
 
-See <Link to="/get-started/motion"> Get a drive moving </Link> for the basics of getting a drive moving with the example hardware.
+If you are using your own hardware then the basic steps (if you are using a Raspberry Pi as the test Linux platform) are:
 
-
-Basics
-
-
+1. Step 1 - install &gbt - see <Link to="/get-started/motion"> Step 1 - Use the create react app custom template to create your getting started project</Link>
+1. Step 2 - install real-time Raspberry Pi Linux OS - see <Link to="/get-started/motion">Step 2 - install Raspberry Pi OS</Link>
+1. Step 3 - install &gbc - see <Link to="/get-started/motion">Step 3 - Download &gbc on the Raspberry Pi</Link>
+1. Step 4 - download &gbem - see <Link to="/docs/gbem/compiling_and_running">Compiling and running &gbem </Link>
+1. Step 5 - if your slaves and drives are currently supported by &gbem you just need to configure a machine in &gbem - see <Link to="/docs/gbem/configuring_machines"> here</Link>
+1. Step 6 - if you need to write new slave code - see <Link to="/docs/gbem/adding_a_new_slave"> here</Link>
+1. Step 7 - if you need to write new drive code - see <Link to="/docs/gbem/adding_a_new_drive"> here</Link>
+1. Step 8 - run &gbc - see <Link to="/docs/gbc/running"> here</Link>
+1. Step 9 - connect your browser to the React dev server and from the browser connect to &gbc  - see <Link to="/get-started/motion"> Step 5 - Run GBC & GBEM and make sure it connected to both GBC and the test hardware</Link>
+1. Step 10 - run &gbem - see <Link to="/docs/gbem/compiling_and_running"> here</Link>
+1. Step 11 - use the React controls in the browser to jog the motor
 

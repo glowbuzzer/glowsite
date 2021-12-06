@@ -1,11 +1,12 @@
 import {Tldr} from "../../../framework/components/Tldr"
+import { Link } from "react-router-dom"
 
 # {props.subtitle}
 <Tldr>
     - &gbem includes PLC functionality
     - Allows you to write c functions that are cyclically called
     - These functions can interact with IO
-    - Includes a standard library of PLC functions e.g. counters, timers etc.
+    - Includes a standard library of PLC functions, for example, counters, timers etc.
 </Tldr>
 
 ## Introduction
@@ -80,17 +81,16 @@ Two macros need to bracket your code, `PLC_TASK_START`&`PLC_TASK_END`.
 
 ### Handling IO
 
-Define as globals in your task function
+Handling IO in PLC functions requires that the IO mapping is completed in the machine mapping.
 
-extern in the machine map
+This allows a map to be created between:
 
+* &gbc IO and &gbem PLC variables
+* EtherCAT IO and &gbem PLC variables
 
+See <Link to="/docs/gbem/configuring_machines">configuring machines</Link> for more details on how to do this.
 
-
-
-
-
-timing debugger
+PLC variables need to be defined as global variables in your task function and marked as `extern` in the `machine_map` header file.
 
 ## PLC stdlib
 
@@ -124,8 +124,4 @@ They include:
 
 * MISC
   * `plcsl_hysterisis` - applies hysteresis to a signal
-
-### Pattern
-
-Provide a pattern to follow to develop your own c code PLC functions
 

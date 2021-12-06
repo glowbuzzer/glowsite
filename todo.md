@@ -1,37 +1,36 @@
-
-
 Nav
   * focus issue&&
   * thin down padding top nav&&&
 
+otg.glowbuzzer.com
+* logo plus purple plus copyright footer
 
-Github and download icon on downloads page to mark items
+downloads.glowbuzzer.com
+* logo and copyright
 
-
-otg - logo plus purple plus copyright footer
-downloads.glowbuzzer.com logo and copyright
-
-mdx
-* method to tidy up imports of std components in mdx files - now is the time to do this or its too late and i can't be arsed &
 
 Home page
-* play with home page chunking - dg
 * add padding to featured blog images - i have forgotten what we said here
 * dots of featured blog in wrong place - dg &&&
 * top carosuel doesnt repsond to dots - speed - dg &&&
 
+front-end docs content
+* hooks autgen
+* redux docs
 
-front-end
-bootstrap redux store
 
 blogs
-left nav
+* fix up left nav
+* sort out tags so it works - dg
 
-* copyright headers in code
+copyright headers
+* in code
+* 
 
 Style
 * choose base font size - p too small by 10%?
 * padding / margin after headings - i like lots
+* heading differentiation
 
 Code blocks
 * filename for code blocks &
@@ -42,28 +41,22 @@ meta
 * hieriachey sub-itle if desc not available
 * log meta to console
 
-
-functionality
-
-* blog keyword nav page - click on keyword get page of links to others blogs - dg to work up now&
-* https://chatlio.com/ integration &&&
+https://chatlio.com/ 
+* integration &&&
 
 
 responsive
 * make hex lose text on mobile &&&
 * do mobile home page carousel images &&&
+* general review
 
 
 
-frip
-* change svg icon colour on hover
-* little bits of motion - 
 
-
-AK
 * gcode working&&&
 * dev video&&&
-
+* move fault reset button
+* 
 
 
 

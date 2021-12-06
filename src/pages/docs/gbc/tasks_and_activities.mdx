@@ -36,20 +36,21 @@ Within &gbc, an Activity is a machine control primitive. They generally do one o
 
 Activities can be invoked in three different ways:
 
-1. As a`solo activity`
-   - this is invoked by sending a websockets message from the front-end control JavaScript to &gbc
-   - all the activities are given a solo activity "wrappper"
-   - essentially they become commands that can invoked through the websockets interface
-   - you can have banks of solo activities these are not queued
-   - solo activities map to a single kinematics configuration (kc)
-   - when you issue a new solo activity (through the websockets interface) the current solo activity gets cancelled - these work under a "one at a time" model
-   - in the React front end API, solo activities are implemented as a promise - i.e. you await a solo activity's completion
-2. As a `streamed activity`
-    - these are used for continuous motion. E.g. streaming a gcode program
-   - they support blending - pause and resume
-   - classic queue for flow control
-   - capacity to check so don't overfill - front end code handles this for you.
-   - Send end program activity to kick it off if you dfont fill buffer  if you fill buffer will kick off acutomaically
+1. As a`solo activity`:
+   - This is invoked by sending a websockets message from the front-end control JavaScript to &gbc
+   - All the activities are given a solo activity "wrapper"
+   - Essentially they become commands that can invoked through the websockets interface
+   - You can have banks of solo activities these are not queued
+   - Solo activities map to a single kinematics configuration (kc)
+   - When you issue a new solo activity (through the websockets interface) the current solo activity gets cancelled - these work under a "one at a time" model
+   - In the React front end API, solo activities are implemented as a promise - i.e. you await a solo activity's completion
+2. As a `streamed activity`:
+   - These are used for continuous motion. E.g. streaming a gcode program
+   - They support blending (for cartesian moves where the next move starts before the previous one has finished causing a radius on the junction)
+   - The support pause and resume functionality
+   - They operate a classic queue model for flow control
+   - There is the capability to check for overfill - the front-end code handles this for you.
+   - You send and "end program activity" to kick it the processing of the stream of activities if you dont fill buffer to capacity. If you do fill the buffer will kick off automatically processing the activities
    - gcode reference impl for this - not exclusively
 3. From a Task executing on &gbc that either cyclically or in response to an event executes the Activity
 

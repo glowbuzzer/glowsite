@@ -1,4 +1,5 @@
 import {Tldr} from "../../../framework/components/Tldr";
+import { Link } from "react-router-dom"
 
 # {props.subtitle}
 
@@ -27,6 +28,22 @@ sudo make install
 
 ### &gbsm
 
-cmake
+```shell
+git clone --recursive https://github.com/glowbuzzer/gbsm
+```
+
+
+This will clone the project and the sub-modules it depends on into gbsm directory.
+
+```shell
+mkdir build
+cd build
+cmake .. -DFLAVOUR=PI
+make
+
+```
+This will create the $gbsm binary in the `builds` directory that can be run with `./GBSM`.
+
+See <Link to="/docs/gbsm/running">the documentation here</Link> for more details on how to run &gbsm.
 
 

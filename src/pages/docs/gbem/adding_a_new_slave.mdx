@@ -17,11 +17,11 @@ We add new slaves and drives as a static library per manufacturer. This means yo
 
 The contents of the `myslave.h` header file are:
 
-1. function declarations for the functions you write in `myslave.c`
-2. #defines for the slave's EEPROM information - e.g. `EEP_NAME`
-3. #defines for BIT numbers used by the slave - e.g. `HOMING_START_BIT_NUM`
-4. #defines for indices of PDO objects - e.g. `SETPOS_PDO_DRIVE_INDEX`
-5. anything needed for decoding error code strings
+1. Function declarations for the functions you write in `myslave.c`
+2. #defines for the slave's EEPROM information - for example, `EEP_NAME`
+3. #defines for BIT numbers used by the slave - for example, `HOMING_START_BIT_NUM`
+4. #defines for indices of PDO objects - for example, `SETPOS_PDO_DRIVE_INDEX`
+5. Anything needed for decoding error code strings
 
 The examples below provide further details on these.
 
@@ -289,9 +289,9 @@ Next, we write the c code to apply the SDO write to effect the PDO mapping. Thes
 
 The sequence used to write PDO mapping is:
 
-1. clear the SM2 and SM3 assignment indexes
-2. write the SM3 and SM3 assignment objects
-3. write the number of entries written in step 2
+1. Clear the SM2 and SM3 assignment indexes
+2. Write the SM3 and SM3 assignment objects
+3. Write the number of entries written in step 2
 
 So we write a c function called `ec_pdo_map_akd` with the signature shown below to perform the series of SDO writes. This function will be automatically called during the start-up of the slave so that when it has finished booting the PDO mapping has been applied.
 
@@ -361,7 +361,7 @@ PDO mapping according to CoE :
 
 ````
 
-We can quickly see that the PDO mapping has been successfully applied. We can further confirm this by looking up the objects detailed in the netscan output e.g. `0x607A` in the Kollmorgen manual and we can confirm it is indeed "Target position INT32". The comments in the above output have been added by looking up the hex values in the Kollmorgen manual.
+We can quickly see that the PDO mapping has been successfully applied. We can further confirm this by looking up the objects detailed in the netscan output, for example, `0x607A` in the Kollmorgen manual and we can confirm it is indeed "Target position INT32". The comments in the above output have been added by looking up the hex values in the Kollmorgen manual.
 
 On the left hand side of the netscan output we can see the `byte_offset` values to create #defines for the objects we want to use in our code.
 

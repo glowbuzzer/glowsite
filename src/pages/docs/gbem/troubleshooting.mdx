@@ -8,7 +8,7 @@ netscan doesn't actually do very much. It makes a call to the `sys/socket.h` `so
 Things to look at:
 * **Run as root user**. &gbem needs to switch the Ethernet interface on the Linux platform into promiscuous mode and root privilege is needed to do this. There are ways round the having to be the root user using the Linux `sudo setcap` with `cap_net_admin` / `cap_net_raw` for scenarios that specifically need this but for development especially running as root is easiest.
 * **The EtherCAT network and slaves**. Is the EtherCAT network wired correctly? Everything that needs power has power? Good network cables? Try swapping the order the slaves appear on the network around. Try having a single known working slave as the first and only slave on the network? Can you see the slaves from another EtherCAT master? What are the LEDs on the slaves telling you?
-* **Linux NIC configuration.** &gbem will work in virtualised environments but needs careful config. Can you test on a non-virtual platform e.g. Raspberry Pi to rule things out?
+* **Linux NIC configuration.** &gbem will work in virtualised environments but needs careful config. Can you test on a non-virtual platform, for example, Raspberry Pi to rule things out?
 
 
 Things not to bother looking at:
@@ -146,7 +146,7 @@ isolcpus=3      # isolate the CPU nr 3
 isolcpus=1,2,3  # isolate the CPUs nr 1, 2 & 3
 ```
 
-To define the affinity of interruptions to a specific CPU type e.g.:
+To define the affinity of interruptions to a specific CPU type, for example:
 
 ````
 sudo echo 3 > /proc/irq/62/smp_affinity

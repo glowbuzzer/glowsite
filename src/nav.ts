@@ -187,13 +187,13 @@ const nav = {
                         },
                         {
                             slug: "running",
-                            title: "Running GBC",
-                            subtitle: "Steps to run GBC on Linux",
+                            title: "Running",
+                            subtitle: "Steps needed to run GBC on Linux",
                             component: () => import("./pages/docs/gbc/running.mdx")
                         },
                         {
                             slug: "configuration",
-                            title: "Configuration of GBC",
+                            title: "Configuration",
                             subtitle: "Configuration of GBC",
                             component: () => import("./pages/docs/gbc/configuration.mdx")
                         },
@@ -205,7 +205,7 @@ const nav = {
                         },
                         {
                             slug: "concepts",
-                            title: "GBC concepts",
+                            title: "Conceptual aspects",
                             subtitle: "Concepts in GBC",
                             component: () => import("./pages/docs/gbc/concepts.mdx")
                         },
@@ -217,8 +217,8 @@ const nav = {
                         },
                         {
                             slug: "motion",
-                            title: "Motion in GBC",
-                            subtitle: "Motion in GBC",
+                            title: "Motion - making things move",
+                            subtitle: "Motion in GBC - making things move",
                             component: () => import("./pages/docs/gbc/motion.mdx")
                         },
                         {
@@ -241,20 +241,20 @@ const nav = {
                         },
                         {
                             slug: "gcode",
-                            title: "GCode in GBC",
+                            title: "GCode handling",
                             subtitle: "GCode in GBC",
                             component: () => import("./pages/docs/gbc/gcode.mdx")
                         },
                         {
                             slug: "io",
-                            title: "IO in GBC",
+                            title: "IO",
                             subtitle: "IO in GBC",
                             component: () => import("./pages/docs/gbc/io.mdx")
                         },
                         {
                             slug: "frames",
-                            title: "Frames in GBC",
-                            subtitle: "Frames in GBC",
+                            title: "Frames",
+                            subtitle: "Reference frames in GBC",
                             component: () => import("./pages/docs/gbc/frames.mdx")
                         },
                         {

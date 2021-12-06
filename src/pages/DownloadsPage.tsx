@@ -1,7 +1,7 @@
 import * as React from "react"
 import { Section } from "../framework/components/Section"
 import { Table } from "antd"
-import { DownloadOutlined } from "@ant-design/icons"
+import { DownloadOutlined, GithubOutlined } from "@ant-design/icons"
 import { File, Project, projects, Release } from "./versions"
 
 export default () => {
@@ -49,7 +49,14 @@ export default () => {
             </p>
             {projects.map(project => (
                 <div key={project.github || project.name}>
-                    <h2>{project.name}</h2>
+                    <h2>
+                        {project.base ? (
+                            <DownloadOutlined style={{ marginRight: "10px" }} />
+                        ) : (
+                            <GithubOutlined style={{ marginRight: "10px" }} />
+                        )}
+                        {project.name}
+                    </h2>
                     {project.releases.map(r => (
                         <div key={r.tag}>
                             <h3>
