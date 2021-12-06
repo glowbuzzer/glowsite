@@ -60,7 +60,7 @@ export const PageTag = ({ tags }) => {
             {tags.map(
                 (tag, index) =>
                     index <= 10 && (
-                        <Link key={tag} className="tag" to={"/blogs/tag/" + tag}>
+                        <Link key={tag} className="tag" to={"/blogs/tag/" + encodeURIComponent(tag)}>
                             <Tag color={tagColors[index]}> {tag}</Tag>
                         </Link>
                     )
