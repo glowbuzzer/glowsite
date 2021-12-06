@@ -28,7 +28,7 @@ export const GlowsiteRoutes = ({children}:{children?}) => {
                                 {/*** if component exported a title use it ***/}
                                 {title && <title>{title}</title>}
                             </Helmet>
-                            <Layout>
+                            <Layout {...props}>
                                 {Component && (
                                     <Suspense fallback={<Loading />}>
                                         <Component title={title} {...props} />

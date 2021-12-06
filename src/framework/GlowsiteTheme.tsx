@@ -58,10 +58,6 @@ const AppStyle = styled.div`
         margin-left: 20px;
     }
 
-    a {
-        color: ${props => props.theme.color.MainPurple};
-    }
-
     .codeblock-toolpath {
         // hack to make toolpath tile taller
         height: 600px;

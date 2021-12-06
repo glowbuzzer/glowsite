@@ -10,8 +10,7 @@ import { BrowserRouter } from "react-router-dom"
 import { CookieConsentProvider } from "../../src/framework/providers/CookieConsentProvider"
 import { Section } from "../../src/framework/components/Section"
 import { TopNav } from "../../src/framework/nav/TopNav"
-import styled from "styled-components"
-import {StyledLayout} from "../../src/framework/layouts/BaseLayout";
+import { StyledLayout } from "../../src/framework/layouts/BaseLayout"
 
 const HomePage = () => {
     return (

@@ -6,6 +6,7 @@ const StyledDiv = styled.div`
         font-size: 14px;
         margin: auto;
     }
+
     .props-table {
         max-width: 800px;
 
@@ -32,10 +33,24 @@ const StyledDiv = styled.div`
 `
 
 function render_cell_inner(value) {
-    return <span className="prop-cell-inner">{value}</span>
+    return value ? <span className="prop-cell-inner">{value}</span> : null
 }
 
-export const ComponentProps = ({ displayName, properties, showDefaults }) => {
+export type ComponentProp = {
+    key: string
+    name: { name: string; required: boolean }
+    type: string
+    description: string
+    default?: string
+}
+
+type ComponentPropsProps = {
+    displayName: string
+    showDefaults: boolean
+    properties: ComponentProp[]
+}
+
+export const ComponentProps = ({ displayName, properties, showDefaults }: ComponentPropsProps) => {
     const columns = [
         {
             title: "Property",

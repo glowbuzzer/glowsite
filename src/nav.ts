@@ -21,12 +21,13 @@ function process(node: Omit<Node, "path">, parentPaths: string[], parent: Node):
     return thisNode
 }
 
-function auto(imports) {
+function auto(imports, displayProps) {
     return Object.entries(imports).map(([path, component]) => {
         const name = path.split("/").pop().split(".")[0]
         return {
             slug: name,
             title: name,
+            displayProps, // indicates component props should be displayed
             component
         }
     })
@@ -587,7 +588,8 @@ const nav = {
                             title: "GBR controls",
                             children: auto(
                                 // @ts-ignore
-                                import.meta.glob("./pages/docs/ui/controls/*.mdx")
+                                import.meta.glob("./pages/docs/ui/controls/*.mdx"),
+                                true
                             )
                         },
                         {
@@ -595,7 +597,8 @@ const nav = {
                             title: "GBR tiles",
                             children: auto(
                                 // @ts-ignore
-                                import.meta.glob("./pages/docs/ui/tiles/*.mdx")
+                                import.meta.glob("./pages/docs/ui/tiles/*.mdx"),
+                                true
                             )
                         },
                         {
@@ -810,7 +813,8 @@ const nav = {
             layout: ControlsDocumentationPage, // so that Redux context is created
             children: auto(
                 // @ts-ignore
-                import.meta.glob("./pages/playground/*.{jsx,tsx,md,mdx,ts}")
+                import.meta.glob("./pages/playground/*.{jsx,tsx,md,mdx,ts}"),
+                false
             )
         },
         {

@@ -27,7 +27,7 @@
     "@ant-design/icons": "^4.7.0",
     "@babel/core": "^7.0.0",
     "@emeks/antd-custom-theme-generator": "^0.2.0",
-    "@glowbuzzer/controls": "1.0.1-alpha.8",
+    "@glowbuzzer/controls": "1.0.1-alpha.9",
     "@glowbuzzer/layout": "1.0.1-alpha.8",
     "@glowbuzzer/store": "1.0.1-alpha.8",
     "@mdx-js/mdx": "^2.0.0-rc.1",
