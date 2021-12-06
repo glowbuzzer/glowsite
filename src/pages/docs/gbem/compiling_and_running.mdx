@@ -36,6 +36,35 @@ Normally, you will run &gbem with: `./GBEM -c -ieth0`. Obviously, change `eth0` 
 
 When you want to scan the EtherCAT network you will run &gbem with: `./GBEM -n -ieth0`.
 
+## Console output from &gbem
+
+When &gbem runs, the first thing you should see is the welcome messages.
+
+```text
+[INFO  ] GBEM: **************************************************************************
+[INFO  ] GBEM: ***                     Starting GB EtherCAT Master                    ***
+[INFO  ] GBEM: **************************************************************************
+[INFO  ] GBEM: ***                           Debug info.                              ***
+[INFO  ] GBEM: **************************************************************************
+[INFO  ] GBEM: Debug logging is globally enabled (ENABLE_LOGGING)
+[INFO  ] GBEM: Debug log level (LOG_LEVEL) is [5]
+[INFO  ] GBEM: General GBEM debug logging is enabled (GBEM_GEN_LOG_EN)
+[INFO  ] GBEM: **************************************************************************
+[INFO  ] GBEM: ***                         Pre-boot sequence                          ***
+[INFO  ] GBEM: **************************************************************************
+[INFO  ] GBEM: Software project name [GBEM]
+[INFO  ] GBEM: Software project version [0.0.1]
+
+```
+
+&gbem will then try and connect to &gbc. If &gbc is not running you will see warning messages like:
+
+```text
+[WARN  ] PID: Failed to read line using popen (we can't find a Linux process that matches the name [GBC])
+```
+
+So make sure &gbc is running.
+
 ## Running with a real-time connection to the EtherCAT network
 
 This assumes you have:

@@ -2,11 +2,9 @@ Nav
   * focus issue&&
   * thin down padding top nav&&&
 
-otg.glowbuzzer.com
-* logo plus purple plus copyright footer
 
-downloads.glowbuzzer.com
-* logo and copyright
+bugs
+* entities dont work with fragments
 
 
 Home page
@@ -15,13 +13,10 @@ Home page
 * top carosuel doesnt repsond to dots - speed - dg &&&
 
 front-end docs content
-* hooks autgen
+* hooks autogen
 * redux docs
 
 
-blogs
-* fix up left nav
-* sort out tags so it works - dg
 
 copyright headers
 * in code

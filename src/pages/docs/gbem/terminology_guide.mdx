@@ -6,15 +6,12 @@ import {Tldr} from "../../../framework/components/Tldr"
 
 * NIC - network interface card
 * Preempt-RT - a patch to the Linux kernel that increases its real-time capabilities
-* 
 
 ## &gbem
 
-* iomap - the mapping between EtherCAT slave IO and GBC and PLC variables. For example, a digital input on a PDO (e.g. channel 1 on an EL1008 module) can be mapped to a GBC IO so that
-* machine - collection
-* 
-* drive
-* index
+* iomap - the mapping between EtherCAT slave IO and &gbc and PLC variables. For example, a digital input on a PDO (e.g. channel 1 on an EL1008 module) can be mapped to a &gbc IO so that code running the the front-end can act on its status
+* machine - collection of drives and IO that make up a machine
+* drive - the electronics that control a motor
 
 ## EtherCAT
 
@@ -31,7 +28,6 @@ import {Tldr} from "../../../framework/components/Tldr"
 * ESC is shorthand for EtherCat Slave
 * CoE is CANopen over EtherCAT. This allows the complete CANopen profile family to be utilized via EtherCAT so for example, when we talk about SDOs for example these are CANopen concepts not EtherCAT concepts.
 * EoE is Ethernet over EtherCAT this allows normal Ethernet traffic to be tunnelled through an EtherCAT network. It has a number of uses and one of the main one is that you connect drive manufacturers configuration software to an EtherCAT slave without having to plug into a separate RJ45 port.
-
 * The "AL status code" is located in ESC registers "0x134" and "0x135" and can be read out by the master. This
   code reflects the current slave error state
 
@@ -53,13 +49,13 @@ import {Tldr} from "../../../framework/components/Tldr"
 ```
 
 * NVRAM - non-volatile memory. In these documents this usually refers to the non-volatile storage on drives 
-
 * Limits - soft limits - position limit - constraints on the envelope of movement of a drive. Moving outside the envelope will usually cause a drive to stop and error.
-* SetPos ,SetVel, SetAcc/SetTorque - 
-* ActPos, ActVel, ActAcc/ActTorque - 
-* Feedback in the context of drives means the 
-* Absolute encoder - an encoder that 
-* Multi-turn encoder - an encoder that 
+* SetPos, SetVel, SetAcc/SetTorque - the value given to a drive to set (command) its position/velocity/torque
+* ActPos, ActVel, ActAcc/ActTorque - the actual value of a drive's position/velocity/torque
+* Feedback in the context of drives means an encoder either built into a motor or external to the motor mounted on the moving part of the machine used by the drive electronics
+* Incremental encode - an encoder that provides the change in position but not the absolute position itself
+* Absolute encoder - an encoder that provides absolute position information this means the position is retained regardless of whether the encoder is powered or not, even if a movement is made without power to the encoder and power is reapplied, the encoder knows it true new position
+* Multi-turn encoder - an encoder that provides position information spanning more than one turn (i.e. the total number of turns made plus the position within the current turn)
 * Interpolation time with respect to a drive often is synonymous with cycle time
 * Homing means moving a drive to a know position, the home position
 * The Touch probe function on a drive provides the capability to save the current position of a drive very accurately at a point in time (usually in response to a sensor input). It is a sub-set of a drive's homing capabilities. 

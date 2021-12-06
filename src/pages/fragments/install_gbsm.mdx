@@ -1,18 +1,17 @@
 import { Link } from "react-router-dom"
 
-&gbem needs to be downloaded from GitHub and compiled locally.
+&gbsm needs to be downloaded from GitHub and compiled locally.
 
-First, download from GitHub by cloning the repository. The `--recursive` option needs to be added to the `clone` command as the repository uses sub-modules and you need to also download these to be able to compile it.
+First, download from GitHub by cloning the repositiory. The `--recursive` option needs to be added to the `clone` command as the repository uses sub-modules and you need to also download these to be able to compile it.
 
 ```shell
-git clone --recursive https://github.com/glowbuzzer/gbem
+git clone --recursive https://github.com/glowbuzzer/gbsm
 ```
-
 This will clone the project and the sub-modules it depends on into `gbsm` directory.
 
 Next we need to compile the code. This can either be done by importing the code into your IDE and doing the build there or from the command line.
 
-First `cd` into the `gbem` directory. Then
+First `cd` into the `gbsm` directory. Then
 
 ```shell
 mkdir build
@@ -22,7 +21,8 @@ make
 ```
 If you don't specify `-DFLAVOUR=PI` then a generic Linux build will be processed.
 
-This will create the GBEM binary in the `builds` directory that can be run with `./GBEM` and the appropriate command line options.
+This will create the GBSM binary in the `builds` directory that can be run with `./GBSM` and the appropriate command line options..
 
 You can also do a `sudo make install` if you want to copy the executable into the `bin` directory.
+
 

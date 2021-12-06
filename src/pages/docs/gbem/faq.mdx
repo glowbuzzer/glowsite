@@ -1,3 +1,4 @@
+import {BogStandardCol,BogStandardRow, BogStandardHeaderRow} from "../../../framework/components";
 
 # {props.subtitle}
 
@@ -26,12 +27,15 @@ What types of EtherCAT slaves work with &gbem?
 : Any
 
 What is the maximum number of drives allowed?
+
 : This is defined by MAX_NUMblah. The dpm interface is constrained to x
 
 What is the maximum number of slaves allowed?
+
 : This is defined by MAX_NUMblah. The dpm interface is constrained to x
 
 What is minimum cycle time?
+
 : Depends on hardware and exactly how things are set up. Start at 4ms and move to 1ms. Good hardware below 1ms.
 
 How realtime is Linux realtime?
@@ -87,34 +91,338 @@ What are the EtherCAT commands?
 
 : The full list of EtherCAT commands are:
 
-| Cmd  | Abbreviation | Name                               | Description                                                  |
-| :--- | :----------- | :--------------------------------- | :----------------------------------------------------------- |
-| 0    | NOP          | No Operation                       | A slave ignores the command.                                 |
-| 1    | APRD         | Auto Increment Read                | A slave increments the address. A slave writes the data it has read to the EtherCAT datagram if the address received is zero. |
-| 2    | APWR         | Auto Increment Write               | A slave increments the address. A slave writes data to a memory area if the address received is zero. |
-| 3    | APRW         | Auto Increment Read Write          | A slave increments the address. A slave writes the data it has read to the EtherCAT datagram and writes the newly acquired data to the same memory area if the received address is zero. |
-| 4    | FPRD         | Configured Address Read            | A slave writes the data it has read to the EtherCAT datagram if its slave address matches one of the addresses configured in the datagram. |
-| 5    | FPWR         | Configured Address Write           | A slave writes data to a memory area if its slave address matches one of the addresses configured in the datagram. |
-| 6    | FPRW         | Configured Address Read Write      | A slave writes the data it has read to the EtherCAT datagram and writes the newly acquired data to the same memory area if its slave address matches one of the addresses configured in the datagram. |
-| 7    | BRD          | Broadcast Read                     | All slaves write a logical OR of the data from the memory area and the data from the EtherCAT datagram to the EtherCAT datagram. All slaves increment the Position field. |
-| 8    | BWR          | Broadcast Write                    | All slaves write data to a memory area. All slaves increment the Position field. |
-| 9    | BRW          | Broadcast Read Write               | All slaves write a logical OR of the data from the memory area and the data from the EtherCAT datagram to the EtherCAT datagram; all slaves write data to the memory area. BRW is typically not used. All slaves increment the Position field. |
-| 10   | LRD          | Logical Memory Read                | A slave writes data it has read to the EtherCAT datagram if the address received matches one of the FMMU areas configured for reading. |
-| 11   | LWR          | Logical Memory Write               | Slaves write data to their memory area if the address received matches one of the FMMU areas configured for writing. |
-| 12   | LRW          | Logical Memory Read Write          | A slave writes data it has read to the EtherCAT datagram if the address received matches one of the FMMU areas configured for reading. Slaves write data to their memory area if the address received matches one of the FMMU areas configured for writing. |
-| 13   | ARMW         | Auto Increment Read Multiple Write | A slave increments the Address field. A slave writes data it has read to the EtherCAT datagram when the address received is zero, otherwise it writes data to the memory area. |
+<BogStandardHeaderRow>
+    <BogStandardCol span={2}>
+        Command
+    </BogStandardCol>
+    <BogStandardCol span={3}>
+        Abbreviation
+    </BogStandardCol>
+    <BogStandardCol span={6}>
+        Name
+    </BogStandardCol>
+    <BogStandardCol span={13}>
+        Description
+    </BogStandardCol>
+</BogStandardHeaderRow>
+
+<BogStandardRow>
+    <BogStandardCol span={2}>
+        0
+    </BogStandardCol>
+    <BogStandardCol span={3}>
+        NOP
+    </BogStandardCol>
+    <BogStandardCol span={6}>
+        No Operation
+    </BogStandardCol>
+    <BogStandardCol span={13}>
+        A slave ignores the command
+    </BogStandardCol>
+</BogStandardRow>
+
+
+<BogStandardRow>
+    <BogStandardCol span={2}>
+        1
+    </BogStandardCol>
+    <BogStandardCol span={3}>
+        APRD
+    </BogStandardCol>
+    <BogStandardCol span={6}>
+        Auto Increment Read
+    </BogStandardCol>
+    <BogStandardCol span={13}>
+        A slave increments the address. A slave writes the data it has read to the EtherCAT datagram if the address received is zero
+    </BogStandardCol>
+</BogStandardRow>
+<BogStandardRow>
+    <BogStandardCol span={2}>
+        2
+    </BogStandardCol>
+    <BogStandardCol span={3}>
+        APWR
+    </BogStandardCol>
+    <BogStandardCol span={6}>
+        Auto Increment Write
+    </BogStandardCol>
+    <BogStandardCol span={13}>
+        A slave increments the address. A slave writes data to a memory area if the address received is zero
+    </BogStandardCol>
+</BogStandardRow>
+<BogStandardRow>
+    <BogStandardCol span={2}>
+        3
+    </BogStandardCol>
+    <BogStandardCol span={3}>
+        APRW
+    </BogStandardCol>
+    <BogStandardCol span={6}>
+        Auto Increment Read Write
+    </BogStandardCol>
+    <BogStandardCol span={13}>
+        A slave increments the address. A slave writes the data it has read to the EtherCAT datagram and writes the newly acquired data to the same memory area if the received address is zero
+    </BogStandardCol>
+</BogStandardRow>
+<BogStandardRow>
+    <BogStandardCol span={2}>
+        4
+    </BogStandardCol>
+    <BogStandardCol span={3}>
+        FPRD
+    </BogStandardCol>
+    <BogStandardCol span={6}>
+        Configured Address Read
+    </BogStandardCol>
+    <BogStandardCol span={13}>
+        A slave writes the data it has read to the EtherCAT datagram if its slave address matches one of the addresses configured in the datagram
+    </BogStandardCol>
+</BogStandardRow>
+<BogStandardRow>
+    <BogStandardCol span={2}>
+        5
+    </BogStandardCol>
+    <BogStandardCol span={3}>
+        FPWR
+    </BogStandardCol>
+    <BogStandardCol span={6}>
+        Configured Address Write
+    </BogStandardCol>
+    <BogStandardCol span={13}>
+        A slave writes data to a memory area if its slave address matches one of the addresses configured in the datagram
+    </BogStandardCol>
+</BogStandardRow>
+<BogStandardRow>
+    <BogStandardCol span={2}>
+        6
+    </BogStandardCol>
+    <BogStandardCol span={3}>
+        FPRW
+    </BogStandardCol>
+    <BogStandardCol span={6}>
+        Configured Address Read Write
+    </BogStandardCol>
+    <BogStandardCol span={13}>
+        A slave writes the data it has read to the EtherCAT datagram and writes the newly acquired data to the same memory area if its slave address matches one of the addresses configured in the datagram. |
+    </BogStandardCol>
+</BogStandardRow>
+<BogStandardRow>
+    <BogStandardCol span={2}>
+        7
+    </BogStandardCol>
+    <BogStandardCol span={3}>
+        BRD
+    </BogStandardCol>
+    <BogStandardCol span={6}>
+        Broadcast Read
+    </BogStandardCol>
+    <BogStandardCol span={13}>
+        All slaves write a logical OR of the data from the memory area and the data from the EtherCAT datagram to the EtherCAT datagram. All slaves increment the Position field
+    </BogStandardCol>
+</BogStandardRow>
+<BogStandardRow>
+    <BogStandardCol span={2}>
+        8
+    </BogStandardCol>
+    <BogStandardCol span={3}>
+        BWR
+    </BogStandardCol>
+    <BogStandardCol span={6}>
+        Broadcast Write
+    </BogStandardCol>
+    <BogStandardCol span={13}>
+        All slaves write data to a memory area. All slaves increment the Position field
+    </BogStandardCol>
+</BogStandardRow>
+<BogStandardRow>
+    <BogStandardCol span={2}>
+        9
+    </BogStandardCol>
+    <BogStandardCol span={3}>
+        BRW
+    </BogStandardCol>
+    <BogStandardCol span={6}>
+        Broadcast Read Write
+    </BogStandardCol>
+    <BogStandardCol span={13}>
+        All slaves write a logical OR of the data from the memory area and the data from the EtherCAT datagram to the EtherCAT datagram; all slaves write data to the memory area. BRW is typically not used. All slaves increment the Position field
+    </BogStandardCol>
+</BogStandardRow>
+
+<BogStandardRow>
+    <BogStandardCol span={2}>
+        10
+    </BogStandardCol>
+    <BogStandardCol span={3}>
+        LRD
+    </BogStandardCol>
+    <BogStandardCol span={6}>
+        Logical Memory Read
+    </BogStandardCol>
+    <BogStandardCol span={13}>
+        A slave writes data it has read to the EtherCAT datagram if the address received matches one of the FMMU areas configured for reading
+    </BogStandardCol>
+</BogStandardRow>
+
+
+<BogStandardRow>
+    <BogStandardCol span={2}>
+        11
+    </BogStandardCol>
+    <BogStandardCol span={3}>
+        LWR
+    </BogStandardCol>
+    <BogStandardCol span={6}>
+        Logical Memory Write
+    </BogStandardCol>
+    <BogStandardCol span={13}>
+        Slaves write data to their memory area if the address received matches one of the FMMU areas configured for writing
+    </BogStandardCol>
+</BogStandardRow>
+<BogStandardRow>
+    <BogStandardCol span={2}>
+        12
+    </BogStandardCol>
+    <BogStandardCol span={3}>
+        LRW
+    </BogStandardCol>
+    <BogStandardCol span={6}>
+        Logical Memory Read Write
+    </BogStandardCol>
+    <BogStandardCol span={13}>
+        A slave writes data it has read to the EtherCAT datagram if the address received matches one of the FMMU areas configured for reading. Slaves write data to their memory area if the address received matches one of the FMMU areas configured for writing
+    </BogStandardCol>
+</BogStandardRow>
+<BogStandardRow>
+    <BogStandardCol span={2}>
+        13
+    </BogStandardCol>
+    <BogStandardCol span={3}>
+        ARMW
+    </BogStandardCol>
+    <BogStandardCol span={6}>
+        Auto Increment Read Multiple Write
+    </BogStandardCol>
+    <BogStandardCol span={13}>
+        A slave increments the Address field. A slave writes data it has read to the EtherCAT datagram when the address received is zero, otherwise it writes data to the memory area
+    </BogStandardCol>
+</BogStandardRow>
+
+
+
 
 What is the working counter?
 
 : The Working Counter is incremented if an EtherCAT device was successfully addressed and a read operation, a write operation or a read/write operation was executed successfully. Each datagram can be assigned a value for the Working Counter that is expected after the telegram has passed through all devices. The master can check whether an EtherCAT datagram was processed successfully by comparing the value to be expected for the Working Counter with the actual value of the Working Counter after it has passed through all devices.
 
-| Command                        | Success    | Increment |
-| :----------------------------- | :--------- | :-------- |
-| Read command                   | No success | No change |
-| Reading successful             | +1         |           |
-| Write command                  | No success | No change |
-| Writing successful             | +1         |           |
-| Read/write command             | No success | No change |
-| Reading successful             | +1         |           |
-| Writing successful             | +2         |           |
-| Reading and writing successful | +3         |           |
+
+<BogStandardHeaderRow>
+<BogStandardCol span={12}>
+    Command
+</BogStandardCol>
+        <BogStandardCol span={6}>
+        Result
+    </BogStandardCol>
+    <BogStandardCol span={6}>
+        Increment
+    </BogStandardCol>
+</BogStandardHeaderRow>
+
+<BogStandardRow>
+    <BogStandardCol span={12}>
+Read command
+    </BogStandardCol>
+    <BogStandardCol span={6}>
+No success
+    </BogStandardCol>
+    <BogStandardCol span={6}>
+No change to WC
+    </BogStandardCol>
+</BogStandardRow>
+
+<BogStandardRow>
+    <BogStandardCol span={12}>
+Read command
+    </BogStandardCol>
+    <BogStandardCol span={6}>
+Successful read
+    </BogStandardCol>
+    <BogStandardCol span={6}>
+WC +1
+    </BogStandardCol>
+</BogStandardRow>
+
+<BogStandardRow>
+    <BogStandardCol span={12}>
+Write command
+    </BogStandardCol>
+    <BogStandardCol span={6}>
+No success
+    </BogStandardCol>
+    <BogStandardCol span={6}>
+No change to WC
+    </BogStandardCol>
+</BogStandardRow>
+
+<BogStandardRow>
+    <BogStandardCol span={12}>
+Write command
+    </BogStandardCol>
+    <BogStandardCol span={6}>
+Successful write
+    </BogStandardCol>
+    <BogStandardCol span={6}>
+WC +1
+    </BogStandardCol>
+</BogStandardRow>
+
+<BogStandardRow>
+    <BogStandardCol span={12}>
+Read/Write command
+    </BogStandardCol>
+    <BogStandardCol span={6}>
+No success
+    </BogStandardCol>
+    <BogStandardCol span={6}>
+No change to WC
+    </BogStandardCol>
+</BogStandardRow>
+
+<BogStandardRow>
+    <BogStandardCol span={12}>
+        Read/Write command
+    </BogStandardCol>
+    <BogStandardCol span={6}>
+Successful read
+    </BogStandardCol>
+    <BogStandardCol span={6}>
+WC +1
+    </BogStandardCol>
+</BogStandardRow>
+
+<BogStandardRow>
+    <BogStandardCol span={12}>
+        Read/Write command
+    </BogStandardCol>
+    <BogStandardCol span={6}>
+Successful write
+    </BogStandardCol>
+    <BogStandardCol span={6}>
+WC +2
+    </BogStandardCol>
+</BogStandardRow>
+
+<BogStandardRow>
+    <BogStandardCol span={12}>
+        Read/Write command
+    </BogStandardCol>
+    <BogStandardCol span={6}>
+        Successful read/write
+
+    </BogStandardCol>
+    <BogStandardCol span={6}>
+WC +3
+    </BogStandardCol>
+</BogStandardRow>
+
+
