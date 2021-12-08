@@ -30,11 +30,16 @@ const AppStyle = styled.div`
     }
 
     // only format code elements outside of pre block
-    *:not(pre) > code {
+    code {
         //background: #d9d9d9;
         border: 1px solid #d9d9d9;
         border-radius: 5px;
         padding: 0 3px 0 3px;
+    }
+
+    pre code {
+        border: none;
+        padding: 0;
     }
 
     pre {

@@ -1,6 +1,6 @@
 import { Node } from "./framework/providers/NavProvider"
 import { HomePage } from "./framework/layouts/HomePage"
-import { DefaultDocumentationPage } from "./framework/layouts/DocumentationPage"
+import {DefaultDocumentationPage, DocumentationPage, TypedocPage} from "./framework/layouts/DocumentationPage"
 import { ControlsDocumentationPage } from "./framework/layouts/ControlsDocumentationPage"
 import { SimpleLayout } from "./framework/layouts/SimpleLayout"
 
@@ -605,7 +605,7 @@ const nav = {
                             slug: "hooks",
                             title: "GBR hooks",
                             subtitle: "Hooks in the front-end",
-                            component: () => import("./pages/docs/ui/hooks.mdx")
+                            component: () => import("./pages/docs/ui/HooksTypedoc")
                         },
                         {
                             slug: "redux",
@@ -831,6 +831,20 @@ const nav = {
             slug: "downloads",
             layout: SimpleLayout,
             component: () => import("./pages/DownloadsPage")
+        },
+        {
+            slug: "docs/gbc/schema/:name",
+            layout: TypedocPage,
+            title: "GBC Schema",
+            filter: c => c.sources?.some(s => s.fileName === "gbc.ts"), // for left nav build
+            component: () => import("./typedoc/TypedocItem")
+        },
+        {
+            slug: "docs/ui/hooks/:name",
+            layout: TypedocPage,
+            title: "GBR Hooks",
+            filter: c => c.name.startsWith("use"), // for left nav build
+            component: () => import("./typedoc/TypedocItem")
         }
     ]
 }

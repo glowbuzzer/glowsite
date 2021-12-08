@@ -55,6 +55,8 @@ export const DocumentationPage = ({ left, children }) => (
     </BaseLayout>
 )
 
+export const TypedocPage = ({ children}) => children
+
 export const DefaultDocumentationPage = props => (
     <DocumentationPage left={<ContexualLeftNav />} {...props} />
 )

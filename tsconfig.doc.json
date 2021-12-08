@@ -1,17 +1,23 @@
 {
+//    "extends": "./tsconfig.base.json",
     "compilerOptions": {
-        "noResolve": true,
-        "skipLibCheck": true,
+        "esModuleInterop": true,
+        "downlevelIteration": true,
+        "jsx": "react",
+        //        "noResolve": true,
+                "skipLibCheck": true
     },
     "exclude": [
-        "apps/**/**",
-        "public/static/**/**",
+        //        "apps/**/**",
+        //        "public/static/**/**",
         "./node_modules/**"
     ],
     "files": [
-        "./src/gbc.ts"
+        "./src/gbc.ts",
+        "./node_modules/@glowbuzzer/store/types/index.d.ts",
+        "../gbr/libs/store/src/index.ts"
     ],
-//    "include": [
-//        "./gbc.ts",
-//    ]
+    //    "include": [
+    //        "./libs/store/src/**/*.ts"
+    //    ]
 }

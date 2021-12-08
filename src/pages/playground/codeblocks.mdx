@@ -7,8 +7,19 @@ subtitle: They look great!
 
 This is `inline code`.
 
-```jsx
+```tsx
 import {Button} from "antd"
+
+type Foo={
+    basic: number
+    bar(param1: number): void
+}
+
+function something() {
+}
+
+const x:number[]=[42, 54]
+const y=something()
 
 export default () => <Button>Hello</Button>
 ```

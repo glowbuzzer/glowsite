@@ -1,7 +1,7 @@
 import * as React from "react"
-import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import styled from "styled-components"
+import { typedocGbcSchemaFilter, useTypedocGrouped } from "../../../typedoc/typedoc-hooks"
 
 export const title = "GBC Schema"
 
@@ -12,28 +12,8 @@ const StyledDiv = styled.div`
     }
 `
 
-type GbcSchemaItem = {
-    kindString: string
-    name: string
-    slug: string
-}
-
 export default function GbcSchema() {
-    const [groups, setGroups] = useState({})
-
-    useEffect(() => {
-        // @ts-ignore
-        import("virtual:gbcschema").then(r => {
-            console.log("RESULT", r.default)
-            const groups = {
-                Enumeration: [] as GbcSchemaItem[],
-                "Type alias": [] as GbcSchemaItem[]
-            }
-
-            r.default.forEach(source => groups[source.kindString]?.push(source))
-            setGroups(groups)
-        })
-    }, [])
+    const groups = useTypedocGrouped(typedocGbcSchemaFilter)
 
     return (
         <StyledDiv>
@@ -48,6 +28,7 @@ export default function GbcSchema() {
                 components).
             </p>
             <p>It is also useful information when creating Tasks in the config.</p>
+
             {Object.keys(groups).map(k => (
                 <div key={k}>
                     <h2>{k}</h2>

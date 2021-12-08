@@ -1,28 +1,18 @@
-import { defineConfig, loadEnv } from "vite"
+import {defineConfig, loadEnv} from "vite"
 import react from "@vitejs/plugin-react"
-import { imagetools } from "vite-imagetools"
+import {imagetools} from "vite-imagetools"
 import radar from "vite-plugin-radar"
-import vx from "vite-plugin-virtual"
 import remarkPrism from "remark-prism"
 import remarkGfm from "remark-gfm"
-import gbc from "../../plugins/data/data-gbcschema.mjs"
-import {
-    glowsiteImageToolsPresets as resolveConfigsFactory,
-    glowsiteOutputFormats as extendOutputFormats
-} from "../../plugins/imagetools-ext.mjs"
+import {glowsiteImageToolsPresets as resolveConfigsFactory, glowsiteOutputFormats as extendOutputFormats} from "../../plugins/imagetools-ext.mjs"
 import remarkMermaid from "../../plugins/remark-mermaid.mjs"
 import remarkCodeblock from "../../plugins/remark-codeblock.mjs"
 import remarkGlowbuzzerFrontmatter from "../../plugins/remark-frontmatter.mjs"
-import { svgWrapper as svgr } from "../../plugins/svr-plugin-wrapper.mjs"
-import { mdxWrapper as mdx } from "../../plugins/mdx-plugin-wrapper.mjs"
+import {svgWrapper as svgr} from "../../plugins/svr-plugin-wrapper.mjs"
+import {mdxWrapper as mdx} from "../../plugins/mdx-plugin-wrapper.mjs"
 import remarkDl from "remark-deflist"
-import { remarkEntities } from "../../plugins/remark-entities.mjs"
-
-//
-// not sure why we need this hack, their ESM module looks okay
-const virtual = vx.default
-
-const { pages: gbcschema } = gbc
+import {remarkEntities} from "../../plugins/remark-entities.mjs"
+import typedoc from "../../plugins/vite-plugin-typedoc.mjs";
 
 const resolveConfigs = resolveConfigsFactory({
     presets: {
@@ -37,6 +27,8 @@ const resolveConfigs = resolveConfigsFactory({
  */
 export default defineConfig(({ mode }) => {
     const env = loadEnv(mode, process.cwd())
+
+    console.log("MODE", mode)
 
     return {
         plugins: [
@@ -53,15 +45,11 @@ export default defineConfig(({ mode }) => {
             }),
             react(),
             svgr(),
+            typedoc(mode),
             imagetools({
                 extendOutputFormats,
                 resolveConfigs
             }),
-            virtual({
-                // 'virtual:module': `export default { hello: 'world' }`,
-                "virtual:gbcschema": gbcschema
-            }),
-            // tsconfigPaths(),
             radar.default({
                 analytics: {
                     id: env.VITE_GA_TRACKING_ID

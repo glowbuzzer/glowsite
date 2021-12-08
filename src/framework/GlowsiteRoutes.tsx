@@ -7,6 +7,7 @@ import {FallbackLayout} from "./layouts/FallbackLayout"
 import * as NotFound from "../pages/404.mdx"
 import {BaseLayout} from "./layouts/BaseLayout"
 import {Loading} from "./components/Loading"
+import {BlogListByTag} from "../pages/blogs/BlogListByTag";
 
 /**
  * Emits all site routes
@@ -38,7 +39,9 @@ export const GlowsiteRoutes = ({children}:{children?}) => {
                         </Route>
                     )
                 })}
-                {children}
+
+                <Route path={"/blogs/tag/:tag"} component={BlogListByTag} />
+
                 <Route>
                     {/* 404 route */}
                     <Helmet>

@@ -1,23 +1,27 @@
-type GbcSchemaItem = {
-    kindString: string
-    name: string
-    slug: string
+import { DeclarationReflection } from "typedoc"
+
+import typedoc from "typedoc:@glowbuzzer/store"
+
+export function useTypedoc(filter): DeclarationReflection[] {
+    return typedoc.children.filter(filter)
 }
 
-// @ts-ignore
-import gbcschema from "virtual:gbcschema"
+export function useTypedocGrouped(filter): { [index: string]: DeclarationReflection[] } {
+    const items = useTypedoc(filter)
 
-const groups = {
-    Enumeration: [] as GbcSchemaItem[],
-    "Type alias": [] as GbcSchemaItem[]
-}
+    const groups: { [index: string]: DeclarationReflection[] } = {}
 
-gbcschema.forEach(source => groups[source.kindString]?.push(source))
+    items.forEach(item => {
+        groups[item.kindString] ??= []
+        return groups[item.kindString].push(item)
+    })
 
-export function useGbcSchema(): { [index: string]: GbcSchemaItem[] } {
     return groups
 }
 
 export function useTypedocItem(name: string) {
-    return gbcschema.find(i => i.name === name)
+    return typedoc.children.find(i => i.name === name)
 }
+
+export const typedocHookFilter = c => c.name.startsWith("use")
+export const typedocGbcSchemaFilter = c => c.sources?.some(s => s.fileName === "gbc.ts")
