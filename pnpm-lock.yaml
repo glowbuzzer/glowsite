@@ -4,9 +4,9 @@ specifiers:
   '@ant-design/icons': ^4.7.0
   '@babel/core': ^7.0.0
   '@emeks/antd-custom-theme-generator': ^0.2.0
-  '@glowbuzzer/controls': 1.0.1-alpha.9
-  '@glowbuzzer/layout': 1.0.1-alpha.8
-  '@glowbuzzer/store': 1.0.1-alpha.8
+  '@glowbuzzer/controls': 1.0.1-alpha.11
+  '@glowbuzzer/layout': 1.0.1-alpha.11
+  '@glowbuzzer/store': 1.0.1-alpha.11
   '@mdx-js/mdx': ^2.0.0-rc.1
   '@mdx-js/react': ^1.6.22
   '@mdx-js/rollup': ^2.0.0-rc.1
@@ -53,8 +53,8 @@ specifiers:
   styled-components: ^5.3.3
   three: 0.125.2
   three-stdlib: ^2.5.9
-  typedoc: ^0.22.6
-  typescript: ^4.4.4
+  typedoc: 0.22.10
+  typescript: ~4.3.0
   unist-util-flatmap: ^1.0.0
   unist-util-visit: ^4.1.0
   vite: 2.6.14
@@ -79,9 +79,9 @@ devDependencies:
   '@ant-design/icons': 4.7.0_react-dom@17.0.2+react@17.0.2
   '@babel/core': 7.15.8
   '@emeks/antd-custom-theme-generator': 0.2.0_antd@4.10.0
-  '@glowbuzzer/controls': 1.0.1-alpha.9
-  '@glowbuzzer/layout': 1.0.1-alpha.8
-  '@glowbuzzer/store': 1.0.1-alpha.8
+  '@glowbuzzer/controls': 1.0.1-alpha.11
+  '@glowbuzzer/layout': 1.0.1-alpha.11
+  '@glowbuzzer/store': 1.0.1-alpha.11
   '@mdx-js/mdx': 2.0.0-rc.1
   '@mdx-js/react': 1.6.22_react@17.0.2
   '@mdx-js/rollup': 2.0.0-rc.1
@@ -119,8 +119,8 @@ devDependencies:
   serve-static: 1.14.1
   three: 0.125.2
   three-stdlib: 2.5.9_three@0.125.2
-  typedoc: 0.22.6_typescript@4.4.4
-  typescript: 4.4.4
+  typedoc: 0.22.10_typescript@4.3.5
+  typescript: 4.3.5
   unist-util-flatmap: 1.0.0
   unist-util-visit: 4.1.0
   vite: 2.6.14_less@4.1.2
@@ -1718,27 +1718,19 @@ packages:
     resolution: {integrity: sha512-OWORNpfjMsSSUBVrRBVGECkhWcULOAJz9ZW8uK9qgxD+87M7jHRcvh/A96XXNhXTLmKcoYSQtBEX7lHMO7YRwg==}
     dev: false
 
-  /@glowbuzzer/controls/1.0.1-alpha.9:
-    resolution: {integrity: sha512-iKNmZ1ydM+hAJOvutzd1+wZs6gCFJa9V0/lAryJDMByHorgPBslRuLauTwIgoHkmdxDf6o01aTV7zFYzfdl3+A==}
+  /@glowbuzzer/controls/1.0.1-alpha.11:
+    resolution: {integrity: sha512-Y7/DrBHlFt78sRrBYWFEc11MXaEHdVCWZzeChMg8fJ/qxlLh0nkugDtbr11lCiq45A5HHsTWpPzleLPa8RVnEQ==}
     dependencies:
-      '@glowbuzzer/layout': 1.0.1-alpha.9
-      '@glowbuzzer/store': 1.0.1-alpha.9
+      '@glowbuzzer/layout': 1.0.1-alpha.11
+      '@glowbuzzer/store': 1.0.1-alpha.11
     dev: true
 
-  /@glowbuzzer/layout/1.0.1-alpha.8:
-    resolution: {integrity: sha512-FuyFyMgJi8yYt8YPhynoABa3qpMB3H7YeG0YQPLsA2VxddKWGi5VipbLXnjltiISwgiowfuiH9ubg80ASOgIzA==}
+  /@glowbuzzer/layout/1.0.1-alpha.11:
+    resolution: {integrity: sha512-hPdiI2UTBuBRFo//vecm6tulgKSySZ8EKAhV5vsNmB5gWUiz0Q1tRIS2ZZqe+36TS/A1OhoptAJVltmjOzUJ1g==}
     dev: true
 
-  /@glowbuzzer/layout/1.0.1-alpha.9:
-    resolution: {integrity: sha512-f44DV1VOyK0l1j/MZD0mlvadE1aIXjj1Vpiog2D23PESv97p4rbW5/tz0diGs4+M4r+XutI4EBPLYnRjdw8+Rw==}
-    dev: true
-
-  /@glowbuzzer/store/1.0.1-alpha.8:
-    resolution: {integrity: sha512-9WpqD9uSPJZowry4tXUdNPulc1Vaq1K3DRnp2B9RqzfbDQq6tVKeJ/C1+oM+T0mGxo2IM0SFcHXFiXzFTYq7bg==}
-    dev: true
-
-  /@glowbuzzer/store/1.0.1-alpha.9:
-    resolution: {integrity: sha512-JFcj5QbspahCfajMQ2CcT5tLzV7FidKxZpxzWxMyQgfl5PLUuU/LCs7xrRVxlKdGlPwNeWkuWDxcd1YDHpZmfg==}
+  /@glowbuzzer/store/1.0.1-alpha.11:
+    resolution: {integrity: sha512-FCFk06m2trXzg1AL/JDzBkynadEBDyjUiJ2J4lBr1Ht59n1cIVLDDYImReAUyaX1jJeAxct8txNAdk/hjh2pYg==}
     dev: true
 
   /@mdx-js/mdx/2.0.0-rc.1:
@@ -7716,23 +7708,23 @@ packages:
       mime-types: 2.1.33
     dev: true
 
-  /typedoc/0.22.6_typescript@4.4.4:
-    resolution: {integrity: sha512-ePbJqOaz0GNkU2ehRwFwBpLD4Gp6m7jbJfHysXmDdjVKc1g8DFJ83r/LOZ9TZrkC661vgpoIY3FjSPEtUilHNA==}
+  /typedoc/0.22.10_typescript@4.3.5:
+    resolution: {integrity: sha512-hQYZ4WtoMZ61wDC6w10kxA42+jclWngdmztNZsDvIz7BMJg7F2xnT+uYsUa7OluyKossdFj9E9Ye4QOZKTy8SA==}
     engines: {node: '>= 12.10.0'}
     hasBin: true
     peerDependencies:
-      typescript: 4.0.x || 4.1.x || 4.2.x || 4.3.x || 4.4.x
+      typescript: 4.0.x || 4.1.x || 4.2.x || 4.3.x || 4.4.x || 4.5.x
     dependencies:
       glob: 7.2.0
       lunr: 2.3.9
       marked: 3.0.8
       minimatch: 3.0.4
       shiki: 0.9.12
-      typescript: 4.4.4
+      typescript: 4.3.5
     dev: true
 
-  /typescript/4.4.4:
-    resolution: {integrity: sha512-DqGhF5IKoBl8WNf8C1gu8q0xZSInh9j1kJJMqT3a94w1JzVaBU4EXOSMrz9yDqMT0xt3selp83fuFMQ0uzv6qA==}
+  /typescript/4.3.5:
+    resolution: {integrity: sha512-DqQgihaQ9cUrskJo9kIyW/+g0Vxsk8cDtZ52a3NGh0YNTfpUSArXSohyUGnvbPazEPLu398C0UxmKSOrPumUzA==}
     engines: {node: '>=4.2.0'}
     hasBin: true
     dev: true
