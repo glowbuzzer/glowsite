@@ -14,16 +14,43 @@ import RunGbc from "../../fragments/run_gbc_short.mdx"
 
 ## Key things to look out for in the console output.
 
+### emstat paths
+
+The paths &gbc is using to store the emstat files are detailed.
 
 ```text
-[WARN  ] GBC-JS: File not found [configs/machine_el7211_test.json], loading file [configs/machine_el7211_test.json] from fsdata
+[INFO  ] GBC: The path we are using for emstat const file [/tmp/emstat_const.json]
+[INFO  ] GBC: The path we are using for emstat const file [/tmp/emstat_status.json]
+[INFO  ] GBC: The path we are using for config file [/tmp/config.json]
 ```
 
+### config. JSON file loading details are confirmed.
+
+&gbc loads its JSON config. files from the file system and these JSON files must be placed in the directory alongside the &gbc executable.
+
+The config.json file is the first one loaded and it may `include` further JSON files.
+
+If the file is found you will see:
+
+```text
+[INFO  ] GBC-JS: loading file [configs/my_machine_config.json]
+```
+
+
+### Bus cycle time
+
+Of course, the bus cycle time is pretty important and this affects lots of things like the scaling of trajectories so it needs to match that used on the fieldbus.
+
+You can see its value that has been read from the config. json files here:
 
 ```text
 [INFO  ] GBC-M7: Machine bus cycle time is [4] ms
 ```
 
+
+### Further confirmation of config. settings
+
+Further confirmation of the config. settings is output to console in sections like this:
 
 ```text
 
