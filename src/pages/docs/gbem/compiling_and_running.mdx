@@ -63,7 +63,60 @@ When &gbem runs, the first thing you should see is the welcome messages.
 [WARN  ] PID: Failed to read line using popen (we can't find a Linux process that matches the name [GBC])
 ```
 
+or
+
+```text
+GBEM: Connection to shared memory & GBC process could not be established - we will continue without a connection to GBC
+```
+
+
 So make sure &gbc is running.
+
+&gbem will confirm what machine target it has been compiled with a console output like this:
+
+
+```text
+GBEM: This code has been compiled for [MY_MACHINE]
+```
+
+
+Next, &gbem will check the machine config for any errors. If you see:
+
+```text
+"GBEM: Config checking (and config JSON creation) >failed< .This implies that there is something nasty in either the machine config itself or the process to create it");
+```
+
+This means that the checking of the machine config failed. Helpful messages will have been outputted that explain where the issue is. You will need to fix teh config c files and compile again.
+
+Next &gbem (in cyclic mode) will start the boot process.
+
+You will see this banner:
+
+```text
+UM_INFO(GBEM_UM_EN, "GBEM: **************************************************************************");
+UM_INFO(GBEM_UM_EN, "GBEM: ***                    Start of cyclic boot process                    ***");
+UM_INFO(GBEM_UM_EN, "GBEM: **************************************************************************");
+```
+
+The boot steps are as follows:
+
+1. Initialise hardware (the Ethernet NIC used for EtherCAT communications)
+1. Enumerate and initialise all slaves
+1. Move all slaves to PRE_OP state
+1. In the PO-to-SO hooks
+    1. Apply PDO mapping
+    1. Apply standard SDOs
+    1. Apply DC settings
+1. Check for errors
+1. Move all slaves to SAFE_OP state (check that all slaves have reach SAFE_OP)
+1. Check the workcounter actual matches expected
+1. Check slaves match (check that the slaves on the network match the type and order you have them in your machine config files)
+1. Move all slave to OP state
+
+If all the slaves make it through all these steps then you are up and running!
+
+Any failure at any step will result in an error message and the boot process will re-try.
+
 
 ## Running with a real-time connection to the EtherCAT network
 

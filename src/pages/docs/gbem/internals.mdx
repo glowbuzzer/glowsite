@@ -1,4 +1,6 @@
 import {Tldr} from "../../../framework/components/Tldr"
+import { Image } from "../../../framework/components/Image"
+
 
 # {props.subtitle}
 <Tldr>
@@ -21,25 +23,30 @@ When everything is up and running we will have the following threads running:
 
 Simple mechanism to centralise the error codes returned from functions.
 
+If you have a look in `gberror.h` & `gberror.c` you can see the defined error codes returned by functions.
+
+If you are writing your own functions then either use codes from this table or add your own new ones.
+
 ## Signals
 
-ec_rxtx thread sends signal to process defined in xxx.
-
-## Data types
-
-### &gbc types
-
-### EC types
+The main &gbem ec_rxtx thread runs in real-time and at whatever frequency you have defined as your bus cycle, will send a signal to process defined in the &gbem configuration.
 
 
 ## Slave numbering
+
+&gbem numbers slaves based on their physical position on the network.
+
+Slave numbers start at 1 and each of the following slaves have an incremented slave number.
+
+Using the `netscan` function of &gbem will help you identify your slave numbers if there is any confusion.
 
 ## CiA 402 state machine
 
 &gbem uses the CiA 402 state machine extensively in its operation.
 
-![alt text][cia402_diagram]
+import cia_402 from "./cia402.svg"
 
+<img src={cia_402} width="100%" alt={"CiA 402 state machine"}/>
 
 &gbem has the concept of the **machine state**. This is a CiA 402 state machine and is commanded by &gbc and reports back its status to &gbc over shared memory (DPM) in the status word. These words are accessed through:
 `dpm_in->machine_word` & `dpm_out->machine_word`.
@@ -115,6 +122,9 @@ uint32_t unsigned32[DPM_NUM_UINT32S];
 
 
 ## logger
+&gbem contains a little logging framework.
+
+In the `main.c` function, it can be set to output messages to file, console (stdout) or syslog by uncommenting the correct line here:
 
 ```
 logger_set_stdout();
