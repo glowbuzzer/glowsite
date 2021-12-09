@@ -53,6 +53,7 @@ const TypedocDeclaration = ({ d }: { d: DeclarationReflection }) => {
                         <span>
                             {d.children.map(property => (
                                 <span className="property">
+                                    <Synopsis item={property} />
                                     <TypedocDeclaration d={property} />
                                 </span>
                             ))}
@@ -155,6 +156,7 @@ const StyledRender = styled.div`
     .tuple-item {
         display: block;
         padding-left: 20px;
+      padding-bottom: 10px;
 
         :only-child {
             //display: inline;
@@ -170,16 +172,22 @@ const StyledRender = styled.div`
         content: " & ";
     }
 
-    .param .shortText {
-        font-family: Roboto, sans-serif;
-        font-size: 0.8em;
-        border-left: 1px solid rgba(0, 0, 0, 0.2);
-        margin-bottom: -4px;
-        padding-left: 5px;
-        color: rgba(0, 0, 0, 0.6);
+    .param,
+    .property {
+        .shortText {
+            font-family: Roboto, sans-serif;
+            font-size: 0.9em;
+            border-left: 2px solid rgba(0, 0, 0, 0.08);
+            margin-top: 8px;
+            margin-bottom: 0;
+            padding-top: 4px;
+            padding-bottom: 4px;
+            padding-left: 8px;
+            color: rgba(0, 0, 0, 0.6);
 
-        p:only-child {
-            margin: 0;
+            p:only-child {
+                margin: 0;
+            }
         }
     }
 
@@ -198,10 +206,10 @@ const PropertyTable = ({ item }) => {
 export const TypeAlias = ({ item }) => {
     return (
         <div>
+            <Synopsis item={item} />
             <pre>
                 type {item.name} = <TypedocType t={item.type} />
             </pre>
-            <Synopsis item={item} />
             <PropertyTable item={item} />
         </div>
     )
@@ -255,6 +263,7 @@ const Enumeration = ({ item }) => {
     )
 }
 
+/*
 const Parameters = ({ sig }: { sig: SignatureReflection }) => {
     if (!sig?.parameters) {
         return null
@@ -280,6 +289,7 @@ const Parameters = ({ sig }: { sig: SignatureReflection }) => {
         </>
     )
 }
+*/
 
 const Function = ({ item }: TypedocItemRenderProps) => {
     return (
@@ -287,11 +297,13 @@ const Function = ({ item }: TypedocItemRenderProps) => {
             {item.signatures.map(s => {
                 return (
                     <div key={s.id}>
+                        <Synopsis item={s} />
                         <pre className="synopsis">
                             <TypedocSignature s={s} />
                         </pre>
-                        <Synopsis item={s} />
+{/*
                         <Parameters sig={s} />
+*/}
                     </div>
                 )
             })}
