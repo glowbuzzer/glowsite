@@ -6,7 +6,7 @@ import { ComponentProps } from "../framework/components/ComponentProps"
 import { Link } from "react-router-dom"
 import { Markdown } from "../framework/components/Markdown"
 import { StyledLeftNavMenu } from "../framework/nav/ContexualLeftNav"
-import { Menu } from "antd"
+import { Menu, Table } from "antd"
 import {
     ArrayType,
     DeclarationReflection,
@@ -29,6 +29,7 @@ const TypedocSignature = ({ s }: { s: SignatureReflection }) => {
                 <span>
                     {s.parameters?.map(param => (
                         <span className="param">
+                            <Synopsis item={param} />
                             {param.name}: <TypedocType t={param.type} />
                         </span>
                     ))}
@@ -156,8 +157,8 @@ const StyledRender = styled.div`
         padding-left: 20px;
 
         :only-child {
-            display: inline;
-            padding-left: 0;
+            //display: inline;
+            //padding-left: 0;
         }
 
         :not(:last-child):after {
@@ -167,6 +168,19 @@ const StyledRender = styled.div`
 
     .intersection:not(:last-child):after {
         content: " & ";
+    }
+
+    .param .shortText {
+        font-family: Roboto, sans-serif;
+        font-size: 0.8em;
+        border-left: 1px solid rgba(0, 0, 0, 0.2);
+        margin-bottom: -4px;
+        padding-left: 5px;
+        color: rgba(0, 0, 0, 0.6);
+
+        p:only-child {
+            margin: 0;
+        }
     }
 
     pre.debug {
@@ -214,16 +228,16 @@ export const TypeAlias = ({ item }) => {
 }
 
 const Synopsis = ({ item }: { item: Reflection }) => {
-    return (
+    return item.comment ? (
         <>
             <div className="shortText">
-                <Markdown>{item.comment?.shortText}</Markdown>
+                <Markdown>{item.comment.shortText.trim()}</Markdown>
             </div>
             <div className="text">
-                <Markdown>{item.comment?.text}</Markdown>
+                <Markdown>{item.comment.text}</Markdown>
             </div>
         </>
-    )
+    ) : null
 }
 
 const Enumeration = ({ item }) => {
@@ -241,6 +255,32 @@ const Enumeration = ({ item }) => {
     )
 }
 
+const Parameters = ({ sig }: { sig: SignatureReflection }) => {
+    if (!sig?.parameters) {
+        return null
+    }
+
+    const data = sig.parameters.map(p => ({
+        key: p.name,
+        name: p.name,
+        description: <Synopsis item={p} />,
+        type: <TypedocType t={p.type} />,
+        default: p.defaultValue
+    }))
+    const cols = ["Name", "Description", "Type", "Default"].map(c => ({
+        title: c,
+        dataIndex: c.toLowerCase(),
+        key: c.toLowerCase()
+    }))
+
+    return (
+        <>
+            <h3>Parameters</h3>
+            <Table columns={cols} dataSource={data} pagination={false} />
+        </>
+    )
+}
+
 const Function = ({ item }: TypedocItemRenderProps) => {
     return (
         <div>
@@ -251,6 +291,7 @@ const Function = ({ item }: TypedocItemRenderProps) => {
                             <TypedocSignature s={s} />
                         </pre>
                         <Synopsis item={s} />
+                        <Parameters sig={s} />
                     </div>
                 )
             })}
