@@ -836,7 +836,7 @@ const nav = {
             slug: "docs/gbc/schema/:name",
             layout: TypedocPage,
             title: "GBC Schema",
-            filter: c => c.sources?.some(s => s.fileName === "gbc.ts"), // for left nav build
+            filter: c => c.sources?.some(s => s.fileName === "gbc.ts" || s.fileName === "gbc.d.ts"), // for left nav build
             component: () => import("./typedoc/TypedocItem")
         },
         {
