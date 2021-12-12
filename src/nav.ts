@@ -1,6 +1,10 @@
 import { Node } from "./framework/providers/NavProvider"
 import { HomePage } from "./framework/layouts/HomePage"
-import {DefaultDocumentationPage, DocumentationPage, TypedocPage} from "./framework/layouts/DocumentationPage"
+import {
+    DefaultDocumentationPage,
+    DocumentationPage,
+    TypedocPage
+} from "./framework/layouts/DocumentationPage"
 import { ControlsDocumentationPage } from "./framework/layouts/ControlsDocumentationPage"
 import { SimpleLayout } from "./framework/layouts/SimpleLayout"
 
@@ -381,9 +385,17 @@ const nav = {
                                     slug: "om_azd3a_ked",
                                     title: "Oriental Motor AZD3A-KED",
                                     subtitle:
-                                        'Review and integration of the Oriental Motor AZD3A-KED"',
+                                        "Review and integration of the Oriental Motor AZD3A-KED",
                                     component: () =>
                                         import("./pages/docs/gbem/drive_support/om_azd3a_ked.mdx")
+                                },
+                                {
+                                    slug: "om_azd_ked",
+                                    title: "Oriental Motor AZD-KED",
+                                    subtitle:
+                                        "Review and integration of the Oriental Motor AZD-KED",
+                                    component: () =>
+                                        import("./pages/docs/gbem/drive_support/om_azd_ked.mdx")
                                 },
                                 {
                                     slug: "omron_accurax_g5",

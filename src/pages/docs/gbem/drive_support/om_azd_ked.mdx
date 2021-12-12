@@ -1,0 +1,372 @@
+import { Image } from "../../../../framework/components/Image"
+import { Rate, Row, Col, Alert } from 'antd';
+import {YoutubeEmbed} from "../../../../framework/components/Video"
+import {GitHubLink} from "../../../../framework/components/GitHubLink";
+
+import mex_select_product_1 from "./mex_select_product_1.png?glowsite"
+import mex_detect_comms_2 from "./mex_detect_comms_2.png?glowsite"
+import mex_read_data_3 from "./mex_read_data_3.png?glowsite"
+import mex_copy_azbo_4 from "./mex_copy_azbo_4.png?glowsite"
+import mex_remote_5 from "./mex_remote_5.png?glowsite"
+import mex_jog_6 from "./mex_jog_6.png?glowsite"
+import mex_change_dir from "./mex_change_dir_7.png?glowsite"
+import mex_set_limits_8 from "./mex_set_limits_8.png?glowsite"
+
+# {props.subtitle}
+
+<GitHubLink title={"Drive interface code"} repo={"gbem"} directory={"/libs/oriental_motor"}/>
+
+<GitHubLink title={"Example machine configuration"} repo={"gbem"} directory={"/libs/machine_mapping/src/machines"} file={"sk1_map.c"} />
+
+
+## Introduction
+
+This short guide reviews the Oriental Motor AZD-KED drivesand discusses how to get it working with &gbem.
+
+## Overview of the Oriental Motor AZD-KED drive
+
+The AZD-KED is a single axis DC powered stepper drive. There is also a multi-axis version of this drive produced by Oriental Motor:
+
+* AZD2A-KED - 2 axes
+* AZD3A-KED - 3 axes
+* AZD4A-KED - 4 axes
+
+There is also the AZD-CED which is the AC powered version of the drive and uses the same motors. These allow larger 85mm frame mortors (4Nm) AZM98/AZM911 motors to be used than the largest 60mm frame AZM69 motors of multi-axis drives. These would have roughly an equivalent rated torque of 400W-750W when compared with a traditional servo motor (albeit for operation at less than 2000rpm) .
+
+The price is roughly €360.
+
+They exclusively support the AZ series motors. This range is extensive and includes linear actuators, hollow shaft, slides, cylinders etc. They all include an absolute encoder.
+
+import azd_ked_product_shot from "./azd_ked_product_shot.png?glowsite"
+
+<Image meta={azd_ked_product_shot} alt="AZD-KED product" maxWidth={400} />
+
+
+## Motor range
+
+Frame sizes include:
+
+1. 20mm - DC only
+1. 28mm - DC only
+1. 42mm - AC & DC
+1. 60mm - AC & DC
+1. 85mm - AC only
+1. 90mm - AC only
+
+The gearbox range is great. We have on offer:
+1. Standard spur gear mechanism gearboxes (in 7.2, 10, 20, 30 ratios)
+1. Right angle (in 7.2, 10, 20, 30 ratios)
+1. Planetary gearboxes (in 5, 7.2, 10, 25, 36, 50 ratios)
+1. Harmonic drive gearboxes  (in 5, 9, 15, 50, 100 ratios)
+
+The harmonic gearboxes are from  (<a href="https://www.harmonicdrive.net/"> hg </a>) and are excellent.
+
+There is a reasonable range of shaft options: straight, one side milled and keyed. Cable direction can be specified.
+
+
+Electromagnetic brakes are available across the motor range.
+
+There also a nice range of hollow shaft motors  and linear slides and electric cylinders available to suit the drive.
+
+The encoder is an 10,000 ppr absolute battery free across the range.
+
+In terms of power you have a nice range of options:
+
+* DC - max power in equivalent servo = 200-400W
+* AC - max power in equivalent servo = 400-750W
+
+
+
+
+
+## Our ratings for the Oriental Motor AZD-KED
+<div style={{margin:"20px"}}>
+    <Row>
+        <Col span={6}>Overall rating</Col>
+        <Col span={4}><Rate disabled defaultValue={4}/></Col>
+        <Col span={14}>Really good compact drive, a little expensive though </Col>
+    </Row>
+
+    <Row>
+        <Col span={6}>Drive configuration software rating</Col>
+        <Col span={4}><Rate disabled defaultValue={5}/></Col>
+        <Col span={14}>MEXE02 is excellent commissioning software</Col>
+    </Row>
+    <Row>
+        <Col span={6}>Drive features rating</Col>
+        <Col span={4}><Rate disabled defaultValue={5}/></Col>
+        <Col span={14}>Excellent, they have covered pretty much everything in these drives</Col>
+    </Row>
+    <Row>
+        <Col span={6}>Motors rating</Col>
+        <Col span={4}><Rate disabled defaultValue={4}/></Col>
+        <Col span={14}>Motor range is good, connectors are field constructable, a little bulky though, no one-cable option</Col>
+    </Row>
+    <Row>
+        <Col span={6}>Gearbox option</Col>
+        <Col span={4}><Rate disabled defaultValue={5}/></Col>
+        <Col span={14}>Excellent</Col>
+    </Row>
+    <Row>
+        <Col span={6}>Price</Col>
+        <Col span={4}><Rate disabled defaultValue={3}/></Col>
+        <Col span={14}>Roughly €360 for a drive excluding cables and motor</Col>
+    </Row>
+</div>
+
+
+
+## Default netscan
+
+We can see from the default netscan, the PDO mapping (before any remapping) maps the following objects:
+
+**SM2**
+* 0x6040:0x00 - 0x10] (UNSIGNED16) - Control word
+* 0x607A:0x00 - 0x20] (INTEGER32) - Target position
+* 0x6060:0x00 - 0x08 (INTEGER8) - Mode of operation (set)
+
+**SM3**
+* 0x6041:0x00 - 0x10 (UNSIGNED16) - Status word
+* 0x6064:0x00 - 0x20 (INTEGER32) - Actual position
+* 0x6061:0x00 - 0x08 (INTEGER8) - Modes of operation (display)
+
+
+
+
+```shell
+*** Starting network scanning output ***
+Slave: 1
+ Name: AZD-KED
+ Output size: 56bits
+ Input size: 56bits
+ State: 18
+ Delay: 0[ns]
+ Has DC: 1
+ DCParentport: 0
+ Activeports: 1.0.0.0
+ Configured address: 1001
+ Man: 000002be ID: 000013e5 Rev: 00000000
+ SM0 A:1000 L: 128 F:00010026 Type:1
+ SM1 A:1080 L: 128 F:00010022 Type:2
+ SM2 A:1400 L:   7 F:00010064 Type:3
+ SM3 A:1700 L:   7 F:00010020 Type:4
+ FMMU0 Ls:00000000 Ll:   7 Lsb:0 Leb:7 Ps:1400 Psb:0 Ty:02 Act:01
+ FMMU1 Ls:00000007 Ll:   7 Lsb:0 Leb:7 Ps:1700 Psb:0 Ty:01 Act:01
+ FMMUfunc 0:1 1:2 2:3 3:0
+ MBX length wr: 128 rd: 128 MBX protocols : 0c
+ CoE details: 2f FoE details: 01 EoE details: 00 SoE details: 00
+ Ebus current: 0[mA]
+ only LRD/LWR:0
+PDO mapping according to CoE :
+  SM2 outputs
+ 	[byte_offset] [addr b  ] [index:sub  ] [bitl] [data_type   ] [name                                    ]
+	[0          ] [0x0000.0] [0x6040:0x00] [0x10] [UNSIGNED16  ] [Number of Entries                       ]
+	[2          ] [0x0002.0] [0x607A:0x00] [0x20] [INTEGER32   ] [Number of Entries                       ]
+	[6          ] [0x0006.0] [0x6060:0x00] [0x08] [INTEGER8    ] [Number of Entries                       ]
+  SM3 inputs
+ 	[byte_offset] [addr b  ] [index: sub ] [bitl] [data_type   ] [name                                    ]
+	[0          ] [0x0007.0] [0x6041:0x00] [0x10] [UNSIGNED16  ] [Number of Entries                       ]
+	[2          ] [0x0009.0] [0x6064:0x00] [0x20] [INTEGER32   ] [Number of Entries                       ]
+	[6          ] [0x000D.0] [0x6061:0x00] [0x08] [INTEGER8    ] [Number of Entries                       ]
+*** End of network scanning output ***
+*** Start of eeprom output ***
+1 slaves found.
+Slave 1 data
+ PDI Control      : 0C08
+ PDI Config       : 0400
+ Config Alias     : 0000
+ Checksum         : 000A
+   calculated     : 000A
+ Vendor ID        : 000002BE
+ Product Code     : 000013E5
+ Revision Number  : 00000000
+ Serial Number    : 00000000
+ Mailbox Protocol : 000C
+ Size             : 000F = 2048 bytes
+ Version          : 0001
+*** End of eeprom output ***
+[INFO  ] GBEM: netscan has finished, closing socket
+[INFO  ] GBEM: net scan finished
+```
+
+## netscan post PDO mapping
+
+There are objects that it would be useful for us to have PDO access to that are not in the default PDO mapping.
+
+In particular, having access to the error code in the PDO is very useful.
+
+The alternative (fixed) PDO mapping using 0x1601 (SM2) and 0x1a01 (SM3) provide access to the Error code.
+
+So, we don't need to go the trouble of doing an &agrave; la carte PDO mapping and just have to set two values in SM3 and SM2.
+
+See the function `ec_pdo_map_azd_ked` inside the `azd-ked.c` file for how to do this.
+
+If we now do a `netscan -m -ieth0` (netscan after applying PDO mapping), we see what we want:
+
+```shell
+Slave: 1
+ Name: AZD-KED
+ Output size: 104bits
+ Input size: 184bits
+ State: 4
+ Delay: 0[ns]
+ Has DC: 1
+ DCParentport: 0
+ Activeports: 1.0.0.0
+ Configured address: 1001
+ Man: 000002be ID: 000013e5 Rev: 00000000
+ SM0 A:1000 L: 128 F:00010026 Type:1
+ SM1 A:1080 L: 128 F:00010022 Type:2
+ SM2 A:1400 L:  13 F:00010064 Type:3
+ SM3 A:1700 L:  23 F:00010020 Type:4
+ FMMU0 Ls:00000000 Ll:  13 Lsb:0 Leb:7 Ps:1400 Psb:0 Ty:02 Act:01
+ FMMU1 Ls:0000000d Ll:  23 Lsb:0 Leb:7 Ps:1700 Psb:0 Ty:01 Act:01
+ FMMUfunc 0:1 1:2 2:3 3:0
+ MBX length wr: 128 rd: 128 MBX protocols : 0c
+ CoE details: 2f FoE details: 01 EoE details: 00 SoE details: 00
+ Ebus current: 0[mA]
+ only LRD/LWR:0
+PDO mapping according to CoE :
+  SM2 outputs
+ 	[byte_offset] [addr b  ] [index:sub  ] [bitl] [data_type   ] [name                                    ]
+	[0          ] [0x0000.0] [0x6040:0x00] [0x10] [UNSIGNED16  ] [Number of Entries                       ]
+	[2          ] [0x0002.0] [0x607A:0x00] [0x20] [INTEGER32   ] [Number of Entries                       ]
+	[6          ] [0x0006.0] [0x60FF:0x00] [0x20] [INTEGER32   ] [Number of Entries                       ]
+	[10         ] [0x000A.0] [0x6060:0x00] [0x08] [INTEGER8    ] [Number of Entries                       ]
+	[11         ] [0x000B.0] [0x60B8:0x00] [0x10] [UNSIGNED16  ] [Number of Entries                       ]
+  SM3 inputs
+ 	[byte_offset] [addr b  ] [index: sub ] [bitl] [data_type   ] [name                                    ]
+	[0          ] [0x000D.0] [0x6041:0x00] [0x10] [UNSIGNED16  ] [Number of Entries                       ]
+	[2          ] [0x000F.0] [0x6064:0x00] [0x20] [INTEGER32   ] [Number of Entries                       ]
+	[6          ] [0x0013.0] [0x6061:0x00] [0x08] [INTEGER8    ] [Number of Entries                       ]
+	[7          ] [0x0014.0] [0x60B9:0x00] [0x10] [UNSIGNED16  ] [Number of Entries                       ]
+	[9          ] [0x0016.0] [0x60BA:0x00] [0x20] [INTEGER32   ] [Number of Entries                       ]
+	[13         ] [0x001A.0] [0x60BC:0x00] [0x20] [INTEGER32   ] [Number of Entries                       ]
+	[17         ] [0x001E.0] [0x603F:0x00] [0x10] [UNSIGNED16  ] [Number of Entries                       ]
+	[19         ] [0x0020.0] [0x60FD:0x00] [0x20] [UNSIGNED32  ] [Number of Entries                       ]
+*** End of network scanning output ***
+```
+
+From this output we can extract the offsets for our PDO objects.
+
+See the `azd-ked.h` file where the #defines record these:
+
+```c
+#define AZD_KED_SETPOS_PDO_INDEX        2
+#define AZD_KED_ACTPOS_PDO_INDEX        2
+#define AZD_KED_CONTROLWORD_PDO_INDEX   0
+#define AZD_KED_STATUSWORD_PDO_INDEX    0
+#define AZD_KED_MOOSET_PDO_INDEX        10
+#define AZD_KED_MOODISP_PDO_INDEX       6
+#define AZD_KED_ERROR_CODE_PDO_INDEX    17
+```
+
+
+
+
+
+
+
+
+
+import mexe02_1 from "./mexe02_1.png?glowsite"
+import mexe02_2 from "./mexe02_2.png?glowsite"
+import mexe02_3 from "./mexe02_3.png?glowsite"
+import mexe02_4 from "./mexe02_4.png?glowsite"
+import mexe02_5 from "./mexe02_5.png?glowsite"
+import mexe02_6 from "./mexe02_6.png?glowsite"
+import mexe02_7 from "./mexe02_7.png?glowsite"
+import mexe02_8 from "./mexe02_8.png?glowsite"
+
+
+
+## MEXE02
+
+MEXE02 is the commissioning software provided by Oriental Motor. It can be downloaded for free from the Oriental Motor <a href="https://www.orientalmotor.eu/"> website </a>.
+
+Once installed it is pretty easy to use.
+
+### Establish connection
+1. Connect the mini-USB cable from the AZD-KED to your PC
+1. Turn on both power supplies (logic and motor power)
+1. Start the MEX02 software.
+
+Then, click the "Select a product" icon.
+
+<Image meta={mex_select_product_1} alt="mexe02 select product" maxWidth={600}/>
+
+Next click the "Detect communication" icon shown here:
+
+<Image meta={mex_detect_comms_2} alt="mexe02 detect comms" maxWidth={600}/>
+
+Then, click the "Read Data" icon show here:
+
+<Image meta={mex_read_data_3} alt="mexe02 read data" maxWidth={600}/>
+
+You should now be up-and-running with the MEXE02 software connected to the drive.
+
+This will allow you to perform the following functions that are useful to us:
+
+1. Test jog a drive to make sure everything is basically working
+1. View drive and EtherCAT error messages
+1. Check that the PDO mapping has been applied
+1. Browse the object dictionary to see the available settings
+
+### Setting the home position & limits
+
+The home (zero) position of the drive is set as follows:
+
+1. Move motor to the home position (jog, by hand)
+1. Press the HOME PRESET button (small button at top of drive) for one second and release (both LEDS blink)
+1. Press switch again within 3 seconds to set the home position
+
+The limits can be set either with the MEX software or with &gbem using the nvram SDO write functions.
+
+See here:
+
+
+<Image meta={mex_set_limits_8} alt="mexe02 set limits" maxWidth={600}/>
+
+
+### Copy from ABZO sensor to drive
+
+This is an important step. The ABZO sensor is the
+
+First, click the [Communication] menu of the MEXE02, and select [Copy the ABZO (fixed) information to the driver in a lump].
+
+<Image meta={mex_copy_azbo_4} alt="mexe02 AZBO copy" maxWidth={600}/>
+
+Then, click ok to perform the operation.
+
+Once it is complete, cycle the driver power and check whether the copied value is applied on the unit information monitor window
+
+
+import mexe02_9 from "./mexe02_9.png?glowsite"
+import mexe02_10 from "./mexe02_10.png?glowsite"
+import mexe02_11 from "./mexe02_11.png?glowsite"
+import mexe02_12 from "./mexe02_12.png?glowsite"
+import mexe02_13 from "./mexe02_13.png?glowsite"
+import mexe02_14 from "./mexe02_14.png?glowsite"
+import mexe02_15 from "./mexe02_15.png?glowsite"
+
+### Test operation in MEX
+
+1. Click [Remote operation] to load the remote operation
+
+<Image meta={mex_remote_5} alt="mexe02 remote operation" maxWidth={600}/>
+
+1. Then check the Remote operation mode check box
+1. Then click the "Current ON" button
+1. Then you can jog the motor using the arrow keys
+
+<Image meta={mex_jog_6} alt="mexe02 jog operations" maxWidth={600}/>
+
+
+
+## Testing
+
+<YoutubeEmbed embedId="" />
+
+## More information
+
+<Alert message="Information" description="A more detailed guide to integrating this motor driver with the glowbuzzer toolkit is available to our customers - please contact us" type="info" showIcon style={{margin: '20px 0 20px 0'}} />

@@ -6,6 +6,9 @@ Nav
 bugs
 * entities dont work with fragments
 
+gb-brand repo on gitghub? for images
+
+
 
 Home page
 * add padding to featured blog images - i have forgotten what we said here

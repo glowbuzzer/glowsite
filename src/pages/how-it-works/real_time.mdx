@@ -31,21 +31,21 @@ Important activities that need a 1ms response time are not handled in the React 
     <Row>
         <Col span="20" style={{background: '#d3adf7', padding: '5px 5px'}}>
             ## Tier 2
-            ### Javascript code running inside the real-time control (GBC)
+            ### Javascript code running inside the real-time control (&gbc)
             **Response time around 5 milliseconds**
         </Col>
     </Row>
     <Row>
         <Col span="20" style={{background: '#efdbff', padding: '5px 5px'}}>
             ## Tier 3
-            ### C code hooked into the real-time control (GBC)
+            ### C code hooked into the real-time control (&gbc)
             **Response time guaranteed to be your cycle time (4 milliseconds down to 0.5 milliseconds)**
         </Col>
     </Row>
     <Row>
         <Col span="20" style={{background: '#f9f0ff', padding: '5px 5px'}}>
             ## Tier 4
-            ### C code running in GBEM (EtherCAT master) or GBSM (Step master)
+            ### C code running in &gbeml or &gbeml
             **Response time guaranteed to be your cycle time (4 milliseconds down to 0.5 milliseconds)**
         </Col>
     </Row>

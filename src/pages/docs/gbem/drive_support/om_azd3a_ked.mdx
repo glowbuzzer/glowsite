@@ -32,62 +32,9 @@ There are not many competitive products in the EtherCAT multi-axis compact stepp
 
 There is also the AZD-CED (AC) and AZD-KED (DC) which are single axes variants of the multi-axis drive.
 
-These allow larger 85mm frame mortors (4Nm) AZM98/AZM911 motors to be used than the largest 60mm frame AZM69 motors of multi-axis drives. These would have roughly an equivalent rated torque of 400W-750W when compared with a tradition servo motor (albeit for operation at less than 2000rpm) .  
+The AZD-CED (AC) allows larger 85mm/90mm (AZM98/AZM911) frame motors (4Nm) to be used than the largest 60mm frame AZM69 motors of multi-axis drives and single axis DC drive.
 
-## Setting the home position & limits
-
-The home (zero) position of the drive is set as follows:
-
-1. Move motor to the home position (jog, by hand)
-
-2. Press the EXT button (small button next to each axis) for one second and release (both LEDS blink)
-
-3. Press switch again within 3 seconds to set the home position
-
-The limits can be set either with the MEX software or with &gbem using the nvram SDO write functions.
-
-## Setting the motor types
-
-Click the [Communication] menu of the MEXE02, and select [Copy the ABZO (fixed) information to the driver in a lump].
-
-Select ALL
-
-Start unit info monitor and check they have been applied
-
-## Motor range
-
-Gear boxes - Good gearbox options using swish neugart parts and they do know their onions with regards to gearboxes and options with 3 arc minute backlash (0.05 degrees 
-
-Brakes - electromagnetic
-
-Style - hollow shaft and linear slides and electric cylinders
-
-Encoder - Abs sensor
-
-
-
-Nice motors - ooze quality
-
-Nice motor cables, extensions, make your own extensions 
-
-Brakes
-
-## PSU
-
-When connecting to operate two or more motors, use so that the input current of the main power supply does not exceed 7.0 A
-
-24/48 VDC
-
-7.0 A
-
-## Drive configuration software
-
-MEX = drive config software
-
-Windows only
-
-
-
+These would have roughly an equivalent rated torque of 400W-750W when compared with a tradition servo motor (albeit for operation at less than 2000rpm) .
 
 
 import om_azd3a_product_shot from "./om_azd3a_product_shot.png?glowsite"
@@ -96,12 +43,52 @@ import om_azd3a_product_shot from "./om_azd3a_product_shot.png?glowsite"
 
 
 
+## Motor range
+
+Frame sizes include:
+
+1. 20mm - DC only
+1. 28mm - DC only
+1. 42mm - AC & DC
+1. 60mm - AC & DC
+1. 85mm - AC only
+1. 90mm - AC only
+
+The gearbox range is great. We have on offer:
+1. Standard spur gear mechanism gearboxes (in 7.2, 10, 20, 30 ratios)
+1. Right angle (in 7.2, 10, 20, 30 ratios)
+1. Planetary gearboxes (in 5, 7.2, 10, 25, 36, 50 ratios)
+1. Harmonic drive gearboxes  (in 5, 9, 15, 50, 100 ratios)
+
+The harmonic gearboxes are from  (<a href="https://www.harmonicdrive.net/"> hg </a>) and are excellent.
+
+There is a reasonable range of shaft options: straight, one side milled and keyed. Cable direction can be specified.
+
+
+Electromagnetic brakes are available across the motor range.
+
+There also a nice range of hollow shaft motors  and linear slides and electric cylinders available to suit the drive.
+
+The encoder is an 10,000 ppr absolute battery free across the range.
+
+In terms of power you have a nice range of options:
+
+* DC - max power in equivalent servo = 200-400W
+* AC - max power in equivalent servo = 400-750W
+
+
+## PSU
+
+When operating two or more motors, the input current of the main power supply must not exceed 7.0 A.
+
+24/48 VDC power may be used.
+
 ## Our ratings for the Oriental Motor AZD3A
 <div style={{margin:"20px"}}>
     <Row>
         <Col span={6}>Overall rating</Col>
         <Col span={4}><Rate disabled defaultValue={4}/></Col>
-        <Col span={14}>Really good, </Col>
+        <Col span={14}>Really good compact drive, a little expensive though </Col>
     </Row>
 
     <Row>
@@ -117,7 +104,7 @@ import om_azd3a_product_shot from "./om_azd3a_product_shot.png?glowsite"
     <Row>
         <Col span={6}>Motors rating</Col>
         <Col span={4}><Rate disabled defaultValue={4}/></Col>
-        <Col span={14}>Bit short on shaft options for the motors, outdated motor connectors, hard to make custom cables</Col>
+        <Col span={14}>Motor range is good, connectors are field constructable, a little bulky though, no one-cable option</Col>
     </Row>
     <Row>
         <Col span={6}>Gearbox option</Col>
@@ -132,30 +119,27 @@ import om_azd3a_product_shot from "./om_azd3a_product_shot.png?glowsite"
 </div>
 
 
-# AZD3A-KED
+## AZD3A-KED connector
 
 import azd3a_ked_connectors from './azd3a_ked_connectors.svg'
 
 <img src={azd3a_ked_connectors} alt="AZD3A-KED connector diagram"/>
 
-CN1 is the motor power - 24V 0V and Earth
-CN2 is the logic power - 24V and 0V
-
-CN7 is the motor connector (one for each axis)
-
-The connector branches into two - encoder and motor power
+* CN1 is the motor power - 24V 0V and Earth
+* CN2 is the logic power - 24V and 0V
+* CN7 is the motor connector (one for each axis) the connector branches into two - encoder and motor power
 
 
-USB mini to connect the Oriental Motor commissioning software (MEXE02)
+The USB mini connector is used to connect to the Oriental Motor commissioning software (MEXE02).
 
-See the Oriental Motor drive manual for more guidance on EMI
+See the Oriental Motor drive manual for more guidance on techniques to reduce EMI.
 
-Connect the regeneration resistor if gravitational operation or other operations involving up/down movement, or
-sudden starting/stopping of a large inertial load, will be repeated frequently.
+You can also connect a regeneration resistor if gravitational operation or other operations involving up/down movement, or sudden starting/stopping of a large inertial load, will be repeated frequently.
+
 Always connect the regeneration resistor if an overvoltage protection alarm generates.
 
 
-also can connect a fan and regen resistor
+You can also can connect a fan to assist with cooling if your loads / duty cycle are high.
 
 import mexe02_1 from "./mexe02_1.png?glowsite"
 import mexe02_2 from "./mexe02_2.png?glowsite"
@@ -165,7 +149,6 @@ import mexe02_5 from "./mexe02_5.png?glowsite"
 import mexe02_6 from "./mexe02_6.png?glowsite"
 import mexe02_7 from "./mexe02_7.png?glowsite"
 import mexe02_8 from "./mexe02_8.png?glowsite"
-
 
 
 
@@ -184,7 +167,7 @@ import mexe02_8 from "./mexe02_8.png?glowsite"
 7. Select AZD-KED in the list of products
 <Image meta={mexe02_4} alt="mexe02_4" maxWidth={600}/>
 
-## Copy from AZBO sensor to drive
+## Copy from ABZO sensor to drive
 1. Click the [Communication] menu of the MEXE02, and select [Copy the ABZO (fixed) information to the driver in a lump].
 <Image meta={mexe02_5} alt="mexe02_5" maxWidth={400}/>
 2. Select the axis that the motorized actuator is connected, and click [OK].
