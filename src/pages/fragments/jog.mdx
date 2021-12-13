@@ -1,6 +1,21 @@
 import {Image} from "../../framework/components/Image";
 
-To jog a motor using the generic front-end.
-dcd
+import jog_tile from "../fragments/jog_tile.svg"
 
-screen shot of motor jog
+
+To jog a motor using the generic front-end, first machine sure the machine is in state "Operation Enabled". If it isn't click on the Machine operation: Enabled button.
+
+The Jog Tile is then used to jog a motor.
+
+The functions of the jog tile are shown in the following diagram.
+
+<img src={jog_tile} alt={"jog tile"} width="100%"/>
+
+A simple continuous jog is performed by:
+
+1. Make sure "Joint" mode is selected
+1. Make sure "Cont" button is selected
+1. Set the Jog speed to an appropriate %
+1. Click one of the arrow buttons to move the motor
+
+The joints DRO will show the motion of the joint. If you are connected to a real machine the motor will move!

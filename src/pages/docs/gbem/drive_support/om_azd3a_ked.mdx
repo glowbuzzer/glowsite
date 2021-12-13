@@ -141,6 +141,223 @@ Always connect the regeneration resistor if an overvoltage protection alarm gene
 
 You can also can connect a fan to assist with cooling if your loads / duty cycle are high.
 
+
+## Default netscan
+
+```shell
+Slave: 1
+Name: EK1100
+Output size: 0bits
+Input size: 0bits
+State: 18
+Delay: 0[ns]
+Has DC: 1
+DCParentport: 0
+Activeports: 1.1.1.0
+Configured address: 1001
+Man: 00000002 ID: 044c2c52 Rev: 00110000
+FMMUfunc 0:0 1:0 2:0 3:0
+MBX length wr: 0 rd: 0 MBX protocols : 00
+CoE details: 00 FoE details: 00 EoE details: 00 SoE details: 00
+Ebus current: -2000[mA]
+only LRD/LWR:0
+PDO mapping according to SII :
+No SII PDO mapping found
+
+Slave: 2
+Name: EL2008
+Output size: 0bits
+Input size: 0bits
+State: 18
+Delay: 0[ns]
+Has DC: 1
+DCParentport: 0
+Activeports: 1.1.0.0
+Configured address: 1002
+Man: 00000002 ID: 07d83052 Rev: 00100000
+SM0 A:0f00 L:   0 F:00090044 Type:0
+FMMUfunc 0:1 1:0 2:0 3:0
+MBX length wr: 0 rd: 0 MBX protocols : 00
+CoE details: 00 FoE details: 00 EoE details: 00 SoE details: 00
+Ebus current: 110[mA]
+only LRD/LWR:0
+PDO mapping according to SII :
+SM0 RXPDO 0x1600 Channel 1
+[addr b  ] [index:sub  ] [bitl] [data_type ]   [name                                    ]
+[0xFFF5D9E0.0] [0x7000:0x01] [0x01] [BOOLEAN     ] [Output                                  ]
+SM0 RXPDO 0x1601 Channel 2
+[addr b  ] [index:sub  ] [bitl] [data_type ]   [name                                    ]
+[0xFFF5D9E0.1] [0x7010:0x01] [0x01] [BOOLEAN     ] [Output                                  ]
+SM0 RXPDO 0x1602 Channel 3
+[addr b  ] [index:sub  ] [bitl] [data_type ]   [name                                    ]
+[0xFFF5D9E0.2] [0x7020:0x01] [0x01] [BOOLEAN     ] [Output                                  ]
+SM0 RXPDO 0x1603 Channel 4
+[addr b  ] [index:sub  ] [bitl] [data_type ]   [name                                    ]
+[0xFFF5D9E0.3] [0x7030:0x01] [0x01] [BOOLEAN     ] [Output                                  ]
+SM0 RXPDO 0x1604 Channel 5
+[addr b  ] [index:sub  ] [bitl] [data_type ]   [name                                    ]
+[0xFFF5D9E0.4] [0x7040:0x01] [0x01] [BOOLEAN     ] [Output                                  ]
+SM0 RXPDO 0x1605 Channel 6
+[addr b  ] [index:sub  ] [bitl] [data_type ]   [name                                    ]
+[0xFFF5D9E0.5] [0x7050:0x01] [0x01] [BOOLEAN     ] [Output                                  ]
+SM0 RXPDO 0x1606 Channel 7
+[addr b  ] [index:sub  ] [bitl] [data_type ]   [name                                    ]
+[0xFFF5D9E0.6] [0x7060:0x01] [0x01] [BOOLEAN     ] [Output                                  ]
+SM0 RXPDO 0x1607 Channel 8
+[addr b  ] [index:sub  ] [bitl] [data_type ]   [name                                    ]
+[0xFFF5D9E0.7] [0x7070:0x01] [0x01] [BOOLEAN     ] [Output                                  ]
+
+Slave: 3
+Name: EL1008
+Output size: 0bits
+Input size: 0bits
+State: 18
+Delay: 0[ns]
+Has DC: 1
+DCParentport: 0
+Activeports: 1.0.0.0
+Configured address: 1003
+Man: 00000002 ID: 03f03052 Rev: 00100000
+SM0 A:1000 L:   1 F:00010000 Type:0
+FMMUfunc 0:2 1:0 2:0 3:0
+MBX length wr: 0 rd: 0 MBX protocols : 00
+CoE details: 00 FoE details: 00 EoE details: 00 SoE details: 00
+Ebus current: 90[mA]
+only LRD/LWR:0
+PDO mapping according to SII :
+SM0 TXPDO 0x1A00 Channel 1
+[addr b  ] [index:sub  ] [bitl] [data_type ]   [name                                    ]
+[0xFFF5D9E0.0] [0x6000:0x01] [0x01] [BOOLEAN     ] [Input                                   ]
+SM0 TXPDO 0x1A01 Channel 2
+[addr b  ] [index:sub  ] [bitl] [data_type ]   [name                                    ]
+[0xFFF5D9E0.1] [0x6010:0x01] [0x01] [BOOLEAN     ] [Input                                   ]
+SM0 TXPDO 0x1A02 Channel 3
+[addr b  ] [index:sub  ] [bitl] [data_type ]   [name                                    ]
+[0xFFF5D9E0.2] [0x6020:0x01] [0x01] [BOOLEAN     ] [Input                                   ]
+SM0 TXPDO 0x1A03 Channel 4
+[addr b  ] [index:sub  ] [bitl] [data_type ]   [name                                    ]
+[0xFFF5D9E0.3] [0x6030:0x01] [0x01] [BOOLEAN     ] [Input                                   ]
+SM0 TXPDO 0x1A04 Channel 5
+[addr b  ] [index:sub  ] [bitl] [data_type ]   [name                                    ]
+[0xFFF5D9E0.4] [0x6040:0x01] [0x01] [BOOLEAN     ] [Input                                   ]
+SM0 TXPDO 0x1A05 Channel 6
+[addr b  ] [index:sub  ] [bitl] [data_type ]   [name                                    ]
+[0xFFF5D9E0.5] [0x6050:0x01] [0x01] [BOOLEAN     ] [Input                                   ]
+SM0 TXPDO 0x1A06 Channel 7
+[addr b  ] [index:sub  ] [bitl] [data_type ]   [name                                    ]
+[0xFFF5D9E0.6] [0x6060:0x01] [0x01] [BOOLEAN     ] [Input                                   ]
+SM0 TXPDO 0x1A07 Channel 8
+[addr b  ] [index:sub  ] [bitl] [data_type ]   [name                                    ]
+[0xFFF5D9E0.7] [0x6070:0x01] [0x01] [BOOLEAN     ] [Input                                   ]
+
+Slave: 4
+Name: AZD3A-KED
+Output size: 0bits
+Input size: 0bits
+State: 2
+Delay: 0[ns]
+Has DC: 1
+DCParentport: 0
+Activeports: 1.0.0.0
+Configured address: 1004
+Man: 000002be ID: 000013af Rev: 01110301
+SM0 A:1000 L: 128 F:00010026 Type:1
+SM1 A:1080 L: 128 F:00010022 Type:2
+SM2 A:1400 L:  23 F:00010064 Type:3
+SM3 A:1700 L:  23 F:00010020 Type:4
+FMMUfunc 0:1 1:2 2:3 3:0
+MBX length wr: 128 rd: 128 MBX protocols : 0c
+CoE details: 2f FoE details: 01 EoE details: 00 SoE details: 00
+Ebus current: 0[mA]
+only LRD/LWR:0
+PDO mapping according to CoE :
+SM2 outputs
+[byte_offset] [addr b  ] [index:sub  ] [bitl] [data_type   ] [name                                    ]
+[0          ] [0xFFF5D9E0.0] [0x6040:0x00] [0x10] [UNSIGNED16  ] [Controlword                             ]
+[2          ] [0xFFF5D9E2.0] [0x607A:0x00] [0x20] [INTEGER32   ] [Target position                         ]
+[6          ] [0xFFF5D9E6.0] [0x6060:0x00] [0x08] [INTEGER8    ] [Modes of operation                      ]
+[7          ] [0xFFF5D9E7.0] [0x6840:0x00] [0x10] [UNSIGNED16  ] [Controlword                             ]
+[9          ] [0xFFF5D9E9.0] [0x687A:0x00] [0x20] [INTEGER32   ] [Target position                         ]
+[13         ] [0xFFF5D9ED.0] [0x6860:0x00] [0x08] [INTEGER8    ] [Modes of operation                      ]
+[14         ] [0xFFF5D9EE.0] [0x7040:0x00] [0x10] [UNSIGNED16  ] [Controlword                             ]
+[16         ] [0xFFF5D9F0.0] [0x707A:0x00] [0x20] [INTEGER32   ] [Target position                         ]
+[20         ] [0xFFF5D9F4.0] [0x7060:0x00] [0x08] [INTEGER8    ] [Modes of operation                      ]
+[21         ] [0xFFF5D9F5.0] [0x2F01:0x00] [0x08] [UNSIGNED8   ] [Controller command 1                    ]
+[22         ] [0xFFF5D9F6.0] [0x2F02:0x00] [0x08] [UNSIGNED8   ] [Controller command 2                    ]
+SM3 inputs
+[byte_offset] [addr b  ] [index: sub ] [bitl] [data_type   ] [name                                    ]
+[0          ] [0xFFF5D9E0.0] [0x6041:0x00] [0x10] [UNSIGNED16  ] [Statusword                              ]
+[2          ] [0xFFF5D9E2.0] [0x6064:0x00] [0x20] [INTEGER32   ] [Position actual value                   ]
+[6          ] [0xFFF5D9E6.0] [0x6061:0x00] [0x08] [INTEGER8    ] [Modes of operation display              ]
+[7          ] [0xFFF5D9E7.0] [0x6841:0x00] [0x10] [UNSIGNED16  ] [Statusword                              ]
+[9          ] [0xFFF5D9E9.0] [0x6864:0x00] [0x20] [INTEGER32   ] [Position actual value                   ]
+[13         ] [0xFFF5D9ED.0] [0x6861:0x00] [0x08] [INTEGER8    ] [Modes of operation display              ]
+[14         ] [0xFFF5D9EE.0] [0x7041:0x00] [0x10] [UNSIGNED16  ] [Statusword                              ]
+[16         ] [0xFFF5D9F0.0] [0x7064:0x00] [0x20] [INTEGER32   ] [Position actual value                   ]
+[20         ] [0xFFF5D9F4.0] [0x7061:0x00] [0x08] [INTEGER8    ] [Modes of operation display              ]
+[21         ] [0xFFF5D9F5.0] [0x2E31:0x00] [0x08] [UNSIGNED8   ] [Controller status 1                     ]
+[22         ] [0xFFF5D9F6.0] [0x2E32:0x00] [0x08] [UNSIGNED8   ] [Controller status 2                     ]
+*** End of network scanning output ***
+*** Start of eeprom output ***
+4 slaves found.
+Slave 1 data
+PDI Control      : 0D00
+PDI Config       : 0000
+Config Alias     : 0000
+Checksum         : 0046
+calculated     : 0046
+Vendor ID        : 00000002
+Product Code     : 044C2C52
+Revision Number  : 00110000
+Serial Number    : 00000000
+Mailbox Protocol : 0000
+Size             : 000F = 2048 bytes
+Version          : 0001
+4 slaves found.
+Slave 2 data
+PDI Control      : 0104
+PDI Config       : 0000
+Config Alias     : 0000
+Checksum         : 00D8
+calculated     : 00D8
+Vendor ID        : 00000002
+Product Code     : 07D83052
+Revision Number  : 00100000
+Serial Number    : 00000000
+Mailbox Protocol : 0000
+Size             : 000F = 2048 bytes
+Version          : 0001
+4 slaves found.
+Slave 3 data
+PDI Control      : 0104
+PDI Config       : 0000
+Config Alias     : 0000
+Checksum         : 0039
+calculated     : 0039
+Vendor ID        : 00000002
+Product Code     : 03F03052
+Revision Number  : 00100000
+Serial Number    : 00000000
+Mailbox Protocol : 0000
+Size             : 000F = 2048 bytes
+Version          : 0001
+4 slaves found.
+Slave 4 data
+PDI Control      : 0C08
+PDI Config       : 0400
+Config Alias     : 0000
+Checksum         : 000A
+calculated     : 000A
+Vendor ID        : 000002BE
+Product Code     : 000013AF
+Revision Number  : 01110301
+Serial Number    : 00000000
+Mailbox Protocol : 000C
+Size             : 000F = 2048 bytes
+Version          : 0001
+*** End of eeprom output ***
+```
+
 import mexe02_1 from "./mexe02_1.png?glowsite"
 import mexe02_2 from "./mexe02_2.png?glowsite"
 import mexe02_3 from "./mexe02_3.png?glowsite"
@@ -150,7 +367,75 @@ import mexe02_6 from "./mexe02_6.png?glowsite"
 import mexe02_7 from "./mexe02_7.png?glowsite"
 import mexe02_8 from "./mexe02_8.png?glowsite"
 
+## netscan post PDO mapping
 
+```shell
+Slave: 4
+Name: AZD3A-KED
+Output size: 184bits
+Input size: 568bits
+State: 4
+Delay: 1255[ns]
+Has DC: 1
+DCParentport: 2
+Activeports: 1.0.0.0
+Configured address: 1004
+Man: 000002be ID: 000013af Rev: 01110301
+SM0 A:1000 L: 128 F:00010026 Type:1
+SM1 A:1080 L: 128 F:00010022 Type:2
+SM2 A:1400 L:  23 F:00010064 Type:3
+SM3 A:1700 L:  71 F:00010020 Type:4
+FMMU0 Ls:00000001 Ll:  23 Lsb:0 Leb:7 Ps:1400 Psb:0 Ty:02 Act:01
+FMMU1 Ls:00000019 Ll:  71 Lsb:0 Leb:7 Ps:1700 Psb:0 Ty:01 Act:01
+FMMUfunc 0:1 1:2 2:3 3:0
+MBX length wr: 128 rd: 128 MBX protocols : 0c
+CoE details: 2f FoE details: 01 EoE details: 00 SoE details: 00
+Ebus current: 0[mA]
+only LRD/LWR:0
+PDO mapping according to CoE :
+SM2 outputs
+[byte_offset] [addr b  ] [index:sub  ] [bitl] [data_type   ] [name                                    ]
+[0          ] [0x0001.0] [0x6040:0x00] [0x10] [UNSIGNED16  ] [Controlword                             ]
+[2          ] [0x0003.0] [0x607A:0x00] [0x20] [INTEGER32   ] [Target position                         ]
+[6          ] [0x0007.0] [0x6060:0x00] [0x08] [INTEGER8    ] [Modes of operation                      ]
+[7          ] [0x0008.0] [0x6840:0x00] [0x10] [UNSIGNED16  ] [Controlword                             ]
+[9          ] [0x000A.0] [0x687A:0x00] [0x20] [INTEGER32   ] [Target position                         ]
+[13         ] [0x000E.0] [0x6860:0x00] [0x08] [INTEGER8    ] [Modes of operation                      ]
+[14         ] [0x000F.0] [0x7040:0x00] [0x10] [UNSIGNED16  ] [Controlword                             ]
+[16         ] [0x0011.0] [0x707A:0x00] [0x20] [INTEGER32   ] [Target position                         ]
+[20         ] [0x0015.0] [0x7060:0x00] [0x08] [INTEGER8    ] [Modes of operation                      ]
+[21         ] [0x0016.0] [0x2F01:0x00] [0x08] [UNSIGNED8   ] [Controller command 1                    ]
+[22         ] [0x0017.0] [0x2F02:0x00] [0x08] [UNSIGNED8   ] [Controller command 2                    ]
+SM3 inputs
+[byte_offset] [addr b  ] [index: sub ] [bitl] [data_type   ] [name                                    ]
+[0          ] [0x0019.0] [0x6041:0x00] [0x10] [UNSIGNED16  ] [Statusword                              ]
+[2          ] [0x001B.0] [0x6064:0x00] [0x20] [INTEGER32   ] [Position actual value                   ]
+[6          ] [0x001F.0] [0x6061:0x00] [0x08] [INTEGER8    ] [Modes of operation display              ]
+[7          ] [0x0020.0] [0x60B9:0x00] [0x10] [UNSIGNED16  ] [Touch probe status                      ]
+[9          ] [0x0022.0] [0x60BA:0x00] [0x20] [INTEGER32   ] [Touch probe position 1 positive value   ]
+[13         ] [0x0026.0] [0x60BC:0x00] [0x20] [INTEGER32   ] [Touch probe position 2 positive value   ]
+[17         ] [0x002A.0] [0x603F:0x00] [0x10] [UNSIGNED16  ] [Error code                              ]
+[19         ] [0x002C.0] [0x60FD:0x00] [0x20] [UNSIGNED32  ] [Digital inputs                          ]
+[23         ] [0x0030.0] [0x6841:0x00] [0x10] [UNSIGNED16  ] [Statusword                              ]
+[25         ] [0x0032.0] [0x6864:0x00] [0x20] [INTEGER32   ] [Position actual value                   ]
+[29         ] [0x0036.0] [0x6861:0x00] [0x08] [INTEGER8    ] [Modes of operation display              ]
+[30         ] [0x0037.0] [0x68B9:0x00] [0x10] [UNSIGNED16  ] [Touch probe status                      ]
+[32         ] [0x0039.0] [0x68BA:0x00] [0x20] [INTEGER32   ] [Touch probe position 1 positive value   ]
+[36         ] [0x003D.0] [0x68BC:0x00] [0x20] [INTEGER32   ] [Touch probe position 2 positive value   ]
+[40         ] [0x0041.0] [0x683F:0x00] [0x10] [UNSIGNED16  ] [Error code                              ]
+[42         ] [0x0043.0] [0x68FD:0x00] [0x20] [UNSIGNED32  ] [Digital inputs                          ]
+[46         ] [0x0047.0] [0x7041:0x00] [0x10] [UNSIGNED16  ] [Statusword                              ]
+[48         ] [0x0049.0] [0x7064:0x00] [0x20] [INTEGER32   ] [Position actual value                   ]
+[52         ] [0x004D.0] [0x7061:0x00] [0x08] [INTEGER8    ] [Modes of operation display              ]
+[53         ] [0x004E.0] [0x70B9:0x00] [0x10] [UNSIGNED16  ] [Touch probe status                      ]
+[55         ] [0x0050.0] [0x70BA:0x00] [0x20] [INTEGER32   ] [Touch probe position 1 positive value   ]
+[59         ] [0x0054.0] [0x70BC:0x00] [0x20] [INTEGER32   ] [Touch probe position 2 positive value   ]
+[63         ] [0x0058.0] [0x703F:0x00] [0x10] [UNSIGNED16  ] [Error code                              ]
+[65         ] [0x005A.0] [0x70FD:0x00] [0x20] [UNSIGNED32  ] [Digital inputs                          ]
+[69         ] [0x005E.0] [0x2E31:0x00] [0x08] [UNSIGNED8   ] [Controller status 1                     ]
+[70         ] [0x005F.0] [0x2E32:0x00] [0x08] [UNSIGNED8   ] [Controller status 2                     ]
+*** End of network scanning output ***
+```
 
 ## MEXE02
 
