@@ -79,9 +79,9 @@ devDependencies:
   '@ant-design/icons': 4.7.0_react-dom@17.0.2+react@17.0.2
   '@babel/core': 7.15.8
   '@emeks/antd-custom-theme-generator': 0.2.0_antd@4.10.0
-  '@glowbuzzer/controls': 1.0.1-alpha.13
-  '@glowbuzzer/layout': 1.0.1-alpha.13
-  '@glowbuzzer/store': 1.0.1-alpha.13
+  '@glowbuzzer/controls': 1.0.1-alpha.16
+  '@glowbuzzer/layout': 1.0.1-alpha.16
+  '@glowbuzzer/store': 1.0.1-alpha.16
   '@mdx-js/mdx': 2.0.0-rc.1
   '@mdx-js/react': 1.6.22_react@17.0.2
   '@mdx-js/rollup': 2.0.0-rc.1
@@ -1718,19 +1718,19 @@ packages:
     resolution: {integrity: sha512-OWORNpfjMsSSUBVrRBVGECkhWcULOAJz9ZW8uK9qgxD+87M7jHRcvh/A96XXNhXTLmKcoYSQtBEX7lHMO7YRwg==}
     dev: false
 
-  /@glowbuzzer/controls/1.0.1-alpha.13:
-    resolution: {integrity: sha512-uRDf8HP27AyW6bM7ZXMxbVm4/hjMt2PdzsWb9/LvPRzt77Xyr0Q6sB1zl8qIOe+9V/9KWuREIgXzBYlJ5qvObA==}
+  /@glowbuzzer/controls/1.0.1-alpha.16:
+    resolution: {integrity: sha512-m9uusBbWvrbMOIyscLcFWg6Q7CGTkvBfUqhXmI/a3itEDV3U5PWbSyrqfg9WRY7ejSBBvsFqXHZhmuK5SBgsxQ==}
     dependencies:
-      '@glowbuzzer/layout': 1.0.1-alpha.13
-      '@glowbuzzer/store': 1.0.1-alpha.13
+      '@glowbuzzer/layout': 1.0.1-alpha.16
+      '@glowbuzzer/store': 1.0.1-alpha.16
     dev: true
 
-  /@glowbuzzer/layout/1.0.1-alpha.13:
-    resolution: {integrity: sha512-jx+Q1kCYpGOwwaQz8O21zmVspHtYIB60FRKnN93Xx+SD3DJitLOQbS6VVdZOC1tT7ejrKpAtYMEnlXWxsRlA6w==}
+  /@glowbuzzer/layout/1.0.1-alpha.16:
+    resolution: {integrity: sha512-AHxma/A9Nap5b6dmHUciigZd3Yczdzq7+6FRhDhRthqFn4YcWMJetBxLWFbNu/LGwly4hkil7m0VPLGgfCnzhg==}
     dev: true
 
-  /@glowbuzzer/store/1.0.1-alpha.13:
-    resolution: {integrity: sha512-bPGLu8tW2gGQsxckjDBMuqPE9iCBqQl0q5BEZw+78ksaooWKfk7jUfCITm36S4d9lfAbYNp1tWzwhNlj2Bt8XQ==}
+  /@glowbuzzer/store/1.0.1-alpha.16:
+    resolution: {integrity: sha512-UQ2sehNgViT+h/EmH48288j0Azr/io5xOI31W4aM+sZhzNQ1lVOPyphzgUL0q6hsVSw67JNUGHrEqfUeS02Lyg==}
     dev: true
 
   /@mdx-js/mdx/2.0.0-rc.1:
