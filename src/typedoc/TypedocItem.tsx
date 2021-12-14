@@ -1,50 +1,121 @@
-import { useRouteMatch } from "react-router"
+import {useRouteMatch} from "react-router"
 
-import { useTypedocGrouped, useTypedocItem } from "./typedoc-hooks"
-import { DocumentationPage } from "../framework/layouts/DocumentationPage"
-import { ComponentProps } from "../framework/components/ComponentProps"
-import { Link } from "react-router-dom"
-import { Markdown } from "../framework/components/Markdown"
-import { StyledLeftNavMenu } from "../framework/nav/ContexualLeftNav"
-import { Menu, Table } from "antd"
+import {useTypedocGrouped, useTypedocItem} from "./typedoc-hooks"
+import {DocumentationPage} from "../framework/layouts/DocumentationPage"
+import {ComponentProps} from "../framework/components/ComponentProps"
+import {Link} from "react-router-dom"
+import {Markdown} from "../framework/components/Markdown"
+import {StyledLeftNavMenu} from "../framework/nav/ContexualLeftNav"
+import {Menu} from "antd"
 import {
     ArrayType,
     DeclarationReflection,
     IntersectionType,
     IntrinsicType,
+    LiteralType,
     ReferenceType,
     Reflection,
     ReflectionType,
     SignatureReflection,
     TupleType,
-    Type
+    Type,
+    UnionType
 } from "typedoc"
 import styled from "styled-components"
 
-const TypedocSignature = ({ s }: { s: SignatureReflection }) => {
+const StyledRender = styled.div`
+  .synopsis .token {
+    filter: brightness(0.75);
+  }
+
+  .property,
+  .param,
+  .tuple-item {
+    display: block;
+    padding-left: 20px;
+
+    :only-child {
+      //display: inline;
+      //padding-left: 0;
+    }
+
+    :not(:last-child):after {
+      content: ", ";
+    }
+  }
+
+  .intersection:not(:last-child):after {
+    content: " & ";
+  }
+
+  .union:not(:last-child):after {
+    content: " | ";
+  }
+
+  .param,
+  .property {
+    .shortText {
+      font-family: Roboto, sans-serif;
+      font-size: 0.9em;
+      border-left: 2px solid rgba(0, 0, 0, 0.08);
+      margin-top: 5px;
+      padding-top: 6px;
+      padding-bottom: 0;
+      padding-left: 8px;
+      color: rgba(0, 0, 0, 0.6);
+
+      p:only-child {
+        margin: 0;
+      }
+    }
+  }
+
+  pre.debug {
+    margin-top: 300px;
+    border-top: 5px dashed grey;
+    padding: 10px;
+    font-size: 0.7em;
+    color: grey;
+  }
+`
+
+const TypedocLiteral = ({l}: { l: LiteralType }) => {
+    switch (typeof l.value) {
+        case "string":
+            return <span>"{l.value}"</span>
+        case "boolean":
+            return <span>{l.value ? "true" : "false"}</span>
+        case "number":
+        case "bigint":
+            return <span>{l.value}</span>
+    }
+}
+
+const TypedocSignature = ({s, includeSynopsis}: { s: SignatureReflection, includeSynopsis: boolean }) => {
     return (
         s && (
             <>
+                {includeSynopsis && <Synopsis item={s}/>}
                 {s.name === "__type" || <span className="token function">{s.name}</span>}(
                 <span>
                     {s.parameters?.map(param => (
-                        <span className="param">
-                            <Synopsis item={param} />
-                            {param.name}: <TypedocType t={param.type} />
+                        <span key={param.name} className="param">
+                            <Synopsis item={param}/>
+                            {param.name}: <TypedocType t={param.type}/>
                         </span>
                     ))}
                 </span>
-                ): <TypedocType t={s.type} />
+                ) {"=>"} <TypedocType t={s.type}/>
             </>
         )
     )
 }
 
-const TypedocDeclaration = ({ d }: { d: DeclarationReflection }) => {
+const TypedocDeclaration = ({d}: { d: DeclarationReflection }) => {
     switch (d.kindString) {
         case "Type literal":
             if (d.signatures?.[0]) {
-                return <TypedocSignature s={d.signatures?.[0]} />
+                return <TypedocSignature s={d.signatures?.[0]} includeSynopsis={true}/>
             }
             if (d.children?.length) {
                 return (
@@ -52,9 +123,9 @@ const TypedocDeclaration = ({ d }: { d: DeclarationReflection }) => {
                         {"{"}
                         <span>
                             {d.children.map(property => (
-                                <span className="property">
-                                    <Synopsis item={property} />
-                                    <TypedocDeclaration d={property} />
+                                <span key={property.name} className="property">
+                                    <Synopsis item={property}/>
+                                    <TypedocDeclaration d={property}/>
                                 </span>
                             ))}
                         </span>
@@ -62,26 +133,33 @@ const TypedocDeclaration = ({ d }: { d: DeclarationReflection }) => {
                     </>
                 )
             }
-            break
+            if (d.indexSignature) {
+                console.log("Unknown type literal", d)
+                return <>{"{"}[<ParameterList sig={d.indexSignature}/>]: <TypedocType t={d.indexSignature.type}/>{"}"}</>
+            }
+            return <span>@{d.kindString}</span>
+
         case "Property":
             return (
                 <>
-                    {d.name}: <TypedocType t={d.type} />
+                    {d.name}: <TypedocType t={d.type}/>
                 </>
             )
 
         case "Method":
-            return <TypedocSignature s={d.signatures?.[0]} />
+            return <TypedocSignature s={d.signatures?.[0]} includeSynopsis={true}/>
+
+        default:
+            return <span>@{d.kindString}</span>
     }
-    return <span>#{d.kindString}</span>
 }
 
-const TypedocType = ({ t }: { t: Type }) => {
+const TypedocType = ({t}: { t: Type }) => {
     switch (t.type) {
         case "array":
             return (
                 <span>
-                    <TypedocType t={(t as ArrayType).elementType} />
+                    <TypedocType t={(t as ArrayType).elementType}/>
                     []
                 </span>
             )
@@ -93,7 +171,7 @@ const TypedocType = ({ t }: { t: Type }) => {
         }
         case "reflection": {
             const r = t as ReflectionType
-            return <TypedocDeclaration d={r.declaration} />
+            return <TypedocDeclaration d={r.declaration}/>
         }
         case "tuple": {
             const r = t as TupleType
@@ -102,7 +180,7 @@ const TypedocType = ({ t }: { t: Type }) => {
                     [
                     {r.elements.map((subtype, index) => (
                         <span key={index} className="tuple-item">
-                            <TypedocType t={subtype} />
+                            <TypedocType t={subtype}/>
                         </span>
                     ))}
                     ]
@@ -116,17 +194,32 @@ const TypedocType = ({ t }: { t: Type }) => {
                 <span>
                     {r.types.map((subtype, index) => (
                         <span className="intersection" key={index}>
-                            <TypedocType t={subtype} />
+                            <TypedocType t={subtype}/>
                         </span>
                     ))}
                 </span>
             )
         }
 
+        case "union": {
+            const u = t as UnionType
+            return (
+                <span>
+                    {u.types.map((subtype, index) => (
+                        <span className="union" key={index}>
+                            <TypedocType t={subtype}/>
+                        </span>
+                    ))}
+                </span>
+            )
+        }
+
+        case "literal":
+            return <TypedocLiteral l={t as LiteralType}/>
+
         case "conditional":
         case "indexedAccess":
         case "inferred":
-        case "literal":
         case "mapped":
         case "optional":
         case "predicate":
@@ -135,7 +228,6 @@ const TypedocType = ({ t }: { t: Type }) => {
         case "template-literal":
         case "named-tuple-member":
         case "typeOperator":
-        case "union":
         case "unknown":
         default:
             return <>#{t.type}</>
@@ -146,71 +238,22 @@ type TypedocItemRenderProps = {
     item: DeclarationReflection
 }
 
-const StyledRender = styled.div`
-    .synopsis .token {
-        filter: brightness(0.75);
-    }
+const ParameterList = ({sig}: { sig: SignatureReflection }) => {
+    return <>{sig.parameters.map(p => <span key={p.name}>{p.name}: <TypedocType t={p.type}/></span>)}</>
+}
 
-    .property,
-    .param,
-    .tuple-item {
-        display: block;
-        padding-left: 20px;
-      padding-bottom: 10px;
-
-        :only-child {
-            //display: inline;
-            //padding-left: 0;
-        }
-
-        :not(:last-child):after {
-            content: ", ";
-        }
-    }
-
-    .intersection:not(:last-child):after {
-        content: " & ";
-    }
-
-    .param,
-    .property {
-        .shortText {
-            font-family: Roboto, sans-serif;
-            font-size: 0.9em;
-            border-left: 2px solid rgba(0, 0, 0, 0.08);
-            margin-top: 8px;
-            margin-bottom: 0;
-            padding-top: 4px;
-            padding-bottom: 4px;
-            padding-left: 8px;
-            color: rgba(0, 0, 0, 0.6);
-
-            p:only-child {
-                margin: 0;
-            }
-        }
-    }
-
-    pre.debug {
-        border-top: 5px dashed grey;
-        padding: 10px;
-        font-size: 0.7em;
-        color: grey;
-    }
-`
-
-const PropertyTable = ({ item }) => {
+const PropertyTable = ({item}) => {
     return <pre className="debug">{JSON.stringify(item, null, 2)}</pre>
 }
 
-export const TypeAlias = ({ item }) => {
+export const TypeAlias = ({item}) => {
     return (
         <div>
-            <Synopsis item={item} />
+            <Synopsis item={item}/>
             <pre>
-                type {item.name} = <TypedocType t={item.type} />
+                type {item.name} = <TypedocType t={item.type}/>
             </pre>
-            <PropertyTable item={item} />
+            <PropertyTable item={item}/>
         </div>
     )
 
@@ -235,7 +278,7 @@ export const TypeAlias = ({ item }) => {
     // )
 }
 
-const Synopsis = ({ item }: { item: Reflection }) => {
+const Synopsis = ({item}: { item: Reflection }) => {
     return item.comment ? (
         <>
             <div className="shortText">
@@ -248,17 +291,17 @@ const Synopsis = ({ item }: { item: Reflection }) => {
     ) : null
 }
 
-const Enumeration = ({ item }) => {
+const Enumeration = ({item}) => {
     const props = item.children.map(p => ({
         key: p.name,
-        name: { name: p.name, required: false },
+        name: {name: p.name, required: false},
         type: item.kindString,
         description: p.comment?.shortText || "Not available"
     }))
     return (
         <>
-            <Synopsis item={item} />
-            <ComponentProps displayName={item.name} properties={props} showDefaults={false} />
+            <Synopsis item={item}/>
+            <ComponentProps displayName={item.name} properties={props} showDefaults={false}/>
         </>
     )
 }
@@ -291,17 +334,18 @@ const Parameters = ({ sig }: { sig: SignatureReflection }) => {
 }
 */
 
-const Function = ({ item }: TypedocItemRenderProps) => {
+const Function = ({item}: TypedocItemRenderProps) => {
     return (
         <div>
             {item.signatures.map(s => {
                 return (
                     <div key={s.id}>
-                        <Synopsis item={s} />
+                        <Synopsis item={s}/>
+                        <h3>Synopsis</h3>
                         <pre className="synopsis">
-                            <TypedocSignature s={s} />
+                            <TypedocSignature s={s} includeSynopsis={false}/>
                         </pre>
-{/*
+                        {/*
                         <Parameters sig={s} />
 */}
                     </div>
@@ -312,7 +356,7 @@ const Function = ({ item }: TypedocItemRenderProps) => {
     )
 }
 
-const TypedocLeftNav = ({ current, title, filter }) => {
+const TypedocLeftNav = ({current, title, filter}) => {
     const groups = useTypedocGrouped(filter)
 
     return (
@@ -321,19 +365,19 @@ const TypedocLeftNav = ({ current, title, filter }) => {
             <Menu mode="inline" defaultSelectedKeys={[current]} selectedKeys={[current]}>
                 {Object.keys(groups).length < 2
                     ? Object.values(groups)[0].map(c => (
-                          <Menu.Item key={c.name}>
-                              <Link to={"./" + c.name}>{c.name}</Link>
-                          </Menu.Item>
-                      ))
+                        <Menu.Item key={c.name}>
+                            <Link to={"./" + c.name}>{c.name}</Link>
+                        </Menu.Item>
+                    ))
                     : Object.entries(groups).map(([name, items]) => (
-                          <Menu.SubMenu key={name} className={"capitalize"} title={name}>
-                              {items.map(c => (
-                                  <Menu.Item key={c.name}>
-                                      <Link to={"./" + c.name}>{c.name}</Link>
-                                  </Menu.Item>
-                              ))}
-                          </Menu.SubMenu>
-                      ))}
+                        <Menu.SubMenu key={name} className={"capitalize"} title={name}>
+                            {items.map(c => (
+                                <Menu.Item key={c.name}>
+                                    <Link to={"./" + c.name}>{c.name}</Link>
+                                </Menu.Item>
+                            ))}
+                        </Menu.SubMenu>
+                    ))}
             </Menu>
         </StyledLeftNavMenu>
     )
@@ -345,8 +389,8 @@ const render_component = {
     Function
 }
 
-export default ({ title, filter }) => {
-    const { params } = useRouteMatch<{ name: string }>()
+export default ({title, filter}) => {
+    const {params} = useRouteMatch<{ name: string }>()
     const item = useTypedocItem(params.name)
 
     if (!item) {
@@ -359,14 +403,14 @@ export default ({ title, filter }) => {
 
     return (
         <DocumentationPage
-            left={<TypedocLeftNav current={item.name} title={title} filter={filter} />}
+            left={<TypedocLeftNav current={item.name} title={title} filter={filter}/>}
         >
             <h1>
                 {params.name} ({item.kindString})
             </h1>
 
             <StyledRender>
-                <Render item={item} />
+                <Render item={item}/>
             </StyledRender>
         </DocumentationPage>
     )
