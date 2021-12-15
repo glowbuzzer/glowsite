@@ -101,7 +101,7 @@ const TypedocSignature = ({s, includeSynopsis}: { s: SignatureReflection, includ
                     {s.parameters?.map(param => (
                         <span key={param.name} className="param">
                             <Synopsis item={param}/>
-                            {param.name}: <TypedocType t={param.type}/>
+                            {param.name}{param.flags.isOptional && "?"}: <TypedocType t={param.type}/>
                         </span>
                     ))}
                 </span>
@@ -148,6 +148,25 @@ const TypedocDeclaration = ({d}: { d: DeclarationReflection }) => {
 
         case "Method":
             return <TypedocSignature s={d.signatures?.[0]} includeSynopsis={true}/>
+
+        case "Interface":
+            if (d.children?.length) {
+                return (
+                    <>
+                        {"{"}
+                        <span>
+                            {d.children.map(property => (
+                                <span key={property.name} className="property">
+                                    <Synopsis item={property}/>
+                                    <TypedocDeclaration d={property}/>
+                                </span>
+                            ))}
+                        </span>
+                        {"}"}
+                    </>
+                )
+            }
+            return <>Interface no children</>
 
         default:
             return <span>@{d.kindString}</span>
@@ -383,8 +402,21 @@ const TypedocLeftNav = ({current, title, filter}) => {
     )
 }
 
+const Interface=({item}: {item}) => {
+    console.log(item)
+
+    return <div>
+        <Synopsis item={item}/>
+        <pre>
+            interface {item.name} <TypedocDeclaration d={item}/>
+        </pre>
+        <pre className="debug">{JSON.stringify(item, null, 2)}</pre>
+    </div>
+}
+
 const render_component = {
     "Type alias": TypeAlias,
+    Interface,
     Enumeration,
     Function
 }
