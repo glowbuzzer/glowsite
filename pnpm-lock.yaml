@@ -4,9 +4,9 @@ specifiers:
   '@ant-design/icons': ^4.7.0
   '@babel/core': ^7.0.0
   '@emeks/antd-custom-theme-generator': ^0.2.0
-  '@glowbuzzer/controls': ^1.0.1-alpha.18
-  '@glowbuzzer/layout': ^1.0.1-alpha.18
-  '@glowbuzzer/store': ^1.0.1-alpha.18
+  '@glowbuzzer/controls': ^1.0.1-alpha.20
+  '@glowbuzzer/layout': ^1.0.1-alpha.20
+  '@glowbuzzer/store': ^1.0.1-alpha.20
   '@mdx-js/mdx': ^2.0.0-rc.1
   '@mdx-js/react': ^1.6.22
   '@mdx-js/rollup': ^2.0.0-rc.1
@@ -79,9 +79,9 @@ devDependencies:
   '@ant-design/icons': 4.7.0_react-dom@17.0.2+react@17.0.2
   '@babel/core': 7.15.8
   '@emeks/antd-custom-theme-generator': 0.2.0_antd@4.10.0
-  '@glowbuzzer/controls': 1.0.1-alpha.18
-  '@glowbuzzer/layout': 1.0.1-alpha.18
-  '@glowbuzzer/store': 1.0.1-alpha.18
+  '@glowbuzzer/controls': 1.0.1-alpha.20
+  '@glowbuzzer/layout': 1.0.1-alpha.20
+  '@glowbuzzer/store': 1.0.1-alpha.20
   '@mdx-js/mdx': 2.0.0-rc.1
   '@mdx-js/react': 1.6.22_react@17.0.2
   '@mdx-js/rollup': 2.0.0-rc.1
@@ -1718,19 +1718,19 @@ packages:
     resolution: {integrity: sha512-OWORNpfjMsSSUBVrRBVGECkhWcULOAJz9ZW8uK9qgxD+87M7jHRcvh/A96XXNhXTLmKcoYSQtBEX7lHMO7YRwg==}
     dev: false
 
-  /@glowbuzzer/controls/1.0.1-alpha.18:
-    resolution: {integrity: sha512-gUUWK0cfJNite8FrPILJ9imIc5wtH5DqMteOH0CiIsHwA2twyIBa62NPUJuVxlHoDC9XhRXD8UGmwtq8bSl3Fg==}
+  /@glowbuzzer/controls/1.0.1-alpha.20:
+    resolution: {integrity: sha512-qzqPtYX6d0iOyx+kmjLKh05zE4N1XcxfQeIpxPynNP7QX/NS4M9hf9GSWYkLLYQeckp5IxgM0dKFEcYHzvYMDA==}
     dependencies:
-      '@glowbuzzer/layout': 1.0.1-alpha.18
-      '@glowbuzzer/store': 1.0.1-alpha.18
+      '@glowbuzzer/layout': 1.0.1-alpha.20
+      '@glowbuzzer/store': 1.0.1-alpha.20
     dev: true
 
-  /@glowbuzzer/layout/1.0.1-alpha.18:
-    resolution: {integrity: sha512-WuG+O6EwTqK6lsljWDg5eJYJfWl7OnwwPn9qceHjMT4c7o3HX85GZezNFUf75rfu4UDCXyr2fa5S35A13ScIGA==}
+  /@glowbuzzer/layout/1.0.1-alpha.20:
+    resolution: {integrity: sha512-z2POwDw2kB+mc4hKniLcqf0Y11yA4tgDudC+P5qaV6QOSxl0QHgW3XEPBtgpWGMw4t9+duXX1+cVoYPM6KkFeg==}
     dev: true
 
-  /@glowbuzzer/store/1.0.1-alpha.18:
-    resolution: {integrity: sha512-45IDhQizwhsYFUi+uwuiGlK7ZnuWuAcqOE0v6b4DzJK3eCcaYtN/bAhina54+eKr/66Fk05HkmEqUoVI47hQog==}
+  /@glowbuzzer/store/1.0.1-alpha.20:
+    resolution: {integrity: sha512-UuTPywLw3m/QlSBhql/4HD5nn8gT9mDDHF6tQRz4pxAlpn7fRHIltZY24aYUfUjaUco/0TL9NyWRTcz/o8M5IA==}
     dev: true
 
   /@mdx-js/mdx/2.0.0-rc.1:

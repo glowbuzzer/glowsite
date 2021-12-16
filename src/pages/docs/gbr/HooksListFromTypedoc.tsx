@@ -3,10 +3,11 @@ import styled from "styled-components"
 import { Table } from "antd"
 import { Link } from "react-router-dom"
 import { typedocHookFilter, useTypedoc } from "../../../typedoc/typedoc-hooks"
+import Synopsis from "./hooks.mdx"
 
 const StyledDiv = styled.div``
 
-export default function HooksTypedoc() {
+export default function HooksListFromTypedoc() {
     const hooks = useTypedoc(typedocHookFilter)
 
     const columns = [
@@ -32,13 +33,13 @@ export default function HooksTypedoc() {
 
     return (
         <StyledDiv>
-            <h1>GBR Hooks</h1>
-            <p>Hooks in React let you use state and other React features without writing a class.</p>
+            <h1>List of GBR Hooks</h1>
 
-            <p>This is pretty handy in machine control applications where many of your (and the components in &gbr) are stateful.</p>
+            <Synopsis/>
 
             <Table dataSource={data} columns={columns} pagination={false} />
 
+{/*
             {hooks.map(hook => {
                 return (
                     <div key={hook.name}>
@@ -47,6 +48,7 @@ export default function HooksTypedoc() {
                     </div>
                 )
             })}
+*/}
         </StyledDiv>
     )
 }

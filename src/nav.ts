@@ -578,8 +578,8 @@ const nav = {
                     ]
                 },
                 {
-                    slug: "ui",
-                    title: "Front-end (GBR)",
+                    slug: "gbr",
+                    title: "React (GBR)",
                     subtitle: "React component documentation",
                     layout: ControlsDocumentationPage, // so that Redux context is created
                     children: [
@@ -587,20 +587,20 @@ const nav = {
                             slug: "overview",
                             title: "Overview of the GBR components",
                             subtitle: "Overview of the toolkit's front-end components (GBR)",
-                            component: () => import("./pages/docs/ui/overview.mdx")
+                            component: () => import("./pages/docs/gbr/overview.mdx")
                         },
                         {
                             slug: "starter_project",
                             title: "Creating a starter project",
                             subtitle: "Creating a React starter project with GBR",
-                            component: () => import("./pages/docs/ui/starter_project.mdx")
+                            component: () => import("./pages/docs/gbr/starter_project.mdx")
                         },
                         {
                             slug: "controls",
                             title: "GBR controls",
                             children: auto(
                                 // @ts-ignore
-                                import.meta.glob("./pages/docs/ui/controls/*.mdx"),
+                                import.meta.glob("./pages/docs/gbr/controls/*.mdx"),
                                 true
                             )
                         },
@@ -609,33 +609,39 @@ const nav = {
                             title: "GBR tiles",
                             children: auto(
                                 // @ts-ignore
-                                import.meta.glob("./pages/docs/ui/tiles/*.mdx"),
+                                import.meta.glob("./pages/docs/gbr/tiles/*.mdx"),
                                 true
                             )
                         },
                         {
                             slug: "hooks",
                             title: "GBR hooks",
-                            subtitle: "Hooks in the front-end",
-                            component: () => import("./pages/docs/ui/HooksTypedoc")
+                            subtitle: "How to use the GBR hooks to ease development",
+                            component: () => import("./pages/docs/gbr/HooksListFromTypedoc")
                         },
                         {
                             slug: "redux",
-                            title: "GBR redux",
-                            subtitle: "Redux in the front-end",
-                            component: () => import("./pages/docs/ui/redux.mdx")
+                            title: "GBR Redux",
+                            subtitle: "How to use the GBR low-level Redux support",
+                            component: () => import("./pages/docs/gbr/redux.mdx")
+                        },
+                        {
+                            slug: "state_machine",
+                            title: "GBR state machine",
+                            subtitle: "Creating a simple state machine to control activities",
+                            component: () => import("./pages/docs/gbr/state_machine.mdx")
                         },
                         {
                             slug: "skeleton",
-                            title: "GBR skeleton app.",
-                            subtitle: "Building a skeleton GBR application",
-                            component: () => import("./pages/docs/ui/skeleton.mdx")
+                            title: "GBR skeleton application",
+                            subtitle: "Create a full React application from Create React App template",
+                            component: () => import("./pages/docs/gbr/skeleton.mdx")
                         },
                         {
                             slug: "imports",
-                            title: "GBR Imports",
-                            subtitle: "Imported components in the front-end",
-                            component: () => import("./pages/docs/ui/imports.mdx")
+                            title: "GBR imports",
+                            subtitle: "How to reduce GBR dependencies",
+                            component: () => import("./pages/docs/gbr/imports.mdx")
                         }
                     ]
                 },
@@ -852,7 +858,7 @@ const nav = {
             component: () => import("./typedoc/TypedocItem")
         },
         {
-            slug: "docs/ui/hooks/:name",
+            slug: "docs/gbr/hooks/:name",
             layout: TypedocPage,
             title: "GBR Hooks",
             filter: c => c.name.startsWith("use"), // for left nav build

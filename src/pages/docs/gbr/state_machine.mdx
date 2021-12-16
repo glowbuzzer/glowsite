@@ -1,0 +1,77 @@
+# Glowbuzzer React (GBR) Simple State Machine
+
+It is often useful to run a sequence of activities on a machine, and this can rapidly lead to quite complex interactions.
+
+It's possible to maintain state in React and drive transitions as this state changes, but this can become quite
+tedious and error-prone without some kind of framework.
+
+GBR provides a hook [useStateMachine](/docs/gbr/hooks/useStateMachine) and the structure
+for a simple state machine definition that can help in these scenarios.
+
+Below is a worked example. This example is self-contained and does not interact with a machine; you can extend this example
+using [useSoloActivity](/docs/gbr/hooks/useSoloActivity) in order to execute real activities.
+
+The example consists of three states: `idle`, `forward` and `back`. The idle state is entered whenever `run` is not set.
+When `run` is set (via the button click handler), the state machine alternates between the `forward` and `back` states
+every two seconds.
+
+The example demonstrates how the `enter` callback on a state can run asynchronous tasks and trigger transitions when a promise is resolved.
+This could be at the end of a move, for example.
+
+```jsx demo
+import {useStateMachine} from "@glowbuzzer/store"
+import {useState} from "react"
+import {Button} from "antd"
+
+// helper to create promise resolved after a delay
+const delay=(next, ms) => new Promise(resolve => setTimeout(() => resolve(next), ms))
+
+export default () => {
+    const [run, setRun]=useState(false)
+    const [forwardCompletedCount, setForwardCompletedCount]=useState(0)
+
+    const {currentState, previousState, userData}=useStateMachine({
+        idle: {
+            transitions: {
+                forward: run
+            }
+        },
+        forward: {
+            enter() {
+                console.log("enter forward")
+                return delay({
+                    state: "back",
+                    data: "going back now"
+                }, 2000)
+            },
+            exit() {
+                setForwardCompletedCount(count => count+1)
+            },
+            transitions: {
+                idle: !run
+            }
+        },
+        back: {
+            enter() {
+                console.log("enter backward")
+                return delay({
+                    state: "forward",
+                    data: "going forward now"
+                }, 2000)
+            },
+            transitions: {
+                idle: !run
+            }
+        },
+    }, "idle", [run])
+
+    return <div>
+        <h3>Simple state machine example</h3>
+        <p>The current state is: {currentState} (from {previousState || "none"})</p>
+        <p>The data from last transition is: {userData || "none"}</p>
+        <p>Forward cycles completed: {forwardCompletedCount}</p>
+
+        <p><Button onClick={()=> setRun(run => !run)}>{run ? "Stop" : "Start"}</Button></p>
+    </div>
+}
+```
