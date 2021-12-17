@@ -12,7 +12,8 @@ const entities = {
     gbsm: "GBSM",
     gbsml: "GBSM (Step Master)",
     gbt: "glowbuzzer toolkit",
-    gbotg: "globuzzer online trajectory planner"
+    gbotg: "globuzzer online trajectory planner",
+    ui: "user interface"
 }
 
 export function remarkEntities() {

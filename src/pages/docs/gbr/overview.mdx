@@ -5,40 +5,36 @@ import {GitHubLink} from "../../../framework/components/GitHubLink";
 # {props.subtitle}
 
 <Tldr>
-    -
+    - Built on React
+    - Redux store
+    - Reusable UI controls
+    - Hooks
+    - Simple state machine
 </Tldr>
 
-The &gbr part of the toolkit provides a framework and set of controls that help you get up and running quickly building machine controls using web-technology.
+The &gbr part of the toolkit provides a framework and set of controls that help you get up and running quickly building machine controls using web technology.
 
 This framework is built on other open source projects, primarily React, Redux and Ant Design.
 
-## Main features
+## Documentation structure
 
-* Useful UI components
-* High-level interface to communicate with &gbc over websockets
-* State machine
+This area of the documentation contains:
 
-## Docs structure
-There is documentation for:
+* Instructions for creating a new project using the glowbuzzer Create React App template
+* Instructions for cloning and running one of the sample projects
+* GBR controls reference. The controls provide re-usable components you can use in your own &ui projects
+* GBR tiles reference. Tiles are a way of composing a full drag and drop &ui
+* GBR hooks reference. Hooks allow you to communicate with &gbc over websockets and provide access to the GBR Redux store
+* GBR Redux details. Provides information about how to use the Redux store directly and how to extend it with your own state
+* GBR state machine. Describes how to use the GBR simple state machine to coordinate activities
+* GBR skeleton application. Show how to create a minimal GBR application
+* GBR imports. Describes ways to minimise external dependencies according to the features you need
 
-* The Controls components: <Link to="/docs/gbr/controls/JointDro"> for example the Joint DRO component </Link>
-* The Tiles components: <Link to="/docs/gbr/tiles/TasksTile"> for example the Tasks Tile </Link>
+You might also like to view the [basic getting started tutorial](/get-started/frontend) which shows how to toggle a digital output and move a drive.
 
-There is basic getting started tutorial (toggle a digital out and move a drive) <Link to="get-started/front-end"> simple tutorials</Link>
-
-We also provide example UI for different types of applications.
-
-These can be downloaded:
-
-cartesian machine
-robot
-blah
-
-(git clone and npm i )
-
-The schema <Link to="/docs/gbc/schema"> the data model and wire data structure for GBC</Link>
+If you are integrating with &gbc at the websocket level and not using React, you will need the [GBC schema reference](/docs/gbc/schema).
 
 ## License
 
-The front-end components are free software; you can redistribute it and/or modify it under the terms of the GNU General Public License version 2 as published by the Free Software Foundation.
+GBR is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License version 2 as published by the Free Software Foundation.
 

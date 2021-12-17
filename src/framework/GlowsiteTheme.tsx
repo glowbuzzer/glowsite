@@ -44,6 +44,7 @@ const AppStyle = styled.div`
 
     pre {
         display: block;
+        background: rgba(0,0,0,0.75);
         width: 100%;
         max-width: 100%;
         overflow-x: auto;
@@ -51,12 +52,15 @@ const AppStyle = styled.div`
     }
 
     .codeblock-demo {
-        padding: 8px;
+        padding: 16px;
         border: 1px solid rgba(0, 0, 0, 0.5);
+        background: white;
+        margin-bottom: -10px;
     }
 
     dt {
         font-weight: bold;
+        color: rgba(0,0,0,0.6);
     }
 
     dd {
