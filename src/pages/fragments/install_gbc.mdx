@@ -29,6 +29,16 @@ Then uncompress with:
 tar -xzf gbc-armv7.tar.gz
 ```
 
+You will need to install libbsd as we use some of its networking functions. This can be done with the Linux package manager:
+
+```shell
+sudo apt install libbsd-dev
+```
+
+(The package manager command will need changing for different Linux versions)
+
+
+
 &gbc has a set of JSON configuration files that configure its main parameters. These need to be located in the same directory as the GBC executable file.
 
 The tar file you download will contain some example configuration files.

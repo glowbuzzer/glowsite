@@ -76,9 +76,6 @@ In terms of power you have a nice range of options:
 * AC - max power in equivalent servo = 400-750W
 
 
-
-
-
 ## Our ratings for the Oriental Motor AZD-KED
 <div style={{margin:"20px"}}>
     <Row>
@@ -114,7 +111,48 @@ In terms of power you have a nice range of options:
     </Row>
 </div>
 
+## Wiring up
 
+The drive requires two 24V connections: one for the motor power and one for the logic power.
+The connectors are:
+
+* CN4 - Motor power - 24v 0v earth - 0.4A to 3.3A depending on the motor
+* CN1 - Logic power - 24v 0v - 0.15A no brake & 0.55A with brake
+
+CN4 also provides the connections for:
+* Electromagnetic brake (MB1 & MB2)
+* Regeneration resistor (TH1 & TH2)
+
+CN4 provides the connections for the power removal function of the drive.
+
+Power removal (HWTO - Hardware torque off) is the Oriental Motor term for STO (safe torque off).
+
+This function, shuts off the drive signal to the power inverter for the drive based on a pair of input signals - HWTO1 & HWTO2).
+
+EDM is an output provided to monitor the status of the HWTO circuits.
+
+Using an external evaluation device monitoring EDM,  SIL 3 / PL e safety integrity/performance can be achieved.
+
+CN2 & CN3 are the connectors for the motor itself. CN2 is for the encoder and C3 is for motor power.
+
+## Cables
+
+The motor power/encoder cable is supplied as a single cable set.
+
+For AZM14, AZM15, AZM24, AZM26 motors we have:
+
+* CC005VZ2F2 (0.5m) - upto - CC200VZ2F2 (20m) - are the standard cables
+* CC005VZ2R2 (0.5m) - upto - CC200VZ2R2 (20m) - are the flexible cables for cable chain use
+
+For AZM46, AZM48, AZM66, AZM69 motors we have:
+
+For motors without a brake:
+* CC005VZF2 (0.5m) - upto - CC200VZF2 (20m) - are standard cables
+* CC005VZR2 (0.5m) - upto - CC200VZR2 (20m) - are the flexible cables for cable chain use
+
+For motors with a brake:
+* CC005VZFB2 (0.5m) - upto - CC200VZFB2 (20m) - are standard cables
+* CC005VZRB2 (0.5m) - upto - CC200VZRB2 (20m) - are the flexible cables for cable chain use
 
 ## Default netscan
 

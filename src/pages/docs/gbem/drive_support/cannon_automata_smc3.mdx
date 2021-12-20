@@ -70,6 +70,124 @@ There is no drive commissioning software provided by Cannon automata, but they a
 </div>
 
 
+## Wiring
+
+The drive requires two power supplies.
+
+Control (logic) power is supplied to:
+* X1.1 or X1.4 - GND
+* X1.3 or X1.6 - 24V
+
+Motor power is supplied to:
+* X6.1 or X6.5 - 24V-48V
+* X6.8 GND
+
+The motor itself is connected to:
+* X6.2 - PH A1
+* X6.3 - PH A2
+* X6.6 - PH B1
+* X6.7 - PH B2
+
+The encoder is connected to:
+* X5.1 - 5V encoder power
+* X5.2 - A
+* X5.3 - B
+* X5.4 - Z
+* X5.6 - 24V encoder power
+* X5.7 - /A
+* X5.8 - /B
+* X5.9 - /Z
+* X5.10 - GND
+
+The encoder power supply requires a power supply connection to X4
+
+Here is the drive wired up with a standard bi-polar stepper motor for testing.
+
+import smc3_connected from "./smc3_connected.jpg?glowsite"
+
+<Image meta={smc3_connected} alt="SMC3 wired up" />
+
+
+## Notes
+
+* No soft limited but digital inputs for mechanical limit switches - plus stallguard
+
+
+## Default netscan
+
+We start by netscanning the drive without applying any configuration. `gbem -n -ieth0`.
+
+
+For the default netscan and taking a peek in the SMC3 manual, we can see that the default PDO set-up is not going work.
+
+The default PDO set-up is for `interpolated position mode`. We want to use `cyclic position mode`.
+
+The pre-configured PDO mapping:
+* SM2 = 0x1602
+* SM3 = 0x1a02
+
+Is for `cyclic position mode` and we need to use this.
+
+0x1602:
+* Object: Controlword, Offset:0, size: uint16
+* Object: Tragetposition, Offset: 2, size: int32
+* Object: Modes of operation, Offset: 6, size: int8
+
+0x1a02:
+* Object: Statusword, Offset:0, size: uint16
+* Object: Position actual value, Offset: 2, size: int32
+* Object: Modes of operation display, Offset: 6, size: int8
+
+This is the absolute minimum we need to control the drive.
+
+We can look to do a custom PDO mapping later if we need to obtain extra information like:
+* error messages
+* follow error
+
+
+```shell
+Slave: 1
+ Name: CA-SMC3
+ Output size: 56bits
+ Input size: 56bits
+ State: 4
+ Delay: 0[ns]
+ Has DC: 1
+ DCParentport: 0
+ Activeports: 0.1.0.0
+ Configured address: 1001
+ Man: 00000642 ID: 70069900 Rev: 00000014
+ SM0 A:1000 L: 512 F:00010026 Type:1
+ SM1 A:1400 L: 512 F:00010022 Type:2
+ SM2 A:1800 L:   7 F:00010064 Type:3
+ SM3 A:1c00 L:   7 F:00010020 Type:4
+ FMMU0 Ls:00000000 Ll:   7 Lsb:0 Leb:7 Ps:1800 Psb:0 Ty:02 Act:01
+ FMMU1 Ls:00000007 Ll:   7 Lsb:0 Leb:7 Ps:1c00 Psb:0 Ty:01 Act:01
+ FMMUfunc 0:1 1:2 2:3 3:0
+ MBX length wr: 512 rd: 512 MBX protocols : 0c
+ CoE details: 0f FoE details: 01 EoE details: 00 SoE details: 00
+ Ebus current: 0[mA]
+ only LRD/LWR:1
+PDO mapping according to CoE :
+  SM2 outputs
+ 	[byte_offset] [addr b  ] [index:sub  ] [bitl] [data_type   ] [name                                    ]
+	[0          ] [0x0000.0] [0x6040:0x00] [0x10] [UNSIGNED16  ] [SubIndex 000                            ]
+	[2          ] [0x0002.0] [0x607A:0x00] [0x20] [INTEGER32   ] [SubIndex 000                            ]
+	[6          ] [0x0006.0] [0x6060:0x00] [0x08] [INTEGER8    ] [SubIndex 000                            ]
+  SM3 inputs
+ 	[byte_offset] [addr b  ] [index: sub ] [bitl] [data_type   ] [name                                    ]
+	[0          ] [0x0007.0] [0x6041:0x00] [0x10] [UNSIGNED16  ] [SubIndex 000                            ]
+	[2          ] [0x0009.0] [0x6064:0x00] [0x20] [INTEGER32   ] [SubIndex 000                            ]
+	[6          ] [0x000D.0] [0x6061:0x00] [0x08] [INTEGER8    ] [SubIndex 000                            ]
+*** End of network scanning output ***
+```
+## Netscan after PDO mapping
+
+After setting up the PDO mapping we can netscan the drive again `gbem -m -ieth0`.
+
+This time we
+
+
 ## Testing
 
 <YoutubeEmbed embedId="" />
