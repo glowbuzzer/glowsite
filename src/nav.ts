@@ -585,8 +585,8 @@ const nav = {
                     children: [
                         {
                             slug: "overview",
-                            title: "Overview of the GBR components",
-                            subtitle: "Overview of the toolkit's front-end components (GBR)",
+                            title: "Overview of glowbuzzer React",
+                            subtitle: "Overview of the toolkit's front-end web framework",
                             component: () => import("./pages/docs/gbr/overview.mdx")
                         },
                         {
@@ -594,6 +594,12 @@ const nav = {
                             title: "Creating a starter project",
                             subtitle: "Creating a React starter project with GBR",
                             component: () => import("./pages/docs/gbr/starter_project.mdx")
+                        },
+                        {
+                            slug: "example_projects",
+                            title: "Example projects",
+                            subtitle: "Downloading an existing GBR example project",
+                            component: () => import("./pages/docs/gbr/example_projects.mdx")
                         },
                         {
                             slug: "controls",
@@ -622,7 +628,7 @@ const nav = {
                         {
                             slug: "redux",
                             title: "GBR Redux",
-                            subtitle: "How to use the GBR low-level Redux support",
+                            subtitle: "How to use the GBR low-level Redux store",
                             component: () => import("./pages/docs/gbr/redux.mdx")
                         },
                         {

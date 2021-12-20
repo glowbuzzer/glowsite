@@ -1,13 +1,124 @@
+import {Tldr} from "../../../framework/components";
+
 # {props.subtitle}
 
-## Redux in &gbr
+<Tldr>
+    - Create the GBR Redux store from scratch
+    - Add your own custom state to the store
+    - See the list of standard GBR slices
+</Tldr>
 
-We use redux in &gbr. Redux is an Open Source library widely used to manage application state. It provides a predictable container for storing the application's state.
+&gbr uses Redux extensively under the covers. This page describes the structure of the store, how to instantiate it and how to add your own state.
+
+The GBR Redux store is created using the official [Redux Toolkit](https://redux-toolkit.js.org) and separated into multiple "slices". Each slice is responsible for a different part of the store.
+
+## Instantiating and customising the store
+
+In the example below, the regular GBR store is enhanced with a custom slice you might use to store state specific to your application. This example is based on the existing
+[GlowbuzzerApp](https://github.com/glowbuzzer/gbr/blob/main/libs/controls/src/GlowbuzzerApp.tsx) component.
+
+```tsx demo
+import { standardReducers } from "@glowbuzzer/store"
+import { Provider, useDispatch, useSelector } from "react-redux"
+import { combineReducers, configureStore, createSlice } from "@reduxjs/toolkit"
+import { Button } from "antd";
+
+const acmeSlice = createSlice({
+    name: "acme",
+    initialState: "Default value from store - click to change",
+    reducers: {
+        set: (store, action) => {
+            // simply store the given value
+            return action.payload
+        }
+    }
+})
+
+const rootReducer = combineReducers({
+    ...standardReducers,
+    acme: acmeSlice.reducer
+})
+
+type StoreType = ReturnType<typeof rootReducer>
+
+const TestComponent = () => {
+    const value = useSelector(({ acme }: StoreType) => acme)
+    const dispatch = useDispatch()
+
+    function update() {
+        dispatch(acmeSlice.actions.set("New value!"))
+    }
+
+    return <>
+        <div>{value}</div>
+        <Button onClick={update}>Change</Button>
+    </>
+}
+
+export default /* app component */ () => {
+    const middleware = getDefault => {
+        // these dev-only checks really hurt performance, so turn them off!
+        return getDefault({ immutableCheck: false, serializableCheck: false })
+    }
+
+    const store = configureStore({
+        reducer: rootReducer,
+        middleware
+    })
+
+    return (
+        <Provider store={store}>
+            <TestComponent/>
+        </Provider>
+    )
+}
+```
+
+## List of standard slices
+
+The complete list of slices provided by GBR is:
+
+config
+
+: Provides access to the current GBC configuration, see [useConfig](hooks/useConfig)
+
+connection
+
+: Provides access to the current connection with GBC, see [useConnection](hooks/useConnection)
+
+machine
+
+: Provides access to the GBC machine configuration and state, see [useMachine](hooks/useMachine)
+
+din, dout, ain, aout, iin, iout
+
+: Provides access to inputs and outputs, see [useDigitalInputs](hooks/useDigitalInputs), [useAnalogInputs](hooks/useAnalogInputs), [useIntegerInputs](hooks/useIntegerInputs),
+[useDigitalOutputState](hooks/useDigitalOutputState), [useAnalogOutputState](hooks/useAnalogOutputState), [useIntegerOutputState](hooks/useIntegerOutputState)
+
+activity
+
+: Provides ability to run activities running on GBC and get information about running activities, see [useSoloActivity](hooks/useSoloActivity)
+
+gcode
+
+: Provides ability to run GCode on GBC and get information about the running GCode, see [useGCode](hooks/useGCode)
+
+kinematics
+
+: Provides configuration information about kinematics configurations and the ability to change feed rate override, see [useKinematicsConfiguration]
+(hooks/useKinematicsConfiguration)
+
+joints
+
+: Provides access to the joint configuration and state, see [useJointConfig](hooks/useJointConfig) and [useJoint](hooks/useJoint)
+
+frames
+
+: Provides access to the frame configuration and functions to convert between frames, see [useFrames](hooks/useFrames)
+
+prefs
+
+: Provides access to preferences backed by local storage, see [usePrefs](hooks/usePrefs)
 
 
-
-In sample apps configured for you
-If you want to configure redux this is what you need to do
-
-
-autogen slices docs
+TODO: Autogen slices docs????

@@ -1,30 +1,38 @@
 import {Image} from "../../framework/components/Image"
 
-We provide a CRA custom template as a useful starting point for your toolkit project which helps to cut out setup and configuration work needed to get started.
+We provide a [Create React App](https://create-react-app.dev) (CRA) custom template as a useful starting point for your project. This helps reduce setup and
+configuration work needed to get started.
 
-You will perform this step on your PC (Windows or Linux or WSL).
+You should perform these steps on your development workstation (Windows or Linux or WSL).
 
-The commands needed are:
+## Prerequisites
+
+You need Node.js installed. We recommend version 12 or above. When installing Node.js, `npm` and `npx` are typically installed automatically, but if you need to install these
+manually, use:
 
 ```shell
-npx create-react-app your-project-name --template glowbuzzer-typescript  --use-npm
+sudo apt install npm
+```
+
+Or use the package manager for your chosen Linux distribution.
+
+## Creating a new project
+
+Execute the following commands to create a new project:
+
+```shell
+npx create-react-app your-project-name --template glowbuzzer-typescript --use-npm
 cd your-project-name
 npm start
 ```
 
-This should then busy away downloading all the required packages. What you should see on your screen is something like this:
+On first run this will download all the required packages which can take a while. What you should see on your screen is something like this:
 
 import cra_template from "./cra_start.png?glowsite"
 
 <Image meta={cra_template} alt="CRA start"/>
 
+When you run the `start` command, a local development server is started which will serve the React application. This can be accessed on localhost, on port 3000 by default, for
+example: http://localhost:3000. CRA may be able to launch your browser automatically dependending on your environment.
 
-It is possible that before you run the `npx` command that you need to:
-* install npm with - `sudo apt install npm` or `sudo dnf install npm` or `sudo pacman -S npm` depending on your Linux flavour
-* npx is installed with npm, but you can  install npx with - `npm install --global npx`
-
-
-When you run the `start` command, this will run your starter project's React application under a local dev. server which can be accessed from the browser under `localhost:xxxx`.
-(Depending on your environment, the browser may launch automatically.)
-
-You can also now open this project in your IDE (JetBrains, VS code etc.).
+You can open this project in your IDE (JetBrains, VS code and so on). Changes will trigger a hot reload in the browser.
