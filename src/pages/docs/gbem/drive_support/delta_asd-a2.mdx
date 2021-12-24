@@ -2,7 +2,8 @@ import { Image } from "../../../../framework/components/Image"
 import { Rate, Row, Col, Alert } from 'antd';
 import {YoutubeEmbed} from "../../../../framework/components/Video"
 import {GitHubLink} from "../../../../framework/components/GitHubLink";
-import {SdoCard} from "../../../../framework/components/SdoCard";
+import {SdoCard} from "../../../../framework/components/SdoCard"
+import {PdoCard} from "../../../../framework/components/PdoCard"
 
 # {props.subtitle}
 
@@ -52,6 +53,7 @@ For the purposes of our evaluation we are using:
 * Encoder cable ASD-ABEN0003
 
 
+
 ## Review
 
 <div style={{margin:"20px"}}>
@@ -91,29 +93,24 @@ For the purposes of our evaluation we are using:
 
 ## Wiring
 
-Single phase models derive their internal control voltage from a mains voltage applied to L1C and L2C. 3 phase versions need a separate 24V control voltage supply.
+Single phase models derive their internal control voltage from a mains voltage applied to L1C and L2C.
 
-
+3 phase versions need a separate 24V control voltage supply.
 
 L1=R=L, L2=S=N, L3=T
 
 
-
-Motor UVW connects up
+Motor UVW connects up to the connector "Motor"
 
 CN2 for encoder via the ASD-ABPW0003 cable (SCSI connector)
 
-
-
 STO - comes with a handy PCB  you can slot into CN-STO to disable this function.
-
-
 
 CN1 - 26 pin SCSI - IO - 4x DO, 7 x DI also encoder out (differential) signals + power 24v
 
 CN2 - 20 pin SCSI - motor encoder connector 
 
-CN5 - dsub 9 - encoder for full closed loop
+CN5 - D-sub 9 - encoder connector for full closed loop
 
 CN6 - RJ45 - pair of EtherCAT ports
 
@@ -123,11 +120,186 @@ CN-STO - STO connector
 
 ## Setup
 
+When you first power up the drive, AL013, "Emergency stop activated" - EGMS DI.
+
+Also AL014 and AL015
+
+These For safety reasons, the default functions of the servo DI 6/7/8 are reverse limit/forward limit/emergency stop, and are all B (normally closed) contacts, so when there is no limit switch connected,
+
+The above alarm will occur when power is applied. If the motor (not the linear motor) is not connected to the mechanism, the user only wants to test it.
+
+You can temporarily remove these protection functions by setting the hundred digits of P2-14, P2-15, P2-16, and P2-17 from 0 to 1. , change to A (normally open) contact; or directly set all three parameters to 0
+
+If you want to use the jog function:
+set P1-01 to PR position control mode and use the jog function (joystiuck icon on toolbar)
+
+
+
 P1-01 to 0x0Ch for EtherCAT communication and CANopen as the application layer.
+
+## Top tip
+
+You need to be careful with the IN/OUT assignemnt of the EtherCAT connector, IN must match in!
+
+# Default netscan
+
+The default PDO mapping maps the following objects:
+
+SM2
+* 0x6040 - ControlWord
+* 0x607A - TargetPosition
+SM3
+* 0x6041 - StatusWord
+* 0x6064 - ActualPosition
+
+```shell
+*** Starting network scanning output ***
+Slave: 1
+ Name: ? M:000001dd I:10305070
+ Output size: 48bits
+ Input size: 48bits
+ State: 4
+ Delay: 0[ns]
+ Has DC: 1
+ DCParentport: 0
+ Activeports: 1.0.0.0
+ Configured address: 1001
+ Man: 000001dd ID: 10305070 Rev: 02040608
+ SM0 A:1000 L: 128 F:00010036 Type:1
+ SM1 A:1400 L: 128 F:00010032 Type:2
+ SM2 A:1800 L:   6 F:00010024 Type:3
+ SM3 A:1c00 L:   6 F:00010000 Type:4
+ FMMU0 Ls:00000000 Ll:   6 Lsb:0 Leb:7 Ps:1800 Psb:0 Ty:02 Act:01
+ FMMU1 Ls:00000006 Ll:   6 Lsb:0 Leb:7 Ps:1c00 Psb:0 Ty:01 Act:01
+ FMMUfunc 0:1 1:2 2:3 3:0
+ MBX length wr: 128 rd: 128 MBX protocols : 04
+ CoE details: 0d FoE details: 00 EoE details: 00 SoE details: 00
+ Ebus current: 0[mA]
+ only LRD/LWR:1
+PDO mapping according to CoE :
+  SM2 outputs
+ 	[byte_offset] [addr b  ] [index:sub  ] [bitl] [data_type   ] [name                                    ]
+	[0          ] [0x0000.0] [0x6040:0x00] [0x10] [UNSIGNED16  ] [S                                       ]
+	[2          ] [0x0002.0] [0x607A:0x00] [0x20] [INTEGER32   ] [S                                       ]
+  SM3 inputs
+ 	[byte_offset] [addr b  ] [index: sub ] [bitl] [data_type   ] [name                                    ]
+	[0          ] [0x0006.0] [0x6041:0x00] [0x10] [UNSIGNED16  ] [S                                       ]
+	[2          ] [0x0008.0] [0x6064:0x00] [0x20] [INTEGER32   ] [S                                       ]
+*** End of network scanning output ***
+*** Start of eeprom output ***
+1 slaves found.
+Slave 1 data
+ PDI Control      : 0008
+ PDI Config       : 6600
+ Config Alias     : 0000
+ Checksum         : 0058
+   calculated     : 0058
+ Vendor ID        : 000001DD
+ Product Code     : 10305070
+ Revision Number  : 02040608
+ Serial Number    : 00000000
+ Mailbox Protocol : 0004
+ Size             : 0001 = 256 bytes
+ Version          : 0001
+*** End of eeprom output ***
+```
+
+## PDO mapping
+
+It would be good to introduce modes-of-operation into the PDO mapping. There is a default PDO mapping offered that supports this:
+
+SM2 0x1600
+* Control word - uint16 - 0
+* Target position - int32 - 2
+* Target velocity - int32 - 6
+* Target torque - int16 - 10
+* Modes of operation (set) - int8 - 12
+
+SM3 0x1a00
+* Status word - unit16 - 0
+* Actual position - int32 - 2
+* Actual velocity - int32 - 6
+* Actual torque - int16 - 10
+* Modes of operation (display) - int8 - 12
+
+After PDO mapping (`gbem -m -ieth0`) we have:
+
+```shell
+PDO mapping according to CoE :
+  SM2 outputs
+ 	[byte_offset] [addr b  ] [index:sub  ] [bitl] [data_type   ] [name                                    ]
+	[0          ] [0x0000.0] [0x6040:0x00] [0x10] [UNSIGNED16  ] [S                                       ]
+	[2          ] [0x0002.0] [0x607A:0x00] [0x20] [INTEGER32   ] [S                                       ]
+	[6          ] [0x0006.0] [0x60FF:0x00] [0x20] [INTEGER32   ] [S                                       ]
+	[10         ] [0x000A.0] [0x6071:0x00] [0x10] [INTEGER16   ] [S                                       ]
+	[12         ] [0x000C.0] [0x6060:0x00] [0x08] [INTEGER8    ] [S                                       ]
+  SM3 inputs
+ 	[byte_offset] [addr b  ] [index: sub ] [bitl] [data_type   ] [name                                    ]
+	[0          ] [0x000D.0] [0x6041:0x00] [0x10] [UNSIGNED16  ] [S                                       ]
+	[2          ] [0x000F.0] [0x6064:0x00] [0x20] [INTEGER32   ] [S                                       ]
+	[6          ] [0x0013.0] [0x606C:0x00] [0x20] [INTEGER32   ] [S                                       ]
+	[10         ] [0x0017.0] [0x6077:0x00] [0x10] [INTEGER16   ] [S                                       ]
+	[12         ] [0x0019.0] [0x6061:0x00] [0x08] [INTEGER8    ] [S                                       ]
+```
+
+## SDOs
+
+<SdoCard name={"Interpolation time period"} index={"0x60C2"} subindex={"0x1"} value={"4"} notes={"Set to the bus cycle period"}/>
+
+<SdoCard name={"Error code"} index={"0x603f"} subindex={"0"} value={"n/a"} notes={"uint16"}/>
+
+<SdoCard name={"Shutdown option code"} index={"0x605B"} subindex={"0"} value={"0"} notes={"int16 0=disable drive, 1=dynamic brake - default=0"}/>
+
+<SdoCard name={"Fault reaction option code"} index={"0x605E"} subindex={"0"} value={"2"} notes={"int16 0=disable drive, 1=slow ramp, 2=quick stop ramp - default = 2"}/>
+
+<SdoCard name={"Follow error window"} index={"0x6065"}  subindex={"0"} value={"3840000"} notes={"uint32 - default=3840000"}/>
+
+
+<SdoCard name={"Quickstop deceleration"} index={"0x6085"}  subindex={"0"} value={"0"} notes={"uint32 - default=0"}/>
+
+
+<SdoCard name={"Position factor numerator"} index={"0x6093"}  subindex={"1"} value={"1"} notes={"uint32 - default=1"}/>
+
+<SdoCard name={"Position factor feedconstant"} index={"0x6093"}  subindex={"2"} value={"1"} notes={"uint32 - default=1"}/>
+
+<SdoCard name={"min position limit"} index={"0x607d"}  subindex={"1"} value={"-2147483648"} notes={"default = -2147483648"}/>
+
+<SdoCard name={"max position limit"} index={"0x607d"}  subindex={"2"} value={"2147483648"} notes={"int32 - default = 2147483648"}/>
+
+
+<SdoCard name={"polarity"} index={"0x607e"}  subindex={"0"}  value={"n/a"} notes ={"uint8"}/>
+
+
+
+
+
+
+
 
 ## Drive commissioning software
 
 The ASDA-Soft drive commissioning software is available free of charge. It comes from the dark ages of computing but just about functions. It needs a USB standard A (the square one) to standard B (to go in your laptop) cable.
+
+1. Start autodetect
+1. Select device corresponding to your drive
+1. Open the parameter editor (green icon on top tool-bar)
+1. Set P2-14, P2-15, P2-16, and P2-17 to 0
+1. Write the parameters to the drive (icon on top of parameter editor window)
+
+import asda_soft_param_editor from "./asda_soft_param_editor.png?glowsite"
+
+<Image meta={asda_soft_param_editor} alt="ASDA soft param editor"  />
+
+import asda_soft_param_di_setting from "./asda_soft_param_di_setting.png?glowsite"
+
+<Image meta={asda_soft_param_di_setting} alt="ASDA soft di setting"  />
+
+
+In the ASDA-Soft application, the drive can be jogged using the jogging control found in the screen launched by the toolbar joystick icon.
+
+import asda_soft_jog from "./asda_soft_jog.png?glowsite"
+
+<Image meta={asda_soft_jog} alt="ASDA soft jogging"  />
 
 
 ## SDOs

@@ -33,13 +33,14 @@ The drives worked well when we tested them, and they were straight forward to co
 There is no drive commissioning software provided by Cannon automata, but they are straight forward enough to integrate without this.
 
 
+## Review
 
 
 <div style={{margin:"20px"}}>
     <Row>
         <Col span={6}>Overall rating</Col>
-        <Col span={4}><Rate disabled defaultValue={4}/></Col>
-        <Col span={14}>Really good, </Col>
+        <Col span={4}><Rate disabled defaultValue={2}/></Col>
+        <Col span={14}>Basic, pricey but work ok </Col>
     </Row>
 
     <Row>
@@ -110,8 +111,8 @@ import smc3_connected from "./smc3_connected.jpg?glowsite"
 
 ## Notes
 
-* No soft limited but digital inputs for mechanical limit switches - plus stallguard
-
+* No soft limits but digital inputs for mechanical limit switches - plus stallguard
+* Uses the Trinamic TMC drive ICs and they expose the features of these ICs
 
 ## Default netscan
 
@@ -181,11 +182,6 @@ PDO mapping according to CoE :
 	[6          ] [0x000D.0] [0x6061:0x00] [0x08] [INTEGER8    ] [SubIndex 000                            ]
 *** End of network scanning output ***
 ```
-## Netscan after PDO mapping
-
-After setting up the PDO mapping we can netscan the drive again `gbem -m -ieth0`.
-
-This time we
 
 
 ## Testing
