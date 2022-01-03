@@ -2,5 +2,121 @@
 
 ## Introduction
 
-This blog describes
+This blog describes exploration of the SOES (Simple Open EtherCAT slave) software and its use with the &gbt.
 
+## How to make an EtherCAT slave
+EtherCAT slaves have precise timing requirements, so it is not usually possible to implement a EtherCAT slave as standard software running on a conventional low-end microcontroller (or microprocessor).
+
+The benchmark statistic for EtherCAT is "end-to-end latency of less than 700ns" and this is tricky to achieve.
+
+So when implementing EtherCAT slaves, people usually reach for one of the following options:
+
+1. Dedicated chips (ASICs)
+1. IP cores for FPGAs
+1. MPUs that include dedicated EtherCAT hardware
+1. MPUs with special features than enable fast Ethernet processing
+
+Option 1, ASICs, are available from a number of manufacturers:
+* Microchip - LAN9252/LAN9253
+* Beckhoff - ET1100
+* ASIX - AX58100
+* Hilscher - netX series
+* HMS - anybus series
+* Reneasa - EC-1
+* Trinamic - TMC
+
+Option 2, IP Cores for FPGAs, are available from Beckhoff:
+* Altera - ET1810/ET1811/ET1812
+* Xlinx - ET1851/ET1816/ET1817
+
+Option 3, MPUs with added hardware are available from Infinion:
+* Infinion - XMC
+
+Option 4, MPUs with fast Ethernet processing are available from TI:
+* Texas instruments - e.g. AM335x
+
+## Why is SOES useful?
+
+Now, you can take say the LAN9252 chip, connected by SPI to your MPU or MCU, and initialise it with a couple of SPI commands.
+
+Then, when it is connected to an EtherCAT master, it will magically jump into operation enabled state, and you can (over SPI) read and write PDO objects.
+
+That's all there is to it.
+
+You can enable distributed clocks on the slave and use an interrupt handler hung off a GPIO pin to co-ordinated the PDO reads and writes.
+
+So, why would you need any additional software?
+
+* state management
+*
+*
+
+
+## What hardware interfaces does SOES support?
+
+There are interfaces available for the following hardware:
+* LAN9252
+* LWIP
+* XMC4
+* AM335x
+* XMC4300
+
+## Steps
+
+To test things out, we used a Raspberry Pi and a evaluation board for the LAN9252.
+
+Either the <a href="https://www.bausano.net/en/hardware/ethercat-e-arduino/ethercat-and-raspberry.html">EasyCAT HAT</a> from AB&T or the EVB from Microchip <a href="https://www.microchip.com/en-us/product/LAN9252#Development%20Environment"> specifically the EVB-LAN9252-SPI board</a>.
+
+The EasyCAT HAT just plugs onto the Raspberry Pi's header and with the Microchip EVB you will need to jumper it up.
+
+The connections needed are:
+
+* SPI - MISO, MOSI, CS, SCK
+* INT - the interrupt signal
+
+
+1. First, we clone the GitHub repo: `https://github.com/OpenEtherCATsociety/SOES`
+1. Next, we open the code in IDE. The code uses CMake and your IDE should recognise this and should allow you to be able to build the project
+1. We want to be able to run the code on the raspberry pi as well as on our development PC so we configure remote dev. We use JetBrains CLion and this supports a handy <a href="https://www.jetbrains.com/help/clion/remote-projects-support.html"> remote mode</a> to enable this.
+1. Define printf in `cc.h` so that we get some debug output
+
+```c
+#else
+#include <stdio.h>
+#define DPRINT(...) printf ("soes: "__VA_ARGS__)
+#endif
+```
+
+1. Set a compile option to `-DRPI_VARIANT=TRUE` so that we compile the raspberry Pi demo code.
+
+1. Install bcm2835 lib on the pi
+
+1. write the `/raspberry_lan9252/slave.bin` file to the LAN9252
+
+
+## generate SII binaries from ESI files
+
+<a href="https://github.com/synapticon/siitool">siitool</a>
+
+
+
+## enable sync0
+
+int is GPIO 17
+
+```c
+
+wiringPiISR(0, INT_EDGE_RISING, callback);
+
+TempLong.Long = 0x00000004;                        // enable interrupt from SYNC 0
+SPIWriteRegisterIndirect (TempLong.Long, 0x204);   // in AL event mask register and disable  other interrupt sources
+
+TempLong.Long = 0x00000111;                        // set LAN9252 interrupt pin driver as push-pull active high
+SPIWriteRegisterDirect (0x54, TempLong.Long);
+                                                         // (On the EasyCAT board the IRQ pin
+                                                         // is inverted by a mosfet, so Arduino
+                                                         // receives an active low signal)
+
+TempLong.Long = 0x00000001;                        // enable LAN9252 interrupt
+SPIWriteRegisterDirect (0x5C, TempLong.Long);
+```

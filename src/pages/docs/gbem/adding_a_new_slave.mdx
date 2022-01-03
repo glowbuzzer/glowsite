@@ -166,57 +166,114 @@ The hash defines for the bit numbers are obviously a bit pointless but follow th
 
 Yes, that is all there is to it - just a single header with some simple #defines.
 
-### Medium difficulty example - Beckhoff EL3001 slave  
+### Medium difficulty example - Beckhoff EL3102 slave
 
-The EL3001 is a single channel analog input module.
+The EL3102 is a  2-channel analog input, voltage, ±10 V, 16 bit, differential.
 
-The first bit of the driver code for the EL3001 is the #defines for the EEPROM information. These can be read off the netscan's output.
+The first bit of the driver code for the EL3102 is the #defines for the EEPROM information. These can be read off the netscan's output.
+
+```shell
+Slave 2 data
+ PDI Control      : 0005
+ PDI Config       : 0013
+ Config Alias     : 0000
+ Checksum         : 0064
+   calculated     : 0064
+ Vendor ID        : 00000002
+ Product Code     : 0C1E3052
+ Revision Number  : 00000000
+ Serial Number    : 00000000
+ Mailbox Protocol : 000C
+ Size             : 000F = 2048 bytes
+ Version          : 0001
+```
+
+
+
+
 
 Next we create the #defines for the locations of the data in the slave's PDO.
 
-The value which is a `int16` is located at position `2` and the 8 bits
+Again, we refer to the `netscan` output.
 
-TODO
+```shell
+Slave: 2
+ Name: EL3102
+ Output size: 0bits
+ Input size: 0bits
+ State: 2
+ Delay: 0[ns]
+ Has DC: 0
+ Activeports: 1.0.0.0
+ Configured address: 1002
+ Man: 00000002 ID: 0c1e3052 Rev: 00000000
+ SM0 A:1800 L: 246 F:00010026 Type:1
+ SM1 A:18f6 L: 246 F:00010022 Type:2
+ SM2 A:1000 L:   0 F:00010024 Type:3
+ SM3 A:1100 L:   0 F:00010020 Type:4
+ FMMUfunc 0:3 1:2 2:0 3:0
+ MBX length wr: 246 rd: 246 MBX protocols : 0c
+ CoE details: 0f FoE details: 01 EoE details: 00 SoE details: 00
+ Ebus current: 180[mA]
+ only LRD/LWR:0
+PDO mapping according to CoE :
+  SM2 outputs
+ 	[byte_offset] [addr b  ] [index:sub  ] [bitl] [data_type   ] [name                                    ]
+  SM3 inputs
+ 	[byte_offset] [addr b  ] [index: sub ] [bitl] [data_type   ] [name                                    ]
+	[0          ] [0xFFF68818.0] [0x3101:0x01] [0x08] [UNSIGNED8   ] [Status                                  ]
+	[1          ] [0xFFF68819.0] [0x3101:0x02] [0x10] [INTEGER16   ] [Value                                   ]
+	[3          ] [0xFFF6881B.0] [0x3102:0x01] [0x08] [UNSIGNED8   ] [Status                                  ]
+	[4          ] [0xFFF6881C.0] [0x3102:0x02] [0x10] [INTEGER16   ] [Value                                   ]
 
-````c
-//EL3001 1Ch. Ana. Input +/-10V
-#define EL3001_EEP_NAME "EL3001"
-#define EL3001_EEP_MAN BECKHOFF_MAN
-#define EL3001_EEP_REV 0x00110000
-#define EL3001_EEP_ID 0xbb93052
+```
 
-//int16
-#define EL3001_VALUE_INDEX 2
+We can see from the `netscan` that the slave has no outputs only inputs.
 
+The objects are a pair of `Status` and `Value` objects. The `Status` is an `uint8` and the `Value` is an `int16`.
+
+This exactly what we would expect for a dual channel 16 bit differential voltage input slave.
+
+The code to support the slave will just be a header file containing the defines.
+
+```c
+#include "beckhoff_shared.h"
+
+//EL3102 2Ch. Ana. Input +/-10V, Diff.
+#define EL3102_EEP_NAME 		"EL3102"
+#define EL3102_EEP_MAN 			BECKHOFF_MAN
+#define EL3102_EEP_ID 			0x0C1E3052
+#define EL3102_EEP_REV 			0x0
+
+/* for 0x1A00 & 0x1A01 PDO mapping */
+//STATUS is uint8
+//VALUE is int16
+
+#define EL3102_CH1_STATUS_INDEX 0
+#define EL3102_CH1_VALUE_INDEX 	1
+#define EL3102_CH2_STATUS_INDEX 3
+#define EL3102_CH2_VALUE_INDEX	4
+```
+
+This is all you need.
+
+You can refine this a little further with some #defines to interpret the status bits
+
+```c
 //Underrange event active
 #define EL3001_STATUS_UNDERRANGE_BIT_NUM 0
 //        Overrange event active
 #define EL3001_STATUS_OVERRANGE_BIT_NUM 1
 
-//Value smaller/equal Limit1
-#define EL3001_STATUS_LIMIT_1_1_BIT_NUM 2
+//Value at Limit1
+#define EL3001_STATUS_LIMIT_1_BIT_NUM 3
 
-//Value bigger/equal Limit1
-#define EL3001_STATUS_LIMIT_1_2_BIT_NUM 3
-
-//Value smaller/equal Limit2 &
-#define EL3001_STATUS_LIMIT_2_1_BIT_NUM 4
-
-// Bit1: Value bigger/equal Limit2
-#define EL3001_STATUS_LIMIT_2_2_BIT_NUM 5
+//Value at Limit2
+#define EL3001_STATUS_LIMIT_2_BIT_NUM 5
 
 //Bit set when Over- or Underrange
 #define EL3001_STATUS_ERROR_BIT_NUM 6
-
-// TRUE when this TxPDO is not valid
-#define EL3001_STATUS_TXPDO_STATE_BIT_NUM 13
-
-// Bit toggles everytime when new value available
-#define EL3001_STATUS_TXPDO_TOGGLE_BIT_NUM_8 14
-
-````
-
-
+```
 
 
 ## Complex example - Kollmorgen AKD drive

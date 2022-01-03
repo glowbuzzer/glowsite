@@ -48,25 +48,3 @@ responsive
 * do mobile home page carousel images &&&
 * general review
 
-
-
-
-* gcode working&&&
-* dev video&&&
-* move fault reset button
-* 
-
-
-
-
-
-
-
-5 slots to xmas
-
-wk1 - nav - front-end compopnents back - motion getting started - everythign lining up - 
-wk2 - gbc docs week
-wk3 - home page week - cookies - meta <<<
-wk4 - gbem week - tweek week
-wk5 - tutorials
-ak blog

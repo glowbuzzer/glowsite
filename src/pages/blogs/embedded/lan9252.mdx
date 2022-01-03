@@ -18,13 +18,54 @@ The LAN9252 and the newer LAN9253 are Microchip’s 2/3-port EtherCAT device con
 
 It is available in an easy to prototype 64-TQFP or 64-QFN package.
 
-It is a simple chip, with a simple interface requiring simple software to drive it. This is a combination we find very appealing.
+It is a simple chip, with a simple interface requiring simple software to drive it. This is a combination we find very appealing!
 
 Hardware design is very simple with a low BoM count:
-* An external crystal of MEMs oscillation
-* PSU filtering & decoupling
+
+* An external crystal or MEMs oscillator
+* Usual filtering & decoupling caps.
 * Dual magnetics
 * EEPROM
 
-There are easy options to prototype with the LAN9252 - (Microchip dev board or EasyCAT) provide details here?
+There are easy options to prototype with the LAN9252. We have used both:
+* Microchip dev board
+* EasyCAT
+
+0x000 - to - 0x01c
+0x020 - to - 0x03c
+
+## inf
+
+You need an SII in the EEPROM that is good enough to boot the LAN9252
+
+
+
+## Why is integrating with a slave useful?
+
+Usually (with &gbem) the &gbt acts a master on the EtherCAT network.
+
+Sometimes, you already have the master
+
+
+## wiring up
+
+
+
+## sync0 and signals
+
+Convert GPIO interupt to signal
+
+
+## comms
+
+## abbreviated format
+128 bytes
+
+
+````c
+bcm2835_gpio_write(RPI_CS_PIN, HIGH);
+bcm2835_delayMicroseconds(20);
+bcm2835_spi_transfernb(physicalFieldbusDataOut, physicalFieldbusDataIn, 200);
+bcm2835_gpio_write(RPI_CS_PIN, LOW);
+```
 
