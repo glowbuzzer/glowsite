@@ -6,7 +6,8 @@ export const GbColours = {
     BackgroundGrey: "#f0f0f0",
     MainPurple: "#9254de",
     TopNav: "#d9d9d9",
-    BackgroundDarkSection: "#22075e"
+    BackgroundDarkSection: "#22075e",
+    BackgroundCodeBlock: "rgba(0,0,0,0.75)"
 }
 
 const Background = styled.div`
@@ -44,11 +45,20 @@ const AppStyle = styled.div`
 
     pre {
         display: block;
-        background: rgba(0,0,0,0.75);
         width: 100%;
         max-width: 100%;
         overflow-x: auto;
         white-space: pre;
+
+        > div {
+            background: ${GbColours.BackgroundCodeBlock} !important;
+        }
+    }
+
+    .remark-highlight {
+        pre {
+            background: ${GbColours.BackgroundCodeBlock};
+        }
     }
 
     .codeblock-demo {
@@ -60,7 +70,7 @@ const AppStyle = styled.div`
 
     dt {
         font-weight: bold;
-        color: rgba(0,0,0,0.6);
+        color: rgba(0, 0, 0, 0.6);
     }
 
     dd {
