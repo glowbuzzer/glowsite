@@ -24,7 +24,7 @@ import {
 import styled from "styled-components"
 
 const StyledRender = styled.div`
-    .synopsis .token {
+    .token {
         filter: brightness(0.75);
     }
 
@@ -52,14 +52,28 @@ const StyledRender = styled.div`
         content: " | ";
     }
 
+    pre > span > .property {
+        > .shortText {
+            //border-top: 2px solid rgba(0, 0, 0, 0.08);
+            padding-top: 6px;
+            padding-bottom: 6px;
+            margin-top: 26px;
+        }
+
+        :first-child > .shortText {
+            margin-top: 10px;
+        }
+    }
+
     .param,
     .property {
-        .shortText {
+        .shortText,
+        .text {
             font-family: Roboto, sans-serif;
             font-size: 0.9em;
             border-left: 2px solid rgba(0, 0, 0, 0.08);
-            margin-top: 5px;
-            padding-top: 6px;
+            margin-top: 0px;
+            padding-top: 0px;
             padding-bottom: 0;
             padding-left: 8px;
             color: rgba(0, 0, 0, 0.6);
@@ -67,6 +81,11 @@ const StyledRender = styled.div`
             p:only-child {
                 margin: 0;
             }
+        }
+
+        .text {
+            padding-top: 6px;
+            padding-bottom: 6px;
         }
     }
 
@@ -121,14 +140,41 @@ const TypedocSignature = ({
     )
 }
 
-const TypedocDeclaration = ({ d }: { d: DeclarationReflection }) => {
+const TypedocConstructor = ({ s }: { s: SignatureReflection }) => {
+    return (
+        s && (
+            <>
+                <Synopsis item={s} />
+                <span className="token function">constructor</span>(
+                <span>
+                    {s.parameters?.map(param => (
+                        <span key={param.name} className="param">
+                            <Synopsis item={param} />
+                            {param.name}
+                            {param.flags.isOptional && "?"}: <TypedocType t={param.type} />
+                        </span>
+                    ))}
+                </span>
+                )
+            </>
+        )
+    )
+}
+
+const TypedocDeclaration = ({
+    d,
+    includeSynopsis = true
+}: {
+    d: DeclarationReflection
+    includeSynopsis?: boolean
+}) => {
     switch (d.kindString) {
         case "Type literal":
             if (d.signatures?.[0]) {
                 return (
                     <TypedocSignature
                         s={d.signatures?.[0]}
-                        includeSynopsis={true}
+                        includeSynopsis={includeSynopsis}
                         isOptional={d.flags.isOptional}
                     />
                 )
@@ -140,7 +186,7 @@ const TypedocDeclaration = ({ d }: { d: DeclarationReflection }) => {
                         <span>
                             {d.children.map(property => (
                                 <span key={property.name} className="property">
-                                    <Synopsis item={property} />
+                                    {includeSynopsis && <Synopsis item={property} />}
                                     <TypedocDeclaration d={property} />
                                 </span>
                             ))}
@@ -158,7 +204,7 @@ const TypedocDeclaration = ({ d }: { d: DeclarationReflection }) => {
                     </>
                 )
             }
-            return <span>@{d.kindString}</span>
+            return <span>#{d.kindString}</span>
 
         case "Property":
             return (
@@ -167,6 +213,20 @@ const TypedocDeclaration = ({ d }: { d: DeclarationReflection }) => {
                     {d.flags.isOptional && "?"}: <TypedocType t={d.type} />
                 </>
             )
+
+        case "Accessor":
+            if (!d.getSignature) {
+                return <>{d.name} has no get signature!</>
+            }
+            return (
+                <>
+                    <Synopsis item={d.getSignature[0]} />
+                    {d.name}: <TypedocType t={d.getSignature[0].type} includeSynopsis={false} />
+                </>
+            )
+
+        case "Constructor":
+            return <TypedocConstructor s={d.signatures[0]} />
 
         case "Method":
             return (
@@ -178,17 +238,20 @@ const TypedocDeclaration = ({ d }: { d: DeclarationReflection }) => {
             )
 
         case "Interface":
+        case "Class":
             if (d.children?.length) {
                 return (
                     <>
                         {"{"}
                         <span>
-                            {d.children.map(property => (
-                                <span key={property.name} className="property">
-                                    <Synopsis item={property} />
-                                    <TypedocDeclaration d={property} />
-                                </span>
-                            ))}
+                            {d.children
+                                .filter(p => !(p.flags?.isProtected || p.flags?.isPrivate))
+                                .map(property => (
+                                    <span key={property.name} className="property">
+                                        <Synopsis item={property} />
+                                        <TypedocDeclaration d={property} />
+                                    </span>
+                                ))}
                         </span>
                         {"}"}
                     </>
@@ -197,7 +260,7 @@ const TypedocDeclaration = ({ d }: { d: DeclarationReflection }) => {
             return <>Interface no children</>
 
         default:
-            return <span>@{d.kindString}</span>
+            return <span>@@{d.kindString}</span>
     }
 }
 
@@ -216,7 +279,7 @@ const TypedocTypeArguments = ({ args }: { args?: Type[] }) => {
     )
 }
 
-const TypedocType = ({ t }: { t: Type }) => {
+const TypedocType = ({ t, includeSynopsis = true }: { t: Type; includeSynopsis?: boolean }) => {
     switch (t.type) {
         case "array":
             return (
@@ -238,7 +301,7 @@ const TypedocType = ({ t }: { t: Type }) => {
         }
         case "reflection": {
             const r = t as ReflectionType
-            return <TypedocDeclaration d={r.declaration} />
+            return <TypedocDeclaration d={r.declaration} includeSynopsis={includeSynopsis} />
         }
         case "tuple": {
             const r = t as TupleType
@@ -359,9 +422,11 @@ const Synopsis = ({ item }: { item: Reflection }) => {
             <div className="shortText">
                 <Markdown>{item.comment.shortText.trim()}</Markdown>
             </div>
-            <div className="text">
-                <Markdown>{item.comment.text}</Markdown>
-            </div>
+            {item.comment.text && (
+                <div className="text">
+                    <Markdown>{item.comment.text}</Markdown>
+                </div>
+            )}
         </>
     ) : null
 }
@@ -459,8 +524,6 @@ const TypedocLeftNav = ({ current, title, filter }) => {
 }
 
 const Interface = ({ item }: { item }) => {
-    console.log(item)
-
     return (
         <div>
             <Synopsis item={item} />
@@ -472,11 +535,24 @@ const Interface = ({ item }: { item }) => {
     )
 }
 
+const Class = ({ item }: { item }) => {
+    return (
+        <div>
+            <Synopsis item={item} />
+            <pre>
+                class {item.name} <TypedocDeclaration d={item} />
+            </pre>
+            <pre className="debug">{JSON.stringify(item, null, 2)}</pre>
+        </div>
+    )
+}
+
 const render_component = {
     "Type alias": TypeAlias,
     Interface,
     Enumeration,
-    Function
+    Function,
+    Class
 }
 
 export default ({ title, filter }) => {
