@@ -6,7 +6,7 @@ specifiers:
   '@emeks/antd-custom-theme-generator': ^0.2.0
   '@glowbuzzer/controls': ^1.0.1-alpha.20
   '@glowbuzzer/layout': ^1.0.1-alpha.20
-  '@glowbuzzer/store': ^1.0.1-alpha.21
+  '@glowbuzzer/store': ^1.0.1-alpha.37
   '@mdx-js/mdx': ^2.0.0-rc.1
   '@mdx-js/react': ^1.6.22
   '@mdx-js/rollup': ^2.0.0-rc.1
@@ -81,7 +81,7 @@ devDependencies:
   '@emeks/antd-custom-theme-generator': 0.2.0_antd@4.10.0
   '@glowbuzzer/controls': 1.0.1-alpha.20
   '@glowbuzzer/layout': 1.0.1-alpha.20
-  '@glowbuzzer/store': 1.0.1-alpha.21
+  '@glowbuzzer/store': 1.0.1-alpha.37
   '@mdx-js/mdx': 2.0.0-rc.1
   '@mdx-js/react': 1.6.22_react@17.0.2
   '@mdx-js/rollup': 2.0.0-rc.1
@@ -1733,8 +1733,8 @@ packages:
     resolution: {integrity: sha512-UuTPywLw3m/QlSBhql/4HD5nn8gT9mDDHF6tQRz4pxAlpn7fRHIltZY24aYUfUjaUco/0TL9NyWRTcz/o8M5IA==}
     dev: true
 
-  /@glowbuzzer/store/1.0.1-alpha.21:
-    resolution: {integrity: sha512-TTJwyvVIpUdvBkUBjNy9GqEruAhkllU7xHzYrJObuRW8Mg90uPAeyUmvmfyvD5q/EigfuRfT0uzl5NhAYS8V/g==}
+  /@glowbuzzer/store/1.0.1-alpha.37:
+    resolution: {integrity: sha512-/D9qk+4w3BBjrn32wMAnYW6cso9q7ywHQ3iRyWkKOSQB8mpYzGGm8lRS9S2H6Kr28bVqz99ZWbmKhiGB0tIgsg==}
     dev: true
 
   /@mdx-js/mdx/2.0.0-rc.1:
