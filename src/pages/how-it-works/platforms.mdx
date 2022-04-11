@@ -25,11 +25,11 @@ This means the &gbr components can be deployed on a range of devices either in t
 
 ## &gbcl
 
-The core control is written in vanilla c code and is written to be highly portable.
+The core control is written in vanilla C and is highly portable.
 
-The core supported platforms are real-time Linux & embedded STM32 but no issues are likely to be found deploying on platforms such as VxWorks, QNX, Xenomai or different high-end dual-core (cortex M4/M7) microcontrollers running FreeRTOS.
+The core supported platforms are real-time Linux and embedded STM32 but no issues are likely to be found deploying on platforms such as VxWorks, QNX, Xenomai or different high-end dual-core (cortex M4/M7) microcontrollers running FreeRTOS.
 
-The core control is designed to be highly performant. For example, the Raspberry 4 single board computer supports 6 axis robots at a 1msec cycle time to the drives.
+The core control is highly performant. For example, the Raspberry 4 single board computer supports six axis robots at with 1 millisecond cycle time to the drives.
 
 If you are using the &gbt with Linux (rather than running on an embedded microcontroller) you will need either an industrial PC or an embedded Linux platform.
 
@@ -55,9 +55,23 @@ These interfaces with &gbc over shared memory on Linux or through SPI on embedde
 
 The required interfaces vary by platform/function:
 
-* Linux EtherCAT/Step master - requires access to the POSIX shared memory API which allows processes to communicate information by sharing a region of memory. This is available across a wide variety of different Linux platforms.
-* Linux EtherCAT master - requires a RAW sockets network interface again this is widely available.
-* Linux Step master - requires a GPIO/SPI interface. Linux has spidev and libgpiod and we often use these interfaces but on some variants of Linux (.e.g Raspberry Pi) other libraries are needed
-* Microcontroller EtherCAT/Step master - requires a GPIO / SPI interface. Microcontrollers are pretty good at GPIO and SPI so this is not an issue!
-* Microcontroller EtherCAT master - requires a custom network driver. We have ported this to STM32/lwIP but for different microcontrollers using different middleware porting work would be needed
+Linux EtherCAT/Step master
+
+: Requires access to the POSIX shared memory API which allows processes to communicate information by sharing a region of memory. This is available across a wide variety of different Linux platforms
+
+Linux EtherCAT master
+
+: Requires a RAW sockets network interface again this is widely available
+
+Linux Step master
+
+: Requires a GPIO/SPI interface. Linux has spidev and libgpiod and we often use these interfaces but on some variants of Linux (.e.g Raspberry Pi) other libraries are needed
+
+Microcontroller EtherCAT/Step master
+
+: Requires a GPIO / SPI interface. Microcontrollers are pretty good at GPIO and SPI so this is not an issue!
+
+Microcontroller EtherCAT master
+
+: Requires a custom network driver. We have ported this to STM32/lwIP but for different microcontrollers using different middleware porting work would be needed
 

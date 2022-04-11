@@ -56,7 +56,7 @@ const nav = {
                 {
                     slug: "detail",
                     title: "More detail",
-                    subtitle: "A little, more technical detail...",
+                    subtitle: "A little more technical detail...",
                     component: () => import("./pages/how-it-works/detail.mdx")
                 },
                 {
@@ -86,7 +86,7 @@ const nav = {
                 {
                     slug: "real_time",
                     title: "Real-time communication",
-                    subtitle: "How we get fast reaction to events?",
+                    subtitle: "How we get fast reaction to events",
                     component: () => import("./pages/how-it-works/real_time.mdx")
                 },
                 {

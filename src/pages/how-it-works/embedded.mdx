@@ -84,8 +84,6 @@ export const dataSourceEmbeddedLinux = [
 ];
 
 
-
-
 export const columns = [
     {
         title: 'Pros',
@@ -131,17 +129,18 @@ The &gbt will run on either a microcontroller or embedded Linux allowing you to 
     <Timeline.Item>GBEM or GBSEM is either integrated with embedded drives in your electronics or connects to packaged EtherCAT drives in your machine</Timeline.Item>
 </Timeline>
 
-And this gives you the ability to build complex co-ordinated motion control applications (robot, Cartesian, delta etc.) built using web stack and running on a fully embedded platform with no PLC in the loop!
+This gives you the ability to build complex co-ordinated motion control applications (robot, Cartesian, delta etc.) built using web stack and running on a fully embedded platform with no PLC in the loop!
 
 ## Pros and cons of microcontroller vs embedded Linux
 There are pros and cons to each approach. Anyone, who has worked in this area knows these trade-offs intimately but to summarise:
 
 <Divider orientation="left"> Microcontroller pros and cons</Divider>
-<Table dataSource={dataSourceMicrocontroller} columns={columns} bordered={true}/>
+
+<Table dataSource={dataSourceMicrocontroller} columns={columns} bordered={true} pagination={false}/>
 
 <Divider orientation="left"> Embedded Linux pros and cons</Divider>
 
-<Table dataSource={dataSourceEmbeddedLinux} columns={columns} bordered={true}/>
+<Table dataSource={dataSourceEmbeddedLinux} columns={columns} bordered={true} pagination={false}/>
 
 
 
