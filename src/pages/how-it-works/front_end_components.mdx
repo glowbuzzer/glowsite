@@ -13,23 +13,52 @@ import { GlowbuzzerApp } from "@glowbuzzer/controls/app"
 
 ## React components (GBR)
 
-The &gbt ships with many front-end React components these are collectively called GBR. You will probably use some of these components unmodified (e.g. the component to connect to a machine) while others can be the starting point for you to modify to your specific needs.
+The &gbt ships with many front-end React components these are collectively called GBR.
+You will probably use some of these components unmodified (such as the component to connect to a machine)
+while others can be the starting point for you to modify to your specific needs.
+Full source code is provided for all components.
 
 The framework is built on other open source projects, primarily React, Redux & Ant Design.
 
-We have selected a handful of the components here to give you a flavour of what's available. But see: <Link to="/docs/gbr/overview">User interface Documentation</Link> to see the full suite of components.
+Below is a description of a handful of the components to give you a flavour of what's available. See <Link to="/docs/gbr/overview">&gbrl; Documentation</Link> for the full suite of components.
 
-* **Machine connection and state machine** - connecting to the machine or robot and taking it through its start-up state machine viewing any errors that may occur
-* **Jogging** - manually moving the machine or robot either in cartesian or joint space
-* **DRO** - where is the machine, in joint-space, in cartesian space in different frames
-* **Task/activities** - interaction with the control programs (tasks and activities)
-* **Analogue and digital in/out** - see that state of inputs and set the state of outputs on the machine
-* **g-code** - load and send gcode to the machine
-* **Path view** - shows in a 3D view where the machine is and the path the program will take the TCP on
-* **Robot/machine view** - for machines with non-trivial kinematics (robots) shows a 3d view of the machine
-* **Telemetry** - shows the trajectories that are sent to drives (for diagnostic purposes)
+**Machine connection and state machine**
 
+: Connecting to the machine or robot and taking it through its start-up state machine viewing any errors that may occur
 
+**Jogging**
+
+: Manually moving the machine or robot either in cartesian or joint space
+
+**DRO**
+
+: Where is the machine, in joint-space, in cartesian space in different frames
+
+**Task/activities**
+
+: Interaction with the control programs (tasks and activities)
+
+**Analogue and digital in/out**
+
+: See that state of inputs and set the state of outputs on the machine
+
+**g-code**
+
+: Load and send gcode to the machine
+
+**Path view**
+
+: Shows in a 3D view where the machine is and the path the program will take the TCP on
+
+**Robot/machine view**
+
+: For machines with non-trivial kinematics (robots) shows a 3d view of the machine
+
+**Telemetry**
+
+: Shows the trajectories that are sent to drives (for diagnostic purposes)
+
+{/*
 Here you can see the documentation for a few components:
 
 <Tabs defaultActiveKey="1">
@@ -83,6 +112,7 @@ import {
     ToolPathTile
 } from "@glowbuzzer/controls"
 ```
+*/}
 
 ## HMI options
 

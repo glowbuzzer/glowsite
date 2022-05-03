@@ -44,3 +44,6 @@ responsive
 * do mobile home page carousel images &&&
 * general review
 
+
+General content / navigation
+* Work on getting-started/simulation page and signpost it more, as a lot of people will start here
