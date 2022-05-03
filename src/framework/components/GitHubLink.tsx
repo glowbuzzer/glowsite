@@ -30,11 +30,11 @@ export const GitHubLink = ({ title, repo, directory, file }: GitHubLinkProps) =>
     var displayUrl
 
     if (!file) {
-        displayUrl = `github.com/glowbuzzer/${repo}/tree/master${directory}`
-        actualUrl = `https://github.com/glowbuzzer/${repo}/tree/master${directory}`
+        displayUrl = `github.com/glowbuzzer/${repo}/tree/main${directory}`
+        actualUrl = `https://github.com/glowbuzzer/${repo}/tree/main${directory}`
     } else {
-        displayUrl = `github.com/glowbuzzer/${repo}/blob/master${directory}/${file}`
-        actualUrl = `https://github.com/glowbuzzer/${repo}/blob/master${directory}/${file}`
+        displayUrl = `github.com/glowbuzzer/${repo}/blob/main${directory}/${file}`
+        actualUrl = `https://github.com/glowbuzzer/${repo}/blob/main${directory}/${file}`
     }
 
     return (

@@ -9,32 +9,39 @@ import Jog from "../fragments/jog.mdx"
 
 <Tldr>
     - You can test the toolkit with no hardware
-    - Runs "self-contained" on WSL (or Linux itself)
-    - Test out the pre-built react components
+    - Runs on WSL, VM (or Linux itself)
+    - Test out our pre-built react components
     - Develop your own React components
+    - Run front-end for our wed
 </Tldr>
 
 ## What is simulation mode?
-Simulation is a way to test the &gbt without needing any hardware.
+Simulation is a way to test the &gbt without needing any hardware (motors, IO etc.).
 
-It is also used to speed up the development of front-end components by allowing you to develop front-end machine control applications without having to fire-up specific hardware (drives, IO, fieldbusses etc.).
+It is also used to speed up the development of front-end components by allowing you to build React machine control applications without having to fire-up specific hardware (drives, IO, fieldbusses etc.).
 
-Testing the &gbt in simulation mode means you can exercise a large part of the software from a Windows PC running WSL or a normal Linux PC. No Linux real-time extensions are required.
+Testing the &gbt in simulation mode means you can exercise a large part of the software from a Windows PC running WSL/VM or a normal Linux PC. No Linux real-time extensions are required.
 
-## Step 1 - Installing the &gbr
+## Step 1 - Installing and running &gbc
+First you need to install &gbc (the real-time core control) on WSL/VM or Linux itself.
 
-<CraTemplate/>
-
-This application needs to connect to &gbc. Installing and running this is the next step.
-
-## Step 2 - Installing and running &gbc
+Then you will connect &gbr to &gbc over the network.
 
 <InstallGbc/>
 
 <RunGbc/>
 
+## Step 2 - Running &gbr
 
-## Step 3 - Test
+The easiest way to start is to use our hosted versions of &gbr from our website.
+
+There are two example applications available for you to play with:
+
+1. generic - an example control for a cartesian machine - <a href="https://www.glowbuzzer.com/xxxx">available here</a>
+1. staubli - an example control for a 6-DOF industrial robot - <a href="https://www.glowbuzzer.com/yyyy">available here</a>
+
+
+## Step 3 - Test the basic functions of &gbr
 
 ### Connect to &gbc
 
@@ -43,4 +50,10 @@ This application needs to connect to &gbc. Installing and running this is the ne
 ### Jog a motor
 
 <Jog/>
+
+## Step 4 - going further
+
+The next step is to have local copy of &gbr for you to customise further.
+
+<CraTemplate/>
 

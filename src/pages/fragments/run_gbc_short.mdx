@@ -1,21 +1,9 @@
-
+import { Link } from "react-router-dom"
 
 
 To run GBC, usually `./GBC` is enough.
 
-You can optionally specify command line arguments of:
-
-`-pPORT` and `-sSHARED_MEMORY_NAME` -`gSIGNAL`.
-
-Usually the default HTTP server `PORT` of 9001 and `SHARED_MEMORY_NAME` of "gbc_shared_mem" and `SIGNAL` of 29 (SIG I/O POSSIBLE) will be used but you can vary these if needed.
-
-To use &gbc to control actual machines, requires that the version of Linux used has the preempt patch installed.
-
-This is not needed to use &gbc in simulation mode.
-
-Similarly, &gbc will not run in real-time on virtual machines (on Windows) but these can be used in simulation mode for development.
-
-Once run, &gbc will output to the console, various logging information about what it is up to. In the case you are having issues, picking carefully through this output is recommended as a good starting point to fault diagnosis.
+You can optionally specify command line arguments - see <Link to="/docs/gbc/configuration"> Configuration of GBC</Link> for more details.
 
 The first output should look something like this.
 

@@ -786,6 +786,11 @@ const nav = {
                             slug: "soes",
                             title: "Simple Open EtherCAT slave (SOES)",
                             subtitle: "Working with the Simple Open EtherCAT Slave (SOES)",
+                            tags: [
+                                "Embedded",
+                                "EtherCAT",
+                                "Linux",
+                            ],
                             component: () => import("./pages/blogs/embedded/soes.mdx")
                         }
                     ]

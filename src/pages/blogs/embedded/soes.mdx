@@ -1,4 +1,20 @@
+import {BogStandardHeaderRow, BogStandardRow, BogStandardCol, GitHubLink} from "../../../framework/components";
+import {TitleImage} from "../../../framework/components/TitleImage";
+import {PageTag} from"../../../framework/components/PageTags"
+import {ReadingTime} from "../../../framework/components/ReadingTime";
+import {Typography} from "antd";
+import netx52 from "./netx52.png?glowsite"
+import WriteSlaveEeprom from "../../fragments/write_slave_eeprom.mdx"
+import easycat from "./easycat.jpg?glowsite"
+import easycat_pi from "./easycat_pi.jpg?glowsite"
+
+export const heroImage=netx52
+
 # {props.subtitle}
+<PageTag tags={props.tags}/>
+<ReadingTime time="7"/>
+
+<TitleImage image={netx52} alt="LAN9252"/>
 
 ## Introduction
 
@@ -7,9 +23,9 @@ This blog describes exploration of the SOES (Simple Open EtherCAT slave) softwar
 ## How to make an EtherCAT slave
 EtherCAT slaves have precise timing requirements, so it is not usually possible to implement a EtherCAT slave as standard software running on a conventional low-end microcontroller (or microprocessor).
 
-The benchmark statistic for EtherCAT is "end-to-end latency of less than 700ns" and this is tricky to achieve.
+The benchmark statistic for EtherCAT is "end-to-end latency of less than 700ns" and this is tricky to achieve say on Linux running on a SoC.
 
-So when implementing EtherCAT slaves, people usually reach for one of the following options:
+So, when implementing EtherCAT slaves, people usually reach for one of the following options:
 
 1. Dedicated chips (ASICs)
 1. IP cores for FPGAs
@@ -27,7 +43,7 @@ Option 1, ASICs, are available from a number of manufacturers:
 
 Option 2, IP Cores for FPGAs, are available from Beckhoff:
 * Altera - ET1810/ET1811/ET1812
-* Xlinx - ET1851/ET1816/ET1817
+* Xilinx - ET1851/ET1816/ET1817
 
 Option 3, MPUs with added hardware are available from Infinion:
 * Infinion - XMC
@@ -35,22 +51,72 @@ Option 3, MPUs with added hardware are available from Infinion:
 Option 4, MPUs with fast Ethernet processing are available from TI:
 * Texas instruments - e.g. AM335x
 
+EtherCAT slaves vary in the level of "intelligence" they have:
+* Low - for example a slave that is say an 8 channel digital output. Based on the values set in a PDO or SDO object the slave turns outputs on and off
+* Medium - for example a slave that acts as a gateway, proxying infomation between a host application and the EtherCAT bus
+* High - for example a slave that acts as an EtherCAT drive
+
+Increasing intelligence in the slave brings the need to have software running alongside the slave and interacting with the EtherCAT state machine and sending messages (Alarms) to the EtherCAT master.
+
 ## Why is SOES useful?
 
-Now, you can take say the LAN9252 chip, connected by SPI to your MPU or MCU, and initialise it with a couple of SPI commands.
+Now, you can take say the Microchip LAN9252 chip, connected by SPI to your MPU or MCU, and initialise it with a couple of SPI commands.
 
-Then, when it is connected to an EtherCAT master, it will magically jump into operation enabled state, and you can (over SPI) read and write PDO objects.
+Then, when it is connected to an EtherCAT master, it will magically jump into operational state, and you can (over SPI) read and write PDO objects which the EtherCAT master will receive.
 
 That's all there is to it.
 
-You can enable distributed clocks on the slave and use an interrupt handler hung off a GPIO pin to co-ordinated the PDO reads and writes.
+You can enable distributed clocks on the slave and use an interrupt handler hung off a GPIO pin to co-ordinate the PDO reads and writes.
 
 So, why would you need any additional software?
 
-* state management
-*
-*
 
+<BogStandardHeaderRow>
+    <BogStandardCol span={8}>Feature</BogStandardCol>
+    <BogStandardCol span={16}>Description</BogStandardCol>
+</BogStandardHeaderRow>
+<BogStandardRow>
+    <BogStandardCol span={8}>**Management of the EtherCAT state machine**</BogStandardCol>
+    <BogStandardCol span={16}>More complex slaves need to control the EtherCAT state machine. So that, for example, the slave only appears to the master as being in Operational state which it is ready and drops into Safe Operational when a local issue occurs</BogStandardCol>
+</BogStandardRow>
+
+<BogStandardRow>
+    <BogStandardCol span={8}>**SDOs**</BogStandardCol>
+    <BogStandardCol span={16}>As well as objects in the PDO that get exchanged with the Master cyclically, slaves can have SDO objects that can be written and read by the Master a-cyclically.</BogStandardCol>
+</BogStandardRow>
+
+<BogStandardRow>
+    <BogStandardCol span={8}>**SDOs**</BogStandardCol>
+    <BogStandardCol span={16}>As well as objects in the PDO that get exchanged with the Master cyclically, slaves can have SDO objects that can be written and read by the Master a-cyclically. Now, these objects need to do something useful. For example, imagine your slave includes a configuration parameter, when the SDO is changed by the master, this SDO's value needs to do something useful in your slave software.</BogStandardCol>
+</BogStandardRow>
+
+
+<BogStandardRow>
+    <BogStandardCol span={8}>**Alarm messages**</BogStandardCol>
+    <BogStandardCol span={16}>Slaves can send alarm messages to the master. These are both the standard EtherCAT messages and custom "manufacturer specific" messages.</BogStandardCol>
+</BogStandardRow>
+
+
+<BogStandardRow>
+    <BogStandardCol span={8}>**File over EtherCAT (FoE)**</BogStandardCol>
+    <BogStandardCol span={16}>FoE enables the EtherCAT master to initiate a file transfer with the slave. This is usually used for uploading new slave firmware from the master.</BogStandardCol>
+</BogStandardRow>
+
+
+<BogStandardRow>
+    <BogStandardCol span={8}>**Ethernet over EtherCAT**</BogStandardCol>
+    <BogStandardCol span={16}>The main use for this is so that EtherCAT slaves can provide an HTTP with its TCP/IP transparently tunnel to the slave from the master. It is usually used so that the slave can offer a web config system.</BogStandardCol>
+</BogStandardRow>
+
+If you need any features like this in your slave's software then you are going to need to interact with the innards of the EtherCAT protocol from your slave's software and this is where SOES comes in.
+
+SOES is the Simple Open EtherCAT Master library. It is Open Source. It is an EtherCAT slave stack written in C.
+
+It is available on GitHub here <a href="https://github.com/OpenEtherCATsociety/SOES">https://github.com/OpenEtherCATsociety/SOES</a>.
+
+It is an alternative to using the ET9300 EtherCAT Slave Stack Code from Beckhoff/ETG and is a bit simpler and is more accessible when you are getting going.
+
+It is not as widely used as the SOEM (master) software but provides a useful framework for when you want your slave to start interacting with the EtherCAT protocol itself.
 
 ## What hardware interfaces does SOES support?
 
@@ -61,43 +127,45 @@ There are interfaces available for the following hardware:
 * AM335x
 * XMC4300
 
-## Steps
+They are written with differing levels of completeness. The LAN9252 interface is the most mature.
 
-To test things out, we used a Raspberry Pi and a evaluation board for the LAN9252.
+For this blog, we are working with the LAN9252.
+
+## Steps to get things working
+
+To test things out, we used a Raspberry Pi and an evaluation board for the LAN9252.
 
 Either the <a href="https://www.bausano.net/en/hardware/ethercat-e-arduino/ethercat-and-raspberry.html">EasyCAT HAT</a> from AB&T or the EVB from Microchip <a href="https://www.microchip.com/en-us/product/LAN9252#Development%20Environment"> specifically the EVB-LAN9252-SPI board</a>.
 
 The EasyCAT HAT just plugs onto the Raspberry Pi's header and with the Microchip EVB you will need to jumper it up.
 
+<Image meta={easycat} alt="Easycat" maxWidth={600}/>
+<Image meta={easycat_pi} alt="Easycat and Pi" maxWidth={600}/>
+
 The connections needed are:
 
 * SPI - MISO, MOSI, CS, SCK
-* INT - the interrupt signal
+* INT - the interrupt signal (we will configure the LAN9252 to make this SYNC0)
 
+Next, you can either clone the SOES GitHub repo from  <a href="https://github.com/OpenEtherCATsociety/SOES">https://github.com/OpenEtherCATsociety/SOES</a> or use our repo where we have stripped SOES down and integrated it with some standard &gbt code.
 
-1. First, we clone the GitHub repo: `https://github.com/OpenEtherCATsociety/SOES`
+Our repository can be found here:
+
+<GitHubLink title={"LAN9252 with SOES"} repo={"gblan9252_soes"} directory={"/"}/>
+
+We will assume that you are using our repo for the next instructions.
+
 1. Next, we open the code in IDE. The code uses CMake and your IDE should recognise this and should allow you to be able to build the project
-1. We want to be able to run the code on the raspberry pi as well as on our development PC so we configure remote dev. We use JetBrains CLion and this supports a handy <a href="https://www.jetbrains.com/help/clion/remote-projects-support.html"> remote mode</a> to enable this.
-1. Define printf in `cc.h` so that we get some debug output
-
-```c
-#else
-#include <stdio.h>
-#define DPRINT(...) printf ("soes: "__VA_ARGS__)
-#endif
-```
-
-1. Set a compile option to `-DRPI_VARIANT=TRUE` so that we compile the raspberry Pi demo code.
-
+1. We want to be able to run the code on the raspberry pi as well as on our development PC so, we configure remote dev. We use JetBrains CLion and this supports a handy <a href="https://www.jetbrains.com/help/clion/remote-projects-support.html"> remote mode</a> to enable this.
+1. Set a compile option to `-DFLAVOUR=PI` so that we compile for the Raspberry Pi
 1. Install bcm2835 lib on the pi
+1. write the `xml esi ` file to the LAN9252
 
-1. write the `/raspberry_lan9252/slave.bin` file to the LAN9252
 
 
-## generate SII binaries from ESI files
 
-<a href="https://github.com/synapticon/siitool">siitool</a>
-
+## Writing the slave EEPROM
+<WriteSlaveEeprom/>
 
 
 ## enable sync0

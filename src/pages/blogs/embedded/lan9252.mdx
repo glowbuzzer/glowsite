@@ -1,15 +1,20 @@
-import lan9252 from "./lan9252.png?glowsite"
-export const heroImage=lan9252
 import {PageTag} from"../../../framework/components/PageTags"
 import {ReadingTime} from "../../../framework/components/ReadingTime";
-
 import {TitleImage} from "../../../framework/components/TitleImage";
+import {Image} from "../../../framework/components";
+import {GitHubLink} from "../../../framework/components";
+import WriteSlaveEeprom from "../../fragments/write_slave_eeprom.mdx"
+import {Link} from "react-router-dom";
+import lan9252 from "./lan9252.png?glowsite"
+import easycat from "./easycat.jpg?glowsite"
+import easycat_pi from "./easycat_pi.jpg?glowsite"
+export const heroImage=lan9252
+
 
 # {props.subtitle}
 
-## Introduction
 <PageTag tags={props.tags}/>
-<ReadingTime time="7"/>
+<ReadingTime time="30"/>
 <TitleImage image={lan9252} alt="LAN9252"/>
 
 This blog describes the process of getting the Microchip LAN9252/52 EtherCAT slave controller working with the &gbt.
@@ -20,52 +25,155 @@ It is available in an easy to prototype 64-TQFP or 64-QFN package.
 
 It is a simple chip, with a simple interface requiring simple software to drive it. This is a combination we find very appealing!
 
-Hardware design is very simple with a low BoM count:
+Hardware design is very simple with a low BoM count. All that is needed is:
 
 * An external crystal or MEMs oscillator
 * Usual filtering & decoupling caps.
 * Dual magnetics
 * EEPROM
 
-There are easy options to prototype with the LAN9252. We have used both:
-* Microchip dev board
-* EasyCAT
+The LAN9252 supports a HBI interface. This is an SRAM-style memory interface. It supports native 8-bit and 16-bit cycles, and indexed (address pointer register) accesses.
 
-0x000 - to - 0x01c
-0x020 - to - 0x03c
+We haven't used this interface, instead opting for SPI. We work mainly with the STM32 microcontrollers and think that getting this interface working with the FSMC (Flexible Static Memory Controller) should be possible. The FSMC is also present on most Cortex M4/M7 microcontrollers. Obviously on embedded Linux, integrating with this parallel interface would be a task for only the most dauntless of embedded developers...
 
-## inf
+## Why is integrating with &gbt as an EtherCAT slave useful?
+
+Usually if you are using &gbem, it acts a master on the EtherCAT network. The drives and other EtherCAT IO devices connect to the master and the master (&gbem) talks to &gbc over shared memory to receive trajectories and other control information.
+
+Sometimes, you already have the master on your EtherCAT network. This would usually be an existing PLC (for example Codesys) or another software EtherCAT master.
+
+Then it is useful to have the &gbt appear to the master as a slave device.
+
+The master (PLC) can then integrate with slaves and drives whilst receiving trajectories and control information from &gbc.
+
+Obviously, you need write a PLC program to control the drive's state machines and forward the &gbc trajectories onto the drives.
+
+It can be useful in scenarios where you have an existing PLC based system that you want to introduce motion.
+
+## Other reasons you might want to build a slave
+
+Sometimes you want to create a custom device that you want to control using the &gbt that sits on an EtherCAT network.
+
+This could be:
+
+* a custom drive
+* a custom sensor
+* a custom actuator
+
+With the LAN9252, it is pretty easy to create custom devices that sit on the network. This article provides a good guide on how to build such a device.
+
+## Show me the code
+
+The code that demonstrates using the LAN9252 to integrate with the &gbt can be found here:
+
+<GitHubLink title={"LAN9252 example code"} repo={"gblan9252"} directory={"/"}/>
+
+## Protptype hardware
+
+To test things out, we used a Raspberry Pi and an evaluation board for the LAN9252.
+
+Either the <a href="https://www.bausano.net/en/hardware/ethercat-e-arduino/ethercat-and-raspberry.html">EasyCAT HAT</a> from AB&T or the EVB from Microchip <a href="https://www.microchip.com/en-us/product/LAN9252#Development%20Environment"> specifically the EVB-LAN9252-SPI board</a>.
+
+The EasyCAT HAT just plugs onto the Raspberry Pi's header and with the Microchip EVB you will need to jumper it up.
+
+<Image meta={easycat} alt="Easycat" maxWidth={600}/>
+<Image meta={easycat_pi} alt="Easycat and Pi" maxWidth={600}/>
+
+The connections needed are:
+
+* SPI - MISO, MOSI, CS, SCK
+* INT - the interrupt signal (we will configure the LAN9252 to make this SYNC0)
+
+
+## Configuring SPI
+
+On the Raspberry Pi when using the BCM2835 library the following SPI initialisation is needed:
+
+```c
+bcm2835_init() // initialise the BCM2835 SPI library
+bcm2835_spi_begin() // initialises SPI using the standard PI SPI pins
+bcm2835_spi_setBitOrder(BCM2835_SPI_BIT_ORDER_MSBFIRST); // sets the bit order of SPI transactions to MSB first
+bcm2835_spi_setClockDivider(BCM2835_SPI_CLOCK_DIVIDER_32); // sets the SPI clock divider
+bcm2835_spi_chipSelect(BCM2835_SPI_CS0); // enables management of the CS0 pin by the SPI lib
+bcm2835_spi_setChipSelectPolarity(BCM2835_SPI_CS0, LOW); // sets active CS polarity to LOW
+```
+
+If you are on embedded Linux platform using spidev then you are going to be configuring like this:
+
+```c
+open(device, O_RDWR);
+ioctl(fd, SPI_IOC_WR_MODE, &mode);
+ioctl(fd, SPI_IOC_RD_MODE, &mode);
+ioctl(fd, SPI_IOC_WR_BITS_PER_WORD, &bits);
+ioctl(fd, SPI_IOC_RD_BITS_PER_WORD, &bits)
+ioctl(fd, SPI_IOC_WR_MAX_SPEED_HZ, &speed);
+ioctl(fd, SPI_IOC_RD_MAX_SPEED_HZ, &speed);
+ioctl(fd, SPI_IOC_WR_LSB_FIRST, &lsb);
+ioctl(fd, SPI_IOC_RD_LSB_FIRST, &lsb);
+```
+
+## SPI read write commands
+
+The LAN9252 needs a set of SPI read and write functions writing.
+
+You can see these in the file `esc_hw.c`.
+
+The lowest level is register read/write functions:
+
+`static void bcm2835_spi_write_32 (uint16_t address, uint32_t val)`
+
+`static uint32_t bcm2835_spi_read_32 (uint16_t address)`
+
+Then comes CSR read write functions (CSR is System Control and Status Registers):
+
+`static void ESC_read_csr (uint16_t address, void *buf, uint16_t len)`
+`static void ESC_write_csr (uint16_t address, void *buf, uint16_t len)`
+
+And then come functions to read write to the process data ram:
+
+`static void ESC_read_pram (uint16_t address, void *buf, uint16_t len)`
+`static void ESC_write_pram (uint16_t address, void *buf, uint16_t len)`
+
+And finally, functions to read and write the EtherCAT slave registers:
+
+`void ESC_read (uint16_t address, void *buf, uint16_t len)`
+`void ESC_write (uint16_t address, void *buf, uint16_t len)`
+
+## Testing you have a connection to the chip
+
+First we reset the chip with: `bcm2835_spi_write_32(ESC_CMD_RESET_CTL,ESC_RESET_CTRL_RST);`.
+
+Next we can read the byte test register on the chip with: `value = bcm2835_spi_read_32(ESC_CMD_BYTE_TEST);`
+
+When `value == ESC_BYTE_TEST_OK` we know we have a connection to the LAN9252.
+
+## Initialising the chip
+
+If you just want to read/write PDO objects, the initilisation
+
+
+
+
+## ESIs & EEPROMs
 
 You need an SII in the EEPROM that is good enough to boot the LAN9252
 
-
-
-## Why is integrating with a slave useful?
-
-Usually (with &gbem) the &gbt acts a master on the EtherCAT network.
-
-Sometimes, you already have the master
-
-
-## wiring up
+<WriteSlaveEeprom/>
 
 
 
 ## sync0 and signals
 
-Convert GPIO interupt to signal
 
 
 ## comms
 
-## abbreviated format
-128 bytes
+## Abbreviated PDO structure
+116 bytes
 
 
-````c
-bcm2835_gpio_write(RPI_CS_PIN, HIGH);
-bcm2835_delayMicroseconds(20);
-bcm2835_spi_transfernb(physicalFieldbusDataOut, physicalFieldbusDataIn, 200);
-bcm2835_gpio_write(RPI_CS_PIN, LOW);
-```
+## Using the LAN9252 with SOES
 
+If you want more control over how you control the slave, you can use the SOES (Simple Open EtherCAT Slave) software to integrate with the LAN9252.
+
+A blog post that describes how to do this and the code to achieve it can be found <Link to="/blogs/embedded/soes">here</Link>.

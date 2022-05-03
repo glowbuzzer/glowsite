@@ -4,29 +4,311 @@ import {TitleImage} from "../../../framework/components/TitleImage";
 import {PageTag} from"../../../framework/components/PageTags"
 import {ReadingTime} from "../../../framework/components/ReadingTime";
 import {Typography} from "antd";
+import {GitHubLink} from "../../../framework/components";
+import {Image} from "../../../framework/components";
 export const { Text } = Typography;
-
+import netx_box from "./netx_box.jpg?glowsite"
+import netx_in_box from "./netx_in_box.jpg?glowsite"
+import itead from "./itead.jpg?glowsite"
+import itead_pi from "./itead_pi.jpg?glowsite"
+import netx_itead_pi from "./netx_itead_pi.jpg?glowsite"
 
 # {props.subtitle}
-<ReadingTime time="3"/>
+<ReadingTime time="60"/>
 <PageTag tags={props.tags}/>
+
 
 ## Introduction
 <TitleImage image={netx52} alt="netx52"/>
 
+This blog describes the process of getting the Hilscher netX 51 Network controller working.
+
+Hilscher produce a range of real time fieldbus communication chips. The series we work with primarily are the <Text mark>NETX51/52</Text>.
+
+Most of this discussion is also relevant to the newer <Text mark>NETX90</Text> as it offers a very similar interface and also uses the cifX toolkit.
+
+The main difference between the NETX51/52 and NETX90 is that you have the option to use an on chip processor (Cortex-M4) with the NETX90 for your code, rather than using a host microcontroller/microprocessor talking to the chip over SPI.
+
+If your application is simple and will run on the M4 with 512KB flash and 64kB SRAM then it is obviously a good choice. It is supported by the Segger jlink.
+
+The NETX90 also includes IP protocols (TCP socket & raw Ethernet) on a separate channel to the main fieldbus which provides a route to provide firmware upload, configuration setting etc. services over a web interface into your application.
+
+The NETX51/52 chips are available as a SoM (system-on-module) to integrate into your board or more complete modules (with network connectors, power suppliers etc.) or of course as discrete ICs in a PBGA package, with a 1 mm raster and 244 Pins.
+
+We have used the SoM solution extensively, and it delivers a very low BoM count. All is needed is:
+* RJ45 connectors
+* LEDs for status signalling
+* USB connector for firmware upload
+* Handful of filtering capacitors
+* Single 3.3V power supply
+
+You can do this on a two-layer PCB if the rest of your board is very simple also.
+
+The NETX51/52 presents an SPI interface with which we can integrate with to our microcontroller or microprocessor (Linux) host. Over this SPI interface we can exchange the process data image to the netX chip which then exchanges it with the fieldbus (master).
+
+The netX chips generally support multiple industrial Ethernet protocol. There is an extensive list on the website. We have worked with the EtherCAT, EtherNet/IP & PROFINET firmware.
+
+Hilscher provide good options to easily prototype with their chips. See later in the article for details of what we used.
+
+## It all looks pretty daunting but it isn't!
+
+If you pick up the Hilscher getting started documentation it all looks pretty scary. The APIs look hairy, you have no idea where to start, and it all looks overkill for what you are trying to do.
+
+When starting work with products like this, you start with one question:
+
+*"What is the **absolute miniumum** I need to do to exchange data over the fieldbus from my host?"*
+
+The Hilscher documentation makes it look you really have your work cut out to do this, but it turns out about fifty lines of code (with no dependence on any complicated libraries) will do the job.
+
+And we will show you how...
+
+## Assumptions for this discussion
+
+* Your host will use SPI to communicate
+* Your host is Linux or microcontroller (we develop everything like this on Linux then port to micocontroller these days)
+* You will be using a fieldbus slave interface (i.e. there is another master on your fieldbus network (e.g. codesys))
+
+## Let's get going
+
+Right enough chit-chat. Let's start talking to the netX chip and see what it has to say.
+
+Hilscher offer a range of development boards. The simplest and cheapest way to get going is to connect their netshield to a Raspberry Pi.
+
+Hilscher do produce a "netpi" (a hat board) for the Raspberry Pi but this doesn't expose the sync0 pin so if you want to synchronise your host to the fieldbus to need to use the netshield.
+
+We use a little interface board from itead to connect the netX shield to the pi. This <a href="https://wiki.iteadstudio.com/RPI_Arduino_Sheild_Add-on_V2.0"> board </a> converts the arduino pinout to the Pi pinout.
+
+The exact part number for the netshield board is shown below:
+
+<Image meta={netx_box} alt="Box for netX" maxWidth={600}/>
+
+The netshield board itself obtained from Hilscher is:
+
+<Image meta={netx_in_box} alt="netX in box" maxWidth={600}/>
+
+The itead board:
+<Image meta={itead} alt="itead board" maxWidth={600}/>
+
+The itead board connected to the Pi:
+<Image meta={itead_pi} alt="itead plus pi" maxWidth={600}/>
+
+The stack of three: pi + itead + netshield:
+<Image meta={netx_itead_pi} alt="itead plus pi plus netX" maxWidth={600}/>
+
+Once you have the three boards plugged together and powered up, you may need to flash the netshield with the loadable firmware.
+
+Follow guide ??????here????? to flash the chip. You will need to use the EtherCAT firmware.
+
+The firmware supplied with the netshield is limited in that it only will run for an hour;
+
+You will need to use a different binary file which is in our repository in the `netxbin` directory. This has been modified to support the 200 byte PDO objects we use.
+
+The first read we will do on the chip is a device detection.
+
+```c
+uint32_t ulDetect  = 0;
+uint8_t  abSend[]  = {CMD_READ_NX51(0xFF), 0xFF, CMD_READ_NX50(4)};
+OS_SpiTransfer(ptDevice->pvOSDependent, abSend, (unsigned char*)&ulDetect, MAX_CNT(abSend));
+```
+
+What `ulDetect` gets set to, identifies the Hilscher chip. For us, we are expecting `((0x1F & ulDetect) == 0x11)` which identifies the netX 51/52 chips.
+
+Once we have this working we know we can successfully read and write to the chip.
+
+You can see the rest of the initialisation code in the `gbnetx` repository in the `netx.c` file in the function `gbnetx_init`.
+
+In the rest of the initialisation code we read and print a whole load of config. information from the chip.
+
+The purpose of this code is mainly to explore what is available.
+
+## Comms channels
+
+There are two main ways you can talk to the netX chip:
+
+(1) Read and write to DPM: Used for cyclic IO and reading config. information
+
+(2) Using the packet interface: Used for reading and writing config. and receiving async messages.
+
+The packet interface takes the form of three packet types:
+* req - requests for information or commands to set a parameter
+* cnf - messages back from the chip in response to a req packet
+* ind - indications which are sent acyclically from the chip (if enabled)
+
+There is a slightly confusing overlap between packet interface and dpm interface in that you read and write config parameters using either.
+
+In the init code we show how to use both interfaces.
+
+### Reading the DPM
+
+This example comes from the `gberror_t gbnetx_init(void)` function in the `gbnetx` repo.
+
+The `NETX_SYSTEM_CHANNEL_INFO` struct is the systems channel information (the netX has a single systems channel and one or more communciation channels)
+
+```c
+typedef __RCX_PACKED_PRE struct NETX_SYSTEM_CHANNEL_INFOtag
+{
+    uint8_t   bChannelType;                                        /*!< 0x00 Type of this channel */
+    uint8_t   bReserved;                                           /*!< 0x01 reserved */
+    uint8_t   bSizePositionOfHandshake;                            /*!< 0x02 Size and position of the handshake cells */
+    uint8_t   bNumberOfBlocks;                                     /*!< 0x03 Number of blocks in this channel */
+    uint32_t  ulSizeOfChannel;                                     /*!< 0x04 Size of channel in bytes */
+    uint16_t  usSizeOfMailbox;                                     /*!< 0x08 Size of the send and receive mailbox */
+    uint16_t  usMailboxStartOffset;                                /*!< 0x0A Start offset of the mailbox structure (see NETX_MAILBOX) */
+    uint8_t   abReserved[4];                                       /*!< 0x0C:0x0F Reserved area */
+} __RCX_PACKED_POST NETX_SYSTEM_CHANNEL_INFO;
+```
+
+To read this, we simply, `netxBlockingRead((uint16_t *) 0x30, &netxSystemChannelInfoBlockStruct, sizeof(NETX_SYSTEM_CHANNEL_INFO));`
+
+All of the DPM structs can be read in this way.
+
+### Reading using the packet interface
+
+If you look in the `gberror_t gbnetx_read_HW_HARDWARE_INFO(void)` function in `system_packets.c` file you can see how to write and read from the systems channel mailbox using the packet interface.
+
+This is where we create the packet we want to send:
+
+```c
+    system_mb_req.tHead.ulDest = LOCAL_CHANNEL;
+    system_mb_req.tHead.ulCmd = RCX_HW_HARDWARE_INFO_REQ;
+    system_mb_req.tHead.ulSrcId = 0x3;
+```
+In this case we want to read `HW_HARDWARE_INFO` which gives us information about the netX hardware.
+
+Here we send the packet and read the response.
+
+`grc = gbnetx_txrx_system_channel(&system_mb_req, sizeof(system_mb_req), &system_mb_resp, sizeof(system_mb_resp));`
+
+The system_mb_resp struct will contain the response from teh packet interface.
+
+For example we can now print out the Device Number.
+
+```c
+UM_INFO(GBNETX_UM_EN, "GBNETX: Device number [%u]", system_mb_resp.tData.ulDeviceNumber);
+```
 
 
 
-This blog describes the process of getting the Hilscher netX 51 Network controller for fieldbus and Real-Time Ethernet slaves working with the &gbt.
+## Handshake bits
+The netX chip coordinates access to functions with what it calls handshake bits. These are described in the manual.
 
 
-Hilscher produce a range of real time fieldbus communication chips.
+## Absolute mininum code you need to init and read and write PDOs
 
-The series we work with primarily are the <Text mark>NETX51/52</Text>.
+There really isn't much code needed if you want the chip to automatically have its EtherCAT state machine controlled by the master and just want to send and receive PDO objects.
+
+```c
+char bUnused;
+uint32_t ulDetect = 0;
+uint8_t abSend[] = {CMD_READ_NX51(0xFF), 0xFF, CMD_READ_NX50(4)};
+
+do {
+    bcm2835_gpio_write(PIN, LOW);
+    bcm2835_spi_transfernb((char *) abSend, (char *) &ulDetect, MAX_CNT(abSend));
+    bcm2835_gpio_write(PIN, HIGH);
+} while (ulDetect == 0);
+
+if ((0x1F & ulDetect) != 0x11) {
+    return -ENODEV;
+}
+Read_NX51(0, &bUnused, 1);
+Read_NX51(0, &bUnused, 1);
+```
+Then read and write to the netX with the `txrx_netx(outA, 200, inA, 200);`
+
+That is it!
+
+The complexities come when you want to do more than this:
+* control the EtherCAT state machien from the slave
+* read and write SDO objects
+
+The code above will across different fieldbus type firmware - i.e. the same code will work with EtherNET/IP.
+
+## Docs
+
+To work with the NET51/52 chip you only really need to look at two Hilscher documents:
+
+1. <a href="https://www.hilscher.com/fileadmin/cms_upload/ja/Resources/pdf/netX_Dual-Port_Memory_Interface_DPM_13_EN.pdf">netX_Dual-Port_Memory_interface</a>
+1. <a href="ht<tps://www.hilscher.com/fileadmin/cms_upload/ja/Resources/pdf/EtherCAT_Slave_V4_Protocol_API_10_EN.pdf">EtherCAT_Slave_V4_Protocol_API</a> (or the protocol API for the fieldbus you are working with)
+
+In fact, you only occasionally need to look things up in the Protocol API, so the DPM interface will be the main document to look at. For the moment, avoid looking at all other Hilscher documents as they will just confuse things.
+
+All the relevant Hilscher docs & configuration tools are available to download from the <a href="https://www.hilscher.com/fileadmin/big_data/de/Resources/zip/netRAPID_Evaluation_DVD_2021-03-1_V1_1_0_2.zip">netRAPID Evaluation DVD</a>from the Hilscher website.
+
+## cifX vs roll your own
+
+Hilscher produce a c language device driver called the "CIFX/netX device driver C". This is an API that allows you to interact with the DPM interface.
+
+This is very nicely written but is quite heavy-weight and is not easy to get going with.
+
+Some device APIs completely abstract the user of the API from details of the interface (think about sending a websockets message `ws.send(JSON.stringify(apiCall));`).
+
+The CIFX driver does not abstract the DPM API, it is just a one-to-one mapping between the things that exist in the DPM interface and a c function to utilise them.
+
+This means you have to understand the DPM interface and how it interfaces with the fieldbus to use the API.
+
+A simple application to exchange data with the fieldbus only needs about 1% of the CIFX API, so we would suggest if your application is straight forward then don't use the CIFX code.
+
+BUT, If as your go along fleshing out your device drive you start to feel like you are rolling your own CIFX toolkit replicating much of what already exists - stop what you are doing and use the CIFX toolkit!
+
+To give you a feel for things: a roll your own device driver that automatically starts up and exchanges data with the fieldbus only will need about a 100 lines of code.
+
+Pros of using CIFX:
+* it covers every function you need (apart from protocol specific operations)
+* it is proper professional code
+Cons
+* it is pretty fat
+* it is tricky to debug until you know what is going on
+
+Pros of rolling your own:
+* it will be compact
+* it will be more debugable
+* you will learn how stuff works
+
+Cons of rolling your own:
+* You are duplicating what already exists
+
+The basic guidance is: if your application's interaction with the DPM interface is very simple then roll your own, if your application's interface is (or becomes) quite complex use the CIFX toolkit.
+
+Examples of complex interaction (for the EtherCAT fieldbus):
+* control over ESM state
+* sending alarm messages
+
+Word of caution: if you do use the CIFX toolkit, it doesnt provide protocol specific API functions, so you will need to go pretty deep to write these...
+
+We have example code for you both using the cifX toolkit and writing your own functions. So can you can have a looka nd take your pick of the solution that works for you.
+* cifX example code:
+* direct DPM example code:
+
+<GitHubLink title={"cifX example code"} repo={"gbnetx"} directory={"/"}/>
+<GitHubLink title={"direct DPM example code"} repo={"gbcifx"} directory={"/"}/>
 
 
-There are available as a SoM or more complete modules or discrete ICs in a PBGA, with a 1 mm raster and 244 Pins. The SoM delivers a very low BoM count - just connectors and leds and a couple of filtering capacitors.
+## multi-protocol
 
-The Hilscher NETX presents an SPI interface with which we can integrate with &gbc. Over this SPI interface we can exchange the process data image from &gbc to the NETX which then exchanges it with the  fieldbus master. The NETX supports multiple industrial Ethernet protocols (see above). This enables &gbc to interoperate in the embedded environment
+You can write you code so that it will work over pretty much unchanged especially for simple applications
 
-Options to easily prototype with the NETX such as the NETshield.
+
+https://www.hilscher.com/products/product-groups/embedded-modules/netx-chip-carrier/nrp-51-repns/?techCats=35&autoLang=false&cHash=89f9da42d539899b08260cfcb88b969d
+
+we have worked with:
+- PROFINET Device
+– EtherCAT Slave
+– Ethernet/IP Adapter
+
+
+## cifX
+
+Lowest level hardware access functions - `DEV_`
+OS specific functions - `OS_`
+User implemented functions - `USER_`
+
+
+
+## Packet interface
+
+Once setup need to poll the mailbox periodically.
+
+See a simple implementation in `gbnetx_poll_mailbox_channel0` function in `channel_poll.c`
+
+Handle pretty much all the packets you would expect to see if you have enabled EtherCAT xxx

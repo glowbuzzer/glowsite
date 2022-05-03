@@ -1,0 +1,18 @@
+import {Image} from "../../framework/components";
+import ethercat_ssc from "./ethercat_ssc.jpg?glowsite"
+
+
+**Using the SSC Tool**
+
+Easiest way to write the EEPROM contents on the slave is to use the SSC tool. You need to be an ETG member (free to join) and you can download from the <a href="https://www.ethercat.org/"> ETG website</a>.
+
+Click the Tool drop down menu, select EEPROM Programmer option then load the XML file you want to write the EEPROM (over the Ethernet connection from your PC to the slave).
+
+<Image meta={ethercat_ssc} alt="Beckhoff SSC tool" maxWidth={600}/>
+
+**Generating SII binaries from ESI (XML) files**
+
+If you dont have access to the SCC then you can use this tool to create the slave binary from the XML (ESI) file and then upload the binary file to the slave's EEPROM with Codesys or TwinCAT.
+
+<a href="https://github.com/synapticon/siitool">siitool</a>
+

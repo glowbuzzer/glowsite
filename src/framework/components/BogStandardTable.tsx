@@ -17,6 +17,8 @@ export const StandardHeaderRowStyled = styled(Row)`
 export const StandardRowStyled = styled(Row)`
     padding-left: 5px;
     padding-right: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
 `
 
 export const ColStyled = styled(Col)``

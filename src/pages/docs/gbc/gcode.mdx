@@ -7,8 +7,8 @@ import {BogStandardHeaderRow, BogStandardRow, BogStandardCol} from "../../../fra
 
 <Tldr>
     - &gbc does not interpret gcode - this is done in the toolkit's React components
-    - Supports xx
-    - xxx
+    - Supports most commonly used gcode commands
+    - Tested with output from common CAM software programs
 </Tldr>
 
 Whilst &gbc doesn't actually interpret the gcode itself (this is done in the React component) this section discusses how to use gcode with GBC when using the toolkit's gcode React components.
@@ -61,6 +61,7 @@ There should be no issues exporting gcode from standard CAM tools if care is tak
         <CheckCircleOutlined/>
     </BogStandardCol>
     <BogStandardCol span={9}>
+        Don't support helical moves
     </BogStandardCol>
 </BogStandardRow>
 
@@ -86,7 +87,7 @@ There should be no issues exporting gcode from standard CAM tools if care is tak
         Set Work Coordinate Offsets
     </BogStandardCol>
     <BogStandardCol span={2}>
-        ?
+        depends on if needed for CAM
     </BogStandardCol>
     <BogStandardCol span={9}>
     </BogStandardCol>
@@ -101,7 +102,7 @@ There should be no issues exporting gcode from standard CAM tools if care is tak
         Plane selection
     </BogStandardCol>
     <BogStandardCol span={2}>
-        ?
+        not supported - add coord system to dframe
     </BogStandardCol>
     <BogStandardCol span={9}>
     </BogStandardCol>
@@ -116,7 +117,7 @@ There should be no issues exporting gcode from standard CAM tools if care is tak
         Units
     </BogStandardCol>
     <BogStandardCol span={2}>
-        ?
+        needs to be added
     </BogStandardCol>
     <BogStandardCol span={9}>
     </BogStandardCol>
@@ -128,7 +129,7 @@ There should be no issues exporting gcode from standard CAM tools if care is tak
     </BogStandardCol>
     <BogStandardCol span={8}>
         Go to Pre-Defined Position
-    </BogStandardCol>
+       </BogStandardCol>
     <BogStandardCol span={2}>
 ?
     </BogStandardCol>
@@ -136,6 +137,25 @@ There should be no issues exporting gcode from standard CAM tools if care is tak
     </BogStandardCol>
 </BogStandardRow>
 
+
+
+
+
+<BogStandardRow>
+    <BogStandardCol span={5}>
+        G40
+    </BogStandardCol>
+    <BogStandardCol span={8}>
+        G41 Cutter Compensation Left
+        G42 Cutter Compensation Right
+        G40 Cancel Cutter Comp G41 and G42
+    </BogStandardCol>
+    <BogStandardCol span={2}>
+        ?
+    </BogStandardCol>
+    <BogStandardCol span={9}>
+    </BogStandardCol>
+</BogStandardRow>
 
 <BogStandardRow>
     <BogStandardCol span={5}>
@@ -151,6 +171,10 @@ There should be no issues exporting gcode from standard CAM tools if care is tak
     </BogStandardCol>
 </BogStandardRow>
 
+    <p>g64 simplifier q0 no similiocation but get overlapping moves</p>
+    <p>non zero q get simplication and overlapping</p>
+
+    <p>g0 always goes at vmax</p>
 
 <BogStandardRow>
     <BogStandardCol span={5}>
@@ -188,6 +212,21 @@ There should be no issues exporting gcode from standard CAM tools if care is tak
     </BogStandardCol>
     <BogStandardCol span={8}>
         Dynamic Tool Length Offsets
+    </BogStandardCol>
+    <BogStandardCol span={2}>
+        <CheckCircleOutlined/>
+    </BogStandardCol>
+    <BogStandardCol span={9}>
+    </BogStandardCol>
+</BogStandardRow>
+
+
+<BogStandardRow>
+    <BogStandardCol span={5}>
+        G90, G91
+    </BogStandardCol>
+    <BogStandardCol span={8}>
+        Absolute / incremental positioning
     </BogStandardCol>
     <BogStandardCol span={2}>
         <CheckCircleOutlined/>
@@ -319,3 +358,8 @@ There should be no issues exporting gcode from standard CAM tools if care is tak
     </BogStandardCol>
 </BogStandardRow>
 
+F % vmax not absolute
+
+g54 ok
+
+g 61

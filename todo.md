@@ -6,7 +6,6 @@ Nav
 bugs
 * entities dont work with fragments
 
-gb-brand repo on gitghub? for images
 
 
 
@@ -15,9 +14,6 @@ Home page
 * dots of featured blog in wrong place - dg &&&
 * top carosuel doesnt repsond to dots - speed - dg &&&
 
-front-end docs content
-* hooks autogen
-* redux docs
 
 
 

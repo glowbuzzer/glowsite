@@ -40,7 +40,7 @@ The key functions performed by &gbc are:
 (A) &gbc communicating with an EtherCAT slaves over an EtherCAT network through the &gbem
 ```mermaid
  flowchart LR
-    id1[Front-end] <-->|websockets|id2{GBC}
+    id1[Front-end - GBR] <-->|websockets|id2{GBC}
     id2 <-->|shared mem| id4[GBEM];
    id4<-->|EtherCAT| id5[Slaves]
     
@@ -49,7 +49,7 @@ The key functions performed by &gbc are:
 (B) &gbc communicating with motor drivers over SPI through the &gbsm
 ```mermaid
  flowchart LR
-    id1[Front-end] <-->|websockets|id2{GBC}
+    id1[Front-end - GBR] <-->|websockets|id2{GBC}
     id2 <-->|shared mem| id3[GBSM]
     id3 <-->|SPI|id6[Motor Drivers]
 
@@ -57,7 +57,7 @@ The key functions performed by &gbc are:
 (C) &gbc communicating over SPI to EtherCAT slave IC and hence to an EtherCAT master
 ```mermaid
  flowchart LR
-    id1[Front-end] <-->|websockets|id2{GBC}
+    id1[Front-end - GBR] <-->|websockets|id2{GBC}
     id2 <-->|SPI| id3[EtherCAT slave]
     id3 <-->|EtherCAT|id4[EtherCAT master]
 
@@ -68,7 +68,7 @@ The key functions performed by &gbc are:
 Many elements of the &gbt are supplied under an Open Source license but &gbc is not. This is our licensed software, and it may not be used without the customer entering into a license agreement with &gb. As we are independent of any hardware, licensing &gbc is the company's main revenue stream.
 
 ## Supported platforms
-&gbc is written in plain c code. It has been tested on different 32-bit and 64-bit Linux versions and also on STM32 microcontrollers. We can compile libraries for different platforms such as QNX, VxWorks, INtime  and different microcontrollers on request.
+&gbc is written in plain c code. It has been tested on different 32-bit and 64-bit Linux versions and also on STM32 microcontrollers. We can compile libraries for different platforms such as QNX, VxWorks, INtime and different microcontrollers on request.
 
 ### Linux
 
@@ -80,9 +80,9 @@ If &gbc is being used in an embedded Linux environment with motor driver ICs the
 
 ### Microcontroller
 
-We test &gbc on the STM32 platform. This is using ST's dual-core ARM M7 / M4 range of microcontrollers.
+We develop and test the &gbc software on the STM32 platform internally at &gb. This is using ST's dual-core ARM M7 / M4 range of microcontrollers.
 
-We see no difficulties getting &gbc working on other manufacturers microcontrollers, but it will likely need to be a dual-core microcontroller, though there may be an option to use two discrete microcontrollers connected over a high speed SPI interface. Either way, for a reasonable number of axes, the microcontroller will need to be in the highest performance range and support hardware floating point. &gbc needs two cores because the web sockets server runs on one core and the real time control & fieldbus interface run on the other core. On Linux we use threads to distribute this workload but on slower speed microcontrollers this just isn't possible.
+We see no difficulties getting &gbc working on other manufacturers microcontrollers, but it will likely need to be a dual-core microcontroller, though there may be an option to use two discrete microcontrollers connected over a high speed (Q)SPI interface. Either way, for a reasonable number of axes, the microcontroller will need to be in the highest performance range and support hardware floating point. &gbc needs two cores because the web sockets server runs on one core and the real time control & fieldbus interface run on the other core. On Linux we use threads to distribute this workload but on slower speed microcontrollers this just isn't possible.
 
 ## Installation
 
@@ -187,10 +187,9 @@ This allows you to provide JavaScript code which will be executed cyclically, in
 This is a powerful feature of &gbc. Examples of how it can be used include:
 
 * (On say a laser cutting machine) if the velocity of the TCP falls to zero automatically turn off the Digital Out controlling the laser
-* If a digital input changes, then exe
+* If a digital input changes, then execute a user provided JavaScript function
 
 This code is provided in the `user.js` file placed in the same directory as the &gbc executable. This file is loaded (if present) and should contain the JavaScript functions.
 
-The main benefit of this Javascript code is that it provided faster response to events than React code. Around a 10ms response time is expected for this code.
-
+The main benefit of this Javascript code running inside &gbc, is that it provided faster response to events than React code. Around a 10ms response time is expected for this code.
 

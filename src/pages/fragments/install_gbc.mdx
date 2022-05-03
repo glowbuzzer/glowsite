@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom"
 
-The installation of &gbc required that you download binaries.
+The installation of &gbc requires that you download binaries.
 
 We provide the binaries for 64-bit Linux and the Raspberry Pi for evaluation. Other platforms can be supplied on request.
 
@@ -29,7 +29,7 @@ Then uncompress with:
 tar -xzf gbc-armv7.tar.gz
 ```
 
-You will need to install libbsd as we use some of its networking functions. This can be done with the Linux package manager:
+You will need to install `libbsd` as we use some of its networking functions. This can be done with the Linux package manager:
 
 ```shell
 sudo apt install libbsd-dev
@@ -37,17 +37,18 @@ sudo apt install libbsd-dev
 
 (The package manager command will need changing for different Linux versions)
 
-
-
 &gbc has a set of JSON configuration files that configure its main parameters. These need to be located in the same directory as the GBC executable file.
 
 The tar file you download will contain some example configuration files.
 
-For example for the start kits, copy the following files into the &gbc directory:
+For example for the starter kits, copy the following files into the &gbc directory:
 
-'machine_starter_kit_1.json`
+`machine_starter_kit_1.json`
+
 `default.json`
+
 `fieldbus.json`
+
 `example_tasks.json`
 
 
