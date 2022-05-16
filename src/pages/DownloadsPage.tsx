@@ -1,8 +1,8 @@
 import * as React from "react"
-import { Section } from "../framework/components/Section"
-import { Table } from "antd"
-import { DownloadOutlined, GithubOutlined } from "@ant-design/icons"
-import { File, Project, projects, Release } from "./versions"
+import {Section} from "../framework/components/Section"
+import {Table} from "antd"
+import {DownloadOutlined, GithubOutlined} from "@ant-design/icons"
+import {File, Project, projects, Release} from "./version_history"
 
 export default () => {
     function make_table(project: Project, release: Release) {
@@ -11,21 +11,29 @@ export default () => {
                 ...(project.defaultFiles.find(f => f.name === file.name) || {}),
                 ...file
             }))
-            .map((file: File) => ({
-                key: file.name,
-                name: file.name,
-                description: file.description,
-                type: file.type,
-                size: file.size,
-                checksum: file.checksum,
-                link: (
-                    <a
-                        href={`https://downloads.glowbuzzer.com/${project.base}/${release.tag}/${file.name}.${file.type}`}
-                    >
-                        <DownloadOutlined />
-                    </a>
-                )
-            }))
+            .map((file: File) => {
+                const path = [
+                    "https://downloads.glowbuzzer.com/releases",
+                    project.basename,
+                    file.arch,
+                    "refs/tags",
+                    release.tag,
+                    `${project.basename}-${release.tag}.${file.type}`
+                ].filter(p => p).join("/")
+                return ({
+                    key: file.name,
+                    name: file.name,
+                    description: file.description,
+                    type: file.type,
+                    size: file.size,
+                    checksum: file.checksum,
+                    link: (
+                        <a href={path}>
+                            <DownloadOutlined/>
+                        </a>
+                    )
+                });
+            })
     }
 
     const file_columns = ["Name", "Description", "Type", "Size", "Checksum", "Link"].map(c => ({
@@ -50,10 +58,10 @@ export default () => {
             {projects.map(project => (
                 <div key={project.github || project.name}>
                     <h2>
-                        {project.base ? (
-                            <DownloadOutlined style={{ marginRight: "10px" }} />
+                        {project.basename ? (
+                            <DownloadOutlined style={{marginRight: "10px"}}/>
                         ) : (
-                            <GithubOutlined style={{ marginRight: "10px" }} />
+                            <GithubOutlined style={{marginRight: "10px"}}/>
                         )}
                         {project.name}
                     </h2>
@@ -72,6 +80,7 @@ export default () => {
                                         )
                                     </span>
                                 )}
+                                {/*
                                 {project.base && (
                                     <span>
                                         (
@@ -83,6 +92,7 @@ export default () => {
                                         )
                                     </span>
                                 )}
+*/}
                             </h3>
                             <p>{r.description}</p>
                             {r.files && (

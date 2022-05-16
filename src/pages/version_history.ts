@@ -1,4 +1,5 @@
 export type File = {
+    arch?: string
     name: string
     description: string
     type: string
@@ -13,7 +14,7 @@ export type Release = {
 export type Project = {
     name: string
     github?: string // main project in github
-    base?: string // base for downloads
+    basename?: string // base for downloads
     defaultFiles?: Partial<File>[]
     releases: Release[]
 }
@@ -31,22 +32,24 @@ export const projects: Project[] = [
     },
     {
         name: "Glowbuzzer Control (GBC) - evaluation versions (time limited running)",
-        base: "gbc",
+        basename: "gbc",
         defaultFiles: [
             {
                 name: "gbc-linux-amd64",
-                description: "GBC for am64 (normal Linux)",
+                arch: "linux-amd64",
+                description: "GBC for amd64 (normal Linux)",
                 type: "tgz"
             },
             {
                 name: "gbc-linux-armv7",
+                arch: "rpi",
                 description: "GBC for armv7 (Raspberry Pi)",
                 type: "tgz"
             }
         ],
         releases: [
             {
-                tag: "0.0.1-alpha-1",
+                tag: "v1.0.0rc7",
                 description: "Fixes and new features",
                 files: [
                     {
@@ -85,7 +88,7 @@ export const projects: Project[] = [
     },
     {
         name: "Raspberry Pi RT image",
-        base: "pi_rt_img",
+        basename: "pi_rt_img",
         defaultFiles: [
             {
                 type: "gz"

@@ -1,9 +1,9 @@
-import { visit } from "unist-util-visit"
+import {visit} from "unist-util-visit"
 import crypto from "crypto"
 import path from "path"
 import fs from "fs"
-import { createCache } from "./util/cache-util.mjs"
-import { handler } from "./util/mdast-util.mjs"
+import {createCache} from "./util/cache-util.mjs"
+import {handler} from "./util/mdast-util.mjs"
 
 const OUTDIR = ".cache/codeblock"
 const PLUGIN_NAME = "remark-codeblock"
@@ -47,25 +47,6 @@ export default function remarkCodeblock() {
                     cache(source, sourcePath),
                     classes.map(c => `codeblock-${c}`).join(" ")
                 )
-
-                //
-                // cache(source, sourcePath).then(({ relative, unique }) => {
-                //     importAST.push(createImport(`CodeBlock${unique}`, relative))
-                // })
-                // // const [file, unique] = render(source, OUTDIR)
-                // // const fullPath = resolve(OUTDIR + "/" + file)
-                // // const relative = path.relative(vFile.history[0], fullPath).replace(/\\/g, '/').substr(3);
-                //
-                // importAST.push({
-                //     type: "import",
-                //     value: `import CodeBlock${unique} from "${relative}"`
-                // })
-                //
-                // parent.children.splice(index, 0, {
-                //     type: "jsx",
-                //     value: `<CodeBlock${unique}/>`
-                // })
-                // return index + 2
             }
         })
 

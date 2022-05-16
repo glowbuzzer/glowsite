@@ -1,4 +1,6 @@
-import { visit } from "unist-util-visit"
+import {visit} from "unist-util-visit"
+
+import {LATEST_VERSIONS} from "../src/versions.mjs"
 
 const entities = {
     gb: "glowbuzzer",
@@ -13,15 +15,16 @@ const entities = {
     gbsml: "GBSM (Step Master)",
     gbt: "glowbuzzer toolkit",
     gbotg: "globuzzer online trajectory planner",
-    ui: "user interface"
+    ui: "user interface",
+    ...LATEST_VERSIONS
 }
 
 export function remarkEntities() {
     // simplified entity regex
-    const regex = /&([a-zA-Z]+);?/
+    const regex = /&([a-zA-Z-_]+);?/
 
     return tree => {
-        visit(tree, "text", (node, index, parent) => {
+        visit(tree, ["text", "code"], (node, index, parent) => {
             const parts = []
             let start = 0
             const text = node.value

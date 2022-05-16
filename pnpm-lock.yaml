@@ -4,9 +4,8 @@ specifiers:
   '@ant-design/icons': ^4.7.0
   '@babel/core': ^7.0.0
   '@emeks/antd-custom-theme-generator': ^0.2.0
-  '@glowbuzzer/controls': ^1.0.1-alpha.50
-  '@glowbuzzer/layout': ^1.0.1-alpha.50
-  '@glowbuzzer/store': ^1.0.1-alpha.50
+  '@glowbuzzer/controls': 1.0.1-alpha.68
+  '@glowbuzzer/store': ^1.0.1-alpha.68
   '@mdx-js/mdx': ^2.0.0-rc.1
   '@mdx-js/react': ^1.6.22
   '@mdx-js/rollup': ^2.0.0-rc.1
@@ -79,9 +78,8 @@ devDependencies:
   '@ant-design/icons': 4.7.0_react-dom@17.0.2+react@17.0.2
   '@babel/core': 7.15.8
   '@emeks/antd-custom-theme-generator': 0.2.0_antd@4.10.0
-  '@glowbuzzer/controls': 1.0.1-alpha.50
-  '@glowbuzzer/layout': 1.0.1-alpha.50
-  '@glowbuzzer/store': 1.0.1-alpha.50
+  '@glowbuzzer/controls': 1.0.1-alpha.68
+  '@glowbuzzer/store': 1.0.1-alpha.68
   '@mdx-js/mdx': 2.0.0-rc.1
   '@mdx-js/react': 1.6.22_react@17.0.2
   '@mdx-js/rollup': 2.0.0-rc.1
@@ -1718,19 +1716,14 @@ packages:
     resolution: {integrity: sha512-OWORNpfjMsSSUBVrRBVGECkhWcULOAJz9ZW8uK9qgxD+87M7jHRcvh/A96XXNhXTLmKcoYSQtBEX7lHMO7YRwg==}
     dev: false
 
-  /@glowbuzzer/controls/1.0.1-alpha.50:
-    resolution: {integrity: sha512-ATzrAPU7G7g5QFKf50YAeiyMgglOEOJe6niumgQerGAEMuETW3qXDWVQqcrf+O7g4u46ki3LV0kK29n/a5f5Gw==}
+  /@glowbuzzer/controls/1.0.1-alpha.68:
+    resolution: {integrity: sha512-8J5689VOpnVMLiUmVNnH6moO5rBHnyh/iUwEatn1KzhVwrSQ7Ac9p8DTat7XsNxClvzRkbQj7g90+9EbJjW0bQ==}
     dependencies:
-      '@glowbuzzer/layout': 1.0.1-alpha.50
-      '@glowbuzzer/store': 1.0.1-alpha.50
+      '@glowbuzzer/store': 1.0.1-alpha.68
     dev: true
 
-  /@glowbuzzer/layout/1.0.1-alpha.50:
-    resolution: {integrity: sha512-pipfg2G3al5yiZMegLVxKTw3OO8ItdD6+ma7t1DrwAkCd8hMqkADVwGLXM6xfSb28eaZ9mE3IYiNLB/jrBuNpQ==}
-    dev: true
-
-  /@glowbuzzer/store/1.0.1-alpha.50:
-    resolution: {integrity: sha512-g4PDX6ITM0TTzntqtpsiElhVETIQmPDlOxjMts05lvDFzwSuuHU9rkdePAG87cd6VkO2aJjXAVzWLe91mSxN8g==}
+  /@glowbuzzer/store/1.0.1-alpha.68:
+    resolution: {integrity: sha512-mBTXUyA1dpRxpmLSBni0LHTOQLzyka2tWs8Wg/OLdrViftOqktT12x+pB3SnCJXsaEky55rtgfaI2x5G7c4rTA==}
     dev: true
 
   /@mdx-js/mdx/2.0.0-rc.1:

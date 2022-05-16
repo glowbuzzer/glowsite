@@ -10,7 +10,11 @@ import { ReactComponent as SmallLogo } from "../../images/logos/tiny-logo.svg?in
 
 import { CloseOutlined, GithubOutlined, MenuOutlined, YoutubeOutlined } from "@ant-design/icons"
 import { Section } from "../components/Section"
-import { projects } from "../../pages/versions"
+
+// @ts-ignore
+import {LATEST_VERSIONS} from "../../versions.mjs";
+
+// import { projects } from "../../pages/versions"
 
 const StyledTopNav = styled.div`
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
@@ -174,8 +178,6 @@ export const TopNav = ({ hideVersionLink }: { hideVersionLink?: boolean }) => {
     const [showMenu, setShowMenu] = useState(false)
 
     // we are expecting each node in the top nav to have children
-    const gbr_version = projects.find(p => p.github === "gbr").releases[0].tag
-
     const downloads_site = window.location.href.indexOf("downloads.glowbuzzer.com") >= 0
 
     return (
@@ -196,7 +198,7 @@ export const TopNav = ({ hideVersionLink }: { hideVersionLink?: boolean }) => {
                     <Space size="middle">
                         {hideVersionLink || (
                             <Link className="latest-release" to="/downloads">
-                                {gbr_version}
+                                {LATEST_VERSIONS.gbc_version}
                             </Link>
                         )}
                         <a href={"https://www.github.com/glowbuzzer"}>

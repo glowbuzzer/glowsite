@@ -46,4 +46,6 @@ responsive
 
 
 General content / navigation
-* Work on getting-started/simulation page and signpost it more, as a lot of people will start here
+* Work on get-started/simulation page and signpost it more, as a lot of people will start here
+* Some pages are too long / poor typography, eg: https://preview.glowbuzzer.com/get-started/frontend (too daunting!)
+* Add "Anatomy of a GBR app" or similar to the GBR doc section. Not clear how app fits together
