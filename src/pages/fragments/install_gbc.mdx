@@ -7,10 +7,10 @@ We provide the binaries for 64-bit Linux and the Raspberry Pi for evaluation. Ot
 The location of the download is as follows:
 
 * Raspberry PI (arm7 32 bit)
-`https://downloads.glowbuzzer.com/gbc-armv7.tar.gz`
+`https://downloads.glowbuzzer.com/releases/rpi/refs/tags/v1.0.0rc6/gbc.tgz`
 
 * Linux (64 bit)
-`https://download.glowbuzzer.com/gbc/gbc-amd64.tar.gz`
+`https://downloads.glowbuzzer.com/releases/linux-amd64/refs/tags/v1.0.0rc6/gbc.tgz`
 
 First, move to the directory in which you want to install &gbc. Then download &gbc using `wget`.
 
@@ -19,37 +19,28 @@ If `wget` needs installing, install with:
 sudo apt install wget //for different linux variants this will need to use the command for thier package manager
 ```
 
-Otherwise, just run:
+Otherwise (change the URL if you want the Raspberry Pi version), just run:
 ```shell
-wget https://download.glowbuzzer.com/gbc-armv7.tar.gz
+wget https://downloads.glowbuzzer.com/releases/linux-amd64/refs/tags/v1.0.0rc6/gbc.tgz
 ```
 
 Then uncompress with:
 ```shell
-tar -xzf gbc-armv7.tar.gz
+tar -xzf gbc.tgz
 ```
 
-You will need to install `libbsd` as we use some of its networking functions. This can be done with the Linux package manager:
 
-```shell
-sudo apt install libbsd-dev
-```
 
 (The package manager command will need changing for different Linux versions)
 
-&gbc has a set of JSON configuration files that configure its main parameters. These need to be located in the same directory as the GBC executable file.
+&gbc has a set of JSON configuration files that configure its main parameters.
 
 The tar file you download will contain some example configuration files.
 
-For example for the starter kits, copy the following files into the &gbc directory:
+For example for the starter kits you will have:
 
 `machine_starter_kit_1.json`
 
-`default.json`
-
-`fieldbus.json`
-
-`example_tasks.json`
-
+These can be
 
 See <Link to="/docs/gbc/configuration"> Configuration of GBC</Link> for more details.

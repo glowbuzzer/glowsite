@@ -1,11 +1,15 @@
 import { Link } from "react-router-dom"
 
 
-To run GBC, usually `./GBC` is enough.
+To run GBC, you may need to specify the configuration file.
 
-You can optionally specify command line arguments - see <Link to="/docs/gbc/configuration"> Configuration of GBC</Link> for more details.
+If you want to run the generic demo just run `./GBC` as it will use the "built-in" configuration.
 
-The first output should look something like this.
+If you want to the Staubli robot demo, then use:
+
+`./GBC -cmachine_tx40.json`
+
+On running GBC, the first console output should look something like this.
 
 ```text
 [INFO  ] GBC: **************************************************************************
@@ -13,10 +17,7 @@ The first output should look something like this.
 [INFO  ] GBC: **************************************************************************
 [WARN  ] GBC: No valid port was specified on the command line. Will use the default [9001]
 [WARN  ] GBC: No valid signal was specified on the command line. Will use the default [29]
-[WARN  ] GBC: No valid shared memory name was specified on the command line. Will use the default [gbc_shared_memory]
-[INFO  ] GBC: Software project name [GBC]
-[INFO  ] GBC: Software project version [0.0.1]
-[INFO  ] GBC: Release Git Tag [0.0.0]
+
 ```
 
 

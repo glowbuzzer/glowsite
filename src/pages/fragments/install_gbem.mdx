@@ -26,3 +26,8 @@ This will create the GBEM binary in the `builds` directory that can be run with 
 
 You can also do a `sudo make install` if you want to copy the executable into the `bin` directory.
 
+You will need to install `libbsd` as we use some of its networking functions. This can be done with the Linux package manager:
+
+```shell
+sudo apt install libbsd-dev
+```

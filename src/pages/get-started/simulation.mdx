@@ -1,9 +1,16 @@
 import {Tldr} from "../../framework/components/Tldr"
 import CraTemplate from "../fragments/cra_template.mdx"
-import InstallGbc from "../fragments/install_gbc.mdx"
+import InstallGbc from "../fragments/install_gbc_short.mdx"
 import RunGbc from "../fragments/run_gbc_short.mdx"
 import FrontendConnect from "../fragments/frontend_connect.mdx"
 import Jog from "../fragments/jog.mdx"
+import {BogStandardCol} from "../../framework/components"
+import {BogStandardRow} from "../../framework/components"
+import {Image} from "../../framework/components"
+import generic_gbr from "./generic_gbr.jpg?glowsite"
+
+import staubli_gbr from "./staubli_gbr.jpg?glowsite"
+
 
 # {props.subtitle}
 
@@ -22,10 +29,24 @@ It is also used to speed up the development of front-end components by allowing 
 
 Testing the &gbt in simulation mode means you can exercise a large part of the software from a Windows PC running WSL/VM or a normal Linux PC. No Linux real-time extensions are required.
 
-## Step 1 - Installing and running &gbc
-First you need to install &gbc (the real-time core control) on WSL/VM or Linux itself.
+With simulation mode you will quickly be able to play with one of the two sample front-end applications shown below:
 
-Then you will connect &gbr to &gbc over the network.
+<BogStandardRow>
+    <BogStandardCol span={12}><Image meta={generic_gbr} alt="Generic GBR UI" MaxWidth={400}/>
+    </BogStandardCol>
+    <BogStandardCol span={12}><Image meta={staubli_gbr} alt="Staubli GBR UI" MaxWdith={500}/></BogStandardCol>
+</BogStandardRow>
+
+<BogStandardRow>
+    <BogStandardCol span={12}>Generic</BogStandardCol>
+    <BogStandardCol span={12}>Staubli (6-DOF robot)</BogStandardCol>
+</BogStandardRow>
+
+
+## Step 1 - Installing and running &gbc
+First you need to install &gbc (the real-time core control) on WSL/Linux Virtual Machine or a full Linux installation.
+
+Then you will connect &gbr to &gbc together over the network and will be able to test out key functions of the software.
 
 <InstallGbc/>
 
@@ -37,9 +58,8 @@ The easiest way to start is to use our hosted versions of &gbr from our website.
 
 There are two example applications available for you to play with:
 
-1. generic - an example control for a cartesian machine - <a href="https://www.glowbuzzer.com/xxxx">available here</a>
-1. staubli - an example control for a 6-DOF industrial robot - <a href="https://www.glowbuzzer.com/yyyy">available here</a>
-
+1. "generic" - an example control for a cartesian machine - <a href="https://preview.glowbuzzer.com/examples/generic/index.html">available here</a>
+1. "staubli" - an example control for a 6-DOF industrial robot - <a href="https://preview.glowbuzzer.com/examples/staubli/index.html">available here</a>
 
 ## Step 3 - Test the basic functions of &gbr
 
@@ -51,7 +71,7 @@ There are two example applications available for you to play with:
 
 <Jog/>
 
-## Step 4 - going further
+## Step 4 - Going further
 
 The next step is to have local copy of &gbr for you to customise further.
 
