@@ -72,10 +72,30 @@ const CarouselItem = styled(CarouselDiv)<{ backgroundImage: string }>`
         img {
             height: 500px;
         }
+
+        @media (max-width: 1200px) {
+            min-height: 500px;
+
+            img {
+                display: none;
+            }
+        }
+
+        @media (max-width: 767px) {
+            min-height: 475px;
+
+            h1 {
+                font-size: 2em;
+            }
+
+            p {
+                font-size: 1em;
+            }
+        }
     }
 `
 
-export const HomeCarousel = props => {
+export const HomeCarousel = () => {
     return (
         <CarouselWrapper {...CarouselSettings}>
             <CarouselItem backgroundImage={BackgroundImage1}>

@@ -35,7 +35,6 @@ export const StyledLayout = styled.div`
         position: fixed;
         text-align: center;
         width: 100%;
-        //max-width: ${props => props.theme.breaks.mainWidth};
         background: white;
         padding: 20px;
         border-top: 1px solid rgba(0, 0, 0, 0.3);
@@ -54,10 +53,18 @@ export const StyledLayout = styled.div`
         bottom: 0;
 
         > div {
+            text-align: center;
             display: inline-flex;
+            flex-wrap: wrap;
             align-items: center;
-            gap: 100px;
+            gap: 10px;
             max-width: ${props => props.theme.breaks.mainWidth};
+
+            .buttons {
+                margin: 0 auto;
+                //width: 100%;
+                text-align: center;
+            }
         }
     }
 `
@@ -98,7 +105,7 @@ export const BaseLayout = ({
                                 can improve our services. For more information see our{" "}
                                 <Link to="/privacy">privacy policy</Link>
                             </div>
-                            <div>
+                            <div className="buttons">
                                 <Button type="primary" onClick={cookieConsent.accept}>
                                     Accept
                                 </Button>{" "}

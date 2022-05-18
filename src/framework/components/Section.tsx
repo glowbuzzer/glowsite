@@ -32,15 +32,15 @@ const StyledSection = styled.div<{
         ${props =>
             props.dataSpaced &&
             css`
-                color: green;
-                padding: 40px 0;
+                @media (min-width: 767px) {
+                    padding: 40px 0;
+                }
             `}
 
         ${props =>
             props.dataExpand &&
             css`
-                //display: flex;
-              flex-grow: 1;
+                flex-grow: 1;
                 align-items: stretch;
             `}
     }
