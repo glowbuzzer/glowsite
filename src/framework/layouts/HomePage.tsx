@@ -170,9 +170,7 @@ export const HomePage = () => {
                     <BlogIcon className="hero-image" style={{ height: "50px" }} />
                 </HeroSection>
             </Section>
-            <Section>
                 <FeaturedBlog />
-            </Section>
         </BaseLayout>
     )
 }
