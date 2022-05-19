@@ -4,24 +4,17 @@ The installation of &gbc requires that you download binaries.
 
 Assuming you want to test this out on WSL or a virtual or real Linux platform, the location of the download is as follows:
 
-`https://downloads.glowbuzzer.com/releases/gbc/linux-amd64/refs/tags/&gbc_version;/gbc-&gbc_version;.tgz`
-
-First, move to the directory in which you want to install &gbc. Then download &gbc using `wget`.
-
-If `wget` needs installing, install with:
 ```shell
-sudo apt install wget //for different linux variants this will need to use the command for their package manager
+https://downloads.glowbuzzer.com/releases/gbc/linux-amd64/refs/tags/&gbc_version;/gbc-&gbc_version;.tgz
 ```
 
-Otherwise, just run:
+First, move to the directory in which you want to install &gbc. Then download &gbc using `wget` or `curl` like this:
+
 ```shell
-wget downloads.glowbuzzer.com/releases/gbc/linux-amd64/refs/tags/&gbc_version;/gbc-&gbc_version;.tgz
+wget https://downloads.glowbuzzer.com/releases/gbc/linux-amd64/refs/tags/&gbc_version;/gbc-&gbc_version;.tgz
 ```
 
 Then uncompress with:
 ```shell
-tar -xzf gbc.tgz
+tar -xzf gbc-&gbc_version;.tgz
 ```
-
-
-

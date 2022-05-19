@@ -2,6 +2,17 @@ import {Image} from "../../framework/components/Image";
 
 import connect_tile from "../fragments/connect_tile.svg"
 import preferences from "../fragments/preferences.png?glowsite"
+import connect_tile_video from "./connect_tile.webm"
+
+In the "preferences" section of top-nav drop-down you can set the target (network address of &gbc) that &gbr connects to.
+
+If you are developing with say WSL and GBC is running on the same host as &gbr this should be set to :`ws://localhost:9001/ws`.
+
+If you are targeting a remote &gbc instance (for example on a Virtual Machine or Raspberry Pi) then target this host with `ws://my-host:9001/ws`.
+
+See below.
+
+<Image meta={preferences} alt="preferences tile" maxWidth={400}/>
 
 In the browser, the "Connection Tile" is the goto place for all things relating to connecting to &gbc and controlling the machine state.
 
@@ -22,10 +33,9 @@ If the machine is in Fault state, you will need to click the "Fault reset" butto
 
 Next, the "Machine operation" buttons take the machine through its state machine. Either up to "Operation Enabled" or down to "Operation Disabled".
 
-If you are developing locally, "preferences" section of drop-down make sure the websockets connection is targeted `ws://localhost:9001/ws`.
+The follow video illustrates the connection process:
 
-See below.
+<video autoPlay loop muted playsInline>
+    <source src={connect_tile_video} type="video/webm"></source>
+</video>
 
-<Image meta={preferences} alt="preferences tile" maxWidth={400}/>
-
-If you are targeting a remote &gbc instance (for example on a Raspberry Pi) then target this host with `ws://my-rpi:9001/ws`.

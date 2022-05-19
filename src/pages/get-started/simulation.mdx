@@ -6,10 +6,19 @@ import FrontendConnect from "../fragments/frontend_connect.mdx"
 import Jog from "../fragments/jog.mdx"
 import {BogStandardCol} from "../../framework/components"
 import {BogStandardRow} from "../../framework/components"
-import {Image} from "../../framework/components"
-import generic_gbr from "./generic_gbr.jpg?glowsite"
+import { Link } from "react-router-dom"
+import {Tabs, Image} from "antd";
+import generic_gbr from "./generic_gbr.jpg"
+import staubli_gbr from "./staubli_gbr.jpg"
+import Icon from '@ant-design/icons';
+import {ReactComponent as RobotIconSvg} from "./robot-icon.svg?inline"
+import {ReactComponent as CartesianIconSvg} from "./cartesian-icon.svg?inline"
 
-import staubli_gbr from "./staubli_gbr.jpg?glowsite"
+export const RobotIcon = props => <Icon component={RobotIconSvg} {...props} />
+export const CartesianIcon = props => <Icon component={CartesianIconSvg} {...props} />
+
+export const { TabPane } = Tabs;
+
 
 
 # {props.subtitle}
@@ -29,51 +38,146 @@ It is also used to speed up the development of front-end components by allowing 
 
 Testing the &gbt in simulation mode means you can exercise a large part of the software from a Windows PC running WSL/VM or a normal Linux PC. No Linux real-time extensions are required.
 
-With simulation mode you will quickly be able to play with one of the two sample front-end applications shown below:
+
+## How to quickly get started with simulation mode
+
+We offer two demo applications for you to see what &gbr offers.
+
+
 
 <BogStandardRow>
-    <BogStandardCol span={12}><Image meta={generic_gbr} alt="Generic GBR UI" MaxWidth={400}/>
+    <BogStandardCol span={12}><CartesianIcon/>  Generic</BogStandardCol>
+    <BogStandardCol span={12}><RobotIcon/>  Staubli</BogStandardCol>
+
+</BogStandardRow>
+
+<BogStandardRow>
+    <BogStandardCol span={12}>
+        * Control for a cartesian machine
+        * 3 joints plus one auxiliary axis
+        * Cartesian kinematics model
+        * Range of IO (analog, digital etc.)
     </BogStandardCol>
-    <BogStandardCol span={12}><Image meta={staubli_gbr} alt="Staubli GBR UI" MaxWdith={500}/></BogStandardCol>
+    <BogStandardCol span={12}>
+        * Control for a 6-DOF robot
+        * 6 joints
+        * Industrial robot arm kinematics model
+        * No IO
+    </BogStandardCol>
 </BogStandardRow>
 
 <BogStandardRow>
-    <BogStandardCol span={12}>Generic</BogStandardCol>
-    <BogStandardCol span={12}>Staubli (6-DOF robot)</BogStandardCol>
+
+<BogStandardCol span={12}><Image src={generic_gbr} width={400}/>    </BogStandardCol>
+    <BogStandardCol span={12}><Image src={staubli_gbr} width={400}/>    </BogStandardCol>
 </BogStandardRow>
 
+So, follow the simple instructions below for either the Generic or Staubli demos.
 
-## Step 1 - Installing and running &gbc
-First you need to install &gbc (the real-time core control) on WSL/Linux Virtual Machine or a full Linux installation.
+<Tabs defaultActiveKey="1"  >
+    <TabPane tab={<span><h2><CartesianIcon/>  Generic machine demo - instructions</h2></span>} key="1">
+        ### Step 1 - Running &gbr
+        The easiest way to start is to use our hosted version of &gbr from our website.
 
-Then you will connect &gbr to &gbc together over the network and will be able to test out key functions of the software.
+        The generic demo (a cartesian machine with 3-axes and an auxiliary axis) is <a href="https://preview.glowbuzzer.com/examples/generic/index.html">available here</a>
 
-<InstallGbc/>
+        You will not be able to use the front-end until you have installed &gbc, the real-time control on your PC.
 
-<RunGbc/>
+        ### Step 2 - Installing and running &gbc
+        First you need to install &gbc (the real-time core control) on WSL/Linux Virtual Machine or a full Linux installation.
 
-## Step 2 - Running &gbr
+        Then you will connect &gbr to &gbc together over the network and will be able to test out key functions of the software.
 
-The easiest way to start is to use our hosted versions of &gbr from our website.
+        <InstallGbc/>
 
-There are two example applications available for you to play with:
+        To run GBC for the generic demo, we can use its "built-in" configuration so we just need to run:
 
-1. "generic" - an example control for a cartesian machine - <a href="https://preview.glowbuzzer.com/examples/generic/index.html">available here</a>
-1. "staubli" - an example control for a 6-DOF industrial robot - <a href="https://preview.glowbuzzer.com/examples/staubli/index.html">available here</a>
+        ```shell
+            ./GBC
+        ```
 
-## Step 3 - Test the basic functions of &gbr
+        On running GBC, the first console output should look something like this.
 
-### Connect to &gbc
+        ```text
+        [INFO  ] GBC: **************************************************************************
+        [INFO  ] GBC: ***                         Starting GB Control                        ***
+        [INFO  ] GBC: **************************************************************************
+        [WARN  ] GBC: No valid port was specified on the command line. Will use the default [9001]
+        [WARN  ] GBC: No valid signal was specified on the command line. Will use the default [29]
 
-<FrontendConnect/>
+        ```
 
-### Jog a motor
+        Now &gbc is running, the next step is to connect &gbr to &gbc and test out key functionality.
 
-<Jog/>
 
-## Step 4 - Going further
+        ### Step 3 - Test the basic functions of &gbr
 
-The next step is to have local copy of &gbr for you to customise further.
+        #### **Connect to &gbc**
 
-<CraTemplate/>
+        <FrontendConnect/>
+
+        #### **Jog a motor**
+
+        <Jog/>
+
+
+    </TabPane>
+    <TabPane tab={<span><h2><RobotIcon/>  Staubli 6-DOF robot demo - instructions</h2></span>} key="2">
+        ### Step 1 - Running &gbr
+        The easiest way to start is to use our hosted versions of &gbr from our website.
+
+        The Staubli demo (a 6-DOF industrial robot) <a href="https://preview.glowbuzzer.com/examples/staubli/index.html">available here</a>
+
+        You will not be able to use the front-end until you have installed &gbc, the real-time control on your PC.
+
+        ### Step 2 - Installing and running &gbc
+        First you need to install &gbc (the real-time core control) on WSL/Linux Virtual Machine or a full Linux installation.
+
+        Then you will connect &gbr to &gbc together over the network and will be able to test out key functions of the software.
+
+        <InstallGbc/>
+
+        To run GBC for the Staubli demo, we need to specifiy a configuration file so we run:
+
+        ```shell
+        ./GBC -cmachine_tx40.json
+        ```
+
+        On running GBC, the first console output should look something like this.
+
+        ```text
+        [INFO  ] GBC: **************************************************************************
+        [INFO  ] GBC: ***                         Starting GB Control                        ***
+        [INFO  ] GBC: **************************************************************************
+        [WARN  ] GBC: No valid port was specified on the command line. Will use the default [9001]
+        [WARN  ] GBC: No valid signal was specified on the command line. Will use the default [29]
+
+        ```
+
+Now &gbc is running, the next step is to connect &gbr to &gbc and test out key functionality.
+
+        ### Step 3 - Test the basic functions of &gbr
+
+        #### Connect to &gbc
+
+        <FrontendConnect/>
+
+        #### Jog a motor
+
+        <Jog/>
+
+
+    </TabPane>
+</Tabs>
+
+
+##  Going further
+
+Great, you have got it working
+
+    1. Customise front-end - have local copy of &gbr for you to customise further - <Link to="/docs/gbr/starter_project">see here</Link>
+    1. Get started with hardware - starter kit - <Link to="/get-started/hardware">see here</Link>
+    1. Understand Integrate with EtherCAT or other fieldbus devices - <Link to="/docs/gbem/overview">see here</Link>
+    1. Understand Integrate with embedded motor drivers - <Link to="/docs/gbsm/overview">see here</Link>
+
 
