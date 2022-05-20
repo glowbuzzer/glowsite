@@ -81,45 +81,8 @@ export default function remarkMermaid() {
                 // push a new promise
 
                 future.img(node, parent, index, cache(source, sourcePath, renderMermaidToSvg))
-                // promises.push(
-                //     cache(source, sourcePath, renderMermaidToSvg)
-                //         .then(({ unique, relative }) => {
-                //             // result of the promise on success
-                //             return {
-                //                 parent,
-                //                 index,
-                //                 replace: createElement("img", {
-                //                     src: `@mermaid_${unique}`,
-                //                     alt: "mermaid-image"
-                //                 }),
-                //                 import: createImport(`mermaid_${unique}`, relative)
-                //             }
-                //         })
-                //         .catch(error => {
-                //             // result of the promise on error (includes line number of code block)
-                //             return { error, line: node.position.start.line }
-                //         })
-                // )
             }
         })
-
-        // const result = await Promise.all(promises)
-        //
-        // const success = result.filter(r => !r.error) // get the successful renders
-        // const imports = success.map(r => r.import) // gather imports
-        //
-        // for (const { parent, index, replace } of success) {
-        //     parent.children[index] = replace // mutate the codeblock nodes
-        // }
-        //
-        // // report any errors
-        // const errors = result.map(({ error, line }) => error && { error, line }).filter(r => r) // get index of error and filter successes
-        // for (const { error, line } of errors) {
-        //     console.log(format_error(sourcePath, error, line))
-        // }
-        //
-        // // insert the imports
-        // tree.children.splice(0, 0, ...imports)
 
         return await future.finalize(tree)
     }

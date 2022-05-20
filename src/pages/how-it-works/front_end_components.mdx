@@ -2,6 +2,7 @@ import {Tabs} from "antd"
 import {Tldr} from "../../framework/components/Tldr";
 import {Link} from "react-router-dom"
 import { GlowbuzzerApp } from "@glowbuzzer/controls/app"
+import GbrTilesOverview from "../fragments/gbr_tiles_overview_list.mdx"
 
 # {props.subtitle}
 
@@ -22,97 +23,7 @@ The framework is built on other open source projects, primarily React, Redux & A
 
 Below is a description of a handful of the components to give you a flavour of what's available. See <Link to="/docs/gbr/overview">&gbrl; Documentation</Link> for the full suite of components.
 
-**Machine connection and state machine**
-
-: Connecting to the machine or robot and taking it through its start-up state machine viewing any errors that may occur
-
-**Jogging**
-
-: Manually moving the machine or robot either in cartesian or joint space
-
-**DRO**
-
-: Where is the machine, in joint-space, in cartesian space in different frames
-
-**Task/activities**
-
-: Interaction with the control programs (tasks and activities)
-
-**Analogue and digital in/out**
-
-: See that state of inputs and set the state of outputs on the machine
-
-**g-code**
-
-: Load and send gcode to the machine
-
-**Path view**
-
-: Shows in a 3D view where the machine is and the path the program will take the TCP on
-
-**Robot/machine view**
-
-: For machines with non-trivial kinematics (robots) shows a 3d view of the machine
-
-**Telemetry**
-
-: Shows the trajectories that are sent to drives (for diagnostic purposes)
-
-{/*
-Here you can see the documentation for a few components:
-
-<Tabs defaultActiveKey="1">
-    <Tabs.TabPane tab="Cartesian DRO" key="1" >
-        <GlowbuzzerApp minWidth={"1px"}>
-        ```jsx demo
-        import * as React from "react";
-        import {CartesianDro} from '@glowbuzzer/controls';
-        export default () => <CartesianDro kinematicsConfigurationIndex={0}/>
-        ```
-        </GlowbuzzerApp>
-
-    </Tabs.TabPane>
-    <Tabs.TabPane tab="Frame view" key="2">
-
-        <GlowbuzzerApp minWidth={"1px"}>
-        ```jsx demo
-            import * as React from "react";
-            import {FrameView} from "@glowbuzzer/controls";
-            export default () => <FrameView/>
-            ```
-        </GlowbuzzerApp>
-
-    </Tabs.TabPane>
-    <Tabs.TabPane tab="Bit Field Display" key="3">
-
-        ```jsx demo
-        import * as React from "react";
-        import {BitFieldDisplay} from "@glowbuzzer/controls";
-        export default () => <BitFieldDisplay value={111} bitCount={16}/>
-        ```
-
-    </Tabs.TabPane>
-</Tabs>
-
-
-
-
-
-You will import the controls you need into your project:
-
-```js
-import {
-    CartesianDro,
-    ConnectTile,
-    DigitalInputsTile,
-    DigitalOutputsTile,
-    FeedRateTile,
-    GCodeTile,
-    JogTile,
-    ToolPathTile
-} from "@glowbuzzer/controls"
-```
-*/}
+<GbrTilesOverview/>
 
 ## HMI options
 

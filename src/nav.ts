@@ -48,28 +48,22 @@ const nav = {
             layout: DefaultDocumentationPage,
             children: [
                 {
-                    slug: "basics",
-                    title: "Basics",
+                    slug: "overview",
+                    title: "Overview",
                     subtitle: "Basically, how does it work?",
                     component: () => import("./pages/how-it-works/basics.mdx")
                 },
                 {
-                    slug: "detail",
-                    title: "More detail",
+                    slug: "architecture",
+                    title: "Architecture",
                     subtitle: "A little more technical detail...",
                     component: () => import("./pages/how-it-works/detail.mdx")
                 },
                 {
-                    slug: "platforms",
-                    title: "Platforms",
+                    slug: "deployment",
+                    title: "Deployment",
                     subtitle: "What platforms does the glowbuzzer toolkit run on?",
                     component: () => import("./pages/how-it-works/platforms.mdx")
-                },
-                {
-                    slug: "drives",
-                    title: "Drives",
-                    subtitle: "How does it integrate with drives?",
-                    component: () => import("./pages/how-it-works/drives.mdx")
                 },
                 {
                     slug: "embedded",
@@ -79,25 +73,31 @@ const nav = {
                 },
                 {
                     slug: "fieldbus",
-                    title: "Fieldbus",
+                    title: "Fieldbus integration",
                     subtitle: "How does it integrate with a fieldbus?",
                     component: () => import("./pages/how-it-works/fieldbus.mdx")
                 },
                 {
+                    slug: "drives",
+                    title: "Drives integration",
+                    subtitle: "How does it integrate with drives?",
+                    component: () => import("./pages/how-it-works/drives.mdx")
+                },
+                {
                     slug: "real_time",
-                    title: "Real-time communication",
-                    subtitle: "How we get fast reaction to events",
+                    title: "Real-time",
+                    subtitle: "Fast reaction to events",
                     component: () => import("./pages/how-it-works/real_time.mdx")
                 },
                 {
                     slug: "front_end_components",
-                    title: "Front-end components",
+                    title: "User interface",
                     subtitle: "Building a machine control in React",
                     component: () => import("./pages/how-it-works/front_end_components.mdx")
                 },
                 {
                     slug: "motion",
-                    title: "Motion - trajectory planning",
+                    title: "Trajectory planner",
                     subtitle: "The algorithms to make things move",
                     component: () => import("./pages/how-it-works/motion.mdx")
                 }
@@ -108,6 +108,12 @@ const nav = {
             title: "Getting started",
             layout: DefaultDocumentationPage,
             children: [
+                {
+                    slug: "simulation",
+                    title: "Quick Start",
+                    subtitle: "Get started without hardware",
+                    component: () => import("./pages/get-started/simulation.mdx")
+                },
                 {
                     slug: "hardware",
                     title: "Hardware",
@@ -141,12 +147,6 @@ const nav = {
                                 import("./pages/get-started/building_hardware/embedded_linux.mdx")
                         }
                     ]
-                },
-                {
-                    slug: "simulation",
-                    title: "Simulation mode",
-                    subtitle: "The no-hardware route to get going",
-                    component: () => import("./pages/get-started/simulation.mdx")
                 },
                 {
                     slug: "motion",

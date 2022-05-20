@@ -19,11 +19,9 @@ A machine is a combination of motors and IO. It could be an industrial robot arm
 
 At a high level, you take the &gbt’s React components and use them either unchanged, extended or added to with your own custom components to build the visual front-end and control logic for your machine control.
 
-This user interface and control logic code runs: in the browser (including HMIs), or as a desktop application, or on a mobile device (tablet, phone).
+This user interface and control logic code runs in the browser (including HMIs), as a desktop application, or on a mobile device (tablet, phone).
 
-The &gbt allows you to build machine control applications using a web stack.
-
-Where a front-end component needs to make the machine perform an action (move a motor or turn something on or off) it issues commands over a WebSocket interface. When a front-end component needs to interact with the state of the machine it reads from a WebSocket interface.
+The &gbt allows you to build machine control applications using a web stack. When a front-end component needs to make the machine perform an action (move a motor, or turn something on or off) it issues commands over a WebSocket interface. When a front-end component needs to interact with the state of the machine it reads from a WebSocket interface.
 
 The WebSockets interface used by the front-end, is provided by the &gbt’s real-time control software that runs either on Linux or on an embedded microcontroller.
 

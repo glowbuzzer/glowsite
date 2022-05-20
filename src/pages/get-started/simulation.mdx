@@ -46,36 +46,28 @@ We offer two demo applications for you to see what &gbr offers.
 
 
 <BogStandardRow>
-    <BogStandardCol span={12}><CartesianIcon/>  Generic</BogStandardCol>
-    <BogStandardCol span={12}><RobotIcon/>  Staubli</BogStandardCol>
-
-</BogStandardRow>
-
-<BogStandardRow>
-    <BogStandardCol span={12}>
+    <BogStandardCol lg={12} xs={24}>
+        <h3><CartesianIcon/>  Generic</h3>
         * Control for a cartesian machine
         * 3 joints plus one auxiliary axis
         * Cartesian kinematics model
         * Range of IO (analog, digital etc.)
+        <Image src={generic_gbr}/>
     </BogStandardCol>
-    <BogStandardCol span={12}>
+    <BogStandardCol lg={12} xs={24}>
+        <h3><RobotIcon/>  Staubli</h3>
         * Control for a 6-DOF robot
         * 6 joints
         * Industrial robot arm kinematics model
         * No IO
+        <Image src={staubli_gbr}/>
     </BogStandardCol>
-</BogStandardRow>
-
-<BogStandardRow>
-
-<BogStandardCol span={12}><Image src={generic_gbr} width={400}/>    </BogStandardCol>
-    <BogStandardCol span={12}><Image src={staubli_gbr} width={400}/>    </BogStandardCol>
 </BogStandardRow>
 
 So, follow the simple instructions below for either the Generic or Staubli demos.
 
 <Tabs defaultActiveKey="1"  >
-    <TabPane tab={<span><h2><CartesianIcon/>  Generic machine demo - instructions</h2></span>} key="1">
+    <TabPane tab={<span><h2><CartesianIcon/>  Generic</h2></span>} key="1">
         ### Step 1 - Running &gbr
         The easiest way to start is to use our hosted version of &gbr from our website.
 
@@ -122,7 +114,7 @@ So, follow the simple instructions below for either the Generic or Staubli demos
 
 
     </TabPane>
-    <TabPane tab={<span><h2><RobotIcon/>  Staubli 6-DOF robot demo - instructions</h2></span>} key="2">
+    <TabPane tab={<span><h2><RobotIcon/>  Staubli</h2></span>} key="2">
         ### Step 1 - Running &gbr
         The easiest way to start is to use our hosted versions of &gbr from our website.
 

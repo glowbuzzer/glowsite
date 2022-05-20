@@ -5,6 +5,13 @@ import { CheckCircleOutlined } from "@ant-design/icons"
 import styled from "styled-components"
 
 const StyledTldr = styled.div`
+    .ant-card {
+        float: right;
+        width: 300px;
+        margin: 20px;
+        padding-top: 20px;
+    }
+
     @media (max-width: 950px) {
         .tldr-wide {
             display: none;
@@ -15,14 +22,9 @@ const StyledTldr = styled.div`
 export const Tldr = ({ children }) => (
     <StyledTldr>
         <div className="tldr-wide">
-            <Card
-                size="small"
-                style={{ width: 300, float: "right", margin: "0 10px 0 20px" }}
-                className={"tldr-wide"}
-            >
+            <Card size="small" className={"tldr-wide"}>
                 <Card.Meta
                     title={"TL;DR"}
-                    style={{ padding: "10px 0 0 0" }}
                     avatar={
                         <Avatar
                             style={{ backgroundColor: "#fff", color: "#000000" }}
@@ -33,13 +35,6 @@ export const Tldr = ({ children }) => (
                 />
                 <Divider />
                 {children}
-                {/*
-        <ul>
-            {React.Children.map(children, child => (
-                <li>{child}</li>
-            ))}
-        </ul>
-*/}
             </Card>
         </div>
     </StyledTldr>

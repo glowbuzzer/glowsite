@@ -1,9 +1,10 @@
 import {Avatar, Col, Divider, List, Row} from 'antd'
-import {Tldr} from "../../framework/components/Tldr"
+import {Tldr} from "../../framework/components"
 import {ApiOutlined, FieldBinaryOutlined,DesktopOutlined, ApartmentOutlined, StepForwardOutlined, DownloadOutlined, DashboardOutlined, EyeOutlined} from "@ant-design/icons"
 import TiersImage1 from './tiers-GBEM.svg'
 import TiersImage2 from './tiers-GBSM.svg'
 
+import GbrTilesOverview from "../fragments/gbr_tiles_overview_list.mdx"
 
 # {props.subtitle}
 
@@ -45,69 +46,7 @@ When you want to integrate with motor driver ICs (usually in an embedded environ
 
 We supply a comprehensive set of components to perform the fundamental machine control functions. Some examples of these components include:
 
-<List bordered>
-    <List.Item>
-        <List.Item.Meta
-            title="Connect to a machine"
-            description="Establish a websockets connection to GBC"
-            avatar={<Avatar
-                icon={<ApiOutlined/>}
-                size={"large"}
-                style={{backgroundColor: "#f0f0f0", color: "black"}}
-            />}
-        />
-    </List.Item>
-    <List.Item>
-        <List.Item.Meta
-            avatar={<Avatar
-                icon={<FieldBinaryOutlined/>} size={"large"} style={{backgroundColor: "#f0f0f0", color: "black"}}/>}
-            title="Manage digital and analogue inputs and outputs"
-            description="Control and monitor the state of digital and analog inputs and outputs on the machine"
-        />
-    </List.Item>
-    <List.Item>
-        <List.Item.Meta
-            avatar={<Avatar
-                icon={<ApartmentOutlined/>} size={"large"} style={{backgroundColor: "#f0f0f0", color: "black"}}/>}
-            title="Manage the machine's state (switched on, faults)"
-            description="The state of the machine is a superimposed state of underlying drives and sub-systems"
-        />
-    </List.Item>
-    <List.Item>
-        <List.Item.Meta
-            avatar={<Avatar
-                icon={<StepForwardOutlined />} size={"large"} style={{backgroundColor: "#f0f0f0", color: "black"}}/>}
-            title="Make a machine move - jogging"
-            description="Jogging a machine is a basic machine function to move axes in concert or individually"
-        />
-    </List.Item>
-    <List.Item>
-        <List.Item.Meta
-            avatar={<Avatar
-                icon={<DashboardOutlined />} size={"large"} style={{backgroundColor: "#f0f0f0", color: "black"}}/>}
-            title="See the machine’s position (DRO)"
-            description="Machines with motors have a position. This can be the position of the motors themselves or the end-effector/tool if the motors act in concert"
-        />
-    </List.Item>
-    <List.Item>
-        <List.Item.Meta
-            avatar={<Avatar
-                icon={<DownloadOutlined />} size={"large"} style={{backgroundColor: "#f0f0f0", color: "black"}}/>}
-            title="Send gcode to a machine"
-            description="gcode is an easy to use way to control machines. We supply the components to interpret and transmit this gcode to a machine"
-        />
-    </List.Item>
-    <List.Item>
-        <List.Item.Meta
-            avatar={<Avatar
-                icon={<EyeOutlined />} size={"large"} style={{backgroundColor: "#f0f0f0", color: "black"}}/>}
-            title="See the path on which a machine moves"
-            description="Plot the path the machine's end-effector or tool follows"
-        />
-    </List.Item>
-</List>
-
-
+<GbrTilesOverview/>
 
 These components are all published under an open - source license agreement and are fully customisable.You can also, of course, tap in the vast ecosystem of components & code available in the wider React / JavaScript ecosystem.When FE components need the machine to do something, they send high - level commands to the machine control over a WebSocket interface.They also receive messages containing the state of the machine over this connection.
 
