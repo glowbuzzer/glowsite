@@ -26,6 +26,7 @@ const StyledSection = styled.div<{
 
     > .section {
         max-width: ${props => props.theme.breaks.mainWidth};
+        min-width: 0;
         margin: 0 auto;
         flex-grow: 1;
 

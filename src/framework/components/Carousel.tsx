@@ -17,42 +17,39 @@ type CarouselProps = CarouselStyleProps & {
 }
 
 const StandardCarouselStyle = styled.div<CarouselStyleProps>`
-    width: ${props => props.width};
-    height: ${props => props.height};
+  max-width: ${props => props.width};
+  max-height: ${props => props.height};
 
-    margin-top: 1vh;
-    margin-bottom: 1vh;
-    margin-left: auto;
-    margin-right: auto;
+  margin: 1vh auto;
 
-    .slide {
-        width: 100%;
-        height: 100%;
-    }
+  .slide {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+  }
 
-    .slide img {
-        height: calc(${props => props.height} - 50px);
-        margin-left: auto;
-        margin-right: auto;
-    }
+  .slide img {
+    max-height: calc(${props => props.height} - 50px);
+    display: inline-block;
+  }
 
-    .slick-dots {
-        top: ${props => props.dotsTop}; // play with the number of pixels to position it as you want
-    }
+  .slick-dots {
+    top: ${props => props.dotsTop}; // play with the number of pixels to position it as you want
+  }
 
-    .slick-dots li button {
-        width: 6px !important;
-        height: 6px !important;
-        border-radius: 100% !important;
-        background: blue !important;
-    }
+  .slick-dots li button {
+    width: 6px !important;
+    height: 6px !important;
+    border-radius: 100% !important;
+    background: blue !important;
+  }
 
-    .slick-dots li.slick-active button {
-        width: 7px !important;
-        height: 7px !important;
-        border-radius: 100% !important;
-        background: ${props => props.theme.color.MainPurple}!important;
-    }
+  .slick-dots li.slick-active button {
+    width: 7px !important;
+    height: 7px !important;
+    border-radius: 100% !important;
+    background: ${props => props.theme.color.MainPurple} !important;
+  }
 `
 
 export const StandardCarousel = ({
@@ -79,9 +76,9 @@ export const StandardCarousel = ({
         >
             {imgdata.map(([url, name], index) => (
                 <div className="slide" key={index}>
-                    <img src={url} />
+                    <img alt={name} src={url} />
                     {labelsOn && (
-                        <h3 style={{ padding: "0 0 0 50px" }}>
+                        <h3 className="caption">
                             <em>{name}</em>
                         </h3>
                     )}

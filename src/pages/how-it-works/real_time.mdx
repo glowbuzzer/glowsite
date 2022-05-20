@@ -19,9 +19,9 @@ We allow deployment of code into four distinct tiers as described below. Importa
 application but much of the complex control logic and workflow can be. This provides a flexible and rapid development environment for most of your application, while still
 allowing time critical functions to be deployed where they are needed.
 
-<div style={{width: "70%"}}>
+<div>
     <Row>
-        <Col span="20" style={{background: '#b37feb', padding: '5px 5px'}}>
+        <Col lg={18} xs={24} style={{background: '#b37feb', padding: '5px 5px'}}>
             ## Tier 1
             ### React application
             **Response time between 10 milliseconds & 1 second (usually fast as PCs are generally very quick but this is
@@ -29,21 +29,21 @@ allowing time critical functions to be deployed where they are needed.
         </Col>
     </Row>
     <Row>
-        <Col span="20" style={{background: '#d3adf7', padding: '5px 5px'}}>
+        <Col lg={18} xs={24} style={{background: '#d3adf7', padding: '5px 5px'}}>
             ## Tier 2
             ### Javascript code running inside the real-time control (&gbc)
             **Response time around 5 milliseconds**
         </Col>
     </Row>
     <Row>
-        <Col span="20" style={{background: '#efdbff', padding: '5px 5px'}}>
+        <Col lg={18} xs={24} style={{background: '#efdbff', padding: '5px 5px'}}>
             ## Tier 3
             ### C code hooked into the real-time control (&gbc)
             **Response time guaranteed to be your cycle time (4 milliseconds down to 0.5 milliseconds)**
         </Col>
     </Row>
     <Row>
-        <Col span="20" style={{background: '#f9f0ff', padding: '5px 5px'}}>
+        <Col lg={18} xs={24} style={{background: '#f9f0ff', padding: '5px 5px'}}>
             ## Tier 4
             ### C code running in &gbeml or &gbeml
             **Response time guaranteed to be your cycle time (4 milliseconds down to 0.5 milliseconds)**

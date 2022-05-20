@@ -136,7 +136,7 @@ There are pros and cons to each approach. Anyone, who has worked in this area kn
 
 <Divider orientation="left"> Microcontroller pros and cons</Divider>
 
-<Table dataSource={dataSourceMicrocontroller} columns={columns} bordered={true} pagination={false}/>
+<Table dataSource={dataSourceMicrocontroller} columns={columns} bordered={true} pagination={false} />
 
 <Divider orientation="left"> Embedded Linux pros and cons</Divider>
 
@@ -195,12 +195,12 @@ If you are using STM32, the recommended development environment just uses the st
 
 The Nucleo board for developing the EtherCAT or Step Master (&gbem / &gbsm) and the Discovery board for developing &gbcl.
 
-<Row>
-    <Col span={9}>
+<Row align="bottom">
+    <Col lg={12} xs={24}>
         <Image meta={nucleo} alt="STM32 H7 Nucleo" maxWidth={300}/>
         <h3>STM32 H7 Nucleo dev. board</h3>
     </Col>
-    <Col span={9}>
+    <Col lg={12} xs={24}>
          <Image meta={disco} alt="STM32 H7 Discovery" maxWidth={300}/>
         <h3>STM32 H7 Discovery dev. board</h3>
     </Col>

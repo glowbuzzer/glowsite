@@ -112,7 +112,7 @@ export const HomePage = () => {
                         <p>
                             <Button
                                 type="primary"
-                                href="/get-started/motion"
+                                href="/get-started/simulation"
                                 icon={<RightCircleOutlined />}
                             >
                                 Find out more{" "}
