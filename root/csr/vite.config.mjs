@@ -12,6 +12,7 @@ import {svgWrapper as svgr} from "../../plugins/svr-plugin-wrapper.mjs"
 import {mdxWrapper as mdx} from "../../plugins/mdx-plugin-wrapper.mjs"
 import remarkDl from "remark-deflist"
 import {remarkEntities} from "../../plugins/remark-entities.mjs"
+import {remarkLinks} from "../../plugins/remark-links.mjs"
 import typedoc from "../../plugins/vite-plugin-typedoc.mjs";
 
 const resolveConfigs = resolveConfigsFactory({
@@ -37,6 +38,7 @@ export default defineConfig(({ mode }) => {
                     remarkGfm,
                     remarkEntities,
                     remarkMermaid,
+                    remarkLinks,
                     remarkDl,
                     remarkCodeblock,
                     remarkGlowbuzzerFrontmatter,

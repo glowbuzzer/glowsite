@@ -66,10 +66,10 @@ export function createElement(name, attributes = {}, children = []) {
  * @param value The literal path to import from
  * @returns node The full mdxjsEsm node for the import
  */
-export function createImport(name, value) {
+export function createImport(name, value, localName) {
     return {
         type: "mdxjsEsm",
-        value: `import ${name} from "${value}"`,
+        value: localName ? `import {${name} as ${localName} from "${value}"` : `import ${name} from "${value}"`,
         data: {
             estree: {
                 sourceType: "module",
@@ -79,10 +79,14 @@ export function createImport(name, value) {
                         type: "ImportDeclaration",
                         specifiers: [
                             {
-                                type: "ImportDefaultSpecifier",
-                                local: {
+                                type: localName ? "ImportSpecifier" : "ImportDefaultSpecifier",
+                                imported: localName ? {
                                     type: "Identifier",
                                     name
+                                } : undefined,
+                                local: {
+                                    type: "Identifier",
+                                    name: localName || name
                                 }
                             }
                         ],
@@ -164,7 +168,7 @@ export function handler(prefix, sourcePath) {
         img(node, parent, index, promise) {
             promises.push(
                 promise
-                    .then(({ unique, relative }) => {
+                    .then(({unique, relative}) => {
                         // result of the promise on success
                         return {
                             parent,
@@ -178,14 +182,14 @@ export function handler(prefix, sourcePath) {
                     })
                     .catch(error => {
                         // result of the promise on error (includes line number of source)
-                        return { error, line: node.position.start.line }
+                        return {error, line: node.position.start.line}
                     })
             )
         },
         component(node, parent, index, promise, wrapperClass = undefined) {
             promises.push(
                 promise
-                    .then(({ unique, relative }) => {
+                    .then(({unique, relative}) => {
                         // default without wrapper
                         let componentElement = createElement(`${prefix}_${unique}`)
                         if (wrapperClass) {
@@ -206,7 +210,7 @@ export function handler(prefix, sourcePath) {
                     })
                     .catch(error => {
                         // result of the promise on error (includes line number of source)
-                        return { error, line: node.position.start.line }
+                        return {error, line: node.position.start.line}
                     })
             )
         },
@@ -217,9 +221,9 @@ export function handler(prefix, sourcePath) {
             const imports = success.map(r => r.import) // gather imports
 
             // keep a count of the inserts done per parent to avoid insert 'drift'
-            const insert_counts = Object.fromEntries(success.map(({ parent }) => [parent, 0]))
+            const insert_counts = Object.fromEntries(success.map(({parent}) => [parent, 0]))
 
-            for (const { parent, index, replace, insert } of success) {
+            for (const {parent, index, replace, insert} of success) {
                 if (replace) {
                     parent.children[index + insert_counts[parent]] = replace // mutate the nodes
                 } else {
@@ -230,8 +234,8 @@ export function handler(prefix, sourcePath) {
             }
 
             // report any errors
-            const errors = result.map(({ error, line }) => error && { error, line }).filter(r => r) // get index of error and filter successes
-            for (const { error, line } of errors) {
+            const errors = result.map(({error, line}) => error && {error, line}).filter(r => r) // get index of error and filter successes
+            for (const {error, line} of errors) {
                 console.log(format_error(error, line))
             }
 
