@@ -3,7 +3,7 @@ import styled from "styled-components"
 import { Carousel } from "antd"
 
 type CarouselStyleProps = {
-    width: string
+    width?: string
     height: string
     dotsTop: string
 }

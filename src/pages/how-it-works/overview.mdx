@@ -1,4 +1,4 @@
-import { Row, Col, Divider} from 'antd';
+import {Row, Col, Divider} from 'antd';
 import {CheckCircleOutlined} from '@ant-design/icons'
 import {Tldr} from "../../framework/components"
 import {YoutubeEmbed} from "../../framework/components/Video";
@@ -21,19 +21,21 @@ At a high level, you take the &gbt’s React components and use them either unch
 
 This user interface and control logic code runs in the browser (including HMIs), as a desktop application, or on a mobile device (tablet, phone).
 
-The &gbt allows you to build machine control applications using a web stack. When a front-end component needs to make the machine perform an action (move a motor, or turn something on or off) it issues commands over a WebSocket interface. When a front-end component needs to interact with the state of the machine it reads from a WebSocket interface.
+The &gbt allows you to build machine control applications using a web stack. When a front-end component needs to make the machine perform an action (move a motor, or turn something on or off) it issues commands over a WebSockets interface. The front-end receives updates on the state of the machine multiple times a second over the same web socket interface.
 
-The WebSockets interface used by the front-end, is provided by the &gbt’s real-time control software that runs either on Linux or on an embedded microcontroller.
+The web socket server is provided by the &gbt’s real-time control software that runs either on Linux or on an embedded microcontroller (&gbc;).
 
-It is this software’s responsibility to translate the high-level instructions received over the WebSockets interface into the low-level commands that can issued over the fieldbus (or SPI bus in embedded applications) to control IO and drives to make the machine move and perform actions. This is where the “heavy lifting” takes place: synchronised multi-axis trajectories are planned, kinematics functions are run, tasks and activities are executed and the state of the machine is calculated. These functions run in real-time.
+The real-time control translates high-level instructions received over the web socket into process data that is continually updated on the fieldbus (or SPI bus in embedded applications) to control IO and drives to make the machine move and perform actions. This is where the “heavy lifting” takes place: synchronised multi-axis trajectories are planned, kinematics functions are run, tasks and activities are executed and the state of the machine is calculated.
 
+{/*
 At is simplest, a browser running your React machine control application is talking WebSockets over an Ethernet or Wi-Fi network to the real-time control running on a Linux platform. The real-time control then talks to the EtherCAT master which is connected to a fieldbus network and contains drives and IO.
+*/}
 
-This gives you the ability to build a sophisticated control for complex machines and robots using a modern web and open software stack with absolutely no proprietary hardware required.
+The &gbt; gives you the ability to build a sophisticated control for complex machines and robots using a modern web stack including a wide variety of open source libraries, with absolutely no proprietary hardware required.
 
 <img src={ImageBbd} alt="Big Block Diagram of the glowbuzzer control" width="100%"/>
 
-<YoutubeEmbed embedId="VnhS6107czk" />
+<YoutubeEmbed embedId="VnhS6107czk"/>
 
 <Divider orientation="left" plain><h1>Summary of features</h1></Divider>
 <Row gutter={[12, 12]}>
@@ -42,7 +44,7 @@ This gives you the ability to build a sophisticated control for complex machines
     <Col lg={1} xs={2}> <CheckCircleOutlined/> </Col>
     <Col lg={11} xs={22}><b>Runs on desktop Linux, Embedded Linux or microcontrollers</b></Col>
     <Col lg={1} xs={2}> <CheckCircleOutlined/> </Col>
-    <Col lg={11} xs={22}><b>Work with the main industrial fieldbusses for example, EtherCAT</b></Col>
+    <Col lg={11} xs={22}><b>Work with the main industrial fieldbusses such as EtherCAT</b></Col>
     <Col lg={1} xs={2}> <CheckCircleOutlined/> </Col>
     <Col lg={11} xs={22}><b>Deliver rich user interfaces to HMIs, tablets with React Native</b></Col>
     <Col lg={1} xs={2}> <CheckCircleOutlined/> </Col>
@@ -54,23 +56,24 @@ This gives you the ability to build a sophisticated control for complex machines
     <Col lg={1} xs={2}> <CheckCircleOutlined/> </Col>
     <Col lg={11} xs={22}><b>Majority of software components delivered under an open-source license agreement</b></Col>
 </Row>
-<Divider plain />
+<Divider plain/>
 
 
 # Let’s take a typical customer scenario...
+
 You are the manufacturer (OEM) of a pick-and-place machine product.
 
-The current control software you ship with the machines was written a good few years ago and is Windows C++ application that communicates over a serial connection to some custom motor control electronics embedded in the machine.
+The current control software you ship with the machines was written a good few years ago and is Windows C++ application that communicates over a serial connection to custom motor control electronics embedded in the machine.
 
-You want to update the control software & electronics but don’t know what to base your new development on. There are no easy choices. You want to write as little low-level code as possible.
+You want to update the control software and electronics but you're not sure what to base your new development on. There are no easy choices. You want to write as little low-level code as possible and you want a beautiful user interface.
 
-With the &gbt, you can write the new control software as a React web application, using the &gb library of components for standard functions (connecting to the machine, io, g-code support, jogging etc.) and write you own new components where needed for your application.
+With the &gbt, you can write the new user interface as a React web application, using the &gb library of components for standard functions (connecting to the machine, io, g-code support, jogging, and so on) and write you own new components where needed for your application.
 
 The React application can run in the browser or on a PC / Mac as an electron application or on a mobile device with React native.
 
 The core control can either run on a Linux single board computer or be integrated into the machine running on a microcontroller.
 
-The motor drives and IO can either be updated to new EtherCAT based devices (there is vast number of these available off-the-shelf from different manufacturers) or you can integrate at a lower level with embedded motor drives.
+The motor drives and IO can either be updated to new EtherCAT based devices (there is a huge variety available, from different manufacturers) or you can integrate at a lower level with embedded motor drives.
 
 **Writing machine control applications in a web stack is our magic sauce.**
 
@@ -78,12 +81,12 @@ The motor drives and IO can either be updated to new EtherCAT based devices (the
 # Open source
 Our products are based heavily on open-source software. We contribute to many open-source projects, and we actively participate in open-source communities.
 
-Automation for too long as been left out of the revolution in software part of which is represented by open source. We want to change that.
+Automation has been largely left out of the revolution in software, part of which is represented by open source. We want to change that.
 
-Automation software has historically been incredibly proprietary being based around major vendor’s hardware offerings.
+Automation software has historically been proprietary, being based around major vendors' hardware offerings.
 
-Where there is some degree interoperability it is via various standards initiatives that never quite deliver what they promised.
+While there is some degree of interoperability, it is via various standards initiatives that never quite deliver what they promised.
 
-Meanwhile, the rest of the world’s software industry has moved into a very model of openness and interoperability and rapid evolution leaving the Automation industry far behind.
+Meanwhile, the rest of the world’s software industry has moved into a model of openness and interoperability and rapid evolution leaving the automation industry far behind.
 
-Most of our software is supplied under an open-source license agreement - this gives you the flexibility to adapt, customise and explore it as you like.
+Most of our software is supplied under an open-source license agreement. This gives you the flexibility to adapt, customise and explore it as you like.

@@ -8,7 +8,7 @@ export default () => {
                 components (React)
             </Timeline.Item>
             <Timeline.Item>
-                Your application talks over websockets to GBC which performs the real time control
+                Your application talks over WebSockets to &gbc which performs the real time control
                 functions
             </Timeline.Item>
             <Timeline.Item>

@@ -8,8 +8,16 @@ const StyledTldr = styled.div`
     .ant-card {
         float: right;
         width: 300px;
-        margin: 20px;
-        padding-top: 20px;
+        margin: 0 0 20px 20px;
+        padding: 10px 5px 0 5px;
+
+        .ant-divider-horizontal {
+            margin: 16px 0;
+        }
+
+        ul {
+            padding-inline-start: 20px;
+        }
     }
 
     @media (max-width: 950px) {

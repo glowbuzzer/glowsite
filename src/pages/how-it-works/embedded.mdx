@@ -1,4 +1,4 @@
-import { Timeline, Table, Divider } from 'antd'
+import {Timeline, Table, Divider} from 'antd'
 import {Tldr} from "../../framework/components/Tldr";
 import {Image} from "../../framework/components/Image"
 import EmbeddedArch from './embedded_arch.png?glowsite'
@@ -43,7 +43,7 @@ export const dataSourceMicrocontroller = [
         pros: "Easier hardware design - deploying a microcontroller to a custom board is straight forward",
         cons: "Deploying SoM is straightforward but designing and building custom boards for SoCs is tricky",
     }
-    ];
+];
 
 export const dataSourceEmbeddedLinux = [
     {
@@ -102,10 +102,10 @@ export const columns = [
 # {props.subtitle}
 
 <Tldr>
-- Runs on embedded Linux
-- Runs on dual core high-end microcontrollers
-- Integrates with motor driver ICs
-- EtherCAT master is ported to microcontroller
+    - Runs on embedded Linux
+    - Runs on dual core high-end microcontrollers
+    - Integrates with motor driver ICs
+    - EtherCAT master is ported to microcontroller
 </Tldr>
 
 ## Introduction
@@ -116,24 +116,28 @@ The &gbt will run on either a microcontroller or embedded Linux allowing you to 
 
 ## How does the &gbt help with embedded machine control development?
 
-<Timeline style={{paddingTop: '20px', paddingLeft: '10px'}}>
-    <Timeline.Item>Develop your machine control application using our web stack based toolkit of components (React)</Timeline.Item>
+<Timeline style={{paddingTop: '20px', paddingLeft: '10px', marginBottom: "-40px"}}>
+    <Timeline.Item>Develop your machine control application using our web stack based toolkit of components
+        (React)</Timeline.Item>
 
-    <Timeline.Item>Your application talks over websockets to GBC which performs the real time control functions</Timeline.Item>
+    <Timeline.Item>Your application talks over WebSockets to &gbc which performs the real-time control
+        functions</Timeline.Item>
 
-    <Timeline.Item>GBC runs on an either a microcontroller or embedded Linux SoC</Timeline.Item>
+    <Timeline.Item>&gbc runs on an either a microcontroller or embedded Linux SoC</Timeline.Item>
 
-    <Timeline.Item>GBEM or GBSEM is either integrated with embedded drives in your electronics or connects to packaged EtherCAT drives in your machine</Timeline.Item>
+    <Timeline.Item>&gbem or &gbsm is either integrated with embedded drives in your electronics or connects to packaged
+        EtherCAT drives in your machine</Timeline.Item>
 </Timeline>
 
-This gives you the ability to build complex co-ordinated motion control applications (robot, Cartesian, delta etc.) built using web stack and running on a fully embedded platform with no PLC in the loop!
+This gives you the ability to build complex co-ordinated motion control applications (robot, Cartesian, delta etc.) using a web stack and running on a fully embedded platform with no PLC in the loop!
 
 ## Pros and cons of microcontroller vs embedded Linux
+
 There are pros and cons to each approach. Anyone, who has worked in this area knows these trade-offs intimately but to summarise:
 
 <Divider orientation="left"> Microcontroller pros and cons</Divider>
 
-<Table dataSource={dataSourceMicrocontroller} columns={columns} bordered={true} pagination={false} />
+<Table dataSource={dataSourceMicrocontroller} columns={columns} bordered={true} pagination={false}/>
 
 <Divider orientation="left"> Embedded Linux pros and cons</Divider>
 
@@ -143,54 +147,66 @@ There are pros and cons to each approach. Anyone, who has worked in this area kn
 
 ## Running on a microcontroller
 
-The toolkit’s real-time core (GBC) needs a high-performance dual-core microcontroller.
+The toolkit’s real-time core (GBC) needs a high-performance dual-core microcontroller. Minimum requirements:
 
-This needs to run at as high a clock speed as possible (500 Mhz +) and with as much memory (1Mbyte +) and flash as possible (2Mbyte +).
+<Row gutter={12}>
+    <Col span={4}>Clock speed</Col>
+    <Col span={20}>480Mhz</Col>
+    <Col span={4}>RAM</Col>
+    <Col span={20}>1Mb</Col>
+    <Col span={4}>Flash</Col>
+    <Col span={20}>2Mb</Col>
+</Row>
 
-The chip set we have developed on is the STM32H7 with ST Arm Cortex-M7 and Cortex-M4 cores running up to 480 MHz and 240 MHz (respectively).
+Our reference design uses an STM32H7 with ST ARM Cortex-M7 and Cortex-M4 cores running up to 480 MHz and 240 MHz respectively.
 
-Other chip manufacturers provide M4/M7 dual-core microcontrollers. E.g. NXP with the i.MX RT1170 and these would likely prove a suitable platform.
+Other chip manufacturers provide M4/M7 dual-core microcontrollers. For example, NXP with the i.MX RT1170 could provide a suitable platform.
 
 The &gbt needs a set of microcontroller middleware to operate. This middleware needs to provide:
 
-* RTOS functions - for example,  <a href="https://www.freertos.org/">FreeRTOS</a>
+* RTOS functions - for example, <a href="https://www.freertos.org/">FreeRTOS</a>
 * Filesystem functions - for example, <a href="https://github.com/littlefs-project">littleFs</a>
-* Network (TCP/IP) - for example,  <a href="https://savannah.nongnu.org/projects/lwip/">LWIP</a> (the &gbt includes the embedded websockets, FTP  and HTTP servers)
-* If you want screen output then you will need a screen driving library
-
+* Network (TCP/IP) - for example, <a href="https://savannah.nongnu.org/projects/lwip/">LWIP</a> (the &gbt ships with WebSockets, FTP and HTTP servers)
+* If you need screen output then you will need a screen driving library
 
 The requirement for dual-core microcontroller platform relates to how we distribute the application over the cores:
+
 * On the M4 core we run:
-    * Websockets & http server
-    * JavaScript interpreter
-    * Message translation (JSON->C & C->JSON)
+* WebSockets, HTTP, and FTP services
+* JavaScript interpreter and any custom scripts
+* Message translation (to/from JSON)
 * On the M7 core we run:
-    * Real time control functions
-    * Trajectory planner
-    * SPI master to talk to hardware slave controller chips or to the &gbem or to EtherCAT slave chips (e.g. LAN9252) or multi-protocol slave chips (e.g. Netx 51)
+* Real time control functions
+* Trajectory planner
+* SPI master to talk to hardware slave controller chips or to the &gbem or to EtherCAT slave chips (e.g. LAN9252) or multi-protocol slave chips (e.g. Netx 51)
 
-The communication between the M7 and M4 cores is based on shared memory. In the Arm dual-core architecture, memory sits either on the 64-bit AXI or 32 AHB busses with the bus masters and slaves interconnected with bus bridges. This allows us to easily share memory across the cores.
+The communication between the M7 and M4 cores is via shared memory. In the ARM dual-core architecture, memory sits either on the 64-bit AXI or 32 AHB busses with the
+bus masters and slaves interconnected with bus bridges. This allows us to easily share memory across the cores.
 
-There are two choices regarding how the &gbt communicates with drives and IO:
+There are two ways the &gbt can communicate with drives and IO:
 
-1. Drives are embedded into your board - using the likes of Trinamic (https://www.trinamic.com/products/integrated-circuits/), TI (https://www.ti.com/motor-drivers/overview.html), ST (https://www.st.com/en/motor-drivers.html) etc. with their stepper or BLDC driver chip sets. Or it is possible to use semi-embedded drives like  technosoft (https://technosoftmotion.com/en/intelligent-drives/) or Elmo (https://www.elmomc.com/servo-drives/)
-1. Drives are external to the board, and you communicate with them over industrial Ethernet (feldbus). There are a huge range of EtherCAT drives from the likes of Kollmorgen, Omron, Beckhoff, Panasonic etc.
+1. Drives are embedded into your board - using the likes of [Trinamic](https://www.trinamic.com/products/integrated-circuits/), [Texas Instruments](https://www.ti.com/motor-drivers/overview.html),
+[ST](https://www.st.com/en/motor-drivers.html) and so on, with their stepper or BLDC driver chip sets. Or it is possible to use semi-embedded drives
+like [TECHNOSOFT](https://technosoftmotion.com/en/intelligent-drives/) or [Elmo](https://www.elmomc.com/servo-drives/)
 
-In the case of the of embedded drives (option 1 above) usually the communication is via SPI between &gbc and the drive controller ICs and IO electronics. &gbc will pass position commands every cycle to the drives.
+1. Drives are external to the board, and you communicate with them over industrial Ethernet (fieldbus). There are a huge range of EtherCAT drives from the likes of Kollmorgen, Omron, Beckhoff, Panasonic and so on.
 
-This is sketched out in the following diagram:
+If you are using embedded drives (option 1 above), usually the communication is via SPI between &gbc and the drive controller ICs and IO electronics. &gbc will pass position commands every cycle to the drives.
+
+The diagram below gives a sketch of the first option where drives are integrated into your board:
 
 <Image meta={EmbeddedArch} alt="Embedded architecture"/>
 
-In the case of using industrial Ethernet drives, assuming we are using EtherCAT, we need to provide an EtherCAT master. &gbem runs on a STM32 H7 microcontroller and acts as an SPI slave providing an interface to &gbc to send drive commands. In these case commercial packaged EtherCAT drives and IO modules would be distributed around the machine.
+If you are using industrial Ethernet drives, assuming it is EtherCAT, we provide an EtherCAT master including source code.
+&gbem runs on a STM32 H7 microcontroller and acts as an SPI slave providing an interface to &gbc to send drive and IO commands.
+In this case commercial packaged EtherCAT drives and IO modules would be incorporated into the machine.
 
 When using embedded EtherCAT, the IO and drives could take different physical forms depending on which is easier to integrate with your machine.
 
 ## Embedded development environment
 
-If you are using STM32, the recommended development environment just uses the standard ST development boards.
-
-The Nucleo board for developing the EtherCAT or Step Master (&gbem / &gbsm) and the Discovery board for developing &gbcl.
+If you are using STM32, the recommended development environment uses the standard ST development boards: the Nucleo board for developing the EtherCAT
+or Step Master (&gbem / &gbsm) and the Discovery board for developing &gbcl.
 
 <Row align="bottom">
     <Col lg={12} xs={24}>
@@ -198,7 +214,7 @@ The Nucleo board for developing the EtherCAT or Step Master (&gbem / &gbsm) and 
         <h3>STM32 H7 Nucleo dev. board</h3>
     </Col>
     <Col lg={12} xs={24}>
-         <Image meta={disco} alt="STM32 H7 Discovery" maxWidth={300}/>
+        <Image meta={disco} alt="STM32 H7 Discovery" maxWidth={300}/>
         <h3>STM32 H7 Discovery dev. board</h3>
     </Col>
 </Row>
@@ -206,16 +222,13 @@ The Nucleo board for developing the EtherCAT or Step Master (&gbem / &gbsm) and 
 
 ## IO options
 
-In the embedded environment there are many options with regards to how to provide machine IO capabilities.
-
-Usually you are looking to provide:
+In the embedded environment there are many options when it comes to providing machine IO capabilities. Typically you will need to provide one or more of the following:
 
 * A number of 24V inputs and 24V outputs of varying current drive capabilities
-* A range of analog inputs of specific voltage ranges, differential/single-ended inputs, tolerance, sample rates etc.
+* A range of analog inputs of specific voltage ranges, differential/single-ended inputs, tolerance, sample rates and so on.
 * A range of analog outputs with specific characteristics
 
-These inputs and outputs need to be isolated.
+These inputs and outputs need to be isolated and are typically integrated with the microcontroller through SPI.
 
-These need to be integrated to the microcontroller usually through SPI.
-
-Many of the major chip manufacturers have solutions in this area. We usually work with the Maxim integrated range. <a href="https://www.maximintegrated.com/en/products/interface/industrial-digital-io.html"> see here</a>
+Many of the major chip manufacturers have solutions in this area.
+We often work with the [Maxim integrated range](https://www.maximintegrated.com/en/products/interface/industrial-digital-io.html).

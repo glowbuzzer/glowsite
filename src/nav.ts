@@ -51,13 +51,13 @@ const nav = {
                     slug: "overview",
                     title: "Overview",
                     subtitle: "Basically, how does it work?",
-                    component: () => import("./pages/how-it-works/basics.mdx")
+                    component: () => import("./pages/how-it-works/overview.mdx")
                 },
                 {
                     slug: "architecture",
                     title: "Architecture",
                     subtitle: "A little more technical detail...",
-                    component: () => import("./pages/how-it-works/detail.mdx")
+                    component: () => import("./pages/how-it-works/architecture.mdx")
                 },
                 {
                     slug: "deployment",
@@ -85,13 +85,13 @@ const nav = {
                 },
                 {
                     slug: "real_time",
-                    title: "Real-time",
+                    title: "Real-time capability",
                     subtitle: "Fast reaction to events",
                     component: () => import("./pages/how-it-works/real_time.mdx")
                 },
                 {
                     slug: "front_end_components",
-                    title: "User interface",
+                    title: "User interface (HMI)",
                     subtitle: "Building a machine control in React",
                     component: () => import("./pages/how-it-works/front_end_components.mdx")
                 },

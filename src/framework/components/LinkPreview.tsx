@@ -4,9 +4,10 @@ import { Image } from "./Image"
 import { LinkOutlined } from "@ant-design/icons"
 
 const WrapperStyledDiv = styled.div`
+
     > div {
+        max-width: 60%;
         display: inline-flex;
-        flex-wrap: wrap;
         align-items: center;
         margin: 10px 0;
         background-color: #d9d9d9;
@@ -14,6 +15,8 @@ const WrapperStyledDiv = styled.div`
         border-radius: 15px;
 
         @media (max-width: 767px) {
+            max-width: 100%;
+            flex-wrap: wrap;
             background-color: inherit;
             width: 100%;
             padding: 12px;
@@ -31,8 +34,9 @@ const WrapperStyledDiv = styled.div`
     }
 
     .text {
-        flex-grow: 1;
-        margin: 0 20px;
+        //flex-basis: 0;
+        //flex-grow: 1;
+        margin: 20px 20px;
     }
 `
 

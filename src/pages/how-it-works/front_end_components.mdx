@@ -1,7 +1,7 @@
 import {Tabs} from "antd"
 import {Tldr} from "../../framework/components/Tldr";
 import {Link} from "react-router-dom"
-import { GlowbuzzerApp } from "@glowbuzzer/controls/app"
+import {GlowbuzzerApp} from "@glowbuzzer/controls/app"
 import GbrTilesOverview from "../fragments/gbr_tiles_overview_list.mdx"
 
 # {props.subtitle}
@@ -12,12 +12,11 @@ import GbrTilesOverview from "../fragments/gbr_tiles_overview_list.mdx"
     - Components can run on PC Mac Tablet Mobile (React Native)
 </Tldr>
 
-## React components (GBR)
+## Overview of &gb for React (GBR)
 
-The &gbt ships with many front-end React components these are collectively called GBR.
-You will probably use some of these components unmodified (such as the component to connect to a machine)
+The &gbt ships with a suite of front-end React components including full source code.
+You can use many of these components unmodified (such as the component to connect to a machine)
 while others can be the starting point for you to modify to your specific needs.
-Full source code is provided for all components.
 
 The framework is built on other open source projects, primarily React, Redux & Ant Design.
 
@@ -25,22 +24,34 @@ Below is a description of a handful of the components to give you a flavour of w
 
 <GbrTilesOverview/>
 
+In addition to the visual components &gbr provides a Redux store and set of hooks that make it easy to control your machine from the browser. You can extend the Redux store as required.
+
 ## HMI options
 
 ### Browser based HMIs
 
-Machine control applications built with the &gbt are web applications and any device running a modern browser that uses the V8 engine (Chrome, and Chromium based browsers for example, Microsoft Edge, Opera etc.) can happily display the applications.
+Machine control applications built with the &gbt are web applications and any device running a modern browser that uses the V8 engine (Chrome, and Chromium based browsers such as Edge, Opera and so on)
+can be used.
 
-This includes many HMI panels available from manufacturers like Phoenix Contact, Beijer Electronics, ABB, Exor etc.
+This includes many HMI panels available from manufacturers like Phoenix Contact, Beijer Electronics, ABB, Exor and so on.
 
 ### React on mobile
 
-However, sometimes you need your application to run as a proper application on the mobile device (phone/tablet running Android or IoS). Most of the time you interact with an app on your phone or tablet (banking, facebook etc.) it is with an app actually running on the device, not through the browser, as it gives the developers the mechanisms to build a much better user experience.
+Sometimes you need your application to be installed and run natively as an application on the mobile device (such as a phone or tablet running Android or iOS).
+As a developer this gives you access to the low-level capabilities of the device, which go beyond those available in a browser environment.
 
-You can use React Native to develop both Android and iOS apps.
+You can use React Native to develop a &bg powered user interface on both Android and iOS. Using React Native, you don’t have to use Android Studio with Java/Kotlin or Xcode with Swift.
+Instead, you use your usual web IDE and use JavaScript. You just need the Google or Apple tools to upload the finished application to the app store.
 
-This means, you don’t have to use Android Studio with Java/Kotlin or Xcode with Swift. Instead, you can use your usual IDE and use JavaScript/TypeScript. (You just need the Google/apple IDEs to upload the finished application to the stores).
+Using React Native you can maintain a code base that is largely shared between Android and iOS.
 
+When it comes to distributing your app you can choose between the following options:
+
+- You can make your app publicly available in the app store
+- You can use one of the B2B programmes available from Google or Apple to control access to the application within the store
+- You can distribute your application outside of the app store, for example using TestFlight
+
+{/*
 In terms of how to distribute the app, obviously for end customers, a public app. store is best.
 
 For example, with Apple you need to register for the iOS Developer license which costs $99 per year and enables you to publish apps to the public store. Apple also have their B2B Apps Program for $299 per year which allows for apps that are not available on the public app. store and your customer use a coupon to install the app.
@@ -49,16 +60,21 @@ There are also various other mechanisms to distribute apps for testing purposes 
 
 Similar arrangements exist with Google and the Play store.
 
-With React native, you can have a shared codebase between Android and iOS apps.
+With React Native, you can have a shared codebase between Android and iOS apps.
 
 The downsides of React Native are slightly less performance, especially for data-heavy apps. But, it’s good enough for most of Facebook though!
+*/}
 
 ### Android on embedded
 
-You can run Android on non-phone devices for example, HMIs.
+You can run Android on non-phone devices for example, HMIs. Industrial Android, as the name suggests, is a great option for HMIs.
 
-Industrial Android, as the name suggests, is a great option for HMIs.
+Android is not only the most popular operating system for mobile devices today, it's also broadly deployed in many industrial scenarios.
+It provides a great user interface and a stack of reusable software components, simplifying development and making available millions of
+existing applications and libraries.
 
-Android is not only the most popular OS for mobile devices today, but also broadly deployed in different industrial use cases. It provides a great user interface and a stack of reusable software components, simplifying development and maintaining millions of existing applications and libraries.
+Industrial Android offers additional features which are not available in stock Android such as:
 
-Industrial Android offers additional features which are not available on the stock Android like: full kiosk mode, extended connectivity with device management and integrated FOTA support.
+- Full kiosk mode
+- Extended connectivity with device management
+- Integrated FOTA support

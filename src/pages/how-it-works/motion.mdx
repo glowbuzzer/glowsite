@@ -1,84 +1,97 @@
-import { Row, Col } from 'antd';
+import {Row, Col} from 'antd';
 import {CheckCircleOutlined} from '@ant-design/icons'
 import {Tldr} from "../../framework/components/Tldr";
-import { Image } from "../../framework/components/Image"
-import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
+import {Image} from "../../framework/components/Image"
+import {TransformWrapper, TransformComponent} from "react-zoom-pan-pinch";
 import {LinkPreview} from "../../framework/components/LinkPreview";
 import preview_img from "./link_preview_otg.png?glowsite"
 
 # {props.subtitle}
 
 <Tldr>
-- Includes sophisticated trajectory planner (&gbotg)
-- Time synchronised multi-dimensional trajectories
-- Jerk limited
-- Multiple pre-built and custom kinematics models
+    - Includes sophisticated trajectory planner (&gbotg)
+    - Time synchronised multi-dimensional trajectories
+    - Jerk limited
+    - Multiple pre-built and custom kinematics models
 </Tldr>
 
 A motion control calculates the trajectories that the motors follow in order to meet the desired commanded movement.
 
-At the heart of the &gbt is our own innovative trajectory planner that computes time optimal and time synchronised multi-dimensional third-order trajectories complying maximal asymmetric motion limits on velocity, acceleration and jerk. This provides the core of our 3D-axis, synchronised axis and single-axis motion control capabilities.
+At the heart of the &gbt is our own innovative trajectory planner that computes time optimal and time synchronised multi-dimensional third-order trajectories
+complying with motion limits on velocity, acceleration and jerk. This provides the core of our 3D-axis, synchronised axis and single-axis motion control capabilities.
 
-<LinkPreview link ={"https://otg.glowbuzzer.com"} title={"glowbuzzer online trajectory planner"} description={"Our trajectory planner is available online for you to test out here:"} image={preview_img} alt={"online trajectory planner"}/>
+<LinkPreview link={"https://otg.glowbuzzer.com"} title={"glowbuzzer online trajectory planner"}
+             description={"An online, interactive version of our trajectory planner is available for you to try."}
+             image={preview_img} alt={"online trajectory planner"}/>
 
+A trajectory is often given as a sequence of positions over time, and these implicitly determine acceleration and jerk. Trajectories are sent to the drives which control the motors.
+The trajectories are calculated cyclically, for example every millisecond. Each drive must receive the trajectory at precisely the same moment if you want to execute synchronised
+movements using multiple motors. Hence, the need for real-time execution and a time synchronised fieldbus.
 
+The following screen show the calculation that occurs inside the &gb trajectory planner each cycle according to the commanded motion at that instant. The trajectory planner
+is able to plan from any initial velocity and acceleration, and so a move can be cancelled and a new one planned instantly and at any state of motion.
 
-A trajectory is often composed as a sequence of positions over time. These sequences tell the motors where to position itself at a certain time. Implicitly this gives how fast the motor will move.
+*Example inputs*
 
-These trajectories are sent to the drives which control the motors. The trajectories are calculated cyclically. For example a position trajectory would be:
+- Velocity limit (`vmax`) 1040mm/s
+- Acceleration limit (`amax`) 3300mm/s&sup2;
+- Jerk limit (`jmax`) 314800mm/s&sup3;
+- Current velocity (`vstart`) 0mm/s;
+- Current acceleration (`astart`) 100mm/s&sup2;
+- Target position (`pwayp`) 1000mm;
+- Target velocity (`vwayp`) 0mm/s;
 
-* 1ms - motor should be at 1 degree
-* 2ms - motor should be at 2 degrees
-* 3ms - motor should be at 4 degrees
-
-Each drive must receive the trajectory at precisely the same movement if you want to execute synchronised movements using multiple motors. Hence, the need for real-time execution and time synchronised fieldbusses.
-
-The following screen show the clever calculation that occurs inside the &gb trajectory planner each cycle.
-
-Using limits of (amax = 3300, jmax = 314800, vmax = 1040) with initial conditions of (astart = 100, vstart = 0) calculate a trajectory to a position (pwayp = 1000) arriving at the waypoint with a velocity (vwayp = 0) and arriving at time (twayp = 10).
+Given these inputs, the trajectory planner produces a motion profile consisting of three phases: acceleration, cruise and deceleration to the target position,
+and determines the minimum time required to complete the move as 1.287 seconds.
 
 import screenshot_raw_planner from "./trajectory_images/screenshot_raw_planner.png"
 
 <div style={{margin: "50px"}}>
     <TransformWrapper>
         <TransformComponent>
-            <img src={screenshot_raw_planner} width={"105%"} alt={"planner"} />
+            <img src={screenshot_raw_planner} width={"105%"} alt={"planner"}/>
         </TransformComponent>
     </TransformWrapper>
 </div>
 
 
-
-
 # Features
 The &gb trajectory planner includes the following features:
 
-
-<Row >
+<Row>
     <Col xs={2} lg={1}> <CheckCircleOutlined/> </Col>
-    <Col xs={22} lg={7}><b>Basic single joint control</b><p>Move absolute, move relative, move at velocity, stop, superimposed move</p></Col>
+    <Col xs={22} lg={7}><b>Basic single joint control</b><p>Move absolute, move relative, move at velocity, stop,
+        superimposed move</p></Col>
     <Col xs={2} lg={1}> <CheckCircleOutlined/> </Col>
-    <Col xs={22} lg={7}><b>Basic multiple joint control</b><p>Gearing and phasing. Different algorithms for specialist applications</p></Col>
+    <Col xs={22} lg={7}><b>Basic multiple joint control</b><p>Gearing and phasing. Different algorithms for specialist
+        applications</p></Col>
     <Col xs={2} lg={1}> <CheckCircleOutlined/> </Col>
-    <Col xs={22} lg={7}><b>On the fly changes to trajectories</b><p>Trajectories can be modified in real-time to respond to events</p></Col>
+    <Col xs={22} lg={7}><b>On the fly changes to trajectories</b><p>Trajectories can be modified in real-time to respond
+        to events</p></Col>
     <Col xs={2} lg={1}> <CheckCircleOutlined/> </Col>
     <Col xs={22} lg={7}><b>Blending of moves</b><p>Single joint and co-ordinated moves can be blended together</p></Col>
     <Col xs={2} lg={1}> <CheckCircleOutlined/> </Col>
-    <Col xs={22} lg={7}><b>Kinematics groups</b><p>Joints can be grouped into kinematics groups to which a Forward and Inverse Kinematics algorithm is applied</p></Col>
+    <Col xs={22} lg={7}><b>Kinematics groups</b><p>Joints can be grouped into kinematics groups to which a Forward and
+        Inverse Kinematics algorithm is applied</p></Col>
     <Col xs={2} lg={1}> <CheckCircleOutlined/> </Col>
     <Col xs={22} lg={7}><b>Co-ordinated moves</b><p>Move line and move arc in 3D space</p></Col>
     <Col xs={2} lg={1}> <CheckCircleOutlined/> </Col>
-    <Col xs={22} lg={7}><b>Frames</b><p>Co-ordinate systems translations and rotations can be applied in an arbitrary hierarchy</p></Col>
+    <Col xs={22} lg={7}><b>Frames</b><p>Co-ordinate systems translations and rotations can be applied in an arbitrary
+        hierarchy</p></Col>
     <Col xs={2} lg={1}> <CheckCircleOutlined/> </Col>
-    <Col xs={22} lg={7}><b>gcode control</b><p>Kinematics groups and single joints can be controlled with gcode through a standard RS-274 G-Code interpreter.Flexibility to adapt the syntax</p></Col>
+    <Col xs={22} lg={7}><b>gcode control</b><p>Kinematics groups and single joints can be controlled with gcode through
+        a standard RS-274 G-Code interpreter.Flexibility to adapt the syntax</p></Col>
     <Col xs={2} lg={1}> <CheckCircleOutlined/> </Col>
     <Col xs={22} lg={7}><b>Time-optimal trajectories</b><p>All trajectories are guaranteed to be time-optimal</p></Col>
     <Col xs={2} lg={1}> <CheckCircleOutlined/> </Col>
-    <Col xs={22} lg={7}><b>Time-synchronised trajectories</b><p>Multi-joint trajectories can be calculated to time-optimally arrive at a destination at the same time</p></Col>
+    <Col xs={22} lg={7}><b>Time-synchronised trajectories</b><p>Multi-joint trajectories can be calculated to
+        time-optimally arrive at a destination at the same time</p></Col>
     <Col xs={2} lg={1}> <CheckCircleOutlined/> </Col>
-    <Col xs={22} lg={7}><b>Streamed trajectories</b><p>Large sequences of moves can be streamed to the low-level control</p></Col>
+    <Col xs={22} lg={7}><b>Streamed trajectories</b><p>Large sequences of moves can be streamed to the low-level
+        control</p></Col>
     <Col xs={2} lg={1}> <CheckCircleOutlined/> </Col>
     <Col xs={22} lg={7}><b>Jogging</b><p>Creation of continuous and step jog trajectories</p></Col>
 </Row>
 
-The motion control includes a variety of kinematics modules to support different types of robot and machines (collaborative robots, 6-DOF industrial robots, delta robots, gantry robots, scara robots, Cartesian gantry robots, h-bot gantry robots etc.)
+The motion control includes a variety of kinematics modules to support different types of robot and machines (collaborative robots,
+6-DOF industrial robots, delta robots, gantry robots, scara robots, Cartesian gantry robots, h-bot gantry robots etc.)

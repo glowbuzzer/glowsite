@@ -73,18 +73,22 @@ const AppStyle = styled.div`
   }
 
   ul,ol {
+    margin-bottom: 24px;
+    
     li {
       margin: 0.5em 0;
     }
   }
 
   dt {
-    font-weight: bold;
-    color: rgba(0, 0, 0, 0.6);
+    //font-weight: bold;
+    color: rgba(0, 0, 0, 0.8);
+    margin-bottom: 2px;
   }
 
   dd {
     margin-left: 20px;
+    margin-bottom: 24px;
   }
 
   .codeblock-toolpath {
@@ -94,6 +98,10 @@ const AppStyle = styled.div`
 
   .codeblock-tasks {
     height: 400px;
+  }
+  
+  .ant-divider-horizontal {
+    border-top-color: rgba(0,0,0,0.2);
   }
 `
 

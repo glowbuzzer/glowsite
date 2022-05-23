@@ -82,13 +82,13 @@ const DesktopFooter = ({}) => {
                     <h3>How it works</h3>
                     <div />
                     <div>
-                        <StyledLink to="/how-it-works/basics">Basics</StyledLink>
+                        <StyledLink to="/how-it-works/overview">Overview</StyledLink>
                     </div>
                     <div>
-                        <StyledLink to="/how-it-works/detail">More detail</StyledLink>
+                        <StyledLink to="/how-it-works/architecture">More detail</StyledLink>
                     </div>
                     <div>
-                        <StyledLink to="/how-it-works/platforms">Supported platforms</StyledLink>
+                        <StyledLink to="/how-it-works/deployment">Deployment</StyledLink>
                     </div>
                 </Col>
                 <Col span={5}>
