@@ -7,31 +7,27 @@ We provide the binaries for 64-bit Linux and the Raspberry Pi for evaluation. Ot
 The location of the download is as follows:
 
 * Raspberry PI (arm7 32 bit)
-`https://downloads.glowbuzzer.com/releases/rpi/refs/tags/v1.0.0rc6/gbc.tgz`
+````shell
+https://downloads.glowbuzzer.com/releases/gbc/linux-amd64/refs/tags/&gbc_version;/gbc-&gbc_version;.tgz
+````
 
 * Linux (64 bit)
-`https://downloads.glowbuzzer.com/releases/linux-amd64/refs/tags/v1.0.0rc6/gbc.tgz`
+````shell
+https://downloads.glowbuzzer.com/releases/gbc/rpi/refs/tags/&gbc_version;/gbc-&gbc_version;.tgz
+````
 
-First, move to the directory in which you want to install &gbc. Then download &gbc using `wget`.
 
-If `wget` needs installing, install with:
+First, move to the directory in which you want to install &gbc. Then download &gbc using `wget` or `curl` like this:
+
 ```shell
-sudo apt install wget //for different linux variants this will need to use the command for thier package manager
+wget https://downloads.glowbuzzer.com/releases/gbc/linux-amd64/refs/tags/&gbc_version;/gbc-&gbc_version;.tgz
 ```
 
-Otherwise (change the URL if you want the Raspberry Pi version), just run:
-```shell
-wget https://downloads.glowbuzzer.com/releases/linux-amd64/refs/tags/v1.0.0rc6/gbc.tgz
-```
 
 Then uncompress with:
 ```shell
-tar -xzf gbc.tgz
+tar -xzf gbc-&gbc_version;.tgz
 ```
-
-
-
-(The package manager command will need changing for different Linux versions)
 
 &gbc has a set of JSON configuration files that configure its main parameters.
 
@@ -41,6 +37,10 @@ For example for the starter kits you will have:
 
 `machine_starter_kit_1.json`
 
-These can be
+GBC needs to be executed with a parameter to pas in this configuration file:
 
-See <Link to="/docs/gbc/configuration"> Configuration of GBC</Link> for more details.
+```shell
+./GBC -cmachine_starter_kit_1.json
+```
+
+See <Link to="/docs/gbc/configuration"> Configuration of GBC</Link> for more details on all the command lines options for GBC.

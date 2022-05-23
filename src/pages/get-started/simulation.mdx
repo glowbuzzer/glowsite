@@ -7,7 +7,7 @@ import Jog from "../fragments/jog.mdx"
 import {BogStandardCol} from "../../framework/components"
 import {BogStandardRow} from "../../framework/components"
 import { Link } from "react-router-dom"
-import {Tabs, Image} from "antd";
+import {Tabs, Image} from "antd"
 import generic_gbr from "./generic_gbr.jpg"
 import staubli_gbr from "./staubli_gbr.jpg"
 import Icon from '@ant-design/icons';
@@ -45,14 +45,14 @@ We offer two demo applications for you to see what &gbr offers.
 
 
 
-<BogStandardRow>
+<BogStandardRow gutter={[16, 16]}>
     <BogStandardCol lg={12} xs={24}>
         <h3><CartesianIcon/>  Generic</h3>
         * Control for a cartesian machine
         * 3 joints plus one auxiliary axis
         * Cartesian kinematics model
         * Range of IO (analog, digital etc.)
-        <Image src={generic_gbr}/>
+        <Image src={generic_gbr} />
     </BogStandardCol>
     <BogStandardCol lg={12} xs={24}>
         <h3><RobotIcon/>  Staubli</h3>
