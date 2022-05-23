@@ -24,7 +24,7 @@ export function remarkEntities() {
     const regex = /&([a-zA-Z-_]+);?/
 
     return tree => {
-        visit(tree, ["text", "code"], (node, index, parent) => {
+        visit(tree, ["text", "code", "inlineCode"], (node, index, parent) => {
             const parts = []
             let start = 0
             const text = node.value

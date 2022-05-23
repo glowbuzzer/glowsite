@@ -4,27 +4,26 @@ import connect_tile from "../fragments/connect_tile.svg"
 import preferences from "../fragments/preferences.png?glowsite"
 import connect_tile_video from "./connect_tile.webm"
 
-In the "preferences" section of top-nav drop-down you can set the target (network address of &gbc) that &gbr connects to.
-
-If you are developing with say WSL and GBC is running on the same host as &gbr this should be set to :`ws://localhost:9001/ws`.
-
-If you are targeting a remote &gbc instance (for example on a Virtual Machine or Raspberry Pi) then target this host with `ws://my-host:9001/ws`.
-
-See below.
+Click the Preferences button at the top of the demo screen to set the connection url for &gbc;.
 
 <Image meta={preferences} alt="preferences tile" maxWidth={400}/>
 
-In the browser, the "Connection Tile" is the goto place for all things relating to connecting to &gbc and controlling the machine state.
+If you are running &gbc on WSL or your host operating system, the default localhost url `ws://localhost:9001/ws` is suitable.
 
-The following diagram illustrates the key features of the Connection Tile.
+If you are targeting a remote &gbc instance (for example, on a Virtual Machine or Raspberry Pi) then use a url of the form `ws://<host>:9001/ws`.
 
-<img src={connect_tile} alt="front-end connect tile" width="100%"/>
+You are now ready to connect. In the demo screen, the "Connection" tile allows you to connect or disconnect from &gbc, and provides basic information about the state of &gbc when connected.
+To connect, click the "Connect" button in the tile header. This establishes the web socket connection between &gbr and &gbc.
 
+&gbc starts in simulation mode. Commands sent to &gbc are not passed onto any machine connected to &gbc. It also starts with a fault active,
+because prior to connecting &gbc had no front-end to communicate with. &gbc will fault any time the front-end connection drops.
+To clear the fault and enable operation, click the Clear Fault button then click the Enabled button. The current state will indicate operation enabled.
 
-To connect, first click the "Connect" button in the top bar. This establishes the web-sockets connection between &gbr and &gbc.
+The following diagram illustrates the key features of the connection tile.
 
-Next, by default you are in simulation mode. This means commands sent to &gbc are not passed onto any machine connected to &gbc.
+<img src={connect_tile} alt="front-end connect tile"/>
 
+{/*
 If you want to control a machine for real, you need to click the "Live" button.
 
 Whether you are in Simulation mode or Live, "Current state" will tell you the current (CiA-402) state of the machine.
@@ -32,8 +31,9 @@ Whether you are in Simulation mode or Live, "Current state" will tell you the cu
 If the machine is in Fault state, you will need to click the "Fault reset" button to clear the fault.
 
 Next, the "Machine operation" buttons take the machine through its state machine. Either up to "Operation Enabled" or down to "Operation Disabled".
+*/}
 
-The follow video illustrates the connection process:
+The follow video shows the process of connecting, clearing the initial fault and enabling operation:
 
 <video autoPlay loop muted playsInline>
     <source src={connect_tile_video} type="video/webm"></source>

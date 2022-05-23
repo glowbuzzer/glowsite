@@ -1,20 +1,18 @@
-import { Link } from "react-router-dom"
+import {Alert} from "antd";
 
-The installation of &gbc requires that you download binaries.
+<Alert type="info" showIcon
+       message={"These instructions assume you are going to run GBC on Windows Subsystem for Linux (WSL), a virtual Linux machine or an Intel Linux system on your network."}/>
 
-Assuming you want to test this out on WSL or a virtual or real Linux platform, the location of the download is as follows:
-
-```shell
-https://downloads.glowbuzzer.com/releases/gbc/linux-amd64/refs/tags/&gbc_version;/gbc-&gbc_version;.tgz
-```
-
-First, move to the directory in which you want to install &gbc. Then download &gbc using `wget` or `curl` like this:
+In the Linux shell, move to the directory in which you want to install &gbc. Enter the following command to download the latest release:
 
 ```shell
 wget https://downloads.glowbuzzer.com/releases/gbc/linux-amd64/refs/tags/&gbc_version;/gbc-&gbc_version;.tgz
 ```
 
-Then uncompress with:
+You can also use `curl` or similar command to download the compressed tar archive.
+
+Extract files from the archive using:
 ```shell
 tar -xzf gbc-&gbc_version;.tgz
 ```
+This will create directory `./&gbc_version;` containing the `GBC` executable and sample configuration files.
