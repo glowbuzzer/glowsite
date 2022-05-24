@@ -16,6 +16,7 @@ const entities = {
     gbt: "glowbuzzer toolkit",
     gbotg: "globuzzer online trajectory planner",
     ui: "user interface",
+    pi: "Raspberry Pi",
     ...LATEST_VERSIONS
 }
 

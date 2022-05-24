@@ -72,11 +72,13 @@ const AppStyle = styled.div`
     }
 
     p + .remark-highlight {
-      // tighten gap between p and following codeblock
-      margin-top: -14px;
+        // tighten gap between p and following codeblock
+        margin-top: -14px;
     }
 
     .remark-highlight {
+        margin-bottom: 24px;
+
         pre {
             background: ${GbColours.BackgroundCodeBlock};
         }
