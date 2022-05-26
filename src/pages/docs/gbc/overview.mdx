@@ -84,27 +84,20 @@ We develop and test the &gbc software on the STM32 platform internally at &gb. T
 
 We see no difficulties getting &gbc working on other manufacturers microcontrollers, but it will likely need to be a dual-core microcontroller, though there may be an option to use two discrete microcontrollers connected over a high speed (Q)SPI interface. Either way, for a reasonable number of axes, the microcontroller will need to be in the highest performance range and support hardware floating point. &gbc needs two cores because the web sockets server runs on one core and the real time control & fieldbus interface run on the other core. On Linux we use threads to distribute this workload but on slower speed microcontrollers this just isn't possible.
 
-## Installation
 
-### Linux
-
-<InstallGbc/>
-
-
-### embedded
+## embedded
 
 If you have an embedded requirement then please get in touch to talk further about how we can get you a compiled library for your toolchain.
 
-## Running &gbc
+## Installing and running &gbc
 
-See <Link to = "/docs/gbc/running">Running GBC</Link>
-
+See <Link to = "/docs/gbc/running">here for details</Link>
 
 ## Configuration of &gbc
 
-The configuration for &gbc takes the form of a number JSON files placed in the same directory as the &gbc binary.
+The configuration for &gbc takes the form of JSON file(s) placed in the same directory as the &gbc binary.
 
-See <Link to = "/docs/gbc/configuration">Configuration of GBC</Link>
+See <Link to = "/docs/gbc/configuration/config_overview">here for details</Link>
 
 ## Interfaces to &gbc
 

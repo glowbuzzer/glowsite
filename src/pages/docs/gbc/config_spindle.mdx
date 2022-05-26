@@ -1,0 +1,40 @@
+import {Tldr} from "../../../framework/components/Tldr"
+import { Link } from "react-router-dom"
+
+# {props.subtitle}
+
+## Introduction
+
+The spindle section of the config is where spindle control is configured.
+
+This implementation of spindle control covers only very simple spindles e.g. a Variable Frequency Drive (VFD) where digital outputs turn the spindle on/off and set its direction and an analogue output controls the spindle's speed.
+
+&gbr is easily customised to support more complex spindles.
+
+## Details
+
+`"directionDigitalOutIndex"` - Index of the digital output used to control direction of spindle
+
+`"directionInvert"` - Defines if the spindle direction is inverted (0 or 1)
+
+`"enableDigitalOutIndex"` - Index of the digital output used to turn on the spindle
+
+`"speedAnalogOutIndex"` - Index of the analogue output used to control the spindle speed
+
+## Example JSON
+
+Here we define a spindle (index 0, key="spindle") which uses Digital Out #0 to turn it on/off and Digital out #1 to control its direction (CW/CCW). Its direction is not inverted. It uses Analogue Output #0 to set its speed.
+
+```json
+ "spindle": {
+    "0": {
+      "enableDigitalOutIndex": 0,
+      "directionDigitalOutIndex": 1,
+      "directionInvert": false,
+      "speedAnalogOutIndex": 0
+    }
+  },
+```
+
+## Link to schema documentation
+`spindle` maps to `SpindleConfig` - see <Link to="/docs/gbc/schema/SpindleConfig">here for the schema documentation</Link>

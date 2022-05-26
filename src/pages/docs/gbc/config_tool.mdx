@@ -1,0 +1,35 @@
+import {Tldr} from "../../../framework/components/Tldr"
+import { Link } from "react-router-dom"
+
+# {props.subtitle}
+
+## Introduction
+
+The tool section of the config defines the "table" of tools used by the machine.
+
+Tools have diameters and a translation and rotation.
+
+## Details
+
+`"diameter"`- optional
+
+`"translation"` - vector 3
+
+`"rotation"` quaternion
+
+## Example JSON
+
+```json
+"tool": {
+        "default": {
+        },
+        "offsetz": {
+            "translation": {
+                "z": -10
+            }
+        }
+    }
+```
+
+## Link to schema documentation
+`tool` maps to `ToolConfig` - see <Link to="/docs/gbc/schema/ToolConfig">here for the schema documentation</Link>

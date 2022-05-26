@@ -186,34 +186,97 @@ const nav = {
                     children: [
                         {
                             slug: "overview",
-                            title: "Overview of GBC",
+                            title: "Overview",
                             subtitle: "Technical overview of GBC (Core Control)",
                             component: () => import("./pages/docs/gbc/overview.mdx")
                         },
                         {
                             slug: "running",
-                            title: "Running",
-                            subtitle: "Steps needed to run GBC on Linux",
-                            component: () => import("./pages/docs/gbc/running.mdx")
+                            title: "Install & Run",
+                            subtitle: "Steps needed to install and run GBC",
+                            component: () => import("./pages/docs/gbc/install_and_run.mdx")
+                        },
+                        {
+                            slug: "command_line",
+                            title: "Command line options",
+                            subtitle: "GBC command line options",
+                            component: () => import("./pages/docs/gbc/command_line.mdx")
                         },
                         {
                             slug: "configuration",
                             title: "Configuration",
                             subtitle: "Configuration of GBC",
-                            component: () => import("./pages/docs/gbc/configuration.mdx")
+                            children: [
+                                {
+                                    slug: "config_overview",
+                                    title: "Overview",
+                                    subtitle: "Overview of the GBC configuration file",
+                                    component: () => import("./pages/docs/gbc/config_overview.mdx")
+                                },
+                                {
+                                    slug: "config_machine",
+                                    title: "Machine configuration",
+                                    subtitle: "GBC machine configuration",
+                                    component: () => import("./pages/docs/gbc/config_machine.mdx")
+                                },
+                                {
+                                    slug: "config_joints_and_kinematics",
+                                    title: "Joints and kinematics configuration",
+                                    subtitle: "GBC joints and kinematics configuration",
+                                    component: () => import("./pages/docs/gbc/config_joints_and_kinematics.mdx")
+                                },
+                                {
+                                    slug: "config_io",
+                                    title: "IO configuration",
+                                    subtitle: "GBC IO configuration",
+                                    component: () => import("./pages/docs/gbc/config_io.mdx")
+                                },
+                                {
+                                    slug: "config_spindle",
+                                    title: "Spindle configuration",
+                                    subtitle: "GBC spindle configuration",
+                                    component: () => import("./pages/docs/gbc/config_spindle.mdx")
+                                },
+                                {
+                                    slug: "config_tool",
+                                    title: "Tool configuration",
+                                    subtitle: "GBC tool configuration",
+                                    component: () => import("./pages/docs/gbc/config_tool.mdx")
+                                },
+                                {
+                                    slug: "config_frames",
+                                    title: "Frames configuration",
+                                    subtitle: "GBC frames configuration",
+                                    component: () => import("./pages/docs/gbc/config_frames.mdx")
+                                },
+                                {
+                                    slug: "config_fieldbus",
+                                    title: "Fieldbus configuration",
+                                    subtitle: "GBC fieldbus configuration",
+                                    component: () => import("./pages/docs/gbc/config_fieldbus.mdx")
+                                },
+                                {
+                                    slug: "config_streams_and_activities",
+                                    title: "Streams and activities configuration",
+                                    subtitle: "GBC streams and activities configuration",
+                                    component: () => import("./pages/docs/gbc/config_streams_and_activities.mdx")
+                                },
+                                {
+                                    slug: "config_advanced",
+                                    title: "Advanced configuration",
+                                    subtitle: "GBC advanced configuration",
+                                    component: () => import("./pages/docs/gbc/config_advanced.mdx")
+                                },
+                        ]
                         },
+
                         {
                             slug: "schema",
                             title: "GBC schema",
                             subtitle: "GBC Schema (data model)",
                             component: () => import("./pages/docs/gbc/GbcSchema")
                         },
-                        {
-                            slug: "concepts",
-                            title: "Conceptual aspects",
-                            subtitle: "Concepts in GBC",
-                            component: () => import("./pages/docs/gbc/concepts.mdx")
-                        },
+
                         {
                             slug: "tasks_and_activities",
                             title: "Tasks and activities",
@@ -244,25 +307,7 @@ const nav = {
                             subtitle: "Scaling in GBC",
                             component: () => import("./pages/docs/gbc/scaling.mdx")
                         },
-                        {
-                            slug: "gcode",
-                            title: "GCode handling",
-                            subtitle: "GCode in GBC",
-                            component: () => import("./pages/docs/gbc/gcode.mdx")
-                        },
-                        {
-                            slug: "io",
-                            title: "IO",
-                            subtitle: "IO in GBC",
-                            component: () => import("./pages/docs/gbc/io.mdx")
-                        },
-                        {
-                            slug: "frames",
-                            title: "Frames",
-                            subtitle: "Reference frames in GBC",
-                            component: () => import("./pages/docs/gbc/frames.mdx")
-                        },
-                        {
+                         {
                             slug: "kinematics_configuration",
                             title: "Kinematics configurations",
                             subtitle: "Kinematics configurations in GBC",
@@ -636,6 +681,12 @@ const nav = {
                             title: "GBR state machine",
                             subtitle: "Creating a simple state machine to control activities",
                             component: () => import("./pages/docs/gbr/state_machine.mdx")
+                        },
+                        {
+                            slug: "gcode",
+                            title: "GCode handling",
+                            subtitle: "GCode in GBR",
+                            component: () => import("./pages/docs/gbr/gcode.mdx")
                         },
                         {
                             slug: "skeleton",

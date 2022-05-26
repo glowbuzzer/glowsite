@@ -1,0 +1,324 @@
+import {Tldr} from "../../../framework/components/Tldr"
+import { Link } from "react-router-dom"
+
+# {props.subtitle}
+
+## Introduction
+
+### `moveParameters: {}`
+The moveParameters section of the config allows the definition of sets of move parameters that can be referenced by different types of moves in activities.
+
+Move parameters define things like the velocity of a move,
+
+### `task: {}` & `activity: {}`
+
+Within &gbc, Tasks are an assembly of Activities that are executed in sequence in response to an event occurring.
+
+&gbc can have multiple Tasks defined and tasks can contain multiple Activities.
+
+&gbc will execute a Task based on its current state (E.g. whether it is already running or has finished) and whether the task's Trigger has fired.
+
+The trigger for a task would typically be an event like a IO being set or tasks can be triggered from front-end code.
+
+Tasks allow for JavaScript code to be run is response to events occurring or periodically without using the front-end code (browser based). See <Link to="/docs/gbc/response_times"> here </Link> for more details on the response time of code in different layers of GBC.
+
+Tasks can have trigger to start them running. This could be a digital input or a thresholded analog input.
+
+
+### `lines: {}`
+The lines section of the config allows sets of lines to be defined that can be referenced by activities.
+
+### `arcs: {}`
+The arcs section of the config allows sets of arcs to be defined that can be referenced by activities.
+
+### `cartesianPositions: {}`
+The cartesianPosition section of the config allows sets of arcs to be defined that can be referenced by activities.
+
+
+### `triggerOn: {}`
+The triggerOn section of the config allows triggers to be defined. These are used to trigger tasks or activities to start - for example on a digital input triggering.
+
+
+## Details
+
+### `moveParameters: {}`
+
+Percentage of amax to be used for move
+
+amaxPercentage?: number
+Blend time percentage to be used for the move
+
+blendTimePercentage?: number
+Tolerance to be applied to the blend
+
+blendTolerance?: number
+Type of blend to be used for the move
+
+blendType?: BLENDTYPE
+Percentage of jmax to be used for move
+
+jmaxPercentage?: number
+Linear and angular limit profile to use for move
+
+limitConfigurationIndex?: number
+Tool to be used for the move
+
+toolIndex?: number
+Vmax (max velocity) for move
+
+vmax?: number
+Percentage of vmax to be used for move
+
+vmaxPercentage?: number
+
+### `task: {}`
+
+
+Number of activities in this task
+
+activityCount?: number
+Link to trigger to cancel task
+
+cancelTriggerOnIndex?: number
+First activity in this task
+
+firstActivityIndex?: number
+Link to trigger to start task
+
+startTriggerOnIndex?: number
+
+
+### `activity: {}`
+
+IMPORTANT: This is the discriminator for the union
+
+activityType?: ACTIVITYTYPE
+Configuration parameters for dwell activity
+
+dwell?: DwellConfig
+Configuration parameters for gear in position activity
+
+gearInPos?: GearInPosConfig
+Configuration parameters for gear in velocity activity
+
+gearInVelo?: GearInVeloConfig
+Configuration parameters for latch position activity
+
+latchPos?: LatchPosConfig
+Configuration parameters for move arc activity
+
+moveArc?: MoveArcConfig
+Configuration parameters for move joints activity
+
+moveJoints?: MoveJointsConfig
+Configuration parameters for move joints at velocity activity
+
+moveJointsAtVelocity?: MoveJointsAtVelocityConfig
+Configuration parameters for move line activity
+
+moveLine?: MoveLineConfig
+Configuration parameters for move line at velocity activity
+
+moveLineAtVelocity?: MoveLineAtVelocityConfig
+Configuration parameters for move arc activity
+
+moveSpline?: MoveSplineConfig
+Configuration parameters for move to position activity
+
+moveToPosition?: MoveToPositionConfig
+Configuration parameters for set aout activity
+
+setAout?: SetAoutConfig
+Configuration parameters for set dout activity
+
+setDout?: SetDoutConfig
+Configuration parameters for set aout activity
+
+setIout?: SetIoutConfig
+Index of trigger for skip-to-next
+
+skipToNextTriggerIndex?: number
+Type of trigger for skip to next
+
+skipToNextTriggerType?: TRIGGERTYPE
+Configuration parameters for spindle activity
+
+spindle?: SpindleConfig
+Configuration parameters for stress test activity
+
+stressTest?: StressTestConfig
+Configuration parameters for switch pose activity
+
+switchPose?: SwitchPoseConfig
+Configuration parameters for wait on analog input activity
+
+waitOnAnalogInput?: WaitOnAnalogInputConfig
+Configuration parameters for wait on digital input activity
+
+waitOnDigitalInput?: WaitOnDigitalInputConfig
+Configuration parameters for wait on integer input activity
+
+waitOnIntegerInput?: WaitOnIntegerInputConfig
+}
+
+
+### `lines: {}`
+
+Destination of the line
+
+destination?: CartesianPosition
+
+### `arcs: {}`
+Is the arc direction CW or CCW (clockwise or counter-clockwise)
+
+arcDirection?: ARCDIRECTION
+Whether the arc is defined by centre or radius
+
+arcType?: ARCTYPE
+Is the centre defined absolutely or relatively
+
+centre?: PositionAbsRel
+Destination position for the arc
+
+destination?: CartesianPosition
+Radius of the arc
+
+radius?: DoubleValue
+
+### `cartesianPositions: {}`
+
+configuration?: number
+position?: CartesianPosition
+
+### `triggerOn: {}`
+
+ndex of analog input to act as a trigger
+
+aiIndex?: number
+Trigger occurs at threshold greater or less than
+
+aiThreholdGreaterLessThan?: GTLT
+Index of digital input to act as a trigger
+
+diIndex?: number
+State that triggers
+
+diTriggerState?: ONOFF
+Filter for trigger
+
+numberofTicksBeforeTrigger?: number
+Threshold for analog in at which trigger occurs
+
+threshold?: number
+}
+
+
+
+## Example JSON
+
+### `moveParameters: {}`
+
+```json
+{
+  "moveParameters": {
+    "set1": {
+      "amaxPercentage": 50,
+      "blendTimePercentage" : 60,
+      "blendTolerance" : 20,
+      "blendType" : 0,
+      "jmaxPercentage": 10,
+      "limitConfigurationIndex" : 0,
+      "toolIndex": 1,
+      "vmaxPercentage": 25
+    }
+  }
+}
+```
+
+
+### `task: {}` & `activity: {}`
+
+```json
+{
+  "task": {
+    "move joint": {
+      "activity1": {
+        "activityType": 4
+      }
+    },
+    "move line": {
+      "activity1": {
+        "activityType": 1
+      }
+    },
+    "move at velocity": {
+      "activity1": {
+        "activityType": 0,
+        "skipToNextTriggerIndex": 1
+      }
+    }
+  }
+}
+```
+
+
+### `lines: {}`
+```json
+{
+  "lines": {
+    "toHome": {
+      "frameIndex": 2,
+      "translation": {
+        "x" : 120,
+        "y" : 240,
+        "z" : 360
+        }
+    }
+  }
+}
+```
+
+### `arcs: {}`
+```json
+{
+  "arcs": {
+
+  }
+}
+```
+
+### `cartesianPositions: {}`
+```json
+{
+  "cartesianPositions": {
+
+  }
+}
+```
+
+
+### `triggerOn: {}`
+```json
+{
+  "triggerOn": {
+
+  }
+}
+```
+
+## Link to schema documentation
+
+`moveParameters` maps to `MoveParametersConfig` - see <Link to="/docs/gbc/schema/MoveParametersConfig">here for the schema documentation</Link>
+
+`task` maps to `TaskConfig` - see <Link to="/docs/gbc/schema/TaskConfig">here for the schema documentation</Link>
+
+`activity` maps to `ActivityConfig` - see <Link to="/docs/gbc/schema/ActivityConfig">here for the schema documentation</Link>
+
+`lines` maps to `LinesConfig` - see <Link to="/docs/gbc/schema/LinesConfig">here for the schema documentation</Link>
+
+`arcs` maps to `ArcsConfig` - see <Link to="/docs/gbc/schema/ArcsConfig">here for the schema documentation</Link>
+
+`cartesianPositions` maps to `CartesianPositionsConfig` - see <Link to="/docs/gbc/schema/CartesianPositionsConfig">here for the schema documentation</Link>
+
+`triggerOn` maps to `TriggerOnConfig` - see <Link to="/docs/gbc/schema/TriggerOnConfig">here for the schema documentation</Link>
+

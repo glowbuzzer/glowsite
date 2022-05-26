@@ -78,6 +78,13 @@ export const ComponentProps = ({ displayName, properties, showDefaults }: Compon
             key: "description",
             className: "prop-description",
             render: render_cell_inner
+        },
+        {
+            title: "Value",
+            dataIndex: "value",
+            key: "description",
+            className: "prop-description",
+            render: render_cell_inner
         }
     ]
     if (showDefaults) {

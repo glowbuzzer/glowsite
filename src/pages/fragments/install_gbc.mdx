@@ -6,12 +6,14 @@ We provide the binaries for 64-bit Linux and the Raspberry Pi for evaluation. Ot
 
 The location of the download is as follows:
 
-* Raspberry PI (arm7 32 bit)
+Raspberry PI (arm7 32 bit):
+
 ````shell
 https://downloads.glowbuzzer.com/releases/gbc/linux-amd64/refs/tags/&gbc_version;/gbc-&gbc_version;.tgz
 ````
 
-* Linux (64 bit)
+Linux (64 bit):
+
 ````shell
 https://downloads.glowbuzzer.com/releases/gbc/rpi/refs/tags/&gbc_version;/gbc-&gbc_version;.tgz
 ````
@@ -28,19 +30,3 @@ Then uncompress with:
 ```shell
 tar -xzf gbc-&gbc_version;.tgz
 ```
-
-&gbc has a set of JSON configuration files that configure its main parameters.
-
-The tar file you download will contain some example configuration files.
-
-For example for the starter kits you will have:
-
-`machine_starter_kit_1.json`
-
-GBC needs to be executed with a parameter to pas in this configuration file:
-
-```shell
-./GBC -cmachine_starter_kit_1.json
-```
-
-See <Link to="/docs/gbc/configuration"> Configuration of GBC</Link> for more details on all the command lines options for GBC.

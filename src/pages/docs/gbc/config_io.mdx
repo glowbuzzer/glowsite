@@ -1,0 +1,114 @@
+import {Tldr} from "../../../framework/components/Tldr"
+import { Link } from "react-router-dom"
+
+# {props.subtitle}
+
+## Introduction
+
+The IO section of the config defines the what input/outputs your machine has and sets parameters on these.
+
+Machines can contain different types of IO.
+
+Digital Inputs - for example, a position sensing switch, float sensor
+
+Digital Outputs - for example, a pump, indicator lamp, pneumatic valve
+
+Analog Inputs - for example, signals from pressure transducers and temperature from thermocouples
+
+Analog Outputs - for example, a speed control signal for a Variable Frequency Drive
+
+IO can be manipulated in a number of different ways:
+
+* gcode using m codes
+* In streamed activities with, for example, the setDout Activity
+* In a React component itself with a soloActivity
+* Directly in the front-end
+* By sending a raw websockets message
+
+
+## Details
+
+key is the number of IO this will need to match the config of &gbem or &gbsm.
+
+`"inverted"` applies only to digital inputs
+
+## Example JSON
+
+```json
+   "din": {
+        "0": {
+            "inverted": 1
+        },
+        "1": {
+            "inverted": 0
+        },
+        "2": {
+            "inverted": 0
+        },
+        "3": {
+            "inverted": 0
+        }
+    },
+    "dout": {
+        "0": {
+            "inverted": 0
+        },
+        "1": {
+            "inverted": 0
+        },
+        "2": {
+            "inverted": 0
+        },
+        "3": {
+            "inverted": 0
+        },
+        "4": {
+            "inverted": 0
+        },
+        "5": {
+            "inverted": 0
+        },
+        "6": {
+            "inverted": 0
+        },
+        "7": {
+            "inverted": 0
+        },
+        "8": {
+            "inverted": 0
+        },
+        "9": {
+            "inverted": 0
+        }
+    },
+    "ain": {
+        "0": {
+        }
+    },
+    "aout": {
+        "0": {
+        }
+    },
+    "iin": {
+        "0": {
+        }
+    },
+    "iout": {
+        "0": {
+        }
+    },
+```
+
+## Link to schema documentation
+
+`din` maps to `DinConfig` - see <Link to="/docs/gbc/schema/DinConfig">here for the schema documentation</Link>
+
+`dout` maps to `DoutConfig` - see <Link to="/docs/gbc/schema/DoutConfig">here for the schema documentation</Link>
+
+`ain` maps to `AinConfig` - see <Link to="/docs/gbc/schema/AinConfig">here for the schema documentation</Link>
+
+`aout` maps to `AoutConfig` - see <Link to="/docs/gbc/schema/AoutConfig">here for the schema documentation</Link>
+
+`iin` maps to `IinConfig` - see <Link to="/docs/gbc/schema/IinConfig">here for the schema documentation</Link>
+
+`iout` maps to `IoutConfig` - see <Link to="/docs/gbc/schema/IoutConfig">here for the schema documentation</Link>

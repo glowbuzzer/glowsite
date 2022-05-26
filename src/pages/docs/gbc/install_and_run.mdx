@@ -1,14 +1,21 @@
 import {Tldr} from "../../../framework/components/Tldr"
-import RunGbc from "../../fragments/run_gbc_short.mdx"
+import RunGbc from "../../fragments/run_gbc.mdx"
+import InstallGbc from "../../fragments/install_gbc.mdx"
 
 # {props.subtitle}
 <Tldr>
-    - Usually just `./GBC` is enough to run &gbc
+    - Usually just `./GBC -cCONFIG_FILE_NAME` is enough to run &gbc
     - Command line options are used to vary defaults
     - &gbc must run on a preempted kernel for real-time performance
     - Real-time kernel is not needed for sim mode or development
 </Tldr>
+
+
+## Installing
+<InstallGbc/>
+
 ## Running
+
 <RunGbc/>
 
 

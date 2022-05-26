@@ -1,0 +1,31 @@
+import {Tldr} from "../../../framework/components/Tldr"
+import { Link } from "react-router-dom"
+
+# {props.subtitle}
+
+## Introduction
+
+The machine section of the config is brief and just sets the speed of status updates and the bus cycle time - the speed at which the fieldbus (or other communications bus) is updated)
+
+## Details
+
+`busCycleTime` needs to be 1, 2, 4 and must match the bus cycle time in &gbem or &gbsm and is needed to ensure the calculated trajectories match the actual cycle at which they are sent to motors. This is measured in milliseconds.
+
+`statusFrequency` is the frequency of status updates (between 20 and 1000, in milliseconds) between &gbr and &gbr. This defines how many updates the front-end receives from GBC over the websockets connection each second.
+
+
+## Example JSON
+
+```json
+"machine": {
+    "default": {
+    "busCycleTime": 4
+    "statusFrequency": 20
+    }
+}
+```
+
+## Link to schema documentation
+`machine` maps to `MachineConfig` - see <Link to="/docs/gbc/schema/MachineConfig">here for the schema documentation</Link>
+
+

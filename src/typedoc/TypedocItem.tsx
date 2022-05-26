@@ -436,7 +436,8 @@ const Enumeration = ({ item }) => {
         key: p.name,
         name: { name: p.name, required: false },
         type: item.kindString,
-        description: p.comment?.shortText || "Not available"
+        description: p.comment?.shortText || "Not available",
+        value: p.defaultValue
     }))
     return (
         <>

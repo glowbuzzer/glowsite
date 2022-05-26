@@ -1,0 +1,76 @@
+import {Tldr} from "../../../framework/components/Tldr"
+import { Link } from "react-router-dom"
+
+# {props.subtitle}
+
+## Introduction
+
+The fieldbus section of the config defines the structure of the fieldbus and is usually not to be altered.
+
+## Details
+
+`"jointCount"`
+
+RxPdo object
+
+RxPdo?: FieldbusRxPdoLayout
+TxPdo object
+
+see schema
+
+TxPdo?: FieldbusTxPdoLayout
+Number of joints stored in the fieldbus process data
+
+jointCount?: number
+
+
+
+
+
+
+## Example JSON
+
+```json
+{
+  "fieldbus": {
+    "0": {
+      "jointCount": 10,
+      "RxPdo": {
+        "machineStatusWordOffset": 0,
+        "activeFaultOffset": 4,
+        "faultHistoryOffset": 8,
+        "heartbeatOffset": 12,
+        "jointStatuswordOffset": 16,
+        "jointActualPositionOffset": 36,
+        "jointActualVelocityOffset": 76,
+        "jointActualTorqueOffset": 116,
+        "digitalOffset": 156,
+        "digitalCount": 8,
+        "analogOffset": 164,
+        "analogCount": 6,
+        "integerOffset": 188,
+        "integerCount": 2
+      },
+      "TxPdo": {
+        "machineControlWordOffset": 0,
+        "gbcControlWordOffset": 4,
+        "hlcControlWordOffset": 8,
+        "heartbeatOffset": 12,
+        "jointControlwordOffset": 16,
+        "jointSetPositionOffset": 36,
+        "jointSetVelocityOffset": 76,
+        "jointSetTorqueOffset": 116,
+        "digitalOffset": 156,
+        "digitalCount": 10,
+        "analogOffset": 164,
+        "analogCount": 6,
+        "integerOffset": 188,
+        "integerCount": 2
+      }
+    }
+  }
+}
+```
+
+## Link to schema documentation
+`fieldbus` maps to `FieldbusConfig` - see <Link to="/docs/gbc/schema/FieldbusConfig">here for the schema documentation</Link>

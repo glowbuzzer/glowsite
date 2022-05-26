@@ -1,0 +1,60 @@
+import {Tldr} from "../../../framework/components/Tldr"
+
+# {props.subtitle}
+<Tldr>
+    - Options to configure network (port etc.)
+    - Options to configure log levels
+    - Options to specific log categories
+    - Options to specific the config file to be used
+</Tldr>
+
+## Command line options for GBC
+
+To run GBC, usually `./GBC -cCONFIG_FILE_NAME` is enough.
+
+You can optionally specify command line arguments of:
+
+`-pPORT`
+`-sSHARED_MEMORY_NAME`
+`gSIGNAL`
+`-lLOG_LVL`
+`-dLOG_CAT`
+`-cCONFIG_FILE_NAME`
+
+`PORT` - the default HTTP server `PORT` of 9001, if you need to change it use this command line argument
+
+`SHARED_MEMORY_NAME` - the default is "gbc_shared_mem", only in advanced scenarios should this be changed
+
+`SIGNAL` - the default is 29 (SIG I/O POSSIBLE), only in advanced scenarios should this be changed
+
+`CONFIG_FILE_NAME` - specifies the JSON file name of the config that GBC will use
+
+`LOG_LVEL` sets logging level. The following log levels (in order of increasing verbosity) are:
+
+* LOG_LVL_FATAL=0
+* LOG_LVL_ERROR=1
+* LOG_LVL_WARNING=2
+* LOG_LVL_INFO=3
+* LOG_LVL_DEBUG=4
+* LOG_LVL_TRACE=5
+
+`LOG_CAT` sets the category of logs outputted. The following categories are supported:
+
+    * `WS_LOG` - Websockets log enable
+    * `JS_LOG` - JavaScript log enable
+    * `JS_MEM_LOG` - JavaScript memory management log enable
+    * `ACTIVITY_LOG` - Activity log enable
+    * `OTG_LOG` - Trajectory planner log enable
+    * `HTTP_LOG` - HTTP server log enable
+    * `STARTUP_LOG` - GBC startup log enable
+    * `STACK_LOG` - stack log enable
+    * `TASK_LOG` - task log enable
+    * `STATE_LOG` - state log enable (the state of the connection to GBR and PLC)
+    * `ACTIVITY_LOG` - activity log enable
+    * `TELEMETRY_LOG` - telemetry log enable
+    * `FIELDBUS_LOG` - fieldbus log enable
+    * `FRAMES_LOG` - frames log enable
+    * `KC_LOG` - kinematics configuration log enable
+    * `STREAM_LOG` - stream log enable
+    * `MACHINE_LOG` - machine log enable
+    * `ALL_LOG` - All logging categories enabled. This creates a logging avalanche so be careful
