@@ -1,5 +1,3 @@
-import { useRouteMatch } from "react-router"
-
 import { useTypedocGrouped, useTypedocItem } from "./typedoc-hooks"
 import { DocumentationPage } from "../framework/layouts/DocumentationPage"
 import { ComponentProps } from "../framework/components/ComponentProps"
@@ -22,80 +20,81 @@ import {
     UnionType
 } from "typedoc"
 import styled from "styled-components"
+import { useMatch, useParams } from "react-router"
 
 const StyledRender = styled.div`
-    .token {
-        filter: brightness(0.75);
+  .token {
+    filter: brightness(0.75);
+  }
+
+  .property,
+  .param,
+  .tuple-item {
+    display: block;
+    padding-left: 20px;
+
+    :only-child {
+      //display: inline;
+      //padding-left: 0;
     }
 
-    .property,
-    .param,
-    .tuple-item {
-        display: block;
-        padding-left: 20px;
+    :not(:last-child):after {
+      content: ", ";
+    }
+  }
 
-        :only-child {
-            //display: inline;
-            //padding-left: 0;
-        }
+  .intersection:not(:last-child):after {
+    content: " & ";
+  }
 
-        :not(:last-child):after {
-            content: ", ";
-        }
+  .union:not(:last-child):after {
+    content: " | ";
+  }
+
+  pre > span > .property {
+    > .shortText {
+      //border-top: 2px solid rgba(0, 0, 0, 0.08);
+      padding-top: 6px;
+      padding-bottom: 6px;
+      margin-top: 26px;
     }
 
-    .intersection:not(:last-child):after {
-        content: " & ";
+    :first-child > .shortText {
+      margin-top: 10px;
+    }
+  }
+
+  .param,
+  .property {
+    .shortText,
+    .text {
+      font-family: Roboto, sans-serif;
+      font-size: 0.9em;
+      border-left: 2px solid rgba(0, 0, 0, 0.08);
+      margin-top: 0;
+      padding-top: 0;
+      padding-bottom: 0;
+      padding-left: 8px;
+      color: rgba(0, 0, 0, 0.6);
+
+      p:only-child {
+        margin: 0;
+      }
     }
 
-    .union:not(:last-child):after {
-        content: " | ";
+    .text {
+      padding-top: 6px;
+      padding-bottom: 6px;
     }
+  }
 
-    pre > span > .property {
-        > .shortText {
-            //border-top: 2px solid rgba(0, 0, 0, 0.08);
-            padding-top: 6px;
-            padding-bottom: 6px;
-            margin-top: 26px;
-        }
-
-        :first-child > .shortText {
-            margin-top: 10px;
-        }
-    }
-
-    .param,
-    .property {
-        .shortText,
-        .text {
-            font-family: Roboto, sans-serif;
-            font-size: 0.9em;
-            border-left: 2px solid rgba(0, 0, 0, 0.08);
-            margin-top: 0px;
-            padding-top: 0px;
-            padding-bottom: 0;
-            padding-left: 8px;
-            color: rgba(0, 0, 0, 0.6);
-
-            p:only-child {
-                margin: 0;
-            }
-        }
-
-        .text {
-            padding-top: 6px;
-            padding-bottom: 6px;
-        }
-    }
-
-    pre.debug {
-        margin-top: 300px;
-        border-top: 5px dashed grey;
-        padding: 10px;
-        font-size: 0.7em;
-        color: grey;
-    }
+  pre.debug {
+    margin-top: 300px;
+    border-top: 5px dashed grey;
+    padding: 10px;
+    font-size: 0.7em;
+    color: grey;
+  }
 `
 
 const TypedocLiteral = ({ l }: { l: LiteralType }) => {
@@ -106,7 +105,7 @@ const TypedocLiteral = ({ l }: { l: LiteralType }) => {
             return <span>{l.value ? "true" : "false"}</span>
         case "number":
         case "bigint":
-            return <span>{l.value}</span>
+            return <span>{l.value.toString()}</span>
     }
 }
 
@@ -557,8 +556,8 @@ const render_component = {
 }
 
 export default ({ title, filter }) => {
-    const { params } = useRouteMatch<{ name: string }>()
-    const item = useTypedocItem(params.name)
+    const { name } = useParams()
+    const item = useTypedocItem(name)
 
     if (!item) {
         return null
@@ -573,7 +572,7 @@ export default ({ title, filter }) => {
             left={<TypedocLeftNav current={item.name} title={title} filter={filter} />}
         >
             <h1>
-                {params.name} ({item.kindString})
+                {name} ({item.kindString})
             </h1>
 
             <StyledRender>

@@ -1,3 +1,4 @@
+import * as React from "react"
 import {Markdown} from "../../framework/components/Markdown"
 import {Section} from "../../framework/components/Section";
 

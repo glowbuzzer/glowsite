@@ -2,7 +2,7 @@ import svgr from "@svgr/rollup"
 
 // intercept the svgr wrapper because we only want it to handle svgs with the 'inline' query param
 export function svgWrapper(options) {
-    const { transform, ...rest } = svgr.default(options)
+    const { transform, ...rest } = svgr(options)
 
     return {
         ...rest,

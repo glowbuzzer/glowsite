@@ -1,3 +1,4 @@
+import * as React from "react"
 import { BaseLayout } from "./BaseLayout"
 import { Section } from "../components/Section"
 import styled from "styled-components"

@@ -7,9 +7,10 @@
  *
  */
 
-import { createContext, FC, useEffect, useMemo, useState } from "react"
+import * as React from "react"
+import {createContext, FC, ReactNode, useEffect, useMemo, useState} from "react"
 import * as Module from "module"
-import { useLocation } from "react-router-dom"
+import {useLocation} from "react-router-dom"
 
 // @ts-ignore because globEager is not defined
 // const imports = import.meta.globEager("../../pages/**/*.{jsx,tsx,md,mdx,ts}")
@@ -71,7 +72,7 @@ export function generate_root_node(base: string, modules: { [index: string]: Mod
 
                     const level = path.length
 
-                    const { default: component, title, ...props } = page
+                    const {default: component, title, ...props} = page
 
                     function add(parent: Node, slug: string, level_attach) {
                         // switch (ext) {
@@ -100,15 +101,15 @@ export function generate_root_node(base: string, modules: { [index: string]: Mod
                         const node =
                             level_attach === level - 1
                                 ? {
-                                      ...common_props,
-                                      ...props,
-                                      title: title || slug,
-                                      component
-                                  }
+                                    ...common_props,
+                                    ...props,
+                                    title: title || slug,
+                                    component
+                                }
                                 : {
-                                      ...common_props,
-                                      title: slug
-                                  }
+                                    ...common_props,
+                                    title: slug
+                                }
 
                         parent.children.push(node)
                         // console.log("ADD", node, "AT", slug, "TO", { ...parent })
@@ -122,7 +123,7 @@ export function generate_root_node(base: string, modules: { [index: string]: Mod
                     }, r)
                     return r
                 },
-                { path: "", children: [] } as Node
+                {path: "", children: []} as Node
             ).children[0] || default_root_node
     )
 }
@@ -134,7 +135,7 @@ type NavContextType = {
 
 export const navContext = createContext<NavContextType>(null)
 
-export const NavProvider: FC<{ root: Node }> = ({ root, children }) => {
+export const NavProvider: FC<{ root: Node, children: ReactNode }> = ({root, children}) => {
     const all = Array.from(walk(root))
-    return <navContext.Provider value={{ root, all }}>{children}</navContext.Provider>
+    return <navContext.Provider value={{root, all}}>{children}</navContext.Provider>
 }

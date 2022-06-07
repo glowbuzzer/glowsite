@@ -1,3 +1,5 @@
+import * as React from "react"
+
 // export const YoutubeEmbed = ({ embedId }) => (
 //     <div style={{ overflow: "hidden", position: "relative", padding: "50px" }}>
 //         <iframe

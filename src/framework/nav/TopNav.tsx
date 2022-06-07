@@ -11,117 +11,84 @@ import { ReactComponent as SmallLogo } from "../../images/logos/tiny-logo.svg?in
 import { CloseOutlined, GithubOutlined, MenuOutlined, YoutubeOutlined } from "@ant-design/icons"
 import { Section } from "../components/Section"
 
-// @ts-ignore
-import {LATEST_VERSIONS} from "../../versions.mjs";
-
-// import { projects } from "../../pages/versions"
+import { LATEST_VERSIONS } from "../../versions.mjs"
 
 const StyledTopNav = styled.div`
-    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 
-    .logo {
-        display: block;
-        padding-top: 10px;
+  .logo {
+    display: block;
+    padding-top: 10px;
+  }
+
+  .ant-menu-horizontal {
+    display: inline-block;
+    text-align: right;
+    background: none;
+    border: none;
+    padding-top: 5px;
+    flex-grow: 1;
+    font-size: 1.1em;
+
+    .ant-menu-submenu {
+      padding-bottom: 10px !important;
     }
 
-    .ant-menu-horizontal {
-        display: inline-block;
-        text-align: right;
-        background: none;
-        border: none;
-        padding-top: 5px;
-        flex-grow: 1;
-        font-size: 1.1em;
+    .ant-menu-submenu {
+      margin: 0 12px !important;
 
-        .ant-menu-submenu {
-            padding-bottom: 10px !important;
-        }
-
-        .ant-menu-submenu {
-            margin: 0 12px !important;
-
-            @media (max-width: 1200px) {
-                margin: 0 4px !important;
-            }
-        }
-
-        .ant-menu-submenu-title {
-            margin: 0 12px;
-
-            @media (max-width: 1200px) {
-                margin: 0 4px;
-            }
-        }
+      @media (max-width: 1200px) {
+        margin: 0 4px !important;
+      }
     }
 
-    .nav-narrow,
-    .nav-narrow-open {
-        display: none;
-    }
+    .ant-menu-submenu-title {
+      margin: 0 12px;
 
+      @media (max-width: 1200px) {
+        margin: 0 4px;
+      }
+    }
+  }
+
+  .nav-narrow,
+  .nav-narrow-open {
+    display: none;
+  }
+
+  .nav-wide {
+    display: flex;
+    gap: 20px;
+  }
+
+  .latest-release {
+    color: ${props => props.theme.color.MainPurple};
+    border: 1px dashed ${props => props.theme.color.MainPurple};
+    border-radius: 14px;
+    padding: 2px 8px;
+  }
+
+  @media (max-width: 950px) {
     .nav-wide {
-        display: flex;
-        gap: 20px;
+      display: none;
     }
 
-    .latest-release {
-        color: ${props => props.theme.color.MainPurple};
-        border: 1px dashed ${props => props.theme.color.MainPurple};
-        border-radius: 14px;
-        padding: 2px 8px;
+    .nav-narrow {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      text-align: right;
+      font-size: 1.5em;
+      cursor: pointer;
     }
 
-    @media (max-width: 950px) {
-        .nav-wide {
-            display: none;
-        }
-
-        .nav-narrow {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            text-align: right;
-            font-size: 1.5em;
-            cursor: pointer;
-        }
-
-        .nav-narrow-open {
-            display: block;
-        }
+    .nav-narrow-open {
+      display: block;
     }
+  }
 `
 
-// doesn't work when placed in component above, I think because menu items are created dynamically
-const StyledMenuItem = styled(Menu.Item)`
-    &&&.horizontal {
-        padding: 8px 12px;
-        height: auto;
-        line-height: 20px;
-
-        @media (max-width: 950px) {
-            // avoids annoying flash of horizontal menu in mobile mode
-            display: none;
-        }
-
-        a {
-            color: grey;
-        }
-
-        :hover {
-            background: ${props => props.theme.color.MainPurple};
-
-            a {
-                color: white;
-            }
-        }
-
-        .title {
-            font-weight: bold;
-        }
-    }
-`
-
-const NavMenu = ({ mode }) => {
+const NavMenu = ({ mode, onNavigate = undefined }) => {
     const { pathname } = useLocation()
     const nav = useRootNav()
     const ancestors = pathname
@@ -142,35 +109,37 @@ const NavMenu = ({ mode }) => {
     return (
         <Menu
             key={mode}
-            className={mode}
+            className="nav-menu"
+            // className={mode}
             mode={mode}
             openKeys={openKeys}
             defaultSelectedKeys={[...ancestors, mode + ":" + pathname]}
             onOpenChange={onOpenChange}
-            forceSubMenuRender
-        >
-            {nav.children
+            subMenuCloseDelay={1}
+            // forceSubMenuRender
+            items={nav.children
                 .filter(node => node.children.length) // don't include nodes like 404 that have no children
-                .map(({ path, title, children }) => (
-                    <Menu.SubMenu
-                        key={mode + ":" + path}
-                        title={<span>{title}</span>}
-                        popupOffset={[0, 20]}
-                    >
-                        {children.map(({ path, title, subtitle, children }) => {
-                            const to = children.length ? children[0].path : path
-                            return (
-                                <StyledMenuItem key={mode + ":" + path} className={mode}>
-                                    <Link to={to}>
-                                        <div className="title">{title}</div>
+                .map(({ path, title, children }) => ({
+                    key: mode + ":" + path,
+                    label: title,
+                    popupOffset: [0, 20],
+                    popupClassName: "nav-sub-menu-" + mode,
+                    children: children.map(({ path, title, subtitle, children }) => {
+                        const to = children.length ? children[0].path : path
+                        return {
+                            key: mode + ":" + path,
+                            label: (
+                                <Link to={to} onClick={onNavigate}>
+                                    <div className="title">{title}</div>
+                                    {mode === "horizontal" && (
                                         <div className="subtitle">{subtitle}</div>
-                                    </Link>
-                                </StyledMenuItem>
+                                    )}
+                                </Link>
                             )
-                        })}
-                    </Menu.SubMenu>
-                ))}
-        </Menu>
+                        }
+                    })
+                }))}
+        />
     )
 }
 
@@ -195,6 +164,7 @@ export const TopNav = ({ hideVersionLink }: { hideVersionLink?: boolean }) => {
                     )}
 
                     <NavMenu mode="horizontal" />
+
                     <Space size="middle">
                         {hideVersionLink || (
                             <Link className="latest-release" to="/downloads">
@@ -223,7 +193,7 @@ export const TopNav = ({ hideVersionLink }: { hideVersionLink?: boolean }) => {
             {showMenu && (
                 <Section background={"White"}>
                     <div className="nav-narrow-open">
-                        <NavMenu mode="inline" />
+                        <NavMenu mode="inline" onNavigate={() => setShowMenu(false)} />
                     </div>
                 </Section>
             )}

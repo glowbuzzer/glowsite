@@ -1,3 +1,4 @@
+import * as React from "react"
 import { createContext, useContext, useMemo } from "react"
 
 export enum CookieConsentState {

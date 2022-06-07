@@ -1,17 +1,10 @@
-import { FC } from "react"
+import * as React from "react"
+import {FC, ReactNode} from "react"
 import { GbColours } from "../GlowsiteTheme"
 import styled from "styled-components"
 import { css } from "styled-components"
 
 type Colors = keyof typeof GbColours
-
-type SectionProps = {
-    background?: Colors
-    inverted?: boolean
-    spaced?: boolean
-    guttered?: boolean
-    expand?: boolean
-}
 
 const StyledSection = styled.div<{
     dataColor: Colors
@@ -74,6 +67,15 @@ const StyledSection = styled.div<{
             }
         `}
 `
+
+type SectionProps = {
+    background?: Colors
+    inverted?: boolean
+    spaced?: boolean
+    guttered?: boolean
+    expand?: boolean
+    children: ReactNode
+}
 
 export const Section: FC<SectionProps> = ({
     background,

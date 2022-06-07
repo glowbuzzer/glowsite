@@ -1,3 +1,4 @@
+import * as React from "react"
 import coming_soon from "./images/coming_soon.png?glowsite"
 import { Image } from "./Image"
 import { Col, Row } from "antd"

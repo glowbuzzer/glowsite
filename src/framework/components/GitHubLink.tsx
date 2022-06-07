@@ -1,3 +1,4 @@
+import * as React from "react"
 import { Row, Col } from "antd"
 import { GithubOutlined } from "@ant-design/icons"
 import styled from "styled-components"

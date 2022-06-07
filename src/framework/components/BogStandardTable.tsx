@@ -1,3 +1,4 @@
+import * as React from "react"
 import styled from "styled-components"
 import { Row, Col } from "antd"
 import { ColProps as AntColProps } from "antd/lib/col/index"

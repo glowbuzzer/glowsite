@@ -4,7 +4,10 @@ import {imagetools} from "vite-imagetools"
 import radar from "vite-plugin-radar"
 import remarkPrism from "remark-prism"
 import remarkGfm from "remark-gfm"
-import {glowsiteImageToolsPresets as resolveConfigsFactory, glowsiteOutputFormats as extendOutputFormats} from "../../plugins/imagetools-ext.mjs"
+import {
+    glowsiteImageToolsPresets as resolveConfigsFactory,
+    glowsiteOutputFormats as extendOutputFormats
+} from "../../plugins/imagetools-ext.mjs"
 import remarkMermaid from "../../plugins/remark-mermaid.mjs"
 import remarkCodeblock from "../../plugins/remark-codeblock.mjs"
 import remarkGlowbuzzerFrontmatter from "../../plugins/remark-frontmatter.mjs"
@@ -26,7 +29,7 @@ const resolveConfigs = resolveConfigsFactory({
 /**
  * @type {import('vite').UserConfig}
  */
-export default defineConfig(({ mode }) => {
+export default defineConfig(({mode}) => {
     const env = loadEnv(mode, process.cwd())
 
     console.log("MODE", mode)
@@ -45,7 +48,9 @@ export default defineConfig(({ mode }) => {
                     remarkPrism
                 ]
             }),
-            react(),
+            react(
+                {jsxRuntime: "classic"}
+            ),
             svgr(),
             typedoc(mode),
             imagetools({
@@ -64,7 +69,7 @@ export default defineConfig(({ mode }) => {
             alias: {
                 // because react@17.x still uses cjs module syntax and we are fully esm
                 // https://github.com/mdx-js/mdx/discussions/1794
-                "react/jsx-runtime": "react/jsx-runtime.js"
+                // "react/jsx-runtime": "react/jsx-runtime.js"
             }
         },
         build: {

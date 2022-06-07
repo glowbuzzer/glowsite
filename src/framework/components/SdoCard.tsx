@@ -1,3 +1,4 @@
+import * as React from "react"
 import { Card, Avatar } from "antd"
 import styled from "styled-components"
 

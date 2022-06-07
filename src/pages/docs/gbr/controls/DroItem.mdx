@@ -6,11 +6,10 @@ import {GithubSourceLink} from "../../../../framework/components";
 
 ## Simple example
 
-[comment]: <> (TODO!!!!!!! DroItem not currently exported)
-
 Displays a single line of a digital readout.
 
-```jsx xdemo
+```jsx demo
+import React from "react"
 import {DroItem} from "@glowbuzzer/controls";
 
 export default () => <DroItem label={"A"} value={100.001} type="scalar"/>
@@ -20,8 +19,8 @@ export default () => <DroItem label={"A"} value={100.001} type="scalar"/>
 
 You can use `DroItem` to compose a custom readout.
 
-```jsx xdemo
-import * as React from "react";
+```jsx demo
+import React from "react"
 
 import {useKinematics} from "@glowbuzzer/store";
 import {FrameSelector, DroItem} from "@glowbuzzer/controls";

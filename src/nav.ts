@@ -183,6 +183,7 @@ const nav = {
                 {
                     slug: "gbc",
                     title: "Core Control (GBC)",
+                    section: true,
                     subtitle: "Core control documentation",
                     children: [
                         {
@@ -319,6 +320,7 @@ const nav = {
                 {
                     slug: "gbem",
                     title: "EtherCAT Master (GBEM)",
+                    section: true,
                     subtitle: "EtherCAT Master documentation",
                     children: [
                         {
@@ -551,6 +553,7 @@ const nav = {
                 {
                     slug: "gbsm",
                     title: "Step Master (GBSM)",
+                    section: true,
                     subtitle: "Step master documentation (step/dir control)",
                     children: [
                         {
@@ -626,6 +629,7 @@ const nav = {
                 {
                     slug: "gbr",
                     title: "React (GBR)",
+                    section: true,
                     subtitle: "React component documentation",
                     layout: ControlsDocumentationPage, // so that Redux context is created
                     children: [

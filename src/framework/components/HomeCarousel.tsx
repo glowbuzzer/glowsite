@@ -1,3 +1,4 @@
+import * as React from "react"
 import styled from "styled-components"
 import { Carousel } from "antd"
 import BackgroundImage1 from "../../home/background_motor_w.jpg"
@@ -6,7 +7,7 @@ import BackgroundImage2 from "../../home/background_board_w.jpg"
 import ForegroundImage2 from "../../home/iso_cpu.svg"
 import BackgroundImage3 from "../../home/background_io_w.jpg"
 import ForegroundImage3 from "../../home/iso_pc_ethercat_master.svg"
-import { FC } from "react"
+import {FC, ReactNode} from "react"
 
 export const CarouselSettings = {
     arrows: false,
@@ -38,7 +39,7 @@ const CarouselWrapper = styled(Carousel)`
     }
 `
 
-const CarouselDiv: FC<{ className?: string }> = ({ className, children }) => (
+const CarouselDiv: FC<{ className?: string, children: ReactNode }> = ({ className, children }) => (
     <div className={className}>
         <div className="carousel-item">{children}</div>
     </div>

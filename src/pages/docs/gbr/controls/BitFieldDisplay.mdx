@@ -9,6 +9,7 @@ Displays a numeric values as bits, either read-only or editable. Bits are displa
 ## Simple example
 
 ```jsx demo
+import React from "react"
 import {BitFieldDisplay} from "@glowbuzzer/controls";
 
 export default () => <BitFieldDisplay value={111} bitCount={16}/>
@@ -34,6 +35,7 @@ export default () => {
 You can add vertical labels to the display by providing an array of strings, least significant bit first.
 
 ```jsx demo
+import React from "react"
 import {BitFieldDisplay} from "@glowbuzzer/controls";
 
 export default () => <BitFieldDisplay value={111} bitCount={8} labels={['ENABLE', , 'POWER', , , , , 'FAULT']}/>
