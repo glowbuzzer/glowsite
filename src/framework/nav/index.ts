@@ -4,7 +4,6 @@ import { useContext } from "react"
 
 export function useOuterNav(path: string): [Node, Node] {
     const { all } = useContext(navContext)
-    // console.log("Find nav for", path, "in", all)
     const node = all.find(n => n.path === path)
     if (node?.parent?.parent?.section) {
         return [node, node.parent.parent]

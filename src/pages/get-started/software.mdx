@@ -1,0 +1,158 @@
+import {Tabs} from "antd";
+import {Tldr} from "../../framework/components"
+import InstallGBEM from "../fragments/install_gbem.mdx"
+import Jog from "../fragments/jog.mdx"
+import {ArrowRightOutlined} from "@ant-design/icons"
+import {PageVariantProvider, PageVariantTabs} from "../../framework/components"
+
+
+# {props.subtitle}
+<Tldr>
+    - Use the getting started hardware to get a drive moving
+    - Commission an EtherCAT master
+    - Use the web-front-end to jog the drives
+    - Interact with the EtherCAT IO
+</Tldr>
+
+## Introduction
+
+This page explains how to install the &gb components &gbc and &gbem in order to get some drives moving and control some IO.
+We assume you have already covered:
+
+[Running &gbc in simulation mode](/get-started/simulation)
+
+: Describes how to quickly get started using a generic front-end connecting to &gbc (no hardware required)
+
+[Assembling the single or three axis starter kit](/get-started/kits/overview)
+
+: Describes the parts needed and gives detailed assembly instructions
+
+<PageVariantProvider variants={["sk1", "sk2"]}>
+
+    {/*
+## Step 1 - Use the create react app custom template to create your getting started project
+
+The easiest way to start is to use our hosted version of &gbr from our website.
+
+The generic demo (a cartesian machine with 3-axes and an auxiliary axis) is <a href="https://preview.glowbuzzer.com/examples/generic/index.html">available here</a> and is suitable for using with the starter kit hardware.
+
+You will not be able to use the front-end until you have installed &gbc, the real-time control on your PC.
+
+For use with real hardware this needs to run on Linux with real-time extensions. The easiest way to get started with this is to use the &pi but of course you can use a desktop version of Linux.
+*/}
+
+    ## Install &pi OS
+
+    To run &gbc and &gbem you need a &pi with a preempt patched kernel, in order to eliminate jitter.
+
+    The easiest way to install this is to use our image, which you can download from
+    `https://downloads.glowbuzzer.com/pi-rt-image.img.z`.
+    We do provide [instructions on how to build the kernel yourself](/docs/gbem/compiling_and_running) if you feel
+    inclined.
+
+    The image needs to be written to a 32Gb SD card. Uncompress the downloaded image either with a Linux `uncompress`
+    command or using the Windows tools.
+    On Windows write the image to the SD card using [Win32 Disk
+    imager](https://sourceforge.net/projects/win32diskimager) or [Etcher](https://www.balena.io/etcher). On Linux, do a
+    web search for
+    "Writing an SD Card Image Using Linux Command Line Tools" and follow the instructions from a good source.
+
+    Once the SD is ready, you can insert the card in the SD card slot on your &pi and power it up.
+
+    If all is well, log onto the &pi with ssh:
+
+    ```shell
+    ssh root@rpi-gb
+    ```
+
+    The default hostname of image is `gb-rpi` and the password is `raspberry`
+
+    ## Download and run &gbc
+
+    We provide the &gbc binaries for the &pi for evaluation. Other platforms can be supplied on request.
+
+    Log in to the &pi and download &gbc:
+
+    ````shell
+    wget https://downloads.glowbuzzer.com/releases/gbc/rpi/refs/tags/&gbc_version;/gbc-&gbc_version;.tgz
+    tar -xzf gbc-&gbc_version;.tgz
+    cd &gbc_version.tgz
+    ````
+
+    Run &gbc
+
+    <PageVariantTabs>
+        <Tabs.TabPane tab="Single Axis Kit" key="sk1">
+            ```shell
+            ./GBC --config machine_starter_kit_1.json
+            ```
+        </Tabs.TabPane>
+        <Tabs.TabPane tab="Three Axis Kit" key="sk2">
+            ```shell
+            ./GBC --config machine_starter_kit_2.json
+            ```
+        </Tabs.TabPane>
+    </PageVariantTabs>
+
+    &gbc will start and listen for connections on port 9000.
+
+    ## Download, compile and run &gbem
+
+    <InstallGBEM>
+        <PageVariantTabs>
+            <Tabs.TabPane tab="Single Axis Kit" key="sk1">
+                Edit `gbem/libs/machine_mapping/inc/map_config.h` to activate the starter kit configuration. Set `MACHINE_SK1`
+                to `1` and set all others to `0`.
+
+                ````shell
+                #define MACHINE_SK1 1
+                ````
+            </Tabs.TabPane>
+            <Tabs.TabPane tab="Three Axis Kit" key="sk2">
+                Edit `gbem/libs/machine_mapping/inc/map_config.h` to activate the starter kit configuration. Set `MACHINE_SK2`
+                to `1` and set all others to `0`.
+
+                ````shell
+                #define MACHINE_SK2 1
+                ````
+            </Tabs.TabPane>
+        </PageVariantTabs>
+    </InstallGBEM>
+
+    Check that &gbem can connect to the slaves on your EtherCAT network:
+
+    ````shell
+    ./gbem -n -ieth0
+    ````
+
+    This prints a lot of detailed diagnostic information, and within this you should see the details of the slaves on
+    the network.
+
+    You are now ready to run &gbem:
+    ```
+    ./GBEM -c -ieth0
+    ```
+
+    ## Launch and connect the front-end
+
+    The simplest way to launch a front-end is to use the generic demo hosted on the &gb website, as you did in the
+    [Quick Start](/get-started/simulation) section.
+
+    <ArrowRightOutlined/> [Launch the generic demo front-end](http://preview.glowbuzzer.com/examples/generic/index.html)
+
+    In the demo application:
+    - Modify the connection url using the Preferences button at the top of the page
+    - Connect
+    - Clear the initial fault
+    - Enable operation
+
+    You are now ready to start jogging.
+
+    ## Jog a motor
+
+    <Jog minimal/>
+
+</PageVariantProvider>
+
+
+

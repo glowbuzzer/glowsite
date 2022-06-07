@@ -1,10 +1,13 @@
-import {Tldr} from "../../framework/components/Tldr"
-import { Link } from "react-router-dom"
-import {Image} from "../../framework/components/Image"
+import {Image, Tldr} from "../../framework/components"
 import CraTemplate from "../fragments/cra_template.mdx"
 import InstallGbc from "../fragments/install_gbc.mdx"
 import RunGbc from "../fragments/run_gbc_short.mdx"
 import FrontendConnect from "../fragments/frontend_connect.mdx"
+import step1_add_switch from "./front_end_tutorial_images/step1_add_switch.png?glowsite"
+import oscillating_move_tile from "./front_end_tutorial_images/oscillating_move_tile.png?glowsite"
+import oscillating_move_running from "./front_end_tutorial_images/oscillating_move_running.png?glowsite"
+import {PageVariantProvider, PageVariantTabs} from "../../framework/components"
+import {Tabs} from "antd";
 
 # {props.subtitle}
 
@@ -15,252 +18,227 @@ import FrontendConnect from "../fragments/frontend_connect.mdx"
 </Tldr>
 
 ## Introduction
-This document takes you though installing the &gbt React components and creating some simple machine control functions of your own.
+This page takes you though installing the &gbt React components (&gbr) and creating a simple machine control &fe of your own.
 
-## Use the CRA template to create your own starter project
+We assume you have already covered [running &gbc in simulation mode](/get-started/simulation). The instructions below assume you will run &gbc in simulation mode (without hardware),
+but you can just as easily run your custom &fe against one of the hardware starter kits.
 
-<CraTemplate/>
+## Use the CRA template to create your project
 
-## Structure of the project
-We provide a little framework that enables a Tiled UI to be created.
+We provide a [Create React App](https://create-react-app.dev) (CRA) custom template as a useful starting point for your project. This helps reduce setup and
+configuration work needed to get started. You should perform these steps on your development workstation (Windows or Linux or WSL).
 
-You don't have to use this framework, we use it because often machine control user interfaces contain discrete "pockets" of functionality laid out on the screen.
+You need Node.js and the Node package manager (npm). We recommend version 12 or above.
+If you don't have Node.js installed, [visit the Node.js website for instructions](https://nodejs.org/en/download).
 
-For this tutorial, we will assume that you are using the Tiles.
+Execute the following command to create the project from the &gb template:
 
-## Create new tile that toggles a Digital Output - Front-end Tutorial 1
-
-### Introduction
-Let's create the simplest possible machine control function. A button to toggle a digital output. This is the "hello world" equivalent in automation land.
-
-### Create the tile
-Start by creating a new tsx file `TutorialDoToggleTile.tsx`.
-
-In this file we need to import the components we will need for our new tile.
-
-```tsx
-//TutorialDoToggleTile.tsx
-import React from "react"
-import { Tile } from "@glowbuzzer/layout"
-import { Switch} from "antd"
-import styled from "styled-components"
-import { useDigitalOutput} from "@glowbuzzer/store"
-
+```shell
+npx create-react-app my-app --template glowbuzzer-typescript --use-npm
 ```
 
-`React` & `styled-components` are the React and <a href="https://styled-components.com/"> styled-components</a> are the imports for the React components and styled-components is a handy way of styling a React application that we use widely.
+Replace `my-app` with your project name. This will download all required packages and bootstrap your project. It can take a few minutes.
 
-`Tile` is the component we provide to help assemble tiled user interfaces.
+```text
+Creating a new React app in my-app.
 
-useDigitalOutput is the &gbt component that integrates with the Digital IO.
+Installing packages. This might take a couple of minutes.
+Installing react, react-dom, and react-scripts with cra-template-glowbuzzer-typescript...
 
-Switch is the component we will use for our switch from the Ant Design framework (<a href="https://ant.design/components/switch/">Switch Component</a>)
+[... package install output ...]
 
-The `useDigitalOutput` component from the &gbt has the following signature:
+Success! Created my-app
+Inside that directory, you can run several commands:
 
-````jsx title="/src/components/HelloCodeTitle.js"
-function useDigitalOutput(index: number): {set(state: number, override?: boolean): void, actState: number, state: number, override?: boolean): void, actState: number, state: number, override: boolean}
-````
+  npm start
+    Starts the development server.
 
-It enables you to both set the state of a digital output and also provides its state (i.e. if it is set or unset).
+  npm run build
+    Bundles the app into static files for production.
 
-So, we need to write a component that sets the state of the digital output when the toggle switch is manipulated.
+  npm test
+    Starts the test runner.
 
-For this tutorial we will use digital output number 1.
+  npm run eject
+    Removes this tool and copies build dependencies, configuration files
+    and scripts into the app directory. If you do this, you can’t go back!
 
-A little function handles the state change and applies the new state to the digital output.
+We suggest that you begin by typing:
 
-The tile's user interface is as simple as it gets, it is just the Ant Design Switch component.
+  cd my-app
+  npm start
 
-The code for this is as follows:
-
-```tsx
-export const TutorialDoToggleTile = ({ labels=[] }) => {
-    const dout = useDigitalOutput(1)
-
-    function handle_state_change() {
-        const new_state = 1 - dout.state
-        dout.set(new_state, true)
-    }
-
-    return (
-       <Tile title="Tutorial Digital Output Toggle">
-           <StyledDiv>
-                Turn on my digital output
-                <Switch checked={dout.state && true} onChange={handle_state_change}/>
-           </StyledDiv>
-       </Tile>
-    )
-}
-````
-
-
-The final code is:
-
-```tsx
-import React from "react"
-import { Tile } from "@glowbuzzer/layout"
-import { Select, Switch, Tag } from "antd"
-import styled from "styled-components"
-import { useDigitalOutput, useDigitalOutputList } from "@glowbuzzer/store"
-
-
-const StyledDiv = styled.div`
-padding-top: 20px;
-
-    > div {
-        display: flex;
-        gap: 10px;
-    }
-     .ant-switch {
-        flex-grow: 1;
-        margin: 10px 20px;
-    }
-`
-
-export const TutorialDoToggleTile = ({ labels=[] }) => {
-    const dout = useDigitalOutput(1)
-
-    function handle_state_change() {
-        const new_state = 1 - dout.state
-        dout.set(new_state, true)
-    }
-
-    return (
-       <Tile title="Tutorial Digital Output Toggle">
-           <StyledDiv>
-                Turn on my digital output
-                <Switch checked={dout.state && true} onChange={handle_state_change}/>
-           </StyledDiv>
-       </Tile>
-    )
-}
+Happy hacking!
 ```
 
-### Add the tile to the UI
+When you run the `start` command, a local development server is started which will serve the React application. This can be accessed on localhost, on port 3000 by default, for
+example: [http://localhost:3000](http://localhost:3000).
 
-In app.tsx, import the component you just wrote:
-```tsx
-import {TutorialDoToggleTile} from "./tutorial/TutorialDoToggleTile";
-```
+You can now open this project in your preferred IDE and start editing (with hot reload enabled).
 
-Then render it on the page at the appropriate point:
+## Simple tutorials
 
-```tsx
-//app.tsx
-{ render: <TutorialDoToggleTile />, height: 4, title: "Tutorial Digital Output Toggle" }
-```
+<PageVariantProvider variants={["tut1", "tut2"]}>
 
+&gbrl provides a simple component named `Tile` you can use to provide a consistent look to your front-ends. You don't have to use this component but much of the &gb basic
+functionality like managing the &gbc connection is provided as tiles. Note that full source code for all our components is
+[available on Github](https://github.com/glowbuzzer/gbr/tree/main/libs/controls) so you can pick apart
+our components and re-package them however you need.
 
-Now when you look at localhost:xxxx you will see your tile and the toggle switch.
+We are going to walk through two different tutorials:
 
-import step1_add_switch from "./front_end_tutorial_images/step1_add_switch.png?glowsite"
+Setting a digital output
 
-<Image meta={step1_add_switch} alt="front-end switch" maxWidth={400}/>
+: Adds a new tile that contains a toggle button that when clicked will toggle a digital output
 
+Oscillating a joint
 
-### Test the toggle switch
+: Adds a new tile that runs an oscillating move on a single joint and provides visual feedback
 
-The next step is to make the toggle switch actually trigger a digital output.
+<PageVariantTabs>
+    <Tabs.TabPane tab="Digital Output Tutorial" key="tut1">
+        Let's create the simplest possible machine control function. A button to toggle a digital output. This is the "hello world" equivalent in automation land.
 
-To do this we need to install GBC.
+        First verify that you can run the React project you just created and can connect to &gbc.
+        You should be able to start &gbc using the generic configuration, that is by running:
+        ```shell
+        ./GBC
+        ```
 
-<InstallGbc/>
+        If you are unable to run &gbc, please follow the [Getting Started](./simulation) instructions.
 
-And then run GBC/
+        Adding a tile is just a matter of creating a new React component and using `Tile` as part of it's render function.
 
-<RunGbc/>
+        Create a new file `ToggleDigitalOutputTile.tsx` and add the following code:
 
-And finally connect the &gbr tiles to &gbc.
+        ```tsx
+        // ToggleDigitalOutputTile.tsx
+        import * as React from "react"
+        import {Space, Switch} from "antd"
+        import {Tile} from "@glowbuzzer/controls"
+        import {useDigitalOutputState} from "@glowbuzzer/store"
 
-<FrontendConnect/>
+        export const ToggleDigitalOutputTile = () => {
+            const [dout, setDout] = useDigitalOutputState(1) // use the 2nd digital output
 
-We will be running in `Simulation Mode` as we have not integrated &gbc with any hardware (e.g. an EtherCAT master).
+            function handle_state_change() {
+                const new_state = !dout.setValue // toggle
+                setDout(new_state, true) // set new state (and override any existing state)
+            }
 
-Now, in the UI, the &gb provided Digital Outputs tile reflects the state of all the digital outputs and you will be able to see Digital Output 1 toggle as your move your switch.
+            return (
+                <Tile title="Tutorial Digital Output Toggle">
+                    <Space>
+                        Toggle my digital output
+                        <Switch checked={dout.setValue} onChange={handle_state_change}/>
+                    </Space>
+                </Tile>
+            )
+        }
+        ```
 
-That is it. It shows how simple it is to create React components to control machine functions.
+        Now you can add the new tile to `App.tsx`:
 
-## Make a drive move - an oscillating move -  Front-end Tutorial 2
+        ```tsx
+        // App.tsx
+        <nav>
+            <ConnectTile/>
+            <ToggleDigitalOutputTile/>
+            <JogTile/>
+            <CartesianDroTile/>
+            <FeedRateTile/>
+        </nav>
+        ```
 
-### Introduction
-The next example in showing how easy it is to write React machine control functions is to make a drive move. In this case we want to make a drive perform an oscillating move.
+        You should see the new tile appear in the left hand column underneath the connect tile in your &fe.
 
-### Create the tile
+        Ensure you are connected to &gbc and that operation is enabled. When you slide the switch &gbc will receive the instruction to set or clear the digital output. In simulation mode,
+        digital output 1 is echoed in digital input 1, so you should see the digital inputs tile change, with the second input bit
+        being toggled.
 
-Create `TutorialOscillatingMoveTile.tsx` in the project you created with the custom template.
+        Congratulations, you've created your first bit of custom &fe!
+    </Tabs.TabPane>
+    <Tabs.TabPane tab="Oscillating Move Tutorial" key="tut2">
+        The next example shows how easy it is to write a React machine control that makes a drive move. In this example we will make a drive perform an oscillating move.
 
-We will use a `soloActivity` to perform the move. Everything you get back is promise based so to create and oscillating move, we can `await` the completion of a move.
+        We assume you have completed the first tutorial to toggle a digital output and that you already have your &fe and &gbc running.
 
+        Create `OscillatingMoveTile.tsx` and add the following code:
 
+        ```tsx
+        // OscillatingMoveTile.tsx
+        import * as React from "react"
+        import {useState} from "react";
+        import {Button, Space} from "antd";
+        import {MotorDro, Tile} from "@glowbuzzer/controls";
+        import {useJoint, useSoloActivity} from '@glowbuzzer/store';
 
-```tsx
-//TutorialOscillatingMoveTile.tsx
-// import React, {createContext, FC, useContext, useRef, useState} from "react"
-import { useSoloActivity } from '@glowbuzzer/store';
-import {Tile} from "@glowbuzzer/layout";
-import {Button} from "antd";
+        const END = 200;
 
-export const TutorialOscillatingMoveTile = () => {
-    const [complete, setComplete] = useState(false)
-    const soloActivity = useSoloActivity(0)
+        export const OscillatingMoveTile = () => {
+            const [iteration, setIteration] = useState(0) // keep track of iterations
+            const soloActivity = useSoloActivity(0) // request solo activity api for first kinematics configuration
+            const joint = useJoint(0) // request joint 0 status
 
-    async function do_promise() {
-        setComplete(false)
-        await soloActivity.moveJoints([1000,0,0]).promise()
-        await soloActivity.moveJoints([0,0,0]).promise()
-        await soloActivity.moveJoints([1000,0,0]).promise()
-        await soloActivity.moveJoints([0,0,0]).promise()
-        setComplete(true)
-    }
+            async function start_moves() {
+                // perform same oscillating move 5 times
+                for (let n = 0; n < 5; n++) {
+                    setIteration(n + 1)
+                    await soloActivity.moveJoints([END]).promise()
+                    await soloActivity.moveJoints([0]).promise()
+                }
+                // reset after a few seconds
+                setTimeout(() => setIteration(0), 3000)
+            }
 
-    return (
-        <Tile title="Test Oscillating move">
-            <Button onClick={do_promise}>Start Move</Button>
-            {complete ? "Move complete" : ""}
-        </Tile>
-    )
-}
-```
+            return (
+                <Tile title="Tutorial Oscillating Move">
+                    <Space>
+                        <Space direction="vertical" align="center">
+                            <Button onClick={start_moves} disabled={!!iteration}>Start Move</Button>
+                            {iteration > 0 ? <div>
+                                Iteration {iteration}
+                            </div> : "Click to start!"}
+                        </Space>
+                        <MotorDro width={100} value={joint.actPos / END * 360}/>
+                    </Space>
+                </Tile>
+            )
+        }
+        ```
 
-### Add the tile to the UI
+        Now you can add the new tile to `App.tsx`:
 
-In app.tsx, import the component you just wrote:
-```tsx
-import {TutorialDoToggleTile} from "./tutorial/TutorialOscillatingMoveTile";
-```
+        ```tsx
+        // App.tsx
+        <nav>
+            <ConnectTile/>
+            <OscillatingMoveTile/>
+            <JogTile/>
+            <CartesianDroTile/>
+            <FeedRateTile/>
+        </nav>
+        ```
 
-Then render it on the page at the appropriate point:
+        You should see the new tile appear in the left hand column underneath the connect tile in your &fe.
 
+        Ensure you are connected to &gbc and that operation is enabled. When you click the start button you should see the motor graphic `MotorDro` move back
+        and forth five times, and the iteration count increase.
 
-```tsx
-//app.tsx
-{ render: <TutorialOscillatingMoveTile />, height: 4, title: "Tutorial Oscillating Move" }
-```
+        Congratulations, you've made a motor move from a React app!
+    </Tabs.TabPane>
+</PageVariantTabs>
 
+</PageVariantProvider>
 
+## Next steps
 
-When you view your site you should now see your tile.
+Congratulations, you have created a custom &fe using &gbrl.
 
-import oscillating_move_tile from "./front_end_tutorial_images/oscillating_move_tile.png?glowsite"
+[Get started with hardware](/get-started/kits/overview)
 
-<Image meta={oscillating_move_tile} alt="Oscillating move tile" maxWidth={400}/>
+: If you haven't already built one of our hardware starter kits, we recommend this as a way of trying our full end-to-end solution.
 
+[Learn more about &gbr](/docs/gbr/overview)
 
-
-### Test the oscillating move
-
-The next step is to test the move.
-
-You will need to run &gbc (see the previous Tutorial for details on how to do this).
-
-Then, in the browser, click connect to establish a connection to &gbc.
-
-Then make sure the machine state is "Operation Enabled" by clicking the `Operate` button (after clearing any faults).
-
-Now when we click the Start move button, in the Joints Tile, we will see our drive spinning.
-
-import oscillating_move_running from "./front_end_tutorial_images/oscillating_move_running.png?glowsite"
-
-<Image meta={oscillating_move_running} alt="Oscillating move running"/>
-
+: Read more about features of &gbr and browse the &gbr reference documentation.

@@ -106,25 +106,26 @@ const nav = {
         {
             slug: "get-started",
             title: "Getting started",
+            section: true,
             layout: DefaultDocumentationPage,
             children: [
                 {
                     slug: "simulation",
-                    title: "Quick Start",
+                    title: "Quick start",
                     subtitle: "Get started without hardware",
                     component: () => import("./pages/get-started/simulation.mdx")
                 },
                 {
-                    slug: "hardware",
-                    title: "Hardware",
-                    subtitle: "Starter kits and recommended hardware",
-                    component: () => import("./pages/get-started/hardware.mdx")
-                },
-                {
                     slug: "kits",
-                    title: "Assembling the hardware",
+                    title: "Hardware starter kits",
                     subtitle: "How to assemble the getting started hardware",
                     children: [
+                        {
+                            slug: "overview",
+                            title: "Overview",
+                            subtitle: "Starter kits and recommended hardware",
+                            component: () => import("./pages/get-started/hardware.mdx")
+                        },
                         {
                             slug: "single-axis",
                             title: "Single axis starter kit",
@@ -149,19 +150,19 @@ const nav = {
                     ]
                 },
                 {
-                    slug: "motion",
-                    title: "Motion",
+                    slug: "software",
+                    title: "Installing the software",
                     subtitle: "How to get a drive moving",
-                    component: () => import("./pages/get-started/motion.mdx")
+                    component: () => import("./pages/get-started/software.mdx")
                 },
                 {
                     slug: "frontend",
-                    title: "Front-end",
+                    title: "Creating a React user interface",
                     subtitle: "Easily create a React machine control",
                     component: () => import("./pages/get-started/front-end.mdx")
                 },
                 {
-                    slug: "how_to-buy",
+                    slug: "how-to-buy",
                     title: "How to buy",
                     subtitle: "How to buy the Glowbuzzer toolkit",
                     component: () => import("./pages/get-started/how_to_buy.mdx")
