@@ -1,6 +1,6 @@
-import { defineConfig, loadEnv } from "vite"
+import {defineConfig, loadEnv} from "vite"
 import react from "@vitejs/plugin-react"
-import { imagetools } from "vite-imagetools"
+import {imagetools} from "vite-imagetools"
 import remarkPrism from "remark-prism"
 import remarkGfm from "remark-gfm"
 import {
@@ -10,10 +10,10 @@ import {
 import remarkMermaid from "../../plugins/remark-mermaid.mjs"
 import remarkCodeblock from "../../plugins/remark-codeblock.mjs"
 import remarkGlowbuzzerFrontmatter from "../../plugins/remark-frontmatter.mjs"
-import { svgWrapper as svgr } from "../../plugins/svr-plugin-wrapper.mjs"
-import { mdxWrapper as mdx } from "../../plugins/mdx-plugin-wrapper.mjs"
+import {svgWrapper as svgr} from "../../plugins/svr-plugin-wrapper.mjs"
+import {mdxWrapper as mdx} from "../../plugins/mdx-plugin-wrapper.mjs"
 import remarkDl from "remark-deflist"
-import { remarkEntities } from "../../plugins/remark-entities.mjs"
+import {remarkEntities} from "../../plugins/remark-entities.mjs"
 
 const resolveConfigs = resolveConfigsFactory({
     presets: {
@@ -26,7 +26,7 @@ const resolveConfigs = resolveConfigsFactory({
 /**
  * @type {import('vite').UserConfig}
  */
-export default defineConfig(({ mode }) => {
+export default defineConfig(({mode}) => {
     const env = loadEnv(mode, process.cwd())
 
     return {
@@ -42,7 +42,9 @@ export default defineConfig(({ mode }) => {
                     remarkPrism
                 ]
             }),
-            react(),
+            react(
+                {jsxRuntime: "classic"}
+            ),
             svgr(),
             imagetools({
                 extendOutputFormats,
@@ -53,7 +55,7 @@ export default defineConfig(({ mode }) => {
             alias: {
                 // because react@17.x still uses cjs module syntax and we are fully esm
                 // https://github.com/mdx-js/mdx/discussions/1794
-                "react/jsx-runtime": "react/jsx-runtime.js"
+                // "react/jsx-runtime": "react/jsx-runtime.js"
             }
         },
         build: {
