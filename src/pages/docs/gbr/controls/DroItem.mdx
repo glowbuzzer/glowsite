@@ -12,7 +12,7 @@ Displays a single line of a digital readout.
 import React from "react"
 import {DroItem} from "@glowbuzzer/controls";
 
-export default () => <DroItem label={"A"} value={100.001} type="scalar"/>
+export default () => <DroItem label={"A"} value={100.001} type="linear"/>
 ```
 
 ## Custom digital readout example
@@ -29,7 +29,7 @@ export default () => {
     const [frameIndex, setFrameIndex] = React.useState(0);
     const kinematics = useKinematics(frameIndex);
 
-    const {position} = kinematics.pose;
+    const position = kinematics.translation;
 
     React.useEffect(() => {
         setFrameIndex(kinematics.frameIndex);
@@ -45,7 +45,7 @@ export default () => {
     return <div>
         <FrameSelector defaultFrame={kinematics.frameIndex} onChange={setFrameIndex}/>
         {
-            Object.keys(pos).map(k => <DroItem key={k} label={k} value={pos[k]} type="scalar"/>)
+            Object.keys(pos).map(k => <DroItem key={k} label={k} value={pos[k]} type="linear"/>)
         }
     </div>
 }
