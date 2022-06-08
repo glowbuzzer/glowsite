@@ -1,3 +1,4 @@
+import * as React from "react"
 import { useTypedocGrouped, useTypedocItem } from "./typedoc-hooks"
 import { DocumentationPage } from "../framework/layouts/DocumentationPage"
 import { ComponentProps } from "../framework/components/ComponentProps"
@@ -502,6 +503,28 @@ const TypedocLeftNav = ({ current, title, filter }) => {
     return (
         <StyledLeftNavMenu>
             <div className="title">{title}</div>
+            <Menu
+                mode="inline"
+                defaultSelectedKeys={[current]}
+                selectedKeys={[current]}
+                items={
+                    Object.keys(groups).length < 2
+                        ? Object.values(groups)[0].map(c => ({
+                              key: c.name,
+                              label: <Link to={"./" + c.name}>{c.name}</Link>
+                          }))
+                        : Object.entries(groups).map(([name, items]) => ({
+                              key: name,
+                              className: "capitalize",
+                              label: name,
+                              children: items.map(c => ({
+                                  key: c.name,
+                                  label: <Link to={c.name}>{c.name}</Link>
+                              }))
+                          }))
+                }
+            />
+            {/*
             <Menu mode="inline" defaultSelectedKeys={[current]} selectedKeys={[current]}>
                 {Object.keys(groups).length < 2
                     ? Object.values(groups)[0].map(c => (
@@ -519,6 +542,7 @@ const TypedocLeftNav = ({ current, title, filter }) => {
                           </Menu.SubMenu>
                       ))}
             </Menu>
+*/}
         </StyledLeftNavMenu>
     )
 }
