@@ -21,81 +21,86 @@ import {
     UnionType
 } from "typedoc"
 import styled from "styled-components"
-import { useMatch, useParams } from "react-router"
+import { useParams } from "react-router"
+import { relative_path } from "./util"
 
 const StyledRender = styled.div`
-  .token {
-    filter: brightness(0.75);
-  }
-
-  .property,
-  .param,
-  .tuple-item {
-    display: block;
-    padding-left: 20px;
-
-    :only-child {
-      //display: inline;
-      //padding-left: 0;
+    .debug {
+        display: none; // comment to show raw typedoc json
     }
 
-    :not(:last-child):after {
-      content: ", ";
-    }
-  }
-
-  .intersection:not(:last-child):after {
-    content: " & ";
-  }
-
-  .union:not(:last-child):after {
-    content: " | ";
-  }
-
-  pre > span > .property {
-    > .shortText {
-      //border-top: 2px solid rgba(0, 0, 0, 0.08);
-      padding-top: 6px;
-      padding-bottom: 6px;
-      margin-top: 26px;
+    .token {
+        filter: brightness(0.75);
     }
 
-    :first-child > .shortText {
-      margin-top: 10px;
-    }
-  }
+    .property,
+    .param,
+    .tuple-item {
+        display: block;
+        padding-left: 20px;
 
-  .param,
-  .property {
-    .shortText,
-    .text {
-      font-family: Roboto, sans-serif;
-      font-size: 0.9em;
-      border-left: 2px solid rgba(0, 0, 0, 0.08);
-      margin-top: 0;
-      padding-top: 0;
-      padding-bottom: 0;
-      padding-left: 8px;
-      color: rgba(0, 0, 0, 0.6);
+        :only-child {
+            //display: inline;
+            //padding-left: 0;
+        }
 
-      p:only-child {
-        margin: 0;
-      }
+        :not(:last-child):after {
+            content: ", ";
+        }
     }
 
-    .text {
-      padding-top: 6px;
-      padding-bottom: 6px;
+    .intersection:not(:last-child):after {
+        content: " & ";
     }
-  }
 
-  pre.debug {
-    margin-top: 300px;
-    border-top: 5px dashed grey;
-    padding: 10px;
-    font-size: 0.7em;
-    color: grey;
-  }
+    .union:not(:last-child):after {
+        content: " | ";
+    }
+
+    pre > span > .property {
+        > .shortText {
+            //border-top: 2px solid rgba(0, 0, 0, 0.08);
+            padding-top: 6px;
+            padding-bottom: 6px;
+            margin-top: 26px;
+        }
+
+        :first-child > .shortText {
+            margin-top: 10px;
+        }
+    }
+
+    .param,
+    .property {
+        .shortText,
+        .text {
+            font-family: Roboto, sans-serif;
+            font-size: 0.9em;
+            border-left: 2px solid rgba(0, 0, 0, 0.08);
+            margin-top: 0;
+            padding-top: 0;
+            padding-bottom: 0;
+            padding-left: 8px;
+            color: rgba(0, 0, 0, 0.6);
+
+            p:only-child {
+                margin: 0;
+            }
+        }
+
+        .text {
+            padding-top: 6px;
+            padding-bottom: 6px;
+        }
+    }
+
+    pre.debug {
+        margin-top: 300px;
+        border-top: 5px dashed grey;
+        padding: 10px;
+        font-size: 0.7em;
+        color: grey;
+    }
 `
 
 const TypedocLiteral = ({ l }: { l: LiteralType }) => {
@@ -294,7 +299,7 @@ const TypedocType = ({ t, includeSynopsis = true }: { t: Type; includeSynopsis?:
             const r = t as ReferenceType & { id? }
             return (
                 <span>
-                    {r.id ? <Link to={"./" + r.name}>{r.name}</Link> : <span>{r.name}</span>}
+                    {r.id ? <Link to={relative_path(r.name)}>{r.name}</Link> : <span>{r.name}</span>}
                     <TypedocTypeArguments args={r.typeArguments} />
                 </span>
             )
@@ -511,7 +516,7 @@ const TypedocLeftNav = ({ current, title, filter }) => {
                     Object.keys(groups).length < 2
                         ? Object.values(groups)[0].map(c => ({
                               key: c.name,
-                              label: <Link to={"./" + c.name}>{c.name}</Link>
+                              label: <Link to={relative_path(c.name)}>{c.name}</Link>
                           }))
                         : Object.entries(groups).map(([name, items]) => ({
                               key: name,
@@ -519,7 +524,7 @@ const TypedocLeftNav = ({ current, title, filter }) => {
                               label: name,
                               children: items.map(c => ({
                                   key: c.name,
-                                  label: <Link to={c.name}>{c.name}</Link>
+                                  label: <Link to={relative_path(c.name)}>{c.name}</Link>
                               }))
                           }))
                 }

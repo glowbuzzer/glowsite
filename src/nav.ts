@@ -1,10 +1,6 @@
 import { Node } from "./framework/providers/NavProvider"
 import { HomePage } from "./framework/layouts/HomePage"
-import {
-    DefaultDocumentationPage,
-    DocumentationPage,
-    TypedocPage
-} from "./framework/layouts/DocumentationPage"
+import { DefaultDocumentationPage, TypedocPage } from "./framework/layouts/DocumentationPage"
 import { ControlsDocumentationPage } from "./framework/layouts/ControlsDocumentationPage"
 import { SimpleLayout } from "./framework/layouts/SimpleLayout"
 

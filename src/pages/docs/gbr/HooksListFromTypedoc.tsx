@@ -4,6 +4,7 @@ import { Table } from "antd"
 import { Link } from "react-router-dom"
 import { typedocHookFilter, useTypedoc } from "../../../typedoc/typedoc-hooks"
 import Synopsis from "./hooks.mdx"
+import { relative_path } from "../../../typedoc/util"
 
 const StyledDiv = styled.div``
 
@@ -15,7 +16,7 @@ export default function HooksListFromTypedoc() {
             title: "Name",
             dataIndex: "name",
             key: "name",
-            render: name => <Link to={"./hooks/"+name}>{name}</Link>
+            render: name => <Link to={relative_path("hooks/"+name)}>{name}</Link>
         },
         {
             title: "Description",
@@ -26,6 +27,7 @@ export default function HooksListFromTypedoc() {
 
     const data = hooks
         .map(({ name, signatures }) => ({
+            key: name,
             name,
             description: signatures?.[0].comment?.shortText
         }))
@@ -35,11 +37,11 @@ export default function HooksListFromTypedoc() {
         <StyledDiv>
             <h1>List of GBR Hooks</h1>
 
-            <Synopsis/>
+            <Synopsis />
 
             <Table dataSource={data} columns={columns} pagination={false} />
 
-{/*
+            {/*
             {hooks.map(hook => {
                 return (
                     <div key={hook.name}>
