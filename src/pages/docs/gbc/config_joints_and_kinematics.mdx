@@ -1,11 +1,14 @@
 import {Tldr} from "../../../framework/components/Tldr"
 import { Link } from "react-router-dom"
+import {Card} from "antd"
+
 
 # {props.subtitle}
 
 ## Introduction
 
 ### `joint: {}`
+
 The `joint: {}` section of the config defines the joints that make up a machine.
 
 Joints correspond to the axes/motors/actuators on your machine and in this section we define their kinematic limits (vmax, amax and jmax), the extent of their travels and the type of joint.
@@ -16,15 +19,17 @@ These need to correspond to the joints defined in the &gbem or &gbsm configurati
 
 ### `kinematicsConfiguration: {}`
 
-The `kinematicsConfiguration: {}`  section of the config defines the one or more kinematics configurations that make up your machine.
+The `kinematicsConfiguration: {}`  section of the config is key to how &gbc works and defines the one or more kinematics configurations that make up your machine.
 
 In &gbc a kinematics configuration is a collection of joints that are controlled in concert to produce motion.
 
-A six DOF robot has six joints (motors) these six joints are members of the kinematics configuration.
+A six DOF robot has six joints (motors) and these six joints are members of the kinematics configuration.
 
-A three axis cartesian milling machine has 3 joints (XYZ) and these three joints are members of the kinematics configuration
+A three axis cartesian milling machine has 3 joints (XYZ) and these three joints are members of the kinematics configuration.
 
-Kinematics configurations need to have mathematical model attached to them and often these models are parameterised (Kinematics chain parameters).
+If the three axis cartesian milling machine also had an auxiliary axis (say a rotary table), another kinematics configuration would be added to config file and would contain just the joint for the rotary table.
+
+Kinematics configurations need to have mathematical model attached to them and often these models are parameterised (with Kinematics chain parameters).
 
 The toolkit contains mathematical kinematics models for common types of robots and, we add can more on customer request depending on what you need.
 
@@ -49,74 +54,80 @@ graph LR
 ```
 There are often multiple solutions to the inverse kinematics (multiple configurations)
 
-## Details
+## Tips for defining Joints and KinematicsConfiguration configs
 
 ### `joint: {}`
 
-The key can be either a number or string.
+The key can be either a number or string. These names are accessible in &gbr and are useful to document your config file.
 
-The main parameters are:
+In the config there is a parameter `"finiteContinuous"`. This is the enum `JOINT_FINITECONTINUOUS`. <Link to="/docs/gbc/schema/JOINT_FINITECONTINUOUS">See here for more details</Link>
 
-`"finiteContinuous"` - `JOINT_FINITECONTINUOUS` - 0 = `JOINT_FINITE` = joint is finite (has travel limits),  1 = `JOINT_CONTINUOUS` =  joint is continous (no travel limits)
+0 = `JOINT_FINITE` = joint is finite (has travel limits),  1 = `JOINT_CONTINUOUS` =  joint is continous (no travel limits).
 
-`"isInverted"` 0 = not inverted, 1 = inverted motion
+This allows us to configure machines where the joint has no limits (for example a conveyor) plus "ordinary" joints which have a fixed travel.
 
-`"jointType"` - `JOINT_TYPE` - 0 = `JOINT_PRISMATIC`= Joint type is prismatic (linear), 1 = `JOINT_REVOLUTE` Joint type is revolute (rotary)
+We can invert the direction of motion of a joint with the `"isInverted"` parameter with 0 = not inverted, 1 = inverted motion.
 
-`"limits"`  LimitConfiguration[]
+The `"jointType"` is the enum `JOINT_TYPE` with 0 = `JOINT_PRISMATIC`= Joint type is prismatic (linear) and 1 = `JOINT_REVOLUTE` Joint type is revolute (rotary). <Link to="/docs/gbc/schema/JOINT_TYPE">See here for more details</Link>
 
-`"negLimit"` negative soft limit for the travel of the joint
+This affects whether the joints motion is in linear units (for prismatic joints) or radians (for revolute joints).
 
-`"posLimit"`number positive soft limit for the travel of the joint
+<Card title="joint Schema docs" extra={<Link to="/docs/gbc/schema/JointConfig">docs Link</Link>} style={{ width: '100%' }}>
 
-`"scale"` number scale factor to be applied to a joint's position for transfer to the fieldbus
+    `joint` in the config file maps to `JointConfig` in the schema
 
+    This documentation details the types, enums etc. behind this section of the config
 
+    Click "docs Link" above to view
+</Card>
 
 
 ### `kinematicsConfiguration: {}`
 
+The key can be either a number or string. These names are accessible in &gbr and are useful to document your config file.
 
-The key can be either a number or string.
+Often we abbreviate Kinematics configurations to "kc".
 
-The main parameters are:
+Kcs have `"angularLimits"` which are defined in a `LimitConfiguration[]`. These angular limits define the angular kinematics limits (vmax, amax and jmax) for the kc as a whole.
+Kcs also have `"linearLimits"` which define the linear kinematics limits of the kc.
 
-`"angularLimits"`"?: LimitConfiguration[]
+These are separate the individual joint's kinematics limits.
 
+`"kinematicsConfigurationType"` is the enum `KC_KINEMATICSCONFIGURATIONTYPE` which defines the mathematical kinematics model used for the kc <Link to="/docs/gbc/schema/KC_KINEMATICSCONFIGURATIONTYPE">see here for more details</Link>
 
-`"extentsX"` - Extent (size) of workspace in X
-
-`"extentsY"` - Extent (size) of workspace in Y
-
-`"extentsZ"` Extent (size) of workspace in Z
-
-
-`"frameIndex"`  ?: number
-
-`"kinChainParams"`Matrix containing the DH parameters for the kinematics model
-
-kinematicsConfigurationIndex?: number
-Kinematics configuration type - i.e. the kinematics model that will be used. Used as discriminator for the union
-
-`"kinematicsConfigurationType"`"?: KC_KINEMATICSCONFIGURATIONTYPE
 List of linear limits to be applied to the kinematics configuration for different types of move
 
-`"linearLimits"`"?: LimitConfiguration[]
+The Kinematics configuration has an extent, this is the maximum volume that kc operates in. Defined in terms of `"extentsX"`, `"extentsY"` and `"extentsZ"`.
 
-participatingJoints?: number[]
-participatingJointsCount?: number
+`"frameIndex"` is a number that refers to the index of frame that is the base frame for the kc. It is used to orientate and translate the position of the kc.
 
-`"scaleX"` - Scale factor to apply to X axis
+`"kinChainParams"` is a matrix containing the DH (Denavit–Hartenberg) parameters for the kinematics model used by the kc. Not all kinematics models used parameters. For example the cartesian kinematics model is un-parameterised.
 
-`"scaleY"` - Scale factor to apply to Y axis
+`"participatingJoints"` is an array of the indexes of the joints that participate in the kc. This is a zero indexed array based on the order the joints appear in the config file.
 
-`"scaleZ"` - Scale factor to apply to Z axis
+`"scaleX"`, `"scaleY"`, and `"scaleZ"` scales the position of the kc itself.
 
+<Card title="kinematicsConfiguration Schema docs" extra={<Link to="/docs/gbc/schema/KinematicsConfigurationConfig">docs Link</Link>} style={{ width: '100%' }}>
+
+    `kinematicsConfiguration` in the config file maps to `KinematicsConfigurationConfig` in the schema
+
+    This documentation details the types, enums etc. behind this section of the config
+
+    Click "docs Link" above to view
+</Card>
 
 
 ## Example JSON
 
 ### `joint: {}`
+
+In this config we define a set of 4 joints.
+
+Joints 0, 1 & 2 are `JOINT_FINITE` because they default to 0 in the `JOINT_FINITECONTINUOUS` enum with 0 = `JOINT_FINITE`. All the three joints have `JOINT_TYPE` of `JOINT_PRISMATIC`.
+
+
+The fourth joint is named `"Aux"` and they have `JOINT_TYPE` of `JOINT_REVOLUTE`.
+
 
 ```json
     "joint": {
@@ -165,6 +176,16 @@ participatingJointsCount?: number
 ```
 
 ### `kinematicsConfiguration: {}`
+
+This config defines a single kinematics configuration called `"default"`.
+
+It's frame index is
+
+Joints 0, 1, 2 participate in this
+
+KinematicsConfigurationType is 4
+
+
 
 ```json
     "kinematicsConfiguration": {
@@ -275,8 +296,4 @@ participatingJointsCount?: number
     },
 ```
 
-## Link to schema documentation
 
-`joint` maps to `JointConfig` - see <Link to="/docs/gbc/schema/JointConfig">here for the schema documentation</Link>
-
-`kinematicsConfiguration` maps to `KinematicsConfigurationConfig` - see <Link to="/docs/gbc/schema/KinematicsConfigurationConfig">here for the schema documentation</Link>

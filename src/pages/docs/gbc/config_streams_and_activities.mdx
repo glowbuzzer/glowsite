@@ -1,20 +1,46 @@
 import {Tldr} from "../../../framework/components/Tldr"
 import { Link } from "react-router-dom"
+import {Card} from "antd"
+
 
 # {props.subtitle}
 
 ## Introduction
 
-The stream section of the config is brief a
+Streams refer to the process used to stream commands from &gbr to &gbc.
 
-the soloActivity section of teh config maps solo activities to kcs
+soloActivity is the API used to invoke activities on &gbc individually from &gbr.
 
-## Details
+## Tips for defining Stream and SoloActivity configs
 
+The stream section of the config is brief and just defines one or more stream. Each config requires at least one stream.
+
+The soloActivity section of the config maps solo activities to kcs. This simply "connects" a kc to a solo activity so that when using the solo activity API you can control different kcs with different solo activities.
+
+
+<Card title="stream Schema docs" extra={<Link to="/docs/gbc/schema/StreamConfig">docs Link</Link>} style={{ width: '100%' }}>
+
+    `stream` in the config file maps to `StreamConfig` in the schema
+
+    This documentation details the types, enums etc. behind this section of the config
+
+    Click "docs Link" above to view
+</Card>
+
+<Card title="soloActivity Schema docs" extra={<Link to="/docs/gbc/schema/SoloActivityConfig">docs Link</Link>} style={{ width: '100%' }}>
+
+    `soloActivity` in the config file maps to `SoloActivityConfig` in the schema
+
+    This documentation details the types, enums etc. behind this section of the config
+
+    Click "docs Link" above to view
+</Card>
 
 
 
 ## Example JSON
+
+In this example there is just a single stream named `"default"`.
 
 ```json
  "stream": {
@@ -22,6 +48,8 @@ the soloActivity section of teh config maps solo activities to kcs
         }
     },
 ```
+
+In this config soloActivity index 0 maps to the `"default"` kc and soloActivity index 1 maps to the `"aux"` kc.
 
 ```json
 "soloActivity": {
@@ -32,8 +60,3 @@ the soloActivity section of teh config maps solo activities to kcs
     },
 ```
 
-
-## Link to schema documentation
-`stream` maps to `StreamConfig` - see <Link to="/docs/gbc/schema/StreamConfig">here for the schema documentation</Link>
-
-`soloActivity` maps to `SoloActivityConfig` - see <Link to="/docs/gbc/schema/SoloActivityConfig">here for the schema documentation</Link>

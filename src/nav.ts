@@ -203,6 +203,7 @@ const nav = {
                         {
                             slug: "configuration",
                             title: "Configuration",
+                            section: true,
                             subtitle: "Configuration of GBC",
                             children: [
                                 {
@@ -276,12 +277,6 @@ const nav = {
                         },
 
                         {
-                            slug: "tasks_and_activities",
-                            title: "Tasks and activities",
-                            subtitle: "Tasks and activities in GBC",
-                            component: () => import("./pages/docs/gbc/tasks_and_activities.mdx")
-                        },
-                        {
                             slug: "motion",
                             title: "Motion - making things move",
                             subtitle: "Motion in GBC - making things move",
@@ -305,12 +300,7 @@ const nav = {
                             subtitle: "Scaling in GBC",
                             component: () => import("./pages/docs/gbc/scaling.mdx")
                         },
-                         {
-                            slug: "kinematics_configuration",
-                            title: "Kinematics configurations",
-                            subtitle: "Kinematics configurations in GBC",
-                            component: () => import("./pages/docs/gbc/kinematics_configuration.mdx")
-                        }
+
                     ]
                 },
                 {

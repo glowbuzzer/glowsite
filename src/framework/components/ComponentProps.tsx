@@ -48,10 +48,11 @@ export type ComponentProp = {
 type ComponentPropsProps = {
     displayName: string
     showDefaults: boolean
+    showValues?: boolean
     properties: ComponentProp[]
 }
 
-export const ComponentProps = ({ displayName, properties, showDefaults }: ComponentPropsProps) => {
+export const ComponentProps = ({ displayName, properties, showDefaults, showValues }: ComponentPropsProps) => {
     const columns = [
         {
             title: "Property",
@@ -80,13 +81,6 @@ export const ComponentProps = ({ displayName, properties, showDefaults }: Compon
             className: "prop-description",
             render: render_cell_inner
         },
-        {
-            title: "Value",
-            dataIndex: "value",
-            key: "description",
-            className: "prop-description",
-            render: render_cell_inner
-        }
     ]
     if (showDefaults) {
         columns.push({
@@ -94,6 +88,15 @@ export const ComponentProps = ({ displayName, properties, showDefaults }: Compon
             dataIndex: "default",
             key: "default",
             className: "prop-default",
+            render: render_cell_inner
+        })
+    }
+    if (showValues) {
+        columns.push({
+            title: "Value",
+            dataIndex: "value",
+            key: "value",
+            className: "prop-description",
             render: render_cell_inner
         })
     }

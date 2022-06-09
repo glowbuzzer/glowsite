@@ -1,5 +1,6 @@
 import {Tldr} from "../../../framework/components/Tldr"
 import { Link } from "react-router-dom"
+import {Card} from "antd"
 
 # {props.subtitle}
 
@@ -7,29 +8,63 @@ import { Link } from "react-router-dom"
 
 The tool section of the config defines the "table" of tools used by the machine.
 
-Tools have diameters and a translation and rotation.
+Tools have diameters and a translation and rotation. The translation is usually used to specify the length of the tool in the form of a translation along the Z axis.
 
-## Details
+## Tips for defining Tool configs
 
-`"diameter"`- optional
+Every machine needs to have at least one tool defined.
 
-`"translation"` - vector 3
+If you don't want to use a tool table, then just define a default tool (as index 0, the first in the json). This is the tool used for moves when you don't explicitly define a tool to use.
 
-`"rotation"` quaternion
+
+```json
+"tool": {
+  "default": {
+  },
+}
+```
+
+Because all values default to zero, this will create a tool with `diameter : 0`, translation `x : 0`, `y : 0`, `z : 0` and a rotation quaternion of `x : 0`, `y : 0`, `z : 0`, `w : 1` (the `w : 1` is set implicitly from an all zero quaternion).
+
+The `diameter` parameter is just used by &gbr when building the 3D representation of the tool. It is accessible in the &gbr API for you to use in other ways.
+
+Usually negative `translation` in `z` is used to represent a standard tool protruding from the spindle in a negative Z direction.
+
+TODO
+tool change link
+position changes instantatious
+
+
+<Card title="tool Schema docs" extra={<Link to="/docs/gbc/schema/ToolConfig">docs Link</Link>} style={{ width: '100%' }}>
+
+    `tool` in the config file maps to `ToolConfig` in the schema
+
+    This documentation details the types, enums etc. behind this section of the config
+
+    Click "docs Link" above to view
+
+</Card>
+
+
 
 ## Example JSON
+
+The following config defines three tools. The first tool, named `"default"`, has null parameters. The second tool, named `"tool1"` has a length offset of 10 and the final tool, named `"tool2"` has a length of 20.
 
 ```json
 "tool": {
         "default": {
         },
-        "offsetz": {
+        "tool1": {
             "translation": {
                 "z": -10
             }
-        }
+        },
+        "tool2": {
+            "translation": {
+                "z": -20
+            }
+        },
+
     }
 ```
-
-## Link to schema documentation
-`tool` maps to `ToolConfig` - see <Link to="/docs/gbc/schema/ToolConfig">here for the schema documentation</Link>

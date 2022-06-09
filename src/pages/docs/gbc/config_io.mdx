@@ -1,21 +1,98 @@
 import {Tldr} from "../../../framework/components/Tldr"
 import { Link } from "react-router-dom"
+import {Card} from "antd"
+import * as React from "react"
+import { useState } from "react"
+
+export const tabList = [
+    {
+        key: 'tab1',
+        tab: 'din Schema docs',
+    },
+    {
+        key: 'tab2',
+        tab: 'dout Schema docs',
+    },
+    {
+        key: 'tab3',
+        tab: 'ain Schema docs',
+    },
+    {
+        key: 'tab4',
+        tab: 'aout Schema docs',
+    },
+    {
+        key: 'tab5',
+        tab: 'iin Schema docs',
+    },
+    {
+        key: 'tab6',
+        tab: 'iout Schema docs',
+    },
+]
+
+
+export const contentList = {
+    tab1:     <span><p><code>din</code> in the config file maps to <code>DinConfig</code> in the schema</p><p>This documentation details the types, enums etc. behind this section of the config</p><p>Click "docs Link" above to view</p></span>,
+    tab2:     <span><p><code>dout</code> in the config file maps to <code>DoutConfig</code> in the schema</p><p>This documentation details the types, enums etc. behind this section of the config</p><p>Click "docs Link" above to view</p></span>,
+    tab3:     <span><p><code>ain</code> in the config file maps to <code>AinConfig</code> in the schema</p><p>This documentation details the types, enums etc. behind this section of the config</p><p>Click "docs Link" above to view</p></span>,
+    tab4:     <span><p><code>aout</code> in the config file maps to <code>AoutConfig</code> in the schema</p><p>This documentation details the types, enums etc. behind this section of the config</p><p>Click "docs Link" above to view</p></span>,
+    tab5:     <span><p><code>iin</code> in the config file maps to <code>IinConfig</code> in the schema</p><p>This documentation details the types, enums etc. behind this section of the config</p><p>Click "docs Link" above to view</p></span>,
+    tab6:     <span><p><code>iout</code> in the config file maps to <code>IoutConfig</code> in the schema</p><p>This documentation details the types, enums etc. behind this section of the config</p><p>Click "docs Link" above to view</p></span>,
+}
+
+
+export const linkList = {
+    tab1: <Link to="/docs/gbc/schema/DinConfig">docs Link</Link>,
+    tab2: <Link to="/docs/gbc/schema/DoutConfig">docs Link</Link>,
+    tab3: <Link to="/docs/gbc/schema/AinConfig">docs Link</Link>,
+    tab4: <Link to="/docs/gbc/schema/AoutConfig">docs Link</Link>,
+    tab5: <Link to="/docs/gbc/schema/IinConfig">docs Link</Link>,
+    tab6: <Link to="/docs/gbc/schema/IoutConfig">docs Link</Link>,
+}
+
+export const TabCards = () => {
+
+    const [activeTabKey1, setActiveTabKey1] = useState('tab1')
+
+    const onTab1Change = (key) => {
+        setActiveTabKey1(key)
+    }
+    const onTab2Change = (key) => {
+        setActiveTabKey2(key)
+    }
+
+
+    return (
+    <Card
+        style={{ width: '100%' }}
+        title="Links to schema documentation"
+        extra={linkList[activeTabKey1]}
+        tabList={tabList}
+        activeTabKey={activeTabKey1}
+        onTabChange={key => {
+            onTab1Change(key);
+        }}
+    >
+        {contentList[activeTabKey1]}
+    </Card>
+
+    )
+
+}
 
 # {props.subtitle}
 
 ## Introduction
 
-The IO section of the config defines the what input/outputs your machine has and sets parameters on these.
+The IO section of the config defines the input/outputs your machine has and sets parameters on these.
 
-Machines can contain different types of IO.
+Machines can contain different types of IO:
 
-Digital Inputs - for example, a position sensing switch, float sensor
-
-Digital Outputs - for example, a pump, indicator lamp, pneumatic valve
-
-Analog Inputs - for example, signals from pressure transducers and temperature from thermocouples
-
-Analog Outputs - for example, a speed control signal for a Variable Frequency Drive
+* Digital Inputs - for example, a position sensing switch, float sensor
+* Digital Outputs - for example, a pump, indicator lamp, pneumatic valve
+* Analog Inputs - for example, signals from pressure transducers and temperature from thermocouples
+* Analog Outputs - for example, a speed control signal for a Variable Frequency Drive
 
 IO can be manipulated in a number of different ways:
 
@@ -26,13 +103,24 @@ IO can be manipulated in a number of different ways:
 * By sending a raw websockets message
 
 
-## Details
+## Tips for defining IO configs
 
-key is the number of IO this will need to match the config of &gbem or &gbsm.
+The key in the config (inside din, dout, ain, aout, iin, iout) is the number of IO channel. This will need to match up with the config you define inside &gbem or &gbsm.
 
-`"inverted"` applies only to digital inputs
+The `"inverted"` parameter applies only to digital inputs and outputs.
+
+<TabCards/>
+
+
+
 
 ## Example JSON
+
+In this configuration we have defined:
+
+* 4 dins (digital in 0 is inverted)
+* 10 douts
+* no analogue or digital ins or outs
 
 ```json
    "din": {
@@ -98,17 +186,3 @@ key is the number of IO this will need to match the config of &gbem or &gbsm.
         }
     },
 ```
-
-## Link to schema documentation
-
-`din` maps to `DinConfig` - see <Link to="/docs/gbc/schema/DinConfig">here for the schema documentation</Link>
-
-`dout` maps to `DoutConfig` - see <Link to="/docs/gbc/schema/DoutConfig">here for the schema documentation</Link>
-
-`ain` maps to `AinConfig` - see <Link to="/docs/gbc/schema/AinConfig">here for the schema documentation</Link>
-
-`aout` maps to `AoutConfig` - see <Link to="/docs/gbc/schema/AoutConfig">here for the schema documentation</Link>
-
-`iin` maps to `IinConfig` - see <Link to="/docs/gbc/schema/IinConfig">here for the schema documentation</Link>
-
-`iout` maps to `IoutConfig` - see <Link to="/docs/gbc/schema/IoutConfig">here for the schema documentation</Link>

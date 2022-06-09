@@ -447,7 +447,7 @@ const Enumeration = ({ item }) => {
     return (
         <>
             <Synopsis item={item} />
-            <ComponentProps displayName={item.name} properties={props} showDefaults={false} />
+            <ComponentProps displayName={item.name} properties={props} showValues={true} showDefaults={false} />
         </>
     )
 }

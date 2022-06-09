@@ -1,16 +1,38 @@
 import {Tldr} from "../../../framework/components/Tldr"
 import { Link } from "react-router-dom"
+import {Card} from "antd"
+import {BogStandardHeaderRow, BogStandardCol, BogStandardRow} from "../../../framework/components/BogStandardTable";
+
 
 # {props.subtitle}
 
 ## Introduction
 
+The advanced config sections are mainly used when you want to define tasks and activities to run autonomously within &gbc.
+
+
+## Tips for defining the different advanced configs
+
 ### `moveParameters: {}`
+
 The moveParameters section of the config allows the definition of sets of move parameters that can be referenced by different types of moves in activities.
 
-Move parameters define things like the velocity of a move,
+Move parameters define things like the velocity of a move, what type of blend will be constructed between one move and the next and the tool that will be used for a move.
 
-### `task: {}` & `activity: {}`
+Limits on vmax, amax and jmax are expressed in terms of the percentage of the the kinematics limit defined for the joint or kc for the move.
+
+
+<Card title="Schema documentation" extra={<Link to="/docs/gbc/schema/MoveParametersConfig">docs Link</Link>} style={{ width: '100%' }}>
+
+    `moveParameters` in the config file maps to `MoveParametersConfig` in the schema
+
+    This documentation details the types, enums etc. behind this section of the config
+
+    Click "docs Link" above to view
+</Card>
+
+
+### `task: {}`
 
 Within &gbc, Tasks are an assembly of Activities that are executed in sequence in response to an event occurring.
 
@@ -24,194 +46,106 @@ Tasks allow for JavaScript code to be run is response to events occurring or per
 
 Tasks can have trigger to start them running. This could be a digital input or a thresholded analog input.
 
+The key things to define in a task are the index of the first activity in a task and the total number of activities that are used by the task.
+
+<Card title="Schema documentation" extra={<Link to="/docs/gbc/schema/TaskConfig">docs Link</Link>} style={{ width: '100%' }}>
+
+    `task` in the config file maps to `TaskConfig` in the schema
+
+    This documentation details the types, enums etc. behind this section of the config
+
+    Click "docs Link" above to view
+</Card>
+
+### `activity: {}`
+
+Any of the &gbc activities can be specified as the `"activityType"` in the activity config. These are the members of the `ACTIVITYTYPE` and are documented  <Link to="/docs/gbc/schema/ACTIVITYTYPE">here</Link>.
+
+<Card title="Schema documentation" extra={<Link to="/docs/gbc/schema/ActivityConfig">docs Link</Link>} style={{ width: '100%' }}>
+
+    `activity` in the config file maps to `ActivityConfig` in the schema
+
+    This documentation details the types, enums etc. behind this section of the config
+
+    Click "docs Link" above to view
+</Card>
+
+
+The config is a union of the different activity types so `"activityType" acts as a discriminator for the union.
+
+So for example, if you define `"activityType": 13` then you are configuring an `ACTIVITYTYPE_DWELL` and so `"dwellConfig"` will be used in the rest of the config.
+
+See <Link to="/docs/gbc/schema/DwellConfig">here</Link> for more details of the dwell config parameters.
+
+The documentation for the schema for the main activity configs that you are likely to use can be found here:
+
+    * <Link to="/docs/gbc/schema/DwellConfig">dwellConfig</Link>
+    * <Link to="/docs/gbc/schema/MoveArcConfig">moveArcConfig</Link>
+    * <Link to="/docs/gbc/schema/MoveJointsConfig">moveJointsConfig</Link>
+    * <Link to="/docs/gbc/schema/MoveJointsAtVelocityConfig">moveJointsAtVelocityConfig</Link>
+    * <Link to="/docs/gbc/schema/MoveLineConfig">moveLineConfig</Link>
+    * <Link to="/docs/gbc/schema/MoveLineAtVelocityConfig">moveLineAtVelocityConfig</Link>
+    * <Link to="/docs/gbc/schema/MoveToPositionConfig">moveToPositionConfig</Link>
+    * <Link to="/docs/gbc/schema/SetAoutConfig">setAoutConfig</Link>
+    * <Link to="/docs/gbc/schema/SetDoutConfig">setDoutConfig</Link>
+    * <Link to="/docs/gbc/schema/SetIoutConfig">setIoutConfig</Link>
+    * <Link to="/docs/gbc/schema/SpindleConfig">spindleConfig</Link>
+
 
 ### `lines: {}`
 The lines section of the config allows sets of lines to be defined that can be referenced by activities.
 
+<Card title="Schema documentation" extra={<Link to="/docs/gbc/schema/LinesConfig">docs Link</Link>} style={{ width: '100%' }}>
+
+    `lines` in the config file maps to `LinesConfig` in the schema
+
+    This documentation details the types, enums etc. behind this section of the config
+
+    Click "docs Link" above to view
+</Card>
+
+
+
 ### `arcs: {}`
 The arcs section of the config allows sets of arcs to be defined that can be referenced by activities.
+
+<Card title="Schema documentation" extra={<Link to="/docs/gbc/schema/ArcsConfig">docs Link</Link>} style={{ width: '100%' }}>
+
+    `arcs` in the config file maps to `ArcsConfig` in the schema
+
+    This documentation details the types, enums etc. behind this section of the config
+
+    Click "docs Link" above to view
+</Card>
+
+
 
 ### `cartesianPositions: {}`
 The cartesianPosition section of the config allows sets of arcs to be defined that can be referenced by activities.
 
 
+<Card title="Schema documentation" extra={<Link to="/docs/gbc/schema/CartesianPositionsConfig">docs Link</Link>} style={{ width: '100%' }}>
+
+    `cartesianPositions` in the config file maps to `CartesianPositionsConfig` in the schema
+
+    This documentation details the types, enums etc. behind this section of the config
+
+    Click "docs Link" above to view
+</Card>
+
+
+
 ### `triggerOn: {}`
 The triggerOn section of the config allows triggers to be defined. These are used to trigger tasks or activities to start - for example on a digital input triggering.
 
+<Card title="Schema documentation" extra={<Link to="/docs/gbc/schema/TriggerOnConfig">docs Link</Link>} style={{ width: '100%' }}>
 
-## Details
+    `triggerOn` in the config file maps to `TriggerOnConfig` in the schema
 
-### `moveParameters: {}`
+    This documentation details the types, enums etc. behind this section of the config
 
-Percentage of amax to be used for move
-
-amaxPercentage?: number
-Blend time percentage to be used for the move
-
-blendTimePercentage?: number
-Tolerance to be applied to the blend
-
-blendTolerance?: number
-Type of blend to be used for the move
-
-blendType?: BLENDTYPE
-Percentage of jmax to be used for move
-
-jmaxPercentage?: number
-Linear and angular limit profile to use for move
-
-limitConfigurationIndex?: number
-Tool to be used for the move
-
-toolIndex?: number
-Vmax (max velocity) for move
-
-vmax?: number
-Percentage of vmax to be used for move
-
-vmaxPercentage?: number
-
-### `task: {}`
-
-
-Number of activities in this task
-
-activityCount?: number
-Link to trigger to cancel task
-
-cancelTriggerOnIndex?: number
-First activity in this task
-
-firstActivityIndex?: number
-Link to trigger to start task
-
-startTriggerOnIndex?: number
-
-
-### `activity: {}`
-
-IMPORTANT: This is the discriminator for the union
-
-activityType?: ACTIVITYTYPE
-Configuration parameters for dwell activity
-
-dwell?: DwellConfig
-Configuration parameters for gear in position activity
-
-gearInPos?: GearInPosConfig
-Configuration parameters for gear in velocity activity
-
-gearInVelo?: GearInVeloConfig
-Configuration parameters for latch position activity
-
-latchPos?: LatchPosConfig
-Configuration parameters for move arc activity
-
-moveArc?: MoveArcConfig
-Configuration parameters for move joints activity
-
-moveJoints?: MoveJointsConfig
-Configuration parameters for move joints at velocity activity
-
-moveJointsAtVelocity?: MoveJointsAtVelocityConfig
-Configuration parameters for move line activity
-
-moveLine?: MoveLineConfig
-Configuration parameters for move line at velocity activity
-
-moveLineAtVelocity?: MoveLineAtVelocityConfig
-Configuration parameters for move arc activity
-
-moveSpline?: MoveSplineConfig
-Configuration parameters for move to position activity
-
-moveToPosition?: MoveToPositionConfig
-Configuration parameters for set aout activity
-
-setAout?: SetAoutConfig
-Configuration parameters for set dout activity
-
-setDout?: SetDoutConfig
-Configuration parameters for set aout activity
-
-setIout?: SetIoutConfig
-Index of trigger for skip-to-next
-
-skipToNextTriggerIndex?: number
-Type of trigger for skip to next
-
-skipToNextTriggerType?: TRIGGERTYPE
-Configuration parameters for spindle activity
-
-spindle?: SpindleConfig
-Configuration parameters for stress test activity
-
-stressTest?: StressTestConfig
-Configuration parameters for switch pose activity
-
-switchPose?: SwitchPoseConfig
-Configuration parameters for wait on analog input activity
-
-waitOnAnalogInput?: WaitOnAnalogInputConfig
-Configuration parameters for wait on digital input activity
-
-waitOnDigitalInput?: WaitOnDigitalInputConfig
-Configuration parameters for wait on integer input activity
-
-waitOnIntegerInput?: WaitOnIntegerInputConfig
-}
-
-
-### `lines: {}`
-
-Destination of the line
-
-destination?: CartesianPosition
-
-### `arcs: {}`
-Is the arc direction CW or CCW (clockwise or counter-clockwise)
-
-arcDirection?: ARCDIRECTION
-Whether the arc is defined by centre or radius
-
-arcType?: ARCTYPE
-Is the centre defined absolutely or relatively
-
-centre?: PositionAbsRel
-Destination position for the arc
-
-destination?: CartesianPosition
-Radius of the arc
-
-radius?: DoubleValue
-
-### `cartesianPositions: {}`
-
-configuration?: number
-position?: CartesianPosition
-
-### `triggerOn: {}`
-
-ndex of analog input to act as a trigger
-
-aiIndex?: number
-Trigger occurs at threshold greater or less than
-
-aiThreholdGreaterLessThan?: GTLT
-Index of digital input to act as a trigger
-
-diIndex?: number
-State that triggers
-
-diTriggerState?: ONOFF
-Filter for trigger
-
-numberofTicksBeforeTrigger?: number
-Threshold for analog in at which trigger occurs
-
-threshold?: number
-}
-
+    Click "docs Link" above to view
+</Card>
 
 
 ## Example JSON
@@ -306,19 +240,4 @@ threshold?: number
 }
 ```
 
-## Link to schema documentation
-
-`moveParameters` maps to `MoveParametersConfig` - see <Link to="/docs/gbc/schema/MoveParametersConfig">here for the schema documentation</Link>
-
-`task` maps to `TaskConfig` - see <Link to="/docs/gbc/schema/TaskConfig">here for the schema documentation</Link>
-
-`activity` maps to `ActivityConfig` - see <Link to="/docs/gbc/schema/ActivityConfig">here for the schema documentation</Link>
-
-`lines` maps to `LinesConfig` - see <Link to="/docs/gbc/schema/LinesConfig">here for the schema documentation</Link>
-
-`arcs` maps to `ArcsConfig` - see <Link to="/docs/gbc/schema/ArcsConfig">here for the schema documentation</Link>
-
-`cartesianPositions` maps to `CartesianPositionsConfig` - see <Link to="/docs/gbc/schema/CartesianPositionsConfig">here for the schema documentation</Link>
-
-`triggerOn` maps to `TriggerOnConfig` - see <Link to="/docs/gbc/schema/TriggerOnConfig">here for the schema documentation</Link>
 

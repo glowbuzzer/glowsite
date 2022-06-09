@@ -1,5 +1,7 @@
 import {Tldr} from "../../../framework/components/Tldr"
 import { Link } from "react-router-dom"
+import {Card} from "antd"
+
 
 # {props.subtitle}
 
@@ -7,28 +9,24 @@ import { Link } from "react-router-dom"
 
 The fieldbus section of the config defines the structure of the fieldbus and is usually not to be altered.
 
-## Details
+## Tips for defining Fieldbus configs
 
-`"jointCount"`
+The fieldbus section of the config defines the offsets of the objects transferred over the fieldbus interface from &gbc to the receiving process.
 
-RxPdo object
+If you need to modify this then it is best to contact us first.
 
-RxPdo?: FieldbusRxPdoLayout
-TxPdo object
+<Card title="fieldbus Schema docs" extra={<Link to="/docs/gbc/schema/FieldbusConfig">docs Link</Link>} style={{ width: '100%' }}>
 
-see schema
+    `fieldbus` in the config file maps to `FieldbusConfig` in the schema
 
-TxPdo?: FieldbusTxPdoLayout
-Number of joints stored in the fieldbus process data
+    This documentation details the types, enums etc. behind this section of the config
 
-jointCount?: number
-
-
-
-
-
+    Click "docs Link" above to view
+</Card>
 
 ## Example JSON
+
+This is the standard layout that works with &gbem and &gbsm in their default configuration.
 
 ```json
 {
@@ -72,5 +70,3 @@ jointCount?: number
 }
 ```
 
-## Link to schema documentation
-`fieldbus` maps to `FieldbusConfig` - see <Link to="/docs/gbc/schema/FieldbusConfig">here for the schema documentation</Link>

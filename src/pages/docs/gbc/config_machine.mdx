@@ -1,31 +1,49 @@
 import {Tldr} from "../../../framework/components/Tldr"
 import { Link } from "react-router-dom"
+import {Card} from "antd"
+
 
 # {props.subtitle}
 
 ## Introduction
 
-The machine section of the config is brief and just sets the speed of status updates and the bus cycle time - the speed at which the fieldbus (or other communications bus) is updated)
+The machine section of the config is brief and just sets:
 
-## Details
+* The speed of status updates between &gbc and &gbr
+* The bus cycle time which is the speed at which the fieldbus (or other communications bus) is updated)
+
+## Tips for defining Machine configs
+
+You can currently only define a single machine in your configuration.
+
+The name of the machine is not used though is accessible in the &gbr API if you need it.
 
 `busCycleTime` needs to be 1, 2, 4 and must match the bus cycle time in &gbem or &gbsm and is needed to ensure the calculated trajectories match the actual cycle at which they are sent to motors. This is measured in milliseconds.
 
-`statusFrequency` is the frequency of status updates (between 20 and 1000, in milliseconds) between &gbr and &gbr. This defines how many updates the front-end receives from GBC over the websockets connection each second.
+`statusFrequency` is the frequency of status updates (between 20 and 1000, in milliseconds) between &gbr and &gbr. This defines how many updates the front-end receives from GBC over the websockets connection each second. Depending on exactly what your front-end applications does, you will need to tune this parameter so that front-end updates speedily but without stressing either &gbr or the browser.
+
+
+<Card title="machine Schema docs" extra={<Link to="/docs/gbc/schema/MachineConfig">docs Link</Link>} style={{ width: '100%' }}>
+
+    `machine` in the config file maps to `MachineConfig` in the schema
+
+    This documentation details the types, enums etc. behind this section of the config
+
+    Click "docs Link" above to view
+</Card>
 
 
 ## Example JSON
+
+This creates a machine called default, with a bus cycle time of 4ms and a status update period of 20ms.
 
 ```json
 "machine": {
     "default": {
     "busCycleTime": 4
     "statusFrequency": 20
-    }
 }
-```
 
-## Link to schema documentation
-`machine` maps to `MachineConfig` - see <Link to="/docs/gbc/schema/MachineConfig">here for the schema documentation</Link>
+```
 
 
