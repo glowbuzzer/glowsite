@@ -1,16 +1,6 @@
-import {GithubSourceLink} from "../../../../framework/components";
-
-# SegmentDisplay
-
-<GithubSourceLink project="gbr" lib="controls" path="dro/SegmentDisplay.tsx"/>
-
-Displays a given value as a traditional segmented display.
-
 ```jsx demo
 import React from "react"
 import {SegmentDisplay} from "@glowbuzzer/controls";
 
-export default () => <SegmentDisplay value={1234.56}/>
+export default () => <SegmentDisplay value={1234.56} toFixed={3} width={10}/>
 ```
-
-

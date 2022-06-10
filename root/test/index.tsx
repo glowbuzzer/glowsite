@@ -1,9 +1,11 @@
 import * as React from "react"
-import ReactDOM from "react-dom"
+import { createRoot } from "react-dom/client"
 
 // @ts-ignore
-import typedoc from "typedoc:@glowbuzzer/store"
+import docs from "react-docgen:@glowbuzzer/controls"
 
-console.log(typedoc)
+console.log("DOCS", docs)
 
-ReactDOM.render(<div>SIMPLE TEST APP</div>, document.getElementById("app"))
+const root = createRoot(document.getElementById("app"))
+
+root.render(<div>SIMPLE TEST APP</div>)

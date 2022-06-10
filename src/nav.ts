@@ -1,8 +1,15 @@
 import { Node } from "./framework/providers/NavProvider"
 import { HomePage } from "./framework/layouts/HomePage"
-import { DefaultDocumentationPage, TypedocPage } from "./framework/layouts/DocumentationPage"
+import {
+    DefaultDocumentationPage,
+    ReactDocgenPage,
+    TypedocPage
+} from "./framework/layouts/DocumentationPage"
 import { ControlsDocumentationPage } from "./framework/layouts/ControlsDocumentationPage"
 import { SimpleLayout } from "./framework/layouts/SimpleLayout"
+import { reactDocgenControlFilter, reactDocgenTileFilter } from "./react/react-docgen-hooks"
+
+import reactDocgenControls from "react-docgen:@glowbuzzer/controls"
 
 function process(node: Omit<Node, "path">, parentPaths: string[], parent: Node): Node {
     const slug = node.slug
@@ -21,16 +28,47 @@ function process(node: Omit<Node, "path">, parentPaths: string[], parent: Node):
     return thisNode
 }
 
+const auto_item = ([path, component], displayProps) => {
+    const name = path.split("/").pop().split(".")[0]
+    return {
+        slug: name,
+        title: name,
+        path,
+        displayProps, // indicates component props should be displayed
+        component
+    }
+}
+
 function auto(imports, displayProps) {
-    return Object.entries(imports).map(([path, component]) => {
-        const name = path.split("/").pop().split(".")[0]
-        return {
-            slug: name,
-            title: name,
-            displayProps, // indicates component props should be displayed
-            component
-        }
-    })
+    return Object.entries(imports)
+        .filter(([path]) => !path.endsWith("overview.mdx")) // little hack to avoid treating overview pages as auto-content
+        .map(i => auto_item(i, displayProps))
+}
+
+function merge(imports, filter) {
+    const autoDocs = Object.entries(reactDocgenControls).filter(([, doc]) => filter(doc))
+
+    return autoDocs
+        .map(([path, item]) => {
+            const { displayName } = item as any
+            const manual = Object.entries(imports).find(([path]) => {
+                const name = path.split("/").pop().split(".")[0]
+                return name === displayName
+            })
+            if (manual) {
+                return {
+                    ...auto_item(manual, true)
+                }
+            }
+            return {
+                slug: `${displayName}`,
+                title: displayName,
+                displayProps: true
+                // component: () => import("./react/ReactDocgenItem")
+            }
+        })
+        .filter(e => e) // filter empty results
+        .sort((a, b) => a.slug.localeCompare(b.slug))
 }
 
 const nav = {
@@ -222,7 +260,8 @@ const nav = {
                                     slug: "config_joints_and_kinematics",
                                     title: "Joints and kinematics configuration",
                                     subtitle: "GBC joints and kinematics configuration",
-                                    component: () => import("./pages/docs/gbc/config_joints_and_kinematics.mdx")
+                                    component: () =>
+                                        import("./pages/docs/gbc/config_joints_and_kinematics.mdx")
                                 },
                                 {
                                     slug: "config_io",
@@ -258,15 +297,16 @@ const nav = {
                                     slug: "config_streams_and_activities",
                                     title: "Streams and activities configuration",
                                     subtitle: "GBC streams and activities configuration",
-                                    component: () => import("./pages/docs/gbc/config_streams_and_activities.mdx")
+                                    component: () =>
+                                        import("./pages/docs/gbc/config_streams_and_activities.mdx")
                                 },
                                 {
                                     slug: "config_advanced",
                                     title: "Advanced configuration",
                                     subtitle: "GBC advanced configuration",
                                     component: () => import("./pages/docs/gbc/config_advanced.mdx")
-                                },
-                        ]
+                                }
+                            ]
                         },
 
                         {
@@ -621,8 +661,8 @@ const nav = {
                     children: [
                         {
                             slug: "overview",
-                            title: "Overview of glowbuzzer React",
-                            subtitle: "Overview of the toolkit's front-end web framework",
+                            title: "Overview",
+                            subtitle: "Overview of glowbuzzer React (GBR)",
                             component: () => import("./pages/docs/gbr/overview.mdx")
                         },
                         {
@@ -638,22 +678,39 @@ const nav = {
                             component: () => import("./pages/docs/gbr/example_projects.mdx")
                         },
                         {
-                            slug: "controls",
-                            title: "GBR controls",
-                            children: auto(
-                                // @ts-ignore
-                                import.meta.glob("./pages/docs/gbr/controls/*.mdx"),
-                                true
-                            )
-                        },
-                        {
                             slug: "tiles",
                             title: "GBR tiles",
-                            children: auto(
-                                // @ts-ignore
-                                import.meta.glob("./pages/docs/gbr/tiles/*.mdx"),
-                                true
-                            )
+                            children: [
+                                {
+                                    slug: "overview",
+                                    title: "Overview",
+                                    subtitle: "Overview of the GBR tiles",
+                                    component: () => import("./pages/docs/gbr/tiles/overview.mdx")
+                                },
+                                ...merge(
+                                    // @ts-ignore
+                                    import.meta.glob("./pages/docs/gbr/tiles/*.mdx"),
+                                    reactDocgenTileFilter
+                                )
+                            ]
+                        },
+                        {
+                            slug: "controls",
+                            title: "GBR controls",
+                            children: [
+                                {
+                                    slug: "overview",
+                                    title: "Overview",
+                                    subtitle: "Overview of the GBR tiles",
+                                    component: () =>
+                                        import("./pages/docs/gbr/controls/overview.mdx")
+                                },
+                                ...merge(
+                                    // @ts-ignore
+                                    import.meta.glob("./pages/docs/gbr/controls/*.mdx"),
+                                    reactDocgenControlFilter
+                                )
+                            ]
                         },
                         {
                             slug: "hooks",
@@ -682,7 +739,8 @@ const nav = {
                         {
                             slug: "skeleton",
                             title: "GBR skeleton application",
-                            subtitle: "Create a full React application from Create React App template",
+                            subtitle:
+                                "Create a full React application from Create React App template",
                             component: () => import("./pages/docs/gbr/skeleton.mdx")
                         },
                         {
@@ -828,11 +886,7 @@ const nav = {
                             slug: "soes",
                             title: "Simple Open EtherCAT slave (SOES)",
                             subtitle: "Working with the Simple Open EtherCAT Slave (SOES)",
-                            tags: [
-                                "Embedded",
-                                "EtherCAT",
-                                "Linux",
-                            ],
+                            tags: ["Embedded", "EtherCAT", "Linux"],
                             component: () => import("./pages/blogs/embedded/soes.mdx")
                         }
                     ]
@@ -916,6 +970,13 @@ const nav = {
             title: "GBR Hooks",
             filter: c => c.name.startsWith("use"), // for left nav build
             component: () => import("./typedoc/TypedocItem")
+            // },
+            // {
+            //     slug: "docs/gbr/tiles/:name",
+            //     layout: ReactDocgenPage,
+            //     title: "GBR Tiles",
+            //     filter: reactDocgenTileFilter,
+            //     component: () => import("./react/ReactDocgenItem")
         }
     ]
 }

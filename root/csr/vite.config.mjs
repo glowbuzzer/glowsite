@@ -17,6 +17,7 @@ import remarkDl from "remark-deflist"
 import {remarkEntities} from "../../plugins/remark-entities.mjs"
 import {remarkLinks} from "../../plugins/remark-links.mjs"
 import typedoc from "../../plugins/vite-plugin-typedoc.mjs";
+import react_docgen from "../../plugins/vite-plugin-react-docgen.mjs"
 
 const resolveConfigs = resolveConfigsFactory({
     presets: {
@@ -31,8 +32,6 @@ const resolveConfigs = resolveConfigsFactory({
  */
 export default defineConfig(({mode}) => {
     const env = loadEnv(mode, process.cwd())
-
-    console.log("MODE", mode)
 
     return {
         plugins: [
@@ -53,6 +52,7 @@ export default defineConfig(({mode}) => {
             ),
             svgr(),
             typedoc(mode),
+            react_docgen(mode),
             imagetools({
                 extendOutputFormats,
                 resolveConfigs

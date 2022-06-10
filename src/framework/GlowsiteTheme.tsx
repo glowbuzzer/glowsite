@@ -90,6 +90,22 @@ const AppStyle = styled.div`
         border: 1px solid rgba(0, 0, 0, 0.5);
         background: white;
         margin-bottom: -10px;
+
+        > div {
+            min-height: 250px;
+        }
+    }
+
+    .codeblock-small {
+        > div {
+            max-width: 400px;
+        }
+    }
+
+    .codeblock-tall {
+        > div {
+            min-height: 300px;
+        }
     }
 
     dt {

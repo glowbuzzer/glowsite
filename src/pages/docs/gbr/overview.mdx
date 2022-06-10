@@ -1,6 +1,5 @@
-import {Tldr} from "../../../framework/components/Tldr"
-import { Link } from "react-router-dom"
-import {GitHubLink} from "../../../framework/components/GitHubLink";
+import {Tldr} from "../../../framework/components"
+import {GithubOutlined} from "@ant-design/icons";
 
 # {props.subtitle}
 
@@ -12,10 +11,55 @@ import {GitHubLink} from "../../../framework/components/GitHubLink";
     - Simple state machine
 </Tldr>
 
-The &gbr part of the toolkit provides a framework and set of controls that help you get up and running quickly building machine controls using web technology.
+&gbr provides a framework and set of components that help you get up and running quickly building machine controls using web technology.
+It's built on other open source projects, primarily React, Redux and Ant Design.
 
-This framework is built on other open source projects, primarily React, Redux and Ant Design.
+&gbr consists of two distinct NPM packages:
 
+@glowbuzzer/store
+
+: Provides the Redux store at the heart of &gbr and hooks to make it easy to interact with the store
+
+@glowbuzzer/controls
+
+: Built on top of the store, provides visual components that you can use to build out your &fe
+
+Full source code for both of these modules is [<GithubOutlined/> available on Github](https://www.github.com/glowbuzzer).
+
+## New project template and examples
+
+The simplest way to create a new &fe project is to use the &gb CRA starter template ([full instructions](/get-started/frontend)).
+
+```shell
+npx create-react-app my-app --template glowbuzzer-typescript --use-npm
+```
+
+You might also want to start with one of our complete example projects. If you haven't encountered these before we recommend you [follow the quick start page](/get-started/simulation).
+
+Generic example ([<GithubOutlined/> Github](https://github.com/glowbuzzer/gbr/tree/main/examples/generic))
+
+: A demo of a cartesian machine control with auxillary axis.
+
+Robot example ([<GithubOutlined/> Github](https://github.com/glowbuzzer/gbr/tree/main/examples/staubli))
+
+: A demo of a 6-DOF robot machine control.
+
+##  Next steps
+
+[Create a new project using the &gbr template](/get-started/frontend)
+
+: Follow step-by-step instructions to get up and running quickly with your own project.
+
+[Try the example projects](/get-started/simulation)
+
+: Run the pre-built examples hosted on the &gb website.
+
+[Explore the &gbr components](tiles/overview)
+
+:
+
+
+{/*
 ## Documentation structure
 
 This area of the documentation contains:
@@ -37,4 +81,7 @@ If you are integrating with &gbc at the websocket level and not using React, you
 ## License
 
 GBR is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License version 2 as published by the Free Software Foundation.
+
+*/}
+
 

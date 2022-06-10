@@ -58,6 +58,7 @@ function typedoc(mode) {
                     continue
                 }
                 // spin up watcher
+                console.log("CONFIGURING PATH", watch)
                 chokidar
                     .watch(resolve(watch), {
                         ignoreInitial: true
@@ -65,6 +66,7 @@ function typedoc(mode) {
                     .on("all", () => {
                         // invalidate module on change
                         const existing_module = moduleGraph.getModuleById(VIRTUAL_PREFIX + module)
+                        console.log("INVALIDATE TYPEDOC", module)
                         if (existing_module) {
                             moduleGraph.invalidateModule(existing_module)
                             if (ws) {

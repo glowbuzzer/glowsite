@@ -1,0 +1,13 @@
+```jsx demo
+import React ,{useState} from "react"
+import {PreferencesDialog} from '@glowbuzzer/controls'
+import {Button} from "antd"
+
+export default () => {
+    const [visible, setVisible]=useState(false)
+    return <div>
+        <Button onClick={() => setVisible(true)}>Show</Button>
+        <PreferencesDialog visible={visible} onClose={() => setVisible(false)}/>
+    </div>
+}
+```

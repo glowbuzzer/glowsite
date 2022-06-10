@@ -1,6 +1,7 @@
 import * as React from "react"
 import { Table } from "antd"
 import styled from "styled-components"
+import { Markdown } from "./Markdown"
 
 const StyledDiv = styled.div`
     p {
@@ -47,12 +48,17 @@ export type ComponentProp = {
 
 type ComponentPropsProps = {
     displayName: string
-    showDefaults: boolean
+    showDefaults?: boolean
     showValues?: boolean
     properties: ComponentProp[]
 }
 
-export const ComponentProps = ({ displayName, properties, showDefaults, showValues }: ComponentPropsProps) => {
+export const ComponentProps = ({
+    displayName,
+    properties,
+    showDefaults,
+    showValues
+}: ComponentPropsProps) => {
     const columns = [
         {
             title: "Property",
@@ -79,8 +85,12 @@ export const ComponentProps = ({ displayName, properties, showDefaults, showValu
             dataIndex: "description",
             key: "description",
             className: "prop-description",
-            render: render_cell_inner
-        },
+            render: value => (
+                <span className="prop-cell-inner">
+                    <Markdown>{value}</Markdown>
+                </span>
+            )
+        }
     ]
     if (showDefaults) {
         columns.push({

@@ -1,9 +1,3 @@
-import {GithubSourceLink} from "../../../../framework/components";
-
-# DroItem
-
-<GithubSourceLink project="gbr" lib="controls" path="dro/DroItem.tsx"/>
-
 ## Simple example
 
 Displays a single line of a digital readout.
@@ -12,7 +6,7 @@ Displays a single line of a digital readout.
 import React from "react"
 import {DroItem} from "@glowbuzzer/controls";
 
-export default () => <DroItem label={"A"} value={100.001} type="linear"/>
+export default () => <div><DroItem label={"A"} value={100.001} type="linear"/></div>
 ```
 
 ## Custom digital readout example
