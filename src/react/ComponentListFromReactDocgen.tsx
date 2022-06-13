@@ -12,15 +12,17 @@ const StyledDiv = styled.div`
     }
 `
 
-export default function ComponentListFromReactDocgen({ title }) {
-    const docs = useReactDocgen(reactDocgenTileFilter)
+export default function ComponentListFromReactDocgen({ title, filter }) {
+    const docs = useReactDocgen(filter)
+
+    console.log("FILTERED", docs)
 
     const columns = [
         {
             title: "Name",
             dataIndex: "name",
             key: "name",
-            render: name => <Link to={relative_path("tiles/" + name)}>{name}</Link>
+            render: name => <Link to={relative_path(name)}>{name}</Link>
         },
         {
             title: "Description",
@@ -41,7 +43,6 @@ export default function ComponentListFromReactDocgen({ title }) {
     return (
         <StyledDiv>
             <h1>{title}</h1>
-
             <Table dataSource={data} columns={columns} pagination={false} />
         </StyledDiv>
     )

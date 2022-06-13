@@ -22,6 +22,7 @@ import { ComponentProp, ComponentProps } from "../components/ComponentProps"
 import reactDocgenControls from "react-docgen:@glowbuzzer/controls"
 import { Markdown } from "../components/Markdown"
 import { GithubSourceLink } from "../components"
+import { ScrollToTopOnMount } from "../components/ScrollToTopOnMount"
 
 const GlowbuzzerCustomApp = ({ children }) => {
     const preview = usePreview()
@@ -55,6 +56,29 @@ export const ControlsDocumentationPage = ({ path, children, slug, displayProps }
                             },
                             Roughing: {
                                 translation: { x: 0, y: 0, z: 20 }
+                            }
+                        },
+                        joint: {
+                            "0": {},
+                            "1": {},
+                            "2": {},
+                            "3": {
+                                jointType: 0,
+                                negLimit: 0,
+                                posLimit: 500,
+                                finiteContinuous: 0
+                            },
+                            "4": {
+                                jointType: 0,
+                                negLimit: 0,
+                                posLimit: 500,
+                                finiteContinuous: 0
+                            },
+                            "5": {
+                                jointType: 0,
+                                negLimit: 0,
+                                posLimit: 500,
+                                finiteContinuous: 0
                             }
                         }
                     }
@@ -166,6 +190,8 @@ export const ControlsDocumentationPage = ({ path, children, slug, displayProps }
         <Provider store={store}>
             <GlowbuzzerCustomApp>
                 <DefaultDocumentationPage>
+                    <ScrollToTopOnMount on={[displayName]} />
+
                     {displayName && <h1>{displayName}</h1>}
 
                     {source && (

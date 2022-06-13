@@ -3,13 +3,18 @@ import { HomePage } from "./framework/layouts/HomePage"
 import {
     DefaultDocumentationPage,
     ReactDocgenPage,
-    TypedocPage
+    TypedocPage,
+    TypedocPageDetached
 } from "./framework/layouts/DocumentationPage"
 import { ControlsDocumentationPage } from "./framework/layouts/ControlsDocumentationPage"
 import { SimpleLayout } from "./framework/layouts/SimpleLayout"
 import { reactDocgenControlFilter, reactDocgenTileFilter } from "./react/react-docgen-hooks"
 
 import reactDocgenControls from "react-docgen:@glowbuzzer/controls"
+import typedoc from "typedoc:@glowbuzzer/store"
+import { typedocHookFilter } from "./typedoc/typedoc-hooks"
+
+console.log("TYPEDOC", typedoc)
 
 function process(node: Omit<Node, "path">, parentPaths: string[], parent: Node): Node {
     const slug = node.slug
@@ -339,8 +344,7 @@ const nav = {
                             title: "Scaling",
                             subtitle: "Scaling in GBC",
                             component: () => import("./pages/docs/gbc/scaling.mdx")
-                        },
-
+                        }
                     ]
                 },
                 {
@@ -701,7 +705,7 @@ const nav = {
                                 {
                                     slug: "overview",
                                     title: "Overview",
-                                    subtitle: "Overview of the GBR tiles",
+                                    subtitle: "Overview of the GBR controls",
                                     component: () =>
                                         import("./pages/docs/gbr/controls/overview.mdx")
                                 },
@@ -715,8 +719,20 @@ const nav = {
                         {
                             slug: "hooks",
                             title: "GBR hooks",
-                            subtitle: "How to use the GBR hooks to ease development",
-                            component: () => import("./pages/docs/gbr/HooksListFromTypedoc")
+                            children: [
+                                {
+                                    slug: "overview",
+                                    title: "Overview",
+                                    subtitle: "Overview of the GBR hooks",
+                                    component: () => import("./pages/docs/gbr/hooks/overview.mdx")
+                                },
+                                ...typedoc.children.filter(typedocHookFilter).map(t => ({
+                                    slug: t.name,
+                                    title: t.name,
+                                    layout: TypedocPage,
+                                    component: () => import("./typedoc/TypedocItem")
+                                }))
+                            ]
                         },
                         {
                             slug: "redux",
@@ -958,25 +974,19 @@ const nav = {
             component: () => import("./pages/DownloadsPage")
         },
         {
-            slug: "docs/gbc/schema/:name",
-            layout: TypedocPage,
-            title: "GBC Schema",
-            filter: c => c.sources?.some(s => s.fileName === "gbc.ts" || s.fileName === "gbc.d.ts"), // for left nav build
+            slug: "docs/types/:name",
+            layout: TypedocPageDetached,
+            title: "GBC Types",
+            // filter: c => c.sources?.some(s => s.fileName === "gbc.ts" || s.fileName === "gbc.d.ts"), // for left nav build
+            filter: c => true,
             component: () => import("./typedoc/TypedocItem")
-        },
-        {
-            slug: "docs/gbr/hooks/:name",
-            layout: TypedocPage,
-            title: "GBR Hooks",
-            filter: c => c.name.startsWith("use"), // for left nav build
-            component: () => import("./typedoc/TypedocItem")
-            // },
-            // {
-            //     slug: "docs/gbr/tiles/:name",
-            //     layout: ReactDocgenPage,
-            //     title: "GBR Tiles",
-            //     filter: reactDocgenTileFilter,
-            //     component: () => import("./react/ReactDocgenItem")
+        // },
+        // {
+        //     slug: "docs/gbr/hooks/:name",
+        //     layout: TypedocPageDetached,
+        //     title: "GBR Hooks",
+        //     filter: c => true,
+        //     component: () => import("./typedoc/TypedocItem")
         }
     ]
 }

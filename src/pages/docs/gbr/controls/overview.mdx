@@ -1,5 +1,8 @@
+import ComponentListFromReactDocgen from "../../../../react/ComponentListFromReactDocgen";
+import {reactDocgenControlFilter} from "../../../../react/react-docgen-hooks";
+
 # {props.subtitle}
 
-The &gbr controls provide simple building blocks for your front-end project.
+The &gbr controls provide low-level building blocks for your front-end project.
 
-CONTROLS TABLE GOES HERE
+<ComponentListFromReactDocgen title={"Controls"} filter={reactDocgenControlFilter}/>

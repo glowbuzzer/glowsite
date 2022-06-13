@@ -23,6 +23,8 @@ import {
 import styled from "styled-components"
 import { useParams } from "react-router"
 import { relative_path } from "./util"
+import { useNavBySlug, useRootNav } from "../framework/nav"
+import { ScrollToTopOnMount } from "../framework/components/ScrollToTopOnMount"
 
 const StyledRender = styled.div`
     .debug {
@@ -102,6 +104,13 @@ const StyledRender = styled.div`
         color: grey;
     }
 `
+
+const TypedocLink = ({ name }) => {
+    const generic_path = "/docs/types/:name"
+    const node = useNavBySlug(name, generic_path)
+    const to = node.path === generic_path ? generic_path.replace(":name", name) : node.path
+    return <Link to={to}>{name}</Link>
+}
 
 const TypedocLiteral = ({ l }: { l: LiteralType }) => {
     switch (typeof l.value) {
@@ -299,7 +308,7 @@ const TypedocType = ({ t, includeSynopsis = true }: { t: Type; includeSynopsis?:
             const r = t as ReferenceType & { id? }
             return (
                 <span>
-                    {r.id ? <Link to={relative_path(r.name)}>{r.name}</Link> : <span>{r.name}</span>}
+                    {r.id ? <TypedocLink name={r.name} /> : <span>{r.name}</span>}
                     <TypedocTypeArguments args={r.typeArguments} />
                 </span>
             )
@@ -399,37 +408,21 @@ export const TypeAlias = ({ item }) => {
             <PropertyTable item={item} />
         </div>
     )
-
-    // const props = defaultItem.map(p => ({
-    //     key: p.name,
-    //     name: { name: p.name, required: false },
-    //     type: emitType(p.type),
-    //     description: <Markdown children={p.comment?.shortText || "Not available"} />
-    // }))
-    //
-    // return (
-    //     <>
-    //         <h1>{item.name}</h1>
-    //         <div className="shortText">
-    //             <Markdown children={item.comment?.shortText || "Not available"} />
-    //         </div>
-    //         <div className="text">
-    //             {item.comment?.text && <Markdown children={item.comment.text} />}
-    //         </div>
-    //         {<ComponentProps displayName={item.name} properties={props} showDefaults={false} />}
-    //     </>
-    // )
 }
 
 const Synopsis = ({ item }: { item: Reflection }) => {
     return item.comment ? (
         <>
             <div className="shortText">
-                <Markdown>{item.comment.shortText.trim()}</Markdown>
+                <Markdown link={({ href }) => <TypedocLink name={href} />}>
+                    {item.comment.shortText.trim()}
+                </Markdown>
             </div>
             {item.comment.text && (
                 <div className="text">
-                    <Markdown>{item.comment.text}</Markdown>
+                    <Markdown link={({ href }) => <TypedocLink name={href} />}>
+                        {item.comment.text}
+                    </Markdown>
                 </div>
             )}
         </>
@@ -447,7 +440,12 @@ const Enumeration = ({ item }) => {
     return (
         <>
             <Synopsis item={item} />
-            <ComponentProps displayName={item.name} properties={props} showValues={true} showDefaults={false} />
+            <ComponentProps
+                displayName={item.name}
+                properties={props}
+                showValues={true}
+                showDefaults={false}
+            />
         </>
     )
 }
@@ -516,7 +514,7 @@ const TypedocLeftNav = ({ current, title, filter }) => {
                     Object.keys(groups).length < 2
                         ? Object.values(groups)[0].map(c => ({
                               key: c.name,
-                              label: <Link to={relative_path(c.name)}>{c.name}</Link>
+                              label: <TypedocLink name={c.name} />
                           }))
                         : Object.entries(groups).map(([name, items]) => ({
                               key: name,
@@ -524,7 +522,7 @@ const TypedocLeftNav = ({ current, title, filter }) => {
                               label: name,
                               children: items.map(c => ({
                                   key: c.name,
-                                  label: <Link to={relative_path(c.name)}>{c.name}</Link>
+                                  label: <TypedocLink name={c.name} />
                               }))
                           }))
                 }
@@ -584,8 +582,9 @@ const render_component = {
     Class
 }
 
-export default ({ title, filter }) => {
-    const { name } = useParams()
+export default ({ title, slug, filter }) => {
+    const { name: name_from_param } = useParams()
+    const name = name_from_param || slug
     const item = useTypedocItem(name)
 
     if (!item) {
@@ -596,10 +595,11 @@ export default ({ title, filter }) => {
         render_component[item.kindString] ||
         (() => <h4>No render component for {item.kindString}</h4>)
 
-    return (
+    return filter ? (
         <DocumentationPage
             left={<TypedocLeftNav current={item.name} title={title} filter={filter} />}
         >
+            <ScrollToTopOnMount on={[item.name]} />
             <h1>
                 {name} ({item.kindString})
             </h1>
@@ -608,5 +608,16 @@ export default ({ title, filter }) => {
                 <Render item={item} />
             </StyledRender>
         </DocumentationPage>
+    ) : (
+        <div>
+            <ScrollToTopOnMount on={[item.name]} />
+            <h1>
+                {title} ({item.kindString})
+            </h1>
+
+            <StyledRender>
+                <Render item={item} />
+            </StyledRender>
+        </div>
     )
 }

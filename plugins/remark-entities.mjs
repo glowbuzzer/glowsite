@@ -17,6 +17,7 @@ const entities = {
     gbotg: "globuzzer online trajectory planner",
     ui: "user interface",
     pi: "Raspberry Pi",
+    kc: "kinematics configuration",
     ...LATEST_VERSIONS
 }
 

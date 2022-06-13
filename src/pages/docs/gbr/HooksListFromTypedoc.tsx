@@ -3,10 +3,15 @@ import styled from "styled-components"
 import { Table } from "antd"
 import { Link } from "react-router-dom"
 import { typedocHookFilter, useTypedoc } from "../../../typedoc/typedoc-hooks"
-import Synopsis from "./hooks.mdx"
+// import Synopsis from "./hooks/hooks.mdx"
 import { relative_path } from "../../../typedoc/util"
+import { Markdown } from "../../../framework/components/Markdown"
 
-const StyledDiv = styled.div``
+const StyledDiv = styled.div`
+    p {
+        margin: 0;
+    }
+`
 
 export default function HooksListFromTypedoc() {
     const hooks = useTypedoc(typedocHookFilter)
@@ -16,12 +21,13 @@ export default function HooksListFromTypedoc() {
             title: "Name",
             dataIndex: "name",
             key: "name",
-            render: name => <Link to={relative_path("hooks/"+name)}>{name}</Link>
+            render: name => <Link to={relative_path(name)}>{name}</Link>
         },
         {
             title: "Description",
             dataIndex: "description",
-            key: "description"
+            key: "description",
+            render: description => <Markdown>{description}</Markdown>
         }
     ]
 
@@ -35,9 +41,9 @@ export default function HooksListFromTypedoc() {
 
     return (
         <StyledDiv>
-            <h1>List of GBR Hooks</h1>
+            {/*<h1>List of GBR Hooks</h1>*/}
 
-            <Synopsis />
+            {/*<Synopsis />*/}
 
             <Table dataSource={data} columns={columns} pagination={false} />
 

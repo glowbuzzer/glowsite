@@ -35,7 +35,7 @@ export default function GbcSchema() {
                     <div className="group">
                         {groups[k].map(item => (
                             <div className="item" key={item.name}>
-                                <Link to={"/docs/gbc/schema/" + item.name}>{item.name}</Link>
+                                <Link to={"/docs/types/" + item.name}>{item.name}</Link>
                             </div>
                         ))}
                     </div>

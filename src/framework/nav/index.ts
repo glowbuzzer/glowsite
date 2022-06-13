@@ -21,6 +21,11 @@ export function useNavNode(location: string) {
     return all.find(r => r.path === location)
 }
 
+export function useNavBySlug(slug: string, backup: string) {
+    const { all } = useContext(navContext)
+    return all.find(r => r.slug === slug) || all.find(r => r.path === backup)
+}
+
 export function useNavTaggedNodes(tag: string) {
     const { all } = useContext(navContext)
     return all.filter(r => r.tags?.includes(tag))
