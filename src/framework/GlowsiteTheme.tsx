@@ -72,16 +72,25 @@ const AppStyle = styled.div`
         }
     }
 
-    p + .remark-highlight {
+    p + .remark-highlight,
+    p + .glowbuzzer-highlight {
         // tighten gap between p and following codeblock
         margin-top: -14px;
     }
 
-    .remark-highlight {
+    .remark-highlight,
+    .glowbuzzer-highlight {
         margin-bottom: 24px;
 
         pre {
             background: ${GbColours.BackgroundCodeBlock};
+        }
+    }
+
+    .glowbuzzer-highlight {
+        pre > div {
+            margin: 0 !important;
+            background: none !important;
         }
     }
 

@@ -1,0 +1,19 @@
+import {Tldr} from "../../../framework/components"
+
+# {props.subtitle}
+
+This page describes how to create a GBR application with the smallest possible bundle size.
+
+&gbr includes a number of components with dependencies on large, mainstream open source projects, for example:
+
+- Three.js
+- React Three Fiber (a wrapper for Three.js)
+- D3
+- Ace Editor
+- TODO MORE
+
+It is quite likely you don't need all these libraries in your project, in which case you will want to use
+more specific imports in `@glowbuzzer/controls` to avoid your bundler automatically including these libraries and
+thus increasing your bundle size.
+
+TODO: EXAMPLE EXAMPLE EXAMPLE

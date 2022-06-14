@@ -669,6 +669,7 @@ const nav = {
                             subtitle: "Overview of glowbuzzer React (GBR)",
                             component: () => import("./pages/docs/gbr/overview.mdx")
                         },
+/*
                         {
                             slug: "starter_project",
                             title: "Creating a starter project",
@@ -681,6 +682,7 @@ const nav = {
                             subtitle: "Downloading an existing GBR example project",
                             component: () => import("./pages/docs/gbr/example_projects.mdx")
                         },
+*/
                         {
                             slug: "tiles",
                             title: "GBR tiles",
@@ -735,8 +737,20 @@ const nav = {
                             ]
                         },
                         {
+                            slug: "solo",
+                            title: "Executing activities",
+                            subtitle: "Executing activities using the solo activity API",
+                            component: () => import("./pages/docs/gbr/solo.mdx")
+                        },
+                        {
+                            slug: "gcode",
+                            title: "G-Code handling",
+                            subtitle: "Executing G-Code using the useGCode hook",
+                            component: () => import("./pages/docs/gbr/gcode.mdx")
+                        },
+                        {
                             slug: "redux",
-                            title: "GBR Redux",
+                            title: "Redux store",
                             subtitle: "How to use the GBR low-level Redux store",
                             component: () => import("./pages/docs/gbr/redux.mdx")
                         },
@@ -747,23 +761,11 @@ const nav = {
                             component: () => import("./pages/docs/gbr/state_machine.mdx")
                         },
                         {
-                            slug: "gcode",
-                            title: "GCode handling",
-                            subtitle: "GCode in GBR",
-                            component: () => import("./pages/docs/gbr/gcode.mdx")
-                        },
-                        {
-                            slug: "skeleton",
-                            title: "GBR skeleton application",
+                            slug: "minimal",
+                            title: "Managing dependencies",
                             subtitle:
-                                "Create a full React application from Create React App template",
-                            component: () => import("./pages/docs/gbr/skeleton.mdx")
-                        },
-                        {
-                            slug: "imports",
-                            title: "GBR imports",
-                            subtitle: "How to reduce GBR dependencies",
-                            component: () => import("./pages/docs/gbr/imports.mdx")
+                                "Create a GBR application with minimal dependencies",
+                            component: () => import("./pages/docs/gbr/minimal.mdx")
                         }
                     ]
                 },
@@ -980,13 +982,13 @@ const nav = {
             // filter: c => c.sources?.some(s => s.fileName === "gbc.ts" || s.fileName === "gbc.d.ts"), // for left nav build
             filter: c => true,
             component: () => import("./typedoc/TypedocItem")
-        // },
-        // {
-        //     slug: "docs/gbr/hooks/:name",
-        //     layout: TypedocPageDetached,
-        //     title: "GBR Hooks",
-        //     filter: c => true,
-        //     component: () => import("./typedoc/TypedocItem")
+            // },
+            // {
+            //     slug: "docs/gbr/hooks/:name",
+            //     layout: TypedocPageDetached,
+            //     title: "GBR Hooks",
+            //     filter: c => true,
+            //     component: () => import("./typedoc/TypedocItem")
         }
     ]
 }

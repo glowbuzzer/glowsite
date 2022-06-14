@@ -105,11 +105,11 @@ const StyledRender = styled.div`
     }
 `
 
-const TypedocLink = ({ name }) => {
+export const TypedocLink = ({ name, content=undefined }) => {
     const generic_path = "/docs/types/:name"
     const node = useNavBySlug(name, generic_path)
     const to = node.path === generic_path ? generic_path.replace(":name", name) : node.path
-    return <Link to={to}>{name}</Link>
+    return <Link to={to}>{content || name}</Link>
 }
 
 const TypedocLiteral = ({ l }: { l: LiteralType }) => {
@@ -587,6 +587,8 @@ export default ({ title, slug, filter }) => {
     const name = name_from_param || slug
     const item = useTypedocItem(name)
 
+    console.log("NAME", name, "ITEM", item)
+
     if (!item) {
         return null
     }
@@ -612,7 +614,7 @@ export default ({ title, slug, filter }) => {
         <div>
             <ScrollToTopOnMount on={[item.name]} />
             <h1>
-                {title} ({item.kindString})
+                {item.name} ({item.kindString})
             </h1>
 
             <StyledRender>

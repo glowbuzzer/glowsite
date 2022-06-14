@@ -1,0 +1,36 @@
+import {TypedocLink} from "../../../typedoc/TypedocItem"
+
+# {props.subtitle}
+
+The solo activity API allows you to execute individual activities and wait for them to complete (using promises).
+If you are not concerned with blending moves, this provides a convenient way to sequence moves together from your
+&fe code. The example below shows a basic rounded rectangle made up of individual moves.
+
+```jsx
+const api=useSoloActivity(0)
+await api.moveLine(0, 10).promise()
+await api.moveArc(2,12).centre(2,10).direction(ARCDIRECTION.ARCDIRECTION_CW).promise()
+await api.moveLine(10, 12).promise()
+await api.moveArc(12,10).centre(10,10).direction(ARCDIRECTION.ARCDIRECTION_CW).promise()
+await api.moveLine(12, 0).promise()
+await api.moveArc(10,-2).centre(10,0).direction(ARCDIRECTION.ARCDIRECTION_CW).promise()
+await api.moveLine(2, -2).promise()
+await api.moveArc(0,0).centre(2,0).direction(ARCDIRECTION.ARCDIRECTION_CW).promise()
+```
+
+If blending is important you may want to use the [G-Code hook](gcode).
+
+## Next steps
+
+<TypedocLink name={"SoloActivityApi"} content="View the solo activity API reference"/>&nbsp;
+
+: Describes all moves and other activities you can use in your programs.
+
+[Use G-Code to specify activites](gcode)
+
+: Shows how to use the G-Code hook to convert G-Code to activities and send them to GBC, including blending.
+
+[Learn how create more dynamic interactions using a state machine](state_machine)
+
+: Using a state machine you can interrupt a current activity and start a new one based on external inputs.
+
