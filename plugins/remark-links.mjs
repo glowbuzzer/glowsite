@@ -7,11 +7,12 @@ const LOCAL_LINK_COMPONENT_NAME = "MarkdownTransformedLink";
 export function remarkLinks() {
     return tree => {
         // always add an import to (aliased) Link component at top of the file (we only want one)
-        const link_import = createImport("Link", "react-router-dom", LOCAL_LINK_COMPONENT_NAME)
+        const link_import = createImport("GlowsiteLink", "@glowsite", LOCAL_LINK_COMPONENT_NAME)
         tree.children.splice(0, 0, link_import)
 
         visit(tree, ["link"], (node, index, parent) => {
-            if (node.url?.startsWith("/")) {
+            if (node.url && !node.url.startsWith("http")) {
+                // console.log("LINK>>", node)
                 // server-relative, so must be internal to site
                 parent.children[index] = createElement(LOCAL_LINK_COMPONENT_NAME, {
                     to: node.url

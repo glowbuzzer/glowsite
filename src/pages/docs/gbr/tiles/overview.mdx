@@ -1,8 +1,20 @@
-import ComponentListFromReactDocgen from "../../../../react/ComponentListFromReactDocgen";
-import {reactDocgenTileFilter} from "../../../../react/react-docgen-hooks";
+import ComponentListFromReactDocgen from "../../../../react/ComponentListFromReactDocgen"
+import {reactDocgenTileFilter} from "../../../../react/react-docgen-hooks"
+import {Tldr} from "../../../../framework/components"
 
 # {props.subtitle}
 
-The &gbr tiles provide simple high-level building blocks for your front-end project.
+<Tldr>
+- Tiles provide building blocks for your application
+- Wide variety of tiles provided
+- Create your own tiles
+</Tldr>
 
-<ComponentListFromReactDocgen title={"Tiles"} filter={reactDocgenTileFilter}/>
+The &gbr tiles provide high-level building blocks for your front-end project. Tiles give your project a consistent, clean
+look and feel and cover a wide range of use cases.
+
+If you want to extend the &gbr tiles, full source code is available on Github. You can [create your own tiles](Tile) or
+bypass the tiles look and feel altogether and create an entirely custom &fe. The tiles we provide leverage the hooks provided by the `@glowbuzzer/store` package and
+generally consist of simple code you can easily copy and modify.
+
+<ComponentListFromReactDocgen title={"List of tiles"} filter={reactDocgenTileFilter}/>

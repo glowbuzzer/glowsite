@@ -44,14 +44,14 @@ Between these frames transformations exist so that given a set of coordinates in
 
 These mappings are essential to controlling a robot as it allows a decoupling of the control program from the position of the work in the robot's environment.
 
-gcode has its own concept of frames - its work and fixture offset commands.
+&gcode has its own concept of frames - its work and fixture offset commands.
 
 ```mermaid
 graph LR
 id1[Unit conversion]-->id2[Relative and Abs]-->id3[G52, G54, G92]-->id4[G51 scaling]-->id5[G68 rotation]
 
 ```
-These are also essential to writing gcode programs and &gbc supports these.
+These are also essential to writing &gcode programs and &gbc supports these.
 
 ## Tips for defining Frames configs
 

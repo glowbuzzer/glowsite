@@ -1,5 +1,3 @@
-import {CheckCircleOutlined, CloseCircleOutlined} from "@ant-design/icons"
-import {BogStandardHeaderRow, BogStandardRow, BogStandardCol} from "../../../framework/components";
 import {TypedocLink} from "../../../typedoc/TypedocItem"
 import {GCodeTable} from "./GCodeTable"
 
@@ -7,13 +5,13 @@ import {GCodeTable} from "./GCodeTable"
 
 {/*
 <Tldr>
-    - &gbc does not interpret gcode - this is done in the toolkit's React components
-    - Supports most commonly used gcode commands
+    - &gbc does not interpret &gcode - this is done in the toolkit's React components
+    - Supports most commonly used &gcode commands
     - Tested with output from common CAM software programs
 </Tldr>
 */}
 
-The G-Code hook allows you to execute a G-Code program. The G-Code commands will be translated into activities and
+The &gcode hook allows you to execute a &gcode program. The &gcode commands will be translated into activities and
 streamed to &gbc. Instructions G64 and G61 can be used to control blending. The following example shows a simple
 use of the hook to draw a square.
 
@@ -28,11 +26,11 @@ gcode.send(`
 `)
 ```
 
-The G-Code hook also provides the state of the current stream, the line number currently executing and a method to stop, pause
+The &gcode hook also provides the state of the current stream, the line number currently executing and a method to stop, pause
 and resume. For more information, see <TypedocLink name={"useGCode"}/>.
 
 The &gbt supports most of the standard G-Codes with a handful of variations, omissions and extensions that are described here.
 
-There should be no issues exporting G-Code from standard CAM tools if care is taken with the post-processor.
+There should be no issues exporting &gcode from standard CAM tools if care is taken with the post-processor.
 
 <GCodeTable/>

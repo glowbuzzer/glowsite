@@ -1,0 +1,66 @@
+# {props.subtitle}
+
+The [connect tile](tiles/ConnectTile) can be used in your &fe to connect to GBC, disconnect, and enable or disable operation.
+
+You can use the connect tile as-is or use the code as a starting point for your own customisation. This page describes the underlying &gbr hooks
+used by the tile, which is useful if you want to develop your own &fe.
+
+There are two hooks required:
+
+[useConnection](hooks/useConnection)
+
+: Provides methods to connect to your &gbc endpoint and provides information about the state of the connection.
+
+[useMachine](hooks/useMachine)
+
+: Provides methods to set the desired target of the machine (simulation or live), and the state of the machine (enabled or disabled). Also provides information about the current target and state.
+
+## Example of useConnection
+
+```jsx
+const MyAppWrapper = ({children}) => {
+    const {connect, connected} = useConnection()
+
+    useEffect(() => {
+        // connect on mount - maybe this lives high up in your component hierarchy
+        connect("ws://localhost:9000/ws")
+    }, [])
+
+    useEffect(() => {
+        console.log("CONNECTION STATE CHANGED, CONNECTED=", connected)
+    }, [connected])
+
+    return <div>{children}</div>
+}
+```
+
+## Example of useMachine
+
+This example assumes you have already taken care of connecting, as in the example above. It tracks the
+current connection state and, whenever &gbr becomes connected to &gbc, it requests the machine enter the operation
+enabled state.
+
+Note that `setDesiredState` is a high level abstraction of the CIA 402 state machine. Under the covers, &gbr looks
+at the current machine status word and determines the machine command word needed to shift the machine towards the desired state.
+This may or may not be successful based on the current faults active, and so on.
+
+```jsx
+const MyMachineWrapper = ({children}) => {
+    const {connected} = useConnection()
+    const {setDesiredState, currentState} = useMachine()
+
+    useEffect(() => {
+        if ( connected ) {
+            // try to put the machine in the operation enabled state when connecting
+            setDesiredState(DesiredState.OPERATIONAL)
+        }
+    }, [connected])
+
+    useEffect(() => {
+        console.log("MACHINE STATE CHANGED, STATE=", currentState)
+    }, [currentState])
+
+    return <div>{children}</div>
+}
+```
+

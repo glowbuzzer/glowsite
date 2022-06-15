@@ -6,14 +6,36 @@ This page describes how to create a GBR application with the smallest possible b
 
 &gbr includes a number of components with dependencies on large, mainstream open source projects, for example:
 
-- Three.js
-- React Three Fiber (a wrapper for Three.js)
-- D3
-- Ace Editor
-- TODO MORE
+- [Three.js](https://threejs.org/), a wrapper for WebGL (3d animation)
+- [React Three Fiber](https://github.com/pmndrs/react-three-fiber), a React wrapper for Three.js
+- [D3](https://d3js.org), a library for creating 2d animations using SVG
+- [Ace Editor](https://ace.c9.io), a code editor
+- [Ant Design](https://ant.design), a React component library
+- [styled components](https://styled-components.com), a React CSS-in-JS library
 
-It is quite likely you don't need all these libraries in your project, in which case you will want to use
-more specific imports in `@glowbuzzer/controls` to avoid your bundler automatically including these libraries and
+It is quite likely you don't need all these libraries in your project, in which case you may want to use
+more specific imports from `@glowbuzzer/controls` to avoid your build automatically including these libraries and
 thus increasing your bundle size.
 
-TODO: EXAMPLE EXAMPLE EXAMPLE
+As an example, let's suppose you are building a &fe that uses the &gcode tile which allows users to edit and
+run &gcode but doesn't use any of the other &gbr tiles we provide. The &gcode tile uses the Ace Editor to provide syntax highlighting,
+but for this application you do not need to include Three.js or D3, among others.
+
+Normally to use the &gcode tile you would simply import from `@glowbuzzer/controls`, for example:
+
+```jsx
+import {GCodeTile} from "@glowbuzzer/controls"
+
+const MyApp = () => <GCodeTile/>
+```
+
+Unless your chosen build tool is very good at tree shaking, this approach will introduce a dependency on Three.js and other libraries
+you don't need. You will also need to include these in your `package.json` dependencies - not ideal.
+
+To avoid this issue, import from more specific paths in the `@glowbuzzer/controls` package. For example, in this case:
+
+```jsx
+import {GCodeTile} from "@glowbuzzer/controls/gcode"
+
+const MyApp = () => <GCodeTile/>
+```

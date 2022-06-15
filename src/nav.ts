@@ -14,8 +14,6 @@ import reactDocgenControls from "react-docgen:@glowbuzzer/controls"
 import typedoc from "typedoc:@glowbuzzer/store"
 import { typedocHookFilter } from "./typedoc/typedoc-hooks"
 
-console.log("TYPEDOC", typedoc)
-
 function process(node: Omit<Node, "path">, parentPaths: string[], parent: Node): Node {
     const slug = node.slug
     const component = node.component
@@ -669,20 +667,6 @@ const nav = {
                             subtitle: "Overview of glowbuzzer React (GBR)",
                             component: () => import("./pages/docs/gbr/overview.mdx")
                         },
-/*
-                        {
-                            slug: "starter_project",
-                            title: "Creating a starter project",
-                            subtitle: "Creating a React starter project with GBR",
-                            component: () => import("./pages/docs/gbr/starter_project.mdx")
-                        },
-                        {
-                            slug: "example_projects",
-                            title: "Example projects",
-                            subtitle: "Downloading an existing GBR example project",
-                            component: () => import("./pages/docs/gbr/example_projects.mdx")
-                        },
-*/
                         {
                             slug: "tiles",
                             title: "GBR tiles",
@@ -737,14 +721,20 @@ const nav = {
                             ]
                         },
                         {
+                            slug: "connecting",
+                            title: "Connecting to GBC from GBR",
+                            subtitle: "Connect to GBC and enable machine operation",
+                            component: () => import("./pages/docs/gbr/connection.mdx")
+                        },
+                        {
                             slug: "solo",
-                            title: "Executing activities",
+                            title: "The solo activity API",
                             subtitle: "Executing activities using the solo activity API",
                             component: () => import("./pages/docs/gbr/solo.mdx")
                         },
                         {
                             slug: "gcode",
-                            title: "G-Code handling",
+                            title: "Streamed activities (G-Code)",
                             subtitle: "Executing G-Code using the useGCode hook",
                             component: () => import("./pages/docs/gbr/gcode.mdx")
                         },

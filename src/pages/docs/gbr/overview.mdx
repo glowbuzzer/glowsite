@@ -16,25 +16,23 @@ It's built on other open source projects, primarily React, Redux and Ant Design.
 
 &gbr consists of two distinct NPM packages:
 
-@glowbuzzer/store
+Store (`@glowbuzzer/store`)
 
-: Provides the Redux store at the heart of &gbr and hooks to make it easy to interact with the store
+: Provides the Redux store at the heart of &gbr and a set of React hooks to make it easy to interact with the store.
 
-@glowbuzzer/controls
+Controls (`@glowbuzzer/controls`)
 
-: Built on top of the store, provides visual components that you can use to build out your &fe
+: Built on top of the store, this package provides React components that you can use to build out your &fe. Within this package you will find
+[low-level controls](controls/overview) and [tiles](tiles/overview) which provide a consistent look and feel for your application.
 
-Full source code for both of these modules is [<GithubOutlined/> available on Github](https://www.github.com/glowbuzzer).
+Full source code for both of these modules is [<GithubOutlined/> available on Github](https://www.github.com/glowbuzzer/gbr).
 
-## New project template and examples
+## Getting started
 
-The simplest way to create a new &fe project is to use the &gb CRA starter template ([full instructions](/get-started/frontend)).
+The simplest way to create a new &fe project is to use the &gb CRA starter template. For detailed instructions, see [Creating a React &fe](/get-started/frontend) under _Getting Started_.
 
-```shell
-npx create-react-app my-app --template glowbuzzer-typescript --use-npm
-```
-
-You might also want to start with one of our complete example projects. If you haven't encountered these before we recommend you [follow the quick start page](/get-started/simulation).
+You might also want to start with one of our more complete example projects. If you haven't seen these running before we recommend you [follow the quick start page](/get-started/simulation)
+which lets you use our hosted versions of the apps and connect to &gbc running in simulation mode.
 
 Generic example ([<GithubOutlined/> Github](https://github.com/glowbuzzer/gbr/tree/main/examples/generic))
 
@@ -44,7 +42,10 @@ Robot example ([<GithubOutlined/> Github](https://github.com/glowbuzzer/gbr/tree
 
 : A demo of a 6-DOF robot machine control.
 
-##  Next steps
+If you want to create a &gbr application with minimal dependencies, see [Managing dependencies](minimal). This explains how to
+control what is imported from the `@glowbuzzer/controls` package.
+
+##  Further information
 
 [Create a new project using the &gbr template](/get-started/frontend)
 
@@ -54,34 +55,27 @@ Robot example ([<GithubOutlined/> Github](https://github.com/glowbuzzer/gbr/tree
 
 : Run the pre-built examples hosted on the &gb website.
 
-[Explore the &gbr components](tiles/overview)
+[Explore the &gbr tiles](tiles/overview)
 
-:
+: Learn about the tiles we provide and how to easily develop your own tiles.
 
+[Explore the &gbr hooks](hooks/overview)
 
-{/*
-## Documentation structure
+: Learn about the large number of hooks we provide that give access to the Redux store.
 
-This area of the documentation contains:
+[Connect &gbr and &gbc](connection)
 
-* Instructions for creating a new project using the glowbuzzer Create React App template
-* Instructions for cloning and running one of the sample projects
-* GBR controls reference. The controls provide re-usable components you can use in your own &ui projects
-* GBR tiles reference. Tiles are a way of composing a full drag and drop &ui
-* GBR hooks reference. Hooks allow you to communicate with &gbc over websockets and provide access to the GBR Redux store
-* GBR Redux details. Provides information about how to use the Redux store directly and how to extend it with your own state
-* GBR state machine. Describes how to use the GBR simple state machine to coordinate activities
-* GBR skeleton application. Show how to create a minimal GBR application
-* GBR imports. Describes ways to minimise external dependencies according to the features you need
+: Learn about the connect tile, or how use hooks to make a connection to &gbc and control the machine state.
 
-You might also like to view the [basic getting started tutorial](/get-started/frontend) which shows how to toggle a digital output and move a drive.
+[Execute an activity in &gbc](solo) or [stream &gcode](gcode)
 
-If you are integrating with &gbc at the websocket level and not using React, you will need the [GBC schema reference](/docs/gbc/schema).
+: Learn about the solo activity API, or the &gcode hook that allows you to send a stream of activities.
 
-## License
+[Extend the Redux store](redux)
 
-GBR is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License version 2 as published by the Free Software Foundation.
+: Learn how to add your own state to Redux.
 
-*/}
+[Create a minimal application](minimal)
 
+: Learn how to create a &gbr application with the smallest possible bundle size.
 
