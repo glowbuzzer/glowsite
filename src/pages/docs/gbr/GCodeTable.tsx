@@ -1,5 +1,4 @@
 import { Table } from "antd"
-import { Markdown } from "../../../framework/components/Markdown"
 import * as React from "react"
 import { CheckCircleOutlined, CloseCircleOutlined } from "@ant-design/icons"
 import styled from "styled-components"
@@ -91,7 +90,12 @@ export const GCodeTable = () => {
 
     return (
         <StyledDiv>
-            <Table dataSource={gcode_support} columns={columns} pagination={false} />
+            <Table
+                dataSource={gcode_support}
+                columns={columns}
+                pagination={false}
+                rowKey={r => r[0] as string}
+            />
         </StyledDiv>
     )
 }

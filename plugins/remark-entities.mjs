@@ -18,6 +18,7 @@ const entities = {
     ui: "user interface",
     pi: "Raspberry Pi",
     kc: "kinematics configuration",
+    gcode: "G-Code",
     ...LATEST_VERSIONS
 }
 

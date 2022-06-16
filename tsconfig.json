@@ -12,6 +12,9 @@
     "paths": {
       "@glowbuzzer/controls": [
         "./src/controls/CustomComponent.tsx"
+      ],
+      "@glowsite": [
+        "./src/framework/index.ts"
       ]
     }
   },

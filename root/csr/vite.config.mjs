@@ -40,8 +40,8 @@ export default defineConfig(({mode}) => {
                     remarkGfm,
                     remarkEntities,
                     remarkMermaid,
-                    remarkLinks,
                     remarkDl,
+                    remarkLinks,
                     remarkCodeblock,
                     remarkGlowbuzzerFrontmatter,
                     remarkPrism
@@ -70,6 +70,7 @@ export default defineConfig(({mode}) => {
                 // because react@17.x still uses cjs module syntax and we are fully esm
                 // https://github.com/mdx-js/mdx/discussions/1794
                 // "react/jsx-runtime": "react/jsx-runtime.js"
+                "@glowsite": process.cwd()+"/src/framework/index.ts"
             }
         },
         build: {

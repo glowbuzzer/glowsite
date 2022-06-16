@@ -184,13 +184,11 @@ export const ControlsDocumentationPage = ({ path, children, slug, displayProps }
             default: info.defaultValue?.value
         }))
 
-    console.log("PROPS", displayName, properties)
-
     return (
         <Provider store={store}>
             <GlowbuzzerCustomApp>
                 <DefaultDocumentationPage>
-                    <ScrollToTopOnMount on={[displayName]} />
+                    <ScrollToTopOnMount on={[window.location.pathname]} />
 
                     {displayName && <h1>{displayName}</h1>}
 
