@@ -322,10 +322,10 @@ const nav = {
                         },
 
                         {
-                            slug: "motion",
-                            title: "Motion - making things move",
-                            subtitle: "Motion in GBC - making things move",
-                            component: () => import("./pages/docs/gbc/motion.mdx")
+                            slug: "motion_primitives",
+                            title: "Motion primitives",
+                            subtitle: "Motion primitives in GBC - making things move",
+                            component: () => import("./pages/docs/gbc/motion_primitives.mdx")
                         },
                         {
                             slug: "orientation",

@@ -1,0 +1,115 @@
+import {Tldr} from "../../../framework/components/Tldr"
+import { Link } from "react-router-dom"
+
+
+# {props.subtitle}
+<Tldr>
+    - Control single joints (motors)
+    - Control multiple joints in master/slave configurations
+    - Control multiple joints performing co-ordinated motion in 3D space
+</Tldr>
+
+## Introduction
+
+&gbc has a sophisticated motion control at its heart.
+
+With &gbc we can control:
+
+* Single joint motion control - for example, move a joint to a position, move a joint at velocity
+* Multiple joints in master/slave - for example, move joint 1 at twice the velocity of joint 2
+* Multiple joints in co-ordinated motion in 3D space - for example, move a tool through 3D space along a line or arc
+
+Within &gbc motion primitives exist. These are fundamental ways to move joints and kinematics configurations: for example `MoveJointsAtVelocity` and `moveLineAtVelocity`.
+
+## Interacting with the &gbc motion primitives
+
+Motion primitives are interacted with within &gbt in different ways. Using Tiles, through the Hooks API and through the Websockets API.
+
+### **Tiles** - you can add pre-built tiles like `JogTile`, `GCodeTile` etc. to your React project which give you an "out of the box" way to invoke motion primitives.
+
+The `JogTile` allows you to move Joints and Kinematics Configurations either to a specific position or be "jogged" manually to a position. See <Link to="/docs/gbr/tiles/JogTile"> JogTile </Link> for more information.
+
+The `GCodeTile` allows you to stream gcode containing different movement instructions to &gbc. See <Link to="/docs/gbr/tiles/GCodeTile"> GCodeTile </Link> for more information.
+
+### **Using the Hooks API** - `SoloActivity`, `UseGcode`
+
+Programmatically, the easiest route to invoke motion primitive from a React Application is to use the `SoloActivityApi`. See <Link to="/docs/types/SoloActivityApi"> SoloActivityApi </Link> for more information.
+
+You can also stream commands using gcode see <Link to="/docs/gbr/gcode"> gcode handling in &gbr </Link> and  <Link to="/docs/gbr/hooks/UseGcode"> see UseGcode Hook </Link> for more infromation.
+
+### **Using the &gbc Websockets interface itself** - start task (after creating lines, activity, task), send solo activity, stream
+
+You can also invoke motion primitives with the Websockets interface in different ways. The three ways are:
+
+1. send a SoloActivity
+1. stream something
+1. start a task running
+
+Instead of using the UseSoloActivity hooks API, you can compose and send a Websockets message - SoloActivity.
+
+See <Link to="/docs/types/SoloActivityCommand"> SoloActivityCommand </Link> for more information.
+
+You can stream an activity using a websockets message -
+
+Finally, you can start a task. Tasks must be pre-configured in the config
+For example for a MoveLine you would create a linesConfig struct in the lines section of the config and then configure your task and moveline activity and reference the line index (but remember we moved the line index to the command struct). N
+
+## Single joint motion control primitives
+
+This is the most basic form of motion control. It allows you to control a joint in the following ways:
+
+* Move to a position specified either relative to current position or absolutely - `moveJoints` - see <Link to = "docs/types/MoveArcStream">moveArc</Link>
+* Move at velocity when the joint ramps up speed to a given velocity - `moveJointsAtVelocity` <Link to = "docs/types/MoveArcStream">MoveJointsAtVelocity</Link>
+* Move superimpose where a relative movement is superimposed on top of a current move
+
+
+
+
+
+## Multiple joints in master slave
+
+Joints can be slaved together. This is a master/slave arrangement where
+
+
+
+## Multiple joints in co-ordinated motion in 3D space
+
+Moving in 3D cartesian
+
+* Move Line
+* Move Arc
+
+
+`moveArc` - Move in an arc
+
+
+
+
+`moveLine` - Move along a linear path to the target position.
+
+`moveLineAtVelocity` - Move in a straight line along the given vector. The velocity of the motion can be controlled using moveParams.
+
+`moveToPosition` - Move to the target position in joint space.
+
+
+
+## Cartesian space vs. Joint space
+
+With robots and other machines with complex kinematics configurations, there is a distinction between joint space and cartesian space. Put simply, joint space is joint angles and cartesian space is x, y, z and orientation.
+
+For a machine with cartesian kinematics (XYZ), essentially, joint space is the same as cartesian space.
+
+For moves planned in cartesian space with cartesian space targets:
+
+* `MoveArc`
+* `MoveLine`
+
+Moves planned in joint space with cartesian space target:
+
+* `MoveToPosition`
+
+Moves planning in joint space with joint space target
+
+* `MoveJoints`
+* `MoveJointsAtVelocity`
+
