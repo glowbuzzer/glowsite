@@ -35,7 +35,7 @@ jobs:
                 run: pnpm run build:www
 
             -   name: Deploy site
-                run: ./deploy-site.sh csr preview.glowbuzzer.com E284GBH6OG76DV
+                run: ./deploy-site.sh www preview.glowbuzzer.com E284GBH6OG76DV
                 env:
                     AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
                     AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
