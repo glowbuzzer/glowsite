@@ -32,7 +32,7 @@ jobs:
                     NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
             -   name: Build site
-                run: pnpm run build:csr
+                run: pnpm run build:www
 
             -   name: Deploy site
                 run: ./deploy-site.sh csr preview.glowbuzzer.com E284GBH6OG76DV

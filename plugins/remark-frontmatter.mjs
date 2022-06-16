@@ -1,15 +1,12 @@
 // Very basic plugin to parse front-matter and convert to exported properties
 // Note that this does NOT support any fancy yaml, only name/value pairs
 
+// NOT CURRENTLY IN USE
+
 import {createExports} from "./util/mdast-util.mjs"
 
 export default function remarkGlowbuzzerFrontmatter() {
     return (tree, vFile) => {
-        const sourcePath = vFile.history[0]
-        // if (sourcePath.indexOf("frontmatter") >= 0) {
-        //     console.log("TREE", JSON.stringify(tree, null, 2))
-        // }
-
         const contents = vFile.value
         const fm_node_index = tree.children?.findIndex(c => c.type === "thematicBreak")
 

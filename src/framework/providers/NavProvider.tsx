@@ -12,12 +12,6 @@ import {createContext, FC, ReactNode, useEffect, useMemo, useState} from "react"
 import * as Module from "module"
 import {useLocation} from "react-router-dom"
 
-// @ts-ignore because globEager is not defined
-// const imports = import.meta.globEager("../../pages/**/*.{jsx,tsx,md,mdx,ts}")
-// const imports = import.meta.globEager("../../pages/playground/**/*.{jsx,tsx,md,mdx,ts}")
-// const imports = import.meta.globEager("../../pages/docs/gbc/**/*.{jsx,tsx,md,mdx,ts}")
-// const imports = import.meta.globEager("../../.test/**/*.{jsx,tsx,md,mdx,ts}")
-
 export type Node = {
     parent?: Node
     slug: string

@@ -12,8 +12,6 @@ export function remarkLinks() {
 
         visit(tree, ["link"], (node, index, parent) => {
             if (node.url && !node.url.startsWith("http")) {
-                // console.log("LINK>>", node)
-                // server-relative, so must be internal to site
                 parent.children[index] = createElement(LOCAL_LINK_COMPONENT_NAME, {
                     to: node.url
                 }, node.children)

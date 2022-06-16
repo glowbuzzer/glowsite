@@ -10,8 +10,8 @@ import {
 } from "../../plugins/imagetools-ext.mjs"
 import remarkMermaid from "../../plugins/remark-mermaid.mjs"
 import remarkCodeblock from "../../plugins/remark-codeblock.mjs"
-import remarkGlowbuzzerFrontmatter from "../../plugins/remark-frontmatter.mjs"
-import {svgWrapper as svgr} from "../../plugins/svr-plugin-wrapper.mjs"
+// import remarkGlowbuzzerFrontmatter from "../../plugins/remark-frontmatter.mjs"
+import {svgWrapper as svgr} from "../../plugins/svgr-plugin-wrapper.mjs"
 import {mdxWrapper as mdx} from "../../plugins/mdx-plugin-wrapper.mjs"
 import remarkDl from "remark-deflist"
 import {remarkEntities} from "../../plugins/remark-entities.mjs"
@@ -43,7 +43,7 @@ export default defineConfig(({mode}) => {
                     remarkDl,
                     remarkLinks,
                     remarkCodeblock,
-                    remarkGlowbuzzerFrontmatter,
+                    // remarkGlowbuzzerFrontmatter,
                     remarkPrism
                 ]
             }),

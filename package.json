@@ -5,11 +5,7 @@
   "main": "index.js",
   "scripts": {
     "theme": "generate-theme src/glowsite-theme.less src/glowsite-theme.css",
-    "dev": "node serve-dev.js",
-    "serve": "node serve-dist.js",
-    "build:server": "root build --ssr src/_render.jsx --outDir dist/server",
-    "build": "root build --outDir dist/static && npm run build:server && node prerender.mjs",
-    "build:csr": "vite build root/csr",
+    "build:www": "vite build root/www",
     "build:downloads": "vite build root/downloads",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
