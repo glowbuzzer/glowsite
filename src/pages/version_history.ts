@@ -3,8 +3,6 @@ export type File = {
     name: string
     description: string
     type: string
-    size: number
-    checksum: string
 }
 export type Release = {
     tag: string
@@ -49,18 +47,14 @@ export const projects: Project[] = [
         ],
         releases: [
             {
-                tag: "v1.0.0rc7",
-                description: "Fixes and new features",
+                tag: "v1.0.0",
+                description: "First release",
                 files: [
                     {
-                        name: "gbc-linux-amd64",
-                        size: 12345,
-                        checksum: "123abc456def"
+                        name: "gbc-linux-amd64"
                     },
                     {
-                        name: "gbc-linux-armv7",
-                        size: 3145,
-                        checksum: "123ab"
+                        name: "gbc-linux-armv7"
                     }
                 ]
             }
@@ -85,29 +79,31 @@ export const projects: Project[] = [
                 description: "First release of the GBSM"
             }
         ]
-    },
-    {
-        name: "Raspberry Pi RT image",
-        basename: "pi_rt_img",
-        defaultFiles: [
-            {
-                type: "gz"
-            }
-        ],
-        releases: [
-            {
-                tag: "0.0.1-alpha-1",
-                description: "Initial release",
-                files: [
-                    {
-                        name: "rpi_rt",
-                        description: "Raspberry Pi RT image",
-                        size: 12345,
-                        type: "gz",
-                        checksum: "12c456def"
-                    }
-                ]
-            }
-        ]
     }
+    /*
+        {
+            name: "Raspberry Pi RT image",
+            basename: "pi_rt_img",
+            defaultFiles: [
+                {
+                    type: "gz"
+                }
+            ],
+            releases: [
+                {
+                    tag: "0.0.1-alpha-1",
+                    description: "Initial release",
+                    files: [
+                        {
+                            name: "rpi_rt",
+                            description: "Raspberry Pi RT image",
+                            size: 12345,
+                            type: "gz",
+                            checksum: "12c456def"
+                        }
+                    ]
+                }
+            ]
+        }
+    */
 ]
