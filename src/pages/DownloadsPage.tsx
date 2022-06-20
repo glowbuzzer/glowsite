@@ -84,9 +84,9 @@ export default () => {
             })
     }
 
-    const file_columns = ["Name", "Description", "Type", "Size", "Checksum", "Link"].map(c => ({
+    const file_columns = ["Name", "Description", "Type", "Size", "Checksum (MD5)", "Link"].map(c => ({
         title: c,
-        dataIndex: c.toLowerCase(),
+        dataIndex: c.split(" ").shift().toLowerCase(),
         key: c.toLowerCase()
     }))
 

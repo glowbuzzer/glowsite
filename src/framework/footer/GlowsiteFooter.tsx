@@ -42,9 +42,23 @@ const OnDesktopHide = styled.div`
     }
 `
 
+const CopyrightVersion = () => {
+    const GITHUB_REF = "refs/tags"
+
+    // @ts-ignore
+    const version = import.meta.env.VITE_GLOWBUZZER_VERSION || "dev"
+
+    return (
+        <span>
+            {/* @ts-ignore */}
+            ©2022 by glowbuzzer All Rights Reserved. Site build {version}
+        </span>
+    )
+}
+
 const MobileFooter = ({}) => (
     <div>
-        <span>©2022 by glowbuzzer All Rights Reserved </span>
+        <CopyrightVersion />
     </div>
 )
 
@@ -138,7 +152,7 @@ const DesktopFooter = ({}) => {
                     </div>
                 </Col>
             </Row>
-            <span>©2022 by glowbuzzer All Rights Reserved </span>
+            <CopyrightVersion />
         </div>
     )
 }

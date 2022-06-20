@@ -6,8 +6,8 @@ specifiers:
   '@commitlint/cli': ^17.0.2
   '@commitlint/config-conventional': ^17.0.2
   '@emeks/antd-custom-theme-generator': ^0.2.1
-  '@glowbuzzer/controls': 1.0.1-alpha.84
-  '@glowbuzzer/store': ^1.0.1-alpha.84
+  '@glowbuzzer/controls': 1.0.0
+  '@glowbuzzer/store': 1.0.0
   '@mdx-js/mdx': ^2.1.1
   '@mdx-js/react': ^2.1.1
   '@mdx-js/rollup': ^2.1.1
@@ -85,8 +85,8 @@ devDependencies:
   '@commitlint/cli': 17.0.2
   '@commitlint/config-conventional': 17.0.2
   '@emeks/antd-custom-theme-generator': 0.2.1_antd@4.21.0
-  '@glowbuzzer/controls': 1.0.1-alpha.84
-  '@glowbuzzer/store': 1.0.1-alpha.84
+  '@glowbuzzer/controls': 1.0.0
+  '@glowbuzzer/store': 1.0.0
   '@mdx-js/mdx': 2.1.1
   '@mdx-js/react': 2.1.1_react@18.1.0
   '@mdx-js/rollup': 2.1.1_rollup@2.75.5
@@ -1712,14 +1712,14 @@ packages:
     resolution: {integrity: sha512-OWORNpfjMsSSUBVrRBVGECkhWcULOAJz9ZW8uK9qgxD+87M7jHRcvh/A96XXNhXTLmKcoYSQtBEX7lHMO7YRwg==}
     dev: false
 
-  /@glowbuzzer/controls/1.0.1-alpha.84:
-    resolution: {integrity: sha512-4uWK165+r3udcF6sOi+sTpyJe0cvT8Ys36H47tbjPvC7AS29BsGhHXY//2OxcoJlaKnu6IQf/UCN78RK4P2Dew==}
+  /@glowbuzzer/controls/1.0.0:
+    resolution: {integrity: sha512-vW+i16sFdfGubXEmdbMv1ndPk+Y3wdomYPQw0lBqoBA3RLI9eE+/Es6q3nN2Y+vvYLPj7NUMAGyagvH07iil6A==}
     dependencies:
-      '@glowbuzzer/store': 1.0.1-alpha.84
+      '@glowbuzzer/store': 1.0.0
     dev: true
 
-  /@glowbuzzer/store/1.0.1-alpha.84:
-    resolution: {integrity: sha512-IphGg4YtPKHC3SMZHom6ZGPKqYfwL6b5T/r+Dryw9s8MfK6OgdervqBk4e3MkZuTom3RwLFVqVGVDujdoFMh2w==}
+  /@glowbuzzer/store/1.0.0:
+    resolution: {integrity: sha512-zh5MhlFeUWzH8C+zpqeVyTv3pyfH0RZMw8s5wmdJFOOXD3eSzgAozV11ZRSeV6oTs5E/AKhinfPe8CYm72nz1A==}
     dev: true
 
   /@hutson/parse-repository-url/3.0.2:
