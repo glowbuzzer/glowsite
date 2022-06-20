@@ -58,7 +58,6 @@ function typedoc(mode) {
                     continue
                 }
                 // spin up watcher
-                console.log("CONFIGURING PATH", watch)
                 chokidar
                     .watch(resolve(watch), {
                         ignoreInitial: true

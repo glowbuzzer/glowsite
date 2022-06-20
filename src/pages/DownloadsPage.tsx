@@ -1,10 +1,56 @@
 import * as React from "react"
-import {Section} from "../framework/components/Section"
-import {Table} from "antd"
-import {DownloadOutlined, GithubOutlined} from "@ant-design/icons"
-import {File, Project, projects, Release} from "./version_history"
+import { Section } from "../framework/components/Section"
+import { Table } from "antd"
+import { DownloadOutlined, GithubOutlined } from "@ant-design/icons"
+import { File, Project, projects, Release } from "./version_history"
+import { useEffect, useState } from "react"
+
+const FileSizeDynamic = ({ url }) => {
+    const [size, setSize] = useState(null)
+
+    useEffect(() => {
+        fetch(url, {
+            method: "HEAD"
+        }).then(r => {
+            setSize(r.headers.get("content-length"))
+        })
+    }, [])
+
+    return <>{size}</>
+}
+
+const FileChecksum = ({ url }) => {
+    const [checksum, setChecksum] = useState(null)
+
+    useEffect(() => {
+        fetch(url + ".md5sum", {
+            method: "GET"
+        })
+            .then(r => r.text())
+            .then(text => setChecksum(text.split(" ").shift()))
+    }, [])
+
+    return <>{checksum}</>
+}
 
 export default () => {
+    function changelog_url(project: Project, release: Release) {
+        if (project.github) {
+            return `https://github.com/glowbuzzer/${project.github}/tree/${release.tag}/CHANGELOG.md`
+        }
+
+        return [
+            "https://downloads.glowbuzzer.com/releases",
+            project.basename,
+            release.files[0].arch || project.defaultFiles[0].arch,
+            "refs/tags",
+            release.tag,
+            "CHANGELOG.md"
+        ]
+            .filter(p => p)
+            .join("/")
+    }
+
     function make_table(project: Project, release: Release) {
         return release.files
             .map(file => ({
@@ -12,33 +58,35 @@ export default () => {
                 ...file
             }))
             .map((file: File) => {
-                const path = [
+                const path_elements = [
                     "https://downloads.glowbuzzer.com/releases",
                     project.basename,
                     file.arch,
                     "refs/tags",
                     release.tag,
                     `${project.basename}-${release.tag}.${file.type}`
-                ].filter(p => p).join("/")
-                return ({
+                ].filter(p => p)
+                const artifact_url = path_elements.join("/")
+
+                return {
                     key: file.name,
                     name: file.name,
                     description: file.description,
                     type: file.type,
-                    size: file.size,
-                    checksum: file.checksum,
+                    size: <FileSizeDynamic url={artifact_url} />,
+                    checksum: <FileChecksum url={artifact_url} />,
                     link: (
-                        <a href={path}>
-                            <DownloadOutlined/>
+                        <a href={artifact_url}>
+                            <DownloadOutlined />
                         </a>
                     )
-                });
+                }
             })
     }
 
-    const file_columns = ["Name", "Description", "Type", "Size", "Checksum", "Link"].map(c => ({
+    const file_columns = ["Name", "Description", "Type", "Size", "Checksum (MD5)", "Link"].map(c => ({
         title: c,
-        dataIndex: c.toLowerCase(),
+        dataIndex: c.split(" ").shift().toLowerCase(),
         key: c.toLowerCase()
     }))
 
@@ -59,9 +107,9 @@ export default () => {
                 <div key={project.github || project.name}>
                     <h2>
                         {project.basename ? (
-                            <DownloadOutlined style={{marginRight: "10px"}}/>
+                            <DownloadOutlined style={{ marginRight: "10px" }} />
                         ) : (
-                            <GithubOutlined style={{marginRight: "10px"}}/>
+                            <GithubOutlined style={{ marginRight: "10px" }} />
                         )}
                         {project.name}
                     </h2>
@@ -69,30 +117,9 @@ export default () => {
                         <div key={r.tag}>
                             <h3>
                                 {r.tag}{" "}
-                                {project.github && (
-                                    <span>
-                                        (
-                                        <a
-                                            href={`https://github.com/glowbuzzer/${project.github}/tree/${r.tag}/CHANGELOG.md`}
-                                        >
-                                            changelog
-                                        </a>
-                                        )
-                                    </span>
-                                )}
-                                {/*
-                                {project.base && (
-                                    <span>
-                                        (
-                                        <a
-                                            href={`https://downloads.glowbuzzer.com/${project.base}/${r.tag}/CHANGELOG.md`}
-                                        >
-                                            changelog
-                                        </a>
-                                        )
-                                    </span>
-                                )}
-*/}
+                                <span>
+                                    <a href={changelog_url(project, r)}>changelog</a>
+                                </span>
                             </h3>
                             <p>{r.description}</p>
                             {r.files && (

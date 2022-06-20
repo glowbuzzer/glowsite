@@ -753,8 +753,7 @@ const nav = {
                         {
                             slug: "minimal",
                             title: "Managing dependencies",
-                            subtitle:
-                                "Create a GBR application with minimal dependencies",
+                            subtitle: "Create a GBR application with minimal dependencies",
                             component: () => import("./pages/docs/gbr/minimal.mdx")
                         }
                     ]
@@ -940,16 +939,19 @@ const nav = {
                 }
             ]
         },
-        {
-            slug: "playground",
-            title: "Playground",
-            layout: ControlsDocumentationPage, // so that Redux context is created
-            children: auto(
-                // @ts-ignore
-                import.meta.glob("./pages/playground/*.{jsx,tsx,md,mdx,ts}"),
-                false
-            )
-        },
+        // @ts-ignore
+        import.meta.env.VITE_GLOWBUZZER_VERSION
+            ? null // don't include playground in release builds
+            : {
+                  slug: "playground",
+                  title: "Playground",
+                  layout: ControlsDocumentationPage, // so that Redux context is created
+                  children: auto(
+                      // @ts-ignore
+                      import.meta.glob("./pages/playground/*.{jsx,tsx,md,mdx,ts}"),
+                      false
+                  )
+              },
         {
             slug: "privacy",
             layout: SimpleLayout,
@@ -980,7 +982,7 @@ const nav = {
             //     filter: c => true,
             //     component: () => import("./typedoc/TypedocItem")
         }
-    ]
+    ].filter(n => n) // filter empty (conditional) nodes
 }
 
 export const root: Node = process(nav, [], null)
