@@ -24,7 +24,7 @@ jobs:
                     NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
             -   name: Build site
-                run: export VITE_GLOWBUZZER_VERSION=${GITHUB_REF#refs/tags/} pnpm run build:www
+                run: export VITE_GLOWBUZZER_VERSION=${GITHUB_REF#refs/tags/} && pnpm run build:www
 
             -   name: Deploy site
                 run: ./deploy-site.sh www www.glowbuzzer.com EOLCC9H61HP6F
