@@ -2,7 +2,6 @@ import { Node } from "./framework/providers/NavProvider"
 import { HomePage } from "./framework/layouts/HomePage"
 import {
     DefaultDocumentationPage,
-    ReactDocgenPage,
     TypedocPage,
     TypedocPageDetached
 } from "./framework/layouts/DocumentationPage"

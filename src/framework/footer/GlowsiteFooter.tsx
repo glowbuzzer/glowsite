@@ -109,13 +109,13 @@ const DesktopFooter = ({}) => {
                     <h3>Get started</h3>
                     <div />
                     <div>
-                        <StyledLink to="/get-started/hardware">Required hardware</StyledLink>
+                        <StyledLink to="/get-started/simulation">Quick start guide</StyledLink>
                     </div>
                     <div>
-                        <StyledLink to="/get-started/motion">Make a drive move</StyledLink>
+                        <StyledLink to="/get-started/kits/overview">Hardware starter kits</StyledLink>
                     </div>
                     <div>
-                        <StyledLink to="/get-started/how_to_buy">How to buy</StyledLink>
+                        <StyledLink to="/get-started/how-to-buy">How to buy</StyledLink>
                     </div>
                 </Col>
                 <Col span={5}>

@@ -23,8 +23,8 @@ export const projects: Project[] = [
         github: "gbr",
         releases: [
             {
-                tag: "0.0.1-alpha-1",
-                description: "Fixes and new features"
+                tag: "v1.0.0",
+                description: "First release of GBR"
             }
         ]
     },
@@ -65,7 +65,7 @@ export const projects: Project[] = [
         github: "gbem",
         releases: [
             {
-                tag: "0.0.1-alpha-1",
+                tag: "1.0.0",
                 description: "First release of GBEM"
             }
         ]
@@ -75,8 +75,8 @@ export const projects: Project[] = [
         github: "gbsm",
         releases: [
             {
-                tag: "0.0.1-alpha-1",
-                description: "First release of the GBSM"
+                tag: "1.0.0",
+                description: "First release of GBSM"
             }
         ]
     }

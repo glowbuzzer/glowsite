@@ -3,6 +3,7 @@ import styled from "styled-components"
 import { BaseLayout } from "./BaseLayout"
 import { Section } from "../components/Section"
 import * as React from "react"
+import { ScrollToTopOnMount } from "../components/ScrollToTopOnMount"
 
 const StyledDocumentationPage = styled.div`
     label: DocumentationPage;
@@ -44,6 +45,7 @@ const StyledDocumentationPage = styled.div`
 
 export const DocumentationPage = ({ left, children }) => (
     <BaseLayout>
+        <ScrollToTopOnMount on={[window.location.pathname]} />
         <Section background={"White"} expand>
             <StyledDocumentationPage>
                 <div className="left">

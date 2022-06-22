@@ -38,7 +38,9 @@ export const ContexualLeftNav = () => {
             <Menu
                 mode="inline"
                 defaultSelectedKeys={[pathname]}
+                selectedKeys={[pathname]}
                 defaultOpenKeys={open}
+                openKeys={open}
                 items={node?.children.map(({ name, title, path, children }) => {
                     return {
                         key: path,
@@ -52,27 +54,6 @@ export const ContexualLeftNav = () => {
                     }
                 })}
             />
-            {/*
-                {node?.children.map(({ name, title, path, children }) => {
-                    if (children?.length) {
-                        return (
-                            <Menu.SubMenu key={path} title={title}>
-                                {children.map(({ path, title, name }) => (
-                                    <Menu.Item key={path}>
-                                        <Link to={path}>{title || name}</Link>
-                                    </Menu.Item>
-                                ))}
-                            </Menu.SubMenu>
-                        )
-                    }
-                    return (
-                        <Menu.Item key={path}>
-                            <Link to={path}>{title || name}</Link>
-                        </Menu.Item>
-                    )
-                })}
-            </Menu>
-*/}
         </StyledLeftNavMenu>
     )
 }
