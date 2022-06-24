@@ -1,5 +1,5 @@
 import { BaseLayout } from "./BaseLayout"
-import { Button, Col, Row } from "antd"
+import { Button } from "antd"
 import styled from "styled-components"
 import { RightCircleOutlined } from "@ant-design/icons"
 import { FeaturedBlog } from "../components/FeaturedBlog"
@@ -19,6 +19,7 @@ import { HomeCarousel } from "../components/HomeCarousel"
 import { YoutubeEmbed } from "../components/Video"
 import HexImage from "../../home/hex_components.svg"
 import { ReactComponent as BlogIcon } from "../../home/blog.svg?inline"
+import { CardFlip } from "../components/CardFlip"
 
 const FeaturesSection = styled.div`
     display: flex;
@@ -125,14 +126,24 @@ export const HomePage = () => {
 
             <Section spaced>
                 <FeaturesSection>
-                    <div>
+                    <CardFlip
+                        back={
+                            <>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer
+                                mollis eros ac turpis efficitur cursus. Maecenas bibendum tortor
+                                orci, vel efficitur metus sollicitudin non. Integer sit amet dui
+                                auctor, imperdiet augue in, convallis risus.
+                            </>
+                        }
+                        to="/get-started/simulation"
+                    >
                         <Html5Icon width={"15%"} />
                         <h2>Web stack</h2>
                         <h3>
                             Build complex machine control applications in a web stack - no
                             proprietary languages or IDEs
                         </h3>
-                    </div>
+                    </CardFlip>
                     <div>
                         <CoordinatedIcon width={"15%"} />
                         <h2>Co-ordinated motion</h2>

@@ -42,7 +42,7 @@ export function useNavCrumbs() {
     return ancestors(current).slice(2) // remove empty root node, home and current node
 }
 
-export function useRoutes() {
+export function useGlowsiteRoutes() {
     const { all } = useContext(navContext)
     // all routes are created even for paths not of type "page", because we can navigate to things like the homepage at "/"
     // and use _meta.ts to control the rendering, eg. layout component

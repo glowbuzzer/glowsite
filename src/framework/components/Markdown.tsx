@@ -8,6 +8,7 @@ import { Prism as SyntaxHighlighter } from "react-syntax-highlighter"
 import { tomorrow } from "react-syntax-highlighter/dist/esm/styles/prism"
 import { relative_path } from "../../typedoc/util"
 import remarkDl from "remark-deflist"
+import { GlowsiteLink } from "@glowsite"
 
 export const Markdown = props => {
     return (
@@ -16,14 +17,14 @@ export const Markdown = props => {
             remarkPlugins={[typedocLinkify, remarkEntities, remarkDl, remarkGfm]}
             components={{
                 a: ({ node, href, ...rest }) => {
-                    console.log("LINK", href)
+                    // console.log("LINK", href)
 
                     return href.startsWith("http") ? (
                         <a href={href} {...rest} target="_blank" />
                     ) : props.link ? (
                         props.link({ href, ...rest })
                     ) : (
-                        <Link to={relative_path(href)} {...rest} />
+                        <GlowsiteLink to={relative_path(href)} {...rest} />
                     )
                 },
                 pre({ node, children, ...props }) {

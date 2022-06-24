@@ -140,6 +140,11 @@ const AppStyle = styled.div`
     .ant-divider-horizontal {
         border-top-color: rgba(0, 0, 0, 0.2);
     }
+  
+    a.broken {
+      color: red;
+      text-decoration: line-through;
+    }
 `
 
 const AppTheme = {

@@ -40,7 +40,7 @@ export const ContexualLeftNav = () => {
                 defaultSelectedKeys={[pathname]}
                 selectedKeys={[pathname]}
                 defaultOpenKeys={open}
-                openKeys={open}
+                // openKeys={open}
                 items={node?.children.map(({ name, title, path, children }) => {
                     return {
                         key: path,
