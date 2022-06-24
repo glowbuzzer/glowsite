@@ -19,7 +19,7 @@ With &gbc we can control:
 * Multiple joints in master/slave - for example, move joint 1 at twice the velocity of joint 2
 * Multiple joints in co-ordinated motion in 3D space - for example, move a tool through 3D space along a line or arc
 
-Within &gbc motion primitives exist. These are fundamental ways to move joints and kinematics configurations: for example `MoveJointsAtVelocity` and `moveLineAtVelocity`.
+Within &gbc motion primitives exist. These are fundamental ways to move joints and kinematics configurations: for example `MoveJointsAtVelocity` and `moveVectorAtVelocity`.
 
 ## Interacting with the &gbc motion primitives
 
@@ -31,67 +31,120 @@ The `JogTile` allows you to move Joints and Kinematics Configurations either to 
 
 The `GCodeTile` allows you to stream gcode containing different movement instructions to &gbc. See <Link to="/docs/gbr/tiles/GCodeTile"> GCodeTile </Link> for more information.
 
+"Under the covers" these tiles use the APIs described in the next sections to perform motion/.
+
 ### **Using the Hooks API** - `SoloActivity`, `UseGcode`
 
 Programmatically, the easiest route to invoke motion primitive from a React Application is to use the `SoloActivityApi`. See <Link to="/docs/types/SoloActivityApi"> SoloActivityApi </Link> for more information.
 
-You can also stream commands using gcode see <Link to="/docs/gbr/gcode"> gcode handling in &gbr </Link> and  <Link to="/docs/gbr/hooks/UseGcode"> see UseGcode Hook </Link> for more infromation.
+The solo activity API is instantiated against a kinematics configuration and has exclusive access to the motion of that KC.
 
-### **Using the &gbc Websockets interface itself** - start task (after creating lines, activity, task), send solo activity, stream
+You can also stream commands using gcode see <Link to="/docs/gbr/gcode"> for more information on gcode handling in &gbr </Link> and  <Link to="/docs/gbr/hooks/UseGcode">see UseGcode</Link> for more information for the hooks API.
 
-You can also invoke motion primitives with the Websockets interface in different ways. The three ways are:
+### **Using the &gbc Websockets interface itself** - Start task, send solo activity, stream
 
-1. send a SoloActivity
-1. stream something
-1. start a task running
+You can also invoke motion primitives with the Websockets interface itself.
 
-Instead of using the UseSoloActivity hooks API, you can compose and send a Websockets message - SoloActivity.
+The three possible ways to invoke motion primitives with Webscokets messages are:
 
-See <Link to="/docs/types/SoloActivityCommand"> SoloActivityCommand </Link> for more information.
+1. Send a SoloActivity
+1. Stream an Activity
+1. Start a task (containing activities) running
 
-You can stream an activity using a websockets message -
+#### Send a SoloActivity
 
-Finally, you can start a task. Tasks must be pre-configured in the config
-For example for a MoveLine you would create a linesConfig struct in the lines section of the config and then configure your task and moveline activity and reference the line index (but remember we moved the line index to the command struct). N
+Instead of using the UseSoloActivity hooks API, you can compose and send a Websockets message.
+
+The message would look like:
+
+```json{
+    command: {
+        soloActivity: {
+            0: {
+                command: {
+                    tag: 42,
+                    activityType: 3,
+                    moveJoints: {
+                        jointPositionArray: [...]
+                    }
+                }
+            }
+        }
+    }
+}
+```
+
+This message will invoke a `moveJoints` against one or more of the joints in the `jointPositionArray`.
+
+The `tag` is a unique number that would allow the user of the API to track different moves issued.
+
+The behaviour of the SoloActvity API is such that if you were to issue another Activity whilst the first is running, the first Activity would be cancelled and second then run.
+
+The SoloActivity has a one-to-one mapping with a kinematics configuration and this mapping needs to be in your config file. See XXXX
+
+See <Link to="/docs/types/SoloActivityCommand"> SoloActivityCommand </Link> for more information (this is union of `ActivityStreamItem`).
+
+#### Stream an Activity
+
+You can also stream an activity using a websockets message.
+
+```json{
+    stream: {
+        soloActivity: {
+            0: {
+                command: {
+                    tag: 42,
+                    activityType: 3,
+                    moveJoints: {
+                        jointPositionArray: [...]
+                    }
+                }
+            }
+        }
+    }
+}
+```
+
+See <Link to="/docs/types/StreamCommand"> StreamCommand </Link> for how to start and stop a stream with the Websockets API.
+
+The key differences between using the SoloActivity API and Streamed API are:
+
+1. Streamed activities are queued whereas each SoloActivity has a single "slot" to hold the current Activity
+1. Streamed motions can be blended (where one motion is blended into the next avoiding the machine stopping at junctions between motions) whereas SoloActivities can not be blended
+1. You can await the completion of a SoloActivity so that your React control program can continue its flow when completed whereas with streamed activities the next in the queue executed as soon as the first is finished
+
+#### Start a task
+
+Finally, you can start a task with a Websocket message. Tasks must be pre-configured in the (JSON) config file with the activities you want to run when you start the task.
+
+For example for a `MoveLine` activity you would start by creating a <Link to="/docs/types/LinesConfig"> LinesConfig</Link> item for the line you want to move along.
+
+Then, in the <Link to="/docs/types/MoveLineConfig"> MoveLineConfig</Link> section of your config file you would reference the index of the line object you created together with the index of the kinematicsConfiguration you want to move and the index of the moveParameters (velocity of the move etc.) that you want to use.
+
+Then you would create a task <Link to="/docs/types/TaskConfig">TaskConfig</Link> referencing the index of the Activity you created (`firstActivityIndex`).
+
+The task would be started with <Link to="/docs/types/TaskCommand"> TaskCommand message </Link>.
+
+The task would then execute the activity that it contains then the task would terminate.
 
 ## Single joint motion control primitives
 
 This is the most basic form of motion control. It allows you to control a joint in the following ways:
 
-* Move to a position specified either relative to current position or absolutely - `moveJoints` - see <Link to = "docs/types/MoveArcStream">moveArc</Link>
-* Move at velocity when the joint ramps up speed to a given velocity - `moveJointsAtVelocity` <Link to = "docs/types/MoveArcStream">MoveJointsAtVelocity</Link>
-* Move superimpose where a relative movement is superimposed on top of a current move
-
-
-
-
-
-## Multiple joints in master slave
-
-Joints can be slaved together. This is a master/slave arrangement where
-
-
+* Move to a position specified either relative to current position or absolutely - `moveJoints` - see <Link to = "/docs/types/MoveJointsStream">moveJoints</Link>
+* Move at velocity when the joint ramps up speed to a given velocity - `moveJointsAtVelocity` <Link to = "/docs/types/MoveJointsAtVelocityStream">MoveJointsAtVelocity</Link>
 
 ## Multiple joints in co-ordinated motion in 3D space
 
 Moving in 3D cartesian
 
-* Move Line
-* Move Arc
+* Move in an arc - `moveArc` - see <Link to = "/docs/types/MoveArcStream">moveArc</Link>
 
+* Move along a linear path to the target position - `moveLine` - see <Link to = "/docs/types/MoveLineStream">moveLine</Link>
 
-`moveArc` - Move in an arc
+* Move in a vector (straight line) along the given vector. The velocity of the motion can be controlled using moveParams. `moveVectorAtVelocity` - see <Link to = "/docs/types/MoveVectorAtVelocityStream">moveVectorAtVelocity</Link>
 
-
-
-
-`moveLine` - Move along a linear path to the target position.
-
-`moveLineAtVelocity` - Move in a straight line along the given vector. The velocity of the motion can be controlled using moveParams.
-
-`moveToPosition` - Move to the target position in joint space.
-
-
+* Move to the target position in joint space -`moveToPosition` - see <Link to = "/docs/types/MoveToPositionStream">moveToPosition</Link>
 
 ## Cartesian space vs. Joint space
 
