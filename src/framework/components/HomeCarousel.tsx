@@ -122,7 +122,7 @@ export const HomeCarousel = () => {
                     <h1>Deploy to embedded Linux or microcontroller</h1>
                     <p>
                         The real-time components of the glowbuzzer toolkit will run on desktop or
-                        embedded Linux or a microcontroller (e.g. STM32).
+                        embedded Linux or a microcontroller (for example STM32).
                     </p>
                     <p>
                         This gives the flexibility to deploy the toolkit to a wide range of
@@ -138,7 +138,7 @@ export const HomeCarousel = () => {
             </CarouselItem>
             <CarouselItem backgroundImage={BackgroundImage3}>
                 <main>
-                    <h1>Work with industrial fieldbusses e.g. EtherCAT</h1>
+                    <h1>Work with industrial fieldbusses for example EtherCAT</h1>
                     <p>
                         Work with drives and IO from any manufacturer that offers a real-time
                         fieldbus interface or on an embedded platform integrate over SPI with motor

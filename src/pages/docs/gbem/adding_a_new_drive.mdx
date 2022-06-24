@@ -73,8 +73,8 @@ Inside the new src and inc directories create a pair of files called `mydrive.c`
 
 There are two types of drive functions that have to be written:
 
-1. *slave functions* which configure the slave itself (e.g. configure the slave's PDO map)
-2. *drive functions* most of which are called cyclically to exchange data with the drive each cycle (e.g. write a set position to a drive)
+1. *slave functions* which configure the slave itself (for example, configuration of the slave's PDO map)
+2. *drive functions* most of which are called cyclically to exchange data with the drive each cycle (i.e. write a set position to a drive)
 
 We discuss how to write these sets of functions in the next sections of this document.
 
@@ -285,7 +285,7 @@ This function needs to get the Modes of Operation (CSP, CSV etc.) for a drive. E
 
 We test that all drives have their Modes of Operation set correctly when &gbem runs and generates an error if there is an issue. We do this because we don't want a drive to be in, for example, cyclic synchronous velocity mode (CSV) and start sending it position values - that would produce some very unexpected movements!
 
-There is a set of #defines in cia402.h for the standard values (e.g. `CIA_MOO_CSP`) that we can use in this function. Usually the Modes of Operation will be an uint8_t or int8_t and so if we are reading a PDO value we will use one of the `ethercatgetset` functions,  most likely `ec_pdo_get_input_uint8`.
+There is a set of #defines in cia402.h for the standard values (for example, `CIA_MOO_CSP`) that we can use in this function. Usually the Modes of Operation will be an uint8_t or int8_t and so if we are reading a PDO value we will use one of the `ethercatgetset` functions,  most likely `ec_pdo_get_input_uint8`.
 
 If the drive doesn't support reading the Modes of Operation then this function needs to be "hardcoded" to return `CIA_MOO_CSP`.
 

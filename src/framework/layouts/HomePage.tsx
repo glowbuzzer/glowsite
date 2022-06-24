@@ -129,13 +129,13 @@ export const HomePage = () => {
                     <CardFlip
                         back={
                             <>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer
-                                mollis eros ac turpis efficitur cursus. Maecenas bibendum tortor
-                                orci, vel efficitur metus sollicitudin non. Integer sit amet dui
-                                auctor, imperdiet augue in, convallis risus.
+                                With the glowbuzzer toolkit, you take our React components and use
+                                them either unchanged, extended or added to with your own custom components
+                                to build the visual front-end and control logic for your machine control.
+                                With this you will be writing machine control programs using familar web technologies.
                             </>
                         }
-                        to="/get-started/simulation"
+                        to="/how-it-works/overview"
                     >
                         <Html5Icon width={"15%"} />
                         <h2>Web stack</h2>
@@ -144,68 +144,136 @@ export const HomePage = () => {
                             proprietary languages or IDEs
                         </h3>
                     </CardFlip>
-                    <div>
+                    <CardFlip
+                        back={
+                            <>
+                                The glowbuzzer toolkit supports complex machines: from basic x,y,z cartesian machines through to industrial robots.
+                                These kinematics models are fully parameterised and can be adapted to a variety of types of machine.
+                                If different kinematics models are required, we can either add these for you or you can provide the models.
+                            </>
+                        }
+                        to="/docs/gbc/configuration/config_joints_and_kinematics"
+                    >
                         <CoordinatedIcon width={"15%"} />
                         <h2>Co-ordinated motion</h2>
-                        <h3>Control robots and machines with complex kinematic configurations</h3>
-                    </div>
-                    <div>
+                        <h3>
+                            Control robots and machines with complex kinematic configurations
+                        </h3>
+                    </CardFlip>
+                    <CardFlip
+                        back={
+                            <>
+                                The glowbuzzer toolkit will run on either a microcontroller or embedded Linux allowing you to embed a sophisticated motion/machine control into your product.
+                                The toolkit’s real-time core (GBC) needs a high-performance dual-core microcontroller.
+                                Our reference design uses an STM32H7 with ST ARM Cortex-M7 and Cortex-M4 cores running up to 480 MHz and 240 MHz respectively.
+                            </>
+                        }
+                        to="/how-it-works/embedded"
+                    >
                         <EmbeddedIcon width={"15%"} />
                         <h2>Embeddable</h2>
                         <h3>
                             Runs on a Linux or microcontroller platform making it easy to embed into
                             your product
                         </h3>
-                    </div>
-
-                    <div>
+                    </CardFlip>
+                    <CardFlip
+                        back={
+                            <>
+                                If you need guaranteed millisecond response times then you will need to write C code in the software PLC layer.
+                                If you have a greater degree of tolerance to your response times (e.g. 10ms) then you can deploy code written in JavaScript or if you can cope with say 20ms response times then you can have code in React responding.
+                            </>
+                        }
+                        to="/how-it-works/real_time"
+                    >
                         <RealTimeIcon width={"15%"} />
                         <h2>Real-time</h2>
                         <h3>
                             Handle complex real-time machine control challenges in a software stack
                             you are familiar with
                         </h3>
-                    </div>
-                    <div>
-                        <FieldbusIcon width={"15%"} />
+                    </CardFlip>
+                    <CardFlip
+                        back={
+                            <>
+                                Interoperability with the major fieldbus protocols is at the heart of the glowbuzzer toolkit.
+                                EtherCAT is the primary fieldbus we support. Mainly because of the wide range of drives and IO available for it.
+                            </>
+                        }
+                        to="/how-it-works/fieldbus"
+                    >
+                    <FieldbusIcon width={"15%"} />
                         <h2>Fieldbus integration</h2>
                         <h3>
                             Integrates common fieldbusses (EtherCAT, PROFINET, Ethernet/IP and so
                             on)
                         </h3>
-                    </div>
-                    <div>
-                        <RoboticArmIcon width={"15%"} />
+                    </CardFlip>
+                    <CardFlip
+                        back={
+                            <>
+                                Machine controls can be complex. You requirements might well be unique and are ofte highly custom.
+                                The glowbuzzer toolkit has deep and wide APIs that allow you to tackle the most challenging of projects.
+                            </>
+                        }
+                        to="/docs/gbr/overview"
+                    >
+                    <RoboticArmIcon width={"15%"} />
                         <h2>Solve challenging machine control problems</h2>
                         <h3>
-                            Handles complex requirements, for example sensor guided real-time motion
+                            Rich APIs allow you to write code to handle complex machine control requirements
                         </h3>
-                    </div>
+                    </CardFlip>
 
-                    <div>
+                    <CardFlip
+                        back={
+                            <>
+                                The glowbuzzer toolkit includes a software PLC but you can also
+                                integrate with off-the-shelf PLCs. We can sit on an fieldbus network
+                                either as a Master or Slave (with say the Hilscher netX) allowing
+                                real-time communication with the PLC.
+                            </>
+                        }
+                        to="/how-it-works/fieldbus"
+                    >
                         <IntegratedIcon width={"15%"} />
                         <h2>PLC integration</h2>
                         <h3>
                             Integrates with PLCs from leading manufacturers - Codesys, Siemens,
                             Allen Bradley, ABB, Omron...
                         </h3>
-                    </div>
-                    <div>
-                        <IndependenceIcon width={"15%"} />
+                    </CardFlip>
+                    <CardFlip
+                        back={
+                            <>
+                                The glowbuzzer toolkit is not based on proprietary technologies or is tied to any hardware.
+                                This allows you to work with pretty much any hardware on the market using software that is used by millions of developers around the world.
+                            </>
+                        }
+                        to="/how-it-works/drives"
+                    >
+                    <IndependenceIcon width={"15%"} />
                         <h2>Vendor independence</h2>
                         <h3>
                             Work with any hardware so you can mix and match to get the performance
                             you want at the price point you need
                         </h3>
-                    </div>
-                    <div>
-                        <GearsIcon width={"15%"} />
+                    </CardFlip>
+                    <CardFlip
+                        back={
+                            <>
+                                From React for the front-end and machine control to C for the embedded PLC, we use technologies that are easy for you understand.
+                                There is nothing proprietary and nothing you can't find a million answers to on stack overflow.
+                            </>
+                        }
+                        to="/how-it-works/overview"
+                    >
+                    <GearsIcon width={"15%"} />
                         <h2>Develop using technology you understand</h2>
                         <h3>
-                            Runs on a Linux or microcontroller platform making it easy to embed into
-                            your product
+                            Basic web development skills for the front-end and C for the embedded PLC.
                         </h3>
-                    </div>
+                    </CardFlip>
                 </FeaturesSection>
             </Section>
 

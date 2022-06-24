@@ -10,8 +10,8 @@ import {Card} from "antd"
 
 Within &gbc, an Activity is a machine control primitive. They generally do one of two things:
 
-* Read and write to the machine's IO. E.g. set a Digital Out or read an Analogue Input)
-* Move joints (motors) either individually or as a set in concert. E.g. rotate a motor at 50rpm or move a robot along a path)
+* Read and write to the machine's IO. For example, set a Digital Out or read an Analogue Input)
+* Move joints (motors) either individually or as a set in concert. For example, rotate a motor at 50rpm or move a robot along a path)
 
 Activities can be invoked in three different ways:
 
@@ -24,7 +24,7 @@ Activities can be invoked in three different ways:
 - When you issue a new solo activity (through the websockets interface) the current solo activity gets cancelled - these work under a "one at a time" model
 - In the React front end API, solo activities are implemented as a promise - i.e. you await a solo activity's completion
 2. As a `streamed activity`:
-- These are used for continuous motion. E.g. streaming a &gcode program
+- These are used for continuous motion. For example, streaming a &gcode program
 - They support blending (for cartesian moves where the next move starts before the previous one has finished causing a radius on the junction)
 - The support pause and resume functionality
 - They operate a classic queue model for flow control

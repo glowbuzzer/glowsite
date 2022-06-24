@@ -76,7 +76,7 @@ The .h template has the following sections:
 3. #defines for the number of drives & slaves
 4. Details of the ESTOP digital in
 
-The `mymachine_map.c` needs to include the header files for the libraries of the slaves you are going to use in your map. E.g.
+The `mymachine_map.c` needs to include the header files for the libraries of the slaves you are going to use in your map. For example,
 
 ````c
 #include "kollmorgen.h"
@@ -108,7 +108,7 @@ This will include your mymachine_map.h file when you have its #define set to 1.
 
 The next steps are needed just to print out the name of the machine the code has been compiled at start-up and in the json machine config summary. It is not essential to do this but from our experience it is very easy to *run the code with the wrong machine #defined* and therefore any reminders can help avoid this easy to make mistake.
 
-Then add an enumerator to the typedef  `map_machine_type_t` enum. E.g.
+Then add an enumerator to the typedef  `map_machine_type_t` enum. For example,
 
 ````c
 typedef enum {
@@ -738,7 +738,7 @@ been mapped to a PDO in the iomap.
 **Check the config**
 
 
-The first step in checking the config is to try and compile &gbem. Of course in an IDE your "linter" (e.g.
+The first step in checking the config is to try and compile &gbem. Of course in an IDE your "linter" (for example,
 clang-tidy) will have helpfully highlighted anything nasty. Once you have it compiling the next step is to run the
 &gbem config checker.
 

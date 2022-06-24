@@ -33,13 +33,13 @@ The `GCodeTile` allows you to stream gcode containing different movement instruc
 
 "Under the covers" these tiles use the APIs described in the next sections to perform motion/.
 
-### **Using the Hooks API** - `SoloActivity`, `UseGcode`
+### **Using the Hooks API** - `SoloActivity`, `useGcode`
 
 Programmatically, the easiest route to invoke motion primitive from a React Application is to use the `SoloActivityApi`. See <Link to="/docs/types/SoloActivityApi"> SoloActivityApi </Link> for more information.
 
 The solo activity API is instantiated against a kinematics configuration and has exclusive access to the motion of that KC.
 
-You can also stream commands using gcode see <Link to="/docs/gbr/gcode"> for more information on gcode handling in &gbr </Link> and  <Link to="/docs/gbr/hooks/UseGcode">see UseGcode</Link> for more information for the hooks API.
+You can also stream commands using gcode see <Link to="/docs/gbr/gcode"> for more information on gcode handling in &gbr </Link> and  <Link to="/docs/gbr/hooks/useGCode">see useGCode</Link> for more information for the hooks API.
 
 ### **Using the &gbc Websockets interface itself** - Start task, send solo activity, stream
 
