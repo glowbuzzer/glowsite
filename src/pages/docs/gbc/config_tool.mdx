@@ -1,6 +1,7 @@
 import {Tldr} from "../../../framework/components/Tldr"
 import { Link } from "react-router-dom"
 import {Card} from "antd"
+import {GlowsiteLink} from "../../../framework"
 
 # {props.subtitle}
 
@@ -35,7 +36,7 @@ tool change link
 position changes instantatious
 
 
-<Card title="tool Schema docs" extra={<Link to="/docs/gbc/schema/ToolConfig">docs Link</Link>} style={{ width: '100%' }}>
+<Card title="tool Schema docs" extra={<GlowsiteLink to="/docs/types/ToolConfig">docs Link</GlowsiteLink>} style={{ width: '100%' }}>
 
     `tool` in the config file maps to `ToolConfig` in the schema
 

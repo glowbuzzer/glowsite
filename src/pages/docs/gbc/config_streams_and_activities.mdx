@@ -1,7 +1,7 @@
 import {Tldr} from "../../../framework/components/Tldr"
 import { Link } from "react-router-dom"
 import {Card} from "antd"
-
+import {GlowsiteLink} from "../../../framework"
 
 # {props.subtitle}
 
@@ -18,7 +18,7 @@ The stream section of the config is brief and just defines one or more stream. E
 The soloActivity section of the config maps solo activities to kcs. This simply "connects" a kc to a solo activity so that when using the solo activity API you can control different kcs with different solo activities.
 
 
-<Card title="stream Schema docs" extra={<Link to="/docs/gbc/schema/StreamConfig">docs Link</Link>} style={{ width: '100%' }}>
+<Card title="stream Schema docs" extra={<GlowsiteLink to="/docs/types/StreamConfig">docs Link</GlowsiteLink>} style={{ width: '100%' }}>
 
     `stream` in the config file maps to `StreamConfig` in the schema
 
@@ -27,7 +27,7 @@ The soloActivity section of the config maps solo activities to kcs. This simply 
     Click "docs Link" above to view
 </Card>
 
-<Card title="soloActivity Schema docs" extra={<Link to="/docs/gbc/schema/SoloActivityConfig">docs Link</Link>} style={{ width: '100%' }}>
+<Card title="soloActivity Schema docs" extra={<GlowsiteLink to="/docs/types/SoloActivityConfig">docs Link</GlowsiteLink>} style={{ width: '100%' }}>
 
     `soloActivity` in the config file maps to `SoloActivityConfig` in the schema
 

@@ -1,5 +1,6 @@
 import {Tldr} from "../../../framework/components/Tldr"
 import { Link } from "react-router-dom"
+import {GlowsiteLink} from "../../../framework";
 
 # {props.subtitle}
 <Tldr>
@@ -88,7 +89,7 @@ This allows a map to be created between:
 * &gbc IO and &gbem PLC variables
 * EtherCAT IO and &gbem PLC variables
 
-See <Link to="/docs/gbem/configuring_machines">configuring machines</Link> for more details on how to do this.
+See <GlowsiteLink to="/docs/gbem/configuring_machines">configuring machines</GlowsiteLink> for more details on how to do this.
 
 PLC variables need to be defined as global variables in your task function and marked as `extern` in the `machine_map` header file.
 

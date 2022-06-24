@@ -1,7 +1,7 @@
 import {Tldr} from "../../../framework/components/Tldr"
 import { Link } from "react-router-dom"
 import {Card} from "antd"
-
+import {GlowsiteLink} from "../../../framework";
 
 # {props.subtitle}
 
@@ -94,13 +94,13 @@ Because everything defaults to zero, this is the same as having the following in
 
 ```
 
-N.B. `"absRel"` is the `FRAME_ABSRELATIVE` enum and 0 = `FRAME_ABSOLUTE` which means the frame is referenced with absolute position and the parent is ignored. <Link to="/docs/gbc/schema/FRAME_ABSRELATIVE">See here for more details</Link>
+N.B. `"absRel"` is the `FRAME_ABSRELATIVE` enum and 0 = `FRAME_ABSOLUTE` which means the frame is referenced with absolute position and the parent is ignored. <GlowsiteLink to="/docs/types/FRAME_ABSRELATIVE">See here for more details</GlowsiteLink>
 
 
 Having friendly names for the keys is useful for documentation of your JSON file and these names are accessible in &gbr (in for example the jogging tile) but the API itself uses (array) indexes.
 
 
-<Card title="frames Schema docs" extra={<Link to="/docs/gbc/schema/FramesConfig">docs Link</Link>} style={{ width: 300 }}>
+<Card title="frames Schema docs" extra={<GlowsiteLink to="/docs/types/FramesConfig">docs Link</GlowsiteLink>} style={{ width: 300 }}>
 
     `frames` in the config file maps to `FramesConfig` in the schema
 

@@ -105,7 +105,7 @@ const StyledRender = styled.div`
     }
 `
 
-export const TypedocLink = ({ name, content=undefined }) => {
+export const TypedocLink = ({ name, content = undefined }) => {
     const generic_path = "/docs/types/:name"
     const node = useNavBySlug(name, generic_path)
     const to = node.path === generic_path ? generic_path.replace(":name", name) : node.path
@@ -582,12 +582,10 @@ const render_component = {
     Class
 }
 
-export default ({ title, slug, filter }) => {
-    const { name: name_from_param } = useParams()
-    const name = name_from_param || slug
-    const item = useTypedocItem(name)
-
-    console.log("NAME", name, "ITEM", item)
+export default ({ title, slug, standaloneTypes }) => {
+    // const { name: name_from_param } = useParams()
+    // const name = name_from_param || slug
+    const item = useTypedocItem(slug)
 
     if (!item) {
         return null
@@ -597,13 +595,13 @@ export default ({ title, slug, filter }) => {
         render_component[item.kindString] ||
         (() => <h4>No render component for {item.kindString}</h4>)
 
-    return filter ? (
+    return standaloneTypes ? (
         <DocumentationPage
-            left={<TypedocLeftNav current={item.name} title={title} filter={filter} />}
+            left={<TypedocLeftNav current={item.name} title={title} filter={() => true} />}
         >
             <ScrollToTopOnMount on={[item.name]} />
             <h1>
-                {name} ({item.kindString})
+                {item.name} ({item.kindString})
             </h1>
 
             <StyledRender>

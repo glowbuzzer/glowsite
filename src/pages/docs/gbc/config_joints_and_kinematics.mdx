@@ -1,7 +1,7 @@
 import {Tldr} from "../../../framework/components/Tldr"
 import { Link } from "react-router-dom"
 import {Card} from "antd"
-
+import {GlowsiteLink} from "../../../framework"
 
 # {props.subtitle}
 
@@ -13,7 +13,7 @@ The `joint: {}` section of the config defines the joints that make up a machine.
 
 Joints correspond to the axes/motors/actuators on your machine and in this section we define their kinematic limits (vmax, amax and jmax), the extent of their travels and the type of joint.
 
-We also need to scale the position sent to the joints - see [scaling](scaling) for more details on how to set the scale factor.
+We also need to scale the position sent to the joints - see [scaling](../scaling) for more details on how to set the scale factor.
 
 These need to correspond to the joints defined in the &gbem or &gbsm configuration and (of course) to your actual machine.
 
@@ -60,7 +60,7 @@ There are often multiple solutions to the inverse kinematics (multiple configura
 
 The key can be either a number or string. These names are accessible in &gbr and are useful to document your config file.
 
-In the config there is a parameter `"finiteContinuous"`. This is the enum `JOINT_FINITECONTINUOUS`. <Link to="/docs/gbc/schema/JOINT_FINITECONTINUOUS">See here for more details</Link>
+In the config there is a parameter `"finiteContinuous"`. This is the enum `JOINT_FINITECONTINUOUS`. <GlowsiteLink to="/docs/types/JOINT_FINITECONTINUOUS">See here for more details</GlowsiteLink>
 
 0 = `JOINT_FINITE` = joint is finite (has travel limits),  1 = `JOINT_CONTINUOUS` =  joint is continous (no travel limits).
 
@@ -68,11 +68,11 @@ This allows us to configure machines where the joint has no limits (for example 
 
 We can invert the direction of motion of a joint with the `"isInverted"` parameter with 0 = not inverted, 1 = inverted motion.
 
-The `"jointType"` is the enum `JOINT_TYPE` with 0 = `JOINT_PRISMATIC`= Joint type is prismatic (linear) and 1 = `JOINT_REVOLUTE` Joint type is revolute (rotary). <Link to="/docs/gbc/schema/JOINT_TYPE">See here for more details</Link>
+The `"jointType"` is the enum `JOINT_TYPE` with 0 = `JOINT_PRISMATIC`= Joint type is prismatic (linear) and 1 = `JOINT_REVOLUTE` Joint type is revolute (rotary). <GlowsiteLink to="/docs/types/JOINT_TYPE">See here for more details</GlowsiteLink>
 
 This affects whether the joints motion is in linear units (for prismatic joints) or radians (for revolute joints).
 
-<Card title="joint Schema docs" extra={<Link to="/docs/gbc/schema/JointConfig">docs Link</Link>} style={{ width: '100%' }}>
+<Card title="joint Schema docs" extra={<GlowsiteLink to="/docs/types/JointConfig">docs Link</GlowsiteLink>} style={{ width: '100%' }}>
 
     `joint` in the config file maps to `JointConfig` in the schema
 
@@ -93,7 +93,7 @@ Kcs also have `"linearLimits"` which define the linear kinematics limits of the 
 
 These are separate the individual joint's kinematics limits.
 
-`"kinematicsConfigurationType"` is the enum `KC_KINEMATICSCONFIGURATIONTYPE` which defines the mathematical kinematics model used for the kc <Link to="/docs/gbc/schema/KC_KINEMATICSCONFIGURATIONTYPE">see here for more details</Link>
+`"kinematicsConfigurationType"` is the enum `KC_KINEMATICSCONFIGURATIONTYPE` which defines the mathematical kinematics model used for the kc <GlowsiteLink to="/docs/types/KC_KINEMATICSCONFIGURATIONTYPE">see here for more details</GlowsiteLink>
 
 List of linear limits to be applied to the kinematics configuration for different types of move
 
@@ -107,7 +107,7 @@ The Kinematics configuration has an extent, this is the maximum volume that kc o
 
 `"scaleX"`, `"scaleY"`, and `"scaleZ"` scales the position of the kc itself.
 
-<Card title="kinematicsConfiguration Schema docs" extra={<Link to="/docs/gbc/schema/KinematicsConfigurationConfig">docs Link</Link>} style={{ width: '100%' }}>
+<Card title="kinematicsConfiguration Schema docs" extra={<GlowsiteLink to="/docs/types/KinematicsConfigurationConfig">docs Link</GlowsiteLink>} style={{ width: '100%' }}>
 
     `kinematicsConfiguration` in the config file maps to `KinematicsConfigurationConfig` in the schema
 

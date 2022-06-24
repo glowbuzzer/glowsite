@@ -1,6 +1,7 @@
-import {Tldr} from "../../../framework/components/Tldr"
+import {Tldr} from "../../../framework/components"
 import { Link } from "react-router-dom"
-import {BogStandardCol, BogStandardHeaderRow, BogStandardRow} from "../../../framework/components/BogStandardTable";
+import {BogStandardCol, BogStandardHeaderRow, BogStandardRow} from "../../../framework/components";
+import {GlowsiteLink} from "../../../framework";
 
 # {props.subtitle}
 
@@ -17,7 +18,7 @@ Adding support for a new type of drive requires the implementation of a set of C
 
 If the drive follows the CiA 402 specification closely, implementing these functions a trivial exercise and the existing examples can just be largely copied and pasted. However, if your drive supports more exotic interfaces or has fancy extra features which you want to use, then this may be more complicated. 
 
-In &gbem adding a new drive a set of extra steps on top of those required to add a new slave, so it is worth reviewing the documentation for adding a new slave as well as the instructions in this section - <Link to="/docs/gbem/adding_a_new_slave">Adding a new slave</Link>.
+In &gbem adding a new drive a set of extra steps on top of those required to add a new slave, so it is worth reviewing the documentation for adding a new slave as well as the instructions in this section - [Adding a new slave](/docs/gbem/adding_a_new_slave).
 
 ## First steps
 If you have ever commissioned a fieldbus drive before, you will already know that it is a bit of a painful process irrespective of the software you are integrating it with. There is, working out the wiring for the safety features to get it to move at all, a slightly baffling tuning process, a dense forest of configuration options to wade through and a "helpful" 500 page manual.
@@ -121,13 +122,13 @@ There are also some useful things that it makes it easier to use &gbem so if the
 
 Some drives require the drive manufacturer's configuration software to be used to create the PDO map and save it to the drive's NVRAM. In this case you can't configure the PDO mapping through &gbem and the functions to do the PDO mapping are not needed.
 
-To create the PDO mapping see the section in the slave document <Link to="/docs/gbem/adding_a_new_slave">Adding a new slave</Link>
+To create the PDO mapping see the section in the slave document [Adding a new slave](/docs/gbem/adding_a_new_slave).
 
 If you are using the drive's default PDO mapping this function won't be needed and its entry in the machine map will be NULL.
 
 If you want (or have) to create PDO map using the drive then this function will need to be written. 
 
-See the section in the slave document <Link to="/docs/gbem/adding_a_new_slave">Adding a new slave</Link> for more information on how to write the `ec_pdo_map_mydrive` function.
+See the section in the slave document [Adding a new slave](/docs/gbem/adding_a_new_slave) for more information on how to write the `ec_pdo_map_mydrive` function.
 
 **This function is optional - if you are using the default PDO mapping for the drive then this function is not needed and the entry in the machine map will be NULL**
 

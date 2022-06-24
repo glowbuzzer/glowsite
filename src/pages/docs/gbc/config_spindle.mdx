@@ -1,6 +1,7 @@
 import {Tldr} from "../../../framework/components/Tldr"
 import { Link } from "react-router-dom"
 import {Card} from "antd"
+import {GlowsiteLink} from "../../../framework";
 
 
 # {props.subtitle}
@@ -22,7 +23,7 @@ This implementation of spindle control covers only very simple spindles for exam
 
 Three Digital Outs and one analogue output are needed to use the simple spindle control.
 
-<Card title="spindle Schema docs" extra={<Link to="/docs/gbc/schema/SpindleConfig">docs link</Link>} style={{ width: '100%' }}>
+<Card title="spindle Schema docs" extra={<GlowsiteLink to="/docs/types/SpindleConfig">docs link</GlowsiteLink>} style={{ width: '100%' }}>
 
     `spindle` in the config file maps to `SpindleConfig` in the schema
 

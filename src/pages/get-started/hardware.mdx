@@ -1,12 +1,12 @@
-
 import { Link } from "react-router-dom"
 import {Row, Col, Divider} from 'antd';
 import {Table, Tag, Space} from 'antd';
-import {Tldr} from "../../framework/components/Tldr"
-import {Image} from "../../framework/components/Image"
+import {Tldr} from "../../framework/components"
+import {Image} from "../../framework/components"
 import {SingleAxisKitDataSource} from "./SingleAxisKit"
 import {ThreeAxisKitDataSource} from "./ThreeAxisKit"
 import {EmbeddedLinuxKitDataSource} from "./EmbeddedLinuxKit"
+import {GlowsiteLink} from "../../framework";
 
 
 export const columns = [
@@ -52,7 +52,7 @@ You don't need any hardware to test the &gbt in *simulation mode*. Everything ca
 
 This will allow you to test out the front-end React components and see how the control behaves and test out writing your own React components to control machines.
 
-See <Link to="/get-started/simulation">simulation mode</Link> for more details on how to run the toolkit without any drives and IO.
+See <GlowsiteLink to="/get-started/simulation">simulation mode</GlowsiteLink> for more details on how to run the toolkit without any drives and IO.
 
 But really, the &gbt is all about making things move and for that you need some hardware. That means you need something to run the core control (in real-time) on and some motors and IO to test your control program with.
 
@@ -96,7 +96,7 @@ import gb_sk_01 from "./photo_single_axis_starter_kit_contents.jpg?glowsite"
 <Table dataSource={SingleAxisKitDataSource} columns={columns} bordered={true} pagination={{ defaultPageSize: 5, showSizeChanger: true, pageSizeOptions: ['5', '10', '15']}}/>
 
 
-See <Link to="/get-started/building_hardware/single_axis"> building the single axis starter kit</Link> for assembly instructions.
+See <GlowsiteLink to="/get-started/building_hardware/single_axis"> building the single axis starter kit</GlowsiteLink> for assembly instructions.
 
 The assembled starter kit assembled is shown below. It is a single EtherCAT drive connected to a motor and Raspberry Pi.
 
@@ -116,7 +116,7 @@ import gb_sk_02 from "./photo_three_axis_kit_contents.jpg?glowsite"
 
 <Table dataSource={ThreeAxisKitDataSource} columns={columns} bordered={true} pagination={{ defaultPageSize: 5, showSizeChanger: true, pageSizeOptions: ['5', '10', '15']}}/>
 
-See <Link to="/get-started/building_hardware/three_axis"> building the three axis starter kit</Link> for assembly instructions.
+See <GlowsiteLink to="/get-started/building_hardware/three_axis"> building the three axis starter kit</GlowsiteLink> for assembly instructions.
 
 The assembled starter kit assembled is shown below. It is a three axis EtherCAT drive connected motors and Beckhoff Digital IO and a Raspberry Pi.
 
@@ -133,6 +133,6 @@ TODO picture
 
 <Table dataSource={EmbeddedLinuxKitDataSource} columns={columns} bordered={true} pagination={{ defaultPageSize: 5, showSizeChanger: true, pageSizeOptions: ['5', '10', '15']}}/>
 
-See <Link to="/get-started/building_hardware/embedded_linux_axis"> building the embedded Linux starter kit</Link> for assembly instructions.
+See <GlowsiteLink to="/get-started/building_hardware/embedded_linux_axis"> building the embedded Linux starter kit</GlowsiteLink> for assembly instructions.
 
 

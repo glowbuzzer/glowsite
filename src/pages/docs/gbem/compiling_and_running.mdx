@@ -2,6 +2,7 @@ import {Tldr} from "../../../framework/components/Tldr"
 import { Image } from "../../../framework/components/Image"
 import { Link } from "react-router-dom"
 import InstallGbem from "../../fragments/install_gbem.mdx"
+import {GlowsiteLink} from "../../../framework";
 
 # {props.subtitle}
 <Tldr>
@@ -124,7 +125,7 @@ This assumes you have:
 
 * &gbem installed on a Linux platform with a preempted kernel
 * Have the correct NIC connected to an EtherCAT network with one or more slaves on it which are powered up
-* Have configured a machine see <Link to="/docs/gbem/configuring_machines">Configuring machines</Link>
+* Have configured a machine see <GlowsiteLink to="/docs/gbem/configuring_machines">Configuring machines</GlowsiteLink>
 
 Start out by doing a netscan. This is `./gbem -n -ieth0`.
 
@@ -150,7 +151,7 @@ Unless the `map_config.h` has the correct machine configuration enabled, and tha
 
 ## ramdisk directory
 
-If running on Linux platforms that use an SD card or eMMC as its filesystem, and you want to use emstat (<Link to="/docs/gbem/emstat">docs here</Link>) to write a JSON file each containing that status of the &gbem then it is useful to store files in RAM based storage rather than on storage that may have limited write/cycles.
+If running on Linux platforms that use an SD card or eMMC as its filesystem, and you want to use emstat (<GlowsiteLink to="/docs/gbem/emstat">docs here</GlowsiteLink>) to write a JSON file each containing that status of the &gbem then it is useful to store files in RAM based storage rather than on storage that may have limited write/cycles.
 
 To do this under Linux, first create a mount point:
 

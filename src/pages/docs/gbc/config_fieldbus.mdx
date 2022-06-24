@@ -1,6 +1,7 @@
 import {Tldr} from "../../../framework/components/Tldr"
 import { Link } from "react-router-dom"
 import {Card} from "antd"
+import {GlowsiteLink} from "../../../framework";
 
 
 # {props.subtitle}
@@ -15,7 +16,7 @@ The fieldbus section of the config defines the offsets of the objects transferre
 
 If you need to modify this then it is best to contact us first.
 
-<Card title="fieldbus Schema docs" extra={<Link to="/docs/gbc/schema/FieldbusConfig">docs Link</Link>} style={{ width: '100%' }}>
+<Card title="fieldbus Schema docs" extra={<GlowsiteLink to="/docs/types/FieldbusConfig">docs Link</GlowsiteLink>} style={{ width: '100%' }}>
 
     `fieldbus` in the config file maps to `FieldbusConfig` in the schema
 

@@ -777,6 +777,18 @@ const nav = {
                                 import("./pages/docs/tutorials/robot_pick_and_place.mdx")
                         }
                     ]
+                },
+                {
+                    slug: "types",
+                    standaloneTypes: true,
+                    children: typedoc.children
+                        .filter(i => !typedocHookFilter(i))
+                        .map(t => ({
+                            slug: t.name,
+                            title: t.name,
+                            layout: TypedocPageDetached,
+                            component: () => import("./typedoc/TypedocItem")
+                        }))
                 }
             ]
         },
@@ -965,22 +977,16 @@ const nav = {
             slug: "downloads",
             layout: SimpleLayout,
             component: () => import("./pages/DownloadsPage")
-        },
-        {
-            slug: "docs/types/:name",
-            layout: TypedocPageDetached,
-            title: "GBC Types",
-            // filter: c => c.sources?.some(s => s.fileName === "gbc.ts" || s.fileName === "gbc.d.ts"), // for left nav build
-            filter: c => true,
-            component: () => import("./typedoc/TypedocItem")
-            // },
-            // {
-            //     slug: "docs/gbr/hooks/:name",
-            //     layout: TypedocPageDetached,
-            //     title: "GBR Hooks",
-            //     filter: c => true,
-            //     component: () => import("./typedoc/TypedocItem")
         }
+
+        // {
+        //     slug: "docs/types/:name",
+        //     layout: TypedocPageDetached,
+        //     title: "GBC Types",
+        //     // filter: c => c.sources?.some(s => s.fileName === "gbc.ts" || s.fileName === "gbc.d.ts"), // for left nav build
+        //     filter: c => true,
+        //     component: () => import("./typedoc/TypedocItem")
+        // }
     ].filter(n => n) // filter empty (conditional) nodes
 }
 

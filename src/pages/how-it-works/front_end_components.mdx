@@ -1,8 +1,9 @@
 import {Tabs} from "antd"
-import {Tldr} from "../../framework/components/Tldr";
+import {Tldr} from "../../framework/components";
 import {Link} from "react-router-dom"
 import {GlowbuzzerApp} from "@glowbuzzer/controls/app"
 import GbrTilesOverview from "../fragments/gbr_tiles_overview_list.mdx"
+import {GlowsiteLink} from "../../framework";
 
 # {props.subtitle}
 
@@ -20,7 +21,7 @@ while others can be the starting point for you to modify to your specific needs.
 
 The framework is built on other open source projects, primarily React, Redux & Ant Design.
 
-Below is a description of a handful of the components to give you a flavour of what's available. See <Link to="/docs/gbr/overview">&gbrl; Documentation</Link> for the full suite of components.
+Below is a description of a handful of the components to give you a flavour of what's available. See <GlowsiteLink to="/docs/gbr/overview">&gbrl; Documentation</GlowsiteLink> for the full suite of components.
 
 <GbrTilesOverview/>
 

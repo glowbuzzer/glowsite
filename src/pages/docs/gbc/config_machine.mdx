@@ -1,6 +1,7 @@
 import {Tldr} from "../../../framework/components/Tldr"
 import { Link } from "react-router-dom"
 import {Card} from "antd"
+import {GlowsiteLink} from "../../../framework";
 
 
 # {props.subtitle}
@@ -23,7 +24,7 @@ The name of the machine is not used though is accessible in the &gbr API if you 
 `statusFrequency` is the frequency of status updates (between 20 and 1000, in milliseconds) between &gbr and &gbr. This defines how many updates the front-end receives from GBC over the websockets connection each second. Depending on exactly what your front-end applications does, you will need to tune this parameter so that front-end updates speedily but without stressing either &gbr or the browser.
 
 
-<Card title="machine Schema docs" extra={<Link to="/docs/gbc/schema/MachineConfig">docs Link</Link>} style={{ width: '100%' }}>
+<Card title="machine Schema docs" extra={<GlowsiteLink to="/docs/types/MachineConfig">docs Link</GlowsiteLink>} style={{ width: '100%' }}>
 
     `machine` in the config file maps to `MachineConfig` in the schema
 

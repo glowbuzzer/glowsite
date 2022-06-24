@@ -1,6 +1,7 @@
 import {Tldr} from "../../../framework/components/Tldr"
 import {Link} from "react-router-dom"
 import {BogStandardCol, BogStandardRow, BogStandardHeaderRow} from "../../../framework/components/BogStandardTable";
+import {GlowsiteLink} from "../../../framework";
 
 # {props.subtitle}
 
@@ -17,10 +18,10 @@ import {BogStandardCol, BogStandardRow, BogStandardHeaderRow} from "../../../fra
 You can use &gbem without writing any new c code if you work with the types of drives/slaves we have pre-configured.
 
 These include a range of slaves from Beckhoff, Oriental Motor, JVL, Kollmorgen, Panasonic, Omron, Delta, Cannon, nanotec,
-Trinamic, Delta etc. (see <Link to="/docs/gbem/drive_support_overview">Drive support</Link>).
+Trinamic, Delta etc. (see <GlowsiteLink to="/docs/gbem/drive_support_overview">Drive support</GlowsiteLink>).
 
 If you want to add support for new slaves from different manufacturers then some very basic c programming know-how is needed.
-See <Link to="/docs/gbem/adding_a_new_slave">Adding a new slave</Link> & <Link to="/docs/gbem/adding_a_new_drive">Adding a new drive</Link>.
+See <GlowsiteLink to="/docs/gbem/adding_a_new_slave">Adding a new slave</GlowsiteLink> & <GlowsiteLink to="/docs/gbem/adding_a_new_drive">Adding a new drive</GlowsiteLink>.
 
 If you are using the pre-configured drives/slaves (or have already written your drive / slave interfaces) the steps
 involved in creating a machine configuration are:
