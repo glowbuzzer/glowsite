@@ -19,7 +19,7 @@ export const SingleAxisKitDataSource = [
         key: "3",
         gb_part_number: "gb_32gb_sdcard",
         qty: 1,
-        item_description: "SanDisk Ultra 32 GB microSDHC Memory Card",
+        item_description: "SanDisk Ultra 32GB microSDHC Memory Card",
         mfr_part_number: "SDSQUA4-032G-GN6MA",
         manufacturer: "SanDisk"
     },

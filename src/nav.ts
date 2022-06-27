@@ -147,7 +147,7 @@ const nav = {
             children: [
                 {
                     slug: "simulation",
-                    title: "Quick start",
+                    title: "Quick start - no hardware",
                     subtitle: "Get started without hardware",
                     component: () => import("./pages/get-started/simulation.mdx")
                 },
@@ -186,9 +186,9 @@ const nav = {
                     ]
                 },
                 {
-                    slug: "software",
-                    title: "Installing the software",
-                    subtitle: "How to get a drive moving",
+                    slug: "qs-hardware",
+                    title: "Quick start - with hardware",
+                    subtitle: "Get started with hardware - How to get a drive moving",
                     component: () => import("./pages/get-started/software.mdx")
                 },
                 {

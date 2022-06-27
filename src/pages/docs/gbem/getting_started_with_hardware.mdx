@@ -9,19 +9,23 @@ import {GlowsiteLink} from "../../../framework";
     - Writing slave and drive interfaces is not hard to supporting any EtherCAT device is not hard
 </Tldr>
 
-If you are using the recommended starter hardware, a guide to getting a drive moving can be found here: <GlowsiteLink to="/get-started/motion">Get a drive moving</GlowsiteLink>.
+If you are using the recommended starter hardware, a guide to getting a drive moving can be found here: <GlowsiteLink to="/get-started/qs-hardware">Quick-start - with hardware</GlowsiteLink>.
 
 If you are using your own hardware then the basic steps (if you are using a Raspberry Pi as the test Linux platform) are:
 
-1. Step 1 - install &gbt - see <GlowsiteLink to="/get-started/motion"> Step 1 - Use the create react app custom template to create your getting started project</GlowsiteLink>
-1. Step 2 - install real-time Raspberry Pi Linux OS - see <GlowsiteLink to="/get-started/motion">Step 2 - install Raspberry Pi OS</GlowsiteLink>
-1. Step 3 - install &gbc - see <GlowsiteLink to="/get-started/motion">Step 3 - Download &gbc on the Raspberry Pi</GlowsiteLink>
-1. Step 4 - download &gbem - see <GlowsiteLink to="/docs/gbem/compiling_and_running">Compiling and running &gbem </GlowsiteLink>
-1. Step 5 - if your slaves and drives are currently supported by &gbem you just need to configure a machine in &gbem - see <GlowsiteLink to="/docs/gbem/configuring_machines"> here</GlowsiteLink>
-1. Step 6 - if you need to write new slave code - see <GlowsiteLink to="/docs/gbem/adding_a_new_slave"> here</GlowsiteLink>
-1. Step 7 - if you need to write new drive code - see <GlowsiteLink to="/docs/gbem/adding_a_new_drive"> here</GlowsiteLink>
-1. Step 8 - run &gbc - see <GlowsiteLink to="/docs/gbc/running"> here</GlowsiteLink>
-1. Step 9 - connect your browser to the React dev server and from the browser connect to &gbc  - see <GlowsiteLink to="/get-started/motion"> Step 5 - Run GBC & GBEM and make sure it connected to both GBC and the test hardware</GlowsiteLink>
-1. Step 10 - run &gbem - see <GlowsiteLink to="/docs/gbem/compiling_and_running"> here</GlowsiteLink>
-1. Step 11 - use the React controls in the browser to jog the motor
+
+Start by following the instructions as if you are using one the starter kits - <GlowsiteLink to="/get-started/qs-hardware">Quick-start - with hardware</GlowsiteLink>.
+
+Then you will need to make changes to the &gbem code to support your specific machine.
+
+This is done with the following steps:
+
+1. Step 1 - if your slaves and drives are currently supported by &gbem you just need to configure a machine in &gbem - see <GlowsiteLink to="/docs/gbem/configuring_machines"> Configuring machines in GBEM</GlowsiteLink>
+1. Step 2 - if you need to write new slave code - see <GlowsiteLink to="/docs/gbem/adding_a_new_slave"> Adding a new slave in GBEM</GlowsiteLink>
+1. Step 3 - if you need to write new drive code - see <GlowsiteLink to="/docs/gbem/adding_a_new_drive"> Adding a new drive in GBEM</GlowsiteLink>
+
+
+Then you will be able to complete the <GlowsiteLink to="/get-started/qs-hardware">Quick-start - with hardware</GlowsiteLink> instructions by jogging a motor on the machine you confgured.
+
+
 
