@@ -98,7 +98,7 @@ export const HomePage = () => {
             </HexImageSection>
 
             <Section background={"White"} spaced>
-                <YoutubeEmbed embedId="VnhS6107czk" />
+                <YoutubeEmbed embedId="13eCFw1BnDo"/>
             </Section>
 
             <Section background={"BackgroundDarkSection"} inverted guttered>
@@ -132,7 +132,7 @@ export const HomePage = () => {
                                 With the glowbuzzer toolkit, you take our React components and use
                                 them either unchanged, extended or added to with your own custom components
                                 to build the visual front-end and control logic for your machine control.
-                                With this you will be writing machine control programs using familar web technologies.
+                                With this you will be writing machine control programs using familiar web technologies.
                             </>
                         }
                         to="/how-it-works/overview"
