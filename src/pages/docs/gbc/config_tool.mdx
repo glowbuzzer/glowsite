@@ -29,7 +29,9 @@ Because all values default to zero, this will create a tool with `diameter : 0`,
 
 The `diameter` parameter is just used by &gbr when building the 3D representation of the tool. It is accessible in the &gbr API for you to use in other ways.
 
-Usually negative `translation` in `z` is used to represent a standard tool protruding from the spindle in a negative Z direction.
+The `translation` in `z` is used to represent a standard tool protruding from the spindle. Whether you enter a positive or negative number
+for your tool lengths depends on the kinematics model for your machine. For the generic example XYZ machine we provide tools
+have a negative Z translation whereas for the Staubli robot example tools have a positive Z translation.
 
 [//]: # (TODO)
 [//]: # (tool change link)
@@ -50,25 +52,42 @@ Usually negative `translation` in `z` is used to represent a standard tool protr
 
 ## Example JSON
 
-The following config defines three tools. The first tool, named `"default"`, has null parameters. The second tool, named `"tool1"` has a length offset of 10 and the final tool, named `"tool2"` has a length of 20.
+The following config defines a number of tools. The first tool, named `"Default"`, has null parameters and so has zero length and diameter and no offsets.
 
-The default tool has a diameter of zero and the two other tools have diameters of 10.
+The second tool, named `"Tool 1"` has a length offset of 10 and a diameter or 10.
 
 ```json
-"tool": {
-        "default": {
+  "tool": [
+        {
+            "name": "Default"
         },
-        "tool1": {
-            "diameter" : 10,
+        {
+            "name": "Tool 1",
+            "diameter": 10,
             "translation": {
                 "z": -10
             }
         },
-        "tool2": {
-            "diameter" : 10,
+        {
+            "name": "Tool 2",
+            "diameter": 10,
             "translation": {
                 "z": -20
             }
+        },
+        {
+            "name": "Tool 3",
+            "diameter": 10,
+            "translation": {
+                "z": -30
+            }
+        },
+        {
+            "name": "Tool 4",
+            "diameter": 10,
+            "translation": {
+                "z": -40
+            }
         }
-    }
+    ]
 ```

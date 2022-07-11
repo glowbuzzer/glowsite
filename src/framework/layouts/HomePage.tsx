@@ -17,7 +17,7 @@ import { Section } from "../components/Section"
 import { ReactComponent as RocketIcon } from "../../home/rocket.svg?inline"
 import { HomeCarousel } from "../components/HomeCarousel"
 import { YoutubeEmbed } from "../components/Video"
-import HexImage from "../../home/hex_components.svg"
+import HexImage from "../../home/hex_components5.svg"
 import { ReactComponent as BlogIcon } from "../../home/blog.svg?inline"
 import { FeaturedItem, FeaturesSection } from "../components/FeaturesSection"
 

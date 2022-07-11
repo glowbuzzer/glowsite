@@ -37,13 +37,14 @@ Three Digital Outs and one analogue output are needed to use the simple spindle 
 Here we define a spindle (index 0, key="spindle") which uses Digital Out #0 to turn it on/off and Digital out #1 to control its direction (CW/CCW). Its direction is not inverted. It uses Analogue Output #0 to set its speed.
 
 ```json
- "spindle": {
-    "0": {
+ "spindle": [
+    {
+      "name": "Default",
       "enableDigitalOutIndex": 0,
       "directionDigitalOutIndex": 1,
       "directionInvert": false,
       "speedAnalogOutIndex": 0
     }
-  },
+  ]
 ```
 

@@ -124,66 +124,60 @@ In this configuration we have defined:
 * no analogue or digital ins or outs
 
 ```json
-   "din": {
-        "0": {
+    "din": [
+        {
             "inverted": 1
         },
-        "1": {
+        {
             "inverted": 0
         },
-        "2": {
+        {
             "inverted": 0
         },
-        "3": {
+        {
             "inverted": 0
         }
-    },
-    "dout": {
-        "0": {
+    ],
+    "dout": [
+        {
+            "name": "DOUT 0",
             "inverted": 0
         },
-        "1": {
-            "inverted": 0
-        },
-        "2": {
-            "inverted": 0
-        },
-        "3": {
-            "inverted": 0
-        },
-        "4": {
-            "inverted": 0
-        },
-        "5": {
-            "inverted": 0
-        },
-        "6": {
-            "inverted": 0
-        },
-        "7": {
-            "inverted": 0
-        },
-        "8": {
-            "inverted": 0
-        },
-        "9": {
+        {
+            "name": "DOUT 1",
             "inverted": 0
         }
-    },
-    "ain": {
-        "0": {
+    ],
+    "ain": [
+        {
+            "name": "AIN 0"
+        },
+        {
+            "name": "AIN 1"
         }
-    },
-    "aout": {
-        "0": {
+    ],
+    "aout": [
+        {
+            "name": "AOUT 0"
+        },
+        {
+            "name": "AOUT 1"
         }
-    },
-    "iin": {
-        "0": {
+    ],
+    "iin": [
+        {
+            "name": "IIN 0"
+        },
+        {
+            "name": "IIN 1"
         }
-    },
-    "iout": {
-        "0": {
+    ],
+    "iout": [
+        {
+            "name": "IOUT 0"
+        },
+        {
+            "name": "IOUT 1"
         }
-    },
+    ]
 ```

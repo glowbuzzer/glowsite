@@ -154,9 +154,9 @@ The triggerOn section of the config allows triggers to be defined. These are use
 ### `moveParameters: {}`
 
 ```json
-{
-  "moveParameters": {
-    "set1": {
+"moveParameters": [
+  {
+      "name": "Default",
       "amaxPercentage": 50,
       "blendTimePercentage" : 60,
       "blendTolerance" : 20,
@@ -165,23 +165,23 @@ The triggerOn section of the config allows triggers to be defined. These are use
       "limitConfigurationIndex" : 0,
       "toolIndex": 1,
       "vmaxPercentage": 25
-    }
   }
-}
+]
 ```
 
 
 ### `task: {}` & `activity: {}`
 
 ```json
-{
-  "task": {
-    "move joint": {
+"task": [
+  {
+    "name": "move joint",
       "activity1": {
         "activityType": 4
       }
-    },
-    "move line": {
+  },
+  {
+    name: "move line",
       "activity1": {
         "activityType": 1
       }
@@ -193,42 +193,70 @@ The triggerOn section of the config allows triggers to be defined. These are use
       }
     }
   }
-}
 ```
 
 
 ### `lines: {}`
 ```json
-{
-  "lines": {
-    "toHome": {
-      "frameIndex": 2,
-      "translation": {
-        "x" : 120,
-        "y" : 240,
-        "z" : 360
-        }
+"lines": [
+  {
+    "name": "toHome",
+    "frameIndex": 2,
+    "translation": {
+      "x" : 120,
+      "y" : 240,
+      "z" : 360
+    }
+  },
+  {
+    "name": "toPart",
+    "frameIndex": 2,
+    "translation": {
+      "x" : 20,
+      "y" : 40,
+      "z" : 60
     }
   }
-}
+]
 ```
 
 ### `arcs: {}`
-```json
-{
-  "arcs": {
 
+
+
+```json
+"arcs": [
+  {
+    "name": "arc1",
+    "arcDirection": 0,
+    "arcType": 1,
+    "destination":
+      {
+        "frameIndex": 2,
+        "translation": {
+        "x" : 20,
+        "y" : 40,
+        "z" : 60
+      },
+    "radius": 100
   }
-}
+]
 ```
 
 ### `cartesianPositions: {}`
 ```json
-{
-  "cartesianPositions": {
-
+"cartesianPositions": [
+  {
+    "name": "part1",
+    "frameIndex": 2,
+    "translation": {
+    "x" : 20,
+    "y" : 40,
+    "z" : 60
   }
-}
+]
+
+
 ```
 
 

@@ -101,19 +101,19 @@ For use with real hardware this needs to run on Linux with real-time extensions.
     <InstallGBEM>
         <PageVariantTabs>
             <Tabs.TabPane tab="Single Axis Kit" key="sk1">
-                Edit `gbem/libs/machine_mapping/inc/map_config.h` to activate the starter kit configuration. Set `MACHINE_SK1`
+                Edit `gbem/libs/machine_mapping/inc/map_config.h` to activate the starter kit configuration. Set `MACHINE_STARTER_KIT_1`
                 to `1` and set all others to `0`.
 
                 ````shell
-                #define MACHINE_SK1 1
+                #define MACHINE_STARTER_KIT_1    1
                 ````
             </Tabs.TabPane>
             <Tabs.TabPane tab="Three Axis Kit" key="sk2">
-                Edit `gbem/libs/machine_mapping/inc/map_config.h` to activate the starter kit configuration. Set `MACHINE_SK2`
+                Edit `gbem/libs/machine_mapping/inc/map_config.h` to activate the starter kit configuration. Set `MACHINE_STARTER_KIT_2`
                 to `1` and set all others to `0`.
 
                 ````shell
-                #define MACHINE_SK2 1
+                #define MACHINE_STARTER_KIT_2    1
                 ````
             </Tabs.TabPane>
         </PageVariantTabs>
@@ -122,7 +122,7 @@ For use with real hardware this needs to run on Linux with real-time extensions.
     Check that &gbem can connect to the slaves on your EtherCAT network:
 
     ````shell
-    ./gbem -n -ieth0
+    ./gbem -n -i eth0
     ````
 
     This prints a lot of detailed diagnostic information, and within this you should see the details of the slaves on
@@ -130,7 +130,7 @@ For use with real hardware this needs to run on Linux with real-time extensions.
 
     You are now ready to run &gbem:
     ```
-    ./GBEM -c -ieth0
+    ./GBEM -c -i eth0
     ```
 
     ## Launch and connect the front-end
