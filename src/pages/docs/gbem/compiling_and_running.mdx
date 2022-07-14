@@ -35,7 +35,7 @@ The main command line modes are:
 
 Normally, you will run &gbem with: `./GBEM -c -ieth0`. Obviously, change `eth0` to the name of the network interface connected to the EtherCAT network.
 
-When you want to scan the EtherCAT network you will run &gbem with: `./GBEM -n -ieth0`.
+When you want to scan the EtherCAT network you will run &gbem with: `./GBEM -n -i eth0`.
 
 ## Console output from &gbem
 
@@ -127,15 +127,15 @@ This assumes you have:
 * Have the correct NIC connected to an EtherCAT network with one or more slaves on it which are powered up
 * Have configured a machine see <GlowsiteLink to="/docs/gbem/configuring_machines">Configuring machines</GlowsiteLink>
 
-Start out by doing a netscan. This is `./gbem -n -ieth0`.
+Start out by doing a netscan. This is `./gbem -n -i eth0`.
 
 This will send out on the EtherCAT network a BRD (Broadcast Read) of address 0, and all functional slaves in the network will respond to this request.
 
 The netscan will either produce an error message 😕 or a blizzard of config information ​🙂.​
 
-If you get an error message then it is time to read the troubleshooting guide. If you have found some slaves, the next step is check the machine config by running `./gbem -d -ith0`. This will either confirm that the machine configuration is valid or will produce error messages explaining where the misconfiguration lies.
+If you get an error message then it is time to read the troubleshooting guide. If you have found some slaves, the next step is check the machine config by running `./gbem -d -i th0`. This will either confirm that the machine configuration is valid or will produce error messages explaining where the misconfiguration lies.
 
-Finally, you can run &gbem in cyclic mode with `./gbem -c -ieth0`. This will boot the EtherCAT network and then try and connect over shared memory to &gbc (or a program you write to control &gbem over shared memory).
+Finally, you can run &gbem in cyclic mode with `./gbem -c -i eth0`. This will boot the EtherCAT network and then try and connect over shared memory to &gbc (or a program you write to control &gbem over shared memory).
 
 ## &gbem config
 

@@ -150,24 +150,28 @@ The frame is another absolute frame called `"pallet"` which we will use to defin
 Finally we have a relative frame called `"part"`. This is relative to frame 2 which is `"pallet"` and is a translation of 10 in x.
 
 ```json
-"frames": {
-  "default": {
+"frames": [
+  {
+    "name": "default"
   },
-  "robot": {
+  {
+    "name": "robot",
     "translation": {
     "x": 50,
     "y": 50,
     "z": 0
     }
   },
-  "pallet": {
+  {
+    "name": "pallet",
     "translation": {
-    "x": 100,
-    "y": 100,
-    "z": 0
-  }
+      "x": 100,
+      "y": 100,
+      "z": 0
+     }
   },
-  "part": {
+  {
+    "name": "part",
     "absRel": 1,
     "parent": 2,
     "translation": {
@@ -175,8 +179,8 @@ Finally we have a relative frame called `"part"`. This is relative to frame 2 wh
       "y": 0,
       "z": 0
     }
-  },
-}
+  }
+]
 ```
 
 

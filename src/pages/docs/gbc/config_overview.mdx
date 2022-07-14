@@ -51,54 +51,30 @@ See <GlowsiteLink to="/docs/gbc/configuration/config_advanced">Advanced config</
 
 ```json
 {
-"machine": {
-"default": {
-"busCycleTime": 4
-}
-},
-
-    "stream": {
-        "default": {
+    "$log": "GENERIC CONFIG ACTIVE",
+    "machine": [
+        {
+            "name": "default",
+            "busCycleTime": 4
         }
-    },
-    "soloActivity": {
-        "default": {
-        },
-        "aux": {
+    ],
+    "stream": [
+        {
+            "name": "default"
         }
-    },
-    "joint": {
-        "0": {
-            "limits": [
-                {
-                    "vmax": 200,
-                    "amax": 4000,
-                    "jmax": 80000
-                }
-            ],
-            "scale": 1000.0
+    ],
+    "soloActivity": [
+        {
+            "name": "default"
         },
-        "1": {
-            "limits": [
-                {
-                    "vmax": 200,
-                    "amax": 4000,
-                    "jmax": 80000
-                }
-            ],
-            "scale": 1000.0
-        },
-        "2": {
-            "limits": [
-                {
-                    "vmax": 200,
-                    "amax": 4000,
-                    "jmax": 80000
-                }
-            ],
-            "scale": 1000.0
-        },
-        "aux": {
+        {
+            "name": "aux"
+        }
+    ],
+    "joint": [
+        {
+            "name": "0",
+            "finiteContinuous": 1,
             "jointType": 1,
             "limits": [
                 {
@@ -107,19 +83,53 @@ See <GlowsiteLink to="/docs/gbc/configuration/config_advanced">Advanced config</
                     "jmax": 80000
                 }
             ],
-            "scale": 1000.0
-        }
-    },
-    "jog": {
-        "0": {
-            "kinematicsConfigurationIndex": 0
+            "scale": 1000
         },
-        "1": {
-            "kinematicsConfigurationIndex": 1
+        {
+            "name": "1",
+            "finiteContinuous": 1,
+            "jointType": 1,
+            "limits": [
+                {
+                    "vmax": 200,
+                    "amax": 4000,
+                    "jmax": 80000
+                }
+            ],
+            "scale": 1000
+        },
+        {
+            "name": "2",
+            "finiteContinuous": 1,
+            "jointType": 1,
+            "limits": [
+                {
+                    "vmax": 200,
+                    "amax": 4000,
+                    "jmax": 80000
+                }
+            ],
+            "scale": 1000
+        },
+        {
+            "name": "aux",
+            "finiteContinuous": 0,
+            "negLimit": -180,
+            "posLimit": 180,
+            "jointType": 1,
+            "limits": [
+                {
+                    "vmax": 200,
+                    "amax": 4000,
+                    "jmax": 80000
+                }
+            ],
+            "scale": 1000
         }
-    },
-    "kinematicsConfiguration": {
-        "default": {
+    ],
+    "kinematicsConfiguration": [
+        {
+            "name": "default",
             "frameIndex": 0,
             "participatingJoints": [
                 0,
@@ -201,7 +211,8 @@ See <GlowsiteLink to="/docs/gbc/configuration/config_advanced">Advanced config</
                 ]
             }
         },
-        "aux": {
+        {
+            "name": "aux",
             "frameIndex": 0,
             "participatingJoints": [
                 3
@@ -223,71 +234,66 @@ See <GlowsiteLink to="/docs/gbc/configuration/config_advanced">Advanced config</
                 }
             ]
         }
-    },
-    "din": {
-        "0": {
+    ],
+    "din": [
+        {
             "inverted": 1
         },
-        "1": {
+        {
             "inverted": 0
         },
-        "2": {
+        {
             "inverted": 0
         },
-        "3": {
+        {
             "inverted": 0
         }
-    },
-    "dout": {
-        "0": {
+    ],
+    "dout": [
+        {
+            "name": "DOUT 0",
             "inverted": 0
         },
-        "1": {
-            "inverted": 0
-        },
-        "2": {
-            "inverted": 0
-        },
-        "3": {
-            "inverted": 0
-        },
-        "4": {
-            "inverted": 0
-        },
-        "5": {
-            "inverted": 0
-        },
-        "6": {
-            "inverted": 0
-        },
-        "7": {
-            "inverted": 0
-        },
-        "8": {
-            "inverted": 0
-        },
-        "9": {
+        {
+            "name": "DOUT 1",
             "inverted": 0
         }
-    },
-    "ain": {
-        "0": {
+    ],
+    "ain": [
+        {
+            "name": "AIN 0"
+        },
+        {
+            "name": "AIN 1"
         }
-    },
-    "aout": {
-        "0": {
+    ],
+    "aout": [
+        {
+            "name": "AOUT 0"
+        },
+        {
+            "name": "AOUT 1"
         }
-    },
-    "iin": {
-        "0": {
+    ],
+    "iin": [
+        {
+            "name": "IIN 0"
+        },
+        {
+            "name": "IIN 1"
         }
-    },
-    "iout": {
-        "0": {
+    ],
+    "iout": [
+        {
+            "name": "IOUT 0"
+        },
+        {
+            "name": "IOUT 1"
         }
-    },
-    "fieldbus": {
-        "0": {
+    ],
+    "fieldbus": [
+        {
+            "name": "0",
             "jointCount": 10,
             "RxPdo": {
                 "machineStatusWordOffset": 0,
@@ -322,16 +328,19 @@ See <GlowsiteLink to="/docs/gbc/configuration/config_advanced">Advanced config</
                 "integerCount": 2
             }
         }
-    },
-    "frames": {
-        "default": {
+    ],
+    "frames": [
+        {
+            "name": "Default"
         },
-        "translate10": {
+        {
+            "name": "Translate 10",
             "translation": {
                 "x": 10
             }
         },
-        "rotate90": {
+        {
+            "name": "Rotate 90",
             "rotation": {
                 "x": 0.7071068,
                 "y": 0,
@@ -339,15 +348,48 @@ See <GlowsiteLink to="/docs/gbc/configuration/config_advanced">Advanced config</
                 "w": 0.7071068
             }
         }
-    },
-    "tool": {
-        "default": {
+    ],
+    "tool": [
+        {
+            "name": "Default"
         },
-        "offsetz": {
+        {
+            "name": "Tool 1",
+            "diameter": 10,
             "translation": {
                 "z": -10
             }
+        },
+        {
+            "name": "Tool 2",
+            "diameter": 10,
+            "translation": {
+                "z": -20
+            }
+        },
+        {
+            "name": "Tool 3",
+            "diameter": 10,
+            "translation": {
+                "z": -30
+            }
+        },
+        {
+            "name": "Tool 4",
+            "diameter": 10,
+            "translation": {
+                "z": -40
+            }
         }
-    }
+    ],
+    "spindle": [
+        {
+            "name": "Default",
+            "enableDigitalOutIndex": 0,
+            "directionDigitalOutIndex": 1,
+            "directionInvert": false,
+            "speedAnalogOutIndex": 0
+        }
+    ]
 }
 ```

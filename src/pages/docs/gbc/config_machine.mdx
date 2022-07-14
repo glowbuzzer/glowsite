@@ -39,11 +39,13 @@ The name of the machine is not used though is accessible in the &gbr API if you 
 This creates a machine called default, with a bus cycle time of 4ms and a status update period of 20ms.
 
 ```json
-"machine": {
-    "default": {
-    "busCycleTime": 4
+"machine": [
+  {
+    "name": "default",
+    "busCycleTime": 4,
     "statusFrequency": 20
-}
+  }
+]
 
 ```
 

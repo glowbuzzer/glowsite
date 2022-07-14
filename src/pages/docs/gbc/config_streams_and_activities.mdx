@@ -39,27 +39,32 @@ The soloActivity section of the config maps solo activities to kcs. This simply 
 
 stream 0 = kc0
 
-soloactivty 0 = kc 0
+soloactivity 0 = kc 0
 
 ## Example JSON
 
 In this example there is just a single stream named `"default"`.
 
 ```json
- "stream": {
-        "default": {
+    "stream": [
+        {
+            "name": "default"
         }
-    },
+    ]
 ```
 
-In this config soloActivity index 0 maps to the `"default"` kc and soloActivity index 1 maps to the `"aux"` kc.
+In this config soloActivity index 0 maps to the kc with index 0 and soloActivity index 1 maps to the kc with index 1.
+
+The names are not used and are just used to document the config.
 
 ```json
-"soloActivity": {
-        "default": {
+"soloActivity": [
+        {
+            "name": "default"
         },
-        "aux": {
+        {
+            "name": "aux"
         }
-    },
+    ]
 ```
 

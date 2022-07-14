@@ -130,38 +130,10 @@ The fourth joint is named `"Aux"` and they have `JOINT_TYPE` of `JOINT_REVOLUTE`
 
 
 ```json
-    "joint": {
-        "0": {
-            "limits": [
-                {
-                    "vmax": 200,
-                    "amax": 4000,
-                    "jmax": 80000
-                }
-            ],
-            "scale": 1000.0
-        },
-        "1": {
-            "limits": [
-                {
-                    "vmax": 200,
-                    "amax": 4000,
-                    "jmax": 80000
-                }
-            ],
-            "scale": 1000.0
-        },
-        "2": {
-            "limits": [
-                {
-                    "vmax": 200,
-                    "amax": 4000,
-                    "jmax": 80000
-                }
-            ],
-            "scale": 1000.0
-        },
-        "aux": {
+    "joint": [
+        {
+            "name": "0",
+            "finiteContinuous": 1,
             "jointType": 1,
             "limits": [
                 {
@@ -170,9 +142,50 @@ The fourth joint is named `"Aux"` and they have `JOINT_TYPE` of `JOINT_REVOLUTE`
                     "jmax": 80000
                 }
             ],
-            "scale": 1000.0
+            "scale": 1000
+        },
+        {
+            "name": "1",
+            "finiteContinuous": 1,
+            "jointType": 1,
+            "limits": [
+                {
+                    "vmax": 200,
+                    "amax": 4000,
+                    "jmax": 80000
+                }
+            ],
+            "scale": 1000
+        },
+        {
+            "name": "2",
+            "finiteContinuous": 1,
+            "jointType": 1,
+            "limits": [
+                {
+                    "vmax": 200,
+                    "amax": 4000,
+                    "jmax": 80000
+                }
+            ],
+            "scale": 1000
+        },
+        {
+            "name": "aux",
+            "finiteContinuous": 0,
+            "negLimit": -180,
+            "posLimit": 180,
+            "jointType": 1,
+            "limits": [
+                {
+                    "vmax": 200,
+                    "amax": 4000,
+                    "jmax": 80000
+                }
+            ],
+            "scale": 1000
         }
-    },
+    ]
 ```
 
 ### `kinematicsConfiguration: {}`
@@ -188,8 +201,9 @@ KinematicsConfigurationType is 4
 
 
 ```json
-    "kinematicsConfiguration": {
-        "default": {
+"kinematicsConfiguration": [
+        {
+            "name": "default",
             "frameIndex": 0,
             "participatingJoints": [
                 0,
@@ -271,7 +285,8 @@ KinematicsConfigurationType is 4
                 ]
             }
         },
-        "aux": {
+        {
+            "name": "aux",
             "frameIndex": 0,
             "participatingJoints": [
                 3
@@ -293,7 +308,7 @@ KinematicsConfigurationType is 4
                 }
             ]
         }
-    },
+    ]
 ```
 
 
