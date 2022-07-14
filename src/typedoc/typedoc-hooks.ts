@@ -26,5 +26,5 @@ export function useTypedocItem(name: string) {
 export const typedocHookFilter = c => c.name.startsWith("use")
 export const typedocGbcSchemaFilter = c =>
     c.sources?.some(
-        s => s.fileName === "gbc.ts" || s.fileName === "gbc.d.ts" || s.fileName === "gbc_extra.ts"
+        s => s.fileName === "gbc.ts" || s.fileName === "gbc.d.ts" || s.fileName === "gbc_extra.ts" || s.fileName === "gbc_extra.d.ts"
     )
