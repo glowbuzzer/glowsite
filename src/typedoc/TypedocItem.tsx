@@ -8,6 +8,8 @@ import { StyledLeftNavMenu } from "../framework/nav/ContexualLeftNav"
 import { Menu } from "antd"
 import {
     ArrayType,
+    Comment,
+    CommentDisplayPart,
     DeclarationReflection,
     IntersectionType,
     IntrinsicType,
@@ -51,12 +53,32 @@ const StyledRender = styled.div`
         }
     }
 
-    .intersection:not(:last-child):after {
+    .typedoc.array > .typedoc.compose {
+        :before {
+            content: "(";
+        }
+
+        :after {
+            content: ")";
+        }
+    }
+
+    .intersection-item:not(:last-child):after {
         content: " & ";
     }
 
-    .union:not(:last-child):after {
+    .union-item:not(:last-child):after {
         content: " | ";
+    }
+
+    .typedoc.synopsis {
+        font-family: monospace;
+    }
+
+    .typedoc.arguments {
+        > .typedoc.type:not(:last-child):after {
+            content: ", ";
+        }
     }
 
     pre > span > .property {
@@ -285,9 +307,11 @@ const TypedocTypeArguments = ({ args }: { args?: Type[] }) => {
     return (
         <>
             {"<"}
-            {args.map((type, index) => (
-                <TypedocType key={index} t={type} />
-            ))}
+            <span className="typedoc arguments">
+                {args.map((type, index) => (
+                    <TypedocType key={index} t={type} />
+                ))}
+            </span>
             {">"}
         </>
     )
@@ -297,17 +321,21 @@ const TypedocType = ({ t, includeSynopsis = true }: { t: Type; includeSynopsis?:
     switch (t.type) {
         case "array":
             return (
-                <span>
+                <span className="typedoc type array">
                     <TypedocType t={(t as ArrayType).elementType} />
                     []
                 </span>
             )
         case "intrinsic":
-            return <span className="token builtin">{(t as IntrinsicType).name}</span>
+            return (
+                <span className="typedoc type intrinsic token builtin">
+                    {(t as IntrinsicType).name}
+                </span>
+            )
         case "reference": {
             const r = t as ReferenceType & { id? }
             return (
-                <span>
+                <span className="typedoc type reference">
                     {r.id ? <TypedocLink name={r.name} /> : <span>{r.name}</span>}
                     <TypedocTypeArguments args={r.typeArguments} />
                 </span>
@@ -315,12 +343,16 @@ const TypedocType = ({ t, includeSynopsis = true }: { t: Type; includeSynopsis?:
         }
         case "reflection": {
             const r = t as ReflectionType
-            return <TypedocDeclaration d={r.declaration} includeSynopsis={includeSynopsis} />
+            return (
+                <span className="typedoc type reflection">
+                    <TypedocDeclaration d={r.declaration} includeSynopsis={includeSynopsis} />
+                </span>
+            )
         }
         case "tuple": {
             const r = t as TupleType
             return (
-                <>
+                <span className="typedoc type tuple">
                     [
                     {r.elements.map((subtype, index) => (
                         <span key={index} className="tuple-item">
@@ -328,16 +360,16 @@ const TypedocType = ({ t, includeSynopsis = true }: { t: Type; includeSynopsis?:
                         </span>
                     ))}
                     ]
-                </>
+                </span>
             )
         }
 
         case "intersection": {
             const r = t as IntersectionType
             return (
-                <span>
+                <span className="typedoc type compose intersection">
                     {r.types.map((subtype, index) => (
-                        <span className="intersection" key={index}>
+                        <span className="intersection-item" key={index}>
                             <TypedocType t={subtype} />
                         </span>
                     ))}
@@ -348,9 +380,9 @@ const TypedocType = ({ t, includeSynopsis = true }: { t: Type; includeSynopsis?:
         case "union": {
             const u = t as UnionType
             return (
-                <span>
+                <span className="typedoc type compose union">
                     {u.types.map((subtype, index) => (
-                        <span className="union" key={index}>
+                        <span className="union-item" key={index}>
                             <TypedocType t={subtype} />
                         </span>
                     ))}
@@ -359,7 +391,11 @@ const TypedocType = ({ t, includeSynopsis = true }: { t: Type; includeSynopsis?:
         }
 
         case "literal":
-            return <TypedocLiteral l={t as LiteralType} />
+            return (
+                <span className="typedoc type literal">
+                    <TypedocLiteral l={t as LiteralType} />
+                </span>
+            )
 
         case "conditional":
         case "indexedAccess":
@@ -374,7 +410,7 @@ const TypedocType = ({ t, includeSynopsis = true }: { t: Type; includeSynopsis?:
         case "typeOperator":
         case "unknown":
         default:
-            return <>#{t.type}</>
+            return <span className={"typedoc type " + t.type}>#{t.type}</span>
     }
 }
 
@@ -402,31 +438,62 @@ export const TypeAlias = ({ item }) => {
     return (
         <div>
             <Synopsis item={item} />
-            <pre>
+            <div className="typedoc type synopsis">
                 type {item.name} = <TypedocType t={item.type} />
-            </pre>
+            </div>
             <PropertyTable item={item} />
         </div>
     )
 }
 
+export function typedocCommentToMarkdown(comment: Comment, shortText = false) {
+    if (!comment?.summary) {
+        return null
+    }
+    const complete = comment.summary
+        .map(p => {
+            switch (p.kind) {
+                case "text":
+                case "code":
+                    return p.text
+                case "inline-tag":
+                    switch (p.tag) {
+                        case "@link":
+                            return `[${p.text}](${p.text})`
+                    }
+                    return p.text
+            }
+        })
+        .join("")
+
+    return shortText ? complete.split("\n")[0] : complete
+}
+
 const Synopsis = ({ item }: { item: Reflection }) => {
-    return item.comment ? (
-        <>
-            <div className="shortText">
-                <Markdown link={({ href }) => <TypedocLink name={href} />}>
-                    {item.comment.shortText.trim()}
-                </Markdown>
-            </div>
-            {item.comment.text && (
-                <div className="text">
-                    <Markdown link={({ href }) => <TypedocLink name={href} />}>
-                        {item.comment.text}
-                    </Markdown>
-                </div>
-            )}
-        </>
+    return item.comment?.summary ? (
+        <div className="text">
+            <Markdown link={({ href }) => <TypedocLink name={href} />}>
+                {typedocCommentToMarkdown(item.comment)}
+            </Markdown>
+        </div>
     ) : null
+
+    // return item.comment ? (
+    //     <>
+    //         <div className="shortText">
+    //             <Markdown link={({ href }) => <TypedocLink name={href} />}>
+    //                 {item.comment.shortText?.trim()}
+    //             </Markdown>
+    //         </div>
+    //         {item.comment.text && (
+    //             <div className="text">
+    //                 <Markdown link={({ href }) => <TypedocLink name={href} />}>
+    //                     {item.comment.text}
+    //                 </Markdown>
+    //             </div>
+    //         )}
+    //     </>
+    // ) : null
 }
 
 const Enumeration = ({ item }) => {
@@ -486,9 +553,9 @@ const Function = ({ item }: TypedocItemRenderProps) => {
                     <div key={s.id}>
                         <Synopsis item={s} />
                         <h3>Synopsis</h3>
-                        <pre className="synopsis">
+                        <div className="typedoc function synopsis">
                             <TypedocSignature s={s} includeSynopsis={false} />
-                        </pre>
+                        </div>
                         {/*
                         <Parameters sig={s} />
 */}
@@ -554,9 +621,9 @@ const Interface = ({ item }: { item }) => {
     return (
         <div>
             <Synopsis item={item} />
-            <pre>
+            <div className="typedoc interface synopsis">
                 interface {item.name} <TypedocDeclaration d={item} />
-            </pre>
+            </div>
             <pre className="debug">{JSON.stringify(item, null, 2)}</pre>
         </div>
     )
@@ -566,9 +633,9 @@ const Class = ({ item }: { item }) => {
     return (
         <div>
             <Synopsis item={item} />
-            <pre>
+            <div className="typedoc class synopsis">
                 class {item.name} <TypedocDeclaration d={item} />
-            </pre>
+            </div>
             <pre className="debug">{JSON.stringify(item, null, 2)}</pre>
         </div>
     )

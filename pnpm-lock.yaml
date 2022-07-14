@@ -6,8 +6,8 @@ specifiers:
   '@commitlint/cli': ^17.0.2
   '@commitlint/config-conventional': ^17.0.2
   '@emeks/antd-custom-theme-generator': ^0.2.1
-  '@glowbuzzer/controls': 1.1.0
-  '@glowbuzzer/store': 1.1.0
+  '@glowbuzzer/controls': 1.0.1-alpha.104
+  '@glowbuzzer/store': 1.0.1-alpha.104
   '@mdx-js/mdx': ^2.1.1
   '@mdx-js/react': ^2.1.1
   '@mdx-js/rollup': ^2.1.1
@@ -58,7 +58,7 @@ specifiers:
   styled-components: ^5.3.5
   three: 0.141.0
   three-stdlib: ^2.10.2
-  typedoc: 0.22.17
+  typedoc: 0.23.7
   typescript: ~4.7.3
   unist-util-flatmap: ^1.0.0
   unist-util-visit: ^4.1.0
@@ -85,8 +85,8 @@ devDependencies:
   '@commitlint/cli': 17.0.2
   '@commitlint/config-conventional': 17.0.2
   '@emeks/antd-custom-theme-generator': 0.2.1_antd@4.21.0
-  '@glowbuzzer/controls': 1.1.0_ef538c7022202e4fbfe5fc7e0bcc88d1
-  '@glowbuzzer/store': 1.1.0_b6d7de7c086296fd2fabc586b3858e4c
+  '@glowbuzzer/controls': 1.0.1-alpha.104_ef538c7022202e4fbfe5fc7e0bcc88d1
+  '@glowbuzzer/store': 1.0.1-alpha.104_b6d7de7c086296fd2fabc586b3858e4c
   '@mdx-js/mdx': 2.1.1
   '@mdx-js/react': 2.1.1_react@18.1.0
   '@mdx-js/rollup': 2.1.1_rollup@2.75.5
@@ -128,7 +128,7 @@ devDependencies:
   standard-version: 9.5.0
   three: 0.141.0
   three-stdlib: 2.10.2_three@0.141.0
-  typedoc: 0.22.17_typescript@4.7.3
+  typedoc: 0.23.7_typescript@4.7.3
   typescript: 4.7.3
   unist-util-flatmap: 1.0.0
   unist-util-visit: 4.1.0
@@ -1719,11 +1719,11 @@ packages:
   /@emotion/unitless/0.7.5:
     resolution: {integrity: sha512-OWORNpfjMsSSUBVrRBVGECkhWcULOAJz9ZW8uK9qgxD+87M7jHRcvh/A96XXNhXTLmKcoYSQtBEX7lHMO7YRwg==}
 
-  /@glowbuzzer/controls/1.1.0_ef538c7022202e4fbfe5fc7e0bcc88d1:
-    resolution: {integrity: sha512-DnYgwEbO+LCXvhNhHg1WDh+FH5Wd6zTrgU5gBJGLIyPVnEl6Y81zEVJcz58pSB9V8gOQxvuz9n9YUaBnWy3xVw==}
+  /@glowbuzzer/controls/1.0.1-alpha.104_ef538c7022202e4fbfe5fc7e0bcc88d1:
+    resolution: {integrity: sha512-pYnzqMechC+sXxqLA3/AKihIoJJi4f+wwMH+XWs0Z4Kf6IL3J/7ERemwm4Ta0sbKRbycOHTdfe8t0N+hcLn/Ig==}
     dependencies:
       '@ant-design/icons': 4.7.0_react-dom@18.1.0+react@18.1.0
-      '@glowbuzzer/store': 1.1.0_b6d7de7c086296fd2fabc586b3858e4c
+      '@glowbuzzer/store': 1.0.1-alpha.104_b6d7de7c086296fd2fabc586b3858e4c
       antd: 4.21.4_react-dom@18.1.0+react@18.1.0
       react-grid-layout: 1.3.4_react-dom@18.1.0+react@18.1.0
       styled-components: 5.3.5_e2968bb7be3b1102f8e7eb6fb4e04aac
@@ -1737,8 +1737,8 @@ packages:
       - redux
     dev: true
 
-  /@glowbuzzer/store/1.1.0_b6d7de7c086296fd2fabc586b3858e4c:
-    resolution: {integrity: sha512-VY7/UD5ewpAD1i6j84Iu5aOxAEY65tVDBeorm0nHSQzzegTHtSCaNtCOXAyLjKty7Y5j1kjmr2dcZQ5+/urH4w==}
+  /@glowbuzzer/store/1.0.1-alpha.104_b6d7de7c086296fd2fabc586b3858e4c:
+    resolution: {integrity: sha512-1ILOwcmAeM6kweFiq+RJH36Zl7SM6+xyfOOzsygi3VIIysf6aOlyyIzQyocFHELxy+emIQaw9d+tMjUUO67pwQ==}
     dependencies:
       '@reduxjs/toolkit': 1.8.2_react-redux@8.0.2+react@18.1.0
       react: 18.1.0
@@ -4933,17 +4933,6 @@ packages:
       minimatch: 3.0.4
       once: 1.4.0
       path-is-absolute: 1.0.1
-    dev: true
-
-  /glob/8.0.3:
-    resolution: {integrity: sha512-ull455NHSHI/Y1FqGaaYFaLGkNMMJbavMrEGFXG/PGrg6y7sutWHUHrz6gy6WEBH6akM1M414dWKCNs+IhKdiQ==}
-    engines: {node: '>=12'}
-    dependencies:
-      fs.realpath: 1.0.0
-      inflight: 1.0.6
-      inherits: 2.0.4
-      minimatch: 5.1.0
-      once: 1.4.0
     dev: true
 
   /global-dirs/0.1.1:
@@ -8981,14 +8970,13 @@ packages:
     resolution: {integrity: sha512-/aCDEGatGvZ2BIk+HmLf4ifCJFwvKFNb9/JeZPMulfgFracn9QFcAf5GO8B/mweUjSoblS5In0cWhqpfs/5PQA==}
     dev: true
 
-  /typedoc/0.22.17_typescript@4.7.3:
-    resolution: {integrity: sha512-h6+uXHVVCPDaANzjwzdsj9aePBjZiBTpiMpBBeyh1zcN2odVsDCNajz8zyKnixF93HJeGpl34j/70yoEE5BfNg==}
-    engines: {node: '>= 12.10.0'}
+  /typedoc/0.23.7_typescript@4.7.3:
+    resolution: {integrity: sha512-Vl/Yh4KYBaxQQOYImBgLQDX61hfaA7XaP/DZVd/w7rQvaqLEsdQH6gEMK8CMjyHo0bSzVnNYwxtD1KPSENoWug==}
+    engines: {node: '>= 14.14'}
     hasBin: true
     peerDependencies:
-      typescript: 4.0.x || 4.1.x || 4.2.x || 4.3.x || 4.4.x || 4.5.x || 4.6.x || 4.7.x
+      typescript: 4.6.x || 4.7.x
     dependencies:
-      glob: 8.0.3
       lunr: 2.3.9
       marked: 4.0.16
       minimatch: 5.1.0

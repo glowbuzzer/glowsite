@@ -6,6 +6,7 @@ import { typedocHookFilter, useTypedoc } from "../../../typedoc/typedoc-hooks"
 // import Synopsis from "./hooks/hooks.mdx"
 import { relative_path } from "../../../typedoc/util"
 import { Markdown } from "../../../framework/components/Markdown"
+import { typedocCommentToMarkdown } from "../../../typedoc/TypedocItem"
 
 const StyledDiv = styled.div`
     p {
@@ -35,7 +36,7 @@ export default function HooksListFromTypedoc() {
         .map(({ name, signatures }) => ({
             key: name,
             name,
-            description: signatures?.[0].comment?.shortText
+            description: typedocCommentToMarkdown(signatures?.[0].comment, true)
         }))
         .sort((a, b) => a.name.localeCompare(b.name))
 
