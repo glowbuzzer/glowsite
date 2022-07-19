@@ -1,6 +1,7 @@
 import {Tldr} from "../../../framework/components/Tldr"
 import { Link } from "react-router-dom"
 import {GlowsiteLink} from "../../../framework";
+import {GitHubLink} from "../../../framework/components";
 
 # {props.subtitle}
 
@@ -18,9 +19,11 @@ import {GlowsiteLink} from "../../../framework";
 
 The configuration files covers different areas of the machine and &gbt configuration which are described below.
 
+
 ## Config file sections
 
-See <GlowsiteLink to="/docs/types/ConfigType">Config</GlowsiteLink> or an overview of the contents of the config.
+See, <GlowsiteLink to="/docs/types/GlowbuzzerConfig">the schema documentation for the Config object</GlowsiteLink> for an overview of the contents of the config.
+
 
 ### `machine: {}` configuration and parameter definition
 See <GlowsiteLink to="/docs/gbc/configuration/config_machine">Machine config</GlowsiteLink> for details.
@@ -43,11 +46,18 @@ See <GlowsiteLink to="/docs/gbc/configuration/config_streams_and_activities">Str
 ### `fieldbus: {}` configuration and parameter definition
 See <GlowsiteLink to="/docs/gbc/configuration/config_fieldbus">Fieldbus config</GlowsiteLink> for details.
 
-### `moveParameters: {}, task: {}, activity: {}, lines: {}, arcs: {}, frames: {}, cartesianPositions: {}, triggerOn: {}` configuration and parameter definition
+### `moveParameters: {}, task: {}, activity: {}, frames: {}, triggerOn: {}` configuration and parameter definition
 See <GlowsiteLink to="/docs/gbc/configuration/config_advanced">Advanced config</GlowsiteLink> for details.
 
 
+
 ## Example config file
+
+See the GitHub repository below for more example config files.
+
+<GitHubLink title={"Example GBC JSON configs"} repo={"gbc-configs"} directory={"/"}/>
+
+A generic example of a JSON config is shown below:
 
 ```json
 {

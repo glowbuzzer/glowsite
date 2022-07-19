@@ -317,7 +317,12 @@ const nav = {
                             subtitle: "GBC Schema (data model)",
                             component: () => import("./pages/docs/gbc/GbcSchema")
                         },
-
+                        {
+                            slug: "status_messages",
+                            title: "Status messages",
+                            subtitle: "Status messages produced by GBC",
+                            component: () => import("./pages/docs/gbc/status_messages.mdx")
+                        },
                         {
                             slug: "motion_primitives",
                             title: "Motion primitives",

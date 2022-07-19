@@ -1,0 +1,18 @@
+import {Tldr} from "../../../framework/components/Tldr"
+import {GlowsiteLink} from "../../../framework";
+
+# {props.subtitle}
+
+<Tldr>
+    - GBC produces periodic status mesages
+    - JSON sent over WebSockets
+    - Contain the current state of the machine
+</Tldr>
+
+GBC produces periodic status messages that are sent over the WebSockets connection to &gbr.
+
+These messages provide information about the current state of the machine, activities, joints, kinematics configurations, IO and tasks.
+
+They are obviously key in &gbr as they update front-end applications with the current status of the machine.
+
+See, <GlowsiteLink to="/docs/types/GlowbuzzerStatus">the schema documentation for the status object</GlowsiteLink> for an overview of the contents of status mesages.

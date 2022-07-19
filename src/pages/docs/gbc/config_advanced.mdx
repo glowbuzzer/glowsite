@@ -93,49 +93,6 @@ The documentation for the schema for the main activity configs that you are like
 * <GlowsiteLink to="/docs/types/SpindleConfig">spindleConfig</GlowsiteLink>
 
 
-### `lines: {}`
-The lines section of the config allows sets of lines to be defined that can be referenced by activities.
-
-<Card title="Schema documentation" extra={<GlowsiteLink to="/docs/types/LinesConfig">docs Link</GlowsiteLink>} style={{ width: '100%' }}>
-
-    `lines` in the config file maps to `LinesConfig` in the schema
-
-    This documentation details the types, enums etc. behind this section of the config
-
-    Click "docs Link" above to view
-</Card>
-
-
-
-### `arcs: {}`
-The arcs section of the config allows sets of arcs to be defined that can be referenced by activities.
-
-<Card title="Schema documentation" extra={<GlowsiteLink to="/docs/types/ArcsConfig">docs Link</GlowsiteLink>} style={{ width: '100%' }}>
-
-    `arcs` in the config file maps to `ArcsConfig` in the schema
-
-    This documentation details the types, enums etc. behind this section of the config
-
-    Click "docs Link" above to view
-</Card>
-
-
-
-### `cartesianPositions: {}`
-The cartesianPosition section of the config allows sets of arcs to be defined that can be referenced by activities.
-
-
-<Card title="Schema documentation" extra={<GlowsiteLink to="/docs/types/CartesianPositionsConfig">docs Link</GlowsiteLink>} style={{ width: '100%' }}>
-
-    `cartesianPositions` in the config file maps to `CartesianPositionsConfig` in the schema
-
-    This documentation details the types, enums etc. behind this section of the config
-
-    Click "docs Link" above to view
-</Card>
-
-
-
 ### `triggerOn: {}`
 The triggerOn section of the config allows triggers to be defined. These are used to trigger tasks or activities to start - for example on a digital input triggering.
 
@@ -175,89 +132,34 @@ The triggerOn section of the config allows triggers to be defined. These are use
 ```json
 "task": [
   {
-    "name": "move joint",
-      "activity1": {
-        "activityType": 4
-      }
-  },
-  {
-    name: "move line",
-      "activity1": {
-        "activityType": 1
-      }
-    },
-    "move at velocity": {
-      "activity1": {
-        "activityType": 0,
-        "skipToNextTriggerIndex": 1
-      }
-    }
-  }
-```
-
-
-### `lines: {}`
-```json
-"lines": [
-  {
-    "name": "toHome",
-    "frameIndex": 2,
-    "translation": {
-      "x" : 120,
-      "y" : 240,
-      "z" : 360
-    }
-  },
-  {
-    "name": "toPart",
-    "frameIndex": 2,
-    "translation": {
-      "x" : 20,
-      "y" : 40,
-      "z" : 60
-    }
+    "name": "MyTask",
+    "activityCount" : 3,
+    "firstActivityIndex": 0
   }
 ]
 ```
 
-### `arcs: {}`
-
-
-
 ```json
-"arcs": [
-  {
-    "name": "arc1",
-    "arcDirection": 0,
-    "arcType": 1,
-    "destination":
-      {
-        "frameIndex": 2,
-        "translation": {
-        "x" : 20,
-        "y" : 40,
-        "z" : 60
-      },
-    "radius": 100
-  }
-]
-```
-
-### `cartesianPositions: {}`
-```json
-"cartesianPositions": [
-  {
-    "name": "part1",
-    "frameIndex": 2,
-    "translation": {
-    "x" : 20,
-    "y" : 40,
-    "z" : 60
-  }
-]
-
-
-```
+"activity": [
+        {
+            "name": "move joints at speed 10",
+            "activityType": 4,
+            "moveJointsAtVelocity":
+            {
+                "jointVelocityArray": [10,10,10],
+                "kinematicsConfigurationIndex": 0,
+                "moveParamsIndex": 0
+            }
+        },
+        {
+            "name": "dwell for 20",
+            "activityType": 13,
+            "dwell":
+            {
+                "ticksToDwell": 20
+            }
+        }
+    ]
 
 
 ### `triggerOn: {}`
