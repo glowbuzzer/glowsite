@@ -240,7 +240,13 @@ const TypedocDeclaration = ({
                     </>
                 )
             }
-            return <span>#{d.kindString}</span>
+            // assume it's empty
+            return (
+                <span>
+                    {"{"}
+                    {"}"}
+                </span>
+            )
 
         case "Property":
             return (
@@ -410,7 +416,7 @@ const TypedocType = ({ t, includeSynopsis = true }: { t: Type; includeSynopsis?:
         case "typeOperator":
         case "unknown":
         default:
-            return <span className={"typedoc type " + t.type}>#{t.type}</span>
+            return <span className={"typedoc type " + t.type}>##{t.type}</span>
     }
 }
 
