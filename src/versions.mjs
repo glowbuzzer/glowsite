@@ -1,3 +1,3 @@
 export const LATEST_VERSIONS={
-    gbc_version: "v1.0.0"
+    gbc_version: "v1.1.2"
 }
