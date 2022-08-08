@@ -1,3 +1,5 @@
+import {LATEST_VERSIONS} from "../versions.mjs";
+
 export type File = {
     arch?: string
     name: string
@@ -46,9 +48,10 @@ export const projects: Project[] = [
             }
         ],
         releases: [
+            // copy below and hard code version number for each release
             {
-                tag: "v1.0.0",
-                description: "First release",
+                tag: LATEST_VERSIONS.gbc_version,
+                description: "Latest release",
                 files: [
                     {
                         name: "gbc-linux-amd64"
