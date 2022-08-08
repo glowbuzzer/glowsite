@@ -43,7 +43,7 @@ export default () => {
             "https://downloads.glowbuzzer.com/releases",
             project.basename,
             release.files[0].arch || project.defaultFiles[0].arch,
-            "refs/tags",
+            null,
             release.tag,
             "CHANGELOG.md"
         ]
@@ -62,7 +62,7 @@ export default () => {
                     "https://downloads.glowbuzzer.com/releases",
                     project.basename,
                     file.arch,
-                    "refs/tags",
+                    null,
                     release.tag,
                     `${project.basename}-${release.tag}.${file.type}`
                 ].filter(p => p)
