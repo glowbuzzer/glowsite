@@ -7,10 +7,12 @@ const StyledDiv = styled.div`
     margin-left: 60px;
 `
 
-export const SimpleLayout = ({ children }) => (
-    <BaseLayout>
-        <Section expand background="White">
-            <StyledDiv>{children}</StyledDiv>
-        </Section>
-    </BaseLayout>
-)
+export const SimpleLayout = ({ children, ...props }) => {
+    return (
+        <BaseLayout {...props}>
+            <Section expand background="White">
+                <StyledDiv>{children}</StyledDiv>
+            </Section>
+        </BaseLayout>
+    )
+}

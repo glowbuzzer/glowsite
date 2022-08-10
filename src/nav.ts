@@ -11,7 +11,7 @@ import { reactDocgenControlFilter, reactDocgenTileFilter } from "./react/react-d
 
 import reactDocgenControls from "react-docgen:@glowbuzzer/controls"
 import typedoc from "typedoc:@glowbuzzer/store"
-import {typedocGbcSchemaFilter, typedocHookFilter} from "./typedoc/typedoc-hooks"
+import { typedocHookFilter } from "./typedoc/typedoc-hooks"
 
 function process(node: Omit<Node, "path">, parentPaths: string[], parent: Node): Node {
     const slug = node.slug
@@ -51,7 +51,7 @@ function merge(imports, filter) {
     const autoDocs = Object.entries(reactDocgenControls).filter(([, doc]) => filter(doc))
 
     return autoDocs
-        .map(([path, item]) => {
+        .map(([, item]) => {
             const { displayName } = item as any
             const manual = Object.entries(imports).find(([path]) => {
                 const name = path.split("/").pop().split(".")[0]

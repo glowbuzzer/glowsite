@@ -72,13 +72,16 @@ export const StyledLayout = styled.div`
 export const BaseLayout = ({
     children,
     hideVersionLink,
-    singleColumn
+    singleColumn,
+    ...props
 }: {
     children
     hideVersionLink?: boolean
     singleColumn?: boolean
 }) => {
     const cookieConsent = useCookieConsent()
+
+    console.log("PAGE PROPERTIES", props)
 
     return (
         <>

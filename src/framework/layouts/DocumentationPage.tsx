@@ -43,8 +43,8 @@ const StyledDocumentationPage = styled.div`
     }
 `
 
-export const DocumentationPage = ({ left, children }) => (
-    <BaseLayout>
+export const DocumentationPage = ({ left, children, ...props }) => (
+    <BaseLayout {...props}>
         <ScrollToTopOnMount on={[window.location.pathname]} />
         <Section background={"White"} expand>
             <StyledDocumentationPage>
