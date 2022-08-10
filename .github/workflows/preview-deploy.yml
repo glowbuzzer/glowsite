@@ -19,7 +19,7 @@ jobs:
         with:
           version: 6
 
-      - uses: actions/setup-node@v1
+      - uses: actions/setup-node@v3
         with:
           node-version: 16
           cache: pnpm
@@ -29,12 +29,14 @@ jobs:
 
       - name: Build site
         run: pnpm run build:www
+        env:
+          NODE_OPTIONS: "--max_old_space_size=4096"
 
       - name: Deploy site
         run: ./deploy-site.sh www preview.glowbuzzer.com E284GBH6OG76DV
 
   deploy-downloads:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v1
 
@@ -42,7 +44,7 @@ jobs:
         with:
           version: 6
 
-      - uses: actions/setup-node@v1
+      - uses: actions/setup-node@v3
         with:
           node-version: 16
           cache: pnpm
