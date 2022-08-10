@@ -1,0 +1,51 @@
+name: glowsite-release
+
+on:
+    push:
+        branches:
+            - main
+
+env:
+    AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+    AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+    NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+jobs:
+    release-please:
+        runs-on: ubuntu-22.04
+        outputs:
+            release_created: ${{ steps.release.outputs.release_created }}
+            version: v${{ steps.release.outputs.major }}.${{ steps.release.outputs.minor }}.${{ steps.release.outputs.patch }}
+        steps:
+            -   uses: google-github-actions/release-please-action@v3
+                id: release
+                with:
+                    release-type: node
+                    package-name: glowsite
+                    changelog-types: '[ { "type": "feat", "section": "Feature" }, { "type": "fix", "section": "Bug Fix" }, { "type": "docs", "section": "Documentation" }, { "type": "enh", "section": "Enhancement" }, { "type": "chore", "section": "Chore" } ]'
+
+    publish-www:
+        needs: release-please
+        if: ${{ needs.release-please.outputs.release_created }}
+        runs-on: ubuntu-18.04
+        steps:
+            -   uses: actions/checkout@v1
+
+            -   uses: pnpm/action-setup@v2.0.1
+                with:
+                    version: 6
+
+            -   uses: actions/setup-node@v1
+                with:
+                    node-version: 16
+                    cache: pnpm
+
+            -   name: Install packages
+                run: pnpm install
+
+            -   name: Build site
+                run: export VITE_GLOWBUZZER_VERSION=${{ needs.release-please.outputs.version }} && pnpm run build:www
+
+            -   name: Deploy site
+                run: ./deploy-site.sh www www.glowbuzzer.com EOLCC9H61HP6F
+
