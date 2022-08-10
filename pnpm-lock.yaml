@@ -4,8 +4,8 @@ specifiers:
   '@ant-design/icons': ^4.7.0
   '@babel/core': ^7.18.2
   '@emeks/antd-custom-theme-generator': ^0.2.1
-  '@glowbuzzer/controls': 1.0.1-alpha.105
-  '@glowbuzzer/store': 1.0.1-alpha.105
+  '@glowbuzzer/controls': 1.2.1
+  '@glowbuzzer/store': 1.2.1
   '@mdx-js/mdx': ^2.1.1
   '@mdx-js/react': ^2.1.1
   '@mdx-js/rollup': ^2.1.1
@@ -80,8 +80,8 @@ devDependencies:
   '@ant-design/icons': 4.7.0_react-dom@18.1.0+react@18.1.0
   '@babel/core': 7.18.2
   '@emeks/antd-custom-theme-generator': 0.2.1_antd@4.21.0
-  '@glowbuzzer/controls': 1.0.1-alpha.105_ef538c7022202e4fbfe5fc7e0bcc88d1
-  '@glowbuzzer/store': 1.0.1-alpha.105_b6d7de7c086296fd2fabc586b3858e4c
+  '@glowbuzzer/controls': 1.2.1_ef538c7022202e4fbfe5fc7e0bcc88d1
+  '@glowbuzzer/store': 1.2.1_b6d7de7c086296fd2fabc586b3858e4c
   '@mdx-js/mdx': 2.1.1
   '@mdx-js/react': 2.1.1_react@18.1.0
   '@mdx-js/rollup': 2.1.1_rollup@2.75.5
@@ -1546,11 +1546,11 @@ packages:
   /@emotion/unitless/0.7.5:
     resolution: {integrity: sha512-OWORNpfjMsSSUBVrRBVGECkhWcULOAJz9ZW8uK9qgxD+87M7jHRcvh/A96XXNhXTLmKcoYSQtBEX7lHMO7YRwg==}
 
-  /@glowbuzzer/controls/1.0.1-alpha.105_ef538c7022202e4fbfe5fc7e0bcc88d1:
-    resolution: {integrity: sha512-6AkdK7jIQ289c8YRfidMtYSZpcWB5B4n14Qi62j0GCf1CCPkb/48ECXTbJ/B7M+epBtzscoLjOlAGsdpXJ+EcQ==}
+  /@glowbuzzer/controls/1.2.1_ef538c7022202e4fbfe5fc7e0bcc88d1:
+    resolution: {integrity: sha512-c5yopkTJT7wezaK/yULSdcJyKjM+8g6enFFzC5iKNGTiXBNcdF/GedeVfD7gytmPxfq6jb4in2a+5krf6NT8Kg==}
     dependencies:
       '@ant-design/icons': 4.7.0_react-dom@18.1.0+react@18.1.0
-      '@glowbuzzer/store': 1.0.1-alpha.105_b6d7de7c086296fd2fabc586b3858e4c
+      '@glowbuzzer/store': 1.2.1_b6d7de7c086296fd2fabc586b3858e4c
       antd: 4.21.4_react-dom@18.1.0+react@18.1.0
       react-grid-layout: 1.3.4_react-dom@18.1.0+react@18.1.0
       styled-components: 5.3.5_e2968bb7be3b1102f8e7eb6fb4e04aac
@@ -1564,8 +1564,8 @@ packages:
       - redux
     dev: true
 
-  /@glowbuzzer/store/1.0.1-alpha.105_b6d7de7c086296fd2fabc586b3858e4c:
-    resolution: {integrity: sha512-5gAdPPgaMaFnjul8V6irW0D7+iFsRte+g8mxYW+LeEALFYpra7EM8ijeeUG/bAuV2+QdC+1DOWS9NBKD1QaSiw==}
+  /@glowbuzzer/store/1.2.1_b6d7de7c086296fd2fabc586b3858e4c:
+    resolution: {integrity: sha512-PbI1NzZ/asREK5woJj7y6ORAuHnAfXZW05lowZYX8izvzW5YAW+hgdPOwxw9D3yyoRDKKCbfE4ms8u/Ado8TNw==}
     dependencies:
       '@reduxjs/toolkit': 1.8.2_react-redux@8.0.2+react@18.1.0
       react: 18.1.0
