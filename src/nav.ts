@@ -11,7 +11,7 @@ import { reactDocgenControlFilter, reactDocgenTileFilter } from "./react/react-d
 
 import reactDocgenControls from "react-docgen:@glowbuzzer/controls"
 import typedoc from "typedoc:@glowbuzzer/store"
-import { typedocHookFilter } from "./typedoc/typedoc-hooks"
+import {typedocGbcSchemaFilter, typedocHookFilter} from "./typedoc/typedoc-hooks"
 
 function process(node: Omit<Node, "path">, parentPaths: string[], parent: Node): Node {
     const slug = node.slug

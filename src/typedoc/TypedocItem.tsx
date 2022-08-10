@@ -1,5 +1,9 @@
 import * as React from "react"
-import { useTypedocGrouped, useTypedocItem } from "./typedoc-hooks"
+import {
+    typedocNonEmptyEnumerationFilter,
+    useTypedocGrouped,
+    useTypedocItem
+} from "./typedoc-hooks"
 import { DocumentationPage } from "../framework/layouts/DocumentationPage"
 import { ComponentProps } from "../framework/components/ComponentProps"
 import { Link } from "react-router-dom"
@@ -30,7 +34,7 @@ import { ScrollToTopOnMount } from "../framework/components/ScrollToTopOnMount"
 
 const StyledRender = styled.div`
     .debug {
-        display: none; // comment to show raw typedoc json
+        //display: none; // comment to show raw typedoc json
     }
 
     .token {
@@ -101,7 +105,7 @@ const StyledRender = styled.div`
             font-family: Roboto, sans-serif;
             font-size: 0.9em;
             border-left: 2px solid rgba(0, 0, 0, 0.08);
-            margin-top: 0;
+            margin-top: 14px;
             padding-top: 0;
             padding-bottom: 0;
             padding-left: 8px;
@@ -113,8 +117,21 @@ const StyledRender = styled.div`
         }
 
         .text {
-            padding-top: 6px;
-            padding-bottom: 6px;
+            padding-top: 10px;
+            padding-bottom: 3px;
+          
+            p {
+              margin: 0
+            }
+          
+            p + p {
+              margin-top: 10px;
+            }
+        }
+      
+        .param .text {
+          padding-top: 5px;
+          margin-top: 0;
         }
     }
 
@@ -130,6 +147,9 @@ const StyledRender = styled.div`
 export const TypedocLink = ({ name, content = undefined }) => {
     const generic_path = "/docs/types/:name"
     const node = useNavBySlug(name, generic_path)
+    if ( !node ) {
+        return name
+    }
     const to = node.path === generic_path ? generic_path.replace(":name", name) : node.path
     return <Link to={to}>{content || name}</Link>
 }
@@ -253,17 +273,18 @@ const TypedocDeclaration = ({
                 <>
                     {d.name}
                     {d.flags.isOptional && "?"}: <TypedocType t={d.type} />
+                    {d.defaultValue && <span> = {d.defaultValue}</span>}
                 </>
             )
 
         case "Accessor":
-            if (!d.getSignature) {
-                return <>{d.name} has no get signature!</>
-            }
+            // if (!d.getSignature) {
+            //     return null // <div className="debug">{d.name} has no get signature (inherited?)</div>
+            // }
             return (
                 <>
-                    <Synopsis item={d.getSignature[0]} />
-                    {d.name}: <TypedocType t={d.getSignature[0].type} includeSynopsis={false} />
+                    <Synopsis item={d.getSignature} />
+                    {d.name}: <TypedocType t={d.getSignature?.type} includeSynopsis={false} />
                 </>
             )
 
@@ -287,7 +308,13 @@ const TypedocDeclaration = ({
                         {"{"}
                         <span>
                             {d.children
-                                .filter(p => !(p.flags?.isProtected || p.flags?.isPrivate))
+                                .filter(
+                                    p =>
+                                        !(
+                                            /*p.flags?.isProtected ||*/ p.flags
+                                                ?.isPrivate /*|| p.inheritedFrom*/
+                                        )
+                                )
                                 .map(property => (
                                     <span key={property.name} className="property">
                                         <Synopsis item={property} />
@@ -324,7 +351,7 @@ const TypedocTypeArguments = ({ args }: { args?: Type[] }) => {
 }
 
 const TypedocType = ({ t, includeSynopsis = true }: { t: Type; includeSynopsis?: boolean }) => {
-    switch (t.type) {
+    switch (t?.type) {
         case "array":
             return (
                 <span className="typedoc type array">
@@ -416,7 +443,7 @@ const TypedocType = ({ t, includeSynopsis = true }: { t: Type; includeSynopsis?:
         case "typeOperator":
         case "unknown":
         default:
-            return <span className={"typedoc type " + t.type}>##{t.type}</span>
+            return <span className={"typedoc type " + t?.type}>##{t?.type}</span>
     }
 }
 
@@ -476,7 +503,7 @@ export function typedocCommentToMarkdown(comment: Comment, shortText = false) {
 }
 
 const Synopsis = ({ item }: { item: Reflection }) => {
-    return item.comment?.summary ? (
+    return item?.comment ? (
         <div className="text">
             <Markdown link={({ href }) => <TypedocLink name={href} />}>
                 {typedocCommentToMarkdown(item.comment)}
@@ -503,13 +530,17 @@ const Synopsis = ({ item }: { item: Reflection }) => {
 }
 
 const Enumeration = ({ item }) => {
-    const props = item.children.map(p => ({
-        key: p.name,
-        name: { name: p.name, required: false },
-        type: item.kindString,
-        description: p.comment?.shortText || "Not available",
-        value: p.defaultValue
-    }))
+    const props =
+        item.children
+            ?.map(p => ({
+                key: p.name,
+                name: { name: p.name, required: false },
+                type: item.kindString,
+                description: typedocCommentToMarkdown(p.comment),
+                value: p.type?.value || "0"
+            }))
+            ?.sort((a, b) => a.value - b.value) || []
+
     return (
         <>
             <Synopsis item={item} />
@@ -519,6 +550,7 @@ const Enumeration = ({ item }) => {
                 showValues={true}
                 showDefaults={false}
             />
+            <pre className="debug">{JSON.stringify(item, null, 2)}</pre>
         </>
     )
 }
@@ -589,15 +621,17 @@ const TypedocLeftNav = ({ current, title, filter }) => {
                               key: c.name,
                               label: <TypedocLink name={c.name} />
                           }))
-                        : Object.entries(groups).map(([name, items]) => ({
-                              key: name,
-                              className: "capitalize",
-                              label: name,
-                              children: items.map(c => ({
-                                  key: c.name,
-                                  label: <TypedocLink name={c.name} />
+                        : Object.entries(groups)
+                              .filter(([n]) => !["Variable", "Function"].includes(n))
+                              .map(([name, items]) => ({
+                                  key: name,
+                                  className: "capitalize",
+                                  label: name,
+                                  children: items.map(c => ({
+                                      key: c.name,
+                                      label: <TypedocLink name={c.name} />
+                                  }))
                               }))
-                          }))
                 }
             />
             {/*
@@ -635,12 +669,24 @@ const Interface = ({ item }: { item }) => {
     )
 }
 
-const Class = ({ item }: { item }) => {
+const Class = ({ item }: { item: DeclarationReflection }) => {
+    const supers = item.extendedTypes?.filter(t => t.type === "reference").map(t => (t as any).name)
+
     return (
         <div>
             <Synopsis item={item} />
             <div className="typedoc class synopsis">
-                class {item.name} <TypedocDeclaration d={item} />
+                class {item.name}{" "}
+                {supers?.length > 0 && (
+                    <span>
+                        extends{" "}
+                        {supers.map(s => (
+                            <TypedocLink key={s} name={s} />
+                        ))}
+                        {" "}
+                    </span>
+                )}
+                <TypedocDeclaration d={item} />
             </div>
             <pre className="debug">{JSON.stringify(item, null, 2)}</pre>
         </div>
@@ -670,7 +716,14 @@ export default ({ title, slug, standaloneTypes }) => {
 
     return standaloneTypes ? (
         <DocumentationPage
-            left={<TypedocLeftNav current={item.name} title={title} filter={() => true} />}
+            // TODO: we should filter out some of these!
+            left={
+                <TypedocLeftNav
+                    current={item.name}
+                    title={title}
+                    filter={typedocNonEmptyEnumerationFilter}
+                />
+            }
         >
             <ScrollToTopOnMount on={[item.name]} />
             <h1>

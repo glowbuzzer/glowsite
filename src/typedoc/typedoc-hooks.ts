@@ -23,8 +23,22 @@ export function useTypedocItem(name: string) {
     return typedoc.children.find(i => i.name === name)
 }
 
-export const typedocHookFilter = c => c.name.startsWith("use")
-export const typedocGbcSchemaFilter = c =>
+export const typedocHookFilter = c => {
+    // console.log("filter", c.name, c.name.startsWith("use"))
+    return c.name.startsWith("use")
+}
+
+export const typedocNonEmptyEnumerationFilter = c =>
+    c.kindString !== "Enumeration" || c.children?.length
+
+const typedocGbcFilter = c =>
     c.sources?.some(
-        s => s.fileName === "gbc.ts" || s.fileName === "gbc.d.ts" || s.fileName === "gbc_extra.ts" || s.fileName === "gbc_extra.d.ts"
+        s =>
+            s.fileName === "gbc.ts" ||
+            s.fileName === "gbc.d.ts" ||
+            s.fileName === "gbc_extra.ts" ||
+            s.fileName === "gbc_extra.d.ts"
     )
+
+export const typedocGbcSchemaFilter = c =>
+    typedocGbcFilter(c) && typedocNonEmptyEnumerationFilter(c)
