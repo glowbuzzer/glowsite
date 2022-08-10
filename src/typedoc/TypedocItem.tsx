@@ -34,7 +34,7 @@ import { ScrollToTopOnMount } from "../framework/components/ScrollToTopOnMount"
 
 const StyledRender = styled.div`
     .debug {
-        //display: none; // comment to show raw typedoc json
+        display: none; // comment to show raw typedoc json
     }
 
     .token {

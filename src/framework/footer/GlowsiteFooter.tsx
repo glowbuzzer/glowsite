@@ -48,7 +48,7 @@ const CopyrightVersion = () => {
 
     return (
         <span>
-            ©2022 by glowbuzzer All Rights Reserved. Site build {version}
+            ©2022 by glowbuzzer All Rights Reserved. Build {version}
         </span>
     )
 }
@@ -146,6 +146,9 @@ const DesktopFooter = ({}) => {
                     </div>
                     <div>
                         <StyledLink to="/downloads">Downloads</StyledLink>
+                    </div>
+                    <div>
+                        <StyledLink to="/sitemap">Sitemap</StyledLink>
                     </div>
                 </Col>
             </Row>

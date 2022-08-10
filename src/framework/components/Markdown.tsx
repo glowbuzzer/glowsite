@@ -17,7 +17,7 @@ export const Markdown = props => {
             remarkPlugins={[typedocLinkify, remarkEntities, remarkDl, remarkGfm]}
             components={{
                 a: ({ node, href, ...rest }) => {
-                    return href.startsWith("http") ? (
+                    return href.startsWith("http") || href.startsWith("mailto") ? (
                         <a href={href} {...rest} target="_blank" />
                     ) : props.link ? (
                         props.link({ href, ...rest })

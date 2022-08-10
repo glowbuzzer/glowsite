@@ -11,7 +11,7 @@ export function remarkLinks() {
         tree.children.splice(0, 0, link_import)
 
         visit(tree, ["link"], (node, index, parent) => {
-            if (node.url && !node.url.startsWith("http")) {
+            if (node.url && !node.url.startsWith("http") && !node.url.startsWith("mailto")) {
                 parent.children[index] = createElement(LOCAL_LINK_COMPONENT_NAME, {
                     to: node.url
                 }, node.children)

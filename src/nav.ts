@@ -785,6 +785,7 @@ const nav = {
                 },
                 {
                     slug: "types",
+                    title: "Types",
                     standaloneTypes: true,
                     children: typedoc.children
                         .filter(i => !typedocHookFilter(i))
@@ -970,18 +971,27 @@ const nav = {
               },
         {
             slug: "privacy",
+            title: "Privacy",
             layout: SimpleLayout,
             component: () => import("./pages/privacy.mdx")
         },
         {
             slug: "legal",
+            title: "Legal",
             layout: SimpleLayout,
             component: () => import("./pages/legal.mdx")
         },
         {
             slug: "downloads",
+            title: "Downloads",
             layout: SimpleLayout,
             component: () => import("./pages/DownloadsPage")
+        },
+        {
+            slug: "sitemap",
+            title: "Sitemap",
+            layout: SimpleLayout,
+            component: () => import("./pages/SitemapPage")
         }
 
         // {
