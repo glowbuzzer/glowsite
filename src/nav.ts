@@ -75,7 +75,7 @@ function merge(imports, filter) {
 
 const nav = {
     slug: "",
-    title: "Home",
+    title: "Glowbuzzer: Web-stack machine motion",
     layout: HomePage,
     children: [
         {

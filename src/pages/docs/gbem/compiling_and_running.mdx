@@ -183,6 +183,29 @@ sudo df -h
 
 These instructions perform a **cross-compile** i.e. the kernel is compiled on a host and transferred to target. This example is for the Raspberry Pi 4B but a similar approach can be taken for other targets.
 
+So will need to download the Raspbian OS to an SD card for your Pi first. See <a href="https://www.raspberrypi.com/software/"> Raspbian installation instructions and software</a>.
+
+If you are using the Raspberry Pi imager software you can use the advance options to set:
+* default username and password (traditionally pi:raspberry)
+* your hostname
+* enable SSH access
+
+Otherwise, once the Pi is un and running, run `sudo raspi-config` and set:
+* S1 - wireless settings
+* S4 - hostname
+* I2 - enable ssh
+* I4 - enable SPI
+
+
+You will also need to enable ssh root access to the Pi with the following:
+
+```shell
+sudo nano /etc/ssh/sshd_config
+```
+
+Find the line `#PermitRootLogin prohibit-password` and replace with `PermitRootLogin yes`.
+
+
 ### Download the sources
 
 Create a directory, `rpi_new_kernel` on your PC, and a subdirectory `rpi_rt_kernel` inside that directory for the compiled files as:
@@ -202,6 +225,8 @@ git clone https://github.com/raspberrypi/tools.git
 
 ### Configuration
 
+First install bison and flex and calc with `sudo apt-get install flex bison bc`.
+
 Next set the environment variables needed for the cross-compilation of the kernel:
 
 ```sh
@@ -216,7 +241,7 @@ make bcm2711_defconfig
 
 ### Cross compiling the Kernel
 
-To compile the kernel you need to type the following:
+To compile the kernel you need to run the following makes:
 
 ```sh
 make -j8 zImage
@@ -226,12 +251,12 @@ make -j8 modules_install
 make -j9 dtbs_install
 ```
 
-The `-jX` parameter is set according to the number of processors that your PC.
+The `-jX` parameter is set according to the number of processors that you want to devote to the compile.
 
 The last line returned after installing `modules_install` reports the kernel version that you compiled, for example:
 
 ```sh
-DEPMOD  4.19.59-rt23-v7l+
+DEPMOD  4.19.71-rt24-v7l+
 ```
 
 You'll need this information for the kernel deployment. Then, make just a blob of data at the end of the kernel image typing:
@@ -242,6 +267,7 @@ mkdir $INSTALL_MOD_PATH/boot
 cd $INSTALL_MOD_PATH/boot
 mv $KERNEL.img kernel7_rt.img
 ```
+
 
 ### Transfer the Kernel
 
@@ -255,11 +281,14 @@ tar czf ../rt-kernel.tgz *
 Then, transfer the resulting '.tgz' file to the Raspberry Pi using `scp` and your ssh credentials:
 
 ```sh
-~/rpi-kernel/rt-kernel$ cd ..
-~/rpi-kernel$ scp rt-kernel.tgz pi@<ipaddress>:/tmp
+~/rpi_new_kernel/rpi_rt_kernel$ cd ..
+~/rpi_new_kernel$ scp rt-kernel.tgz pi@<ipaddress>:/tmp
 ```
 
 Change `<ipaddress>` to the corresponding IP of your Raspberry Pi.
+
+At this stage, `uname -a` will give something like - `Linux raspberrypi 5.15.32-v7l+ #1538 SMP` for the stock raspbian install.
+
 
 ### Installing the Kernel Image, Modules & Device Tree Overlays
 
@@ -273,10 +302,10 @@ sudo cp -dr * /lib/
 cd ../overlays
 sudo cp -d * /boot/overlays
 cd ..
-cp -d bcm* /boot/
+sudo cp -d bcm* /boot/
 ```
 
-Add the following entry to `/boot/config.txt`:
+Add the following entry to `/boot/config.txt` (`sudo nano /boot/config.txt`):
 
 ```sh
 # Add the following option:
@@ -287,8 +316,21 @@ Reboot the Raspberry Pi and test if the kernel is working by typing:
 
 ```sh
 uname -r
-4.19.59-rt23-v7l+
+4.19.71-rt24-v7l+
 ```
+
+```sh
+git clone git://git.kernel.org/pub/scm/utils/rt-tests/rt-tests.git`
+cd rt-tests
+git checkout stable/v1.0
+make all -j4
+sudo make install
+```
+
+Then run with `sudo cyclictest -l50000000 -m -S -p90 -i200 -h400 -q > output.txt`.
+
+Or `sudo cyclictest --mlockall --smp --priority=80 --interval=200 --distance=0`
+
 
 ## Forcing variables
 
