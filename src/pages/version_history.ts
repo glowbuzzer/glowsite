@@ -68,8 +68,8 @@ export const projects: Project[] = [
         github: "gbem",
         releases: [
             {
-                tag: "1.0.0",
-                description: "First release of GBEM"
+                tag: LATEST_VERSIONS.gbem_version,
+                description: "Latest release of GBEM"
             }
         ]
     },
@@ -78,8 +78,8 @@ export const projects: Project[] = [
         github: "gbsm",
         releases: [
             {
-                tag: "1.0.0",
-                description: "First release of GBSM"
+                tag: LATEST_VERSIONS.gbsm_version,
+                description: "Latest release of GBSM"
             }
         ]
     }
