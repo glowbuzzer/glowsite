@@ -31,6 +31,10 @@ jobs:
         run: pnpm run build:www
         env:
           NODE_OPTIONS: "--max_old_space_size=4096"
+          VITE_GLOWBUZZER_VERSION: preview
+
+      - name: Generate index
+        run: node post-process-site.mjs preview.glowbuzzer.com
 
       - name: Deploy site
         run: ./deploy-site.sh www preview.glowbuzzer.com E284GBH6OG76DV

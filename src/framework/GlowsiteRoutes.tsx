@@ -42,6 +42,9 @@ export const GlowsiteRoutes = () => {
                         <Helmet>
                             <meta charSet="utf-8" />
                             {/** if component exported a title use it **/}
+                            {props.description && (
+                                <meta name="description" content={props.description} />
+                            )}
                             {title && <title>{title}</title>}
                         </Helmet>
                         <Layout title={title} path={path} {...props}>

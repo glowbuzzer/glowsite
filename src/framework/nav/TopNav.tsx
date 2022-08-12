@@ -12,80 +12,86 @@ import { CloseOutlined, GithubOutlined, MenuOutlined, YoutubeOutlined } from "@a
 import { Section } from "../components/Section"
 
 import { LATEST_VERSIONS } from "../../versions.mjs"
+import { Search } from "./Search"
 
 const StyledTopNav = styled.div`
-  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 
-  .logo {
-    display: block;
-    padding-top: 10px;
-  }
-
-  .ant-menu-horizontal {
-    display: inline-block;
-    text-align: right;
-    background: none;
-    border: none;
-    padding-top: 5px;
-    flex-grow: 1;
-    font-size: 1.1em;
-
-    .ant-menu-submenu {
-      padding-bottom: 10px !important;
+    .logo {
+        display: block;
+        padding-top: 10px;
     }
 
-    .ant-menu-submenu {
-      margin: 0 12px !important;
+    .ant-menu-horizontal {
+        display: inline-block;
+        text-align: right;
+        background: none;
+        border: none;
+        padding-top: 5px;
+        flex-grow: 1;
+        font-size: 1.1em;
 
-      @media (max-width: 1200px) {
-        margin: 0 4px !important;
-      }
+        @media (max-width: 1200px) {
+            font-size: inherit;
+        }
+
+        .ant-menu-submenu {
+            padding-bottom: 10px !important;
+        }
+
+        .ant-menu-submenu {
+            margin: 0 0 !important;
+
+            @media (max-width: 1600px) {
+                margin: 0 0 !important;
+                padding: 0 10px 10px 10px !important;
+            }
+        }
+
+        .ant-menu-submenu-title {
+            margin: 0 6px;
+
+            @media (max-width: 1600px) {
+                margin: 0 0;
+            }
+        }
     }
 
-    .ant-menu-submenu-title {
-      margin: 0 12px;
-
-      @media (max-width: 1200px) {
-        margin: 0 4px;
-      }
-    }
-  }
-
-  .nav-narrow,
-  .nav-narrow-open {
-    display: none;
-  }
-
-  .nav-wide {
-    display: flex;
-    gap: 20px;
-  }
-
-  .latest-release {
-    color: ${props => props.theme.color.MainPurple};
-    border: 1px dashed ${props => props.theme.color.MainPurple};
-    border-radius: 14px;
-    padding: 2px 8px;
-  }
-
-  @media (max-width: 950px) {
-    .nav-wide {
-      display: none;
-    }
-
-    .nav-narrow {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      text-align: right;
-      font-size: 1.5em;
-      cursor: pointer;
-    }
-
+    .nav-narrow,
     .nav-narrow-open {
-      display: block;
+        display: none;
     }
-  }
+
+    .nav-wide {
+        display: flex;
+        gap: 20px;
+    }
+
+    .latest-release {
+        color: ${props => props.theme.color.MainPurple};
+        border: 1px dashed ${props => props.theme.color.MainPurple};
+        border-radius: 14px;
+        padding: 2px 8px;
+    }
+
+    @media (max-width: 1010px) {
+        .nav-wide {
+            display: none;
+        }
+
+        .nav-narrow {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            text-align: right;
+            font-size: 1.5em;
+            cursor: pointer;
+        }
+
+        .nav-narrow-open {
+            display: block;
+        }
+    }
 `
 
 const NavMenu = ({ mode, onNavigate = undefined }) => {
@@ -165,7 +171,7 @@ export const TopNav = ({ hideVersionLink }: { hideVersionLink?: boolean }) => {
 
                     <NavMenu mode="horizontal" />
 
-                    <Space size="middle">
+                    <Space size="middle" align="center">
                         {hideVersionLink || (
                             <Link className="latest-release" to="/downloads">
                                 {LATEST_VERSIONS.gbc_version}
@@ -177,6 +183,7 @@ export const TopNav = ({ hideVersionLink }: { hideVersionLink?: boolean }) => {
                         <a href={"https://www.youtube.com/channel/UCd5lSqWK5Ep4su1sHx6kkUA"}>
                             <YoutubeOutlined style={{ fontSize: "24px", color: "#9254de" }} />
                         </a>
+                        <Search />
                     </Space>
                 </div>
                 <div className="nav-narrow">

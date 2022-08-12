@@ -65,7 +65,8 @@ function merge(imports, filter) {
             return {
                 slug: `${displayName}`,
                 title: displayName,
-                displayProps: true
+                displayProps: true,
+                include: true // include in sitemap
                 // component: () => import("./react/ReactDocgenItem")
             }
         })
@@ -371,6 +372,7 @@ const nav = {
                             slug: "drive_support_overview",
                             title: "Supported drives overview",
                             subtitle: "What drives are supported by GBEM?",
+                            // description: "This is the meta description. Short description of the page. Will be used in search results.",
                             component: () => import("./pages/docs/gbem/drive_support_overview.mdx")
                         },
                         {

@@ -1,0 +1,3 @@
+Sitemap: http://www.glowbuzzer.com/sitemap.txt
+User-agent: *
+Disallow:

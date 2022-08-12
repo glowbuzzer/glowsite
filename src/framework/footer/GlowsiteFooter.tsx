@@ -148,7 +148,7 @@ const DesktopFooter = ({}) => {
                         <StyledLink to="/downloads">Downloads</StyledLink>
                     </div>
                     <div>
-                        <StyledLink to="/sitemap">Sitemap</StyledLink>
+                        <StyledLink className="sitemap-nav-link" to="/sitemap">Sitemap</StyledLink>
                     </div>
                 </Col>
             </Row>

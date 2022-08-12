@@ -71,26 +71,24 @@ export const StyledLayout = styled.div`
 
 export const BaseLayout = ({
     children,
-    hideVersionLink,
     singleColumn,
     ...props
 }: {
     children
-    hideVersionLink?: boolean
     singleColumn?: boolean
 }) => {
     const cookieConsent = useCookieConsent()
-
-    console.log("PAGE PROPERTIES", props)
 
     return (
         <>
             <StyledLayout>
                 <ScrollToTopOnMount />
                 <div className="main">
+{/*
                     <nav>
-                        <TopNav hideVersionLink={hideVersionLink} />
+                        <TopNav/>
                     </nav>
+*/}
                     <div className={singleColumn ? "single-body" : "body"}>
                         <BreadcrumbNav />
                         {children}

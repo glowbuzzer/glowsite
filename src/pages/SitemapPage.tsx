@@ -7,7 +7,14 @@ import { Link } from "react-router-dom"
 const SitemapItem = ({ node }: { node: Node }) => {
     return (
         <div>
-            <Link to={node.path}>{node.title}</Link>
+            {node.component || node.include ? (
+                <Link className="sitemap-link" to={node.path}>
+                    {node.title}
+                </Link>
+            ) : (
+                <span>{node.title}</span>
+            )}
+
             {node.children?.length > 0 && (
                 <ul>
                     {node.children.map(child => (

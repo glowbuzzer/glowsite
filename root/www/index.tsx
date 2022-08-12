@@ -14,6 +14,7 @@ import { CookieConsentProvider } from "../../src/framework/providers/CookieConse
 import { createRoot } from "react-dom/client"
 import {SettingOutlined} from "@ant-design/icons";
 import {Menu} from "antd";
+import {TopNav} from "../../src/framework/nav/TopNav";
 
 const items = [
     {
@@ -94,6 +95,7 @@ rootNode.render(
         <CookieConsentProvider>
             <GlowsiteTheme>
                 <NavProvider root={root}>
+                    <TopNav/>
                     <GlowsiteRoutes />
                 </NavProvider>
             </GlowsiteTheme>
