@@ -40,7 +40,7 @@ const server = app.listen(port, async () => {
 
     const links = await Promise.all(elems.map(async elem => elem.evaluate(e => e.getAttribute("href"))))
 
-    const chunks = Array.from(chunk(links, 10)).slice(0, 1);
+    const chunks = Array.from(chunk(links, 10))// .slice(0, 1);
 
     // follow each link and index the content
     const all = await Promise.all(chunks.map(async chunk => {
@@ -70,7 +70,7 @@ const server = app.listen(port, async () => {
 
         for (const {path, success, title, text, message} of all.flat()) {
             if (success) {
-                console.log("Adding to index", path);
+                // console.log("Adding to index", path);
                 this.add({
                     path,
                     title,
@@ -90,12 +90,12 @@ const server = app.listen(port, async () => {
                                                                       text
                                                                   }) => `${path}\n${title}\n---\n${text}\n---\n`).join("\n"));
 
-    console.log(all.flat().map(({
-                                    path,
-                                    success,
-                                    text,
-                                    message
-                                }) => `${path}: ${success ? "success" : "failed"}: ${text?.substr(0, 30) || message}`));
+    // console.log(all.flat().map(({
+    //                                 path,
+    //                                 success,
+    //                                 text,
+    //                                 message
+    //                             }) => `${path}: ${success ? "success" : "failed"}: ${text?.substr(0, 30) || message}`));
 
     process.exit(0);
 })
