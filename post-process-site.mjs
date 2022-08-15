@@ -25,8 +25,8 @@ app.get('/*', (req, res) => {
 const server = app.listen(port, async () => {
     const browser = await puppeteer.launch({
         args: [
-            '--no-sandbox',
-            '--no-zygote',
+            // '--no-sandbox',
+            // '--no-zygote',
             // '--single-process',
         ]
     });
@@ -40,7 +40,7 @@ const server = app.listen(port, async () => {
 
     const links = await Promise.all(elems.map(async elem => elem.evaluate(e => e.getAttribute("href"))))
 
-    const chunks = Array.from(chunk(links, 10))// .slice(0, 1);
+    const chunks = Array.from(chunk(links, 5))// .slice(0, 1);
 
     // follow each link and index the content
     const all = await Promise.all(chunks.map(async chunk => {

@@ -5,7 +5,7 @@ import { Node } from "../framework/providers/NavProvider"
 import { Link } from "react-router-dom"
 
 const SitemapItem = ({ node }: { node: Node }) => {
-    const remove_unlinked = c => !c.unlinked
+    const remove_unlinked = c => !c.unlinked || c.standaloneTypes // include the types in the sitemap (partly for indexing!)
     const children = node.children?.filter(remove_unlinked)
 
     return (
