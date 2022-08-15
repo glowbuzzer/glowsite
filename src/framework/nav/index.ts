@@ -21,6 +21,12 @@ export function useNavNode(location: string) {
     return all.find(r => r.path === location)
 }
 
+export function useCurrentNav() {
+    const { all } = useContext(navContext)
+    const location = useLocation()
+    return all.find(r => r.path === location.pathname)
+}
+
 export function useNavBySlug(slug: string, backup: string) {
     const { all } = useContext(navContext)
     return all.find(r => r.slug === slug) || all.find(r => r.path === backup)

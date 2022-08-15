@@ -1,4 +1,3 @@
-import { TopNav } from "../nav/TopNav"
 import styled from "styled-components"
 import { GlowsiteFooter } from "../footer/GlowsiteFooter"
 import { BreadcrumbNav } from "../components/BreadcrumbNav"
@@ -84,11 +83,6 @@ export const BaseLayout = ({
             <StyledLayout>
                 <ScrollToTopOnMount />
                 <div className="main">
-{/*
-                    <nav>
-                        <TopNav/>
-                    </nav>
-*/}
                     <div className={singleColumn ? "single-body" : "body"}>
                         <BreadcrumbNav />
                         {children}

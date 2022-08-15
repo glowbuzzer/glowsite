@@ -1,4 +1,4 @@
-import { useRootNav } from "../nav"
+import {useCurrentNav, useRootNav} from "../nav"
 import { Link, useLocation } from "react-router-dom"
 import { Menu, Space } from "antd"
 import * as React from "react"
@@ -124,26 +124,30 @@ const NavMenu = ({ mode, onNavigate = undefined }) => {
             subMenuCloseDelay={1}
             // forceSubMenuRender
             items={nav.children
-                .filter(node => node.children.length) // don't include nodes like 404 that have no children
+                // don't include nodes like 404 that have no children
+                // or nodes that are outside of nav
+                .filter(node => node.children.length && !node.unlinked)
                 .map(({ path, title, children }) => ({
                     key: mode + ":" + path,
                     label: title,
                     popupOffset: [0, 20],
                     popupClassName: "nav-sub-menu-" + mode,
-                    children: children.map(({ path, title, subtitle, children }) => {
-                        const to = children.length ? children[0].path : path
-                        return {
-                            key: mode + ":" + path,
-                            label: (
-                                <Link to={to} onClick={onNavigate}>
-                                    <div className="title">{title}</div>
-                                    {mode === "horizontal" && (
-                                        <div className="subtitle">{subtitle}</div>
-                                    )}
-                                </Link>
-                            )
-                        }
-                    })
+                    children: children
+                        .filter(n => !n.unlinked) // don't include nodes that are outside of nav
+                        .map(({ path, title, subtitle, children }) => {
+                            const to = children.length ? children[0].path : path
+                            return {
+                                key: mode + ":" + path,
+                                label: (
+                                    <Link to={to} onClick={onNavigate}>
+                                        <div className="title">{title}</div>
+                                        {mode === "horizontal" && (
+                                            <div className="subtitle">{subtitle}</div>
+                                        )}
+                                    </Link>
+                                )
+                            }
+                        })
                 }))}
         />
     )
@@ -151,6 +155,12 @@ const NavMenu = ({ mode, onNavigate = undefined }) => {
 
 export const TopNav = ({ hideVersionLink }: { hideVersionLink?: boolean }) => {
     const [showMenu, setShowMenu] = useState(false)
+
+    const node=useCurrentNav()
+
+    if ( node?.landing ) {
+        return null
+    }
 
     // we are expecting each node in the top nav to have children
     const downloads_site = window.location.href.indexOf("downloads.glowbuzzer.com") >= 0

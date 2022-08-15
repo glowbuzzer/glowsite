@@ -5,6 +5,9 @@ import { Node } from "../framework/providers/NavProvider"
 import { Link } from "react-router-dom"
 
 const SitemapItem = ({ node }: { node: Node }) => {
+    const remove_unlinked = c => !c.unlinked
+    const children = node.children?.filter(remove_unlinked)
+
     return (
         <div>
             {node.component || node.include ? (
@@ -15,9 +18,9 @@ const SitemapItem = ({ node }: { node: Node }) => {
                 <span>{node.title}</span>
             )}
 
-            {node.children?.length > 0 && (
+            {children?.length > 0 && (
                 <ul>
-                    {node.children.map(child => (
+                    {children.map(child => (
                         <li key={child.path}>
                             <SitemapItem node={child} />
                         </li>

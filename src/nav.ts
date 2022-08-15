@@ -789,6 +789,7 @@ const nav = {
                     slug: "types",
                     title: "Types",
                     standaloneTypes: true,
+                    unlinked: true,
                     children: typedoc.children
                         .filter(i => !typedocHookFilter(i))
                         .map(t => ({
@@ -993,7 +994,22 @@ const nav = {
             slug: "sitemap",
             title: "Sitemap",
             layout: SimpleLayout,
+            unlinked: true,
             component: () => import("./pages/SitemapPage")
+        },
+        {
+            slug: "landing",
+            title: "Landing",
+            layout: SimpleLayout,
+            unlinked: true, // inherited by children, remove from nav and sitemap
+            landing: true, // hides the top nav
+            children: [
+                {
+                    slug: "test",
+                    title: "Test Landing Page",
+                    component: () => import("./landing/test.mdx")
+                }
+            ]
         }
 
         // {

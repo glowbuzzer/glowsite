@@ -92,47 +92,48 @@ export default () => {
 
     return (
         <Section>
-            <h1>Toolkit releases & downloads</h1>
-            <p>Here we highlight the latest releases of the glowbuzzer toolkit's components.</p>
-            <p>
-                Components like GBR (React components), GBEM (EtherCAT Master), GBSM (Step Master)
-                are supplied as source code and you need to download and compile these yourself from
-                Github.
-            </p>
-            <p>
-                GBC, the core real-time control, is the closed source licensed component of the
-                toolkit and an evaluation version (time limited) is available for download.
-            </p>
-            {projects.map(project => (
-                <div key={project.github || project.name}>
-                    <h2>
-                        {project.basename ? (
-                            <DownloadOutlined style={{ marginRight: "10px" }} />
-                        ) : (
-                            <GithubOutlined style={{ marginRight: "10px" }} />
-                        )}
-                        {project.name}
-                    </h2>
-                    {project.releases.map(r => (
-                        <div key={r.tag}>
-                            <h3>
-                                {r.tag}{" "}
-                                <span>
+            <div className="content">
+                <h1>Toolkit releases & downloads</h1>
+                <p>Here we highlight the latest releases of the glowbuzzer toolkit's components.</p>
+                <p>
+                    Components like GBR (React components), GBEM (EtherCAT Master), GBSM (Step Master)
+                    are supplied as source code and you need to download and compile these yourself from
+                    Github.
+                </p>
+                <p>
+                    GBC, the core real-time control, is the closed source licensed component of the
+                    toolkit and an evaluation version (time limited) is available for download.
+                </p>
+                {projects.map(project => (
+                    <div key={project.github || project.name}>
+                        <h2>
+                            {project.basename ? (
+                                <DownloadOutlined style={{marginRight: "10px"}}/>
+                            ) : (
+                                <GithubOutlined style={{marginRight: "10px"}}/>
+                            )}
+                            {project.name}
+                        </h2>
+                        {project.releases.map(r => (
+                            <div key={r.tag}>
+                                <h3>
+                                    {r.tag}{" "}
+                                    <span>
                                     <a href={changelog_url(project, r)}>changelog</a>
                                 </span>
-                            </h3>
-                            <p>{r.description}</p>
-                            {r.files && (
-                                <Table
-                                    pagination={false}
-                                    columns={file_columns}
-                                    dataSource={make_table(project, r)}
-                                />
-                            )}
-                        </div>
-                    ))}
-                </div>
-            ))}
-        </Section>
+                                </h3>
+                                <p>{r.description}</p>
+                                {r.files && (
+                                    <Table
+                                        pagination={false}
+                                        columns={file_columns}
+                                        dataSource={make_table(project, r)}
+                                    />
+                                )}
+                            </div>
+                        ))}
+                    </div>
+                ))}
+            </div></Section>
     )
 }
