@@ -816,6 +816,7 @@ const nav = {
                             slug: "react_native",
                             title: "React native",
                             subtitle: "Getting started with React Native",
+                            description: "How to use React Native to create device based user interfaces for the glowbuzzer toolkit",
                             tags: ["web-dev", "React", "HMI", "Android", "React Native", "iOS"],
                             component: () => import("./pages/blogs/webdev/react_native.mdx")
                         },
@@ -823,6 +824,7 @@ const nav = {
                             slug: "threejs",
                             title: "three.js",
                             subtitle: "Introduction to three.js",
+                            description: "An introduction on how to use three.js to create 3D visualisations for glowbuzzer applications",
                             tags: ["web-dev", "React"],
                             component: () => import("./pages/blogs/webdev/threejs.mdx")
                         },
@@ -830,6 +832,7 @@ const nav = {
                             slug: "opcua",
                             title: "OPC/UA",
                             subtitle: "Working with OPC/UA",
+                            description: "How to use OPC/UA with the glowbuzzer toolkit",
                             tags: ["web-dev", "OPC-UA", "node.js", "PLC", "pub/sub"],
                             component: () => import("./pages/blogs/webdev/opcua.mdx")
                         }

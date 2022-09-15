@@ -1,0 +1,53 @@
+# Simple pick-and-place with Igus 5-DOF robot
+
+## Introduction
+
+This blog discusses how to use an Igus D-DOF robot arm to perform simple pick and place operations with the &gbt.
+
+## Hardware
+
+We are using an Igus 5-DOF arm. This
+
+We used Oriental Motor Stepper motors on the robot. These have absolute encoders.
+
+Motor models:
+
+Joint 1 -
+Joint 2 -
+Joint 3 -
+
+Controllers
+
+AZD-3A -
+AZD-2A -
+
+
+## Kinematics
+
+A 5-DOF arm, unlike their 6-DOF friends, have a large number of unreachable positions and orientations in their working space.
+
+This means that you can not specify an arbitrary position and orientation within the robots reach and expect it to be able to reach it.
+
+With the Igus all positions (excluding those around the base and out of reach) can be attained it is just there are constraints on the orientations that can be achieved at each position.
+
+## Configuration
+
+### &gbr
+
+json
+
+
+### &gbem
+
+
+
+## Test jogging
+
+Run &gbc with:
+
+`./GBC -c ../../gbc-configs/config_igus.json`
+
+
+video
+
+## &gbr code for pick and place
