@@ -1,7 +1,7 @@
 import { useRoutes } from "react-router"
 import * as React from "react"
 import { Suspense } from "react"
-import { Helmet } from "react-helmet"
+import { Helmet, HelmetProvider } from "react-helmet-async"
 import { FallbackLayout } from "./layouts/FallbackLayout"
 import * as NotFound from "../pages/404.mdx"
 import { BaseLayout } from "./layouts/BaseLayout"
@@ -20,7 +20,7 @@ export const GlowsiteRoutes = () => {
         {
             path: "*",
             element: (
-                <>
+                <HelmetProvider>
                     {/* 404 route */}
                     <Helmet>
                         <meta charSet="utf-8" />
@@ -29,7 +29,7 @@ export const GlowsiteRoutes = () => {
                     <BaseLayout>
                         <NotFound.default />
                     </BaseLayout>
-                </>
+                </HelmetProvider>
             )
         },
         ...nav.map(({ path, title, layout, component, ...props }) => {
@@ -38,7 +38,7 @@ export const GlowsiteRoutes = () => {
             return {
                 path,
                 element: (
-                    <>
+                    <HelmetProvider>
                         <Helmet>
                             <meta charSet="utf-8" />
                             {/** if component exported a title use it **/}
@@ -54,7 +54,7 @@ export const GlowsiteRoutes = () => {
                                 </Suspense>
                             )}
                         </Layout>
-                    </>
+                    </HelmetProvider>
                 )
             }
         }),
