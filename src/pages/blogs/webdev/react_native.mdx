@@ -1,4 +1,3 @@
-
 import reactIcon from "./react-icon.png?glowsite"
 export const heroImage=reactIcon
 import {TitleImage} from "../../../framework/components/TitleImage"
@@ -7,20 +6,232 @@ import {ReadingTime} from "../../../framework/components/ReadingTime"
 
 # {props.subtitle}
 
-<ReadingTime time="5"/>
+<ReadingTime time="10"/>
 <PageTag tags={props.tags}/>
 
 ## Introduction
 
 <TitleImage image={reactIcon} alt="React logo"/>
 
-React Native is describes itself as "combining the best parts of native development with React with a best-in-class JavaScript library for building user interfaces
+React Native describes itself as "combining the best parts of native development with React, a best-in-class
+JavaScript library for building user interfaces".
 
-It allows you to build native applications for Android and iOS using React.
+React Native allows you to build native applications for Android and iOS using React.
 
-This is interesting to us as it allows a way to use the &gbt to build HMI (user interface) applications to control machines that can can be deployed to tablets/phones/HMI etc.
+This is interesting to us as it allows a way to use the &gbt to build HMI (user interface) applications to control
+machines that can can be deployed to tablets, phones or industrial HMIs running Android.
 
-This blog post discusses how to use the &gbr components with React Native.
+This blog post describes how to use the &gbr components with React Native.
 
 ## Expo
 
+[Expo](https://expo.dev) is a set of tools and services built around React Native that streamline the development process and allow you to
+get a React Native app up and running on your phone within minutes.
+
+This tutorial makes use of Expo to simplify the setup, but you do not have to use Expo for your React Native app.
+
+## Is React Native the right choice for my app?
+
+This tutorial shows how to build a React Native app using the &gbt. React Native apps are not built using HTML and CSS and
+the user interface needs to be carefully constructed using React Native features. These are then rendered using the native
+controls on each device. This has pros and cons, and other options are available. For example, you might consider creating a
+progressive web app (PWA) using frameworks such as [Capacitor](https://capacitorjs.com). This bundles an app in a native
+container but uses a WebView under the covers to render your vanilla React app (HTML and CSS).
+
+## Glowbuzzer Controls and Glowbuzzer Store
+
+The &gbt is split into two core dependencies `@glowbuzzer/store` and `@glowbuzzer/controls`. The controls are vanilla
+React components written in HTML and CSS, and as such they cannot be used in your React Native app. The store, on the other hand,
+uses Redux which works just fine in React Native. This also provides useful hooks and a motion API making it easy to interact with
+&gbc.
+
+## Project setup
+
+The code for the finished app is [available on Github](https://github.com/glowbuzzer/gbr/tree/main/examples/react-native).
+
+First create a new Expo project [using the instructions on the Expo site](https://docs.expo.dev/get-started/create-a-new-app).
+
+Check that you are able to connect to the new app on your phone.
+
+Next add the dependencies for &gb and react-redux:
+```
+npm install --save @glowbuzzer/store react-redux
+```
+
+Now you can create a component that lets you connect to &gbc. Create the file `SimpleConnectView.jsx`.
+
+```jsx
+// SimpleConnectView.jsx
+import { Button, StyleSheet, Text, View } from "react-native"
+import {
+    DesiredState,
+    determine_machine_state,
+    FaultCode,
+    MachineState,
+    possible_transitions,
+    useConnection,
+    useMachine
+} from "@glowbuzzer/store"
+
+// CHANGE THE CONNECT URL WITH ADDRESS WHERE GBC IS RUNNING
+const CONNECT_URL = "ws://192.168.1.199:9001/ws"
+
+export const SimpleConnectView = () => {
+    const connection = useConnection()
+    const machine = useMachine()
+
+    const state = determine_machine_state(machine.statusWord)
+
+    // some variables we will use based on current connection and machine state
+    const connected = connection.connected && connection.statusReceived
+    const fault = machine.currentState === MachineState.FAULT
+    const fault_active = machine.currentState === MachineState.FAULT_REACTION_ACTIVE
+    const target_not_acquired = machine.actualTarget !== machine.requestedTarget
+    const op_enabled = !(!connected || fault || fault_active || target_not_acquired)
+
+    return (
+        <View>
+            <Text>Connection state: {connection.state}</Text>
+            <View>
+                <Text>
+                    {connection.connected ? (
+                        <Button title={"DISCONNECT"} onPress={() => connection.disconnect()} />
+                    ) : (
+                        <Button title={"CONNECT"} onPress={() => connection.connect(CONNECT_URL)} />
+                    )}
+                </Text>
+            </View>
+        </View>
+    )
+}
+```
+
+In order to render this component, you need to bootstrap the Redux store and add the component to your app. Edit `App.jsx` as follows.
+
+```jsx
+import { configureStore } from "@reduxjs/toolkit"
+import { Provider } from "react-redux"
+import { rootReducer } from "@glowbuzzer/store"
+import { SimpleConnectView } from "./SimpleConnectView"
+
+const style = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: "#fff",
+        alignItems: "center",
+        justifyContent: "center"
+    }
+})
+
+export default function App() {
+    // middleware factory
+    const middleware = getDefault => {
+        return getDefault({ immutableCheck: false, serializableCheck: false })
+    }
+
+    // create the Redux store
+    const store = configureStore({
+        reducer: rootReducer,
+        middleware
+    })
+
+    return (
+        <Provider store={store}>
+            <View style={style.container}>
+                <SimpleConnectView />
+                <StatusBar style="auto" />
+            </View>
+        </Provider>
+    )
+}
+```
+
+Run &gbc and bring up the app on your phone with Expo app. To run &gbc, use the generic config:
+```shell
+gbc --config config_generic.json
+```
+
+Check that you can connect and disconnect to &gbc from the app.
+
+After connecting &gbr to &gbc, you need a way to clear faults and enable operation before you can issue moves.
+
+Add the following code to allow clearing of faults:
+
+```jsx
+    return (
+        <View>
+            ... existing code ...
+
+            {connected && fault && (
+                <Button
+                    onPress={() =>
+                        machine.setMachineControlWord(possible_transitions.FaultReset())
+                    }
+                    title={"Reset Fault"}
+                />
+            )}
+        </View>
+    )
+```
+
+The following code provides buttons to disable and enable operation:
+
+```jsx
+    return (
+        <View>
+            ... existing code ...
+
+            <View>
+                <View>
+                    <Text>Machine operation</Text>
+                </View>
+                <Button
+                    disabled={!op_enabled}
+                    onPress={() => machine.setDesiredState(DesiredState.STANDBY)}
+                    color={state === MachineState.OPERATION_ENABLED ? "gray" : undefined}
+                    title={"Disabled"}
+                />
+                <Button
+                    disabled={!op_enabled}
+                    onPress={() => machine.setDesiredState(DesiredState.OPERATIONAL)}
+                    color={state === MachineState.OPERATION_ENABLED ? undefined : "gray"}
+                    title={"Enabled"}
+                />
+            </View>
+        </View>
+    )
+```
+
+Finally, you need to add some components to send moves to &gbc.
+
+Create a new file `SimpleMoveView.jsx`:
+
+```jsx
+import { useJointPositions, useSoloActivity } from "@glowbuzzer/store"
+import { Button, Text, View } from "react-native"
+
+export const SimpleMoveView = () => {
+    const joints = useJointPositions(0)
+    const api = useSoloActivity(0)
+
+    function move(n) {
+        return api.moveJoints([n]).relative(true).promise()
+    }
+
+    return (
+        <View>
+            <View>
+                <Text>Position: {joints[0]}</Text>
+            </View>
+            <View>
+                <Button title={"Move -100"} onPress={() => move(-100)} />
+                <Button title={"Move +100"} onPress={() => move(+100)} />
+            </View>
+        </View>
+    )
+}
+```
+
+Add this component to `App.jsx` and test that you can move a joint.
+
+Congratulations, you have successfully created a React Native glowbuzzer application!
