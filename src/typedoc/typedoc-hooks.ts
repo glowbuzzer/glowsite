@@ -34,10 +34,10 @@ export const typedocNonEmptyEnumerationFilter = c =>
 const typedocGbcFilter = c =>
     c.sources?.some(
         s =>
-            s.fileName === "gbc.ts" ||
-            s.fileName === "gbc.d.ts" ||
-            s.fileName === "gbc_extra.ts" ||
-            s.fileName === "gbc_extra.d.ts"
+            s.fileName.endsWith("gbc.ts") ||
+            s.fileName.endsWith("gbc.d.ts") ||
+            s.fileName.endsWith("gbc_extra.ts") ||
+            s.fileName.endsWith("gbc_extra.d.ts")
     )
 
 export const typedocGbcSchemaFilter = c =>
