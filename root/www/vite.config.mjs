@@ -34,6 +34,10 @@ export default defineConfig(({mode}) => {
     const env = loadEnv(mode, process.cwd())
 
     return {
+        server: {
+            port: 8000,
+            host: true
+        },
         plugins: [
             mdx({
                 remarkPlugins: [
@@ -70,7 +74,7 @@ export default defineConfig(({mode}) => {
                 // because react@17.x still uses cjs module syntax and we are fully esm
                 // https://github.com/mdx-js/mdx/discussions/1794
                 // "react/jsx-runtime": "react/jsx-runtime.js"
-                "@glowsite": process.cwd()+"/src/framework/index.ts"
+                "@glowsite": process.cwd() + "/src/framework/index.ts"
             }
         },
         build: {
