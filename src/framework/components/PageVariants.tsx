@@ -5,6 +5,7 @@ import styled from "styled-components"
 
 type PageVariantProps = {
     variants: string[]
+    children
 }
 
 type PageVariantContextType = {
@@ -36,9 +37,7 @@ export const PageVariantTabs = ({ children }) => {
         context.setCurrent(key)
     }
 
-    return (
-        <StyledTabs activeKey={context.current} onChange={change}>
-            {children}
-        </StyledTabs>
-    )
+    return <StyledTabs activeKey={context.current} onChange={change}>
+        {children}
+    </StyledTabs>
 }

@@ -157,6 +157,11 @@ const AppStyle = styled.div`
         color: red;
         text-decoration: line-through;
     }
+
+    // not sure why we need this, but without it tabs appear stacked horizontally
+    .ant-tabs-tabpane-hidden {
+        display: none;
+    }
 `
 
 const AppTheme = {
