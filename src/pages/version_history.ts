@@ -25,8 +25,12 @@ export const projects: Project[] = [
         github: "gbr",
         releases: [
             {
-                tag: "v1.0.0",
-                description: "First release of GBR"
+                tag: "v1.4.0-alpha.9",
+                description: "Alpha release"
+            },
+            {
+                tag: "v1.3.0",
+                description: "Stable release"
             }
         ]
     },

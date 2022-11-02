@@ -99,22 +99,39 @@ const AppStyle = styled.div`
         border: 1px solid rgba(0, 0, 0, 0.5);
         background: white;
         margin-bottom: -10px;
+        height: 200px;
+    }
 
+    .codeblock-tile {
         > div {
-            min-height: 250px;
+            width: 500px;
+            height: 100%;
         }
     }
 
-    .codeblock-small {
+    .codeblock-wide {
         > div {
-            max-width: 400px;
+            width: 800px;
+        }
+    }
+
+    .codeblock-narrow {
+        > div {
+            max-width: 300px;
         }
     }
 
     .codeblock-tall {
+        height: auto;
+
         > div {
-            min-height: 300px;
+            height: 300px;
         }
+    }
+
+    .codeblock-toolpath {
+        // hack to make toolpath tile taller
+        height: 600px;
     }
 
     dt {
@@ -128,11 +145,6 @@ const AppStyle = styled.div`
         margin-bottom: 24px;
     }
 
-    .codeblock-toolpath {
-        // hack to make toolpath tile taller
-        height: 600px;
-    }
-
     .codeblock-tasks {
         height: 400px;
     }
@@ -140,10 +152,10 @@ const AppStyle = styled.div`
     .ant-divider-horizontal {
         border-top-color: rgba(0, 0, 0, 0.2);
     }
-  
+
     a.broken {
-      color: red;
-      text-decoration: line-through;
+        color: red;
+        text-decoration: line-through;
     }
 `
 
@@ -161,10 +173,13 @@ declare module "styled-components" {
     interface DefaultTheme extends Readonly<typeof AppTheme> {}
 }
 
-export const GlowsiteTheme = ({ children }) => (
-    <ThemeProvider theme={AppTheme}>
-        <Background>
-            <AppStyle>{children}</AppStyle>
-        </Background>
-    </ThemeProvider>
-)
+export const GlowsiteTheme = ({ children }) => {
+    return (
+        // @ts-ignore
+        <ThemeProvider theme={AppTheme}>
+            <Background>
+                <AppStyle>{children}</AppStyle>
+            </Background>
+        </ThemeProvider>
+    )
+}

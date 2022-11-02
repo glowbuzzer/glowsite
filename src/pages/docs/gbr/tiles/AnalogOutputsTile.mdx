@@ -1,6 +1,7 @@
-```jsx demo small
+```jsx demo tile
 import React from "react"
-import {AnalogOutputsTile} from "@glowbuzzer/controls";
+import {GlowbuzzerTileDefinitions} from "@glowbuzzer/controls";
+import {DockExampleLayout} from "@glowsite";
 
-export default () => <AnalogOutputsTile labels={["Target temperature", "Rotor speed"]}/>
+export default () => <DockExampleLayout tile={GlowbuzzerTileDefinitions.ANALOG_OUTPUTS}/>
 ```

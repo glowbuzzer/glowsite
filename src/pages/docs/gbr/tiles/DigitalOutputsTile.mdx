@@ -1,6 +1,7 @@
-```jsx demo small
+```jsx demo tile
 import React from "react"
-import {DigitalOutputsTile} from "@glowbuzzer/controls";
+import {GlowbuzzerTileDefinitions} from "@glowbuzzer/controls";
+import {DockExampleLayout} from "@glowsite";
 
-export default () => <DigitalOutputsTile labels={["Coolant", "Laser"]}/>
+export default () => <DockExampleLayout tile={GlowbuzzerTileDefinitions.DIGITAL_OUTPUTS}/>
 ```

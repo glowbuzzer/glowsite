@@ -94,7 +94,7 @@ export const sample_config = {
         },
         "Perform quality check": {
             "Wait for magic eye": {
-                activityType: ACTIVITYTYPE.ACTIVITYTYPE_WAITON
+                activityType: ACTIVITYTYPE.ACTIVITYTYPE_DWELL
             },
             "Take photo": {
                 activityType: ACTIVITYTYPE.ACTIVITYTYPE_SETDOUT
@@ -109,6 +109,14 @@ export const sample_config = {
         1: {}
     },
     din: {
+        0: {},
+        1: {}
+    },
+    aout: {
+        0: {},
+        1: {}
+    },
+    ain: {
         0: {},
         1: {}
     }

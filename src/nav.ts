@@ -7,7 +7,7 @@ import {
 } from "./framework/layouts/DocumentationPage"
 import { ControlsDocumentationPage } from "./framework/layouts/ControlsDocumentationPage"
 import { SimpleLayout } from "./framework/layouts/SimpleLayout"
-import { reactDocgenControlFilter, reactDocgenTileFilter } from "./react/react-docgen-hooks"
+import { reactDocgenDockFilter, reactDocgenTileFilter } from "./react/react-docgen-hooks"
 
 import reactDocgenControls from "react-docgen:@glowbuzzer/controls"
 import typedoc from "typedoc:@glowbuzzer/store"
@@ -53,10 +53,12 @@ function merge(imports, filter) {
     return autoDocs
         .map(([, item]) => {
             const { displayName } = item as any
-            const manual = Object.entries(imports).find(([path]) => {
-                const name = path.split("/").pop().split(".")[0]
-                return name === displayName
-            })
+            const manual =
+                imports &&
+                Object.entries(imports).find(([path]) => {
+                    const name = path.split("/").pop().split(".")[0]
+                    return name === displayName
+                })
             if (manual) {
                 return {
                     ...auto_item(manual, true)
@@ -674,6 +676,23 @@ const nav = {
                             component: () => import("./pages/docs/gbr/overview.mdx")
                         },
                         {
+                            slug: "dock",
+                            title: "GBR docking layout",
+                            children: [
+                                {
+                                    slug: "overview",
+                                    title: "Overview",
+                                    subtitle: "Overview of the GBR docking layout",
+                                    component: () => import("./pages/docs/gbr/dock/overview.mdx")
+                                },
+                                ...merge(
+                                    // @ts-ignore
+                                    import.meta.glob("./pages/docs/gbr/dock/*.mdx"),
+                                    reactDocgenDockFilter
+                                )
+                            ]
+                        },
+                        {
                             slug: "tiles",
                             title: "GBR tiles",
                             children: [
@@ -687,24 +706,6 @@ const nav = {
                                     // @ts-ignore
                                     import.meta.glob("./pages/docs/gbr/tiles/*.mdx"),
                                     reactDocgenTileFilter
-                                )
-                            ]
-                        },
-                        {
-                            slug: "controls",
-                            title: "GBR controls",
-                            children: [
-                                {
-                                    slug: "overview",
-                                    title: "Overview",
-                                    subtitle: "Overview of the GBR controls",
-                                    component: () =>
-                                        import("./pages/docs/gbr/controls/overview.mdx")
-                                },
-                                ...merge(
-                                    // @ts-ignore
-                                    import.meta.glob("./pages/docs/gbr/controls/*.mdx"),
-                                    reactDocgenControlFilter
                                 )
                             ]
                         },
@@ -816,7 +817,8 @@ const nav = {
                             slug: "react_native",
                             title: "React native",
                             subtitle: "Getting started with React Native",
-                            description: "How to use React Native to create device based user interfaces for the glowbuzzer toolkit",
+                            description:
+                                "How to use React Native to create device based user interfaces for the glowbuzzer toolkit",
                             tags: ["web-dev", "React", "HMI", "Android", "React Native", "iOS"],
                             component: () => import("./pages/blogs/webdev/react_native.mdx")
                         },
@@ -824,7 +826,8 @@ const nav = {
                             slug: "threejs",
                             title: "three.js",
                             subtitle: "Introduction to three.js",
-                            description: "An introduction on how to use three.js to create 3D visualisations for glowbuzzer applications",
+                            description:
+                                "An introduction on how to use three.js to create 3D visualisations for glowbuzzer applications",
                             tags: ["web-dev", "React"],
                             component: () => import("./pages/blogs/webdev/threejs.mdx")
                         },

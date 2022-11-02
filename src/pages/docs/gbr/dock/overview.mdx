@@ -1,0 +1,104 @@
+import {Tldr} from "../../../../framework/components"
+
+# {props.subtitle}
+
+<Tldr>
+    - Built on flexlayout-react
+    - Provides drag and drop tiled layout
+    - Customise the layout and add your own tiles
+    - Supports layouts with multiple perspectives
+</Tldr>
+
+&gbr; provides a drag and drop tiled layout for your React application. It is built on top of the [flexlayout-react](https://github.com/caplin/FlexLayout) library but abstracts
+away most of the detail and gives you a simple way to specify which components you want to include, and to add your own components.
+
+In the simplest case, you can just specify the tiles you want to include and the layout will be automatically generated for you.
+
+## Example using the Glowbuzzer standard tiles
+
+The following example shows how to include three of the standard tiles in your application. The initial layout will be according
+to the tile definitions, but the user can drag and drop the tiles to change the layout. You can also change the default placement
+of tiles, as shown in a later example.
+
+```jsx
+import {GlowbuzzerApp, DockLayoutProvider, DockLayout, GlowbuzzerTileDefinitions} from "@glowbuzzer/controls";
+
+const MyApp=() => {
+    return (
+        <GlowbuzzerApp>
+            <DockLayoutProvider appName={"myapp"} tiles={[
+                GlowbuzzerTileDefinitions.CONNECT,
+                GlowbuzzerTileDefinitions.GCODE,
+                GlowbuzzerTileDefinitions.CARTESIAN_JOG
+            ]}>
+                <DockLayout />
+            </DockLayoutProvider>
+        </GlowbuzzerApp>
+   );
+}
+```
+
+## Example using your own tiles
+
+You can also add your own tiles to the layout. The following example shows how to add a tile for a custom component called `MyTile`.
+
+```jsx
+import {GlowbuzzerApp, DockLayoutProvider, DockLayout, GlowbuzzerTileDefinitions,DockTileDefinitionBuilder} from "@glowbuzzer/controls";
+
+const MyApp=() => {
+    const myTileDefinition=DockTileDefinitionBuilder()
+        .id("mytile")
+        .title("My Tile")
+        .render(() => {
+            return <div>THIS IS A CUSTOM TILE</div>
+        })
+        .build();
+
+    return (
+        <GlowbuzzerApp>
+            <DockLayoutProvider appName={"myapp"} tiles={[
+                GlowbuzzerTileDefinitions.CONNECT,
+                GlowbuzzerTileDefinitions.GCODE,
+                GlowbuzzerTileDefinitions.CARTESIAN_JOG,
+                myTileDefinition
+            ]}>
+                <DockLayout />
+            </DockLayoutProvider>
+        </GlowbuzzerApp>
+   );
+}
+```
+
+## Customising properties of one of the standard tiles
+
+The standard components are displayed with default properties and with a default placement.
+You can change parameters or change the default placement of the standard tiles by creating a builder based on the default tile definition.
+The following example shows how to customise the 3d scene tile.
+
+```jsx
+import {GlowbuzzerApp, DockLayoutProvider, DockLayout, DockTileDefinitionBuilder, GlowbuzzerTileDefinitions, ThreeDimensionalSceneTile} from "@glowbuzzer/controls";
+
+const MyApp=() => {
+    const myTileDefinition=DockTileDefinitionBuilder(GlowbuzzerTileDefinitions.THREE_DIMENSIONAL_SCENE)
+        .id("mytile")
+        .title("My Tile")
+        .render(() => {
+            return <ThreeDimensionalSceneTile model={/* pass in your robot model */}/>
+        })
+        .defaultPlacement(1, 1)
+        .build();
+
+    return (
+        <GlowbuzzerApp>
+            <DockLayoutProvider appName={"myapp"} tiles={[
+                GlowbuzzerTileDefinitions.CONNECT,
+                GlowbuzzerTileDefinitions.CARTESIAN_JOG,
+                myTileDefinition
+            ]}>
+                <DockLayout />
+            </DockLayoutProvider>
+        </GlowbuzzerApp>
+   );
+}
+```
+

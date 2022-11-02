@@ -8,9 +8,9 @@
  */
 
 import * as React from "react"
-import {createContext, FC, ReactNode, useEffect, useMemo, useState} from "react"
-import * as Module from "module"
-import {useLocation} from "react-router-dom"
+import {createContext, FC, ReactNode} from "react"
+// @ts-ignore
+import * as Module from "module";
 
 export type Node = {
     parent?: Node

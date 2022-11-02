@@ -35,7 +35,7 @@ export default function remarkCodeblock() {
 
         visit(tree, "code", (node, index, parent) => {
             if (node.meta?.startsWith("demo")) {
-                // meta can be 'demo' followed by list of classes, eg. "demo toolpath", see ToolPathTile.mdx (to control height, etc)
+                // meta can be 'demo' followed by list of classes, eg. "demo toolpath", see ThreeDimensionalSceneTile.mdx (to control height, etc)
                 const classes = node.meta.split(" ")
                 delete node.meta
 

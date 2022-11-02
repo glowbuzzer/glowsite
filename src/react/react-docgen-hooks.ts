@@ -8,5 +8,8 @@ export function useReactDocgen(filter) {
 export const reactDocgenTileFilter = c =>
     c.displayName.endsWith("Tile") && !c.description?.startsWith("@ignore")
 
-export const reactDocgenControlFilter = c =>
-    !c.displayName.endsWith("Tile") && !c.description?.startsWith("@ignore")
+// export const reactDocgenControlFilter = c =>
+//     !c.displayName.endsWith("Tile") && !c.description?.startsWith("@ignore")
+
+export const reactDocgenDockFilter = c =>
+    c.displayName.indexOf("Dock") >= 0 && !c.description?.startsWith("@ignore")

@@ -15,6 +15,7 @@ import { createRoot } from "react-dom/client"
 import {SettingOutlined} from "@ant-design/icons";
 import {Menu} from "antd";
 import {TopNav} from "../../src/framework/nav/TopNav";
+import {GlowbuzzerTileDefinitions} from "@glowbuzzer/controls";
 
 const rootNode = createRoot(document.getElementById("app"))
 rootNode.render(

@@ -32,4 +32,6 @@ for (const [name, version] of Object.entries(local.dependencies)) {
 if (save) {
     console.log("Writing package.json")
     fs.writeFileSync("./package.json", JSON.stringify(local, null, 2))
+} else {
+    console.log("** No changes made. Use --save to write package.json")
 }

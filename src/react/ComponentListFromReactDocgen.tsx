@@ -15,8 +15,6 @@ const StyledDiv = styled.div`
 export default function ComponentListFromReactDocgen({ title, filter }) {
     const docs = useReactDocgen(filter)
 
-    console.log("FILTERED", docs)
-
     const columns = [
         {
             title: "Name",

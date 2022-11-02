@@ -10,6 +10,10 @@ export default defineConfig(({mode}) => {
     const env = loadEnv(mode, process.cwd())
 
     return {
+        server: {
+            port: 8001,
+            host: true
+        },
         plugins: [react_docgen(mode), typedoc(mode), testPlugin()]
     }
 })

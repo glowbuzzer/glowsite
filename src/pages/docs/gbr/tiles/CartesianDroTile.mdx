@@ -1,6 +1,11 @@
-```jsx demo small tall
+```jsx demo tile tall
 import React from "react"
-import {CartesianDroTile} from "@glowbuzzer/controls";
+import {GlowbuzzerTileDefinitions, DockTileDefinitionBuilder, CartesianDroTile} from "@glowbuzzer/controls";
+import {DockExampleLayout} from "@glowsite";
 
-export default () => <CartesianDroTile kinematicsConfigurationIndex={0} clipboardMode={true}/>
+const definition=DockTileDefinitionBuilder(GlowbuzzerTileDefinitions.CARTESIAN_DRO)
+    .render(() => <CartesianDroTile clipboardMode={true} />)
+    .build();
+
+export default () => <DockExampleLayout tile={definition}/>
 ```

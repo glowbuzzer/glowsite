@@ -4,6 +4,8 @@ import { DefaultDocumentationPage } from "./DocumentationPage"
 import {
     configSlice,
     ConnectionState,
+    GlowbuzzerConfig,
+    KinematicsConfigurationConfig,
     MachineState,
     MACHINETARGET,
     rootReducer,
@@ -14,6 +16,8 @@ import {
 } from "@glowbuzzer/store"
 
 import "dseg/css/dseg.css"
+import "flexlayout-react/style/light.css"
+
 import { configureStore } from "@reduxjs/toolkit"
 import { Provider } from "react-redux"
 import { sample_config } from "../store/config"
@@ -23,17 +27,18 @@ import reactDocgenControls from "react-docgen:@glowbuzzer/controls"
 import { Markdown } from "../components/Markdown"
 import { GithubSourceLink } from "../components"
 import { ScrollToTopOnMount } from "../components/ScrollToTopOnMount"
+import { dino } from "../store/dino"
 
 const GlowbuzzerCustomApp = ({ children }) => {
     const preview = usePreview()
     useEffect(() => {
-        // setTimeout(() => preview.setGCode(dino), 1000)
+        setTimeout(() => preview.setGCode(dino), 1000)
     }, [])
 
     return children
 }
 
-export const ControlsDocumentationPage = ({ path, children, slug, displayProps }) => {
+export const ControlsDocumentationPage = ({ children, slug, displayProps }) => {
     const middleware = getDefault => {
         return getDefault({ immutableCheck: false, serializableCheck: false })
     }
@@ -44,44 +49,102 @@ export const ControlsDocumentationPage = ({ path, children, slug, displayProps }
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             const store = createStore(rootReducer)
             const initial_state = store.getState()
+            const kc: KinematicsConfigurationConfig = {
+                name: "Machine",
+                participatingJoints: [0, 1, 2]
+            }
             const state = {
                 ...initial_state,
                 config: {
                     ...initial_state.config,
                     value: {
                         ...initial_state.config.value,
-                        tool: {
-                            Default: {
-                                translation: { x: 0, y: 0, z: 10 }
+                        tool: [
+                            { name: "Default", translation: { x: 0, y: 0, z: 10 } },
+                            { name: "Roughing", translation: { x: 0, y: 0, z: 20 } }
+                        ],
+                        frames: [
+                            { name: "World" },
+                            {
+                                name: "Table",
+                                translation: { x: 100, y: 0, z: 0 },
+                                absRel: 1,
+                                parent: 0
                             },
-                            Roughing: {
-                                translation: { x: 0, y: 0, z: 20 }
+                            {
+                                name: "Robot",
+                                translation: { x: 20, y: 20, z: 0 },
+                                absRel: 1,
+                                parent: 1
+                            },
+                            {
+                                name: "Part",
+                                translation: { x: 10, y: 10, z: 20 },
+                                absRel: 1,
+                                parent: 1
                             }
-                        },
-                        joint: {
-                            "0": {},
-                            "1": {},
-                            "2": {},
-                            "3": {
+                        ],
+                        points: [
+                            {
+                                name: "Point 1",
+                                translation: { x: 100, y: 0, z: 0 },
+                                absRel: 1,
+                                parent: 0
+                            },
+                            {
+                                name: "Point 2",
+                                translation: { x: 20, y: 20, z: 0 },
+                                absRel: 1,
+                                parent: 1
+                            }
+                        ],
+                        spindle: [{ name: "Spindle 1" }],
+                        joint: [
+                            { name: "J1" },
+                            { name: "J2" },
+                            { name: "J3" },
+                            {
+                                name: "J4",
                                 jointType: 0,
                                 negLimit: 0,
                                 posLimit: 500,
                                 finiteContinuous: 0
                             },
-                            "4": {
+                            {
+                                name: "J5",
                                 jointType: 0,
                                 negLimit: 0,
                                 posLimit: 500,
                                 finiteContinuous: 0
                             },
-                            "5": {
+                            {
+                                name: "J6",
                                 jointType: 0,
                                 negLimit: 0,
                                 posLimit: 500,
                                 finiteContinuous: 0
                             }
-                        }
-                    }
+                        ],
+                        kinematicsConfiguration: [kc],
+                        ain: [{ name: "Current Temp" }],
+                        aout: [{ name: "Target Temp" }, { name: "Rotor Speed" }],
+                        din: [{ name: "Light Beam" }],
+                        dout: [{ name: "Coolant" }, { name: "Laser" }],
+                        iin: [{ name: "Piece Count" }],
+                        iout: [{ name: "Model Number" }, { name: "Serial Number" }],
+                        task: [
+                            {
+                                name: "Task 1",
+                                activityCount: 1,
+                                firstActivityIndex: 0
+                            }
+                        ],
+                        activity: [
+                            {
+                                name: "Activity 1",
+                            }
+                        ]
+                    } as GlowbuzzerConfig
                 },
                 connection: {
                     ...initial_state.connection,
@@ -108,6 +171,10 @@ export const ControlsDocumentationPage = ({ path, children, slug, displayProps }
                     }
                 ],
                 ain: [123.45],
+                aout: [
+                    { effectiveValue: 100.76 },
+                    { effectiveValue: 54, override: true, setValue: 21 }
+                ],
                 din: [true],
                 iin: [42],
                 joints: [
