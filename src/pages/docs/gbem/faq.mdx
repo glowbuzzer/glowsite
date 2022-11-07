@@ -1,4 +1,7 @@
 import {BogStandardCol,BogStandardRow, BogStandardHeaderRow} from "../../../framework/components";
+import {Image} from "../../../framework/components"
+
+import pi4b_latency from "./pi4b_latency.png?glowsite"
 
 # {props.subtitle}
 
@@ -85,7 +88,9 @@ How do you read is slave's "register"?
 
 Can I run &gbem without patching the kernel?
 
-: Yes it should just about work, but you will need a long (4ms+) bus cycle time. As you can see in the graphs below the standard Linux kernel gives latencies of around 300us. ![Raspberry Pi 4b kernel latency](pi4b_latency.png)
+: Yes it should just about work, but you will need a long (4ms+) bus cycle time. As you can see in the graphs below the standard Linux kernel gives latencies of around 300us.
+
+<Image meta={pi4b_latency} alt="pi4b latency graph" maxWidth={800} />
 
 What are the EtherCAT commands?
 

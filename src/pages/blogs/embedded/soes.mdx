@@ -3,18 +3,18 @@ import {TitleImage} from "../../../framework/components/TitleImage";
 import {PageTag} from"../../../framework/components/PageTags"
 import {ReadingTime} from "../../../framework/components/ReadingTime";
 import {Typography} from "antd";
-import netx52 from "./netx52.png?glowsite"
 import WriteSlaveEeprom from "../../fragments/write_slave_eeprom.mdx"
 import easycat from "./easycat.jpg?glowsite"
 import easycat_pi from "./easycat_pi.jpg?glowsite"
+import {Image} from "../../../framework/components";
 
-export const heroImage=netx52
+export const heroImage=easycat
 
 # {props.subtitle}
 <PageTag tags={props.tags}/>
 <ReadingTime time="7"/>
 
-<TitleImage image={netx52} alt="LAN9252"/>
+<TitleImage image={easycat} alt="easycat LAN9252"/>
 
 ## Introduction
 
@@ -112,7 +112,7 @@ If you need any features like this in your slave's software then you are going t
 
 SOES is the Simple Open EtherCAT Master library. It is Open Source. It is an EtherCAT slave stack written in C.
 
-It is available on GitHub here <a href="https://github.com/OpenEtherCATsociety/SOES">https://github.com/OpenEtherCATsociety/SOES</a>.
+It is available on GitHub here <a href="https://github.com/OpenEtherCATsociety/SOES">SOES GitHub Repo</a>.
 
 It is an alternative to using the ET9300 EtherCAT Slave Stack Code from Beckhoff/ETG and is a bit simpler and is more accessible when you are getting going.
 
@@ -147,7 +147,7 @@ The connections needed are:
 * SPI - MISO, MOSI, CS, SCK
 * INT - the interrupt signal (we will configure the LAN9252 to make this SYNC0)
 
-Next, you can either clone the SOES GitHub repo from  <a href="https://github.com/OpenEtherCATsociety/SOES">https://github.com/OpenEtherCATsociety/SOES</a> or use our repo where we have stripped SOES down and integrated it with some standard &gbt code.
+Next, you can either clone the SOES GitHub repo from  <a href="https://github.com/OpenEtherCATsociety/SOES">SOES GitHub repo</a> or use our repo where we have stripped SOES down and integrated it with some standard &gbt code.
 
 Our repository can be found here:
 
@@ -160,7 +160,6 @@ We will assume that you are using our repo for the next instructions.
 1. Set a compile option to `-DFLAVOUR=PI` so that we compile for the Raspberry Pi
 1. Install bcm2835 lib on the pi
 1. write the `xml esi ` file to the LAN9252
-
 
 
 

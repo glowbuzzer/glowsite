@@ -824,6 +824,15 @@ const nav = {
                             component: () => import("./pages/blogs/webdev/react_native.mdx")
                         },
                         {
+                            slug: "adding_kinematics_visualisations",
+                            title: "Adding kinematics visualisations",
+                            subtitle: "Adding kinematics visualisations with react-three-fibre ",
+                            description:
+                                "Using react-three-fibre",
+                            tags: ["web-dev", "React", "R3F"],
+                            component: () => import("./pages/blogs/webdev/adding_kinematics_visualisations.mdx")
+                        },
+                        {
                             slug: "threejs",
                             title: "three.js",
                             subtitle: "Introduction to three.js",
@@ -930,11 +939,27 @@ const nav = {
                     title: "Robotics",
                     subtitle: "Blogs about robotics",
                     children: [
+
+                        {
+                            slug: "custom_kinematics",
+                            title: "Adding custom kinematics",
+                            subtitle: "Adding custom kinematics functions - two-link arm example",
+                            tags: ["kinematics", "robotics"],
+                            component: () => import("./pages/blogs/robotics/custom_kinematics.mdx")
+                        },
                         {
                             slug: "staubli_wiring",
                             title: "Commissioning a Stabli TX robot",
                             subtitle: "Wiring up a Staubli TX robot",
+                            tags: ["Robotics", "Staubli"],
                             component: () => import("./pages/blogs/robotics/staubli_wiring.mdx")
+                        },
+                        {
+                            slug: "igus_pick_and_place",
+                            title: "Igus pick-and-place",
+                            subtitle: "Simple pick-and-place operations with the Igus 5-DOF arm",
+                            tags: ["Pick-and-place", "Robotics", "Igus"],
+                            component: () => import("./pages/blogs/robotics/igus_pick_and_place.mdx")
                         }
                     ]
                 }

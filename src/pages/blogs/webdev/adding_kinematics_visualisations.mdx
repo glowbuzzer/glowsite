@@ -26,16 +26,19 @@ It shows how visualisations for custom kinematics models can be created with &gb
 
 Assumes you have:
 
-Either: followed (the tutorial for adding custom kinematics models <GlowsiteLink to="/blogs/robotics/custom_kinematics">adding custom kinematics functions</GlowsiteLink>
+Either: followed (the tutorial for adding custom kinematics models
+
+<GlowsiteLink to="/blogs/robotics/custom_kinematics">adding custom kinematics functions</GlowsiteLink>
 
 Or: have enabled two-link kinematics in config.json ENUM
 
 Or: are using example config `./GBC -c config_2link.json`
 
 
-
 ## Code
-The code that accompanies this blog post can be found at: <GitHubLink title={"Two-link arm example"} repo={"gbr"} directory={"/examples/two-link"}/>
+The code that accompanies this blog post can be found at:
+
+<GitHubLink title={"Two-link arm example"} repo={"gbr"} directory={"/examples/two-link"}/>
 
 ## The &gbt 3D scene tile
 
@@ -85,7 +88,7 @@ scale is the mapping between the units for link_length and the units in this cas
 
 offset is the
 
-```typescript
+```js
 const TWOLINK_MODEL: RobotModel = {
        name: "2link",
        config: [
