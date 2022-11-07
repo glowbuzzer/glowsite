@@ -20,8 +20,8 @@ import {Tabs} from "antd";
 ## Introduction
 This page takes you though installing the &gbt React components (&gbr) and creating a simple machine control &fe of your own.
 
-We assume you have already covered [running &gbc in simulation mode](/get-started/simulation). The instructions below assume you will run &gbc in simulation mode (without hardware),
-but you can just as easily run your custom &fe against one of the hardware starter kits.
+We assume you have already covered [running &gbc in simulation mode](/get-started/simulation). The instructions below assume you are running &gbc in simulation mode (without hardware),
+but you can also run your custom &fe against one of the hardware starter kits with very few changes.
 
 ## Use the CRA template to create your project
 
@@ -80,12 +80,13 @@ You can now open this project in your preferred IDE and start editing (with hot 
 
 <PageVariantProvider variants={["tut1", "tut2"]}>
 
-&gbrl provides a simple component named `Tile` you can use to provide a consistent look to your front-ends. You don't have to use this component but much of the &gb basic
-functionality like managing the &gbc connection is provided as tiles. Note that full source code for all our components is
+&gbrl provides a docking layout framework you can use to provide a consistent look to your front-ends. Within the docking layout are tiles,
+either provided by &gb or ones you develop yourselves. The tiles
+are regular React components, so you don't have to use the docking layout if not needed. Note that full source code for all our tiles is
 [available on Github](https://github.com/glowbuzzer/gbr/tree/main/libs/controls) so you can pick apart
 our components and re-package them however you need.
 
-We are going to walk through two different tutorials:
+We are going to walk through two different scenarios:
 
 Setting a digital output
 
@@ -107,18 +108,13 @@ Oscillating a joint
 
         If you are unable to run &gbc, please follow the [Getting Started](./simulation) instructions.
 
-        Adding a tile is just a matter of creating a new React component and using `Tile` as part of it's render function.
+        Adding a tile involves creating a new React component and then adding it to the docking layout.
 
-        Create a new file `ToggleDigitalOutputTile.tsx` and add the following code:
+        Edit `src/index.tsx` and add the new React component which will render the tile content:
 
         ```tsx
-        // ToggleDigitalOutputTile.tsx
-        import * as React from "react"
-        import {Space, Switch} from "antd"
-        import {Tile} from "@glowbuzzer/controls"
-        import {useDigitalOutputState} from "@glowbuzzer/store"
-
-        export const ToggleDigitalOutputTile = () => {
+        // index.tsx
+        const ToggleDigitalOutputTile = () => {
             const [dout, setDout] = useDigitalOutputState(1) // use the 2nd digital output
 
             function handle_state_change() {
@@ -127,39 +123,49 @@ Oscillating a joint
             }
 
             return (
-                <Tile title="Tutorial Digital Output Toggle">
+                <div>
                     <Space>
                         Toggle my digital output
-                        <Switch checked={dout.setValue} onChange={handle_state_change}/>
+                        <Switch checked={dout.setValue} onChange={handle_state_change} />
                     </Space>
-                </Tile>
+                </div>
             )
         }
         ```
 
-        Now you can add the new tile to `App.tsx`:
+        Next, use `DockTileDefinitionBuilder` to create a docking layout tile definition for the new component:
 
         ```tsx
-        // App.tsx
-        <nav>
-            <ConnectTile/>
-            <ToggleDigitalOutputTile/>
-            <JogTile/>
-            <CartesianDroTile/>
-            <FeedRateTile/>
-        </nav>
+        const toggleDigitalOutputTileDefinition = DockTileDefinitionBuilder()
+            .id("toggle-digital-output")
+            .name("Toggle Digital Output")
+            .placement(1, 0)
+            .render(() => <ToggleDigitalOutputTile />)
+            .build()
         ```
 
-        You should see the new tile appear in the left hand column underneath the connect tile in your &fe.
+        Finally, replace the full set of standard tiles in the Create React App template with the new tile, plus the required Connect tile:
 
-        Ensure you are connected to &gbc and that operation is enabled. When you slide the switch &gbc will receive the instruction to set or clear the digital output. In simulation mode,
-        digital output 1 is echoed in digital input 1, so you should see the digital inputs tile change, with the second input bit
-        being toggled.
+        ```tsx
+        <DockLayoutProvider
+            appName={"myapp"}
+            tiles={[GlowbuzzerTileDefinitions.CONNECT, toggleDigitalOutputTileDefinition]}
+        >
+            <Menu mode="horizontal" theme="light" selectedKeys={[]}>
+                <DockViewMenu />
+            </Menu>
+            <DockLayout />
+        </DockLayoutProvider>
+        ```
+
+        You should now see the new tile appear in the right hand column next to the connect tile in your &fe.
+
+        Ensure you are connected to &gbc and that operation is enabled. When you slide the switch &gbc will receive the instruction to set or clear the digital output.
 
         Congratulations, you've created your first bit of custom &fe!
     </Tabs.TabPane>
     <Tabs.TabPane tab="Oscillating Move Tutorial" key="tut2">
-        The next example shows how easy it is to write a React machine control that makes a drive move. In this example we will make a drive perform an oscillating move.
+        This example shows how easy it is to write a React machine control that makes a drive move. In this example we will make a drive perform an oscillating move.
 
         We assume you have completed the first tutorial to toggle a digital output and that you already have your &fe and &gbc running.
 
@@ -170,12 +176,12 @@ Oscillating a joint
         import * as React from "react"
         import {useState} from "react";
         import {Button, Space} from "antd";
-        import {MotorDro, Tile} from "@glowbuzzer/controls";
+        import {MotorDro, DockTileDefinitionBuilder} from "@glowbuzzer/controls";
         import {useJoint, useSoloActivity} from '@glowbuzzer/store';
 
         const END = 200;
 
-        export const OscillatingMoveTile = () => {
+        const OscillatingMoveTile = () => {
             const [iteration, setIteration] = useState(0) // keep track of iterations
             const soloActivity = useSoloActivity(0) // request solo activity api for first kinematics configuration
             const joint = useJoint(0) // request joint 0 status
@@ -192,7 +198,7 @@ Oscillating a joint
             }
 
             return (
-                <Tile title="Tutorial Oscillating Move">
+                <div>
                     <Space>
                         <Space direction="vertical" align="center">
                             <Button onClick={start_moves} disabled={!!iteration}>Start Move</Button>
@@ -205,22 +211,31 @@ Oscillating a joint
                 </Tile>
             )
         }
+
+        export const OscillatingMoveTileDefinition = DockTileDefinitionBuilder()
+            .id("oscillating-move")
+            .name("Oscillating Move")
+            .placement(1, 0)
+            .render(() => <OscillatingMoveTile />)
+            .build()
         ```
 
-        Now you can add the new tile to `App.tsx`:
+        Now you can add import the new tile and add it to the docking layout in `index.tsx`:
 
         ```tsx
-        // App.tsx
-        <nav>
-            <ConnectTile/>
-            <OscillatingMoveTile/>
-            <JogTile/>
-            <CartesianDroTile/>
-            <FeedRateTile/>
-        </nav>
+        // index.tsx
+        <DockLayoutProvider
+            appName={"myapp"}
+            tiles={[GlowbuzzerTileDefinitions.CONNECT, OscillatingMoveTileDefinition]}
+        >
+            <Menu mode="horizontal" theme="light" selectedKeys={[]}>
+                <DockViewMenu />
+            </Menu>
+            <DockLayout />
+        </DockLayoutProvider>
         ```
 
-        You should see the new tile appear in the left hand column underneath the connect tile in your &fe.
+        You should see the new tile appear in the right hand column next to the connect tile in your &fe.
 
         Ensure you are connected to &gbc and that operation is enabled. When you click the start button you should see the motor graphic `MotorDro` move back
         and forth five times, and the iteration count increase.
