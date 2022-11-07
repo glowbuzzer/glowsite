@@ -962,6 +962,21 @@ const nav = {
                             component: () => import("./pages/blogs/robotics/igus_pick_and_place.mdx")
                         }
                     ]
+                },
+                {
+                    slug: "using_glowbuzzer",
+                    title: "Using the glowbuzzer toolkit ",
+                    subtitle: "Using the glowbuzzer toolkit - scenarios",
+                    children: [
+
+                        {
+                            slug: "cam",
+                            title: "Using CAM with the glowbuzzer toolkit",
+                            subtitle: "Integrating CAM tools with the glowbuzzer toolkit",
+                            tags: ["gcode", "CAM"],
+                            component: () => import("./pages/blogs/using/cam.mdx")
+                        }
+                    ]
                 }
             ]
         },

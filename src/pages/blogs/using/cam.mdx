@@ -1,0 +1,23 @@
+import ecam_hero from "./ecam.png?glowsite"
+import {Image} from "../../../framework/components"
+export const heroImage=ecam_hero
+import {TitleImage} from "../../../framework/components/TitleImage"
+import {PageTag} from "../../../framework/components/PageTags"
+import {ReadingTime} from "../../../framework/components/ReadingTime"
+import {GitHubLink} from "../../../framework/components";
+import {GlowsiteLink} from "../../../framework"
+export const ContentTags =  ["CAM", "gcode"]
+import {ComingSoon} from "../../../framework/components/ComingSoon"
+
+# {props.subtitle}
+
+<ReadingTime time="5"/>
+<PageTag tags={props.tags}/>
+
+## Introduction
+
+<TitleImage image={ecam_hero} alt="ecam logo" />
+
+Here we describe how to use a CAM tool (in this case ecam ) to export gcode to the glowbuzzer toolkit.
+
+<ComingSoon/>
