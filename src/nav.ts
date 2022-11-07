@@ -79,6 +79,7 @@ function merge(imports, filter) {
 const nav = {
     slug: "",
     title: "Glowbuzzer: Web-stack machine motion",
+    description: "Control robots and machines with a web-stack. Build complex machine control applications with React. Integrated with a real-time core connected to EtherCAT.",
     layout: HomePage,
     children: [
         {

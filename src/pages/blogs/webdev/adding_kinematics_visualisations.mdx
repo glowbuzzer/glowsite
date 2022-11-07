@@ -1,0 +1,99 @@
+import two_link_arm_diagram from "./two_link_arm_diagram.jpg?glowsite"
+import threeDimensionalSceneTile from "./toolpath_tille.jpg?glowsite"
+import {GlowsiteLink} from "../../../framework"
+import L0 from "./L0.jpg?glowsite"
+import L1 from "./L1.jpg?glowsite"
+import {Image} from "../../../framework/components"
+export const heroImage=two_link_arm_diagram
+import {TitleImage} from "../../../framework/components/TitleImage"
+import {PageTag} from "../../../framework/components/PageTags"
+import {ReadingTime} from "../../../framework/components/ReadingTime"
+import {GitHubLink} from "../../../framework/components";
+export const ContentTags =  ["web-dev", "three.js", "3D", "animation", "kinematice"]
+
+# {props.subtitle}
+
+<ReadingTime time="5"/>
+<PageTag tags={props.tags}/>
+
+## Introduction
+
+<TitleImage image={two_link_arm_diagram} alt="two_link_arm_diagram"/>
+
+This blog discusses how to create a 3D view of a two-link arm using the &gbt.
+
+It shows how visualisations for custom kinematics models can be created with &gbt.
+
+Assumes you have:
+
+Either: followed (the tutorial for adding custom kinematics models <GlowsiteLink to="/blogs/robotics/custom_kinematics">adding custom kinematics functions</GlowsiteLink>
+
+Or: have enabled two-link kinematics in config.json ENUM
+
+Or: are using example config `./GBC -c config_2link.json`
+
+
+
+## Code
+The code that accompanies this blog post can be found at: <GitHubLink title={"Two-link arm example"} repo={"gbr"} directory={"/examples/two-link"}/>
+
+## The &gbt 3D scene tile
+
+The toolkit contains a 3D scene tile. This tile displays robot models and traces the toolpath the machine will follow.
+
+If you jog your machine, you will see the movement in the 3D scene tile.
+
+If you load gcode, you will see the expected (future) ToolPath in the tile.
+
+<Image meta={threeDimensionalSceneTile} alt="3D Scene Tile" maxWidth={600}/>
+
+
+## Modelling the robot in &gbr
+
+`<ToolPathTile model={showRobot && TWOLINK_MODEL}></ToolPathTile>`
+
+load STEP or GLTF files
+
+need to create CAD files for each link in your robot.
+
+For the two link arm we have two links and need to create two CAD models named `L0.glb` and `L1.glb`.
+
+This is the CAD model for the first link:
+
+<Image meta={L0} alt="Link 0 (L0)" maxWidth={600}/>
+
+And this is the CAD model for the second link:
+
+<Image meta={L1} alt="Link 1 (L1)" maxWidth={600}/>
+
+
+Place these files in `public/assets/name` folder (where name is the name specified in the `RobotModel` in the object below) labelled as `L0.glb` `L1.glb` or `.step` if using the step loader.
+
+`RobotModel` describes the kinematics structure of the robot.
+
+The structure of this file is a little hard to describe. It is based on the Denavit–Hartenberg (DH) matrix.
+
+It only supports revolute joints.
+
+* `link_length` is the length of the link
+* `alpha`
+* `teta`
+* `skip_link` is whether
+* `limits` specifiy the maxium travel of the joint in degrees
+
+scale is the mapping between the units for link_length and the units in this case 1000 is used
+
+offset is the
+
+```typescript
+const TWOLINK_MODEL: RobotModel = {
+       name: "2link",
+       config: [
+           { alpha: 0, link_length: 0.15, skip_link: true },
+           { alpha: 0, teta:0, link_length: 0.15, limits: [-180, 180] },
+       ],
+       offset: new THREE.Vector3(0, 0, 0),
+       scale: 1000
+   }
+```
+

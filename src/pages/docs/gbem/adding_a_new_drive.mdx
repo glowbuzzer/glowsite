@@ -29,11 +29,11 @@ These are the steps we suggest you follow to implement a new drive interface for
 1. Implement the most basic possible wiring scheme required to get the drive to an operational state. (Obviously the drive will be outside the machine just sitting on the workbench at this stage).
 1. Use the drive manufacturer's configuration software to try and get the drive to move (if the manufacturer provides such software).
 1. Plug the drive into an EtherCAT network and run the &gbem with the netscan option to see if it can be seen and to have a look at its default PDO mapping.
-1. Dive into the manufacturer's drive documentation to work out the PDO mapping you want to use, [see here](#Write_slave_functions).
+1. Dive into the manufacturer's drive documentation to work out the PDO mapping you want to use, [Write slave functions](#Write_slave_functions).
 1. Dive into the manufacturer's docs to work out the start-up SDOs and any initial PDO writes that are needed.
-1. Write the functions to perform the initial SDO writes, [see here](#Initial_sdos) .
-1. Write the cyclic functions to communicate with the drives PDOs, [see here](#Cyclic_functions).
-1. Test the drive, [see here](#Test_drive).
+1. Write the functions to perform the initial SDO writes, Configuring initials SDO writes(#Initial_sdos) .
+1. Write the cyclic functions to communicate with the drives PDOs, [Cyclic functions](#Cyclic_functions).
+1. Test the drive, [Drive testing](#Test_drive).
 
 ## What are the key functions provided by &gbem that you will need to use?
 

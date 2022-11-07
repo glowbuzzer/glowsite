@@ -1,0 +1,238 @@
+import kinematics_logo from "./kinematics_logo.png?glowsite"
+import {Image} from "../../../framework/components"
+export const heroImage=kinematics_logo
+import {TitleImage} from "../../../framework/components/TitleImage"
+import {PageTag} from "../../../framework/components/PageTags"
+import {ReadingTime} from "../../../framework/components/ReadingTime"
+import {GlowsiteLink} from "../../../framework"
+
+export const ContentTags =  ["robots", "kinematics"]
+
+# {props.subtitle}
+
+<ReadingTime time="5"/>
+<PageTag tags={props.tags}/>
+
+## Introduction
+<TitleImage image={kinematics_logo} alt="Kinematics logo"/>
+
+&gbt, out-of-the-box, supports a variety of kinematics models for different types of machines:
+* naked kinematics for Cartesian (XYZ) machines
+* slaved kinematics for Cartesian machines where multiple motors power the same axis
+* generic 6-DOF industrial robot kinematics (for robots with a spherical wrist configuration) - customisable by loading DH parameters
+* a 5-DOF kinematics - based around an Igus robot
+* two-link kinematics - for a generic two link robot
+
+We can add kinematics models for our customers on request, but you can also provide your own code to &gbc to implement the required kinematics functions.
+
+This custom kinematics code is run through an interpreter and so is much less performant than compiled code. Usually you use the interpreter to develop you kinematics functions. Once you have them working satisfactorily, you ask the &gb team to compile them for you.
+
+The performance of the interpreted kinematics functions is also very much dependent on the performance of the Linux host you are running &gbc on. For low-end hardware you will need to seriously reduce you bus cycle time or ask us to compile the function into &gbc for you once you have tested it.
+
+## Required c functions
+
+### Forward kinematics - fk
+
+Forward kinematics function take the angles of the joints as an input and return the cartesian position and orientation of the Tool Centre Point (TCP).
+
+There is a one-to-one mapping between the angles of the joints and the TCP's position and orientation.
+
+The signature for the forward kinematics function you will need to implement is as follows:
+```c
+void fk_custom(double theta1, double theta2, double theta3, double theta4, double theta5, double theta6, double theta7,
+                             double *x, double *y,
+                             double *z, double *qw, double *qx, double *qy, double *qz)
+```
+
+The function signature *must* match this template exactly.
+
+`theta1` to `theta7` are the joints angles (in radians) `x`, `y` & `z` are the cartesian position and `qw`, `qx`, `qy` & `qz` are the quaternion orientation.
+
+`theta1` to `theta7` are inputs to the function.
+
+`x`, `y`, `z`, `qw`, `qx`, `qy` & `qz` are outputs from the function.
+
+### Inverse kinematics - ik
+
+Inverse kinematics functions take the cartesian position and orientation as an input and return the angles of the joints.
+
+For many kinematics structures, there is a many-to-one mapping between the TCP's position and orientation and the angles of the joints. This is because, often, a certain TCP position and orientation can be reached with multiple different angles of the joints.
+
+This means that an inverse kinematics function must be able to calculate all the possible sets of joint angles given a specified TCP position and orientation
+
+The signature for the inverse kinematics function you will need to implement is as follows:
+
+```c
+void ik_6dof_spherical_wrist(int configuration, double x, double y, double z, double qw, double qx,
+double qy, double qz, double *result)
+```
+
+The function signature *must* match this template exactly.
+
+`result` is an array containing the joint angles. This is the output from the function.
+
+`x`, `y` & `z` are the cartesian position and `qw`, `qx`, `qy` & `qz` are the quaternion orientation of the current robot TCP. These are inputs to the function.
+
+The `conf` is an indication used to represent the configuration of the robot you want to calculate the joint angles for. This is an input to the function. This is a binary value representing the configuration. For example:
+`0b001` might represent `SHOULDER_LEFTY` & `ELBOW_POSITIVE`, `WRIST_POSITIVE`.
+
+
+### Find configuration
+
+The find configuration function's job is to return the configuration a robot is in based on the joint angles.
+
+The configuration is an `int` that represents the different configurations robot and matches the results returned by the Inverse Kinematics function.
+
+```c
+int find_configuration_custom(double theta1, double theta2, double theta3, double theta4, double theta5,
+double theta6, double theta7)
+```
+`theta1` to `theta7` are the joints angles (in radians). These are inputs to the function.function
+
+The function returns an `int` which is a (usually binary) representation of the robot's configuration.
+
+The function signature *must* match this template exactly.
+
+## Two link arm forward and inverse kinematics
+
+As an example we will discuss the code for a two link planar robot arm.
+
+A two link arm consists of two revolute joints in a serial kinematics configuration.
+
+There are many online resources that show how to calculate the forward and inverse kinematics for a two link planar robot arm. The easiest way is to this geometrically.
+
+One example of the derivation of the kinematics can be found on [YouTube](https://www.youtube.com/watch?v=IKOGwoJ2HLk).
+
+From the equations described, we can implement the c code to perform the calculations.
+
+### Forward kinematics function
+
+First we need to declare and initialise two global variables for our link lengths:
+```c
+double link1_length = 150;
+
+double link2_length = 150;
+```
+
+Then we can implement the forward kinematics as follows.
+
+```c
+void fk(double theta1, double theta2,  double theta3, double theta4, double theta5, double theta6, double theta7,
+        double *x, double *y,
+        double *z, double *qw, double *qx, double *qy, double *qz){
+
+    double x1_pos = link1_length*cos(theta1);
+    double y1_pos = link1_length*sin(theta1);
+    double x2_pos = x1_pos + link2_length*cos(theta1+theta2);
+    double y2_pos = y1_pos + link2_length*sin(theta1+theta2);
+
+    *x=x2_pos;
+    *y=y2_pos;
+    *z=0;
+
+    *qw = 1;
+    *qx = 0;
+    *qy = 0;
+    *qz = 0;
+}
+```
+
+### Inverse kinematics function
+
+Similarly, for the inverse kinematics:
+
+```c
+    double temp = (pow(x,2) + pow(y,2) - pow(link1_length,2) - pow(link2_length,2))/(2*link1_length*link2_length);
+
+    if (temp>1){
+        temp =1;
+    }
+    if (temp<-1){
+        temp =-1;
+    }
+
+
+    if (configuration==0){
+        result[1]= acos(temp);
+        result[0] = atan2(y, x) - atan2((link2_length * sin(result[1])), link1_length + link2_length * cos(result[1]));
+
+    }else {
+        result[1]= -acos(temp);
+        result[0] = atan2(y, x) + atan2((link2_length * sin(result[1])), link1_length + link2_length * cos(result[1]));
+        if(x < 0){
+            result[0]+=M_PI;
+        }
+    }
+```
+
+### Find configuration function
+
+And finally, the find configuration function which returns based on the joint angles whether the robot is in an elbow up or elbow down configuration.
+
+```c
+int find_configuration(double theta1, double theta2,  double theta3, double theta4, double theta5, double theta6, double theta7){
+
+    int conf = 0;
+
+    //confs are elbow up and elbow down
+
+    if (theta2 <0){
+        ((conf) |= (1 << (0)));
+    }
+
+    return conf;
+}
+```
+
+## Loading a custom kinematics function in &gbc
+
+Implement your custom kinematics functions in a single file called, say, `custom_kinematics.c`.
+
+Load this file in &gbc with `GBC -k ./custom_kinematics.c`.
+
+## Limitations on the c code for implementing kinematics functions
+The c code is interpreted rather than compiled.
+
+The only standard libs that are available are: `time`, `unistd`,`string`,`stdlib`,`stdio`,`math`, `stdbool`,`errno` `ctype`.
+
+The interpreter puts limitations on the code you can write. These limitations include:
+
+*  `const` - this is not supported for constants
+* `#define` - macros are implemented but have some limitations. They can only be used as part of expressions and operate a bit like functions. Since they're used in expressions they must result in a value. No macros like `ULL` are available.
+* `#if/#ifdef/#else/#endif` - the conditional compilation operators are implemented, but have some limitations. The operator "defined()" is not implemented. These operators can only be used at statement boundaries.
+* `#include` - not supported
+* Function pointers - pointers to functions are currently not supported.
+* Storage classes - many of the storage classes in C90 really only have meaning in a compiler so they're not implemented in picoc. This includes: static, extern, volatile, register and auto. They're recognised but currently ignored.
+* `struct` and `union` - structs and unions can only be defined globally. It's not possible to define them within the scope of a function.
+* Bitfields - bitfields in structs are not supported.
+
+## Testing the kinematics functions
+
+If you have added the two-link kinematics functions you should now be able to run &gbc with the `-k ./custom_kinematics.c` to include the functions in the kinematics processing.
+
+The json config file to GBC will need to be changed to support the two-link arm. The following specifies a two-link arm and the `"kinematicsConfigurationType": 7` specifies that the functions in the file get invoked.
+
+```js
+"kinematicsConfiguration": [
+{
+"name": "default",
+"frameIndex": 0,
+"participatingJoints": [
+0,
+1
+],
+"participatingJointsCount": 2,
+"kinematicsConfigurationType": 7,
+```
+
+If you know run &gbr with the generic example, in the DROs and examine the joint and cartesian DROs you will see that their values now reflect the custom kinematics functions you provided.
+
+But you can't see the arm itself moving in the 3D scene.
+
+To visualise the arm in &gbr you need to have a look at another blog post - <GlowsiteLink to="/blogs/webdev/adding_kinematics_visualisations">adding kinematics visualisations</GlowsiteLink> for details on how to create the visualisation for the arm.
+
+
+
+
+
+
