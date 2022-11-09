@@ -84,11 +84,13 @@ export default () => {
             })
     }
 
-    const file_columns = ["Name", "Description", "Type", "Size", "Checksum (MD5)", "Link"].map(c => ({
-        title: c,
-        dataIndex: c.split(" ").shift().toLowerCase(),
-        key: c.toLowerCase()
-    }))
+    const file_columns = ["Name", "Description", "Type", "Size", "Checksum (MD5)", "Link"].map(
+        c => ({
+            title: c,
+            dataIndex: c.split(" ").shift().toLowerCase(),
+            key: c.toLowerCase()
+        })
+    )
 
     return (
         <Section>
@@ -96,9 +98,9 @@ export default () => {
                 <h1>Toolkit releases & downloads</h1>
                 <p>Here we highlight the latest releases of the glowbuzzer toolkit's components.</p>
                 <p>
-                    Components like GBR (React components), GBEM (EtherCAT Master), GBSM (Step Master)
-                    are supplied as source code and you need to download and compile these yourself from
-                    Github.
+                    Components like GBR (React components), GBEM (EtherCAT Master), GBSM (Step
+                    Master) are supplied as source code and you need to download and compile these
+                    yourself from Github.
                 </p>
                 <p>
                     GBC, the core real-time control, is the closed source licensed component of the
@@ -108,19 +110,24 @@ export default () => {
                     <div key={project.github || project.name}>
                         <h2>
                             {project.basename ? (
-                                <DownloadOutlined style={{marginRight: "10px"}}/>
+                                <DownloadOutlined style={{ marginRight: "10px" }} />
                             ) : (
-                                <GithubOutlined style={{marginRight: "10px"}}/>
+                                <GithubOutlined style={{ marginRight: "10px" }} />
                             )}
                             {project.name}
                         </h2>
                         {project.releases.map(r => (
                             <div key={r.tag}>
                                 <h3>
-                                    {r.tag}{" "}
-                                    <span>
-                                    <a href={changelog_url(project, r)}>changelog</a>
-                                </span>
+                                    {r.tag}
+                                    {project.noChangeLog ? null : (
+                                        <>
+                                            {" "}
+                                            <span>
+                                                <a href={changelog_url(project, r)}>changelog</a>
+                                            </span>
+                                        </>
+                                    )}
                                 </h3>
                                 <p>{r.description}</p>
                                 {r.files && (
@@ -134,6 +141,7 @@ export default () => {
                         ))}
                     </div>
                 ))}
-            </div></Section>
+            </div>
+        </Section>
     )
 }
