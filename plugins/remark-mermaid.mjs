@@ -41,11 +41,11 @@ async function renderMermaidToSvg(definition) {
 
         await page.setContent(html)
         // assumes we have mermaid installed
-        await page.addScriptTag({ path: "./node_modules/mermaid/dist/mermaid.min.js" })
+        await page.addScriptTag({path: "./node_modules/mermaid/dist/mermaid.min.js"})
         return await page.evaluate(
-            async ({ definition }) => {
+            async ({definition}) => {
                 // run the mermaid magic "client side"
-                window.mermaid.initialize({})
+                window.mermaid.initialize({flowchart: {useMaxWidth: false}})
                 return new Promise((resolve, reject) => {
                     try {
                         window.mermaid.mermaidAPI.render("container", definition, svgCode => {
@@ -56,7 +56,7 @@ async function renderMermaidToSvg(definition) {
                     }
                 })
             },
-            { definition } /* pass in the mermaid source */
+            {definition} /* pass in the mermaid source */
         )
     } finally {
         await page.close()
@@ -73,7 +73,7 @@ export default function remarkMermaid() {
         // we want to run async and then mutate the tree at the end, so we build an array of
         // promises that we'll then resolve with Promise.all
         // const promises = []
-        const future=handler("mermaid", sourcePath)
+        const future = handler("mermaid", sourcePath)
 
         visit(tree, "code", (node, index, parent) => {
             if (node.lang === "mermaid") {
