@@ -537,12 +537,6 @@ const nav = {
                             component: () => import("./pages/docs/gbem/adding_a_new_drive.mdx")
                         },
                         {
-                            slug: "adding_jvl_mis_drive",
-                            title: "Detailed guide to adding a JVL MIS drive",
-                            subtitle: "Detailed guide to adding a JVL MIS drive - blow-by-blow",
-                            component: () => import("./pages/docs/gbem/adding_jvl_mis_drive.mdx")
-                        },
-                        {
                             slug: "getting_started_with_hardware",
                             title: "Getting started with hardware",
                             subtitle: "Getting started with hardware",
@@ -856,6 +850,13 @@ const nav = {
                     title: "Drives",
                     subtitle: "Blogs about drives",
                     children: [
+                        {
+                            slug: "jvl_mis_blow_by_blow",
+                            title: "Integrating the JVL MIS drive - blow-by-blow",
+                            subtitle: "Integration of the JVL MIS - a detailled step-by-step guide",
+                            component: () =>
+                                import("./pages/blogs/drives/adding_jvl_mis_drive.mdx")
+                        },
                         {
                             slug: "invertek_optidrive_p2",
                             title: "Invertek Optidrive P2",

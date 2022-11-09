@@ -118,9 +118,9 @@ The key differences between using the SoloActivity API and Streamed API are:
 
 Finally, you can start a task with a Websocket message. Tasks must be pre-configured in the (JSON) config file with the activities you want to run when you start the task.
 
-For example for a `MoveLine` activity you would start by creating a <GlowsiteLink to="/docs/types/LinesConfig">LinesConfig</GlowsiteLink> item for the line you want to move along.
+For example for a `MoveToPosition` activity you would start by creating a <GlowsiteLink to="/docs/types/PointsConfig">PointsConfig</GlowsiteLink> item for the positions  you want to move to.
 
-Then, in the <GlowsiteLink to="/docs/types/MoveLineConfig">MoveLineConfig</GlowsiteLink> section of your config file you would reference the index of the line object you created together with the index of the kinematicsConfiguration you want to move and the index of the moveParameters (velocity of the move etc.) that you want to use.
+Then, in the <GlowsiteLink to="/docs/types/MoveToPosition">MoveLineConfig</GlowsiteLink> section of your config file you would reference the index of the line object you created together with the index of the kinematicsConfiguration you want to move and the index of the moveParameters (velocity of the move etc.) that you want to use.
 
 Then you would create a task <GlowsiteLink to="/docs/types/TaskConfig">TaskConfig</GlowsiteLink> referencing the index of the Activity you created (`firstActivityIndex`).
 

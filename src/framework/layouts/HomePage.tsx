@@ -78,7 +78,7 @@ export const HomePage = () => {
             </HexImageSection>
 
             <Section background={"White"} spaced>
-                <YoutubeEmbed embedId="13eCFw1BnDo" />
+                <YoutubeEmbed embedId="LPFD4kW1ILw" />
             </Section>
 
             <Section background={"BackgroundDarkSection"} inverted guttered>

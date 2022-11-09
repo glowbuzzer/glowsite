@@ -4,6 +4,15 @@ import {YoutubeEmbed} from "../../../framework/components/Video"
 import {GitHubLink} from "../../../framework/components/GitHubLink";
 import {BogStandardCol, BogStandardRow, BogStandardHeaderRow} from "../../../framework/components/BogStandardTable";
 
+
+import jvl_unboxing from "./jvl_unboxing.jpg?glowsite"
+import jvl_m12_rj45 from "./jvl_m12_rj45.png?glowsite"
+import jvl_mis_drive from "./jvl_mis_drive.png?glowsite"
+import jvl_power_connector_prep from "./jvl_power_connector_prep.jpg?glowsite"
+import jvl_scan from "./jvl_scan.png?glowsite"
+import jvl_ethercat from "./jvl_ethercat.png?glowsite"
+import jvl_dc_sync_ok from "./jvl_dc_sync_ok.png?glowsite"
+
 # {props.subtitle}
 
 
@@ -41,14 +50,11 @@ The motor has four connectors:
 The drives look like this:
 
 
-import jvl_mis_drive from "./jvl_mis_drive.png?glowsite"
-
 <Image meta={jvl_mis_drive} alt="JVL MIS Drive" maxWidth={400} />
 
 
 The motor uses 4 pin M12 connectors for its fieldbus. These are easily converted to the standard Ethernet Rj45 form with cables like these:
 
-import jvl_m12_rj45 from "./jvl_m12_rj45.png?glowsite"
 
 <Image meta={jvl_m12_rj45} alt="JVL M12 RJ45 connector" maxWidth={400} />
 
@@ -159,7 +165,7 @@ Tools: wire cutter, wire stripper, bootlace ferrule crimp tool.
 
 These are the components from the above BoM as delivered from JVL.
 
-import jvl_unboxing from "./jvl_unboxing.jpg?glowsite"
+
 
 <Image meta={jvl_unboxing} alt="JVL MIS unboxing" maxWidth={400} />
 
@@ -198,7 +204,7 @@ For production use and use with multiple drives you are going to need to have se
 The bare wire end of the power cable will need a bit of preparation before use.  The power supply cable needs crimping and also the braided screen terminating so that we can ground the end of the cable screen.
 
 
-import jvl_power_connector_prep from "./jvl_power_connector_prep.jpg?glowsite"
+
 
 <Image meta={jvl_power_connector_prep} alt="JVL power cable prep"  maxWidth={400} />
 
@@ -217,7 +223,7 @@ The aim of this step is to make sure that we can talk to the motor from MacTalk.
 5. Run the MacTalk software
 6. Click "Scan" (1) in top bar of the software (after selecting the right COM port) and then in the window that appears, click "Scan All" (2) then select the motor with the "Select" (3) button.
 
-import jvl_scan from "./jvl_scan.png?glowsite"
+
 
 <Image meta={jvl_scan} alt="JVL scan" preset="wide" />
 
@@ -229,7 +235,6 @@ The next steps involve making sure the drive is configured the correct way to su
 1. Go to the EtherCAT screen in MacTalk
 2. Check "Enabled DSP402 drive profile" is selected
 
-import jvl_ethercat from "./jvl_ethercat.png?glowsite"
 
 <Image meta={jvl_ethercat} alt="JVL MacTalk EtherCAT" preset="wide" />
 
@@ -838,7 +843,7 @@ Need to create a JSON file
 
 
 
-import jvl_dc_sync_ok from "./jvl_dc_sync_ok.png?glowsite"
+
 
 <Image meta={jvl_dc_sync_ok} alt="JVL sync ok" preset={"wide"} />
 

@@ -18,6 +18,28 @@ import {ComingSoon} from "../../../framework/components/ComingSoon"
 
 <TitleImage image={ecam_hero} alt="ecam logo" />
 
-Here we describe how to use a CAM tool (in this case ecam ) to export gcode to the glowbuzzer toolkit.
+In this blog we describe how to use a CAM tool (in this case ecam) to export gcode to the glowbuzzer toolkit.
+
+ecam is an easy-to-use CAD/CAM (Computer Aided Design / Computer Aided Manufacturing) package. See the <a href="https://www.e-cam.it/">e-cam website</a> for a download.
+
+The software is free evaluate and is free to use at weekends. The cost is around $200.
+
+It provides a good way to produce 2D and 3D toolpaths to import into the &gb toolkit.
+
+Fusion 360 would be an alternative, with a bit of a steeper learning curve and price tag at around $70/month.
+
+## Example 2D cutting
+
+1. Click "Generic cutting" on top toolbar and then "New setup". Then define the stock dimensions.
+1. Next, add a Cutting Profile (under Generic cutting on top toolbar) select say a circle pick the centre point on the stock and then set the radius
+1. Arrow button on top toolpath previews the job
+1. Generate gcode button on top toolbar - save to file
+1. paste into toolpath tile in the &gbt
+
+Screen shot from e-cam
+
+Screen shot from &gbt
+
+
 
 <ComingSoon/>
