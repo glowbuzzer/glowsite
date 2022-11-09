@@ -1,4 +1,4 @@
-import {LATEST_VERSIONS} from "../versions.mjs";
+import { LATEST_VERSIONS } from "../versions.mjs"
 
 export type File = {
     arch?: string
@@ -15,6 +15,7 @@ export type Project = {
     name: string
     github?: string // main project in github
     basename?: string // base for downloads
+    noChangeLog?: boolean // don't include changelog link
     defaultFiles?: Partial<File>[]
     releases: Release[]
 }
@@ -24,13 +25,15 @@ export const projects: Project[] = [
         name: "Glowbuzzer React (GBR)",
         github: "gbr",
         releases: [
+            /*
+                        {
+                            tag: "v1.4.0-alpha.9",
+                            description: "Alpha release"
+                        },
+            */
             {
-                tag: "v1.4.0-alpha.9",
-                description: "Alpha release"
-            },
-            {
-                tag: "v1.3.0",
-                description: "Stable release"
+                tag: LATEST_VERSIONS.gbr_version,
+                description: "Current release"
             }
         ]
     },
@@ -55,7 +58,7 @@ export const projects: Project[] = [
             // copy below and hard code version number for each release
             {
                 tag: LATEST_VERSIONS.gbc_version,
-                description: "Latest release",
+                description: "Current release",
                 files: [
                     {
                         name: "gbc-linux-amd64"
@@ -73,7 +76,7 @@ export const projects: Project[] = [
         releases: [
             {
                 tag: LATEST_VERSIONS.gbem_version,
-                description: "Latest release of GBEM"
+                description: "Current release of GBEM"
             }
         ]
     },
@@ -83,34 +86,31 @@ export const projects: Project[] = [
         releases: [
             {
                 tag: LATEST_VERSIONS.gbsm_version,
-                description: "Latest release of GBSM"
+                description: "Current release of GBSM"
+            }
+        ]
+    },
+    {
+        name: "Raspberry Pi RT image",
+        basename: "rt24-pi",
+        noChangeLog: true,
+        defaultFiles: [
+            {
+                type: "gz"
+            }
+        ],
+        releases: [
+            {
+                tag: "4.19.71",
+                description: "Current release",
+                files: [
+                    {
+                        name: "rt24-pi",
+                        description: "Raspberry Pi RT image",
+                        type: "tgz"
+                    }
+                ]
             }
         ]
     }
-    /*
-        {
-            name: "Raspberry Pi RT image",
-            basename: "pi_rt_img",
-            defaultFiles: [
-                {
-                    type: "gz"
-                }
-            ],
-            releases: [
-                {
-                    tag: "0.0.1-alpha-1",
-                    description: "Initial release",
-                    files: [
-                        {
-                            name: "rpi_rt",
-                            description: "Raspberry Pi RT image",
-                            size: 12345,
-                            type: "gz",
-                            checksum: "12c456def"
-                        }
-                    ]
-                }
-            ]
-        }
-    */
 ]
