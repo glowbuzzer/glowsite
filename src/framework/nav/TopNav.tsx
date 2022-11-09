@@ -8,7 +8,7 @@ import styled from "styled-components"
 import { ReactComponent as StandardLogo } from "../../images/logos/small-logo.svg?inline"
 import { ReactComponent as SmallLogo } from "../../images/logos/tiny-logo.svg?inline"
 
-import { CloseOutlined, GithubOutlined, MenuOutlined, YoutubeOutlined } from "@ant-design/icons"
+import { CloseOutlined, GithubOutlined, MenuOutlined, YoutubeOutlined, TwitterOutlined } from "@ant-design/icons"
 import { Section } from "../components/Section"
 
 import { LATEST_VERSIONS } from "../../versions.mjs"
@@ -189,6 +189,9 @@ export const TopNav = ({ hideVersionLink }: { hideVersionLink?: boolean }) => {
                         )}
                         <a href={"https://www.github.com/glowbuzzer"}>
                             <GithubOutlined style={{ fontSize: "24px", color: "#9254de" }} />
+                        </a>
+                        <a href={"https://twitter.com/glowbuzzer"}>
+                            <TwitterOutlined style={{ fontSize: "24px", color: "#9254de" }} />
                         </a>
                         <a href={"https://www.youtube.com/channel/UCd5lSqWK5Ep4su1sHx6kkUA"}>
                             <YoutubeOutlined style={{ fontSize: "24px", color: "#9254de" }} />
