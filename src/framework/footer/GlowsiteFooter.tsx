@@ -1,7 +1,7 @@
-import { Col, Modal, Row } from "antd"
+import {Col, Modal, Row, Space} from "antd"
 import styled from "styled-components"
 import * as React from "react"
-import { GithubOutlined, YoutubeOutlined } from "@ant-design/icons"
+import { GithubOutlined, YoutubeOutlined, TwitterOutlined } from "@ant-design/icons"
 import { Link } from "react-router-dom"
 import { useCookieConsent } from "../providers/CookieConsentProvider"
 
@@ -135,14 +135,17 @@ const DesktopFooter = ({}) => {
                     <h3>Resources</h3>
                     <div />
                     <div>
-                        <a href={"https://www.github.com/glowbuzzer"}>
-                            <GithubOutlined style={{ fontSize: "24px", color: "#9254de" }} />
-                        </a>
-                    </div>
-                    <div>
-                        <a href={"https://www.youtube.com/glowbuzzer"}>
-                            <YoutubeOutlined style={{ fontSize: "24px", color: "#9254de" }} />
-                        </a>
+                        <Space>
+                            <a href={"https://www.github.com/glowbuzzer"}>
+                                <GithubOutlined style={{ fontSize: "24px", color: "#9254de" }} />
+                            </a>
+                            <a href={"https://www.twitter.com/glowbuzzer"}>
+                                <TwitterOutlined style={{ fontSize: "24px", color: "#9254de" }} />
+                            </a>
+                            <a href={"https://www.youtube.com/glowbuzzer"}>
+                                <YoutubeOutlined style={{ fontSize: "24px", color: "#9254de" }} />
+                            </a>
+                        </Space>
                     </div>
                     <div>
                         <StyledLink to="/downloads">Downloads</StyledLink>
