@@ -60,7 +60,7 @@ There are often multiple solutions to the inverse kinematics (multiple configura
 
 The key can be either a number or string. These names are accessible in &gbr and are useful to document your config file.
 
-In the config there is a parameter `"finiteContinuous"`. This is the enum `JOINT_FINITECONTINUOUS`. <GlowsiteLink to="/docs/types/JOINT_FINITECONTINUOUS">See here for more details</GlowsiteLink>
+In the config there is a parameter `"finiteContinuous"`. This is the enum `JOINT_FINITECONTINUOUS`. See the <GlowsiteLink to="/docs/types/JOINT_FINITECONTINUOUS">GBC Schema documentation</GlowsiteLink> for details.
 
 0 = `JOINT_FINITE` = joint is finite (has travel limits),  1 = `JOINT_CONTINUOUS` =  joint is continous (no travel limits).
 
@@ -68,7 +68,7 @@ This allows us to configure machines where the joint has no limits (for example 
 
 We can invert the direction of motion of a joint with the `"isInverted"` parameter with 0 = not inverted, 1 = inverted motion.
 
-The `"jointType"` is the enum `JOINT_TYPE` with 0 = `JOINT_PRISMATIC`= Joint type is prismatic (linear) and 1 = `JOINT_REVOLUTE` Joint type is revolute (rotary). <GlowsiteLink to="/docs/types/JOINT_TYPE">See here for more details</GlowsiteLink>
+The `"jointType"` is the enum `JOINT_TYPE` with 0 = `JOINT_PRISMATIC`= Joint type is prismatic (linear) and 1 = `JOINT_REVOLUTE` Joint type is revolute (rotary). See the <GlowsiteLink to="/docs/types/JOINT_TYPE">GBC Schema documentation</GlowsiteLink> for details.
 
 This affects whether the joints motion is in linear units (for prismatic joints) or radians (for revolute joints).
 
@@ -93,7 +93,7 @@ Kcs also have `"linearLimits"` which define the linear kinematics limits of the 
 
 These are separate the individual joint's kinematics limits.
 
-`"kinematicsConfigurationType"` is the enum `KC_KINEMATICSCONFIGURATIONTYPE` which defines the mathematical kinematics model used for the kc <GlowsiteLink to="/docs/types/KC_KINEMATICSCONFIGURATIONTYPE">see here for more details</GlowsiteLink>
+`"kinematicsConfigurationType"` is the enum `KC_KINEMATICSCONFIGURATIONTYPE` which defines the mathematical kinematics model used for the kc. See the <GlowsiteLink to="/docs/types/KC_KINEMATICSCONFIGURATIONTYPE">GBC Schema documentation</GlowsiteLink> for details.
 
 List of linear limits to be applied to the kinematics configuration for different types of move
 

@@ -26,9 +26,9 @@ Within &gbc motion primitives exist. These are fundamental ways to move joints a
 
 Motion primitives are interacted with within &gbt in different ways. Using Tiles, through the Hooks API and through the Websockets API.
 
-### **Tiles** - you can add pre-built tiles like `JogTile`, `GCodeTile` etc. to your React project which give you an "out of the box" way to invoke motion primitives.
+### **Tiles** - you can add pre-built tiles like `JogCartesianTile`, `GCodeTile` etc. to your React project which give you an "out of the box" way to invoke motion primitives.
 
-The `JogTile` allows you to move Joints and Kinematics Configurations either to a specific position or be "jogged" manually to a position. See <GlowsiteLink to="/docs/gbr/tiles/JogTile">JogTile</GlowsiteLink> for more information.
+The `JogJointsTile` & `JogCartesian` allows you to move Joints and Kinematics Configurations either to a specific position or be "jogged" manually to a position. See <GlowsiteLink to="/docs/gbr/tiles/JogJointsTile">JogTile</GlowsiteLink> &  <GlowsiteLink to="/docs/gbr/tiles/JogCartesianTile">JogCartesianTile</GlowsiteLink>for more information.
 
 The `GCodeTile` allows you to stream gcode containing different movement instructions to &gbc. See <GlowsiteLink to="/docs/gbr/tiles/GCodeTile">GCodeTile</GlowsiteLink> for more information.
 

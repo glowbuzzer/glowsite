@@ -1,8 +1,12 @@
 import three_logo from "./three_logo.png?glowsite"
+import threeDimensionalSceneTile from "./toolpath_tille.jpg?glowsite"
+import {Image} from "../../../framework/components"
 export const heroImage=three_logo
 import {TitleImage} from "../../../framework/components/TitleImage"
 import {PageTag} from "../../../framework/components/PageTags"
 import {ReadingTime} from "../../../framework/components/ReadingTime"
+import {GitHubLink} from "../../../framework/components";
+import {GlowsiteLink} from "../../../framework"
 export const ContentTags =  ["web-dev", "three.js", "3D", "animation", "WebGL"]
 
 # {props.subtitle}
@@ -18,15 +22,229 @@ three.js is a JavaScript library used to create and display 3D graphics in a web
 
 three.js is used within the &gbt for the 3D display of robots and toolpaths.
 
-This blog discusses how to create a 3D view of a two-link arm using the &gbt.
 
-## Two link arm forward and inverse kinematics
+## Code
 
-### Forward kinematics
+The code that accompanies this blog post can be found at:
 
-### Inverse kinematics
+<GitHubLink title={"three.js tutorial"} repo={"gbr"} directory={"/examples/three-tutorial"}/>
 
-## Visualising
+If you clone the repository and run `pnpm i` in the `/gbr` directory and then in this same directory run `vite examples/three-tutorial` you will see the three-tutorial examples.
+
+ADD SCREENSHOT HERE
+
+## The &gbt 3D scene tile
+
+The toolkit contains a 3D scene tile. This tile displays robot models and traces the toolpath the machine will follow.
+
+If you jog your machine, you will see the movement in the 3D scene tile.
+
+If you load gcode, you will see the expected (future) ToolPath in the tile.
+
+<Image meta={threeDimensionalSceneTile} alt="3D Scene Tile" maxWidth={600}/>
+
+The 3D Scene Tile is the three.js canvas which we can customise in different ways. For example, we can:
+
+* create 3D models of custom kinematics configurations (different types of robots) and visualise their movement
+* add our own objects to the scene and use their positions to help develop robot programs
+* add CAD models (e.g. a STEP file) to the scene and use their geometry to develop robot programs
+* add animations of the robot interacting with objects in the scene
+
+
+### three.js basics
+
+React 3 Fibre (R3F) is described as a "React renderer for three.js on the web and react-native".
+
+This means it is responsible for rendering React components to the DOM and native views which means we are able to create regular React components and let react-three-fiber handle converting those components into three.js primitives (3D objects).
+
+As the &gbt is based on React, we primarily interact with three.js through React 3 Fibre. So, most of the code in this blog (and in the &gbt) will be interactions with three.js through R3F.
+
+Another package that we use is [drei](https://github.com/pmndrs/drei) which contains a range of useful helpers for R3F. These include:
+
+- controls - for example `FlyControls`, `TrackballControls` which enabled you to navigate your scene in different ways
+- shortcuts - which allow you to more easily create Shapes such as `Line` `Cube` etc.
+- gizmos - for example `PivotControls` which allow you to move objects within the scene
+- loaders - for example `usGLTF` which allows you to load GLTF files
+
+Some basic three terminology to get us started:
+
+**scene**
+ : it where everything takes place visually. In other words, it is your x, y, z 3D space.
+
+**camera**
+: how your scene is observed different types of camera (e.g. perspective, orthographic)
+
+**light**
+: scenes are dark until you add, well, a light. Ambient light comes from all directions, directional light comes from one side, point light comes from a particular point, and spotlight is, well, like a real world spotlight
+
+**mesh**
+: is what we place into our scene at a specific coordinate. It accepts a geometry to specify the shape of your object, a material for surface level effects, and it allows for the attachment of event handlers so that you can interact with it.
+
+**geometry**
+: is how specific shapes are assigned to the mesh in your scene. A sphere, box, cone, and cylinder are only a handful of the geometry objects
+
+**material**
+: is what is applied to the outer surface of your mesh. Choosing basic, lambert, phong, or normal will all affect how light interacts with your object:
+
+- `meshLambertMaterial` - for non-shiny surfaces, without specular highlights.
+- `meshBasicMaterial` - for drawing geometries in a simple shaded (flat or wireframe) way.
+- `meshStandardMaterial` - physically based material, using Metallic-Roughness workflow.
+- `MeshPhongMaterial` - for shiny surfaces with specular highlights.
+- there are others material types - see [the three docs](https://threejs.org/docs/)
+
+**shadows**
+: lights (spot and point but not ambient) can cast shadows onto a mesh that is configured to receive them
+
+### canvas object
+
+The 3D Scene tile  provides the R3F Canvas object. (they describe the canvas object as  your "portal into three.js" which is a fancy way of saying it provides your three.js scene and camera.
+
+The Canvas object is where you start to define your React Three Fiber Scene.
+
+### Adding objects to the scene
+
+In your &gbr `App` function you will render the tiles used in your application. One of them will be the `threeDimensionalSceneTile`.
+
+To add R3F components into the scene you simply add them as follows:
+
+```js
+<threeDimensionalSceneTile model={TX40_MODEL}>
+    <MyComponent/>
+</threeDimensionalSceneTile>
+```
+
+### Example 1 - Adding a Sphere to the scene
+
+The code for this example is in the `ExampleSphere` function in `exampleSphere.tsx` in the gbr repository in the `examples` directory.
+
+To add a sphere geometry to your scene, three.js has a class `SphereGeometry` for generating these. The drei utilies provides a shortcut to add these, we will use their `Sphere` shortcut here.
+
+Using this is straightforward, as can be seen in the following code:
+
+```js
+import {
+    Sphere,
+} from "@react-three/drei"
+
+
+const ExampleSphere = () => {
+    return (
+        <Sphere args={20}
+            position={[300, 300, 0]}
+        >
+            <meshBasicMaterial color="red"/>
+        </Sphere>
+    )
+}
+```
+
+`postion` is the position of the sphere within the scene.
+
+`args` map to the constructor arguments on the Sphere geometry and here specify the radius of the sphere.
+
+`meshBasicMaterial` is the material to be used for the sphere. Here we will use the most basic "plain flat" material.
+
+`color` is the color of the sphere mesh. Here we have used red.
+
+In terms of the `args`. Looking at the three.js documentation we see how they map to the constructor arguments:
+
+**`SphereGeometry(radius : Float, widthSegments : Integer, heightSegments : Integer, phiStart : Float, phiLength : Float, thetaStart : Float, thetaLength : Float)`**
+
+* **radius** — sphere radius. Default is 1.
+* **widthSegments** — number of horizontal segments. Minimum value is 3, and the default is 32.
+* **heightSegments** — number of vertical segments. Minimum value is 2, and the default is 16.
+* **phiStart** — specify horizontal starting angle. Default is 0.
+* **phiLength** — specify horizontal sweep angle size. Default is Math.PI * 2.
+* **thetaStart** — specify vertical starting angle. Default is 0.
+* **thetaLength** — specify vertical sweep angle size. Default is Math.PI.
+
+So the `args={20}` code specifies the radius of the sphere and the rest of the constructor arguments are defaults.
+
+screenshotExampleSphere
+
+In this example, we used `meshBasicMaterial` which is just a simple shaded material. Try varying the material to `meshLambertMaterial`, `meshStandardMaterial` & `MeshPhongMaterial` and zoom in and see what difference it makes.
+
+Also try varying the parameters of the materials. E.g. `<meshPhongMaterial transparent={true} color="red" opacity={0.5}/>` will give a semi-transparent sphere.
+
+### Example 2 - Add some texture to a box geometry and make it move
+
+The code for this example is in the `ExampleTexture` function in `exampleTexture.tsx` in the gbr repository in the `examples` directory.
+
+We have grabbed a metal texture from (AmbientCG)[https://ambientcg.com/view?id=Metal024]. This is a rusty metal texture and the files we downloaded are in the `/examples/textures` directory.
+
+First, we want to apply this to a box geometry. This is done by passing `props` to `<meshStandard material/>` as shown below:
+
+```js
+        const props = useTexture({
+            metalnessMap: "/textures/Metal024/Metal024_1K_Metalness.jpg",
+            map: "/textures/Metal024/Metal024_1K_Color.jpg",
+            roughnessMap: "/textures/Metal024/Metal024_1K_Roughness.jpg",
+            normalMap: "/textures/Metal024/Metal024_1K_NormalGL.jpg"
+        })
+```
+```js
+<Box ref={boxRef} args={[200,200,200]} position={[0, 300, 0]}  castShadow={true}>
+    <meshStandardMaterial {...props}/>
+</Box>
+```
+Next, we want to make the cube move.
+
+`useFrame` is a R3F hook that calls you back every frame. This is good for making things move, updating properties etc.
+`clock` is the `THREE.clock` system clock which you can `.start`, `.stop` etc.
+
+```js
+        useFrame(({clock}) => {
+            boxRef.current.rotation.x = (Math.sin(clock.elapsedTime) * Math.PI) / 4
+            boxRef.current.rotation.y = (Math.sin(clock.elapsedTime) * Math.PI) / 4
+            boxRef.current.rotation.z = (Math.sin(clock.elapsedTime) * Math.PI) / 4
+            boxRef.current.position.x = 400
+            boxRef.current.position.y = Math.sin(clock.elapsedTime) * 300
+            boxRef.current.position.z = Math.sin(clock.elapsedTime) + 200
+        })
+````
+
+        `const boxRef = useRef(null)`
+
+
+### Example 3 -
+
+The code for this example is in the `ExampleXXXX` function in `exampleXXX.tsx` in the gbr repository in the `examples` directory.
+
+
+### Example 4 - XXX
+
+The code for this example is in the `ExampleXXXX` function in `exampleXXX.tsx` in the gbr repository in the `examples` directory.
+
+
+### Example 5 - XXX
+
+The code for this example is in the `ExampleXXXX` function in `exampleXXX.tsx` in the gbr repository in the `examples` directory.
+
+### Example 6 - XXX
+
+The code for this example is in the `ExampleXXXX` function in `exampleXXX.tsx` in the gbr repository in the `examples` directory.
+
+### Example 7 - XXX
+
+The code for this example is in the `ExampleXXXX` function in `exampleXXX.tsx` in the gbr repository in the `examples` directory.
+
+### Example 8 - XXX
+
+The code for this example is in the `ExampleXXXX` function in `exampleXXX.tsx` in the gbr repository in the `examples` directory.
+
+### Example 9 - XXX
+
+The code for this example is in the `ExampleXXXX` function in `exampleXXX.tsx` in the gbr repository in the `examples` directory.
+
+### Example 10 - XXX
+
+The code for this example is in the `ExampleXXXX` function in `exampleXXX.tsx` in the gbr repository in the `examples` directory.
 
 
 
+If working outside of the &gbt codebase, the most basic three.js example would be:
+
+```js
+import { Canvas, useFrame } from 'react-three-fiber'
+
+```

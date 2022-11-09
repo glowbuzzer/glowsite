@@ -43,7 +43,7 @@ Within &gbc, Tasks are an assembly of Activities that are executed in sequence i
 
 The trigger for a task would typically be an event like a IO being set or tasks can be triggered from front-end code.
 
-Tasks allow for JavaScript code to be run is response to events occurring or periodically without using the front-end code (browser based). See <GlowsiteLink to="/docs/gbc/response_times"> here</GlowsiteLink> for more details on the response time of code in different layers of GBC.
+Tasks allow for JavaScript code to be run is response to events occurring or periodically without using the front-end code (browser based). See <GlowsiteLink to="/docs/gbc/response_times"> response times in GBC layers</GlowsiteLink> for more details on the response time of code in different layers of GBC.
 
 Tasks can have trigger to start them running. This could be a digital input or a thresholded analog input.
 
@@ -60,7 +60,7 @@ The key things to define in a task are the index of the first activity in a task
 
 ### `activity: {}`
 
-Any of the &gbc activities can be specified as the `"activityType"` in the activity config. These are the members of the `ACTIVITYTYPE` and are documented <GlowsiteLink to="/docs/types/ACTIVITYTYPE">here</GlowsiteLink>.
+Any of the &gbc activities can be specified as the `"activityType"` in the activity config. These are the members of the `ACTIVITYTYPE` and are documented in the <GlowsiteLink to="/docs/types/ACTIVITYTYPE">GBC schema</GlowsiteLink>.
 
 <Card title="Schema documentation" extra={<GlowsiteLink to="/docs/types/ActivityConfig">docs Link</GlowsiteLink>} style={{ width: '100%' }}>
 
@@ -74,13 +74,11 @@ Any of the &gbc activities can be specified as the `"activityType"` in the activ
 
 The config is a union of the different activity types so `"activityType" acts as a discriminator for the union.
 
-So for example, if you define `"activityType": 13` then you are configuring an `ACTIVITYTYPE_DWELL` and so `"dwellConfig"` will be used in the rest of the config.
+So for example, if you define `"activityType": 5` then you are configuring an `ACTIVITYTYPE_MOVELINE`
 
-See <GlowsiteLink to="/docs/types/DwellConfig">here</GlowsiteLink> for more details of the dwell config parameters.
 
 The documentation for the schema for the main activity configs that you are likely to use can be found here:
 
-* <GlowsiteLink to="/docs/types/DwellConfig">dwellConfig</GlowsiteLink>
 * <GlowsiteLink to="/docs/types/MoveArcConfig">moveArcConfig</GlowsiteLink>
 * <GlowsiteLink to="/docs/types/MoveJointsConfig">moveJointsConfig</GlowsiteLink>
 * <GlowsiteLink to="/docs/types/MoveJointsAtVelocityConfig">moveJointsAtVelocityConfig</GlowsiteLink>
