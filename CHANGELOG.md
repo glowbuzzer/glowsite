@@ -2,6 +2,61 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.1.0](https://github.com/glowbuzzer/glowsite/compare/v1.0.3...v1.1.0) (2022-11-09)
+
+
+### Documentation
+
+* add react-native blog post ([6091d90](https://github.com/glowbuzzer/glowsite/commit/6091d90b965cc47a3cbfa0992bf506763b2d14c9))
+* finish off react-native blog ([dae4de9](https://github.com/glowbuzzer/glowsite/commit/dae4de992df34cce5edeeb682ece6c2680b75edd))
+
+
+### Feature
+
+* **#11:** Implement site search ([ad08239](https://github.com/glowbuzzer/glowsite/commit/ad082397309f4e75c0d5bec9f09e5f841bf51cef))
+* **#24:** Twitter link in footer ([339987e](https://github.com/glowbuzzer/glowsite/commit/339987e0307193d562cf464c158dedf59ebd0f27))
+* **#24:** Twitter link in top nav ([fe91440](https://github.com/glowbuzzer/glowsite/commit/fe91440b1ee3831c4ebafb04ec273d874c7a3a8a))
+* **#2:** Log page metadata ([ad08239](https://github.com/glowbuzzer/glowsite/commit/ad082397309f4e75c0d5bec9f09e5f841bf51cef))
+* **#8:** Create sitemap ([ad08239](https://github.com/glowbuzzer/glowsite/commit/ad082397309f4e75c0d5bec9f09e5f841bf51cef))
+* add sitemap ([75e0f0c](https://github.com/glowbuzzer/glowsite/commit/75e0f0cba836a027d506381616f0310167d43079))
+* log page properties ([f9541e1](https://github.com/glowbuzzer/glowsite/commit/f9541e1e426c5422ad4d5c6c1ff95514561ebb10))
+
+
+### Bug Fix
+
+* **#12:** Mermaid diags too big ([dfaebe1](https://github.com/glowbuzzer/glowsite/commit/dfaebe1ff5ff139edc1211d57b7a583d4d9140ea))
+* **#13:** Support landing page with no main nav ([68da373](https://github.com/glowbuzzer/glowsite/commit/68da373ff73d6beb838ee86656aefc26d1801fdd))
+* **#16:** Remove some deep pages from nav ([68da373](https://github.com/glowbuzzer/glowsite/commit/68da373ff73d6beb838ee86656aefc26d1801fdd))
+* **#19:** GBC schema not working in glowsite ([120f813](https://github.com/glowbuzzer/glowsite/commit/120f8135435764c76beafd3638c75aebb45ee41f))
+* **#25:** Broken link in tiles overview ([72525be](https://github.com/glowbuzzer/glowsite/commit/72525bed6ca73b996a4ca1c42e155f5f580da1bb))
+* add all types to sitemap for indexing ([9f4aa86](https://github.com/glowbuzzer/glowsite/commit/9f4aa86ebbedcef6db4f020e778e0262eee9aedd))
+* revert puppeteer version (mermaid issue) ([f83c1e0](https://github.com/glowbuzzer/glowsite/commit/f83c1e01b27c6985a6d3e615dcaed8e3fd69038d))
+
+
+### Chore
+
+* **#10:** Add robots.txt ([ad08239](https://github.com/glowbuzzer/glowsite/commit/ad082397309f4e75c0d5bec9f09e5f841bf51cef))
+* **#12:** Add meta description tag ([ad08239](https://github.com/glowbuzzer/glowsite/commit/ad082397309f4e75c0d5bec9f09e5f841bf51cef))
+* **#9:** Determine static search index size ([ad08239](https://github.com/glowbuzzer/glowsite/commit/ad082397309f4e75c0d5bec9f09e5f841bf51cef))
+* Added blog content ([f8e003a](https://github.com/glowbuzzer/glowsite/commit/f8e003af9b2fc39e941e4468b96b36283c15f23a))
+* Added blog content and minor edits ([71c77ae](https://github.com/glowbuzzer/glowsite/commit/71c77ae9f621371420fe95babcb48a3b2588e95e))
+* Added blog content and minor edits ([5e6d47f](https://github.com/glowbuzzer/glowsite/commit/5e6d47f9d9814f5e77523dbc8b98c89e7f65a17f))
+* Added blog content and minor edits ([c3cc5a9](https://github.com/glowbuzzer/glowsite/commit/c3cc5a936a77ec9841816b8b595b69d562291950))
+* Added blog content and minor edits ([615eb98](https://github.com/glowbuzzer/glowsite/commit/615eb98a6c63b0b506ce34a260991a82ee2e03ff))
+* change default glowsite dev port ([582f2d0](https://github.com/glowbuzzer/glowsite/commit/582f2d0ad4e6e063ca298a485fdfaae2fa04bebe))
+* Fix download page versions for gbem/gbsm ([7696f0e](https://github.com/glowbuzzer/glowsite/commit/7696f0e2ae4bca74284cfa68d60546548db7cf62))
+* include all pages in index ([838401a](https://github.com/glowbuzzer/glowsite/commit/838401a99ef7488b0304a520abac85ce36f42557))
+* rationalise package.json ([719e58e](https://github.com/glowbuzzer/glowsite/commit/719e58e845a60d5894c3aa1f7fe06abc15dd1526))
+* remove legacy Tile.mdx and fix antd tab issue ([e62c024](https://github.com/glowbuzzer/glowsite/commit/e62c0242696131124fadb000ed79fbb5574973fa))
+* remove pnpm dependency warnings ([9222838](https://github.com/glowbuzzer/glowsite/commit/9222838aec774c5055b2f7823007b4982aef9852))
+* remove unused var ([46ed7f2](https://github.com/glowbuzzer/glowsite/commit/46ed7f21e4969409e17ccdd11a64aae69c192943))
+* script update of package versions based on gbr project ([22339cf](https://github.com/glowbuzzer/glowsite/commit/22339cf86ca829fc909b37ae34f5726259da071d))
+* try to get github action working ([9f4aa86](https://github.com/glowbuzzer/glowsite/commit/9f4aa86ebbedcef6db4f020e778e0262eee9aedd))
+* update front-end.mdx getting started examples ([821cbd9](https://github.com/glowbuzzer/glowsite/commit/821cbd919b72d6b9355f9000dbb3df36e20de41f))
+* Update versions and add rpi real-time download ([d77908b](https://github.com/glowbuzzer/glowsite/commit/d77908b6500696ee58484f76008ffe854a0d6f2c))
+* update with gbr tile changes ([2938d5c](https://github.com/glowbuzzer/glowsite/commit/2938d5ccf7c7fa9a80a6a82edf893e8079b3f76a))
+* Updated pi image instructions ([4693bac](https://github.com/glowbuzzer/glowsite/commit/4693bac59ca0d514f2489d286c46776c3699181b))
+
 ## [1.0.3](https://github.com/glowbuzzer/glowsite/compare/v1.0.2...v1.0.3) (2022-08-10)
 
 
