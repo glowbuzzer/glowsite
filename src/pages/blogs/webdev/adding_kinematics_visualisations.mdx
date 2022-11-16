@@ -50,14 +50,11 @@ If you load gcode, you will see the expected (future) ToolPath in the tile.
 
 <Image meta={threeDimensionalSceneTile} alt="3D Scene Tile" maxWidth={600}/>
 
-
 ## Modelling the robot in &gbr
 
-`<ToolPathTile model={showRobot && TWOLINK_MODEL}></ToolPathTile>`
+You need to load STEP or GLTF files for each of the two links.
 
-load STEP or GLTF files
-
-need to create CAD files for each link in your robot.
+Hence, you need to create CAD files for each link in your robot.
 
 For the two link arm we have two links and need to create two CAD models named `L0.glb` and `L1.glb`.
 
@@ -69,34 +66,53 @@ And this is the CAD model for the second link:
 
 <Image meta={L1} alt="Link 1 (L1)" maxWidth={600}/>
 
+Place these files in `public/assets/name` folder for CRA or `/assets/name` folder for Vite as `L0.glb` `L1.glb` or `.step` if using the step loader.
 
-Place these files in `public/assets/name` folder (where name is the name specified in the `RobotModel` in the object below) labelled as `L0.glb` `L1.glb` or `.step` if using the step loader.
 
-`RobotModel` describes the kinematics structure of the robot.
-
-The structure of this file is a little hard to describe. It is based on the Denavit–Hartenberg (DH) matrix.
-
-It only supports revolute joints.
-
-* `link_length` is the length of the link
-* `alpha`
-* `teta`
-* `skip_link` is whether
-* `limits` specifiy the maxium travel of the joint in degrees
-
-scale is the mapping between the units for link_length and the units in this case 1000 is used
-
-offset is the
+Then load the files as follows:
 
 ```js
-const TWOLINK_MODEL: RobotModel = {
-       name: "2link",
-       config: [
-           { alpha: 0, link_length: 0.15, skip_link: true },
-           { alpha: 0, teta:0, link_length: 0.15, limits: [-180, 180] },
-       ],
-       offset: new THREE.Vector3(0, 0, 0),
-       scale: 1000
-   }
+    const [links, setLinks] = useState<Object3D[]>([new Object3D(), new Object3D()])
+
+    useEffect(() => {
+        Promise.all(
+            ["L0", "L1"].map(linkName => loadStepFile(`/assets/2link/${linkName}.STEP`))
+        ).then(setLinks)
+    }, [])
+```
+
+(glb/gltf files are loaded with the drei `useGLTF` function as seen in the other robot example code)
+
+These are then assembled into three.js groups with the following code:
+
+```js
+    const [link1, link2] = links
+
+    return (
+        <group ref={link1Ref}>
+            <primitive object={link1} />
+            <group ref={link2Ref} position={new Vector3(0.15 * 1000, 0, 0)}>
+                <primitive object={link2} />
+                <group position={new Vector3(0.15 * 1000, 0, 0)}>{children}</group>
+            </group>
+        </group>
+```
+
+This creates a nested group of the model files offset by the length of the links. These must match the lengths in the code for the ik/fk c code functions.
+The group must be created so that rotating the z axis moves the joints.
+
+
+The robot is moved using the following code:
+
+```js
+    const { jointPositions } = useKinematics(0)
+
+    const link1Ref = React.useRef<Group>()
+    const link2Ref = React.useRef<Group>()
+
+    useEffect(() => {
+        link1Ref.current.rotation.set(0, 0, jointPositions[0] || 0)
+        link2Ref.current.rotation.set(0, 0, jointPositions[1] || 0)
+    }, [jointPositions])
 ```
 
