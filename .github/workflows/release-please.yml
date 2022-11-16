@@ -49,6 +49,9 @@ jobs:
           NODE_OPTIONS: "--max_old_space_size=4096"
           VITE_GLOWBUZZER_VERSION: ${{ needs.release-please.outputs.version }}
 
+      - name: Generate index
+        run: node post-process-site.mjs www.glowbuzzer.com
+
       - name: Deploy site
         run: ./deploy-site.sh www www.glowbuzzer.com EOLCC9H61HP6F
 
