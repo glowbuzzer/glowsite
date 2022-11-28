@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.1.2](https://github.com/glowbuzzer/glowsite/compare/v1.1.1...v1.1.2) (2022-11-28)
+
+
+### Chore
+
+* add chatlio ([8dc6621](https://github.com/glowbuzzer/glowsite/commit/8dc66218a84647f7af0414d678b9c4c11d679e9f))
+* add chatlio and landing page gtag events ([6070bb7](https://github.com/glowbuzzer/glowsite/commit/6070bb76207d500b8f3ae70098bc7690439880b9))
+
 ## [1.1.1](https://github.com/glowbuzzer/glowsite/compare/v1.1.0...v1.1.1) (2022-11-16)
 
 
