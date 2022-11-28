@@ -1,4 +1,24 @@
-# Simple pick-and-place with Igus 5-DOF robot
+import igus_overall_2 from "./igus_overall_2.jpg?glowsite"
+import igus_control_panel from "./igus_control_panel.jpg?glowsite"
+import igus_motor_detail_1 from "./igus_motor_detail_1.jpg?glowsite"
+import igus_motor_detail_2 from "./igus_motor_detail_2.jpg?glowsite"
+
+import {Image} from "../../../framework/components"
+export const heroImage=igus_overall_2
+import {TitleImage} from "../../../framework/components/TitleImage"
+import {PageTag} from "../../../framework/components/PageTags"
+import {ReadingTime} from "../../../framework/components/ReadingTime"
+import {GitHubLink} from "../../../framework/components";
+import {GlowsiteLink} from "../../../framework"
+export const ContentTags =  ["robotics", "igus", "Oriental Motor"]
+
+# {props.subtitle}
+
+<ReadingTime time="5"/>
+<PageTag tags={props.tags}/>
+
+<TitleImage image={igus_overall_2} alt="Igus robot"/>
+
 
 ## Introduction
 
@@ -6,20 +26,44 @@ This blog discusses how to use an Igus D-DOF robot arm to perform simple pick an
 
 ## Hardware
 
-We are using an Igus 5-DOF arm. This
+We are using an Igus 5-DOF arm. This is a "kit" produced by igus.
 
-We used Oriental Motor Stepper motors on the robot. These have absolute encoders.
+We used Oriental Motor Stepper motors on the robot. These have absolute encoders which removes the need for any homing cycles or limit switches and much simplifies construction.
 
-Motor models:
+The motor models used on the different joints are as follows:
 
-Joint 1 -
-Joint 2 -
-Joint 3 -
+* Joint 1 - AZM69
+* Joint 2 - AZM69
+* Joint 3 - AZM48
+* Joint 4 - AZM48
+* Joint 5 - AZM26
 
-Controllers
+Controllers:
 
-AZD-3A -
-AZD-2A -
+* AZD-3A - 3 axis Oriental Motors EtherCAT
+* AZD-2A - 2 axis Oriental Motors EtherCAT
+
+
+Beckhoff IO was provided for:
+
+* EK1100 - Coupler
+* EL2022 - 2 x digital out - 2A (for pneumatic valve actuator for sucker)
+* EL2008 - 8 x digital out
+* EL1008 - 8 x digital in
+
+The wired control panel is shown in the following photograph.
+
+<Image meta={igus_control_panel} alt="Igus control panel" maxWidth={600}/>
+
+
+## Mechanical construction
+
+The robot's construction is shown in the following photographs.
+
+<Image meta={igus_motor_detail_1} alt="Igus motor detail 1" maxWidth={600}/>
+
+<Image meta={igus_motor_detail_2} alt="Igus motor detail 2" maxWidth={600}/>
+
 
 
 ## Kinematics
