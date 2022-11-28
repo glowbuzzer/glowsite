@@ -1,6 +1,6 @@
-import {useCurrentNav, useRootNav} from "../nav"
+import { useCurrentNav, useRootNav } from "../nav"
 import { Link, useLocation } from "react-router-dom"
-import { Menu, Space } from "antd"
+import { Menu, Space, Tooltip } from "antd"
 import * as React from "react"
 import { useState } from "react"
 import styled from "styled-components"
@@ -8,7 +8,14 @@ import styled from "styled-components"
 import { ReactComponent as StandardLogo } from "../../images/logos/small-logo.svg?inline"
 import { ReactComponent as SmallLogo } from "../../images/logos/tiny-logo.svg?inline"
 
-import { CloseOutlined, GithubOutlined, MenuOutlined, YoutubeOutlined, TwitterOutlined } from "@ant-design/icons"
+import {
+    CloseOutlined,
+    DownloadOutlined,
+    GithubOutlined,
+    MenuOutlined,
+    TwitterOutlined,
+    YoutubeOutlined
+} from "@ant-design/icons"
 import { Section } from "../components/Section"
 
 import { LATEST_VERSIONS } from "../../versions.mjs"
@@ -68,10 +75,34 @@ const StyledTopNav = styled.div`
     }
 
     .latest-release {
+        margin: -4px 0;
+        display: flex;
+        align-items: center;
+        //flex-direction: column;
+        gap: 8px;
+        border: 1px solid ${props => props.theme.color.TopNav};
         color: ${props => props.theme.color.MainPurple};
-        border: 1px dashed ${props => props.theme.color.MainPurple};
-        border-radius: 14px;
-        padding: 2px 8px;
+        padding: 2px 8px 2px 5px;
+
+        .anticon {
+            font-size: 24px;
+        }
+
+        div {
+            div {
+                line-height: 1.2em;
+                font-size: 12px;
+                font-family: monospace;
+            }
+        }
+
+        // div {
+        //     color: ${props => props.theme.color.MainPurple};
+        //     border: 1px dashed ${props => props.theme.color.MainPurple};
+        //     line-height: 1em;
+        //     //border-radius: 14px;
+        //     padding: 0 5px;
+        // }
     }
 
     @media (max-width: 1010px) {
@@ -156,9 +187,9 @@ const NavMenu = ({ mode, onNavigate = undefined }) => {
 export const TopNav = ({ hideVersionLink }: { hideVersionLink?: boolean }) => {
     const [showMenu, setShowMenu] = useState(false)
 
-    const node=useCurrentNav()
+    const node = useCurrentNav()
 
-    if ( node?.landing ) {
+    if (node?.landing) {
         return null
     }
 
@@ -183,9 +214,15 @@ export const TopNav = ({ hideVersionLink }: { hideVersionLink?: boolean }) => {
 
                     <Space size="middle" align="center">
                         {hideVersionLink || (
-                            <Link className="latest-release" to="/downloads">
-                                {LATEST_VERSIONS.gbc_version}
-                            </Link>
+                            <Tooltip title="Go to Downloads">
+                                <Link className="latest-release" to="/downloads">
+                                    <DownloadOutlined />
+                                    <div>
+                                        <div>GBC {LATEST_VERSIONS.gbc_version}</div>
+                                        <div>GBR {LATEST_VERSIONS.gbr_version}</div>
+                                    </div>
+                                </Link>
+                            </Tooltip>
                         )}
                         <a href={"https://www.github.com/glowbuzzer"}>
                             <GithubOutlined style={{ fontSize: "24px", color: "#9254de" }} />

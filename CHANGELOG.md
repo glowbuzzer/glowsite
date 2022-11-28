@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.1.2](https://github.com/glowbuzzer/glowsite/compare/v1.1.1...v1.1.2) (2022-11-28)
+
+
+### Chore
+
+* add chatlio ([8dc6621](https://github.com/glowbuzzer/glowsite/commit/8dc66218a84647f7af0414d678b9c4c11d679e9f))
+* add chatlio and landing page gtag events ([6070bb7](https://github.com/glowbuzzer/glowsite/commit/6070bb76207d500b8f3ae70098bc7690439880b9))
+
+## [1.1.1](https://github.com/glowbuzzer/glowsite/compare/v1.1.0...v1.1.1) (2022-11-16)
+
+
+### Chore
+
+* build search index in release build ([d5ecc0e](https://github.com/glowbuzzer/glowsite/commit/d5ecc0e77be806646d81e55d98fb4e24b0fd4bde))
+* Fix twitter link ([73f7fd3](https://github.com/glowbuzzer/glowsite/commit/73f7fd35f22b9a7b1097b8b2c81f5cd19aded5e2))
+* provide example of adding to scene in ThreeDimensionalSceneTile.mdx ([530d0f6](https://github.com/glowbuzzer/glowsite/commit/530d0f63087b098b3b52e4a7edff8d560e0e859f))
+* show gbc and gbr versions in TopNav.tsx ([1863acf](https://github.com/glowbuzzer/glowsite/commit/1863acf6c3ef93eaf887cbf31774718569ee3359))
+* update gbc version ([f653b84](https://github.com/glowbuzzer/glowsite/commit/f653b84aa1138e26cb276663f73908cff2daf95b))
+* update gbr dependency version ([2648de4](https://github.com/glowbuzzer/glowsite/commit/2648de4c68c7c58b0d24882227a008a063394ed6))
+* Updated 2link blog ([42d5691](https://github.com/glowbuzzer/glowsite/commit/42d5691014ed4eace572048ff06b2fd55220eed0))
+
 ## [1.1.0](https://github.com/glowbuzzer/glowsite/compare/v1.0.3...v1.1.0) (2022-11-09)
 
 
