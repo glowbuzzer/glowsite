@@ -227,7 +227,7 @@ export const TopNav = ({ hideVersionLink }: { hideVersionLink?: boolean }) => {
                         <a href={"https://www.github.com/glowbuzzer"}>
                             <GithubOutlined style={{ fontSize: "24px", color: "#9254de" }} />
                         </a>
-                        <a href={"https://twitter.com/theglowbuzzers"}>
+                        <a href={"https://twitter.com/glowbuzzer"}>
                             <TwitterOutlined style={{ fontSize: "24px", color: "#9254de" }} />
                         </a>
                         <a href={"https://www.youtube.com/channel/UCd5lSqWK5Ep4su1sHx6kkUA"}>

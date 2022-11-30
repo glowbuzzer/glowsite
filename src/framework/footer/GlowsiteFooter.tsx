@@ -139,7 +139,7 @@ const DesktopFooter = ({}) => {
                             <a href={"https://www.github.com/glowbuzzer"}>
                                 <GithubOutlined style={{ fontSize: "24px", color: "#9254de" }} />
                             </a>
-                            <a href={"https://www.twitter.com/theglowbuzzers"}>
+                            <a href={"https://www.twitter.com/glowbuzzer"}>
                                 <TwitterOutlined style={{ fontSize: "24px", color: "#9254de" }} />
                             </a>
                             <a href={"https://www.youtube.com/glowbuzzer"}>
