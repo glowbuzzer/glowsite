@@ -1,6 +1,13 @@
-import {Tldr} from "../../../framework/components"
+import {Tldr} from "../../../framework/components";
+import {NpmPackageComposition} from "../../../framework/components/NpmPackageComposition";
 
 # {props.subtitle}
+
+<Tldr>
+- Minimise the number of dependencies when using parts of &gbt
+- Manage optional dependencies
+- View package paths, exports and dependencies
+</Tldr>
 
 This page describes how to create a GBR application with the smallest possible bundle size.
 
@@ -17,9 +24,11 @@ It is quite likely you don't need all these libraries in your project, in which 
 more specific imports from `@glowbuzzer/controls` to avoid your build automatically including these libraries and
 thus increasing your bundle size.
 
-As an example, let's suppose you are building a &fe that uses the &gcode tile which allows users to edit and
-run &gcode but doesn't use any of the other &gbr tiles we provide. The &gcode tile uses the Ace Editor to provide syntax highlighting,
-but for this application you do not need to include Three.js or D3, among others.
+As an example, let's suppose you are building a &fe that uses the &gcode tile (which allows users to edit and
+run &gcode) but doesn't use any of the other &gbr tiles we provide. The &gcode tile uses the Ace Editor to provide syntax highlighting,
+but for this application you do not need to include D3, among others.
+
+## Importing using a more specific path
 
 Normally to use the &gcode tile you would simply import from `@glowbuzzer/controls`, for example:
 
@@ -29,8 +38,8 @@ import {GCodeTile} from "@glowbuzzer/controls"
 const MyApp = () => <GCodeTile/>
 ```
 
-Unless your chosen build tool is very good at tree shaking, this approach will introduce a dependency on Three.js and other libraries
-you don't need. You will also need to include these in your `package.json` dependencies - not ideal.
+Unless your chosen build tool is good at tree shaking, this approach will introduce a dependency on D3 and other libraries
+you don't need.
 
 To avoid this issue, import from more specific paths in the `@glowbuzzer/controls` package. For example, in this case:
 
@@ -39,3 +48,32 @@ import {GCodeTile} from "@glowbuzzer/controls/gcode"
 
 const MyApp = () => <GCodeTile/>
 ```
+
+This will ensure that your build tool will only include the code you need.
+
+## NPM and optional dependencies
+
+The glowbuzzer packages use `optionalDependencies` in `package.json`, to give you more control over the install process.
+By default these dependencies will be installed, thus making the initial setup as seemless as possible.
+
+If you want to avoid installing a dependency you don't need into `node_modules`, you can use the
+`--no-optional` flag when installing the package, for example:
+
+```bash
+npm install @glowbuzzer/controls --no-optional
+```
+
+If you want to make sure this is the case whenever you run `npm install`, you can add the following to your `.npmrc` file in
+the root of your project:
+
+```bash
+omit=optional
+```
+
+## Paths available and their dependencies
+
+The table below gives the paths available in `@glowbuzzer/controls` and the dependencies they require, plus the components
+exported from each. You can use this table to understand the composition of the package and which paths you can use based on the
+components you are using, plus the dependencies required.
+
+<NpmPackageComposition/>
