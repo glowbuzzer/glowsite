@@ -1,9 +1,10 @@
 {
     "compilerOptions": {
+        "lib": ["ES2015", "DOM"]
     },
     "exclude": [
     ],
     "files": [
-        "./node_modules/@glowbuzzer/store/types/index.d.ts"
+        "./node_modules/@glowbuzzer/store/index.d.ts"
     ]
 }

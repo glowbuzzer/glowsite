@@ -43,7 +43,7 @@ function typedoc(mode) {
                     watch: "../gbr/libs/store/src/**/*.{ts,tsx}"
                 }
                 : {
-                    entryPoint: "./node_modules/@glowbuzzer/store/types/index.d.ts",
+                    entryPoint: "./node_modules/@glowbuzzer/store/index.d.ts",
                     tsconfig: "./tsconfig.doc.json"
                 }
     }
