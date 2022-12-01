@@ -12,6 +12,7 @@ import { reactDocgenDockFilter, reactDocgenTileFilter } from "./react/react-docg
 import reactDocgenControls from "react-docgen:@glowbuzzer/controls"
 import typedoc from "typedoc:@glowbuzzer/store"
 import { typedocHookFilter } from "./typedoc/typedoc-hooks"
+import {LandingPageLayout} from "./framework/layouts/LandingPageLayout";
 
 function process(node: Omit<Node, "path">, parentPaths: string[], parent: Node): Node {
     const slug = node.slug
@@ -1048,14 +1049,14 @@ const nav = {
         {
             slug: "landing",
             title: "Landing",
-            layout: SimpleLayout,
+            layout: LandingPageLayout,
             unlinked: true, // inherited by children, remove from nav and sitemap
             landing: true, // hides the top nav
             children: [
                 {
                     slug: "test",
                     title: "Test Landing Page",
-                    component: () => import("./landing/test.mdx")
+                    component: () => import("./landing/TestLandingPage")
                 }
             ]
         }
