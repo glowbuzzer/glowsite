@@ -8,6 +8,7 @@ import oscillating_move_tile from "./front_end_tutorial_images/oscillating_move_
 import oscillating_move_running from "./front_end_tutorial_images/oscillating_move_running.png?glowsite"
 import {PageVariantProvider, PageVariantTabs} from "../../framework/components"
 import {Tabs} from "antd";
+import {ConnectTileDefinition} from "@glowbuzzer/controls";
 
 # {props.subtitle}
 
@@ -149,7 +150,7 @@ Oscillating a joint
         ```tsx
         <DockLayoutProvider
             appName={"myapp"}
-            tiles={[GlowbuzzerTileDefinitions.CONNECT, toggleDigitalOutputTileDefinition]}
+            tiles={[ConnectTileDefinition, toggleDigitalOutputTileDefinition]}
         >
             <Menu mode="horizontal" theme="light" selectedKeys={[]}>
                 <DockViewMenu />
@@ -226,7 +227,7 @@ Oscillating a joint
         // index.tsx
         <DockLayoutProvider
             appName={"myapp"}
-            tiles={[GlowbuzzerTileDefinitions.CONNECT, OscillatingMoveTileDefinition]}
+            tiles={[ConnectTileDefinition, OscillatingMoveTileDefinition]}
         >
             <Menu mode="horizontal" theme="light" selectedKeys={[]}>
                 <DockViewMenu />

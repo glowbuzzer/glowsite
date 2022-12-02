@@ -1,9 +1,9 @@
 ```jsx demo tile toolpath wide
 import React from "react"
-import {GlowbuzzerTileDefinitions} from "@glowbuzzer/controls";
+import {ThreeDimensionalSceneTileDefinition} from "@glowbuzzer/controls";
 import {DockExampleLayout} from "@glowsite";
 
-export default () => <DockExampleLayout tile={GlowbuzzerTileDefinitions.THREE_DIMENSIONAL_SCENE}/>
+export default () => <DockExampleLayout tile={ThreeDimensionalSceneTileDefinition}/>
 ```
 
 ## Customising the default tile
@@ -12,10 +12,10 @@ The following example shows how to customise the standard 3D scene tile shown ab
 
 ```jsx demo tile toolpath wide
 import React from "react"
-import {GlowbuzzerTileDefinitions, DockTileDefinitionBuilder, ThreeDimensionalSceneTile, Frustum} from "@glowbuzzer/controls";
+import {DockTileDefinitionBuilder, ThreeDimensionalSceneTile, ThreeDimensionalSceneTileDefinition, Frustum} from "@glowbuzzer/controls";
 import {DockExampleLayout} from "@glowsite";
 
-const CustomTile=DockTileDefinitionBuilder(GlowbuzzerTileDefinitions.THREE_DIMENSIONAL_SCENE)
+const CustomTile=DockTileDefinitionBuilder(ThreeDimensionalSceneTileDefinition)
     .render(() => {
         return <ThreeDimensionalSceneTile>
             <Frustum scale={1000}/>

@@ -21,15 +21,15 @@ to the tile definitions, but the user can drag and drop the tiles to change the 
 of tiles, as shown in a later example.
 
 ```jsx
-import {GlowbuzzerApp, DockLayoutProvider, DockLayout, GlowbuzzerTileDefinitions} from "@glowbuzzer/controls";
+import {GlowbuzzerApp, DockLayoutProvider, DockLayout, ConnectTileDefinition, GCodeTileDefinition, CartesianJogTileDefinition} from "@glowbuzzer/controls";
 
 const MyApp=() => {
     return (
         <GlowbuzzerApp>
             <DockLayoutProvider appName={"myapp"} tiles={[
-                GlowbuzzerTileDefinitions.CONNECT,
-                GlowbuzzerTileDefinitions.GCODE,
-                GlowbuzzerTileDefinitions.CARTESIAN_JOG
+                ConnectTileDefinition,
+                GCodeTileDefinition,
+                CartesianJogTileDefinition
             ]}>
                 <DockLayout />
             </DockLayoutProvider>
@@ -43,7 +43,7 @@ const MyApp=() => {
 You can also add your own tiles to the layout. The following example shows how to add a tile for a custom component called `MyTile`.
 
 ```jsx
-import {GlowbuzzerApp, DockLayoutProvider, DockLayout, GlowbuzzerTileDefinitions,DockTileDefinitionBuilder} from "@glowbuzzer/controls";
+import {GlowbuzzerApp, DockLayoutProvider, DockLayout, DockTileDefinitionBuilder, ConnectTileDefinition, GCodeTileDefinition, CartesianJogTileDefinition} from "@glowbuzzer/controls";
 
 const MyApp=() => {
     const myTileDefinition=DockTileDefinitionBuilder()
@@ -57,9 +57,9 @@ const MyApp=() => {
     return (
         <GlowbuzzerApp>
             <DockLayoutProvider appName={"myapp"} tiles={[
-                GlowbuzzerTileDefinitions.CONNECT,
-                GlowbuzzerTileDefinitions.GCODE,
-                GlowbuzzerTileDefinitions.CARTESIAN_JOG,
+                ConnectTileDefinition,
+                GCodeTileDefinition,
+                CartesianJogTileDefinition,
                 myTileDefinition
             ]}>
                 <DockLayout />
@@ -76,10 +76,10 @@ You can change parameters or change the default placement of the standard tiles 
 The following example shows how to customise the 3d scene tile.
 
 ```jsx
-import {GlowbuzzerApp, DockLayoutProvider, DockLayout, DockTileDefinitionBuilder, GlowbuzzerTileDefinitions, ThreeDimensionalSceneTile} from "@glowbuzzer/controls";
+import {GlowbuzzerApp, DockLayoutProvider, DockLayout, DockTileDefinitionBuilder, ThreeDimensionalSceneTile, ConnectTileDefinition, CartesianJogTileDefinition, ThreeDimensionalSceneTileDefinition} from "@glowbuzzer/controls";
 
 const MyApp=() => {
-    const myTileDefinition=DockTileDefinitionBuilder(GlowbuzzerTileDefinitions.THREE_DIMENSIONAL_SCENE)
+    const myTileDefinition=DockTileDefinitionBuilder(ThreeDimensionalSceneTileDefinition)
         .id("mytile")
         .title("My Tile")
         .render(() => {
@@ -91,8 +91,8 @@ const MyApp=() => {
     return (
         <GlowbuzzerApp>
             <DockLayoutProvider appName={"myapp"} tiles={[
-                GlowbuzzerTileDefinitions.CONNECT,
-                GlowbuzzerTileDefinitions.CARTESIAN_JOG,
+                ConnectTileDefinition,
+                CartesianJogTileDefinition,
                 myTileDefinition
             ]}>
                 <DockLayout />

@@ -1,6 +1,6 @@
 import * as React from "react"
-import { Table, Tag } from "antd"
-import styled from "styled-components";
+import { Table } from "antd"
+import styled from "styled-components"
 
 // TODO: M: read this from modules.json in the package
 const ref = [
@@ -25,17 +25,26 @@ const ref = [
         ],
         exports: [
             "AnalogInputsTile",
+            "AnalogInputsTileDefinition",
             "AnalogInputsTileHelp",
             "AnalogOutputsTile",
+            "AnalogOutputsTileDefinition",
             "AnalogOutputsTileHelp",
             "BasicRobot",
             "BitFieldDisplay",
             "CartesianDro",
+            "CartesianDroClipboardOption",
             "CartesianDroTile",
+            "CartesianDroTileDefinition",
             "CartesianDroTileHelp",
+            "CartesianJogTile",
+            "CartesianJogTileDefinition",
+            "ConfigEditTile",
+            "ConfigEditTileDefinition",
             "ConnectSettings",
             "ConnectTabButtons",
             "ConnectTile",
+            "ConnectTileDefinition",
             "ConnectTileHelp",
             "CylindricalTool",
             "DefaultGridHelper",
@@ -43,8 +52,10 @@ const ref = [
             "DefaultPerspectiveCamera",
             "DefaultViewCube",
             "DigitalInputsTile",
+            "DigitalInputsTileDefinition",
             "DigitalInputsTileHelp",
             "DigitalOutputsTile",
+            "DigitalOutputsTileDefinition",
             "DigitalOutputsTileHelp",
             "DockLayout",
             "DockLayoutContext",
@@ -54,43 +65,57 @@ const ref = [
             "DockViewMenu",
             "DroItem",
             "FeedRateTile",
+            "FeedRateTileDefinition",
             "FeedRateTileHelp",
             "FramesDisplay",
+            "FramesDropdown",
+            "FramesTile",
+            "FramesTileDefinition",
             "Frustum",
             "GCodeTile",
+            "GCodeTileDefinition",
             "GCodeTileHelp",
             "GlowbuzzerApp",
             "GlowbuzzerTileDefinitionList",
-            "GlowbuzzerTileDefinitions",
             "GlowbuzzerTileIdentifiers",
             "IntegerInputsTile",
+            "IntegerInputsTileDefinition",
             "IntegerInputsTileHelp",
             "IntegerOutputsTile",
+            "IntegerOutputsTileDefinition",
             "IntegerOutputsTileHelp",
-            "JogCartesianTile",
-            "JogJointsTile",
             "JointDro",
             "JointDroTile",
+            "JointDroTileDefinition",
             "JointDroTileHelp",
-            "LoadConfigDialog",
+            "JointJogTile",
+            "JointJogTileDefinition",
             "MotorDro",
+            "PointsTile",
+            "PointsTileDefinition",
             "PreferencesDialog",
             "PreviewPath",
             "RobotConfigurationDro",
             "ScaleProvider",
             "SegmentDisplay",
-            "ShowConfigDialog",
+            "SpindleTile",
+            "SpindleTileDefinition",
             "StateMachineToolsTile",
+            "StateMachineToolsTileDefinition",
             "StateMachineToolsTileHelp",
             "TasksTile",
+            "TasksTileDefinition",
             "TasksTileHelp",
             "TelemetryTile",
+            "TelemetryTileDefinition",
             "TelemetryTileSettings",
             "ThreeDimensionalSceneTile",
+            "ThreeDimensionalSceneTileDefinition",
             "ThreeDimensionalSceneTileHelp",
             "TileEmptyMessage",
             "ToolPath",
             "ToolsTile",
+            "ToolsTileDefinition",
             "ToolsTileHelp",
             "TrackPosition",
             "TriadHelper",
@@ -120,7 +145,13 @@ const ref = [
         module: "./connect",
         import: "@glowbuzzer/controls/connect",
         dependencies: ["antd", "react", "styled-components"],
-        exports: ["ConnectSettings", "ConnectTabButtons", "ConnectTile", "ConnectTileHelp"]
+        exports: [
+            "ConnectSettings",
+            "ConnectTabButtons",
+            "ConnectTile",
+            "ConnectTileDefinition",
+            "ConnectTileHelp"
+        ]
     },
     {
         module: "./scene",
@@ -147,6 +178,7 @@ const ref = [
             "PreviewPath",
             "ScaleProvider",
             "ThreeDimensionalSceneTile",
+            "ThreeDimensionalSceneTileDefinition",
             "ThreeDimensionalSceneTileHelp",
             "ToolPath",
             "TrackPosition",
@@ -160,7 +192,7 @@ const ref = [
         module: "./tasks",
         import: "@glowbuzzer/controls/tasks",
         dependencies: ["@ant-design/icons", "antd", "react", "styled-components"],
-        exports: ["TasksTile", "TasksTileHelp"]
+        exports: ["TasksTile", "TasksTileDefinition", "TasksTileHelp"]
     },
     {
         module: "./io",
@@ -168,16 +200,22 @@ const ref = [
         dependencies: ["@ant-design/icons", "antd", "react", "styled-components", "three"],
         exports: [
             "AnalogInputsTile",
+            "AnalogInputsTileDefinition",
             "AnalogInputsTileHelp",
             "AnalogOutputsTile",
+            "AnalogOutputsTileDefinition",
             "AnalogOutputsTileHelp",
             "DigitalInputsTile",
+            "DigitalInputsTileDefinition",
             "DigitalInputsTileHelp",
             "DigitalOutputsTile",
+            "DigitalOutputsTileDefinition",
             "DigitalOutputsTileHelp",
             "IntegerInputsTile",
+            "IntegerInputsTileDefinition",
             "IntegerInputsTileHelp",
             "IntegerOutputsTile",
+            "IntegerOutputsTileDefinition",
             "IntegerOutputsTileHelp"
         ]
     },
@@ -191,13 +229,17 @@ const ref = [
         module: "./telemetry",
         import: "@glowbuzzer/controls/telemetry",
         dependencies: ["antd", "d3", "react", "react-redux", "styled-components"],
-        exports: ["TelemetryTile", "TelemetryTileSettings"]
+        exports: ["TelemetryTile", "TelemetryTileDefinition", "TelemetryTileSettings"]
     },
     {
         module: "./dev",
         import: "@glowbuzzer/controls/dev",
         dependencies: ["antd", "react", "styled-components"],
-        exports: ["StateMachineToolsTile", "StateMachineToolsTileHelp"]
+        exports: [
+            "StateMachineToolsTile",
+            "StateMachineToolsTileDefinition",
+            "StateMachineToolsTileHelp"
+        ]
     },
     {
         module: "./gcode",
@@ -210,19 +252,24 @@ const ref = [
             "react-ace",
             "styled-components"
         ],
-        exports: ["GCodeTile", "GCodeTileHelp"]
+        exports: ["GCodeTile", "GCodeTileDefinition", "GCodeTileHelp"]
     },
     {
         module: "./feedrate",
         import: "@glowbuzzer/controls/feedrate",
         dependencies: ["@ant-design/icons", "antd", "react", "styled-components"],
-        exports: ["FeedRateTile", "FeedRateTileHelp"]
+        exports: ["FeedRateTile", "FeedRateTileDefinition", "FeedRateTileHelp"]
     },
     {
         module: "./jogging",
         import: "@glowbuzzer/controls/jogging",
         dependencies: ["@ant-design/icons", "antd", "react", "styled-components", "three"],
-        exports: ["JogCartesianTile", "JogJointsTile"]
+        exports: [
+            "CartesianJogTile",
+            "CartesianJogTileDefinition",
+            "JointJogTile",
+            "JointJogTileDefinition"
+        ]
     },
     {
         module: "./dro",
@@ -231,11 +278,14 @@ const ref = [
         exports: [
             "BitFieldDisplay",
             "CartesianDro",
+            "CartesianDroClipboardOption",
             "CartesianDroTile",
+            "CartesianDroTileDefinition",
             "CartesianDroTileHelp",
             "DroItem",
             "JointDro",
             "JointDroTile",
+            "JointDroTileDefinition",
             "JointDroTileHelp",
             "MotorDro",
             "RobotConfigurationDro",
@@ -244,9 +294,9 @@ const ref = [
     }
 ]
 
-const StyledTable=styled(Table)`
+const StyledTable = styled(Table)`
     td {
-      vertical-align: top;
+        vertical-align: top;
     }
 `
 
@@ -270,5 +320,5 @@ export const NpmPackageComposition = () => {
             </div>
         ))
     }))
-    return <StyledTable dataSource={dataSource} columns={columns} pagination={false}/>
+    return <StyledTable dataSource={dataSource} columns={columns} pagination={false} />
 }

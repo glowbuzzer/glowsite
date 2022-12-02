@@ -2,10 +2,8 @@ import * as React from "react"
 import { useEffect } from "react"
 import { DefaultDocumentationPage } from "./DocumentationPage"
 import {
-    configSlice,
     ConnectionState,
     GlowbuzzerConfig,
-    KinematicsConfigurationConfig,
     MachineState,
     MACHINETARGET,
     rootReducer,
@@ -20,20 +18,19 @@ import "flexlayout-react/style/light.css"
 
 import { configureStore } from "@reduxjs/toolkit"
 import { Provider } from "react-redux"
-import { sample_config } from "../store/config"
 import { ComponentProp, ComponentProps } from "../components/ComponentProps"
 
 import reactDocgenControls from "react-docgen:@glowbuzzer/controls"
 import { Markdown } from "../components/Markdown"
 import { GithubSourceLink } from "../components"
 import { ScrollToTopOnMount } from "../components/ScrollToTopOnMount"
-import { dino } from "../store/dino"
+import {dino} from "../store/dino";
 
 const GlowbuzzerCustomApp = ({ children }) => {
     const preview = usePreview()
     useEffect(() => {
-        setTimeout(() => preview.setGCode(dino), 1000)
-    }, [])
+        setTimeout(() => preview.setGCode(dino), 10)
+    }, [window.location.pathname])
 
     return children
 }
@@ -46,19 +43,9 @@ export const ControlsDocumentationPage = ({ children, slug, displayProps }) => {
     // here we mimic up some state in the store to make the controls work nicely
     const enhancer = createStore => {
         return rootReducer => {
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            const store = createStore(rootReducer)
-            const initial_state = store.getState()
-            const kc: KinematicsConfigurationConfig = {
-                name: "Machine",
-                participatingJoints: [0, 1, 2]
-            }
             const state = {
-                ...initial_state,
                 config: {
-                    ...initial_state.config,
                     value: {
-                        ...initial_state.config.value,
                         tool: [
                             { name: "Default", translation: { x: 0, y: 0, z: 10 } },
                             { name: "Roughing", translation: { x: 0, y: 0, z: 20 } }
@@ -88,14 +75,10 @@ export const ControlsDocumentationPage = ({ children, slug, displayProps }) => {
                             {
                                 name: "Point 1",
                                 translation: { x: 100, y: 0, z: 0 },
-                                absRel: 1,
-                                parent: 0
                             },
                             {
                                 name: "Point 2",
                                 translation: { x: 20, y: 20, z: 0 },
-                                absRel: 1,
-                                parent: 1
                             }
                         ],
                         spindle: [{ name: "Spindle 1" }],
@@ -125,7 +108,15 @@ export const ControlsDocumentationPage = ({ children, slug, displayProps }) => {
                                 finiteContinuous: 0
                             }
                         ],
-                        kinematicsConfiguration: [kc],
+                        kinematicsConfiguration: [
+                            {
+                                name: "Machine",
+                                participatingJoints: [0, 1, 2],
+                                extentsX: [0, 500],
+                                extentsY: [0, 500],
+                                extentsZ: [0, 500]
+                            }
+                        ],
                         ain: [{ name: "Current Temp" }],
                         aout: [{ name: "Target Temp" }, { name: "Rotor Speed" }],
                         din: [{ name: "Light Beam" }],
@@ -141,17 +132,15 @@ export const ControlsDocumentationPage = ({ children, slug, displayProps }) => {
                         ],
                         activity: [
                             {
-                                name: "Activity 1",
+                                name: "Activity 1"
                             }
                         ]
                     } as GlowbuzzerConfig
                 },
                 connection: {
-                    ...initial_state.connection,
                     state: ConnectionState.CONNECTED
                 },
                 machine: {
-                    ...initial_state.machine,
                     actualTarget: MACHINETARGET.MACHINETARGET_SIMULATION,
                     statusWord: 0b100111,
                     currentState: MachineState.OPERATION_ENABLED
@@ -198,12 +187,14 @@ export const ControlsDocumentationPage = ({ children, slug, displayProps }) => {
                     }
                 ]
             }
+            const store = createStore(rootReducer, state)
 
             return {
                 ...store,
-                getState() {
-                    return state
-                }
+                // getState() {
+                //     console.log("state", state)
+                //     return state
+                // }
             }
         }
     }
@@ -215,7 +206,7 @@ export const ControlsDocumentationPage = ({ children, slug, displayProps }) => {
     })
 
     useEffect(() => {
-        store.dispatch(configSlice.actions.setConfig(sample_config))
+        // store.dispatch(configSlice.actions.setConfig(sample_config))
         store.dispatch(
             tasksSlice.actions.status([
                 { taskState: TASK_STATE.TASK_RUNNING, currentActivityIndex: 0 },
