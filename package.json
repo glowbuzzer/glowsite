@@ -22,6 +22,8 @@
     "@react-three/drei": "^9.40.0",
     "@react-three/fiber": "^8.9.1",
     "@reduxjs/toolkit": "^1.8.2",
+    "mathjs": "^9.5.1",
+    "@react-three/postprocessing": "^2.7.0",
     "@svgr/core": "^6.5.1",
     "@svgr/rollup": "^6.5.1",
     "@types/mermaid": "^9.1.0",

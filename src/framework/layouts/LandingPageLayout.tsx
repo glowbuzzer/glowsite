@@ -27,11 +27,13 @@ const StyledDiv = styled.div`
                 .logo {
                     width: 100px;
                 }
-
-                .title {
+              fill: ${props => props.theme.color.MainPurple};
+              .title {
                     font-size: 2.5rem;
                     line-height: 2.5rem;
                     padding: 20px 0;
+                                   
+                  }
                 }
             }
 
@@ -52,8 +54,12 @@ const StyledDiv = styled.div`
         .left {
             min-width: 30%;
             min-height: 300px;
-            border: 1px solid black;
+          .image {
+
+          }
+
         }
+      
 
         .right {
             .title {

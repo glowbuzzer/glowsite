@@ -15,6 +15,7 @@ specifiers:
   '@mdx-js/rollup': ^2.1.1
   '@react-three/drei': ^9.40.0
   '@react-three/fiber': ^8.9.1
+  '@react-three/postprocessing': ^2.7.0
   '@reduxjs/toolkit': ^1.8.2
   '@svgr/core': ^6.5.1
   '@svgr/rollup': ^6.5.1
@@ -35,6 +36,7 @@ specifiers:
   imagetools-core: ^2.8.0
   less: 4.1.2
   lunr: ^2.3.9
+  mathjs: ^9.5.1
   mermaid: ^9.1.7
   occt-import-js: ^0.0.14
   prettier: ^2.6.2
@@ -83,6 +85,7 @@ dependencies:
   '@mdx-js/rollup': 2.1.1_rollup@2.75.5
   '@react-three/drei': 9.40.0_frqueqj2hl5hpvsednxu46k3ly
   '@react-three/fiber': 8.9.1_5vzz734aui5gu3jm6wlduec5ym
+  '@react-three/postprocessing': 2.7.0_tf7sjnjqzqyj4a64d7zdzdzede
   '@reduxjs/toolkit': 1.8.2_ctm756ikdwcjcvyfxxwskzbr6q
   '@svgr/core': 6.5.1
   '@svgr/rollup': 6.5.1
@@ -103,6 +106,7 @@ dependencies:
   imagetools-core: 2.8.0
   less: 4.1.2
   lunr: 2.3.9
+  mathjs: 9.5.2
   mermaid: 9.1.7
   occt-import-js: 0.0.14
   prettier: 2.6.2
@@ -2481,6 +2485,22 @@ packages:
     dev: false
     optional: true
 
+  /@react-three/postprocessing/2.7.0_tf7sjnjqzqyj4a64d7zdzdzede:
+    resolution: {integrity: sha512-lJfV8GYp+L1SlGRcl8QPUg9QMdO+8ojW2kfaEc/MuvoI4rX3TRhVd3qFjjF++0bBmzt8LeQpDHCOHFAaT3MNYA==}
+    peerDependencies:
+      '@react-three/fiber': '>=7.0'
+      react: '>=17.0 || 18'
+      three: '>=0.136.0'
+    dependencies:
+      '@react-three/fiber': 8.9.1_5vzz734aui5gu3jm6wlduec5ym
+      postprocessing: 6.29.1_three@0.140.2
+      react: 18.1.0
+      react-merge-refs: 1.1.0
+      screen-space-reflections: 2.5.0_ggklohrewx732p2fysaqxpfr7u
+      three: 0.140.2
+      three-stdlib: 2.17.3_three@0.140.2
+    dev: false
+
   /@reduxjs/toolkit/1.8.2_ctm756ikdwcjcvyfxxwskzbr6q:
     resolution: {integrity: sha512-CtPw5TkN1pHRigMFCOS/0qg3b/yfPV5qGCsltVnIz7bx4PKTJlGHYfIxm97qskLknMzuGfjExaYdXJ77QTL0vg==}
     peerDependencies:
@@ -3464,6 +3484,10 @@ packages:
     dependencies:
       array-ify: 1.0.0
       dot-prop: 5.3.0
+    dev: false
+
+  /complex.js/2.1.1:
+    resolution: {integrity: sha512-8njCHOTtFFLtegk6zQo0kkVX1rngygb/KQI6z1qZxlFI3scluC+LVTCFbrkWjBv4vvLlbQ9t88IPMC6k95VTTg==}
     dev: false
 
   /compute-scroll-into-view/1.0.17:
@@ -5000,6 +5024,10 @@ packages:
     resolution: {integrity: sha1-Aljq5NPQwJdN4cFpGI7wBR0dGYg=}
     dev: false
 
+  /escape-latex/1.2.0:
+    resolution: {integrity: sha512-nV5aVWW1K0wEiUIEdZ4erkGGH8mDxGyxSeqPzRNtWP7ataw+/olFObw7hujFWlVjNsaDFw5VZ5NzVSIqRgfTiw==}
+    dev: false
+
   /escape-string-regexp/1.0.5:
     resolution: {integrity: sha512-vbRorB5FUQWvla16U8R/qgaFIya2qGzwDrNmCZuYKrbdSUMG6I1ZCGQRefkRVhuOkIGVne7BQ35DSfo1qvJqFg==}
     engines: {node: '>=0.8.0'}
@@ -5282,6 +5310,10 @@ packages:
   /forwarded/0.2.0:
     resolution: {integrity: sha512-buRG0fpBtRHSTCOASe6hD258tEubFoRLb4ZNA6NxMVHNw2gOcwHo9wyablzMzOA5z9xA9L1KNjk/Nt6MT9aYow==}
     engines: {node: '>= 0.6'}
+    dev: false
+
+  /fraction.js/4.2.0:
+    resolution: {integrity: sha512-MhLuK+2gUcnZe8ZHlaaINnQLl0xRIGRfcGk2yl8xoQAfHrSsL3rYu6FCmBdkdbhc9EPlwyGHewaRsvwRMJtAlA==}
     dev: false
 
   /fresh/0.5.2:
@@ -5843,6 +5875,10 @@ packages:
       react: 18.1.0
     dev: false
 
+  /javascript-natural-sort/0.7.1:
+    resolution: {integrity: sha512-nO6jcEfZWQXDhOiBtG2KvKyEptz7RVbpGP4vTD2hLBdmNQSsCiicO2Ioinv6UI4y9ukqnBpy+XZ9H6uLNgJTlw==}
+    dev: false
+
   /js-tokens/4.0.0:
     resolution: {integrity: sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==}
     dev: false
@@ -6137,6 +6173,22 @@ packages:
     resolution: {integrity: sha512-+Z6KDjSPa6/723PQYyc1axYZpYYpDnECDaU6hkaf5gqBieBkMKYReL5hteF2QizhlMbgbo8umXl/clZ67+GlsA==}
     engines: {node: '>= 12'}
     hasBin: true
+    dev: false
+
+  /mathjs/9.5.2:
+    resolution: {integrity: sha512-c0erTq0GP503/Ch2OtDOAn50GIOsuxTMjmE00NI/vKJFSWrDaQHRjx6ai+16xYv70yBSnnpUgHZGNf9FR9IwmA==}
+    engines: {node: '>= 12'}
+    hasBin: true
+    dependencies:
+      '@babel/runtime': 7.18.3
+      complex.js: 2.1.1
+      decimal.js: 10.3.1
+      escape-latex: 1.2.0
+      fraction.js: 4.2.0
+      javascript-natural-sort: 0.7.1
+      seedrandom: 3.0.5
+      tiny-emitter: 2.1.0
+      typed-function: 2.1.0
     dev: false
 
   /mdast-util-definitions/5.1.0:
@@ -7234,6 +7286,15 @@ packages:
       nanoid: 3.3.4
       picocolors: 1.0.0
       source-map-js: 1.0.2
+    dev: false
+
+  /postprocessing/6.29.1_three@0.140.2:
+    resolution: {integrity: sha512-w+XoL2Z7YpVDsHbIeg6sldMMmDqZS4Hul1FDq3TjOeXZ0Wnp0Qy1EvR7QmYJxyWBux1cKQx/k3XO7LxfvPsZyg==}
+    engines: {node: '>= 0.13.2'}
+    peerDependencies:
+      three: '>= 0.125.0 < 0.147.0'
+    dependencies:
+      three: 0.140.2
     dev: false
 
   /potpack/1.0.2:
@@ -8577,10 +8638,24 @@ packages:
       loose-envify: 1.4.0
     dev: false
 
+  /screen-space-reflections/2.5.0_ggklohrewx732p2fysaqxpfr7u:
+    resolution: {integrity: sha512-fWSDMhJS0xwD3LTxRRch7Lb9NzxsR66sCmtDmAA7i+OGnghUrBBsrha85ng7StnCBaLq/BKmZ97dLxWd1XgWdQ==}
+    peerDependencies:
+      postprocessing: '>=6.28.0'
+      three: '>=0.141.0'
+    dependencies:
+      postprocessing: 6.29.1_three@0.140.2
+      three: 0.140.2
+    dev: false
+
   /scroll-into-view-if-needed/2.2.28:
     resolution: {integrity: sha512-8LuxJSuFVc92+0AdNv4QOxRL4Abeo1DgLnGNkn1XlaujPH/3cCFz3QI60r2VNu4obJJROzgnIUw5TKQkZvZI1w==}
     dependencies:
       compute-scroll-into-view: 1.0.17
+    dev: false
+
+  /seedrandom/3.0.5:
+    resolution: {integrity: sha512-8OwmbklUNzwezjGInmZ+2clQmExQPvomqjL7LFqOYqtmuxRgQYqOD3mHaU+MvZn5FLUeVxVfQjwLZW/n/JFuqg==}
     dev: false
 
   /semver/5.7.1:
@@ -9065,6 +9140,7 @@ packages:
 
   /three/0.146.0:
     resolution: {integrity: sha512-1lvNfLezN6OJ9NaFAhfX4sm5e9YCzHtaRgZ1+B4C+Hv6TibRMsuBAM5/wVKzxjpYIlMymvgsHEFrrigEfXnb2A==}
+    requiresBuild: true
     dev: false
     optional: true
 
@@ -9083,6 +9159,10 @@ packages:
     resolution: {integrity: sha512-iOqSav00cVxEEICeD7TjLB1sueEL+81Wpzp2bY17uZjZN0pWZPuo4suZ/61VujxmqSGFfgOcNuTZ85QJwNZQpw==}
     dependencies:
       readable-stream: 3.6.0
+    dev: false
+
+  /tiny-emitter/2.1.0:
+    resolution: {integrity: sha512-NB6Dk1A9xgQPMoGqC5CVXn123gWyte215ONT5Pp5a0yt4nlEoO1ZWeCwpncaekPHXO60i47ihFnZPiRPjRMq4Q==}
     dev: false
 
   /tiny-inflate/1.0.3:
@@ -9240,6 +9320,11 @@ packages:
     dependencies:
       media-typer: 0.3.0
       mime-types: 2.1.33
+    dev: false
+
+  /typed-function/2.1.0:
+    resolution: {integrity: sha512-bctQIOqx2iVbWGDGPWwIm18QScpu2XRmkC19D8rQGFsjKSgteq/o1hTZvIG/wuDq8fanpBDrLkLq+aEN/6y5XQ==}
+    engines: {node: '>= 10'}
     dev: false
 
   /typedarray/0.0.6:

@@ -1,6 +1,6 @@
 
 import { LandingPageLink } from "../framework/conversions/LandingPageLink"
-
+import * as React from "react"
 import { ReactComponent as Logo } from "../images/logos/tiny-logo.svg?inline"
 import { Canvas } from "@react-three/fiber"
 import { OrbitControls } from "@react-three/drei"
@@ -15,7 +15,7 @@ const TestLandingPage = () => {
                             <Logo />
                         </div>
                         <div className="title">
-                            Create robot visualisations with react-three-fiber
+                            Test landing
                         </div>
                         <div className="description">
                             Use web stack blah lorem ipsum dolor sit amet, consectetur adipiscing

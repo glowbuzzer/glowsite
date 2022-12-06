@@ -1057,7 +1057,12 @@ const nav = {
                     slug: "test",
                     title: "Test Landing Page",
                     component: () => import("./landing/TestLandingPage")
-                }
+                },
+                {
+                    slug: "viz",
+                    title: "Creating visualisations",
+                    component: () => import("./landing/viz/VizLanding")
+                },
             ]
         }
 
