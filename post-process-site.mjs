@@ -25,6 +25,10 @@ app.get('/*', (req, res) => {
 const server = app.listen(port, async () => {
     const browser = await puppeteer.launch({
         args: [
+            '--blink-settings=imagesEnabled=false',
+            '--disable-gpu',
+            '--headless',
+            "--disable-3d-apis"
             // '--no-sandbox',
             // '--no-zygote',
             // '--single-process',
@@ -48,17 +52,22 @@ const server = app.listen(port, async () => {
         const sub = await browser.newPage();
         const results = []
         for (const path of chunk/*.slice(0, 5)*/) {
-            await sub.goto("http://localhost:5000" + path, {waitUntil: 'networkidle2', timeout: 60000});
-            const result = await sub.evaluate(() => {
-                const el = document.querySelector(".content");
-                if (!el) {
-                    return {success: false, message: "No .content element found"};
-                }
-                const title = el.querySelector("h1")?.innerText;
-                return {success: true, title, text: el.innerText};
-            });
-            results.push({...result, path});
-            console.log("Processed", path);
+            try {
+                await sub.goto("http://localhost:5000" + path, {waitUntil: 'networkidle2', timeout: 10000});
+                const result = await sub.evaluate(() => {
+                    const el = document.querySelector(".content");
+                    if (!el) {
+                        return {success: false, message: "No .content element found"};
+                    }
+                    const title = el.querySelector("h1")?.innerText;
+                    return {success: true, title, text: el.innerText};
+                });
+                results.push({...result, path});
+                console.log("Processed", path);
+            } catch (e) {
+                console.error("Error processing", path, e.message);
+                throw e
+            }
         }
         return results
     }));
