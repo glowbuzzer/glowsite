@@ -1,7 +1,12 @@
 import {defineConfig, loadEnv} from "vite"
-import react_docgen from "../../plugins/vite-plugin-react-docgen.mjs"
-import typedoc from "../../plugins/vite-plugin-typedoc.mjs"
-import {testPlugin} from "./plugins/test_plugin.mjs";
+import {mdxWrapper as mdx} from "../../plugins/mdx-plugin-wrapper.mjs";
+import remarkGfm from "remark-gfm";
+import {remarkEntities} from "../../plugins/remark-entities.mjs";
+import remarkMermaid from "../../plugins/remark-mermaid.mjs";
+import remarkDl from "remark-deflist";
+import {remarkLinks} from "../../plugins/remark-links.mjs";
+import remarkCodeblock from "../../plugins/remark-codeblock.mjs";
+import remarkPrism from "remark-prism";
 
 /**
  * @type {import('vite').UserConfig}
@@ -14,6 +19,18 @@ export default defineConfig(({mode}) => {
             port: 8001,
             host: true
         },
-        plugins: [react_docgen(mode), typedoc(mode), testPlugin()]
+        plugins: [
+            mdx({
+                remarkPlugins: [
+                    remarkCodeblock
+                ]
+            })
+        ],
+        resolve: {
+            alias: {
+                "@glowsite": process.cwd() + "/src/framework/index.ts"
+            }
+        },
+
     }
 })
