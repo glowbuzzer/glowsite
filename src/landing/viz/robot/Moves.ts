@@ -10,17 +10,17 @@ export function CalculateMoveJointSpace  ({x, y, z, i,j,k,w, setMoveJointSpaceCt
 
     const targetJointAngles = targetJointAnglesAllConfs[overallCtx.configuration]
 
-    console.error("CalculateMoveJointSpace: targetJointAngles", targetJointAngles)
+    // console.log("CalculateMoveJointSpace: targetJointAngles", targetJointAngles)
 
     const currentJointAngles = overallCtx.currentThetas
 
-    console.error("CalculateMoveJointSpace: currentJointAngles", currentJointAngles)
+    // console.log("CalculateMoveJointSpace: currentJointAngles", currentJointAngles)
 
     const jointDifferences = targetJointAngles.map(function(item, index:number) {
         return item - currentJointAngles[index]
     })
 
-    console.error("CalculateMoveJointSpace: jointDifferences", jointDifferences)
+    // console.log("CalculateMoveJointSpace: jointDifferences", jointDifferences)
 
     const absJointDifferences = jointDifferences.map(function(item, index:number) {
         return Math.abs(item)
@@ -28,7 +28,7 @@ export function CalculateMoveJointSpace  ({x, y, z, i,j,k,w, setMoveJointSpaceCt
 
     const max = Math.max(...<any>absJointDifferences)
 
-    console.log("CalculateMoveJointSpace: max", max)
+    // console.log("CalculateMoveJointSpace: max", max)
 
 
 
@@ -36,7 +36,7 @@ export function CalculateMoveJointSpace  ({x, y, z, i,j,k,w, setMoveJointSpaceCt
         return item/max
     })
 
-    console.log("CalculateMoveJointSpace: jointRatios", jointRatios)
+    // console.log("CalculateMoveJointSpace: jointRatios", jointRatios)
 
 
     setMoveJointSpaceCtx((prevState)=>({
@@ -61,10 +61,13 @@ export function CalculateMoveLine  ({x, y, z,i,j,k,w, setMoveLineCtx, moveLineCt
 
     const fk = KIN.fk_tx40(overallCtx.currentThetas)
 
+    const ik = KIN.ik_tx40([x,y,z], [i,j,k,w])[overallCtx.configuration]
+
     const currentPosition =fk.position
     const currentOrientation = fk.orientation
-    console.log("CalculateMoveLine: currentPosition", currentPosition)
-    console.log("CalculateMoveLine: currentOrientation", currentOrientation)
+
+    // console.log("CalculateMoveLine: currentPosition", currentPosition)
+    // console.log("CalculateMoveLine: currentOrientation", currentOrientation)
 
     const startVector = new THREE.Vector3(currentPosition[0],currentPosition[1],currentPosition[2])
     const targetVector = new THREE.Vector3(x,y,z)
@@ -72,21 +75,20 @@ export function CalculateMoveLine  ({x, y, z,i,j,k,w, setMoveLineCtx, moveLineCt
 
     const distance = startVector.distanceTo(targetVector)
 
-    console.log("CalculateMoveLine:directionVector", directionVector)
-    console.log("CalculateMoveLine:distance", distance)
+    // console.log("CalculateMoveLine:directionVector", directionVector)
+    // console.log("CalculateMoveLine:distance", distance)
 
 
     setMoveLineCtx((prevState)=>({
         ...prevState,
         startPosition: [currentPosition[0],currentPosition[1],currentPosition[2]],
         startOrientation: [i,j,k,w],
-        // startOrientation: currentOrientation,
+        targetThetas: ik,
         targetPosition: [x, y, z],
         lineDirection: [directionVector.x, directionVector.y, directionVector.z],
         lineDistance: distance
     }))
 
-    console.log("CalculateMoveLine:ctx", moveLineCtx)
 
     setOverallCtx((prevState)=>({
         ...prevState,
@@ -109,7 +111,6 @@ export function ExecuteMove ({setMoveJointSpaceCtx,moveJointSpaceCtx, setMoveLin
 
     if (overallCtx.moveType ==activeMove.MOVE_JOINT_SPACE){
 
-
         //if we are close to  our destination
 
         if (overallCtx.progress > (1-step-(step/10))){
@@ -129,7 +130,7 @@ export function ExecuteMove ({setMoveJointSpaceCtx,moveJointSpaceCtx, setMoveLin
         })
 
 
-        console.log("ExecuteMove(MoveJoints): nextThetas", nextThetas)
+        // console.log("ExecuteMove(MoveJoints): nextThetas", nextThetas)
 
         setOverallCtx((prevState)=>({
             ...prevState,
@@ -137,8 +138,7 @@ export function ExecuteMove ({setMoveJointSpaceCtx,moveJointSpaceCtx, setMoveLin
             progress: prevState.progress+step
         }))
 
-
-        console.log("ExecuteMove(MoveJoints): progress", overallCtx.progress)
+        // console.log("ExecuteMove(MoveJoints): progress", overallCtx.progress)
 
     }
 
@@ -149,25 +149,26 @@ export function ExecuteMove ({setMoveJointSpaceCtx,moveJointSpaceCtx, setMoveLin
 
             setOverallCtx((prevState)=>({
                 ...prevState,
-                nextThetas: moveJointSpaceCtx.targetThetas,
+                nextThetas: moveLineCtx.targetThetas,
                 moveType: activeMove.NONE,
                 progress: 1
             }))
             return
         }
 
-        console.log("ExecuteMove(MoveLine):moveLineCtx.startPosition.x", moveLineCtx.startPosition[0])
+
         const start =  new THREE.Vector3(moveLineCtx.startPosition[0], moveLineCtx.startPosition[1], moveLineCtx.startPosition[2])
-        console.log("ExecuteMove(MoveLine):start", start)
+
+        // console.log("ExecuteMove(MoveLine):start", start)
 
         const dir =  new THREE.Vector3(moveLineCtx.lineDirection[0], moveLineCtx.lineDirection[1],moveLineCtx.lineDirection[2])
 
-        console.log("ExecuteMove(MoveLine):dir", dir)
+        // console.log("ExecuteMove(MoveLine):dir", dir)
 
 
         const newPos = new THREE.Vector3().addVectors ( start, dir.multiplyScalar( overallCtx.progress*moveLineCtx.lineDistance))
 
-        console.log("ExecuteMove(MoveLine):newPos", newPos)
+        // console.log("ExecuteMove(MoveLine):newPos", newPos)
 
         const nextThetas =KIN.ik_tx40([newPos.x, newPos.y, newPos.z],[moveLineCtx.startOrientation[0],moveLineCtx.startOrientation[1],moveLineCtx.startOrientation[2],moveLineCtx.startOrientation[3]])[overallCtx.configuration]
 
@@ -179,7 +180,7 @@ export function ExecuteMove ({setMoveJointSpaceCtx,moveJointSpaceCtx, setMoveLin
             progress: prevState.progress+step
         }))
 
-        console.log("ExecuteMove(MoveLine): progress", overallCtx.progress)
+        // console.log("ExecuteMove(MoveLine): progress", overallCtx.progress)
 
     }
 

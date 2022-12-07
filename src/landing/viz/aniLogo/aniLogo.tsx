@@ -1,5 +1,5 @@
 import ReactDOM from "react-dom"
-import React, {useEffect, useState, useMemo, useRef, useLayoutEffect} from "react"
+import React, {useEffect, useState, useMemo, useRef, useLayoutEffect, Suspense} from "react"
 import {Canvas, useFrame, extend, useThree, useLoader} from '@react-three/fiber'
 
 import * as THREE from 'three'
@@ -12,6 +12,8 @@ import {EffectComposer, Bloom} from '@react-three/postprocessing'
 import {SVGLoader} from 'three/examples/jsm/loaders/SVGLoader'
 
 import hex from "./assets/hex.svg"
+import {GbColours, GlowsiteTheme} from "../../../framework/GlowsiteTheme";
+import {SpinThreeDimensional} from "../spin/Spin";
 
 
 const HexSvg = (props) => {
@@ -55,8 +57,9 @@ export default function AniLogo() {
     const camRef = useRef(null)
     const canvRef = useRef(null)
     return (
-        <div style={{width: "20vw", height: "20vh", backgroundColor: "#9254de"}}>
-            <Canvas ref={canvRef} gl={{preserveDrawingBuffer: true}} id={'my-canvas'}>
+        <div style={{width: "250px"}}>
+            <Canvas ref={canvRef}  id={'my-canvas'}>
+                <Suspense>
                 <PerspectiveCamera
                     ref={camRef}
                     makeDefault
@@ -66,11 +69,14 @@ export default function AniLogo() {
                     up={[0, 0, 1]}
                 />
 
+
                 <Float speed={4} rotationIntensity={1} floatIntensity={2}>
                     <HexSvg position={[-152,60,-1]}/>
                     <GlowElectron position={[-152, 60, 0]} speed={2}/>
+
                     <SolidG position={[-152, 60, 0]}/>
                 </Float>
+        </Suspense>
                 <Ec/>
             </Canvas>
 
@@ -91,7 +97,7 @@ const SolidG = (props) => {
     useFrame((state, delta) => {
         const t = state.clock.getElapsedTime() * speed
         ref.current.children[0].material.emissiveIntensity = 2 + (Math.cos(t))
-        console.log(ref.current)
+
     })
 
 

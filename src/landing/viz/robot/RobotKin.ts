@@ -83,25 +83,25 @@ export function fk_tx40(thetas: number[]): {
 
     const delta = dh_d4*Sin(theta2+theta3) + dh_a2*Cos(theta2);
 
-    console.log("DELTA", delta)
+    // console.log("DELTA", delta)
 
     if (delta < 0){
-        console.log ("RIGHTY")
+        // console.log ("RIGHTY")
     }
     else {
-        console.log ("LEFTY")
+        // console.log ("LEFTY")
     }
 
     if (theta3 < 0){
-        console.log ("ELBOW NEGATIVE")
+        // console.log ("ELBOW NEGATIVE")
     }else{
-        console.log ("ELBOW POSITIVE")
+        // console.log ("ELBOW POSITIVE")
     }
 
     if (theta5 < 0){
-        console.log ("WRIST NEGATIVE")
+        // console.log ("WRIST NEGATIVE")
     }else{
-    console.log ("WRIST POSITIVE")
+    // console.log ("WRIST POSITIVE")
 }
 
 

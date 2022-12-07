@@ -1,9 +1,10 @@
 
 import { LandingPageLink } from "../../framework/conversions/LandingPageLink"
 import * as React from "react"
+import {
+     Suspense
+} from "react"
 import { ReactComponent as Logo } from "../../images/logos/tiny-logo.svg?inline"
-import { Canvas } from "@react-three/fiber"
-import { OrbitControls } from "@react-three/drei"
 import {Image} from "../../framework/components"
 import screenShot from "./skew_points.png?glowsite"
 import Icon from '@ant-design/icons';
@@ -16,17 +17,18 @@ import {
     GlowbuzzerApp,
 } from "@glowbuzzer/controls/app"
 
-const TestLandingPage = () => {
+const VizLandingPage = () => {
     return (
         <GlowbuzzerApp>
         <div>
-
             <div className="top-section-container">
                 <div className="top-section">
                     <div className="left">
                         <div className="logo">
                             {/*<Logo />*/}
+
                             <AniLogo/>
+
                         </div>
                         <div className="title">
                             Create robot visualisations with react-three-fiber
@@ -63,7 +65,7 @@ const TestLandingPage = () => {
             <div className="bottom-section">
                 <div className="left">
                     <div className="image">
-                        <Image meta={screenShot} alt="glowbuzzer UI screen shot" maxWidth={600}/>
+                        <Image meta={screenShot} alt="glowbuzzer UI screen shot"/>
                     </div>
                 </div>
                 <div className="right">
@@ -110,4 +112,4 @@ const TestLandingPage = () => {
     )
 }
 
-export default TestLandingPage
+export default VizLandingPage
