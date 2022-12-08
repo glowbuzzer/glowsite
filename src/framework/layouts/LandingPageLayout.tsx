@@ -27,7 +27,7 @@ const StyledDiv = styled.div`
                 .logo {
                     width: 100px;
                 }
-              fill: ${props => props.theme.color.MainPurple};
+              // fill: ${props => props.theme.color.MainPurple};
               .title {
                     font-size: 2.5rem;
                     line-height: 2.5rem;
@@ -55,9 +55,13 @@ const StyledDiv = styled.div`
             min-width: 30%;
             min-height: 300px;
           .image {
-
+            @media (max-width: 976px) {
+              display: none;
+            }
           }
-
+          @media (max-width: 976px) {
+            display: none;
+          }
         }
       
 

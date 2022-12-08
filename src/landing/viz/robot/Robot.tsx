@@ -3,7 +3,7 @@ import {
     useRef,
     useState,
     useEffect,
-    Dispatch, SetStateAction
+    Dispatch, SetStateAction, Suspense
 } from "react"
 import * as THREE from 'three'
 import {
@@ -46,7 +46,9 @@ import {
     useJointPositions,
     useKinematicsConfiguration,
     useToolIndex, useConnection, useFrames, useKinematicsCartesianPosition
-} from "@glowbuzzer/store";
+} from "@glowbuzzer/store"
+import {SpinThreeDimensional} from "../spin/Spin";
+
 
 
 const DEG90 = Math.PI / 2
@@ -95,6 +97,7 @@ export type moveLineCtxProps = {
     startOrientation: number[],
     targetPosition: number[],
     targetOrientation: number[],
+    targetThetas: number[],
     lineDirection: number[],
     lineDistance: number
 }
@@ -121,9 +124,9 @@ const RobotAnimation = (props) => {
 
     const textureProps = useTexture({
         map: "/assets/mats/Wood049_1K_Color.jpg",
-        roughnessMap: "/assets/mats/Wood049_1K_Roughness.jpg",
-        normalMap: "/assets/mats/Wood049_1K_NormalGL.jpg",
-        displacementsMap: "/assets/mats/Wood049_1K_Displacement.jpg",
+        // roughnessMap: "/assets/mats/Wood049_1K_Roughness.jpg",
+        // normalMap: "/assets/mats/Wood049_1K_NormalGL.jpg",
+        // displacementsMap: "/assets/mats/Wood049_1K_Displacement.jpg",
     })
 
     const [overallCtx, setOverallCtx] = useState<overallCtxProps>({
@@ -139,6 +142,7 @@ const RobotAnimation = (props) => {
         startOrientation: [0, 0, 0, 1],
         targetPosition: [0, 0, 0],
         targetOrientation: [0, 0, 0, 1],
+        targetThetas: [0,0,0,0,0,0],
         lineDirection: [0, 0, 0],
         lineDistance: 0
     })
@@ -150,7 +154,6 @@ const RobotAnimation = (props) => {
         maxJointAngle: 0
     })
 
-    // console.log("ctx", overallCtx, moveLineCtx, moveJointSpaceCtx)
 
     const {frameIndex} = useKinematicsConfiguration(0)
     const {translation, rotation} = useFrame(frameIndex!, false)
@@ -171,188 +174,147 @@ const RobotAnimation = (props) => {
 
     useFrameR3f(({clock}) => {
 
-        switch (moveNumber.current) {
+        if (overallCtx.moveType == activeMove.NONE) {
+            if (overallCtx.progress == 1){
+                setOverallCtx((prevState)=>({
+                    ...prevState,
+                    progress:0
+                }))
+            }else {
 
-            case 0: {
-                console.error("move number 0")
-                // setShowTargetBox(false)
+                switch (moveNumber.current) {
 
+                    case 0: {
+                        // console.log("move number 0")
+                        setShowTargetBox(false)
 
-                if (overallCtx.progress == 1){
-                    setOverallCtx((prevState)=>({
-                        ...prevState,
-                        progress:0
-                    }))
-                    break
-                }
+                        MOVE.CalculateMoveJointSpace({
+                            x: 0,
+                            y: 300,
+                            z: -130,
+                            i: 0,
+                            j: 1,
+                            k: 0,
+                            w: 0,
+                            setMoveJointSpaceCtx: setMoveJointSpaceCtx,
+                            moveJointSpaceCtx: moveJointSpaceCtx,
+                            setOverallCtx: setOverallCtx,
+                            overallCtx: overallCtx
+                        })
+                        moveNumber.current++
 
-                if (overallCtx.moveType == activeMove.NONE) {
-console.error("calc move 0")
-                    MOVE.CalculateMoveJointSpace({
-                        x: 0,
-                        y: 300,
-                        z: -130,
-                        i: 0,
-                        j: 1,
-                        k: 0,
-                        w: 0,
-                        setMoveJointSpaceCtx: setMoveJointSpaceCtx,
-                        moveJointSpaceCtx: moveJointSpaceCtx,
-                        setOverallCtx: setOverallCtx,
-                        overallCtx: overallCtx
-                    })
-                    moveNumber.current++
-                }
-                break
-            }
-            case 1: {
-                console.log("move number 1")
-                if (overallCtx.progress == 1){
-                    setOverallCtx((prevState)=>({
-                        ...prevState,
-                        progress:0
-                    }))
-                    break
-                }
-                if (overallCtx.moveType == activeMove.NONE) {
-                    setToolColor(0xFFC300)
-                    MOVE.CalculateMoveLine({
-                        x: 0,
-                        y: 300,
-                        z: -150,
-                        i: 0,
-                        j: 1,
-                        k: 0,
-                        w: 0,
-                        setMoveLineCtx: setMoveLineCtx,
-                        moveLineCtx: moveLineCtx,
-                        setOverallCtx: setOverallCtx,
-                        overallCtx: overallCtx
-                    })
-                    moveNumber.current++
-                }
-                break
-            }
-            // case 2: {
-            //     console.log("move number 2")
-            //     if (overallCtx.progress == 1){
-            //         overallCtx.progress = 0
-            //         break
-            //     }
-            //     if (overallCtx.moveType == activeMove.NONE) {
-            //         MOVE.CalculateMoveJointSpace({
-            //             x: 0,
-            //             y: 0,
-            //             z: 650,
-            //             i: 0,
-            //             j: 1,
-            //             k: 0,
-            //             w: 0,
-            //             setMoveJointSpaceCtx: setMoveJointSpaceCtx,
-            //             moveJointSpaceCtx: moveJointSpaceCtx,
-            //             setOverallCtx: setOverallCtx,
-            //             overallCtx: overallCtx
-            //         })
-            //         moveNumber.current++
-            //     }
-            //     break
-            // }
-            case 2: {
-                if (overallCtx.progress == 1){
-                    setOverallCtx((prevState)=>({
-                        ...prevState,
-                        progress:0
-                    }))
-                    break
-                }
-                if (overallCtx.moveType == activeMove.NONE) {
+                        break
+                    }
+                    case 1: {
+                        // console.log("move number 1")
 
-                    // gripperLeftRef.current.position.x -= Math.sin(clock.getElapsedTime()*5)*10+30
-                    // if(!reachedMiddle) {
-                    gripperLeftRef.current.position.x -= 0.5
-                    gripperRightRef.current.position.x += 0.5
-                    // } else{
+                        MOVE.CalculateMoveLine({
+                            x: 0,
+                            y: 300,
+                            z: -170,
+                            i: 0,
+                            j: 1,
+                            k: 0,
+                            w: 0,
+                            setMoveLineCtx: setMoveLineCtx,
+                            moveLineCtx: moveLineCtx,
+                            setOverallCtx: setOverallCtx,
+                            overallCtx: overallCtx
+                        })
+                        moveNumber.current++
+
+                        break
+                    }
+                    // case 2: {
+                    //     console.log("move number 2")
+                    //     if (overallCtx.progress == 1){
+                    //         overallCtx.progress = 0
+                    //         break
+                    //     }
+                    //     if (overallCtx.moveType == activeMove.NONE) {
+                    //         MOVE.CalculateMoveJointSpace({
+                    //             x: 0,
+                    //             y: 0,
+                    //             z: 650,
+                    //             i: 0,
+                    //             j: 1,
+                    //             k: 0,
+                    //             w: 0,
+                    //             setMoveJointSpaceCtx: setMoveJointSpaceCtx,
+                    //             moveJointSpaceCtx: moveJointSpaceCtx,
+                    //             setOverallCtx: setOverallCtx,
+                    //             overallCtx: overallCtx
+                    //         })
+                    //         moveNumber.current++
+                    //     }
+                    //     break
                     // }
+                    case 2: {
+                        //     console.log("move number 3")
 
-                    console.log(gripperLeftRef.current.position.x)
+                        gripperLeftRef.current.position.x -= 0.5
+                        gripperRightRef.current.position.x += 0.5
 
-                    if (gripperLeftRef.current.position.x < 21) {
-                        // setReachedMiddle(true)
+                        // console.log(gripperLeftRef.current.position.x)
+
+                        if (gripperLeftRef.current.position.x < 31) {
+                            moveNumber.current++
+                        }
+
+                        break
+                    }
+                    case 3: {
+                        //     console.log("move number 3")
+
+                        setShowTargetBox(true)
+                        moveNumber.current++
+
+                        break
+
+                    }
+                    case 4: {
+                        //     console.log("move number 4")
 
                         moveNumber.current++
+
+                        break
                     }
+                    case 5: {
+                        //     console.log("move number 5")
+                        MOVE.CalculateMoveJointSpace({
+                            x: -0.94,
+                            y: 35.47,
+                            z: 512,
+                            i: 0,
+                            j: 0,
+                            k: 0,
+                            w: 1,
+                            setMoveJointSpaceCtx: setMoveJointSpaceCtx,
+                            moveJointSpaceCtx: moveJointSpaceCtx,
+                            setOverallCtx: setOverallCtx,
+                            overallCtx: overallCtx
+                        })
+                        moveNumber.current++
+
+                        break
+                    }
+                        case 6:{
+                            //     console.log("move number 6")
+
+                            gripperLeftRef.current.position.x += 0.5
+                            gripperRightRef.current.position.x -= 0.5
+
+
+                            if (gripperLeftRef.current.position.x > 41) {
+                                moveNumber.current=0
+                            }
+
+                            break
+                        }
+
+
                 }
-                break
             }
-            case 3: {
-                console.log("move out!")
-                if (overallCtx.progress == 1){
-                    setOverallCtx((prevState)=>({
-                        ...prevState,
-                        progress:0
-                    }))
-                    break
-                }
-                // if (gripperLeftRef.current.position.x>39 && reachedMiddle){
-                gripperLeftRef.current.position.x += 0.5
-                gripperRightRef.current.position.x -= 0.5
-
-                if (gripperLeftRef.current.position.x>40){
-                    // setReachedMiddle(true)
-                    moveNumber.current++
-                }
-
-                break
-                // gripperLeftRef.current.position.x = 40
-                // gripperRightRef.current.position.x = -40
-                // // setReachedMiddle(false)
-                // setGrip(false)
-            }
-            case 4: {
-                if (overallCtx.progress == 1){
-                    overallCtx.progress = 0
-                    break
-                }
-                // console.log("TCP: ", joints[6].localToWorld(new THREE.Vector3()))
-
-                // const pos = new THREE.Vector3(group1.current.position.x,group1.current.position.y, group1.current.position.z)
-                // .localToWorld(new THREE.Vector3)
-                // console.log("world", group1.current.localToWorld(new THREE.Vector3()))
-
-                setShowTargetBox(true)
-                moveNumber.current++
-                break
-            }
-            case 5: {
-                if (overallCtx.progress == 1){
-                    setOverallCtx((prevState)=>({
-                        ...prevState,
-                        progress:0
-                    }))
-                    break
-                }
-                if (overallCtx.moveType == activeMove.NONE) {
-                    console.error("calc final move")
-                    MOVE.CalculateMoveJointSpace({
-                        x: -0.94,
-                        y: 35.47,
-                        z: 512,
-                        i: 0,
-                        j: 0,
-                        k: 0,
-                        w: 1,
-                        setMoveJointSpaceCtx: setMoveJointSpaceCtx,
-                        moveJointSpaceCtx: moveJointSpaceCtx,
-                        setOverallCtx: setOverallCtx,
-                        overallCtx: overallCtx
-                    })
-                }
-
-                moveNumber.current=0
-
-                break
-            }
-
         }
 
         MOVE.ExecuteMove({
@@ -389,7 +351,7 @@ console.error("calc move 0")
                        }}
                 >
                     <Box ref={baseRef} args={[100, 50, 100]} position={[0, 0, 50]}  castShadow={true}>
-                        <meshStandardMaterial color={"bisque"}/>
+                        <meshStandardMaterial metalness={1} roughness={0.1} color={"bisque"}/>
                     </Box>
                     <group ref={group2} position={[0, 0, 0]}>
                         <Box ref={gripperLeftRef} args={[20, 20, 50]} position={[40, 0, 125]}
@@ -401,18 +363,13 @@ console.error("calc move 0")
                             <meshStandardMaterial color={"silver"}/>
                         </Box>
                     </group>
-                    <Box args={[50,50,50]} visible={showTargetBox} position={[0, 0, 175]}  castShadow={true}>
+                    <Box args={[50,50,50]} visible={showTargetBox} position={[0, 0, 135]}  castShadow={true}>
                         <meshStandardMaterial displacementScale={1} {...textureProps}/>
                     </Box>
                 </group>
 
 
             </BasicRobot>
-            {/*<mesh ref={targetBox} visible={!showTargetBox} position={[100,35,950]}>*/}
-            {/*    <boxBufferGeometry  args={[50, 50, 50]} />*/}
-            {/*    <meshStandardMaterial color={"red"} />*/}
-            {/*</mesh>*/}
-
             <Box args={[50,50,50]} visible={!showTargetBox} position={[0, 300, 25]}  castShadow={true}>
                 <meshStandardMaterial displacementScale={1} {...textureProps}/>
             </Box>
@@ -491,12 +448,8 @@ export default function Robot() {
 
     const cameraRef =useRef(null)
 
-
-
-
     const ContextBridge = useContextBridge(ReactReduxContext)
 
-    // makeDefault rotation={[Math.PI/2, Math.PI/2,Math.PI/2]}
     return (
             <Canvas shadows>
                 <ContextBridge>
@@ -510,6 +463,7 @@ export default function Robot() {
                         near={1}
                         up={[0, 0, 1]}
                     />
+
                     {/*<color attach="background" args={['white']} />*/}
                     <ambientLight color={"grey"}/>
                     <pointLight
@@ -523,13 +477,18 @@ export default function Robot() {
                         shadow-bias={-0.0001}
                     />
 
+                    <Suspense fallback={
+                        <SpinThreeDimensional position={[0,0,30]}/>
+                    }>
                     <RobotAnimation />
+
+
                     {/*<Diamond scale={[100,100,100]} position={[400,200,50]} rotation={[Math.PI/2,0,-Math.PI/4]}/>*/}
                     <Environment files="https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/1k/aerodynamics_workshop_1k.hdr" />
-
-                    <EffectComposer>
-                        <Bloom luminanceThreshold={2} intensity={1} levels={9} mipmapBlur />
-                    </EffectComposer>
+                    </Suspense>
+                    {/*<EffectComposer>*/}
+                    {/*    <Bloom luminanceThreshold={2} intensity={1} levels={9} mipmapBlur />*/}
+                    {/*</EffectComposer>*/}
                 </ContextBridge>
             </Canvas>
     )
