@@ -20,6 +20,7 @@ import { YoutubeEmbed } from "../components/Video"
 import HexImage from "../../home/hex_components5.svg"
 import { ReactComponent as BlogIcon } from "../../home/blog.svg?inline"
 import { FeaturedItem, FeaturesSection } from "../components/FeaturesSection"
+import {TeaserCarousel} from "../components/TeaserCarousel";
 
 const HeroSection = styled.div`
     position: relative;
@@ -70,6 +71,47 @@ export const HomePage = () => {
     return (
         <BaseLayout>
             <HomeCarousel />
+
+            <TeaserCarousel
+                items={[
+                    {
+                        key: "1",
+                        title: "Lorem ipsum dolor sit amet",
+                        subtitle:
+                            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                        to: "/",
+                        animationUrl: "https://via.placeholder.com/800x450",
+                        imageUrl: "https://via.placeholder.com/800x450",
+                        videoUrl: "https://static.glowbuzzer.com/short_intro.mp4"
+                    },
+                    {
+                        key: "2",
+                        title: "Sit amet consectetur adipiscing elit",
+                        subtitle:
+                            "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+                        animationUrl: "https://via.placeholder.com/800x450",
+                        imageUrl: "https://via.placeholder.com/800x450"
+                    },
+                    {
+                        key: "3",
+                        title: "Consectetur adipiscing elit",
+                        subtitle:
+                            "Laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+                        to: "/",
+                        animationUrl: "https://via.placeholder.com/800x450",
+                        imageUrl: "https://via.placeholder.com/800x450"
+                    },
+                    {
+                        key: "4",
+                        title: "Incididunt ut labore et dolore magna aliqua",
+                        subtitle:
+                            "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+                        to: "/",
+                        animationUrl: "https://via.placeholder.com/800x450",
+                        imageUrl: "https://via.placeholder.com/800x450"
+                    }
+                ]}
+            />
 
             <HexImageSection>
                 <Section>
