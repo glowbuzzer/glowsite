@@ -4,10 +4,11 @@ import { Carousel } from "antd"
 import { Link } from "react-router-dom"
 import { ArrowRightOutlined } from "@ant-design/icons"
 import styled from "styled-components"
+import {GbColours} from "../GlowsiteTheme";
 
 const StyledCarousel = styled(Carousel)`
-  padding: 20px 0;
-  background: white;
+  padding: 30px 0;
+  background: ${GbColours.BackgroundDarkSection};
 
   .slick-slide {
     padding: 20px 20px;
@@ -20,12 +21,12 @@ const StyledCarousel = styled(Carousel)`
 `
 
 const StyledCarouselItem = styled.div`
-  //background: red;
   padding: 10px 15px;
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 15px;
   user-select: none;
   cursor: default;
+  background: ${GbColours.LightGrey};
 
   .wrapper {
     .title {
@@ -37,16 +38,15 @@ const StyledCarouselItem = styled.div`
       -webkit-line-clamp: 1;
     }
 
-    &.selected .title:hover {
+    &.selected .title:hover a {
       text-decoration: underline;
     }
 
     .subtitle {
-      overflow: hidden;
-      text-overflow: ellipsis;
-      display: -webkit-box;
-      -webkit-box-orient: vertical;
-      -webkit-line-clamp: 2;
+      height: 8em;
+      @media (max-width: 768px) {
+        line-height: 1.15em;
+      }
     }
 
     .media-container {
@@ -189,7 +189,6 @@ export const TeaserCarousel = ({ items }: TeaserCarouselProps) => {
 
     function change_slide(_, n) {
         const val = n % 7
-        console.log("change_slide", val)
         setSelected(val)
     }
 
@@ -204,6 +203,30 @@ export const TeaserCarousel = ({ items }: TeaserCarouselProps) => {
             beforeChange={change_slide}
             responsive={[
                 {
+                    breakpoint: 4000,
+                    settings: {
+                        centerPadding: "450px"
+                    }
+                },
+                {
+                    breakpoint: 2300,
+                    settings: {
+                        centerPadding: "300px"
+                    }
+                },
+                {
+                    breakpoint: 2200,
+                    settings: {
+                        centerPadding: "250px"
+                    }
+                },
+                {
+                    breakpoint: 2100,
+                    settings: {
+                        centerPadding: "200px"
+                    }
+                },
+                {
                     breakpoint: 2000,
                     settings: {
                         centerPadding: "150px"
@@ -212,7 +235,14 @@ export const TeaserCarousel = ({ items }: TeaserCarouselProps) => {
                 {
                     breakpoint: 1400,
                     settings: {
-                        centerPadding: "50px"
+                        centerPadding: "0px"
+                    }
+                },
+                {
+                    breakpoint: 1200,
+                    settings: {
+                        slidesToShow: 1,
+                        centerPadding: "350px"
                     }
                 },
                 {
@@ -240,7 +270,7 @@ export const TeaserCarousel = ({ items }: TeaserCarouselProps) => {
                     breakpoint: 600,
                     settings: {
                         slidesToShow: 1,
-                        centerPadding: "50px"
+                        centerPadding: "30px"
                     }
                 }
             ]}
