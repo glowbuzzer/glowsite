@@ -6,7 +6,7 @@ import { Image } from "../../framework/components"
 import screenShot from "./skew_points.png?glowsite"
 import Icon from "@ant-design/icons"
 import { StarFilled } from "@ant-design/icons"
-import Robot from "./robot/Robot"
+// import Robot from "./robot/Robot"
 import AniLogo from "../utils/aniLogo/aniLogo"
 import { Col, Row } from "antd"
 
@@ -14,7 +14,7 @@ import { GlowbuzzerApp } from "@glowbuzzer/controls/app"
 
 import { GbColours, GlowsiteTheme } from "../../framework/GlowsiteTheme"
 
-const VizLandingPage = () => {
+const RosLandingPage = () => {
     return (
         <GlowbuzzerApp>
             <div>
@@ -22,45 +22,51 @@ const VizLandingPage = () => {
                     <div className="top-section">
                         <div className="left">
                             <div className="logo">
-                                {/*<Logo />*/}
-
                                 <AniLogo color={GbColours.MainPurple} />
                             </div>
                             <div className="title">
-                                Create robot visualisations with react-three-fiber
+                                Migrate from Ros & build machine and robot controls with modern web
+                                technologies
                             </div>
                             <div className="description">
                                 <p>
-                                    The glowbuzzer toolkit allows you to build robot and machine
-                                    controls with a web-stack. Visualisations are developed with
-                                    react-three-fibre (three.js) and allow you to simulate control
-                                    code in realistic physical environments.
+                                    Unlike Ros, the glowbuzzer toolkit is focussed on real-world
+                                    applications rather than academia or research.
                                 </p>
                                 <p>
-                                    Simulation supports a physics engine (cannon.js) allowing you to
-                                    model the physical behaviour of objects you interact with.
+                                    If you are sick-of Ros with huge volume of wierd dependencies
+                                    and hurdles to get through to do fairly simple things then we
+                                    have the answer. With the glowbuzzer toolkit it easy to get
+                                    started.
                                 </p>
                                 <p>
-                                    It is easy to integrate sensor data with your simulation. From
-                                    simple digital and analog sensors through to camera and LIDAR
-                                    data.
+                                    With Ros you need to learn a new, complex C++ framework spread
+                                    across several dozens of packages in several repos. With
+                                    glowbuzzer everything is integarted and you are using familar
+                                    JavaScript/TypeScript code.
                                 </p>
                                 <p>
-                                    All developed in very familiar JavaScript/TypeScript code with
-                                    React and a huge online community supporting the packages.
+                                    Unlike the Ros build system which has been described as "CMake
+                                    but with even more boilerplate configuration and also outside
+                                    config files" you are in the of npm and HMR.
+                                </p>
+                                <p>
+                                    Our engineering team can help migrate existing solutions or
+                                    prototypes from Ros to the glowbuzzer platform.
                                 </p>
                             </div>
                         </div>
                         <div className="right">
-                            {/*<Canvas>*/}
-                            {/*    <ambientLight />*/}
-                            {/*    <gridHelper />*/}
-                            {/*    <OrbitControls />*/}
-                            {/*    <mesh>*/}
-                            {/*        <boxBufferGeometry args={[1, 1, 1]} />*/}
-                            {/*    </mesh>*/}
-                            {/*</Canvas>*/}
-                            <Robot color={GbColours.MainPurple} />
+                            <div className="media-container">
+                                <video
+                                    className="video"
+                                    src="https://static.glowbuzzer.com/glowsite/landing/staubli_landing.mp4"
+                                    autoPlay
+                                    loop
+                                    muted
+                                    playsInline
+                                />
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -100,6 +106,7 @@ const VizLandingPage = () => {
                                 GitHub.
                             </LandingPageLink>
                         </p>
+
                         <p>
                             Or browse the{" "}
                             <LandingPageLink to="/"> glowbuzzer website.</LandingPageLink>
@@ -111,8 +118,8 @@ const VizLandingPage = () => {
                                 <StarFilled style={{ color: "#9254de" }} />
                             </Col>
                             <Col xs={22} lg={22}>
-                                <LandingPageLink to="/blogs/webdev/threejs">
-                                    Read the introduction to R3F blog
+                                <LandingPageLink to="/how-it-works/overview">
+                                    Read a basic technical introduction
                                 </LandingPageLink>
                             </Col>
                         </Row>
@@ -144,4 +151,4 @@ const VizLandingPage = () => {
     )
 }
 
-export default VizLandingPage
+export default RosLandingPage

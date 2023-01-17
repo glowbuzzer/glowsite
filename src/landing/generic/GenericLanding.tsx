@@ -6,15 +6,16 @@ import { Image } from "../../framework/components"
 import screenShot from "./skew_points.png?glowsite"
 import Icon from "@ant-design/icons"
 import { StarFilled } from "@ant-design/icons"
-import Robot from "./robot/Robot"
+// import Robot from "./robot/Robot"
 import AniLogo from "../utils/aniLogo/aniLogo"
 import { Col, Row } from "antd"
 
 import { GlowbuzzerApp } from "@glowbuzzer/controls/app"
 
 import { GbColours, GlowsiteTheme } from "../../framework/GlowsiteTheme"
+import styled from "styled-components"
 
-const VizLandingPage = () => {
+const GenericLandingPage = () => {
     return (
         <GlowbuzzerApp>
             <div>
@@ -27,23 +28,19 @@ const VizLandingPage = () => {
                                 <AniLogo color={GbColours.MainPurple} />
                             </div>
                             <div className="title">
-                                Create robot visualisations with react-three-fiber
+                                Build robot and machine controls with a web-stack
                             </div>
                             <div className="description">
                                 <p>
-                                    The glowbuzzer toolkit allows you to build robot and machine
-                                    controls with a web-stack. Visualisations are developed with
-                                    react-three-fibre (three.js) and allow you to simulate control
-                                    code in realistic physical environments.
+                                    Rather than using PLCs, proprietary Robot control software, an
+                                    "lash-up" like Ros, you can use a web-stack to build your robot
+                                    and machine controls.
                                 </p>
+                                <p></p>
                                 <p>
-                                    Simulation supports a physics engine (cannon.js) allowing you to
-                                    model the physical behaviour of objects you interact with.
-                                </p>
-                                <p>
-                                    It is easy to integrate sensor data with your simulation. From
-                                    simple digital and analog sensors through to camera and LIDAR
-                                    data.
+                                    It's core is real-time deeply integrates with industrial
+                                    fieldbuses such as EtherCAT to allow you to work with drives and
+                                    IO from 1000s of vendors.
                                 </p>
                                 <p>
                                     All developed in very familiar JavaScript/TypeScript code with
@@ -52,15 +49,25 @@ const VizLandingPage = () => {
                             </div>
                         </div>
                         <div className="right">
-                            {/*<Canvas>*/}
-                            {/*    <ambientLight />*/}
-                            {/*    <gridHelper />*/}
-                            {/*    <OrbitControls />*/}
-                            {/*    <mesh>*/}
-                            {/*        <boxBufferGeometry args={[1, 1, 1]} />*/}
-                            {/*    </mesh>*/}
-                            {/*</Canvas>*/}
-                            <Robot color={GbColours.MainPurple} />
+                            <div className="media-container">
+                                {/*<Canvas>*/}
+                                {/*    <ambientLight />*/}
+                                {/*    <gridHelper />*/}
+                                {/*    <OrbitControls />*/}
+                                {/*    <mesh>*/}
+                                {/*        <boxBufferGeometry args={[1, 1, 1]} />*/}
+                                {/*    </mesh>*/}
+                                {/*</Canvas>*/}
+                                {/*<Robot color={GbColours.MainPurple}/>*/}
+                                <video
+                                    className="video"
+                                    src="https://static.glowbuzzer.com/glowsite/landing/hexapod_gbr_jogging.mp4"
+                                    autoPlay
+                                    loop
+                                    muted
+                                    playsInline
+                                />
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -104,15 +111,14 @@ const VizLandingPage = () => {
                             Or browse the{" "}
                             <LandingPageLink to="/"> glowbuzzer website.</LandingPageLink>
                         </p>
-
                         <p>For more detailled information take a look at:</p>
                         <Row gutter={30} align="middle">
                             <Col xs={2} lg={1}>
                                 <StarFilled style={{ color: "#9254de" }} />
                             </Col>
                             <Col xs={22} lg={22}>
-                                <LandingPageLink to="/blogs/webdev/threejs">
-                                    Read the introduction to R3F blog
+                                <LandingPageLink to="/how-it-works/overview">
+                                    Read a basic technical introduction
                                 </LandingPageLink>
                             </Col>
                         </Row>
@@ -144,4 +150,4 @@ const VizLandingPage = () => {
     )
 }
 
-export default VizLandingPage
+export default GenericLandingPage

@@ -52,32 +52,27 @@ const Ec = () => {
 }
 
 
-export default function AniLogo() {
+export default function AniLogo(props) {
 
-    const camRef = useRef(null)
-    const canvRef = useRef(null)
     return (
         <div style={{width: "250px"}}>
-            <Canvas ref={canvRef}  id={'my-canvas'}>
+            <Canvas color={props.color} >
                 <Suspense>
                 <PerspectiveCamera
-                    ref={camRef}
                     makeDefault
                     position={[0, 0, 200]}
                     far={10000}
                     near={1}
                     up={[0, 0, 1]}
                 />
-
-
                 <Float speed={4} rotationIntensity={1} floatIntensity={2}>
                     <HexSvg position={[-152,60,-1]}/>
                     <GlowElectron position={[-152, 60, 0]} speed={2}/>
-
                     <SolidG position={[-152, 60, 0]}/>
                 </Float>
-        </Suspense>
+
                 <Ec/>
+                </Suspense>
             </Canvas>
 
         </div>

@@ -76,39 +76,41 @@ export const HomePage = () => {
                 items={[
                     {
                         key: "1",
-                        title: "Lorem ipsum dolor sit amet",
+                        title: "Knock down the dominos!",
                         subtitle:
-                            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                            "Introducing physics into your glowbuzzer toolkit 3D scene is straightforward with use-cannon, physics based hooks for react-three-fibre. Here’s a simple example, use the robot to knock down the dominos!",
                         to: "/",
-                        animationUrl: "https://via.placeholder.com/800x450",
-                        imageUrl: "https://via.placeholder.com/800x450",
-                        videoUrl: "https://static.glowbuzzer.com/short_intro.mp4"
+                        animationUrl: "https://static.glowbuzzer.com/glowsite/carousel/physics/short_physics_summary.gif",
+                        imageUrl: "https://static.glowbuzzer.com/glowsite/carousel/physics/short_physics_keyframe.jpg",
+                        videoUrl: "https://static.glowbuzzer.com/glowsite/carousel/physics/short_physics.mp4"
                     },
                     {
                         key: "2",
-                        title: "Sit amet consectetur adipiscing elit",
+                        title: "Introducing hexapod kinematics",
                         subtitle:
-                            "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-                        animationUrl: "https://via.placeholder.com/800x450",
-                        imageUrl: "https://via.placeholder.com/800x450"
+                            "We have been testing stewart-platform kinematics with the glowbuzzer control. Here we are controlling the hexapod with JavaScript/TypeScript+React code.  Messages from the web layer are passed into the real-time layer and then onto the fieldbus (EtherCAT) to control the motors.",
+                        animationUrl: "https://static.glowbuzzer.com/glowsite/carousel/hexapod/short_hexapod_summary.gif",
+                        imageUrl: "https://static.glowbuzzer.com/glowsite/carousel/hexapod/short_hexapod_keyframe.jpg",
+                        videoUrl: "https://static.glowbuzzer.com/glowsite/carousel/hexapod/short_hexapod.mp4"
                     },
                     {
                         key: "3",
-                        title: "Consectetur adipiscing elit",
+                        title: "Drive testing",
                         subtitle:
-                            "Laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
-                        to: "/",
-                        animationUrl: "https://via.placeholder.com/800x450",
-                        imageUrl: "https://via.placeholder.com/800x450"
+                            "We recently completed a round of drive testing in which we tested the glowbuzzer toolkit with various manufacturers' drives. This round was focussed on EtherCAT drives from manufacturers including JVL, Oriental Motor, Delta, Kollmorgen, Beckhoff & Omron.",
+                        animationUrl: "https://static.glowbuzzer.com/glowsite/carousel/drive_testing/short_drive_testing_summary.gif",
+                        imageUrl: "https://static.glowbuzzer.com/glowsite/carousel/drive_testing/short_drive_testing_keyframe.jpg",
+                        videoUrl: "https://static.glowbuzzer.com/glowsite/carousel/drive_testing/short_drive_testing.mp4"
                     },
                     {
                         key: "4",
-                        title: "Incididunt ut labore et dolore magna aliqua",
+                        title: "CAM integration",
                         subtitle:
-                            "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-                        to: "/",
-                        animationUrl: "https://via.placeholder.com/800x450",
-                        imageUrl: "https://via.placeholder.com/800x450"
+                            "We have been working on integrating CAM into the glowbuzzer toolkit. In this demonstration, we are using eCAM to generate a toolpath for a laser cut part. We import the gcode into the glowbuzzer control then run the job on a machine.",
+                        // to: "/",
+                        animationUrl: "https://static.glowbuzzer.com/glowsite/carousel/gcode/short_gcode_summary.gif",
+                        imageUrl: "https://static.glowbuzzer.com/glowsite/carousel/gcode/short_gcode_keyframe.jpg",
+                        videoUrl: "https://static.glowbuzzer.com/glowsite/carousel/gcode/short_gcode.mp4"
                     }
                 ]}
             />

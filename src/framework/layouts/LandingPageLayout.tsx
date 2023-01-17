@@ -42,6 +42,46 @@ const StyledDiv = styled.div`
                 width: 100px;
                 min-height: 400px;
                 //background: white;
+
+              .media-container {
+                padding-top: 180px;
+
+                img {
+                  border: 1px solid rgba(0, 0, 0, 0.1);
+                }
+
+                img,
+                .img,
+                video,
+                svg {
+                  border-radius: 15px;
+                  width: 100%;
+                  height: 100%;
+                }
+
+                video {
+                  background-color: transparent;
+                  clip-path: inset(1px 1px);
+                }
+
+                .img {
+                  position: relative;
+                }
+
+                svg {
+                  position: absolute;
+                  top: 0;
+                  left: 0;
+                  right: 0;
+                  bottom: 0;
+                  display: none;
+                }
+
+                &:hover svg {
+                  display: block;
+                  cursor: pointer;
+                }
+              }
             }
         }
     }
@@ -79,6 +119,8 @@ const StyledDiv = styled.div`
                     padding: 3px 0;
                 }
             }
+          
+
         }
     }
 
@@ -87,7 +129,7 @@ const StyledDiv = styled.div`
         max-width: ${MAX_WIDTH}px;
         margin: 0 auto;
 
-        @media (max-width: ${MAX_WIDTH+200}px) {
+        @media (max-width: ${MAX_WIDTH + 200}px) {
             margin: 0 100px;
         }
       

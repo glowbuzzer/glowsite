@@ -1063,6 +1063,16 @@ const nav = {
                     title: "Creating visualisations",
                     component: () => import("./landing/viz/VizLanding")
                 },
+                {
+                    slug: "ros",
+                    title: "Why glowbuzzer is better than ROS",
+                    component: () => import("./landing/ros/RosLanding")
+                },
+                {
+                    slug: "generic",
+                    title: "glowbuzzer the basis for your machine/robot control",
+                    component: () => import("./landing/generic/GenericLanding")
+                },
             ]
         }
 

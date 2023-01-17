@@ -67,6 +67,7 @@ const StyledCarouselItem = styled.div`
 
       video {
         background-color: transparent;
+        clip-path: inset(1px 1px);
       }
 
       .img {
