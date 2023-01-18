@@ -1,4 +1,4 @@
-import {Col, Modal, Row, Space} from "antd"
+import { Col, Modal, Row, Space } from "antd"
 import styled from "styled-components"
 import * as React from "react"
 import { GithubOutlined, YoutubeOutlined, TwitterOutlined } from "@ant-design/icons"
@@ -46,11 +46,7 @@ const CopyrightVersion = () => {
     // @ts-ignore
     const version = import.meta.env.VITE_GLOWBUZZER_VERSION || "dev"
 
-    return (
-        <span>
-            ©2022 by glowbuzzer All Rights Reserved. Build {version}
-        </span>
-    )
+    return <span>©2023 by glowbuzzer All Rights Reserved. Build {version}</span>
 }
 
 const MobileFooter = ({}) => (
@@ -109,7 +105,9 @@ const DesktopFooter = ({}) => {
                         <StyledLink to="/get-started/simulation">Quick start guide</StyledLink>
                     </div>
                     <div>
-                        <StyledLink to="/get-started/kits/overview">Hardware starter kits</StyledLink>
+                        <StyledLink to="/get-started/kits/overview">
+                            Hardware starter kits
+                        </StyledLink>
                     </div>
                     <div>
                         <StyledLink to="/get-started/how-to-buy">How to buy</StyledLink>
@@ -151,7 +149,9 @@ const DesktopFooter = ({}) => {
                         <StyledLink to="/downloads">Downloads</StyledLink>
                     </div>
                     <div>
-                        <StyledLink className="sitemap-nav-link" to="/sitemap">Sitemap</StyledLink>
+                        <StyledLink className="sitemap-nav-link" to="/sitemap">
+                            Sitemap
+                        </StyledLink>
                     </div>
                 </Col>
             </Row>

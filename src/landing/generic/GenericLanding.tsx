@@ -32,19 +32,29 @@ const GenericLandingPage = () => {
                             </div>
                             <div className="description">
                                 <p>
-                                    Rather than using PLCs, proprietary Robot control software, an
-                                    "lash-up" like Ros, you can use a web-stack to build your robot
-                                    and machine controls.
-                                </p>
-                                <p></p>
-                                <p>
-                                    It's core is real-time deeply integrates with industrial
-                                    fieldbuses such as EtherCAT to allow you to work with drives and
-                                    IO from 1000s of vendors.
+                                    Rather than using PLCs, proprietary robot control software or an
+                                    academic lash-up like ROS, Glowbuzzer’s motion control
+                                    development product is a complete integrated product for
+                                    developing real-world motion control applications using a
+                                    web-stack.
                                 </p>
                                 <p>
-                                    All developed in very familiar JavaScript/TypeScript code with
-                                    React and a huge online community supporting the packages.
+                                    Our toolkit provides all the functionality, resources and
+                                    support required by a commercial machine builder who is shipping
+                                    product to customers.
+                                </p>
+                                <p>
+                                    With the Glowbuzzer you are no longer locked into a vendor’s
+                                    technology, their roadmap, schedule and constraints. Our
+                                    real-time toolkit supports deep integration with industrial
+                                    fieldbusses such as EtherCAT which allows you to work with
+                                    drives and IO from thousands of vendors. You can right-size and
+                                    right-cost your components and really own your own roadmap.
+                                </p>
+                                <p>
+                                    Developed in the modern and familiar Javascript/Typescript code
+                                    with React our toolkit is familiar to today’s software engineers
+                                    which takes away the skills and staffing headaches.
                                 </p>
                             </div>
                         </div>

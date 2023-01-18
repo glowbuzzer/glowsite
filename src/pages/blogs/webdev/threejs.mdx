@@ -1,5 +1,7 @@
 import three_logo from "./three_logo.png?glowsite"
 import threeDimensionalSceneTile from "./toolpath_tille.jpg?glowsite"
+import threeTutorial from "./three_tutorial.jpg?glowsite"
+
 import {Image} from "../../../framework/components"
 export const heroImage=three_logo
 import {TitleImage} from "../../../framework/components/TitleImage"
@@ -31,7 +33,7 @@ The code that accompanies this blog post can be found at:
 
 If you clone the repository and run `pnpm i` in the `/gbr` directory and then in this same directory run `vite examples/three-tutorial` you will see the three-tutorial examples.
 
-ADD SCREENSHOT HERE
+<Image meta={threeTutorial} alt="Three Tutorial Screen Shot" maxWidth={600}/>
 
 ## The &gbt 3D scene tile
 
@@ -170,7 +172,7 @@ Also try varying the parameters of the materials. E.g. `<meshPhongMaterial trans
 
 The code for this example is in the `ExampleTexture` function in `exampleTexture.tsx` in the gbr repository in the `examples` directory.
 
-We have grabbed a metal texture from (AmbientCG)[https://ambientcg.com/view?id=Metal024]. This is a rusty metal texture and the files we downloaded are in the `/examples/textures` directory.
+We have grabbed a metal texture from [AmbientCG](https://ambientcg.com/view?id=Metal024). This is a rusty metal texture and the files we downloaded are in the `/examples/textures` directory.
 
 First, we want to apply this to a box geometry. This is done by passing `props` to `<meshStandard material/>` as shown below:
 
@@ -203,48 +205,42 @@ Next, we want to make the cube move.
         })
 ````
 
-        `const boxRef = useRef(null)`
+        `const boxRef = useRef(null)` is a ref to the box object. This is used to access the box object in the `useFrame` hook.
+
+The object is a `Object3D` and so has a `rotation` property which is a `Euler` object. The `Euler` object has `x`, `y` and `z` properties which are the rotation angles in radians.
+
+Here we are using the `clock.elapsedTime` to set the rotation angles. We are using `Math.sin` to make the rotation angles oscillate between 0 and 1.
+
+### Example 3 - Spotlight on object
+
+The code for this example is in `ExampleSpotLightOnObject.tsx` in the gbr repository in the `examples` directory.
+
+### Example 4 - Physics and knocking down dominoes
+
+The code for this example is in `ExamplePhysics.tsx`  in the gbr repository in the `examples` directory.
+
+### Example 5 - Sprites and text
+
+The code for this example is in `exampleSprites.tsx` in the gbr repository in the `examples` directory.
+
+### Example 6 - Show object coordinates
+
+The code for this example is in `exampleShowObjectCoordinates.tsx` in the gbr repository in the `examples` directory.
+
+### Example 7 - Move object in scene
+
+The code for this example is in `exampleMoveObject.tsx` in the gbr repository in the `examples` directory.
+
+### Example 8 - Object collision detection
+
+The code for this example is in `exampleCollisionDetection.tsx` in the gbr repository in the `examples` directory.
+
+### Example 9 - Points from config
+
+The code for this example is in `exampleTriadPoints.tsx` in the gbr repository in the `examples` directory.
+
+### Example 10 - Object position from endcoder
+
+The code for this example is in `examplePendulum.tsx` in the gbr repository in the `examples` directory.
 
 
-### Example 3 -
-
-The code for this example is in the `ExampleXXXX` function in `exampleXXX.tsx` in the gbr repository in the `examples` directory.
-
-
-### Example 4 - XXX
-
-The code for this example is in the `ExampleXXXX` function in `exampleXXX.tsx` in the gbr repository in the `examples` directory.
-
-
-### Example 5 - XXX
-
-The code for this example is in the `ExampleXXXX` function in `exampleXXX.tsx` in the gbr repository in the `examples` directory.
-
-### Example 6 - XXX
-
-The code for this example is in the `ExampleXXXX` function in `exampleXXX.tsx` in the gbr repository in the `examples` directory.
-
-### Example 7 - XXX
-
-The code for this example is in the `ExampleXXXX` function in `exampleXXX.tsx` in the gbr repository in the `examples` directory.
-
-### Example 8 - XXX
-
-The code for this example is in the `ExampleXXXX` function in `exampleXXX.tsx` in the gbr repository in the `examples` directory.
-
-### Example 9 - XXX
-
-The code for this example is in the `ExampleXXXX` function in `exampleXXX.tsx` in the gbr repository in the `examples` directory.
-
-### Example 10 - XXX
-
-The code for this example is in the `ExampleXXXX` function in `exampleXXX.tsx` in the gbr repository in the `examples` directory.
-
-
-
-If working outside of the &gbt codebase, the most basic three.js example would be:
-
-```js
-import { Canvas, useFrame } from 'react-three-fiber'
-
-```
