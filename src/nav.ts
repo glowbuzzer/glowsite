@@ -1004,7 +1004,7 @@ const nav = {
                     slug: "contact",
                     title: "Contact",
                     subtitle: "How to contact glowbuzzer",
-                    component: () => import("./pages/about/contact.mdx")
+                    component: () => import("./pages/about/contact")
                 }
             ]
         },
