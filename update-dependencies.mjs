@@ -3,7 +3,7 @@
  *
  * Assumes you have the gbr project alongside glowsite!
  *
- * Copyright (c) 2022. Glowbuzzer. All rights reserved
+ * Copyright (c) 2023. Glowbuzzer. All rights reserved
  */
 
 import fs from "fs"

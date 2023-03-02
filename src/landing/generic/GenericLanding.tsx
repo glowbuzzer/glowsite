@@ -33,7 +33,7 @@ const GenericLandingPage = () => {
                             <div className="description">
                                 <p>
                                     Rather than using PLCs, proprietary robot control software or an
-                                    academic lash-up like ROS, Glowbuzzer’s motion control
+                                    academic lash-up like ROS, glowbuzzer’s motion control
                                     development product is a complete integrated product for
                                     developing real-world motion control applications using a
                                     web-stack.
@@ -44,7 +44,7 @@ const GenericLandingPage = () => {
                                     product to customers.
                                 </p>
                                 <p>
-                                    With the Glowbuzzer you are no longer locked into a vendor’s
+                                    With glowbuzzer, you are no longer locked into a vendor’s
                                     technology, their roadmap, schedule and constraints. Our
                                     real-time toolkit supports deep integration with industrial
                                     fieldbusses such as EtherCAT which allows you to work with
@@ -52,8 +52,8 @@ const GenericLandingPage = () => {
                                     right-cost your components and really own your own roadmap.
                                 </p>
                                 <p>
-                                    Developed in the modern and familiar Javascript/Typescript code
-                                    with React our toolkit is familiar to today’s software engineers
+                                    Developed in modern and familiar Javascript/Typescript code with
+                                    React, our toolkit is familiar to young software engineers,
                                     which takes away the skills and staffing headaches.
                                 </p>
                             </div>
@@ -71,7 +71,7 @@ const GenericLandingPage = () => {
                                 {/*<Robot color={GbColours.MainPurple}/>*/}
                                 <video
                                     className="video"
-                                    src="https://static.glowbuzzer.com/glowsite/landing/hexapod_gbr_jogging.mp4"
+                                    src="https://static.glowbuzzer.com/glowsite/landing/gb_blizzard.mp4"
                                     autoPlay
                                     loop
                                     muted
@@ -121,7 +121,7 @@ const GenericLandingPage = () => {
                             Or browse the{" "}
                             <LandingPageLink to="/"> glowbuzzer website.</LandingPageLink>
                         </p>
-                        <p>For more detailled information take a look at:</p>
+                        <p>For more detailed information take a look at:</p>
                         <Row gutter={30} align="middle">
                             <Col xs={2} lg={1}>
                                 <StarFilled style={{ color: "#9254de" }} />

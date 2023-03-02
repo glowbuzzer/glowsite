@@ -27,7 +27,7 @@ const VizLandingPage = () => {
                                 <AniLogo color={GbColours.MainPurple} />
                             </div>
                             <div className="title">
-                                Create robot visualisations with react-three-fiber
+                                Create robot visualisations with React and three.js
                             </div>
                             <div className="description">
                                 <p>
@@ -45,10 +45,7 @@ const VizLandingPage = () => {
                                     simple digital and analog sensors through to camera and LIDAR
                                     data.
                                 </p>
-                                <p>
-                                    All developed in very familiar JavaScript/TypeScript code with
-                                    React and a huge online community supporting the packages.
-                                </p>
+                                <p>All developed in very familiar JavaScript/TypeScript code.</p>
                             </div>
                         </div>
                         <div className="right">
@@ -86,7 +83,7 @@ const VizLandingPage = () => {
                         </p>
 
                         <p>
-                            Or have a look on twitter for{" "}
+                            Have a look on twitter for{" "}
                             <LandingPageLink to="https://www.twitter.com/glowbuzzer">
                                 {" "}
                                 our latest product news.
@@ -94,7 +91,7 @@ const VizLandingPage = () => {
                         </p>
 
                         <p>
-                            Or or you want to dive into the code have a look on{" "}
+                            If you want to dive into the code have a look on{" "}
                             <LandingPageLink to="https://www.github.com/glowbuzzer">
                                 {" "}
                                 GitHub.
@@ -105,14 +102,14 @@ const VizLandingPage = () => {
                             <LandingPageLink to="/"> glowbuzzer website.</LandingPageLink>
                         </p>
 
-                        <p>For more detailled information take a look at:</p>
+                        <p>For more detailed information take a look at:</p>
                         <Row gutter={30} align="middle">
                             <Col xs={2} lg={1}>
                                 <StarFilled style={{ color: "#9254de" }} />
                             </Col>
                             <Col xs={22} lg={22}>
                                 <LandingPageLink to="/blogs/webdev/threejs">
-                                    Read the introduction to R3F blog
+                                    Read the introduction to three.js blog
                                 </LandingPageLink>
                             </Col>
                         </Row>

@@ -25,34 +25,40 @@ const RosLandingPage = () => {
                                 <AniLogo color={GbColours.MainPurple} />
                             </div>
                             <div className="title">
-                                Migrate from Ros & build machine and robot controls with modern web
+                                Migrate from ROS & build machine and robot controls with modern web
                                 technologies
                             </div>
                             <div className="description">
                                 <p>
-                                    Unlike Ros, the glowbuzzer toolkit is focussed on real-world
-                                    applications rather than academia or research.
+                                    There are no easy ways to write a robot control and ROS has
+                                    faced difficult design decisions over its long history.
                                 </p>
                                 <p>
-                                    If you are sick-of Ros with huge volume of wierd dependencies
-                                    and hurdles to get through to do fairly simple things then we
-                                    have the answer. With the glowbuzzer toolkit it easy to get
-                                    started.
+                                    You will be landing here either because you are frustrated with
+                                    ROS or because you have enough experience to know that ROS has
+                                    too many limitations:
+                                    <ul>
+                                        <li>
+                                            Unfederated project with endless confusing dependencies
+                                            spread across dozens of packages. It takes a long time
+                                            to figure out how to do even very simple things.
+                                        </li>
+                                        <li>
+                                            A complex build system described as “CMake but with more
+                                            boilerplate config and config outside of config files”.
+                                        </li>
+                                        <li>
+                                            It is more of a tool for robotics research than
+                                            fully-fledged commercial applications
+                                        </li>
+                                    </ul>
                                 </p>
                                 <p>
-                                    With Ros you need to learn a new, complex C++ framework spread
-                                    across several dozens of packages in several repos. With
-                                    glowbuzzer everything is integarted and you are using familar
-                                    JavaScript/TypeScript code.
-                                </p>
-                                <p>
-                                    Unlike the Ros build system which has been described as "CMake
-                                    but with even more boilerplate configuration and also outside
-                                    config files" you are in the of npm and HMR.
-                                </p>
-                                <p>
-                                    Our engineering team can help migrate existing solutions or
-                                    prototypes from Ros to the glowbuzzer platform.
+                                    glowbuzzer is an integrated toolkit developed for commercial
+                                    machine and robot builders who are shipping real product to real
+                                    customers. It uses modern programming languages and frameworks
+                                    (React/Typescript/three.js) making developing machine controls
+                                    quicker and easier.
                                 </p>
                             </div>
                         </div>
@@ -112,7 +118,7 @@ const RosLandingPage = () => {
                             <LandingPageLink to="/"> glowbuzzer website.</LandingPageLink>
                         </p>
 
-                        <p>For more detailled information take a look at:</p>
+                        <p>For more detailed information take a look at:</p>
                         <Row gutter={30} align="middle">
                             <Col xs={2} lg={1}>
                                 <StarFilled style={{ color: "#9254de" }} />
