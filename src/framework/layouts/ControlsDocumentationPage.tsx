@@ -24,7 +24,8 @@ import reactDocgenControls from "react-docgen:@glowbuzzer/controls"
 import { Markdown } from "../components/Markdown"
 import { GithubSourceLink } from "../components"
 import { ScrollToTopOnMount } from "../components/ScrollToTopOnMount"
-import {dino} from "../store/dino";
+import { dino } from "../store/dino"
+import { ConfigLiveEditProvider } from "@glowbuzzer/controls"
 
 const GlowbuzzerCustomApp = ({ children }) => {
     const preview = usePreview()
@@ -45,7 +46,7 @@ export const ControlsDocumentationPage = ({ children, slug, displayProps }) => {
         return rootReducer => {
             const state = {
                 config: {
-                    value: {
+                    current: {
                         tool: [
                             { name: "Default", translation: { x: 0, y: 0, z: 10 } },
                             { name: "Roughing", translation: { x: 0, y: 0, z: 20 } }
@@ -74,11 +75,11 @@ export const ControlsDocumentationPage = ({ children, slug, displayProps }) => {
                         points: [
                             {
                                 name: "Point 1",
-                                translation: { x: 100, y: 0, z: 0 },
+                                translation: { x: 100, y: 0, z: 0 }
                             },
                             {
                                 name: "Point 2",
-                                translation: { x: 20, y: 20, z: 0 },
+                                translation: { x: 20, y: 20, z: 0 }
                             }
                         ],
                         spindle: [{ name: "Spindle 1" }],
@@ -190,7 +191,7 @@ export const ControlsDocumentationPage = ({ children, slug, displayProps }) => {
             const store = createStore(rootReducer, state)
 
             return {
-                ...store,
+                ...store
                 // getState() {
                 //     console.log("state", state)
                 //     return state
@@ -245,31 +246,33 @@ export const ControlsDocumentationPage = ({ children, slug, displayProps }) => {
     return (
         <Provider store={store}>
             <GlowbuzzerCustomApp>
-                <DefaultDocumentationPage>
-                    <ScrollToTopOnMount on={[window.location.pathname]} />
+                <ConfigLiveEditProvider>
+                    <DefaultDocumentationPage>
+                        <ScrollToTopOnMount on={[window.location.pathname]} />
 
-                    {displayName && <h1>{displayName}</h1>}
+                        {displayName && <h1>{displayName}</h1>}
 
-                    {source && (
-                        <GithubSourceLink
-                            project="gbr"
-                            lib="controls"
-                            path={source.split(`\\`).slice(5).join("/")}
-                        />
-                    )}
+                        {source && (
+                            <GithubSourceLink
+                                project="gbr"
+                                lib="controls"
+                                path={source.split(`\\`).slice(5).join("/")}
+                            />
+                        )}
 
-                    {description && <Markdown>{description}</Markdown>}
+                        {description && <Markdown>{description}</Markdown>}
 
-                    {children}
+                        {children}
 
-                    {displayProps && properties?.length > 0 && (
-                        <ComponentProps
-                            displayName={slug}
-                            showDefaults={true}
-                            properties={properties}
-                        />
-                    )}
-                </DefaultDocumentationPage>
+                        {displayProps && properties?.length > 0 && (
+                            <ComponentProps
+                                displayName={slug}
+                                showDefaults={true}
+                                properties={properties}
+                            />
+                        )}
+                    </DefaultDocumentationPage>
+                </ConfigLiveEditProvider>
             </GlowbuzzerCustomApp>
         </Provider>
     )

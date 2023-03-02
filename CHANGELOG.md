@@ -2,6 +2,41 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.2.0](https://github.com/glowbuzzer/glowsite/compare/v1.1.2...v1.2.0) (2023-02-14)
+
+
+### Feature
+
+* add teaser carousel on homepage ([65a9633](https://github.com/glowbuzzer/glowsite/commit/65a9633447b672a5495e622888668ca6423522c6))
+* first pass at homepage TeaserCarousel.tsx ([fedd28e](https://github.com/glowbuzzer/glowsite/commit/fedd28e649fb6baedcf02f48a9c4b6acd2b6911c))
+
+
+### Bug Fix
+
+* disable webgl when indexing pages ([0702bf0](https://github.com/glowbuzzer/glowsite/commit/0702bf01ebc0aea699d8ac79683e4760e464a51b))
+* fix ThreeDimensionalSceneTile demo and remove references to GlowbuzzerTileDefinition ([ec790b7](https://github.com/glowbuzzer/glowsite/commit/ec790b76dd534b5693ab1990e6b51bde516f5a84))
+* increase puppeteer timeout ([2dd575f](https://github.com/glowbuzzer/glowsite/commit/2dd575f0124345791645cbe43ccf1e541cd68bb7))
+* remove black bars on video element ([829791d](https://github.com/glowbuzzer/glowsite/commit/829791d652c4670ebfce77fabb5984470e3bb236))
+* support external links in LandingPageLink.tsx ([6a47fd5](https://github.com/glowbuzzer/glowsite/commit/6a47fd5ca7867fd6b30ea5fc520106dcf1212f77))
+
+
+### Chore
+
+* Added new landing pages ([9ff8ccb](https://github.com/glowbuzzer/glowsite/commit/9ff8ccb64e8fb8a503e1e61d1a650b2423ab29cb))
+* Edits to landing pages ([ca48a9a](https://github.com/glowbuzzer/glowsite/commit/ca48a9af6896d1690cebe42feea8f9517cfea5a9))
+* Landing page viz ([e431150](https://github.com/glowbuzzer/glowsite/commit/e4311508c30cdfac4f6f2f6862384216f1b9e101))
+* Landing page viz ([2fbb04b](https://github.com/glowbuzzer/glowsite/commit/2fbb04bd34849dae9c4bbf6e8214185947187964))
+* Minor fixes and igus content ([54d8f3c](https://github.com/glowbuzzer/glowsite/commit/54d8f3cf25422d8debba5d4ebdebccc3e5dffa12))
+* remove _meta.ts files ([f8b583a](https://github.com/glowbuzzer/glowsite/commit/f8b583ac550ac640d8015ebc96e504a8c558da7f))
+* styled landing template/example ([a80de57](https://github.com/glowbuzzer/glowsite/commit/a80de57195bf83de449550a0e022a02b2d4fe501))
+* tweak contact page ([bea24c1](https://github.com/glowbuzzer/glowsite/commit/bea24c1100996c2e9d642d7f4293909a0bf4e315))
+* tweak TeaserCarousel.tsx look and feel ([89bf8fe](https://github.com/glowbuzzer/glowsite/commit/89bf8fe5bc55ac1d8ed073e6fce0cbb2688b4870))
+* update @glowbuzzer/controls and add more info about managing dependencies ([f508455](https://github.com/glowbuzzer/glowsite/commit/f5084555628945b96064c578688cd5fbc0e44a13))
+* update gbr version ([90599a9](https://github.com/glowbuzzer/glowsite/commit/90599a9e3f596e9a22928b9e516d2c57af950b85))
+* update gbr version ([75da88f](https://github.com/glowbuzzer/glowsite/commit/75da88feef537f000143ecddfee19f7914f563f0))
+* update typedoc plugin with new .d.ts location ([1b82688](https://github.com/glowbuzzer/glowsite/commit/1b826884ffd9274ed9c28f3cd310d6f1e10ff9c0))
+* update versions.mjs ([c751aaf](https://github.com/glowbuzzer/glowsite/commit/c751aaf2dde694e25e0dcd2b6576a5641b0eac97))
+
 ## [1.1.2](https://github.com/glowbuzzer/glowsite/compare/v1.1.1...v1.1.2) (2022-11-28)
 
 
