@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.2.1](https://github.com/glowbuzzer/glowsite/compare/v1.2.0...v1.2.1) (2023-03-02)
+
+
+### Chore
+
+* Edits to landing pages ([cd10acd](https://github.com/glowbuzzer/glowsite/commit/cd10acdc39ae7a3012a99a908791fcd9a19b192e))
+
 ## [1.2.0](https://github.com/glowbuzzer/glowsite/compare/v1.1.2...v1.2.0) (2023-02-14)
 
 
