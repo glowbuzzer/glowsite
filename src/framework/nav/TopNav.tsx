@@ -2,7 +2,7 @@ import { useCurrentNav, useRootNav } from "../nav"
 import { Link, useLocation } from "react-router-dom"
 import { Menu, Space, Tooltip } from "antd"
 import * as React from "react"
-import { useState } from "react"
+import {MouseEvent, useState} from "react"
 import styled from "styled-components"
 
 import { ReactComponent as StandardLogo } from "../../images/logos/small-logo.svg?inline"
@@ -167,10 +167,16 @@ const NavMenu = ({ mode, onNavigate = undefined }) => {
                         .filter(n => !n.unlinked) // don't include nodes that are outside of nav
                         .map(({ path, title, subtitle, children }) => {
                             const to = children.length ? children[0].path : path
+
+                            function handle_click() {
+                                send_gtag(to)
+                                onNavigate?.()
+                            }
+
                             return {
                                 key: mode + ":" + path,
                                 label: (
-                                    <Link to={to} onClick={onNavigate}>
+                                    <Link to={to} onClick={handle_click}>
                                         <div className="title">{title}</div>
                                         {mode === "horizontal" && (
                                             <div className="subtitle">{subtitle}</div>
@@ -182,6 +188,14 @@ const NavMenu = ({ mode, onNavigate = undefined }) => {
                 }))}
         />
     )
+}
+
+declare const gtag: any
+
+function send_gtag(to: string) {
+    gtag("event", "www_engagement", {
+        event_label: to
+    })
 }
 
 export const TopNav = ({ hideVersionLink }: { hideVersionLink?: boolean }) => {
@@ -215,7 +229,7 @@ export const TopNav = ({ hideVersionLink }: { hideVersionLink?: boolean }) => {
                     <Space size="middle" align="center">
                         {hideVersionLink || (
                             <Tooltip title="Go to Downloads">
-                                <Link className="latest-release" to="/downloads">
+                                <Link className="latest-release" to="/downloads" onClick={() => send_gtag("/downloads")}>
                                     <DownloadOutlined />
                                     <div>
                                         <div>GBC {LATEST_VERSIONS.gbc_version}</div>
