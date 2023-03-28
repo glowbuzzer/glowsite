@@ -12,7 +12,7 @@ import { reactDocgenDockFilter, reactDocgenTileFilter } from "./react/react-docg
 import reactDocgenControls from "react-docgen:@glowbuzzer/controls"
 import typedoc from "typedoc:@glowbuzzer/store"
 import { typedocHookFilter } from "./typedoc/typedoc-hooks"
-import {LandingPageLayout} from "./framework/layouts/LandingPageLayout";
+import { LandingPageLayout } from "./framework/layouts/LandingPageLayout"
 
 function process(node: Omit<Node, "path">, parentPaths: string[], parent: Node): Node {
     const slug = node.slug
@@ -80,7 +80,8 @@ function merge(imports, filter) {
 const nav = {
     slug: "",
     title: "Glowbuzzer: Web-stack machine motion",
-    description: "Control robots and machines with a web-stack. Build complex machine control applications with React. Integrated with a real-time core connected to EtherCAT.",
+    description:
+        "Control robots and machines with a web-stack. Build complex machine control applications with React. Integrated with a real-time core connected to EtherCAT.",
     layout: HomePage,
     children: [
         {
@@ -822,10 +823,10 @@ const nav = {
                             slug: "adding_kinematics_visualisations",
                             title: "Adding kinematics visualisations",
                             subtitle: "Adding kinematics visualisations with react-three-fibre ",
-                            description:
-                                "Using react-three-fibre",
+                            description: "Using react-three-fibre",
                             tags: ["web-dev", "React", "R3F"],
-                            component: () => import("./pages/blogs/webdev/adding_kinematics_visualisations.mdx")
+                            component: () =>
+                                import("./pages/blogs/webdev/adding_kinematics_visualisations.mdx")
                         },
                         {
                             slug: "threejs",
@@ -855,8 +856,7 @@ const nav = {
                             slug: "jvl_mis_blow_by_blow",
                             title: "Integrating the JVL MIS drive - blow-by-blow",
                             subtitle: "Integration of the JVL MIS - a detailled step-by-step guide",
-                            component: () =>
-                                import("./pages/blogs/drives/adding_jvl_mis_drive.mdx")
+                            component: () => import("./pages/blogs/drives/adding_jvl_mis_drive.mdx")
                         },
                         {
                             slug: "invertek_optidrive_p2",
@@ -941,7 +941,6 @@ const nav = {
                     title: "Robotics",
                     subtitle: "Blogs about robotics",
                     children: [
-
                         {
                             slug: "custom_kinematics",
                             title: "Adding custom kinematics",
@@ -961,7 +960,8 @@ const nav = {
                             title: "Igus pick-and-place",
                             subtitle: "Simple pick-and-place operations with the Igus 5-DOF arm",
                             tags: ["Pick-and-place", "Robotics", "Igus"],
-                            component: () => import("./pages/blogs/robotics/igus_pick_and_place.mdx")
+                            component: () =>
+                                import("./pages/blogs/robotics/igus_pick_and_place.mdx")
                         }
                     ]
                 },
@@ -970,7 +970,6 @@ const nav = {
                     title: "Using the glowbuzzer toolkit ",
                     subtitle: "Using the glowbuzzer toolkit - scenarios",
                     children: [
-
                         {
                             slug: "cam",
                             title: "Using CAM with the glowbuzzer toolkit",
@@ -1073,6 +1072,26 @@ const nav = {
                     title: "glowbuzzer the basis for your machine/robot control",
                     component: () => import("./landing/generic/GenericLanding")
                 },
+                {
+                    slug: "ethercat",
+                    title: "Controlling EtherCAT devices from web-applications",
+                    component: () => import("./landing/ethercat/EthercatLanding")
+                },
+                {
+                    slug: "embedded",
+                    title: "Controlling machines and robots with an embedded motion control",
+                    component: () => import("./landing/embedded/EmbeddedLanding")
+                },
+                {
+                    slug: "drives",
+                    title: "Control EtherCAT drives from web-stack motion control",
+                    component: () => import("./landing/drives/DrivesLanding")
+                },
+                {
+                    slug: "robot",
+                    title: "Control robots with a web-stack motion control",
+                    component: () => import("./landing/robot/RobotLanding")
+                }
             ]
         }
 

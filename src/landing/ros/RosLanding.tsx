@@ -16,7 +16,7 @@ import { GbColours, GlowsiteTheme } from "../../framework/GlowsiteTheme"
 
 const RosLandingPage = () => {
     return (
-        <GlowbuzzerApp>
+        <GlowbuzzerApp appName={"glowsite"}>
             <div>
                 <div className="top-section-container">
                     <div className="top-section">
@@ -49,7 +49,7 @@ const RosLandingPage = () => {
                                         </li>
                                         <li>
                                             It is more of a tool for robotics research than
-                                            fully-fledged commercial applications
+                                            fully-fledged commercial applications.
                                         </li>
                                     </ul>
                                 </p>

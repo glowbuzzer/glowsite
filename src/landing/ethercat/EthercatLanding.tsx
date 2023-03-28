@@ -15,7 +15,7 @@ import { GlowbuzzerApp } from "@glowbuzzer/controls/app"
 import { GbColours, GlowsiteTheme } from "../../framework/GlowsiteTheme"
 import styled from "styled-components"
 
-const GenericLandingPage = () => {
+const EthercatLandingPage = () => {
     return (
         <GlowbuzzerApp appName={"glowsite"}>
             <div>
@@ -27,35 +27,20 @@ const GenericLandingPage = () => {
 
                                 <AniLogo color={GbColours.MainPurple} />
                             </div>
-                            <div className="title">
-                                Build robot and machine controls with a web-stack
-                            </div>
+                            <div className="title">Control EtherCAT devices with a web-stack</div>
                             <div className="description">
                                 <p>
-                                    Rather than using PLCs, proprietary robot control software or an
-                                    academic lash-up like ROS, glowbuzzer’s motion control
-                                    development product is a complete integrated product for
-                                    developing real-world motion control applications using a
-                                    web-stack.
+                                    The glowbuzzer toolkit embeds an EtherCAT master which is
+                                    exposed through a websockets interface to allow web-applications
+                                    to easily control EtherCAT drives, sensors and actuators discretely or in the form of machines and robots.
                                 </p>
                                 <p>
-                                    Our toolkit provides all the functionality, resources and
-                                    support required by a commercial machine builder who is shipping
-                                    product to customers.
+                                    Control EtherCAT drives with discrete or co-ordinated motion
+                                    through a motion control including forward and inverse
+                                    kinematics for complex kinematics structures integrated into the
+                                    EtherCAT master.
                                 </p>
-                                <p>
-                                    With glowbuzzer, you are no longer locked into a vendor’s
-                                    technology, their roadmap, schedule and constraints. Our
-                                    real-time toolkit supports deep integration with industrial
-                                    fieldbusses such as EtherCAT which allows you to work with
-                                    drives and IO from thousands of vendors. You can right-size and
-                                    right-cost your components and really own your own roadmap.
-                                </p>
-                                <p>
-                                    Developed in modern and familiar Javascript/Typescript code with
-                                    React, our toolkit is familiar to young software engineers,
-                                    which takes away the skills and staffing headaches.
-                                </p>
+                                <p>Runs on embedded Linux and microcontroller platforms.</p>
                             </div>
                         </div>
                         <div className="right">
@@ -71,7 +56,7 @@ const GenericLandingPage = () => {
                                 {/*<Robot color={GbColours.MainPurple}/>*/}
                                 <video
                                     className="video"
-                                    src="https://static.glowbuzzer.com/glowsite/landing/gb_blizzard.mp4"
+                                    src="https://static.glowbuzzer.com/glowsite/landing/short_ethercat.mp4"
                                     autoPlay
                                     loop
                                     muted
@@ -160,4 +145,4 @@ const GenericLandingPage = () => {
     )
 }
 
-export default GenericLandingPage
+export default EthercatLandingPage

@@ -16,7 +16,7 @@ import { GbColours, GlowsiteTheme } from "../../framework/GlowsiteTheme"
 
 const VizLandingPage = () => {
     return (
-        <GlowbuzzerApp>
+        <GlowbuzzerApp appName={"myapp"}>
             <div>
                 <div className="top-section-container">
                     <div className="top-section">

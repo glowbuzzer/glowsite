@@ -15,7 +15,7 @@ import { GlowbuzzerApp } from "@glowbuzzer/controls/app"
 import { GbColours, GlowsiteTheme } from "../../framework/GlowsiteTheme"
 import styled from "styled-components"
 
-const GenericLandingPage = () => {
+const EmbeddedLandingPage = () => {
     return (
         <GlowbuzzerApp appName={"glowsite"}>
             <div>
@@ -27,35 +27,15 @@ const GenericLandingPage = () => {
 
                                 <AniLogo color={GbColours.MainPurple} />
                             </div>
-                            <div className="title">
-                                Build robot and machine controls with a web-stack
-                            </div>
+                            <div className="title">Create embedded machine and robot controls</div>
                             <div className="description">
                                 <p>
-                                    Rather than using PLCs, proprietary robot control software or an
-                                    academic lash-up like ROS, glowbuzzer’s motion control
-                                    development product is a complete integrated product for
-                                    developing real-world motion control applications using a
-                                    web-stack.
+                                    Use either embedded Linux or high-end microcontroller platforms
+                                    to create machine and robot controls
                                 </p>
-                                <p>
-                                    Our toolkit provides all the functionality, resources and
-                                    support required by a commercial machine builder who is shipping
-                                    product to customers.
-                                </p>
-                                <p>
-                                    With glowbuzzer, you are no longer locked into a vendor’s
-                                    technology, their roadmap, schedule and constraints. Our
-                                    real-time toolkit supports deep integration with industrial
-                                    fieldbusses such as EtherCAT which allows you to work with
-                                    drives and IO from thousands of vendors. You can right-size and
-                                    right-cost your components and really own your own roadmap.
-                                </p>
-                                <p>
-                                    Developed in modern and familiar Javascript/Typescript code with
-                                    React, our toolkit is familiar to young software engineers,
-                                    which takes away the skills and staffing headaches.
-                                </p>
+                                <p>EtherCAT interface</p>
+                                <p>PLC</p>
+                                <p></p>
                             </div>
                         </div>
                         <div className="right">
@@ -160,4 +140,4 @@ const GenericLandingPage = () => {
     )
 }
 
-export default GenericLandingPage
+export default EmbeddedLandingPage

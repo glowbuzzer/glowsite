@@ -6,7 +6,6 @@ import { Image } from "../../framework/components"
 import screenShot from "./skew_points.png?glowsite"
 import Icon from "@ant-design/icons"
 import { StarFilled } from "@ant-design/icons"
-// import Robot from "./robot/Robot"
 import AniLogo from "../utils/aniLogo/aniLogo"
 import { Col, Row } from "antd"
 
@@ -14,8 +13,9 @@ import { GlowbuzzerApp } from "@glowbuzzer/controls/app"
 
 import { GbColours, GlowsiteTheme } from "../../framework/GlowsiteTheme"
 import styled from "styled-components"
+import Robot from "./Robot"
 
-const GenericLandingPage = () => {
+const RobotLandingPage = () => {
     return (
         <GlowbuzzerApp appName={"glowsite"}>
             <div>
@@ -23,61 +23,34 @@ const GenericLandingPage = () => {
                     <div className="top-section">
                         <div className="left">
                             <div className="logo">
-                                {/*<Logo />*/}
-
                                 <AniLogo color={GbColours.MainPurple} />
                             </div>
                             <div className="title">
-                                Build robot and machine controls with a web-stack
+                                Control robots with a web-stack motion control
                             </div>
                             <div className="description">
                                 <p>
-                                    Rather than using PLCs, proprietary robot control software or an
-                                    academic lash-up like ROS, glowbuzzer’s motion control
-                                    development product is a complete integrated product for
-                                    developing real-world motion control applications using a
-                                    web-stack.
+                                    If you want to control machines and robots using web-technology
+                                    (JavaScript/React/three.js etc.) you are in the right place
                                 </p>
                                 <p>
-                                    Our toolkit provides all the functionality, resources and
-                                    support required by a commercial machine builder who is shipping
-                                    product to customers.
+                                    Integrates with different industrial robots/cobots allowing
+                                    controls and simulations to be built outside the constraints of
+                                    the robot manufacturer provided control software
                                 </p>
                                 <p>
-                                    With glowbuzzer, you are no longer locked into a vendor’s
-                                    technology, their roadmap, schedule and constraints. Our
-                                    real-time toolkit supports deep integration with industrial
-                                    fieldbusses such as EtherCAT which allows you to work with
-                                    drives and IO from thousands of vendors. You can right-size and
-                                    right-cost your components and really own your own roadmap.
+                                    Perform all the standard robot control scenarios plus complex
+                                    control scenarios like time synchronised moves, tracking,
+                                    reaction to events
                                 </p>
                                 <p>
-                                    Developed in modern and familiar Javascript/Typescript code with
-                                    React, our toolkit is familiar to young software engineers,
-                                    which takes away the skills and staffing headaches.
+                                    Integrate with existing robots through their controls or
+                                    directly with motors over industrial fieldbusses like EtheCAT
                                 </p>
                             </div>
                         </div>
                         <div className="right">
-                            <div className="media-container">
-                                {/*<Canvas>*/}
-                                {/*    <ambientLight />*/}
-                                {/*    <gridHelper />*/}
-                                {/*    <OrbitControls />*/}
-                                {/*    <mesh>*/}
-                                {/*        <boxBufferGeometry args={[1, 1, 1]} />*/}
-                                {/*    </mesh>*/}
-                                {/*</Canvas>*/}
-                                {/*<Robot color={GbColours.MainPurple}/>*/}
-                                <video
-                                    className="video"
-                                    src="https://static.glowbuzzer.com/glowsite/landing/gb_blizzard.mp4"
-                                    autoPlay
-                                    loop
-                                    muted
-                                    playsInline
-                                />
-                            </div>
+                            <Robot color={GbColours.MainPurple} />
                         </div>
                     </div>
                 </div>
@@ -160,4 +133,4 @@ const GenericLandingPage = () => {
     )
 }
 
-export default GenericLandingPage
+export default RobotLandingPage
