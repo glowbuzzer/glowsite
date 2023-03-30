@@ -129,7 +129,7 @@ const RobotAnimation = props => {
                 buttonTwoHeight.current = buttonHeight
             }
         }
-        console.log(buttonTwoHeight.current)
+        // console.log(buttonTwoHeight.current)
         if (approxeq(worldPos.y, 200, 0.1)) {
             if (worldPos.z < buttonHeight) {
                 buttonThreeHeight.current = worldPos.z
@@ -137,7 +137,7 @@ const RobotAnimation = props => {
                 buttonThreeHeight.current = buttonHeight
             }
         }
-        console.log(counter.current)
+        // console.log(counter.current)
     })
 
     const tcpRef = useRef(null)

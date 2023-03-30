@@ -30,22 +30,22 @@ const RobotLandingPage = () => {
                             </div>
                             <div className="description">
                                 <p>
-                                    If you want to control machines and robots using web-technology
-                                    (JavaScript/React/three.js etc.) you are in the right place
+                                    If you want to control machines and robots using web technology
+                                    (JavaScript/React/three.js and more) you are in the right place.
                                 </p>
                                 <p>
                                     Integrates with different industrial robots/cobots allowing
                                     controls and simulations to be built outside the constraints of
-                                    the robot manufacturer provided control software
+                                    the robot manufacturer provided control software.
                                 </p>
                                 <p>
                                     Perform all the standard robot control scenarios plus complex
                                     control scenarios like time synchronised moves, tracking,
-                                    reaction to events
+                                    reaction to events.
                                 </p>
                                 <p>
                                     Integrate with existing robots through their controls or
-                                    directly with motors over industrial fieldbusses like EtheCAT
+                                    directly with motors over industrial fieldbusses like EtherCAT.
                                 </p>
                             </div>
                         </div>

@@ -31,8 +31,9 @@ const EthercatLandingPage = () => {
                             <div className="description">
                                 <p>
                                     The glowbuzzer toolkit embeds an EtherCAT master which is
-                                    exposed through a websockets interface to allow web-applications
-                                    to easily control EtherCAT drives, sensors and actuators discretely or in the form of machines and robots.
+                                    exposed through a websockets interface to allow web applications
+                                    to easily control EtherCAT drives, sensors and actuators
+                                    discretely or in the form of machines and robots.
                                 </p>
                                 <p>
                                     Control EtherCAT drives with discrete or co-ordinated motion
