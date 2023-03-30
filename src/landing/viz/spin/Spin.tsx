@@ -1,34 +1,10 @@
 import * as React from "react"
-import {
-    useRef,
-    useState,
-    useEffect,
-    useMemo,
-    Dispatch, SetStateAction, Suspense
-} from "react"
-import * as THREE from 'three'
-import {
-    Box,
-    Sphere,
-    PivotControls,
-    Html,
-    OrbitControls,
-    PerspectiveCamera,
-    useGLTF,
-    useContextBridge,
-    MeshRefractionMaterial,
-    CubeCamera,
-    AccumulativeShadows,
-    RandomizedLight,
-    Environment,
-    Trail,
-    useTexture,
-    Instance,
-    Instances
-} from "@react-three/drei"
+import { useEffect, useRef } from "react"
+import * as THREE from "three"
+import { Html } from "@react-three/drei"
 
-import {useFrame, useThree, useLoader, Canvas} from "@react-three/fiber"
-import {GbColours, GlowsiteTheme} from "../../../framework/GlowsiteTheme";
+import { useFrame } from "@react-three/fiber"
+import { GbColours } from "../../../framework/GlowsiteTheme"
 
 export const SpinThreeDimensional = (props) => {
 
@@ -77,7 +53,6 @@ export const SpinThreeDimensional = (props) => {
 
             tempObjectSphere.updateMatrix()
             instanceRef.current.setMatrixAt(i, tempObjectSphere.matrix)
-
         }
 
         instanceRef.current.instanceMatrix.needsUpdate = true
@@ -90,16 +65,18 @@ export const SpinThreeDimensional = (props) => {
 
     return (
         <group ref={spinGroupRef} position={props.position}>
+            <Html style={{
+                width: "500px",
+                marginLeft: "-75px",
+                marginTop: "-100px",
+                color: "#eeeeee"
+            }}>
+                <p>Loading Visualisation</p>
+            </Html>
 
             <instancedMesh ref={instanceRef} material={meshMat} geometry={sphGeometry}
                            args={[undefined, undefined, 4]}>
-
             </instancedMesh>
-            <Html style={{
-                width: "500px",
-            }}>
-                <p>Loading visualisation awesomeness...</p>
-            </Html>
         </group>
 
     )
