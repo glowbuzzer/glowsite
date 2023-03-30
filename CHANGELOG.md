@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.2.2](https://github.com/glowbuzzer/glowsite/compare/v1.2.1...v1.2.2) (2023-03-30)
+
+
+### Chore
+
+* add www_engagement event on navigation click ([7f6943c](https://github.com/glowbuzzer/glowsite/commit/7f6943c9f11b2d53d4f8dc193e63a457811696cf))
+* Edits to landing pages ([ed63f51](https://github.com/glowbuzzer/glowsite/commit/ed63f51d3e20a20dd02d576c61c96a3ef1e3685b))
+* Edits to landing pages ([0964a75](https://github.com/glowbuzzer/glowsite/commit/0964a756af3bc55fe698af855c8c80d3f820d7eb))
+* reposition loading text in 3d visualisation ([c1ab163](https://github.com/glowbuzzer/glowsite/commit/c1ab16396b81c240d398d8f0a684eb0c96a6a7c8))
+
 ## [1.2.1](https://github.com/glowbuzzer/glowsite/compare/v1.2.0...v1.2.1) (2023-03-02)
 
 
