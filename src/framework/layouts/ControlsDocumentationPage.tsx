@@ -10,7 +10,8 @@ import {
     TASK_STATE,
     tasksSlice,
     TaskStatus,
-    usePreview
+    usePreview,
+    GlowbuzzerConnectionContext
 } from "@glowbuzzer/store"
 
 import "dseg/css/dseg.css"
@@ -138,9 +139,6 @@ export const ControlsDocumentationPage = ({ children, slug, displayProps }) => {
                         ]
                     } as GlowbuzzerConfig
                 },
-                connection: {
-                    state: ConnectionState.CONNECTED
-                },
                 machine: {
                     actualTarget: MACHINETARGET.MACHINETARGET_SIMULATION,
                     statusWord: 0b100111,
@@ -245,35 +243,37 @@ export const ControlsDocumentationPage = ({ children, slug, displayProps }) => {
 
     return (
         <Provider store={store}>
-            <GlowbuzzerCustomApp>
-                <ConfigLiveEditProvider>
-                    <DefaultDocumentationPage>
-                        <ScrollToTopOnMount on={[window.location.pathname]} />
+            <GlowbuzzerConnectionContext.Provider value={{connected: true}}>
+                <GlowbuzzerCustomApp>
+                    <ConfigLiveEditProvider>
+                        <DefaultDocumentationPage>
+                            <ScrollToTopOnMount on={[window.location.pathname]} />
 
-                        {displayName && <h1>{displayName}</h1>}
+                            {displayName && <h1>{displayName}</h1>}
 
-                        {source && (
-                            <GithubSourceLink
-                                project="gbr"
-                                lib="controls"
-                                path={source.split(`\\`).slice(5).join("/")}
-                            />
-                        )}
+                            {source && (
+                                <GithubSourceLink
+                                    project="gbr"
+                                    lib="controls"
+                                    path={source.split(`\\`).slice(5).join("/")}
+                                />
+                            )}
 
-                        {description && <Markdown>{description}</Markdown>}
+                            {description && <Markdown>{description}</Markdown>}
 
-                        {children}
+                            {children}
 
-                        {displayProps && properties?.length > 0 && (
-                            <ComponentProps
-                                displayName={slug}
-                                showDefaults={true}
-                                properties={properties}
-                            />
-                        )}
-                    </DefaultDocumentationPage>
-                </ConfigLiveEditProvider>
-            </GlowbuzzerCustomApp>
+                            {displayProps && properties?.length > 0 && (
+                                <ComponentProps
+                                    displayName={slug}
+                                    showDefaults={true}
+                                    properties={properties}
+                                />
+                            )}
+                        </DefaultDocumentationPage>
+                    </ConfigLiveEditProvider>
+                </GlowbuzzerCustomApp>
+            </GlowbuzzerConnectionContext.Provider>
         </Provider>
     )
 }
