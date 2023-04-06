@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.2.4](https://github.com/glowbuzzer/glowsite/compare/v1.2.3...v1.2.4) (2023-04-06)
+
+
+### Chore
+
+* update to ubuntu-latest in github actions ([04c317f](https://github.com/glowbuzzer/glowsite/commit/04c317fe4c7e27c417cd9be5683a9ff3aee1b1b8))
+
 ## [1.2.3](https://github.com/glowbuzzer/glowsite/compare/v1.2.2...v1.2.3) (2023-04-06)
 
 
