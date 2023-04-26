@@ -8,8 +8,8 @@ specifiers:
   '@babel/core': ^7.18.2
   '@babel/preset-react': ^7.17.12
   '@emeks/antd-custom-theme-generator': ^0.2.1
-  '@glowbuzzer/controls': 1.6.1
-  '@glowbuzzer/store': 1.6.1
+  '@glowbuzzer/controls': 1.7.3
+  '@glowbuzzer/store': 1.7.3
   '@mdx-js/mdx': ^2.1.1
   '@mdx-js/react': ^2.1.1
   '@mdx-js/rollup': ^2.1.1
@@ -78,8 +78,8 @@ dependencies:
   '@babel/core': 7.18.2
   '@babel/preset-react': 7.18.6_@babel+core@7.18.2
   '@emeks/antd-custom-theme-generator': 0.2.1_antd@4.23.6
-  '@glowbuzzer/controls': 1.6.1_3q4pkiq6kshwgxaguvbbhcj77u
-  '@glowbuzzer/store': 1.6.1_w3l547aimklp2l5lywdlhbmojq
+  '@glowbuzzer/controls': 1.7.3_3q4pkiq6kshwgxaguvbbhcj77u
+  '@glowbuzzer/store': 1.7.3_w3l547aimklp2l5lywdlhbmojq
   '@mdx-js/mdx': 2.1.1
   '@mdx-js/react': 2.1.1_react@18.1.0
   '@mdx-js/rollup': 2.1.1_rollup@2.75.5
@@ -2098,10 +2098,10 @@ packages:
     dev: false
     optional: true
 
-  /@glowbuzzer/controls/1.6.1_3q4pkiq6kshwgxaguvbbhcj77u:
-    resolution: {integrity: sha512-X6PObRPym8j4K+g2BfYbAfMgSLh8alk4ay9dM9iuFpLtp0QyrTbSkSsvY9Vy721WGVf8G1+doF2IPtafUu+Qug==}
+  /@glowbuzzer/controls/1.7.3_3q4pkiq6kshwgxaguvbbhcj77u:
+    resolution: {integrity: sha512-lDb63dW+YLr4CE1e5tOyMPKNnslTd+0db20TG4BjrGMdjUfJn34jB/VK5R5YSQvdkirg8VbcmFwG3eeEsIE/5w==}
     dependencies:
-      '@glowbuzzer/store': 1.6.1_w3l547aimklp2l5lywdlhbmojq
+      '@glowbuzzer/store': 1.7.3_w3l547aimklp2l5lywdlhbmojq
     optionalDependencies:
       '@ant-design/icons': 4.7.0_ef5jwxihqo6n7gxfmzogljlgcm
       '@react-three/drei': 9.40.0_4aw44tzs5pzw2lynuqb2as7pru
@@ -2129,8 +2129,8 @@ packages:
       - redux
     dev: false
 
-  /@glowbuzzer/store/1.6.1_w3l547aimklp2l5lywdlhbmojq:
-    resolution: {integrity: sha512-kEfwqZPe988OL51los73xiMpfr/pG35/QyyG4HPp6BFAuiFW+Bdkg5ejKoyf0z0L+gYOHclfT5xaDIgm6IAzXA==}
+  /@glowbuzzer/store/1.7.3_w3l547aimklp2l5lywdlhbmojq:
+    resolution: {integrity: sha512-IQebxGUTh0inhgXyasSbuSWF91fp/GuG2kJUrcgVJWQu4OoYosesJQONaTJJkuw3MMNH1HffpM7EHGi9AsPU+g==}
     optionalDependencies:
       '@reduxjs/toolkit': 1.8.2_ctm756ikdwcjcvyfxxwskzbr6q
       react: 18.1.0

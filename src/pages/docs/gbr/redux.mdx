@@ -14,8 +14,16 @@ The GBR Redux store is created using the official [Redux Toolkit](https://redux-
 
 ## Instantiating and customising the store
 
-In the example below, the regular GBR store is enhanced with a custom slice you might use to store state specific to your application. This example is based on the existing
-[GlowbuzzerApp](https://github.com/glowbuzzer/gbr/blob/main/libs/controls/src/GlowbuzzerApp.tsx) component.
+If you simply want to add a custom reducer to the &gbr store and you are using the `GlowbuzzerApp` component, it provides an `additionalReducers` property you can use to merge
+your reducer into the standard &gbr reducers. The example below assumes your are using Redux Toolkit slices but this is not required.
+
+```tsx
+<GlowbuzzerApp additionalReducers={{mySlice: mySlice.reducer}}></GlowbuzzerApp>
+```
+
+The more complex example below shows full customisation of the &gbr store. This example is based on code in the existing
+[GlowbuzzerApp](https://github.com/glowbuzzer/gbr/blob/main/libs/controls/src/GlowbuzzerApp.tsx) component. Normally this level of
+detail is not required.
 
 ```tsx demo
 import React from "react"
@@ -110,7 +118,7 @@ kinematics
 
 joints
 
-: Provides access to the joint configuration and state, see [useJointConfig](hooks/useJointConfig) and [useJoint](hooks/useJoint)
+: Provides access to the joint configuration and state, see [useJointConfigurationList](hooks/useJointConfigurationList) and [useJoint](hooks/useJoint)
 
 {/*
 frames

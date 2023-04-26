@@ -88,8 +88,8 @@ function typedoc(mode) {
             if (id.startsWith(VIRTUAL_PREFIX)) {
                 const resolved = id.slice(VIRTUAL_PREFIX.length)
 
-                console.log("Generate typedoc for", resolved)
                 const {entryPoint, tsconfig} = modules[resolved]
+                console.log("Generate typedoc for", resolved, "entryPoint=", entryPoint, "tsconfig=", tsconfig)
                 const typedoc = loadTypedoc(entryPoint, tsconfig)
 
                 console.log("Typedoc complete")

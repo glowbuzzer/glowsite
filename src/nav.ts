@@ -737,15 +737,21 @@ const nav = {
                             component: () => import("./pages/docs/gbr/solo.mdx")
                         },
                         {
+                            slug: "streaming",
+                            title: "The streaming activity API",
+                            subtitle: "Executing activities using the streaming activity API",
+                            component: () => import("./pages/docs/gbr/streaming.mdx")
+                        },
+                        {
                             slug: "gcode",
-                            title: "Streamed activities (G-Code)",
+                            title: "G-Code",
                             subtitle: "Executing G-Code using the useGCode hook",
                             component: () => import("./pages/docs/gbr/gcode.mdx")
                         },
                         {
                             slug: "redux",
-                            title: "Redux store",
-                            subtitle: "How to use the GBR low-level Redux store",
+                            title: "Redux store customisation",
+                            subtitle: "How to use and change the GBR low-level Redux store",
                             component: () => import("./pages/docs/gbr/redux.mdx")
                         },
                         {

@@ -1,0 +1,56 @@
+import {TypedocLink} from "../../../typedoc/TypedocItem"
+
+# {props.subtitle}
+
+The streaming activity API allows you to execute a sequence of activities and wait for them to complete (using promises).
+There are two main advantages of using the streaming API over the solo activity API:
+
+Precise and real-time transitions between activities
+
+: When one activity finishes the next is started in the following cycle without any delay. Using triggers based on
+tick count, it's also possible to precisely synchronize motion between multiple independent kinematics configurations.
+
+Blending moves
+
+: When streaming, moves can be blended to avoid exact stop at the end of each move. This leads to faster completion of
+tasks.
+
+When streaming, you are able to react to the completion of each individual activity, or the stream as a whole.
+
+The API is non-blocking when adding activities to the stream. The activities are buffered in the &fe and sent
+to &gbc as capacity on the &gbc queue becomes available.
+
+The example below shows a simple sequence of streamed moves, with handling of completion during and after the
+sequence completes.
+
+```jsx
+const stream=useStream(0)
+await stream.send(api => [
+    api.moveLine(0, 10).promise(),
+    api.moveArc(2,12).centre(2,10).direction(ARCDIRECTION.ARCDIRECTION_CW).promise(),
+    api.moveLine(10, 12).promise(),
+    api.moveArc(12,10).centre(10,10).direction(ARCDIRECTION.ARCDIRECTION_CW)
+        .promise().then(() => console.log("second arc complete")),
+    api.moveLine(12, 0).promise(),
+    api.moveArc(10,-2).centre(10,0).direction(ARCDIRECTION.ARCDIRECTION_CW).promise(),
+    api.moveLine(2, -2).promise(),
+    api.moveArc(0,0).centre(2,0).direction(ARCDIRECTION.ARCDIRECTION_CW).promise()
+]).then(() => {
+    console.log("sequence complete!")
+})
+```
+
+## Next steps
+
+<TypedocLink name={"StreamingActivityApi"} content="View the streaming API reference"/>&nbsp;
+
+: Describes all moves and other activities you can use in your programs.
+
+[Use &gcode to specify activites](gcode)
+
+: Shows how to use the &gcode hook to convert &gcode to activities and send them to GBC, including blending.
+
+[Learn how create more dynamic interactions using a state machine](state_machine)
+
+: Using a state machine you can interrupt a current activity and start a new one based on external inputs.
+
