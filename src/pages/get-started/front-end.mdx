@@ -24,56 +24,23 @@ This page takes you though installing the &gbt React components (&gbr) and creat
 We assume you have already covered [running &gbc in simulation mode](/get-started/simulation). The instructions below assume you are running &gbc in simulation mode (without hardware),
 but you can also run your custom &fe against one of the hardware starter kits with very few changes.
 
-## Use the CRA template to create your project
+## Use the glowbuzzer React template to create your project
 
-We provide a [Create React App](https://create-react-app.dev) (CRA) custom template as a useful starting point for your project. This helps reduce setup and
+We provide a custom template as a useful starting point for your project. This helps reduce setup and
 configuration work needed to get started. You should perform these steps on your development workstation (Windows or Linux or WSL).
 
-You need Node.js and the Node package manager (npm). We recommend version 12 or above.
+You need Node.js and the Node package manager (npm). We recommend version 16 or above.
 If you don't have Node.js installed, [visit the Node.js website for instructions](https://nodejs.org/en/download).
 
 Execute the following command to create the project from the &gb template:
 
 ```shell
-npx create-react-app my-app --template glowbuzzer-typescript --use-npm
+npx create-glowbuzzer-app
 ```
 
-Replace `my-app` with your project name. This will download all required packages and bootstrap your project. It can take a few minutes.
-
-```text
-Creating a new React app in my-app.
-
-Installing packages. This might take a couple of minutes.
-Installing react, react-dom, and react-scripts with cra-template-glowbuzzer-typescript...
-
-[... package install output ...]
-
-Success! Created my-app
-Inside that directory, you can run several commands:
-
-  npm start
-    Starts the development server.
-
-  npm run build
-    Bundles the app into static files for production.
-
-  npm test
-    Starts the test runner.
-
-  npm run eject
-    Removes this tool and copies build dependencies, configuration files
-    and scripts into the app directory. If you do this, you can’t go back!
-
-We suggest that you begin by typing:
-
-  cd my-app
-  npm start
-
-Happy hacking!
-```
-
-When you run the `start` command, a local development server is started which will serve the React application. This can be accessed on localhost, on port 3000 by default, for
-example: [http://localhost:3000](http://localhost:3000).
+Follow the on-screen instructions to install packages and start the app. When you run the `start` command, a local development server
+is started which will serve the React application. This can be accessed on localhost, on port 5173 by default, for
+example: [http://localhost:5173](http://localhost:5173).
 
 You can now open this project in your preferred IDE and start editing (with hot reload enabled).
 

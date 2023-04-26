@@ -1,13 +1,13 @@
 import {Image} from "../../framework/components/Image"
 
-We provide a [Create React App](https://create-react-app.dev) (CRA) custom template as a useful starting point for your project. This helps reduce setup and
+We provide an npm package that will bootstrap a new glowbuzzer React project. This helps reduce setup and
 configuration work needed to get started.
 
 You should perform these steps on your development workstation (Windows or Linux or WSL).
 
 ## Prerequisites
 
-You need Node.js installed. We recommend version 12 or above. When installing Node.js, `npm` and `npx` are typically installed automatically, but if you need to install these
+You need Node.js installed. We recommend version 16 or above. When installing Node.js, `npm` and `npx` are typically installed automatically, but if you need to install these
 manually, use:
 
 ```shell
@@ -21,18 +21,27 @@ Or use the package manager for your chosen Linux distribution.
 Execute the following commands to create a new project:
 
 ```shell
-npx create-react-app your-project-name --template glowbuzzer-typescript --use-npm
-cd your-project-name
+npx create-glowbuzzer-app
+```
+
+This will prompt for a project name and then create a new directory with that name. It will then download and configure the latest version of the glowbuzzer React template.
+
+Once this command completes, change to the new directory and run the following command:
+
+```shell
+npm install
 npm start
 ```
 
-On first run this will download all the required packages which can take a while. What you should see on your screen is something like this:
+You can also use `pnpm` or `yarn` instead of `npm` if you prefer.
+
+On first run this will download all the required packages which might take a while. What you should see on your screen is something like this:
 
 import cra_template from "./cra_start.png?glowsite"
 
 <Image meta={cra_template} alt="CRA start"/>
 
-When you run the `start` command, a local development server is started which will serve the React application. This can be accessed on localhost, on port 3000 by default, for
-example: http://localhost:3000. CRA may be able to launch your browser automatically dependending on your environment.
+When you run the `start` command, a local development server is started which will serve the React application. This can be accessed on localhost, on port 5173 by default, for
+example: http://localhost:5173.
 
-You can open this project in your IDE (JetBrains, VS code and so on). Changes will trigger a hot reload in the browser.
+You can open this project in your IDE (JetBrains, VS Code and so on). Changes will trigger a hot reload in the browser.
