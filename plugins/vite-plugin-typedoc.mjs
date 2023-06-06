@@ -20,7 +20,7 @@ function loadTypedoc(entryPoint, tsconfig) {
         const project = app.convert()
 
         if (project) {
-            return app.serializer.toObject(project)
+            return app.serializer.projectToObject(project, process.cwd())
         } else {
             console.log("No typedoc generated!")
             return {

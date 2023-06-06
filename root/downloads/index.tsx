@@ -5,7 +5,6 @@ import { NavProvider, Node } from "../../src/framework/providers/NavProvider"
 import { GlowsiteTheme } from "../../src/framework/GlowsiteTheme"
 import { GlowsiteRoutes } from "../../src/framework/GlowsiteRoutes"
 
-import "../../src/glowsite-theme.css"
 import { BrowserRouter } from "react-router-dom"
 import { CookieConsentProvider } from "../../src/framework/providers/CookieConsentProvider"
 import { Section } from "../../src/framework/components/Section"

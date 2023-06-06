@@ -2,16 +2,17 @@ import * as React from "react"
 import { useEffect, useRef } from "react"
 import * as THREE from "three"
 import { Html } from "@react-three/drei"
+import {theme} from "antd"
 
 import { useFrame } from "@react-three/fiber"
-import { GbColours } from "../../../framework/GlowsiteTheme"
 
 export const SpinThreeDimensional = (props) => {
+    const {token}=theme.useToken()
 
     const spinGroupRef = useRef(null)
     const instanceRef = useRef(null)
 
-    const primaryColor = GbColours.MainPurple
+    const primaryColor = token.colorPrimary
 
     const primaryColorThree = new THREE.Color(primaryColor)
     const lerpToColorThree = new THREE.Color("#D4C1EC");
@@ -22,7 +23,7 @@ export const SpinThreeDimensional = (props) => {
     const spherePositions = [new THREE.Vector3(-ballSize * ballSpaceRatio / 2, -ballSize * ballSpaceRatio / 2, 0), new THREE.Vector3(ballSize * ballSpaceRatio / 2, -ballSize * ballSpaceRatio / 2, 0), new THREE.Vector3(ballSize * ballSpaceRatio / 2, ballSize * ballSpaceRatio / 2, 0), new THREE.Vector3(-ballSize * ballSpaceRatio / 2, ballSize * ballSpaceRatio / 2, 0)]
 
 
-    useFrame((state, delta) => {
+    useFrame((state) => {
 
         spinGroupRef.current.rotation.z += 0.1
 

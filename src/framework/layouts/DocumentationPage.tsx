@@ -6,7 +6,6 @@ import * as React from "react"
 import { ScrollToTopOnMount } from "../components/ScrollToTopOnMount"
 
 const StyledDocumentationPage = styled.div`
-    label: DocumentationPage;
     display: flex;
     flex-grow: 1;
     // min-width to ensure pre respects max-width
@@ -60,7 +59,7 @@ export const DocumentationPage = ({ left, children, ...props }) => (
 export const TypedocPage = props => <DocumentationPage left={<ContexualLeftNav />} {...props} />
 export const TypedocPageDetached = ({ children }) => children
 
-export const ReactDocgenPage = props => <DocumentationPage left={<ContexualLeftNav />} {...props} />
+// export const ReactDocgenPage = props => <DocumentationPage left={<ContexualLeftNav />} {...props} />
 
 export const DefaultDocumentationPage = props => (
     <DocumentationPage left={<ContexualLeftNav />} {...props} />
