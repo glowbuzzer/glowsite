@@ -2,7 +2,7 @@ import * as React from "react"
 import ReactDOM from "react-dom"
 
 import { NavProvider, Node } from "../../src/framework/providers/NavProvider"
-import { GlowsiteTheme } from "../../src/framework/GlowsiteTheme"
+import { AppTheme } from "../../src/framework/GlowsiteTheme"
 import { GlowsiteRoutes } from "../../src/framework/GlowsiteRoutes"
 
 import { BrowserRouter } from "react-router-dom"
@@ -10,17 +10,22 @@ import { CookieConsentProvider } from "../../src/framework/providers/CookieConse
 import { Section } from "../../src/framework/components/Section"
 import { TopNav } from "../../src/framework/nav/TopNav"
 import { StyledLayout } from "../../src/framework/layouts/BaseLayout"
+import { useTheme } from "styled-components"
+import { GlowbuzzerThemeProvider } from "@glowbuzzer/controls"
+
+import "antd/dist/reset.css"
 
 const HomePage = () => {
+    const theme = useTheme()
+
     return (
         <StyledLayout>
-            <TopNav hideVersionLink />
-            <Section expand background="White">
-                <h1>Downloads</h1>
+            <TopNav hideVersionLink hideSearch />
+            <Section expand background={theme.colorBgContainer} spaced>
+                <h1>Downloads for glowbuzzer</h1>
                 <p>
-                    This is the homepage for glowbuzzer downloads but you won't find much here. All
-                    our downloads are linked to from the{" "}
-                    <a href="https://www.glowbuzzer.com">main glowbuzzer site</a> and from our{" "}
+                    All our downloads are linked to from the{" "}
+                    <a href="https://www.glowbuzzer.com">main glowbuzzer site</a> or from our{" "}
                     <a href="https://www.github.com/glowbuzzer">Github account</a>.
                 </p>
             </Section>
@@ -39,11 +44,11 @@ const nav: Node = {
 ReactDOM.render(
     <BrowserRouter>
         <CookieConsentProvider>
-            <GlowsiteTheme>
+            <GlowbuzzerThemeProvider theme={AppTheme}>
                 <NavProvider root={nav}>
                     <GlowsiteRoutes />
                 </NavProvider>
-            </GlowsiteTheme>
+            </GlowbuzzerThemeProvider>
         </CookieConsentProvider>
     </BrowserRouter>,
     document.getElementById("app")

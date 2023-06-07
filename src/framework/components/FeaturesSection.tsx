@@ -69,7 +69,7 @@ const StyledFeaturesSection = styled.div`
         }
 
         .flip-card-back {
-            background-color: ${props => props.theme.color.MainPurple};
+            background-color: ${props => props.theme.colorPrimary};
             color: white;
             transform: rotateY(180deg);
 

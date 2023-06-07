@@ -30,5 +30,5 @@ export const GlowsiteLink = ({ to, children }) => {
             </Link>
         )
     }
-    return <Link to={next.pathname}>{children}</Link>
+    return <Link to={next.pathname} className="markdown-link">{children}</Link>
 }

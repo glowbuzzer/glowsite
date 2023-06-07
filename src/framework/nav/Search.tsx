@@ -147,7 +147,7 @@ export const Search = () => {
 
     return (
         <StyledAutoComplete
-            dropdownMatchSelectWidth={500}
+            popupMatchSelectWidth={500}
             options={options}
             onChange={() => {}}
             onFocus={load}

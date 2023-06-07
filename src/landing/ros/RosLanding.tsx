@@ -1,20 +1,17 @@
 import { LandingPageLink } from "../../framework/conversions/LandingPageLink"
 import * as React from "react"
-import { Suspense } from "react"
-import { ReactComponent as Logo } from "../../images/logos/tiny-logo.svg?inline"
 import { Image } from "../../framework/components"
 import screenShot from "./skew_points.png?glowsite"
-import Icon from "@ant-design/icons"
 import { StarFilled } from "@ant-design/icons"
 // import Robot from "./robot/Robot"
 import AniLogo from "../utils/aniLogo/aniLogo"
 import { Col, Row } from "antd"
 
 import { GlowbuzzerApp } from "@glowbuzzer/controls/app"
-
-import { GbColours, GlowsiteTheme } from "../../framework/GlowsiteTheme"
+import { useTheme } from "styled-components"
 
 const RosLandingPage = () => {
+    const theme=useTheme()
     return (
         <GlowbuzzerApp appName={"glowsite"}>
             <div>
@@ -22,7 +19,7 @@ const RosLandingPage = () => {
                     <div className="top-section">
                         <div className="left">
                             <div className="logo">
-                                <AniLogo color={GbColours.MainPurple} />
+                                <AniLogo color={theme.colorPrimary} />
                             </div>
                             <div className="title">
                                 Migrate from ROS & build machine and robot controls with modern web

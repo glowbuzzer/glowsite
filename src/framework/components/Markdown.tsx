@@ -18,7 +18,7 @@ export const Markdown = props => {
             components={{
                 a: ({ node, href, ...rest }) => {
                     return href.startsWith("http") || href.startsWith("mailto") ? (
-                        <a href={href} {...rest} target="_blank" />
+                        <a className="markdown-link" href={href} {...rest} target="_blank" />
                     ) : props.link ? (
                         props.link({ href, ...rest })
                     ) : (

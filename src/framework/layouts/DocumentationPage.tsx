@@ -1,5 +1,5 @@
 import { ContexualLeftNav } from "../nav/ContexualLeftNav"
-import styled from "styled-components"
+import styled, {useTheme} from "styled-components"
 import { BaseLayout } from "./BaseLayout"
 import { Section } from "../components/Section"
 import * as React from "react"
@@ -28,7 +28,7 @@ const StyledDocumentationPage = styled.div`
         flex-grow: 80;
         min-width: 0; // as above
 
-        background: ${props => props.theme.color.LightGrey};
+        background: ${props => props.theme.colorBgLayout};
 
         h3 {
             padding-top: 5px;
@@ -42,19 +42,23 @@ const StyledDocumentationPage = styled.div`
     }
 `
 
-export const DocumentationPage = ({ left, children, ...props }) => (
-    <BaseLayout {...props}>
-        <ScrollToTopOnMount on={[window.location.pathname]} />
-        <Section background={"White"} expand>
-            <StyledDocumentationPage>
-                <div className="left">
-                    <div className="full">{left}</div>
-                </div>
-                <div className="content">{children}</div>
-            </StyledDocumentationPage>
-        </Section>
-    </BaseLayout>
-)
+export const DocumentationPage = ({ left, children, ...props }) => {
+    const theme=useTheme()
+
+    return (
+        <BaseLayout {...props}>
+            <ScrollToTopOnMount on={[window.location.pathname]} />
+            <Section background={theme.colorBgContainer} expand>
+                <StyledDocumentationPage>
+                    <div className="left">
+                        <div className="full">{left}</div>
+                    </div>
+                    <div className="content">{children}</div>
+                </StyledDocumentationPage>
+            </Section>
+        </BaseLayout>
+    )
+}
 
 export const TypedocPage = props => <DocumentationPage left={<ContexualLeftNav />} {...props} />
 export const TypedocPageDetached = ({ children }) => children

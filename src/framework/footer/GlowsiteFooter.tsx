@@ -12,7 +12,7 @@ const StyledFooter = styled.div`
 `
 
 const StyledLink = styled(Link)`
-    color: ${props => props.theme.color.MainPurple};
+    color: ${props => props.theme.colorPrimary};
 
     &:hover {
         color: #391085;
@@ -20,7 +20,7 @@ const StyledLink = styled(Link)`
 `
 
 const StyledLinkLookalike = styled.div`
-    color: ${props => props.theme.color.MainPurple};
+    color: ${props => props.theme.colorPrimary};
     cursor: pointer;
 
     &:hover {

@@ -14,7 +14,8 @@ export const CarouselSettings = {
     dots: true,
     pauseOnHover: true,
     infinite: true,
-    speed: 5000,
+    speed: 1000,
+    autoplaySpeed: 6000,
     centerMode: false,
     autoplay: true,
     fade: true,
@@ -35,7 +36,7 @@ const CarouselWrapper = styled(Carousel)`
         width: 7px !important;
         height: 7px !important;
         border-radius: 100% !important;
-        background: ${props => props.theme.color.MainPurple} !important;
+        background: ${props => props.theme.colorPrimary} !important;
     }
 `
 

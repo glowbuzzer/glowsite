@@ -1,21 +1,17 @@
 import * as React from "react"
 import {FC, ReactNode} from "react"
-import { GbColours } from "../GlowsiteTheme"
 import styled from "styled-components"
 import { css } from "styled-components"
 
-type Colors = keyof typeof GbColours
-
 const StyledSection = styled.div<{
-    dataColor: Colors
+    dataColor: string
     dataInverted: boolean
     dataSpaced: boolean
     dataGuttered: boolean
     dataExpand: boolean
 }>`
-    label: Section;
     display: flex;
-    background: ${props => props.theme.color[props.dataColor] || "inherit"};
+    background: ${props => props.dataColor || "inherit"};
 
     > .section {
         max-width: ${props => props.theme.breaks.mainWidth};
@@ -61,7 +57,8 @@ const StyledSection = styled.div<{
             h2,
             h3,
             h4,
-            h5 {
+            h5,
+            a {
                 // override the antd black
                 color: white;
             }
@@ -69,7 +66,7 @@ const StyledSection = styled.div<{
 `
 
 type SectionProps = {
-    background?: Colors
+    background?: string
     inverted?: boolean
     spaced?: boolean
     guttered?: boolean

@@ -1,20 +1,6 @@
 import * as React from "react"
-import styled, { DefaultTheme, ThemeProvider } from "styled-components"
-import { ConfigProvider, GlobalToken, theme, ThemeConfig } from "antd"
-
-export const GbColours = {
-    White: "#ffffff",
-    LightGrey: "#f9f9f9",
-    BackgroundGrey: "#f0f0f0",
-    MainPurple: "#9254de",
-    TopNav: "#d9d9d9",
-    BackgroundDarkSection: "#22075e",
-    BackgroundCodeBlock: "rgba(0,0,0,0.75)"
-}
-
-const Background = styled.div`
-    background: ${GbColours.BackgroundGrey};
-`
+import styled from "styled-components"
+import { GlobalToken } from "antd"
 
 export const AppStyle = styled.div`
     font-family: Roboto, sans-serif;
@@ -69,7 +55,7 @@ export const AppStyle = styled.div`
         white-space: pre;
 
         > div {
-            background: ${GbColours.BackgroundCodeBlock} !important;
+            background: ${props => props.theme.colorText} !important;
         }
     }
 
@@ -84,7 +70,7 @@ export const AppStyle = styled.div`
 
         pre {
             color: rgba(255, 255, 255, 0.7);
-            background: ${GbColours.BackgroundCodeBlock};
+            background: ${props => props.theme.colorText};
             padding: 10px;
         }
     }
@@ -154,8 +140,12 @@ export const AppStyle = styled.div`
         border-top-color: rgba(0, 0, 0, 0.2);
     }
 
-    a {
-        color: ${props => props.theme.colorLink};
+    .markdown-link {
+        color: ${props => props.theme.colorPrimary};
+
+        &:hover {
+            color: ${props => props.theme.colorPrimaryHover};
+        }
     }
 
     a.broken {
@@ -170,46 +160,18 @@ export const AppStyle = styled.div`
 `
 
 export const AppTheme = {
-    color: {
-        ...GbColours
-    },
+    // this will be merged into the antd token by GlowbuzzerThemeProvider
+    // and made available in the styled components theme for use by components
     breaks: {
         mainWidth: "1400px",
         leftNavCollapse: "768px"
     }
 }
 
-type MergedThemeTypes = typeof AppTheme & GlobalToken
 declare module "styled-components" {
-    interface DefaultTheme extends Readonly<MergedThemeTypes> {}
+    // ensure our additions are available in the styled components theme
+    interface DefaultTheme extends Readonly<typeof AppTheme & GlobalToken> {}
 }
 
-const GlowsiteThemeInner = ({ children }) => {
-    const { token } = theme.useToken()
 
-    const combined_theme = {
-        ...token,
-        ...AppTheme
-    }
 
-    return (
-        <ThemeProvider theme={combined_theme}>
-            <Background>
-                <AppStyle>{children}</AppStyle>
-            </Background>
-        </ThemeProvider>
-    )
-}
-export const GlowsiteTheme = ({ children }) => {
-    const antd_theme: ThemeConfig = {
-        token: {
-            colorPrimary: "rgb(146, 84, 222)",
-            colorLink: "rgb(146, 84, 222)"
-        }
-    }
-    return (
-        <ConfigProvider theme={antd_theme}>
-            <GlowsiteThemeInner>{children}</GlowsiteThemeInner>
-        </ConfigProvider>
-    )
-}

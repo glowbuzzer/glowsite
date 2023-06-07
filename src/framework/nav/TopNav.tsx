@@ -2,7 +2,7 @@ import { useCurrentNav, useRootNav } from "../nav"
 import { Link, useLocation } from "react-router-dom"
 import { Menu, Space, Tooltip } from "antd"
 import * as React from "react"
-import {MouseEvent, useState} from "react"
+import { MouseEvent, useState } from "react"
 import styled from "styled-components"
 
 import { ReactComponent as StandardLogo } from "../../images/logos/small-logo.svg?inline"
@@ -80,8 +80,8 @@ const StyledTopNav = styled.div`
         align-items: center;
         //flex-direction: column;
         gap: 8px;
-        border: 1px solid ${props => props.theme.color.TopNav};
-        color: ${props => props.theme.color.MainPurple};
+        border: 1px solid ${props => props.theme.colorBorder};
+        color: ${props => props.theme.colorPrimary};
         padding: 2px 8px 2px 5px;
 
         .anticon {
@@ -95,14 +95,6 @@ const StyledTopNav = styled.div`
                 font-family: monospace;
             }
         }
-
-        // div {
-        //     color: ${props => props.theme.color.MainPurple};
-        //     border: 1px dashed ${props => props.theme.color.MainPurple};
-        //     line-height: 1em;
-        //     //border-radius: 14px;
-        //     padding: 0 5px;
-        // }
     }
 
     @media (max-width: 1010px) {
@@ -198,7 +190,12 @@ function send_gtag(to: string) {
     })
 }
 
-export const TopNav = ({ hideVersionLink }: { hideVersionLink?: boolean }) => {
+type TopNavProps = {
+    hideVersionLink?: boolean
+    hideSearch?: boolean
+}
+
+export const TopNav = ({ hideVersionLink, hideSearch }: TopNavProps) => {
     const [showMenu, setShowMenu] = useState(false)
 
     const node = useCurrentNav()
@@ -212,7 +209,7 @@ export const TopNav = ({ hideVersionLink }: { hideVersionLink?: boolean }) => {
 
     return (
         <StyledTopNav>
-            <Section background={"BackgroundGrey"} guttered>
+            <Section guttered>
                 <div className="nav-wide">
                     {downloads_site ? (
                         <a href="https://www.glowbuzzer.com">
@@ -229,7 +226,11 @@ export const TopNav = ({ hideVersionLink }: { hideVersionLink?: boolean }) => {
                     <Space size="middle" align="center">
                         {hideVersionLink || (
                             <Tooltip title="Go to Downloads">
-                                <Link className="latest-release" to="/downloads" onClick={() => send_gtag("/downloads")}>
+                                <Link
+                                    className="latest-release"
+                                    to="/downloads"
+                                    onClick={() => send_gtag("/downloads")}
+                                >
                                     <DownloadOutlined />
                                     <div>
                                         <div>GBC {LATEST_VERSIONS.gbc_version}</div>
@@ -247,7 +248,7 @@ export const TopNav = ({ hideVersionLink }: { hideVersionLink?: boolean }) => {
                         <a href={"https://www.youtube.com/channel/UCd5lSqWK5Ep4su1sHx6kkUA"}>
                             <YoutubeOutlined style={{ fontSize: "24px", color: "#9254de" }} />
                         </a>
-                        <Search />
+                        {!hideSearch && <Search />}
                     </Space>
                 </div>
                 <div className="nav-narrow">
@@ -262,7 +263,7 @@ export const TopNav = ({ hideVersionLink }: { hideVersionLink?: boolean }) => {
                 </div>
             </Section>
             {showMenu && (
-                <Section background={"White"}>
+                <Section>
                     <div className="nav-narrow-open">
                         <NavMenu mode="inline" onNavigate={() => setShowMenu(false)} />
                     </div>

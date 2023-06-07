@@ -1,47 +1,23 @@
 import * as React from "react"
-import { useRef, useState, useEffect, Dispatch, SetStateAction, Suspense } from "react"
+import { Dispatch, SetStateAction, Suspense, useRef, useState } from "react"
 import * as THREE from "three"
 import {
     Box,
-    Sphere,
-    PivotControls,
-    Html,
+    Environment,
     OrbitControls,
     PerspectiveCamera,
-    useGLTF,
     useContextBridge,
-    MeshRefractionMaterial,
-    CubeCamera,
-    AccumulativeShadows,
-    RandomizedLight,
-    Environment,
-    Trail,
+    useGLTF,
     useTexture
 } from "@react-three/drei"
-import { RGBELoader } from "three-stdlib"
 // import { RGBELoader } from "three/examples/jsm/loaders/RGBELoader";
-import { useThree, useLoader, Canvas } from "@react-three/fiber"
+import { Canvas, useFrame as useFrameR3f } from "@react-three/fiber"
 import { ReactReduxContext } from "react-redux"
-
-import { GbColours, GlowsiteTheme } from "../../../framework/GlowsiteTheme"
-import { useFrame as useFrameR3f } from "@react-three/fiber"
-
-import * as KIN from "./RobotKin"
 import * as MOVE from "./Moves"
 
 import { BasicRobot, RobotKinematicsChainElement } from "@glowbuzzer/controls/scene"
 
-import { EffectComposer, Outline, SelectiveBloom, Bloom } from "@react-three/postprocessing"
-
-import {
-    useFrame,
-    useJointPositions,
-    useKinematicsConfiguration,
-    useToolIndex,
-    useConnection,
-    useFrames,
-    useKinematicsCartesianPosition
-} from "@glowbuzzer/store"
+import { useFrame, useKinematicsConfiguration, useToolIndex } from "@glowbuzzer/store"
 import { SpinThreeDimensional } from "../spin/Spin"
 
 const DEG90 = Math.PI / 2

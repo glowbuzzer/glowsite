@@ -8,7 +8,7 @@ const StyledDiv = styled.div`
     background: white;
 
     .top-section-container {
-        background: ${props => props.theme.color.MainPurple};
+        background: ${props => props.theme.colorPrimary};
 
         .top-section {
             display: flex;
@@ -27,7 +27,6 @@ const StyledDiv = styled.div`
                 .logo {
                     width: 100px;
                 }
-              // fill: ${props => props.theme.color.MainPurple};
               .title {
                     font-size: 2.5rem;
                     line-height: 2.5rem;
@@ -38,7 +37,7 @@ const StyledDiv = styled.div`
             }
 
             .right {
-                box-shadow: inset 0 0 15px 15px ${props => props.theme.color.MainPurple};
+                box-shadow: inset 0 0 15px 15px ${props => props.theme.colorPrimary};
                 width: 100px;
                 min-height: 400px;
                 //background: white;

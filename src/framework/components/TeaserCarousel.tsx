@@ -4,11 +4,12 @@ import { Carousel } from "antd"
 import { Link } from "react-router-dom"
 import { ArrowRightOutlined } from "@ant-design/icons"
 import styled from "styled-components"
-import {GbColours} from "../GlowsiteTheme";
 
 const StyledCarousel = styled(Carousel)`
+  border-top: 1px solid ${props => props.theme.colorBorder};
+  border-bottom: 1px solid ${props => props.theme.colorBorder};
   padding: 30px 0;
-  background: ${GbColours.BackgroundDarkSection};
+  background: ${props => props.theme.colorBgContainer};
 
   .slick-slide {
     padding: 20px 20px;
@@ -26,7 +27,7 @@ const StyledCarouselItem = styled.div`
   border-radius: 15px;
   user-select: none;
   cursor: default;
-  background: ${GbColours.LightGrey};
+  background: ${props => props.theme.colorBgLayout};
 
   .wrapper {
     .title {

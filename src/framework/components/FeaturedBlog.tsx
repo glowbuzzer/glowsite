@@ -66,7 +66,7 @@ const CarouselWrapper = styled(Carousel)`
         width: 7px !important;
         height: 7px !important;
         border-radius: 100% !important;
-        background: ${props => props.theme.color.MainPurple} !important;
+        background: ${props => props.theme.colorPrimary} !important;
     }
 
     .slick-track {

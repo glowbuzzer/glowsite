@@ -1,21 +1,18 @@
 import { LandingPageLink } from "../../framework/conversions/LandingPageLink"
 import * as React from "react"
-import { Suspense } from "react"
-import { ReactComponent as Logo } from "../../images/logos/tiny-logo.svg?inline"
 import { Image } from "../../framework/components"
 import screenShot from "./skew_points.png?glowsite"
-import Icon from "@ant-design/icons"
 import { StarFilled } from "@ant-design/icons"
 import AniLogo from "../utils/aniLogo/aniLogo"
 import { Col, Row } from "antd"
 
 import { GlowbuzzerApp } from "@glowbuzzer/controls/app"
 
-import { GbColours, GlowsiteTheme } from "../../framework/GlowsiteTheme"
-import styled from "styled-components"
+import { useTheme } from "styled-components"
 import Robot from "./Robot"
 
 const RobotLandingPage = () => {
+    const theme = useTheme()
     return (
         <GlowbuzzerApp appName={"glowsite"}>
             <div>
@@ -23,7 +20,7 @@ const RobotLandingPage = () => {
                     <div className="top-section">
                         <div className="left">
                             <div className="logo">
-                                <AniLogo color={GbColours.MainPurple} />
+                                <AniLogo color={theme.colorPrimary} />
                             </div>
                             <div className="title">
                                 Control robots with a web-stack motion control
@@ -50,7 +47,7 @@ const RobotLandingPage = () => {
                             </div>
                         </div>
                         <div className="right">
-                            <Robot color={GbColours.MainPurple} />
+                            <Robot color={theme.colorPrimary} />
                         </div>
                     </div>
                 </div>

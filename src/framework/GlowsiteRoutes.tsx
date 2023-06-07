@@ -8,6 +8,7 @@ import { BaseLayout } from "./layouts/BaseLayout"
 import { Loading } from "./components/Loading"
 import { BlogListByTag } from "../pages/blogs/BlogListByTag"
 import { useGlowsiteRoutes } from "./nav"
+import {ThemeViewer} from "./ThemeViewer";
 
 /**
  * Emits all site routes
@@ -61,6 +62,10 @@ export const GlowsiteRoutes = () => {
         {
             path: "/blogs/tag/:tag",
             element: <BlogListByTag />
+        },
+        {
+            path: "/theme",
+            element: <ThemeViewer/>
         }
     ])
 }

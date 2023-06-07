@@ -13,6 +13,7 @@ import { root } from "../../src/nav"
 
 import "prismjs/themes/prism-tomorrow.css"
 import "antd/dist/reset.css"
+import {Button} from "antd";
 
 const rootNode = createRoot(document.getElementById("app"))
 rootNode.render(

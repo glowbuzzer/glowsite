@@ -1,6 +1,6 @@
 import { BaseLayout } from "./BaseLayout"
 import { Button } from "antd"
-import styled from "styled-components"
+import styled, {useTheme} from "styled-components"
 import { RightCircleOutlined } from "@ant-design/icons"
 import { FeaturedBlog } from "../components/FeaturedBlog"
 import { ReactComponent as CoordinatedIcon } from "../../images/home_icons/coordinated-icon.svg?inline"
@@ -68,6 +68,8 @@ const HexImageSection = styled.div`
 `
 
 export const HomePage = () => {
+    const theme=useTheme()
+
     return (
         <BaseLayout>
             <HomeCarousel />
@@ -133,11 +135,15 @@ export const HomePage = () => {
                 </Section>
             </HexImageSection>
 
-            <Section background={"White"} spaced>
+            <Section background={theme.colorBgContainer} spaced>
                 <YoutubeEmbed embedId="LPFD4kW1ILw" />
             </Section>
 
-            <Section background={"BackgroundDarkSection"} inverted guttered>
+            <Section
+                background={theme.colorPrimaryTextActive}
+                inverted
+                guttered>
+
                 <HeroSection>
                     <main>
                         <h1>Get started</h1>
@@ -152,7 +158,7 @@ export const HomePage = () => {
                                 href="/get-started/simulation"
                                 icon={<RightCircleOutlined />}
                             >
-                                Find out more{" "}
+                                Find out more
                             </Button>
                         </p>
                     </main>
@@ -329,7 +335,9 @@ export const HomePage = () => {
                 </FeaturesSection>
             </Section>
 
-            <Section background={"BackgroundDarkSection"} inverted spaced guttered>
+            <Section
+                background={theme.colorPrimaryTextActive}
+                inverted spaced guttered>
                 <HeroSection>
                     <main>
                         <h1>Blogs that might interest you</h1>

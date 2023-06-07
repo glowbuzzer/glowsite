@@ -48,7 +48,7 @@ const StandardCarouselStyle = styled.div<CarouselStyleProps>`
     width: 7px !important;
     height: 7px !important;
     border-radius: 100% !important;
-    background: ${props => props.theme.color.MainPurple} !important;
+    background: ${props => props.theme.colorPrimary} !important;
   }
 `
 
