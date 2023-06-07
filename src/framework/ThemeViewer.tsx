@@ -31,7 +31,6 @@ export const ThemeViewer=() => {
         .filter(([k, v]) => k.startsWith("color"))
 
     return <BaseLayout>
-        <TopNav/>
         <Section spaced>
             <h1>Glowsite Theme Colours</h1>
             <StyledDiv>{items.map(([name, v]) => {
