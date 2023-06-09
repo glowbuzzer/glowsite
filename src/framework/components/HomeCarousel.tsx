@@ -55,6 +55,7 @@ const CarouselItem = styled(CarouselDiv)<{ backgroundImage: string }>`
     .carousel-item {
         text-align: left;
         display: inline-flex;
+        display: inline-flex;
         max-width: 1400px;
         gap: 40px;
         justify-content: center;
@@ -64,11 +65,12 @@ const CarouselItem = styled(CarouselDiv)<{ backgroundImage: string }>`
         h1 {
             margin: 0 0 18px 0;
             font-size: 3em;
+            color: #333333;
         }
 
         p {
             font-size: 1.4em;
-            color: black;
+            color: #333333;
         }
 
         img {

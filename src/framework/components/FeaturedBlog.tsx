@@ -93,18 +93,18 @@ const CarouselDiv = styled.div`
     height: 100%;
     padding: 10px;
     text-align: center;
-    color: rgba(0, 0, 0, 0.9);
-    background: white;
+    color: ${props => props.theme.colorText};
+    background: ${props => props.theme.colorBgElevated};
 
     :hover {
-        background: rgba(0, 0, 0, 0.05);
+        background: ${props => props.theme.colorPrimaryBg};
     }
 
     a {
         display: flex;
         flex-direction: column;
         height: 100%;
-        color: black !important;
+        color: ${props => props.theme.colorText};
     }
 
     figure {
