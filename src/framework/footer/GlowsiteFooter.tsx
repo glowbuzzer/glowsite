@@ -6,8 +6,8 @@ import { Link } from "react-router-dom"
 import { useCookieConsent } from "../providers/CookieConsentProvider"
 
 const StyledFooter = styled.div`
-    padding: 20px 100px;
-    background-color: #d9d9d9;
+    border-top: 1px solid ${props => props.theme.colorBorder};
+    padding: 10px 100px;
     text-align: center;
 `
 
@@ -46,7 +46,7 @@ const CopyrightVersion = () => {
     // @ts-ignore
     const version = import.meta.env.VITE_GLOWBUZZER_VERSION || "dev"
 
-    return <span>©2023 by glowbuzzer All Rights Reserved. Build {version}</span>
+    return <span className="copyright">©2023 by glowbuzzer All Rights Reserved. Build {version}</span>
 }
 
 const MobileFooter = ({}) => (

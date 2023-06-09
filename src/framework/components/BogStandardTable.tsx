@@ -7,7 +7,7 @@ import { RowProps as AntRowProps } from "antd/lib/row/index"
 import Tooltip from "antd/lib/tooltip"
 
 export const StandardHeaderRowStyled = styled(Row)`
-    background: #efdbff;
+    background: ${props => props.theme.colorPrimaryBorder};
     font-weight: bold;
     margin-top: 20px;
     padding-top: 5px;

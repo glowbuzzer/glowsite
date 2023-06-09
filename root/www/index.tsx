@@ -11,20 +11,18 @@ import { TopNav } from "../../src/framework/nav/TopNav"
 
 import { root } from "../../src/nav"
 
-import "prismjs/themes/prism-tomorrow.css"
 import "antd/dist/reset.css"
-import {Button} from "antd";
 
 const rootNode = createRoot(document.getElementById("app"))
 rootNode.render(
     <BrowserRouter>
-        <ChatlioFirstMessageConversion />
+        <ChatlioFirstMessageConversion/>
         <CookieConsentProvider>
-            <GlowbuzzerThemeProvider theme={AppTheme}>
+            <GlowbuzzerThemeProvider theme={AppTheme as any}>
                 <AppStyle>
                     <NavProvider root={root}>
-                        <TopNav />
-                        <GlowsiteRoutes />
+                        <TopNav/>
+                        <GlowsiteRoutes/>
                     </NavProvider>
                 </AppStyle>
             </GlowbuzzerThemeProvider>

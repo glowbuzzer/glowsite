@@ -7,7 +7,7 @@ export const title = "GBC Schema"
 
 const StyledDiv = styled.div`
     .group {
-        column-count: 4;
+        column-count: 3;
         column-width: 250px;
     }
 `
@@ -35,7 +35,7 @@ export default function GbcSchema() {
                     <div className="group">
                         {groups[k].map(item => (
                             <div className="item" key={item.name}>
-                                <Link to={"/docs/types/" + item.name}>{item.name}</Link>
+                                <Link className="markdown-link" to={"/docs/types/" + item.name}>{item.name}</Link>
                             </div>
                         ))}
                     </div>

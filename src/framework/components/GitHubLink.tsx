@@ -14,7 +14,7 @@ const StyledDiv = styled.div`
     padding-top: 20px;
     padding-bottom: 20px;
     margin-bottom: 20px;
-    background: white;
+    background: ${props => props.theme.colorBgContainer};
 
     .col {
         padding: 10px;

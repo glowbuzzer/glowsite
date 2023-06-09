@@ -13,7 +13,6 @@ import { Menu } from "antd"
 import {
     ArrayType,
     Comment,
-    CommentDisplayPart,
     DeclarationReflection,
     IntersectionType,
     IntrinsicType,
@@ -27,9 +26,8 @@ import {
     UnionType
 } from "typedoc"
 import styled from "styled-components"
-import { useParams } from "react-router"
-import { relative_path } from "./util"
-import { useNavBySlug, useRootNav } from "../framework/nav"
+import { kindOf, ReflectionKindLocal } from "./util"
+import { useNavBySlug } from "../framework/nav"
 import { ScrollToTopOnMount } from "../framework/components/ScrollToTopOnMount"
 
 const StyledRender = styled.div`
@@ -41,19 +39,21 @@ const StyledRender = styled.div`
         filter: brightness(0.75);
     }
 
-    .property,
-    .param,
-    .tuple-item {
-        display: block;
-        padding-left: 20px;
+    .synopsis {
+        .property,
+        .param,
+        .tuple-item {
+            display: block;
+            padding-left: 20px;
 
-        :only-child {
-            //display: inline;
-            //padding-left: 0;
-        }
+            :only-child {
+                //display: inline;
+                //padding-left: 0;
+            }
 
-        :not(:last-child):after {
-            content: ", ";
+            :not(:last-child):after {
+                content: ", ";
+            }
         }
     }
 
@@ -104,12 +104,12 @@ const StyledRender = styled.div`
         .text {
             font-family: Roboto, sans-serif;
             font-size: 0.9em;
-            border-left: 2px solid rgba(0, 0, 0, 0.08);
+            border-left: 2px solid ${props => props.theme.colorBorder};
             margin-top: 14px;
             padding-top: 0;
             padding-bottom: 0;
             padding-left: 8px;
-            color: rgba(0, 0, 0, 0.6);
+            color: ${props => props.theme.colorTextSecondary};
 
             p:only-child {
                 margin: 0;
@@ -119,19 +119,19 @@ const StyledRender = styled.div`
         .text {
             padding-top: 10px;
             padding-bottom: 3px;
-          
+
             p {
-              margin: 0
+                margin: 0;
             }
-          
+
             p + p {
-              margin-top: 10px;
+                margin-top: 10px;
             }
         }
-      
+
         .param .text {
-          padding-top: 5px;
-          margin-top: 0;
+            padding-top: 5px;
+            margin-top: 0;
         }
     }
 
@@ -147,11 +147,15 @@ const StyledRender = styled.div`
 export const TypedocLink = ({ name, content = undefined }) => {
     const generic_path = "/docs/types/:name"
     const node = useNavBySlug(name, generic_path)
-    if ( !node ) {
+    if (!node) {
         return name
     }
     const to = node.path === generic_path ? generic_path.replace(":name", name) : node.path
-    return <Link to={to}>{content || name}</Link>
+    return (
+        <Link className="markdown-link" to={to}>
+            {content || name}
+        </Link>
+    )
 }
 
 const TypedocLiteral = ({ l }: { l: LiteralType }) => {
@@ -224,8 +228,8 @@ const TypedocDeclaration = ({
     d: DeclarationReflection
     includeSynopsis?: boolean
 }) => {
-    switch (d.kindString) {
-        case "Type literal":
+    switch (d.kind as unknown as ReflectionKindLocal) {
+        case ReflectionKindLocal.TypeLiteral:
             if (d.signatures?.[0]) {
                 return (
                     <TypedocSignature
@@ -268,7 +272,7 @@ const TypedocDeclaration = ({
                 </span>
             )
 
-        case "Property":
+        case ReflectionKindLocal.Property:
             return (
                 <>
                     {d.name}
@@ -277,10 +281,7 @@ const TypedocDeclaration = ({
                 </>
             )
 
-        case "Accessor":
-            // if (!d.getSignature) {
-            //     return null // <div className="debug">{d.name} has no get signature (inherited?)</div>
-            // }
+        case ReflectionKindLocal.Accessor:
             return (
                 <>
                     <Synopsis item={d.getSignature} />
@@ -288,10 +289,10 @@ const TypedocDeclaration = ({
                 </>
             )
 
-        case "Constructor":
+        case ReflectionKindLocal.Constructor:
             return <TypedocConstructor s={d.signatures[0]} />
 
-        case "Method":
+        case ReflectionKindLocal.Method:
             return (
                 <TypedocSignature
                     s={d.signatures?.[0]}
@@ -300,8 +301,8 @@ const TypedocDeclaration = ({
                 />
             )
 
-        case "Interface":
-        case "Class":
+        case ReflectionKindLocal.Interface:
+        case ReflectionKindLocal.Class:
             if (d.children?.length) {
                 return (
                     <>
@@ -329,7 +330,7 @@ const TypedocDeclaration = ({
             return <>Interface no children</>
 
         default:
-            return <span>@@{d.kindString}</span>
+            return <span>@@{kindOf(d.kind)}</span>
     }
 }
 
@@ -366,10 +367,10 @@ const TypedocType = ({ t, includeSynopsis = true }: { t: Type; includeSynopsis?:
                 </span>
             )
         case "reference": {
-            const r = t as ReferenceType & { id? }
+            const r = t as ReferenceType & { target? }
             return (
                 <span className="typedoc type reference">
-                    {r.id ? <TypedocLink name={r.name} /> : <span>{r.name}</span>}
+                    {r.target ? <TypedocLink name={r.name} /> : <span>{r.name}</span>}
                     <TypedocTypeArguments args={r.typeArguments} />
                 </span>
             )
@@ -438,8 +439,8 @@ const TypedocType = ({ t, includeSynopsis = true }: { t: Type; includeSynopsis?:
         case "predicate":
         case "query":
         case "rest":
-        case "template-literal":
-        case "named-tuple-member":
+        case "templateLiteral":
+        case "namedTupleMember":
         case "typeOperator":
         case "unknown":
         default:
@@ -682,8 +683,7 @@ const Class = ({ item }: { item: DeclarationReflection }) => {
                         extends{" "}
                         {supers.map(s => (
                             <TypedocLink key={s} name={s} />
-                        ))}
-                        {" "}
+                        ))}{" "}
                     </span>
                 )}
                 <TypedocDeclaration d={item} />
@@ -694,11 +694,11 @@ const Class = ({ item }: { item: DeclarationReflection }) => {
 }
 
 const render_component = {
-    "Type alias": TypeAlias,
-    Interface,
-    Enumeration,
-    Function,
-    Class
+    [ReflectionKindLocal.TypeAlias]: TypeAlias,
+    [ReflectionKindLocal.Interface]: Interface,
+    [ReflectionKindLocal.Enum]: Enumeration,
+    [ReflectionKindLocal.Function]: Function,
+    [ReflectionKindLocal.Class]: Class
 }
 
 export default ({ title, slug, standaloneTypes }) => {
@@ -711,8 +711,7 @@ export default ({ title, slug, standaloneTypes }) => {
     }
 
     const Render =
-        render_component[item.kindString] ||
-        (() => <h4>No render component for {item.kindString}</h4>)
+        render_component[item.kind] || (() => <h4>No render component for {kindOf(item.kind)}</h4>)
 
     return standaloneTypes ? (
         <DocumentationPage
@@ -727,7 +726,7 @@ export default ({ title, slug, standaloneTypes }) => {
         >
             <ScrollToTopOnMount on={[item.name]} />
             <h1>
-                {item.name} ({item.kindString})
+                {item.name} ({kindOf(item.kind)})
             </h1>
 
             <StyledRender>
@@ -738,7 +737,7 @@ export default ({ title, slug, standaloneTypes }) => {
         <div>
             <ScrollToTopOnMount on={[item.name]} />
             <h1>
-                {item.name} ({item.kindString})
+                {item.name} ({kindOf(item.kind)})
             </h1>
 
             <StyledRender>

@@ -29,7 +29,7 @@ export default ({ subtitle }) => {
             <div className="items">
                 <div className="item">
                     <div className="title">By email</div>
-                    <div><a href="mailto:hello@glowbuzzer.com">hello@glowbuzzer.com</a></div>
+                    <div><a className="markdown-link" href="mailto:hello@glowbuzzer.com">hello@glowbuzzer.com</a></div>
                 </div>
                 <div className="item">
                     <div className="title">By post</div>

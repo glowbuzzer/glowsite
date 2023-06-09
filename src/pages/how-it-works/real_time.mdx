@@ -19,6 +19,24 @@ We allow deployment of code into four distinct tiers as described below. Importa
 application but much of the complex control logic and workflow can be. This provides a flexible and rapid development environment for most of your application, while still
 allowing time critical functions to be deployed where they are needed.
 
+Tier 1 - React application
+
+: Response time between 10 milliseconds & 1 second (usually fast as PCs are generally very quick but this is
+not guaranteed)
+
+Tier 2 - Javascript code running inside the real-time control (&gbc)
+
+: Response time around 5 milliseconds
+
+Tier 3 - C code hooked into the real-time control (&gbc)
+
+: Response time guaranteed to be your cycle time (4 milliseconds down to 0.5 milliseconds)
+
+Tier 4 - C code running in &gbeml or &gbeml
+
+: Response time guaranteed to be your cycle time (4 milliseconds down to 0.5 milliseconds)
+
+{/*
 <div>
     <Row>
         <Col lg={18} xs={24} style={{background: '#b37feb', padding: '5px 5px'}}>
@@ -50,6 +68,7 @@ allowing time critical functions to be deployed where they are needed.
         </Col>
     </Row>
 </div>
+*/}
 
 You should architect your application carefully based on the response time needed to make sure code runs in the right tier. Usually 99% of the code lives in Tier 1 and only small specialised functions live in the other tiers.
 

@@ -1,44 +1,45 @@
 import {Tldr} from "../../../framework/components/Tldr"
 
 # {props.subtitle}
-<Tldr>
-    - Options to configure network (port etc.)
-    - Options to configure log levels
-    - Options to specific log categories
-    - Options to specific the config file to be used
-</Tldr>
 
-## Command line options for GBC
+## Usage
 
-To run GBC, usually `./GBC --config CONFIG_FILE_NAME` is enough.
+```
+GBC [OPTIONS]
+```
 
-You can optionally specify command line arguments of:
+## Options
 
-`-pPORT`
-`-sSHARED_MEMORY_NAME`
-`gSIGNAL`
-`-lLOG_LVL`
-`-dLOG_CAT`
-`-cCONFIG_FILE_NAME`
+`-p, --port <port>`
 
-`PORT` - the default HTTP server `PORT` of 9001, if you need to change it use this command line argument
+: The HTTP (and WebSocket) port to listen on. Default is 9001.
 
-`SHARED_MEMORY_NAME` - the default is "gbc_shared_mem", only in advanced scenarios should this be changed
+`-c, --config <config>`
 
-`SIGNAL` - the default is 29 (SIG I/O POSSIBLE), only in advanced scenarios should this be changed
+: The JSON file to use for configuration. If not specified, &gbc will start with a minimal configuration. Configuration can be pushed to &gbc after connecting from &gbr.
 
-`CONFIG_FILE_NAME` - specifies the JSON file name of the config that GBC will use
+`-s, --shared-memory <shared-memory>`
 
-`LOG_LVEL` sets logging level. The following log levels (in order of increasing verbosity) are:
+: The default is "gbc_shared_mem", only in advanced scenarios should this be changed.
 
-* LOG_LVL_FATAL=0
-* LOG_LVL_ERROR=1
-* LOG_LVL_WARNING=2
-* LOG_LVL_INFO=3
-* LOG_LVL_DEBUG=4
-* LOG_LVL_TRACE=5
+`-g, --signal <signal>`
 
-`LOG_CAT` sets the category of logs outputted. The following categories are supported:
+: The default is 29 (SIG I/O POSSIBLE), only in advanced scenarios should this be changed.
+
+`-l, --log-level <log-level>`
+
+: Sets logging level (integer). The following log levels (in order of increasing verbosity) are:
+
+    * `0` - FATAL
+    * `1` - ERROR
+    * `2` - WARNING
+    * `3` - INFO
+    * `4` - DEBUG
+    * `5` - TRACE
+
+`-d, --log-category <log-category>`
+
+: Sets the categories of logging desired (comma separated). The following categories are supported:
 
     * `WS_LOG` - Websockets log enable
     * `JS_LOG` - JavaScript log enable
@@ -57,4 +58,5 @@ You can optionally specify command line arguments of:
     * `KC_LOG` - kinematics configuration log enable
     * `STREAM_LOG` - stream log enable
     * `MACHINE_LOG` - machine log enable
-    * `ALL_LOG` - All logging categories enabled. This creates a logging avalanche so be careful
+    * `ALL_LOG` - All logging categories enabled. This creates a lot of logging so should generally not be used
+

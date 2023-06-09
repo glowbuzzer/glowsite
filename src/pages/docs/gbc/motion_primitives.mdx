@@ -1,7 +1,7 @@
 import {Tldr} from "../../../framework/components/Tldr"
 import { Link } from "react-router-dom"
 import {GlowsiteLink} from "../../../framework";
-
+import {TypedocLink} from "../../../typedoc/TypedocItem";
 
 # {props.subtitle}
 <Tldr>
@@ -12,61 +12,73 @@ import {GlowsiteLink} from "../../../framework";
 
 ## Introduction
 
-&gbc has a sophisticated motion control at its heart.
-
-With &gbc we can control:
+&gbc has a sophisticated motion control at its heart. This allows you to control the motion of joints directly and to control the motion of one or more kinematics configurations in 3D space (coordinated moves).
 
 * Single joint motion control - for example, move a joint to a position, move a joint at velocity
-* Multiple joints in master/slave - for example, move joint 1 at twice the velocity of joint 2
 * Multiple joints in co-ordinated motion in 3D space - for example, move a tool through 3D space along a line or arc
 
-Within &gbc motion primitives exist. These are fundamental ways to move joints and kinematics configurations: for example `MoveJointsAtVelocity` and `moveVectorAtVelocity`.
+&gbc provides a number of motion primitives to enable different kinds of motion. These can be invoked in different ways depending on your use case.
 
 ## Interacting with the &gbc motion primitives
 
-Motion primitives are interacted with within &gbt in different ways. Using Tiles, through the Hooks API and through the Websockets API.
+Motion primitives can be invoked in different ways. Ultimately they are all sent to &gbc as JSON over the &ws interface, but there are a number of ways to do this.
 
-### **Tiles** - you can add pre-built tiles like `JogCartesianTile`, `GCodeTile` etc. to your React project which give you an "out of the box" way to invoke motion primitives.
+### Using our existing React front-end visual components (tiles)
 
-The `JogJointsTile` & `JogCartesian` allows you to move Joints and Kinematics Configurations either to a specific position or be "jogged" manually to a position. See <GlowsiteLink to="/docs/gbr/tiles/JogJointsTile">JogTile</GlowsiteLink> &  <GlowsiteLink to="/docs/gbr/tiles/JogCartesianTile">JogCartesianTile</GlowsiteLink>for more information.
+You can add pre-built tiles such as [CartesianJogTile](/docs/gbr/tiles/CartesianJogTile),
+[JointJogTile](/docs/gbr/tiles/JointJogTile) and [GCodeTile](/docs/gbr/tiles/GCodeTile) to your React project which give you an "out of the box" way to invoke motion primitives.
 
-The `GCodeTile` allows you to stream gcode containing different movement instructions to &gbc. See <GlowsiteLink to="/docs/gbr/tiles/GCodeTile">GCodeTile</GlowsiteLink> for more information.
+For further information, see the [Tiles](/docs/gbr/tiles/overview) reference documentation, or you might want to start with the [Getting Started](/get-started/frontend) guide.
 
-"Under the covers" these tiles use the APIs described in the next sections to perform motion/.
+Under the covers these tiles use the hooks described in the next sections to perform motion.
 
-### **Using the Hooks API** - `SoloActivity`, `useGcode`
+### Using the glowbuzzer hooks
 
-Programmatically, the easiest route to invoke motion primitive from a React Application is to use the `SoloActivityApi`. See <GlowsiteLink to="/docs/types/SoloActivityApi">SoloActivityApi</GlowsiteLink> for more information.
+Programmatically, the easiest route to invoke motion primitive from a React Application is to use the hooks provided by the glowbuzzer library. These are:
 
-The solo activity API is instantiated against a kinematics configuration and has exclusive access to the motion of that KC.
+[useSoloActivity](/docs/gbr/hooks/useSoloActivity)
 
-You can also stream commands using &gcode. For more information, see [Streamed activities](/docs/gbr/gcode).
+: The solo activity API is instantiated against a kinematics configuration and has exclusive access to the motion of that KC. You can start a solo activity, await its completion and then start another.
 
-### **Using the &gbc Websockets interface itself** - Start task, send solo activity, stream
+[useStream](/docs/gbr/hooks/useStream)
 
-You can also invoke motion primitives with the Websockets interface itself.
+: The stream API allows you to stream activities to &gbc. These activities are queued and executed in order. You can start and stop the stream and await the completion of the stream, and you can
+also act on promises fulfilled by each activity in the stream as it completes execution. You can also blend activities in the stream so that the machine does not stop at junctions between activities.
 
-The three possible ways to invoke motion primitives with Webscokets messages are:
+[useGCode](/docs/gbr/hooks/useGCode)
 
-1. Send a SoloActivity
-1. Stream an Activity
-1. Start a task (containing activities) running
+: You can also stream commands using &gcode. The &gcode is converted into activities, so ultimately this is the same as using the stream API, but is more convenient if you are working with &gcode.
+
+[useTask](/docs/gbr/hooks/useTask)
+
+: You can also start a task. A task is a pre-configured set of activities that you can start and stop. You can also await the completion of a task.
+
+All hooks end up sending activities and commands to &gbc over the &ws interface.
+
+### Using the &gbc &ws interface directly
+
+You can also invoke motion primitives with the &ws interface itself.
+
+The three possible ways to invoke motion primitives with &ws messages are:
+
+1. Send a solo activity
+1. Stream an activity
+1. Start a task (containing activities)
 
 #### Send a SoloActivity
 
-Instead of using the UseSoloActivity hooks API, you can compose and send a Websockets message.
+Instead of using the useSoloActivity hook, you can compose and send a &ws message, such as:
 
-The message would look like:
-
-```json{
-    command: {
-        soloActivity: {
-            0: {
-                command: {
-                    tag: 42,
-                    activityType: 3,
-                    moveJoints: {
-                        jointPositionArray: [...]
+```json
+{
+    "command": {
+        "soloActivity": {
+            "0": {
+                "command": {
+                    "tag": 42,
+                    "activityType": 3,
+                    "moveJoints": {
+                        "jointPositionArray": [...]
                     }
                 }
             }
@@ -75,58 +87,99 @@ The message would look like:
 }
 ```
 
-This message will invoke a `moveJoints` against one or more of the joints in the `jointPositionArray`.
+This message will start a `moveJoints` activity against one or more of the joints in the `jointPositionArray`. For the
+list of activity types, see <TypedocLink name="ACTIVITYTYPE"/>.
 
-The `tag` is a unique number that would allow the user of the API to track different moves issued.
+The `tag` property is a unique number that you can use to track progress of the activity in the &gbc status message.
 
-The behaviour of the SoloActvity API is such that if you were to issue another Activity whilst the first is running, the first Activity would be cancelled and second then run.
+The behaviour of the solo activity command is such that, if you were to issue another activity whilst the first is running, the first activity will be cancelled and second started.
 
-The SoloActivity has a one-to-one mapping with a kinematics configuration and this mapping needs to be in your config file. See XXXX
+The index of the solo activity (`0` in this case) has a one-to-one correspondance with your configured kinematics configurations. If you have more than
+one kinematics configuration, you can start a solo activity against each one and they will run concurrently.
 
-See <GlowsiteLink to="/docs/types/SoloActivityCommand">SoloActivityCommand</GlowsiteLink> for more information (this is union of `ActivityStreamItem`).
+See <TypedocLink name="SoloActivityCommand"/> for the full list of activities you can send.
 
 #### Stream an Activity
 
-You can also stream an activity using a websockets message.
+You can also stream an activity using a &ws message.
 
-```json{
-    stream: {
-        soloActivity: {
-            0: {
-                command: {
-                    tag: 42,
-                    activityType: 3,
-                    moveJoints: {
-                        jointPositionArray: [...]
+```json
+{
+    "stream": {
+        "streamIndex": 0,
+        "items": [
+            {
+                "tag": 42,
+                "activityType": 3,
+                "moveJoints": {
+                    "jointPositionArray": [...]
+                }
+            },
+            ...
+        ]
+    }
+}
+```
+
+See <GlowsiteLink to="/docs/types/StreamCommand">StreamCommand</GlowsiteLink> for how to start and stop and pause a stream with the &ws API.
+
+The key differences between using the solo activity API and streaming API are:
+
+1. Streamed activities are queued whereas sending a new solo activity while one is running will cancel the first activity
+2. Streamed motion can be blended (where one motion is blended into the next avoiding the machine stopping at junctions between motions) whereas solo activities can not be blended
+3. You can await the completion of a solo activity before starting another, so that your application is in complete contrl. With streamed activities the next in the queue is executed as soon as activities complete
+
+#### Start a task
+
+Finally, you can start a task with a &ws message. Tasks must be pre-configured in the JSON configuration file with the activities you want to run when you start the task.
+
+For example for a `MoveToPosition` activity within a task you can follow these steps:
+
+1. Add a <TypedocLink name="ActivityConfig"/> entry to the `activity` section of your config file, for example:
+    ```json
+    {
+        "activity": [
+            {
+                "activityType": 3,
+                "moveToPosition": {
+                    "kinematicsConfigurationIndex": 0,
+                    "cartesianPosition": [...],
+                    "moveParamsIndex": 0
+                }
+            }
+        }
+    }
+    ```
+
+2. Add a <TypedocLink name="TaskConfig"/> to the `task` section of your config file, for example:
+    ```json
+    {
+        "task": [
+            {
+                "name": "MyTask",
+                "firstActivityIndex": 0,
+                "activityCount": 1
+            }
+        ]
+    }
+    ```
+3. Start the task with a <TypedocLink name="TaskCommand"/> message.
+    ```json
+    {
+        "command": {
+            "task": {
+                "0": {
+                    "command": {
+                        "taskIndex": 0,
+                        "taskCommand": 1
                     }
                 }
             }
         }
     }
-}
-```
+    ```
 
-See <GlowsiteLink to="/docs/types/StreamCommand">StreamCommand</GlowsiteLink> for how to start and stop a stream with the Websockets API.
-
-The key differences between using the SoloActivity API and Streamed API are:
-
-1. Streamed activities are queued whereas each SoloActivity has a single "slot" to hold the current Activity
-1. Streamed motions can be blended (where one motion is blended into the next avoiding the machine stopping at junctions between motions) whereas SoloActivities can not be blended
-1. You can await the completion of a SoloActivity so that your React control program can continue its flow when completed whereas with streamed activities the next in the queue executed as soon as the first is finished
-
-#### Start a task
-
-Finally, you can start a task with a Websocket message. Tasks must be pre-configured in the (JSON) config file with the activities you want to run when you start the task.
-
-For example for a `MoveToPosition` activity you would start by creating a <GlowsiteLink to="/docs/types/PointsConfig">PointsConfig</GlowsiteLink> item for the positions  you want to move to.
-
-Then, in the <GlowsiteLink to="/docs/types/MoveToPosition">MoveLineConfig</GlowsiteLink> section of your config file you would reference the index of the line object you created together with the index of the kinematicsConfiguration you want to move and the index of the moveParameters (velocity of the move etc.) that you want to use.
-
-Then you would create a task <GlowsiteLink to="/docs/types/TaskConfig">TaskConfig</GlowsiteLink> referencing the index of the Activity you created (`firstActivityIndex`).
-
-The task would be started with <GlowsiteLink to="/docs/types/TaskCommand">TaskCommand message</GlowsiteLink>.
-
-The task would then execute the activity that it contains then the task would terminate.
+The task then executes the activity and terminates.
 
 ## Single joint motion control primitives
 

@@ -20,7 +20,7 @@ export default function ComponentListFromReactDocgen({ title, filter }) {
             title: "Name",
             dataIndex: "name",
             key: "name",
-            render: name => <Link to={relative_path(name)}>{name}</Link>
+            render: name => <Link className="markdown-link" to={relative_path(name)}>{name}</Link>
         },
         {
             title: "Description",

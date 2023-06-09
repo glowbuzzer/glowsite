@@ -46,7 +46,7 @@ Using the `netscan` function of &gbem will help you identify your slave numbers 
 
 import cia_402 from "./cia402.svg"
 
-<img src={cia_402} width="100%" alt={"CiA 402 state machine"}/>
+<img className="bg-light" src={cia_402} width="100%" alt={"CiA 402 state machine"}/>
 
 &gbem has the concept of the **machine state**. This is a CiA 402 state machine and is commanded by &gbc and reports back its status to &gbc over shared memory (DPM) in the status word. These words are accessed through:
 `dpm_in->machine_word` & `dpm_out->machine_word`.

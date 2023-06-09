@@ -10,8 +10,8 @@ const WrapperStyledDiv = styled.div`
         display: inline-flex;
         align-items: center;
         margin: 10px 0;
-        background-color: #d9d9d9;
-        border: 1px solid #d9d9d9;
+        background-color: ${props => props.theme.colorFillContent};
+        border: 1px solid ${props => props.theme.colorBorder};
         border-radius: 15px;
 
         @media (max-width: 767px) {

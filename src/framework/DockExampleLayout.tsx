@@ -12,7 +12,7 @@ import { useMemo } from "react"
 
 const StyledLayout = styled.div`
     > div {
-        outline: 1px solid rgba(0, 0, 0, 0.39);
+        outline: 1px solid ${props => props.theme.colorBorder};
         position: relative;
         width: 100%;
         height: 100%;

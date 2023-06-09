@@ -18,8 +18,7 @@ import InstallGbc from "../../fragments/install_gbc.mdx"
 
 <RunGbc/>
 
-
-## Key things to look out for in the console output.
+## Key things to look out for in the console output
 
 ### emstat paths
 
@@ -31,9 +30,9 @@ The paths &gbc is using to store the emstat files are detailed.
 [INFO  ] GBC: The path we are using for config file [/tmp/config.json]
 ```
 
-### config. JSON file loading details are confirmed.
+### Configuration JSON file loading details are confirmed
 
-&gbc loads its JSON config. files from the file system and these JSON files must be placed in the directory alongside the &gbc executable.
+&gbc loads its JSON configuration files from the file system and these JSON files must be placed in the directory alongside the &gbc executable.
 
 The config.json file is the first one loaded and it may `include` further JSON files.
 
@@ -42,7 +41,6 @@ If the file is found you will see:
 ```text
 [INFO  ] GBC-JS: loading file [configs/my_machine_config.json]
 ```
-
 
 ### Bus cycle time
 
@@ -55,9 +53,9 @@ You can see its value that has been read from the config. json files here:
 ```
 
 
-### Further confirmation of config. settings
+### Further confirmation of configuration settings
 
-Further confirmation of the config. settings is output to console in sections like this:
+Further confirmation of the configuration settings is output to console in sections like this:
 
 ```text
 

@@ -1,7 +1,4 @@
----
-title: Codeblocks
-subtitle: They look great!
----
+import {Markdown} from "../../framework/components/Markdown";
 
 # Basic codeblock
 
@@ -65,3 +62,20 @@ import {CartesianDro} from "@glowbuzzer/controls/dro"
 export default () => <CartesianDro/>
 ```
 
+# Codeblock inside JSX tags
+
+<div>
+    This is inside jsx
+    - Bullet 1
+    - Bullet 2
+
+    ```js
+    function test() {
+        console.log('test');
+    }
+    ```
+</div>
+
+# Using ReactMarkdown
+
+<Markdown children={"```js\nfunction test() {\n  console.log('hello')\n}\n```"}/>

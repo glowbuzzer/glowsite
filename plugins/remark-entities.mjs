@@ -19,6 +19,7 @@ const entities = {
     pi: "Raspberry Pi",
     kc: "kinematics configuration",
     gcode: "G-Code",
+    ws: "WebSockets",
     ...LATEST_VERSIONS
 }
 

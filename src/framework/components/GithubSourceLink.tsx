@@ -12,5 +12,5 @@ export const GithubSourceLink = ({ project, lib, path }: GithubSourceLinkProps) 
         .filter(p => p)
         .join("/")
 
-    return <a href={url}><GithubOutlined/> Source code</a>
+    return <a className="markdown-link" href={url}><GithubOutlined/> Source code</a>
 }

@@ -1,6 +1,6 @@
 import { useRoutes } from "react-router"
 import * as React from "react"
-import { Suspense } from "react"
+import {Suspense, useEffect} from "react"
 import { Helmet, HelmetProvider } from "react-helmet-async"
 import { FallbackLayout } from "./layouts/FallbackLayout"
 import * as NotFound from "../pages/404.mdx"
@@ -9,6 +9,7 @@ import { Loading } from "./components/Loading"
 import { BlogListByTag } from "../pages/blogs/BlogListByTag"
 import { useGlowsiteRoutes } from "./nav"
 import {ThemeViewer} from "./ThemeViewer";
+import {useGlowbuzzerTheme} from "@glowbuzzer/controls";
 
 /**
  * Emits all site routes

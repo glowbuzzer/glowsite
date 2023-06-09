@@ -13,7 +13,7 @@ function* ancestors(node: Node): IterableIterator<Node> {
 }
 
 export const StyledLeftNavMenu = styled.div`
-  background: white;
+  background: ${props => props.theme.colorBgContainer};
 
   .title {
     padding: 12px;

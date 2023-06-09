@@ -15,6 +15,12 @@ export function remarkLinks() {
                 parent.children[index] = createElement(LOCAL_LINK_COMPONENT_NAME, {
                     to: node.url
                 }, node.children)
+            } else {
+                // if the link is external, apply the markdown-link class
+                parent.children[index] = createElement("a", {
+                    href: node.url,
+                    className: "markdown-link"
+                }, node.children)
             }
         })
     }

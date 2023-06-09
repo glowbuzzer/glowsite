@@ -174,6 +174,7 @@ export function handler(prefix, sourcePath) {
                             parent,
                             index,
                             replace: createElement("img", {
+                                className: "bg-light",
                                 src: `@${prefix}_${unique}`,
                                 alt: `${prefix}-image`
                             }),

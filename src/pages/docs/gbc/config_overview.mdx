@@ -15,41 +15,46 @@ import {GitHubLink} from "../../../framework/components";
 
 ## Introduction
 
-&gbc is configured with a JSON file read at start-up using the `./GBC --config CONFIG_FILE_NAME` command line argument.
+&gbc can be configured with a JSON file using `--config <config_file>` on the command line. Configuration
+can also be sent to &gbc from &gbr after connecting over WebSockets.
 
 The configuration files covers different areas of the machine and &gbt configuration which are described below.
 
-
 ## Config file sections
 
-See, <GlowsiteLink to="/docs/types/GlowbuzzerConfig">the schema documentation for the Config object</GlowsiteLink> for an overview of the contents of the config.
+`machine`
 
+: See [Machine config](/docs/gbc/configuration/config_machine) for details.
 
-### `machine: {}` configuration and parameter definition
-See <GlowsiteLink to="/docs/gbc/configuration/config_machine">Machine config</GlowsiteLink> for details.
+`kinematicsConfiguration`, `joint`
 
-### `kinematicsConfiguration: {}, joint: {}` configuration and parameter definition
-See <GlowsiteLink to="/docs/gbc/configuration/config_joints_and_kinematics">Joint and kinematics config</GlowsiteLink> for details.
+: See [Joint and kinematics config](/docs/gbc/configuration/config_joints_and_kinematics) for details.
 
-### `dout: {}, din: {}, din: {}, din: {}, aout: {}, ain: {}, ain: {}, iout: {}, iin: {}` configuration and parameter definition
-See <GlowsiteLink to="/docs/gbc/configuration/config_io">IO config</GlowsiteLink> for details.
+`dout`, `din`, `aout`, `ain`, `iout`, `iin`
 
-### `tool: {}` configuration and parameter definition
-See <GlowsiteLink to="/docs/gbc/configuration/config_tool">Tool config</GlowsiteLink> for details.
+: See [IO config](/docs/gbc/configuration/config_io) for details.
 
-### `spindle: {}` configuration and parameter definition
-See <GlowsiteLink to="/docs/gbc/configuration/config_spindle">Spindle config</GlowsiteLink> for details.
+`tool`
 
-### `stream: {}, soloActivity: {}` configuration and parameter definition
-See <GlowsiteLink to="/docs/gbc/configuration/config_streams_and_activities">Streams and Activities config</GlowsiteLink> for details.
+: See [Tool config](/docs/gbc/configuration/config_tool) for details.
 
-### `fieldbus: {}` configuration and parameter definition
-See <GlowsiteLink to="/docs/gbc/configuration/config_fieldbus">Fieldbus config</GlowsiteLink> for details.
+`spindle`
 
-### `moveParameters: {}, task: {}, activity: {}, frames: {}, triggerOn: {}` configuration and parameter definition
-See <GlowsiteLink to="/docs/gbc/configuration/config_advanced">Advanced config</GlowsiteLink> for details.
+: See [Spindle config](/docs/gbc/configuration/config_spindle) for details.
 
+`stream`, `soloActivity`
 
+: See [Streams and Activities config](/docs/gbc/configuration/config_streams_and_activities) for details.
+
+`fieldbus`
+
+: See [Fieldbus config](/docs/gbc/configuration/config_fieldbus) for details.
+
+`moveParameters`, `task`, `activity`, `frames`, `triggerOn`
+
+: See [Advanced config](/docs/gbc/configuration/config_advanced) for details.
+
+See [the Config object](/docs/types/GlowbuzzerConfig) in the reference documentation for the complete schema.
 
 ## Example config file
 

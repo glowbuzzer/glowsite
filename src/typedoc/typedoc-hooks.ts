@@ -1,6 +1,7 @@
-import { DeclarationReflection } from "typedoc"
+import {DeclarationReflection, Reflection} from "typedoc"
 
 import typedoc from "typedoc:@glowbuzzer/store"
+import {kindOf} from "./util";
 
 export function useTypedoc(filter): DeclarationReflection[] {
     return typedoc.children.filter(filter)
@@ -12,14 +13,15 @@ export function useTypedocGrouped(filter): { [index: string]: DeclarationReflect
     const groups: { [index: string]: DeclarationReflection[] } = {}
 
     items.forEach(item => {
-        groups[item.kindString] ??= []
-        return groups[item.kindString].push(item)
+        const kind = kindOf(item.kind);
+        groups[kind] ??= []
+        return groups[kind].push(item)
     })
 
     return groups
 }
 
-export function useTypedocItem(name: string) {
+export function useTypedocItem(name: string):Reflection {
     return typedoc.children.find(i => i.name === name)
 }
 
