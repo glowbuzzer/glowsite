@@ -2,6 +2,30 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.3.0](https://github.com/glowbuzzer/glowsite/compare/v1.2.4...v1.3.0) (2023-06-12)
+
+
+### Feature
+
+* dark mode ([8a05ce8](https://github.com/glowbuzzer/glowsite/commit/8a05ce885779967b400091a5bb1190c67f01bc2b))
+
+
+### Bug Fix
+
+* issues with dark theme ([ade78d6](https://github.com/glowbuzzer/glowsite/commit/ade78d6fa38c5bb62cc1bb2e84f6a92ca156b153))
+
+
+### Chore
+
+* add docs on streaming api ([5f0368d](https://github.com/glowbuzzer/glowsite/commit/5f0368d1b99959a1dee49f73ca0ae98883fc8dec))
+* remove top nav from theme view ([c724be3](https://github.com/glowbuzzer/glowsite/commit/c724be3b8c9afe1d8ece687c8d926f00c4811da5))
+* update gbc and gbr versions ([0c27b04](https://github.com/glowbuzzer/glowsite/commit/0c27b04a138f51e83083bc9f2690441253e85251))
+* update instructions to use create-glowbuzzer-app instead of CRA ([2207204](https://github.com/glowbuzzer/glowsite/commit/22072043bc468001ffccc0ceacd3beb958b74a81))
+* update to antd 5 and work on theme ([9df8c3a](https://github.com/glowbuzzer/glowsite/commit/9df8c3ab0b8168459c484abad305a6b5a2a06a64))
+* update to latest gbr version ([5f0368d](https://github.com/glowbuzzer/glowsite/commit/5f0368d1b99959a1dee49f73ca0ae98883fc8dec))
+* update various doc pages ([8a05ce8](https://github.com/glowbuzzer/glowsite/commit/8a05ce885779967b400091a5bb1190c67f01bc2b))
+* work in progress to antd and theming, typedoc fixes ([d11765e](https://github.com/glowbuzzer/glowsite/commit/d11765edfc7bf332a26eff802bda87d2de281289))
+
 ## [1.2.4](https://github.com/glowbuzzer/glowsite/compare/v1.2.3...v1.2.4) (2023-04-06)
 
 
