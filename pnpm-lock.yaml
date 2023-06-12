@@ -8,8 +8,8 @@ specifiers:
   '@ant-design/icons': ^4.7.0
   '@babel/core': ^7.21.8
   '@babel/preset-react': ^7.18.6
-  '@glowbuzzer/controls': 1.8.0-alpha.3
-  '@glowbuzzer/store': 1.8.0-alpha.3
+  '@glowbuzzer/controls': 1.8.0
+  '@glowbuzzer/store': 1.8.0
   '@mdx-js/mdx': ^2.1.1
   '@mdx-js/react': ^2.1.1
   '@mdx-js/rollup': ^2.1.1
@@ -77,8 +77,8 @@ dependencies:
   '@ant-design/icons': 4.7.0_biqbaboplfbrettd7655fr4n2y
   '@babel/core': 7.22.1
   '@babel/preset-react': 7.18.6_@babel+core@7.22.1
-  '@glowbuzzer/controls': 1.8.0-alpha.3_y5kbgg3clbfhtteryu6dofzj2q
-  '@glowbuzzer/store': 1.8.0-alpha.3_k5e2wdccv2rta25k3iqbvdww4q
+  '@glowbuzzer/controls': 1.8.0_y5kbgg3clbfhtteryu6dofzj2q
+  '@glowbuzzer/store': 1.8.0_k5e2wdccv2rta25k3iqbvdww4q
   '@mdx-js/mdx': 2.1.1
   '@mdx-js/react': 2.1.1_react@18.2.0
   '@mdx-js/rollup': 2.1.1_rollup@2.75.5
@@ -1969,10 +1969,10 @@ packages:
     dev: false
     optional: true
 
-  /@glowbuzzer/controls/1.8.0-alpha.3_y5kbgg3clbfhtteryu6dofzj2q:
-    resolution: {integrity: sha512-7n5t4cC0o6P3CfNMgoB9IJBr4FVz/UCY+XMjtJ+eY7+GenxnYELynKeY0/VkJ0fDLQ53YMivPIFSPYjzfRXZ9g==}
+  /@glowbuzzer/controls/1.8.0_y5kbgg3clbfhtteryu6dofzj2q:
+    resolution: {integrity: sha512-dDvfEvsvRPa3dvZH0PJY3pyY3va0jP5k9Mv7qWIfhSbJe8qpNvaZ8yW0qlXqFdUMC9ZOYXkC5QS9329pBOeFRw==}
     dependencies:
-      '@glowbuzzer/store': 1.8.0-alpha.3_k5e2wdccv2rta25k3iqbvdww4q
+      '@glowbuzzer/store': 1.8.0_k5e2wdccv2rta25k3iqbvdww4q
     optionalDependencies:
       '@ant-design/icons': 4.7.0_biqbaboplfbrettd7655fr4n2y
       '@react-three/drei': 9.70.3_qiinicf5th25oex3hnyk6z33ua
@@ -2004,8 +2004,8 @@ packages:
       - redux
     dev: false
 
-  /@glowbuzzer/store/1.8.0-alpha.3_k5e2wdccv2rta25k3iqbvdww4q:
-    resolution: {integrity: sha512-VfneMQAqq4pkFBszwNsXPgyfHvuUjcI/koA0qO3y3eR/D95Pj3q7zlFfWzbmGvZm+FCM9EahH5fZAktUbMzaCQ==}
+  /@glowbuzzer/store/1.8.0_k5e2wdccv2rta25k3iqbvdww4q:
+    resolution: {integrity: sha512-GQpGvyIOOsU+EZHxJHBQgbPtwNBhTC06cp1QZ5riXyi8WDOIT4NyDZiv7EJDr6FmpKZNFozyxX85o4rscpu9GQ==}
     optionalDependencies:
       '@reduxjs/toolkit': 1.9.5_mdrgh7pftervsmldwkouzrv5ry
       react: 18.2.0
