@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.3.1](https://github.com/glowbuzzer/glowsite/compare/v1.3.0...v1.3.1) (2023-06-28)
+
+
+### Bug Fix
+
+* add esmoduleinterop flag to doc tsconfig.doc.json ([f76f6f0](https://github.com/glowbuzzer/glowsite/commit/f76f6f0fce43b7eb289a94846a51f55ae3449473))
+* increase timeout on fetching page for indexing ([d53b4ae](https://github.com/glowbuzzer/glowsite/commit/d53b4aeac75093320cbf19d4db42a71571a76bdf))
+* update @types/node to avoid typedoc compile error ([d674979](https://github.com/glowbuzzer/glowsite/commit/d6749791e7e6bc28831deda1547b43fbc761d150))
+
 ## [1.3.0](https://github.com/glowbuzzer/glowsite/compare/v1.2.4...v1.3.0) (2023-06-12)
 
 
