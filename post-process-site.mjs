@@ -53,7 +53,7 @@ const server = app.listen(port, async () => {
         const results = []
         for (const path of chunk/*.slice(0, 5)*/) {
             try {
-                await sub.goto("http://localhost:5000" + path, {waitUntil: 'networkidle2', timeout: 10000});
+                await sub.goto("http://localhost:5000" + path, {waitUntil: 'networkidle2', timeout: 30000});
                 const result = await sub.evaluate(() => {
                     const el = document.querySelector(".content");
                     if (!el) {
