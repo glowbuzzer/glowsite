@@ -23,6 +23,7 @@
     "@reduxjs/toolkit": "^1.9.5",
     "@svgr/core": "^6.5.1",
     "@svgr/rollup": "^7.0.0",
+    "@types/node": "18.16.18",
     "@types/mermaid": "^9.1.0",
     "@types/react": "^18.2.5",
     "@types/styled-components": "^5.1.26",
@@ -80,7 +81,8 @@
   "pnpm": {
     "overrides": {
       "less": "4.1.2",
-      "@types/webxr": "0.5.2"
+      "@types/webxr": "0.5.2",
+      "@types/node": "18.16.18"
     },
     "peerDependencyRules": {
       "allowedVersions": {

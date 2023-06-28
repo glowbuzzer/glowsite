@@ -3,6 +3,7 @@ lockfileVersion: 5.4
 overrides:
   less: 4.1.2
   '@types/webxr': 0.5.2
+  '@types/node': 18.16.18
 
 specifiers:
   '@ant-design/icons': ^4.7.0
@@ -20,6 +21,7 @@ specifiers:
   '@svgr/core': ^6.5.1
   '@svgr/rollup': ^7.0.0
   '@types/mermaid': ^9.1.0
+  '@types/node': 18.16.18
   '@types/react': ^18.2.5
   '@types/styled-components': ^5.1.26
   '@types/three': ^0.152.0
@@ -89,6 +91,7 @@ dependencies:
   '@svgr/core': 6.5.1
   '@svgr/rollup': 7.0.0_rollup@2.75.5
   '@types/mermaid': 9.1.0
+  '@types/node': 18.16.18
   '@types/react': 18.2.8
   '@types/styled-components': 5.1.26
   '@types/three': 0.152.1
@@ -137,7 +140,7 @@ dependencies:
   typescript: 5.1.3
   unist-util-flatmap: 1.0.0
   unist-util-visit: 4.1.0
-  vite: 4.3.9_less@4.1.2
+  vite: 4.3.9_uj76k3nwx3xadhvv3keukewdsq
   vite-imagetools: 3.9.0
   vite-plugin-radar: 0.9.0_vite@4.3.9
   vite-tsconfig-paths: 3.5.0_vite@4.3.9
@@ -2813,10 +2816,9 @@ packages:
     resolution: {integrity: sha512-iiUgKzV9AuaEkZqkOLDIvlQiL6ltuZd9tGcW3gwpnX8JbuiuhFlEGmmFXEXkN50Cvq7Os88IY2v0dkDqXYWVgA==}
     dev: false
 
-  /@types/node/16.11.6:
-    resolution: {integrity: sha512-ua7PgUoeQFjmWPcoo9khiPum3Pd60k4/2ZGXt18sm2Slk0W0xZTqt5Y0Ny1NyBiN1EVQ/+FaF9NcY4Qe6rwk5w==}
+  /@types/node/18.16.18:
+    resolution: {integrity: sha512-/aNaQZD0+iSBAGnvvN2Cx92HqE5sZCPZtx2TsK+4nvV23fFe09jVDvpArXr2j9DnYlzuU9WuoykDDc6wqvpNcw==}
     dev: false
-    optional: true
 
   /@types/normalize-package-data/2.4.1:
     resolution: {integrity: sha512-Gj7cI7z+98M282Tqmp2K5EIsoouUEzbBJhQQzDE3jSIRk6r9gsz0oUokqIUR4u1R3dMHo0pDHM7sNOHyhulypw==}
@@ -2900,7 +2902,7 @@ packages:
     resolution: {integrity: sha512-8uALY5LTvSuHgloDVUvWP3pIauILm+8/0pDMokuDYIoNsOkSwd5AiHBTSEJjKTDcZr5z8UpgOWZkxBF4iJftoA==}
     requiresBuild: true
     dependencies:
-      '@types/node': 16.11.6
+      '@types/node': 18.16.18
     dev: false
     optional: true
 
@@ -2928,7 +2930,7 @@ packages:
       '@babel/plugin-transform-react-jsx-source': 7.19.6_@babel+core@7.22.1
       magic-string: 0.27.0
       react-refresh: 0.14.0
-      vite: 4.3.9_less@4.1.2
+      vite: 4.3.9_uj76k3nwx3xadhvv3keukewdsq
     transitivePeerDependencies:
       - supports-color
     dev: false
@@ -9270,7 +9272,7 @@ packages:
     peerDependencies:
       vite: ^2.0.0 || ^3.0.0 || ^4.0.0
     dependencies:
-      vite: 4.3.9_less@4.1.2
+      vite: 4.3.9_uj76k3nwx3xadhvv3keukewdsq
     dev: false
 
   /vite-tsconfig-paths/3.5.0_vite@4.3.9:
@@ -9282,12 +9284,12 @@ packages:
       globrex: 0.1.2
       recrawl-sync: 2.2.1
       tsconfig-paths: 4.0.0
-      vite: 4.3.9_less@4.1.2
+      vite: 4.3.9_uj76k3nwx3xadhvv3keukewdsq
     transitivePeerDependencies:
       - supports-color
     dev: false
 
-  /vite/4.3.9_less@4.1.2:
+  /vite/4.3.9_uj76k3nwx3xadhvv3keukewdsq:
     resolution: {integrity: sha512-qsTNZjO9NoJNW7KnOrgYwczm0WctJ8m/yqYAMAK9Lxt4SoySUfS5S8ia9K7JHpa3KEeMfyF8LoJ3c5NeBJy6pg==}
     engines: {node: ^14.18.0 || >=16.0.0}
     hasBin: true
@@ -9312,6 +9314,7 @@ packages:
       terser:
         optional: true
     dependencies:
+      '@types/node': 18.16.18
       esbuild: 0.17.19
       less: 4.1.2
       postcss: 8.4.24
