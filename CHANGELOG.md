@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.3.2](https://github.com/glowbuzzer/glowsite/compare/v1.3.1...v1.3.2) (2023-07-06)
+
+
+### Chore
+
+* update gbr and gbc versions ([24fc83c](https://github.com/glowbuzzer/glowsite/commit/24fc83c8d3cae1178530f8d00f6c66fb5f0e0b76))
+
 ## [1.3.1](https://github.com/glowbuzzer/glowsite/compare/v1.3.0...v1.3.1) (2023-06-28)
 
 
