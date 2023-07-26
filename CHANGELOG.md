@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.3.3](https://github.com/glowbuzzer/glowsite/compare/v1.3.2...v1.3.3) (2023-07-26)
+
+
+### Chore
+
+* update gbc version after failed build ([eb4ca2e](https://github.com/glowbuzzer/glowsite/commit/eb4ca2e2c5262754e7255fe19b1febf537f4234d))
+* update gbr and gbc versions ([daf0e8a](https://github.com/glowbuzzer/glowsite/commit/daf0e8aa4c1c819cae23c6e74aa88887d172e7ab))
+* Updated carousel ([e341dde](https://github.com/glowbuzzer/glowsite/commit/e341dde26d37aba1320323a0c24c2bc56e25b8f9))
+
 ## [1.3.2](https://github.com/glowbuzzer/glowsite/compare/v1.3.1...v1.3.2) (2023-07-06)
 
 
