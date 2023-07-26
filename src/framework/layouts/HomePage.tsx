@@ -1,6 +1,6 @@
 import { BaseLayout } from "./BaseLayout"
 import { Button } from "antd"
-import styled, {useTheme} from "styled-components"
+import styled, { useTheme } from "styled-components"
 import { RightCircleOutlined } from "@ant-design/icons"
 import { FeaturedBlog } from "../components/FeaturedBlog"
 import { ReactComponent as CoordinatedIcon } from "../../images/home_icons/coordinated-icon.svg?inline"
@@ -68,7 +68,7 @@ const HexImageSection = styled.div`
 `
 
 export const HomePage = () => {
-    const theme=useTheme()
+    const theme = useTheme()
 
     return (
         <BaseLayout>
@@ -77,29 +77,65 @@ export const HomePage = () => {
             <TeaserCarousel
                 items={[
                     {
-                        key: "1",
-                        title: "Knock down the dominos!",
+                        key: "0",
+                        title: "Dancing robots",
                         subtitle:
-                            "Introducing physics into your glowbuzzer toolkit 3D scene is straightforward with use-cannon, physics based hooks for react-three-fibre. Here’s a simple example, use the robot to knock down the dominos!",
-                        // to: "/",
+                            "Two robots dancing! Here we show an application of time synchronised trajectories. Two robots perform different cartesian moves (one two lines and the other an arc) and both arrive at their destination at exactly the same time",
                         animationUrl:
-                            "https://static.glowbuzzer.com/glowsite/carousel/physics/short_physics_summary.gif",
+                            "https://static.glowbuzzer.com/glowsite/carousel/dancing/short_dancing_summary.gif",
                         imageUrl:
-                            "https://static.glowbuzzer.com/glowsite/carousel/physics/short_physics_keyframe.jpg",
+                            "https://static.glowbuzzer.com/glowsite/carousel/dancing/short_dancing_keyframe.jpg",
                         videoUrl:
-                            "https://static.glowbuzzer.com/glowsite/carousel/physics/short_physics.mp4"
+                            "https://static.glowbuzzer.com/glowsite/carousel/dancing/short_dancing.mp4"
                     },
+                    // {
+                    //     key: "1",
+                    //     title: "Knock down the dominos!",
+                    //     subtitle:
+                    //         "Introducing physics into your glowbuzzer toolkit 3D scene is straightforward with use-cannon, physics based hooks for react-three-fibre. Here’s a simple example, use the robot to knock down the dominos!",
+                    //     // to: "/",
+                    //     animationUrl:
+                    //         "https://static.glowbuzzer.com/glowsite/carousel/physics/short_physics_summary.gif",
+                    //     imageUrl:
+                    //         "https://static.glowbuzzer.com/glowsite/carousel/physics/short_physics_keyframe.jpg",
+                    //     videoUrl:
+                    //         "https://static.glowbuzzer.com/glowsite/carousel/physics/short_physics.mp4"
+                    // },
+                    {
+                        key: "1",
+                        title: "Robot collision avoidance and path planning",
+                        subtitle:
+                            "Obstacle avoidance and path planning for machines and robots. Create a path to follow from a number of points. Add an obstacle somewhere along the path. Uses different strategies to avoid collision.",
+                        animationUrl:
+                            "https://static.glowbuzzer.com/glowsite/carousel/avoidance/short_avoidance_summary.gif",
+                        imageUrl:
+                            "https://static.glowbuzzer.com/glowsite/carousel/avoidance/short_avoidance_keyframe.jpg",
+                        videoUrl:
+                            "https://static.glowbuzzer.com/glowsite/carousel/avoidance/short_avoidance.mp4"
+                    },
+                    // {
+                    //     key: "2",
+                    //     title: "Introducing hexapod kinematics",
+                    //     subtitle:
+                    //         "We have been testing stewart-platform kinematics with the glowbuzzer control. Here we are controlling the hexapod with JavaScript/TypeScript+React code.  Messages from the web layer are passed into the real-time layer and then onto the fieldbus (EtherCAT) to control the motors.",
+                    //     animationUrl:
+                    //         "https://static.glowbuzzer.com/glowsite/carousel/hexapod/short_hexapod_summary.gif",
+                    //     imageUrl:
+                    //         "https://static.glowbuzzer.com/glowsite/carousel/hexapod/short_hexapod_keyframe.jpg",
+                    //     videoUrl:
+                    //         "https://static.glowbuzzer.com/glowsite/carousel/hexapod/short_hexapod.mp4"
+                    // },
                     {
                         key: "2",
-                        title: "Introducing hexapod kinematics",
+                        title: "Creating paths from imported STEP files",
                         subtitle:
-                            "We have been testing stewart-platform kinematics with the glowbuzzer control. Here we are controlling the hexapod with JavaScript/TypeScript+React code.  Messages from the web layer are passed into the real-time layer and then onto the fieldbus (EtherCAT) to control the motors.",
+                            "Creating robot paths from the geometry of imported STEP files for robotic welding using the buerli.io CAD components",
                         animationUrl:
-                            "https://static.glowbuzzer.com/glowsite/carousel/hexapod/short_hexapod_summary.gif",
+                            "https://static.glowbuzzer.com/glowsite/carousel/welding/short_welding_summary.gif",
                         imageUrl:
-                            "https://static.glowbuzzer.com/glowsite/carousel/hexapod/short_hexapod_keyframe.jpg",
+                            "https://static.glowbuzzer.com/glowsite/carousel/welding/short_welding_keyframe.jpg",
                         videoUrl:
-                            "https://static.glowbuzzer.com/glowsite/carousel/hexapod/short_hexapod.mp4"
+                            "https://static.glowbuzzer.com/glowsite/carousel/welding/short_welding.mp4"
                     },
                     {
                         key: "3",
@@ -125,6 +161,32 @@ export const HomePage = () => {
                             "https://static.glowbuzzer.com/glowsite/carousel/gcode/short_gcode_keyframe.jpg",
                         videoUrl:
                             "https://static.glowbuzzer.com/glowsite/carousel/gcode/short_gcode.mp4"
+                    },
+                    {
+                        key: "5",
+                        title: "3,4, 5 axis CNC controls",
+                        subtitle:
+                            "Use the glowbuzzer toolkit  for your 3, 4 and 5 axis CNC control. Software used to control the machine is React/TypeScript that machine builders can customise. In this demo we show the integration of an automatic tool changer (ATC)",
+                        // to: "/",
+                        animationUrl:
+                            "https://static.glowbuzzer.com/glowsite/carousel/cnc/short_cnc_summary.gif",
+                        imageUrl:
+                            "https://static.glowbuzzer.com/glowsite/carousel/cnc/short_cnc_keyframe.jpg",
+                        videoUrl:
+                            "https://static.glowbuzzer.com/glowsite/carousel/cnc/short_cnc.mp4"
+                    },
+                    {
+                        key: "6",
+                        title: "Control automation hardware with web-tech",
+                        subtitle:
+                            "Control automation kit (servos, digital IO, industrial cameras) with web-technology like React is now easy. Dorner Conveyor + Kollmorgen servos + Basler GigE camera is doing object sorting. Written entirely in react / typescript.",
+                        // to: "/",
+                        animationUrl:
+                            "https://static.glowbuzzer.com/glowsite/carousel/conveyors/short_conveyors_summary.gif",
+                        imageUrl:
+                            "https://static.glowbuzzer.com/glowsite/carousel/conveyors/short_conveyors_keyframe.jpg",
+                        videoUrl:
+                            "https://static.glowbuzzer.com/glowsite/carousel/conveyors/short_conveyors.mp4"
                     }
                 ]}
             />
@@ -139,11 +201,7 @@ export const HomePage = () => {
                 <YoutubeEmbed embedId="LPFD4kW1ILw" />
             </Section>
 
-            <Section
-                background={theme.colorPrimaryTextActive}
-                inverted
-                guttered>
-
+            <Section background={theme.colorPrimaryTextActive} inverted guttered>
                 <HeroSection>
                     <main>
                         <h1>Get started</h1>
@@ -335,9 +393,7 @@ export const HomePage = () => {
                 </FeaturesSection>
             </Section>
 
-            <Section
-                background={theme.colorPrimaryTextActive}
-                inverted spaced guttered>
+            <Section background={theme.colorPrimaryTextActive} inverted spaced guttered>
                 <HeroSection>
                     <main>
                         <h1>Blogs that might interest you</h1>
