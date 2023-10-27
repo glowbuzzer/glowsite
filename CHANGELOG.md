@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.3.5](https://github.com/glowbuzzer/glowsite/compare/v1.3.4...v1.3.5) (2023-10-05)
+
+
+### Chore
+
+* update gbem version ([a42bd4f](https://github.com/glowbuzzer/glowsite/commit/a42bd4fa8356fdb69abf009d9b98f3032de4bfd5))
+
 ## [1.3.4](https://github.com/glowbuzzer/glowsite/compare/v1.3.3...v1.3.4) (2023-09-12)
 
 
