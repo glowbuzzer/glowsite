@@ -51,8 +51,9 @@ const StyledRender = styled.div`
                 //padding-left: 0;
             }
 
-            :not(:last-child):after {
+            &:not(:last-child):after {
                 content: ", ";
+                opacity: 0.5;
             }
         }
     }
