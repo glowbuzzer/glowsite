@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.3.6](https://github.com/glowbuzzer/glowsite/compare/v1.3.5...v1.3.6) (2024-01-07)
+
+
+### Bug Fix
+
+* fix about page (theming) ([727edac](https://github.com/glowbuzzer/glowsite/commit/727edac10f11a8adfffd90574d2cb3cfc86a3059))
+* fix issues with robot visualisations ([727edac](https://github.com/glowbuzzer/glowsite/commit/727edac10f11a8adfffd90574d2cb3cfc86a3059))
+* fix styling on landing pages (links and theming) ([727edac](https://github.com/glowbuzzer/glowsite/commit/727edac10f11a8adfffd90574d2cb3cfc86a3059))
+
+
+### Chore
+
+* add backup script ([40c6050](https://github.com/glowbuzzer/glowsite/commit/40c6050e22db66b7e74c4bb214cd29d7f5b25792))
+* update gbr and gbc versions ([612036a](https://github.com/glowbuzzer/glowsite/commit/612036a035ae83b9918841d79ed824019a36c3f7))
+
 ## [1.3.5](https://github.com/glowbuzzer/glowsite/compare/v1.3.4...v1.3.5) (2023-10-05)
 
 
