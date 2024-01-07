@@ -9,10 +9,10 @@ const StyledDiv= styled.div`
     justify-content: space-between;
     
     .item {
-      background: white;
+      background: ${props => props.theme.colorBgContainer};
       margin: 10px;
       padding: 10px;
-      border: 1px solid #ccc;
+      border: 1px solid ${props => props.theme.colorBorder};
       
       .title {
         font-weight: bold;

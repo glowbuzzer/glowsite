@@ -5,7 +5,8 @@ import { BaseLayout } from "./BaseLayout"
 const MAX_WIDTH = 1200
 
 const StyledDiv = styled.div`
-    background: white;
+    background: ${props => props.theme.colorBgBase};
+    //background: white;
 
     .top-section-container {
         background: ${props => props.theme.colorPrimary};
@@ -91,14 +92,14 @@ const StyledDiv = styled.div`
         padding: 60px 0;
 
         .left {
-            min-width: 30%;
+            min-width: 600px;
             min-height: 300px;
           .image {
-            @media (max-width: 976px) {
+            @media (max-width: 1215px) {
               display: none;
             }
           }
-          @media (max-width: 976px) {
+          @media (max-width: 1215px) {
             display: none;
           }
         }

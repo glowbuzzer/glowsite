@@ -6,48 +6,24 @@ import {
     Environment,
     OrbitControls,
     PerspectiveCamera,
-    useContextBridge,
-    useGLTF
+    useContextBridge
 } from "@react-three/drei"
-import { Canvas, useFrame as useFrameR3f, useThree } from "@react-three/fiber"
+import { Canvas, useFrame as useFrameR3f } from "@react-three/fiber"
 import { ReactReduxContext } from "react-redux"
 
-import { BasicRobot, RobotKinematicsChainElement } from "@glowbuzzer/controls/scene"
-
 import { Telemetry } from "./Telemetry"
-
-import { useFrame, useKinematicsConfiguration } from "@glowbuzzer/store"
 import { SpinThreeDimensional } from "../viz/spin/Spin"
+import { StaubliRobot } from "../staubli/StaubliRobot"
+import {CylindricalTool} from "@glowbuzzer/controls";
 
-const DEG90 = Math.PI / 2
-
-const DEFAULT_POSITION = new THREE.Vector3(0, 0, 325)
-
-// const DEFAULT_POSITION = new THREE.Vector3(0, 0, -225)
-
-const TX40_KIN_CHAIN: RobotKinematicsChainElement[] = [
-    { moveable: true },
-    { rotateX: -DEG90, moveable: true, jointAngleAdjustment: -DEG90 },
-    { rotateX: 0, translateX: 0.225, jointAngleAdjustment: DEG90, moveable: true },
-    { rotateX: DEG90, translateZ: 0.035, moveable: true },
-    { rotateX: -DEG90, translateZ: 0.225, moveable: true },
-    { rotateX: DEG90, moveable: true },
-    { translateZ: 0.065 },
-    { moveable: false }
-]
-
-const approxeq = function (v1, v2, epsilon) {
+const approxeq = function (v1:number, v2:number, epsilon:number) {
     if (epsilon == null) {
         epsilon = 0.001
     }
     return Math.abs(v1 - v2) < epsilon
 }
-const RobotAnimation = props => {
-    const { frameIndex } = useKinematicsConfiguration(0)
-    const { translation, rotation } = useFrame(frameIndex!, false)
 
-    const updateRate = 0.0001
-
+const RobotAnimation = () => {
     const buttonHeight = 10
     const buttonRadius = 40
     const buttonOneHeight = useRef(buttonHeight)
@@ -57,13 +33,7 @@ const RobotAnimation = props => {
     const button2Color = useMemo(() => new THREE.Color("PeachPuff"), [])
     const button3Color = useMemo(() => new THREE.Color("olive"), [])
 
-    const parts = useMemo(
-        () => useGLTF([0, 1, 2, 3, 4, 5, 6].map(j => `/assets/tx40/L${j}.glb`)).map(m => m.scene),
-        []
-    )
-
     const [j, setJ] = useState([0, 0, 0, 0, 0, 0])
-    const { invalidate } = useThree()
     const counter = useRef(0)
     useFrameR3f(({ clock }) => {
         // console.log(clock.elapsedTime)
@@ -78,8 +48,6 @@ const RobotAnimation = props => {
         setJ(newJ)
         counter.current++
         clock.start()
-        // invalidate()
-        // }
 
         const worldPos = new THREE.Vector3()
         if (tcpRef.current) {
@@ -89,7 +57,7 @@ const RobotAnimation = props => {
         if (counter.current >= 1500) {
             counter.current = 0
         }
-        // console.log(tcpRef.current)
+
         if (approxeq(worldPos.y, -200, 0.1)) {
             if (worldPos.z < buttonHeight) {
                 buttonOneHeight.current = worldPos.z
@@ -97,6 +65,7 @@ const RobotAnimation = props => {
                 buttonOneHeight.current = buttonHeight
             }
         }
+
         if (approxeq(worldPos.y, 0, 0.1)) {
             if (worldPos.z < buttonHeight && counter.current > 1) {
                 buttonTwoHeight.current = worldPos.z
@@ -104,7 +73,6 @@ const RobotAnimation = props => {
                 buttonTwoHeight.current = buttonHeight
             }
         }
-        // console.log(buttonTwoHeight.current)
         if (approxeq(worldPos.y, 200, 0.1)) {
             if (worldPos.z < buttonHeight) {
                 buttonThreeHeight.current = worldPos.z
@@ -112,24 +80,17 @@ const RobotAnimation = props => {
                 buttonThreeHeight.current = buttonHeight
             }
         }
-        // console.log(counter.current)
     })
 
     const tcpRef = useRef(null)
 
     return (
         <>
-            <BasicRobot
-                kinematicsChain={TX40_KIN_CHAIN}
-                parts={parts}
-                jointPositions={j}
-                translation={translation || DEFAULT_POSITION}
-                rotation={rotation}
-                scale={1000}
-            >
-                {/*<CylindricalTool toolIndex={toolIndex} />*/}
+            <StaubliRobot jointPositions={j}>
+                <CylindricalTool toolIndex={0} />
                 <Cylinder ref={tcpRef} args={[0, 0, 0]} />
-            </BasicRobot>
+            </StaubliRobot>
+
             <Cylinder
                 receiveShadow
                 args={[buttonRadius, buttonRadius, buttonOneHeight.current, 128]}
@@ -138,6 +99,7 @@ const RobotAnimation = props => {
             >
                 <meshStandardMaterial color={button1Color} roughness={0} />
             </Cylinder>
+
             <Cylinder
                 receiveShadow
                 args={[buttonRadius, buttonRadius, buttonTwoHeight.current, 128]}
@@ -146,6 +108,7 @@ const RobotAnimation = props => {
             >
                 <meshStandardMaterial color={button2Color} roughness={0} />
             </Cylinder>
+
             <Cylinder
                 receiveShadow
                 args={[buttonRadius, buttonRadius, buttonThreeHeight.current, 128]}
@@ -158,14 +121,13 @@ const RobotAnimation = props => {
     )
 }
 
-export default function Robot(props) {
+export default function Robot({color}) {
     const cameraRef = useRef(null)
 
     const ContextBridge = useContextBridge(ReactReduxContext)
 
     return (
-        // <Canvas shadows frameloop="demand" color={props.color}>
-        <Canvas shadows color={props.color}>
+        <Canvas shadows color={color}>
             <ContextBridge>
                 <gridHelper rotation={[Math.PI / 2, 0, 0]} args={[2000, 20, "grey", "grey"]} />
                 <OrbitControls enableDamping={false} makeDefault target={[0, 0, 300]} />
@@ -178,7 +140,6 @@ export default function Robot(props) {
                     up={[0, 0, 1]}
                 />
 
-                {/*<color attach="background" args={[0x9254de]} />*/}
                 <ambientLight color={"grey"} />
                 <pointLight
                     position={[0, 0, 1000]}
@@ -193,13 +154,8 @@ export default function Robot(props) {
 
                 <Suspense fallback={<SpinThreeDimensional position={[0, 0, 30]} />}>
                     <RobotAnimation />
-
-                    {/*<Diamond scale={[100,100,100]} position={[400,200,50]} rotation={[Math.PI/2,0,-Math.PI/4]}/>*/}
                     <Environment files="https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/1k/aerodynamics_workshop_1k.hdr" />
                 </Suspense>
-                {/*<EffectComposer>*/}
-                {/*    <Bloom luminanceThreshold={2} intensity={1} levels={9} mipmapBlur />*/}
-                {/*</EffectComposer>*/}
             </ContextBridge>
         </Canvas>
     )

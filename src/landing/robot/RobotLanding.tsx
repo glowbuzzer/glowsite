@@ -4,7 +4,7 @@ import { Image } from "../../framework/components"
 import screenShot from "./skew_points.png?glowsite"
 import { StarFilled } from "@ant-design/icons"
 import AniLogo from "../utils/aniLogo/aniLogo"
-import { Col, Row } from "antd"
+import {Col, Layout, Row} from "antd"
 
 import { GlowbuzzerApp } from "@glowbuzzer/controls/app"
 
@@ -15,7 +15,7 @@ const RobotLandingPage = () => {
     const theme = useTheme()
     return (
         <GlowbuzzerApp appName={"glowsite"}>
-            <div>
+            <Layout>
                 <div className="top-section-container">
                     <div className="top-section">
                         <div className="left">
@@ -125,7 +125,7 @@ const RobotLandingPage = () => {
                         </Row>
                     </div>
                 </div>
-            </div>
+            </Layout>
         </GlowbuzzerApp>
     )
 }

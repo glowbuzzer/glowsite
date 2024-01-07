@@ -10,40 +10,39 @@ import {
     useGLTF,
     useTexture
 } from "@react-three/drei"
-// import { RGBELoader } from "three/examples/jsm/loaders/RGBELoader";
+
 import { Canvas, useFrame as useFrameR3f } from "@react-three/fiber"
 import { ReactReduxContext } from "react-redux"
 import * as MOVE from "./Moves"
 
-import { BasicRobot, RobotKinematicsChainElement } from "@glowbuzzer/controls/scene"
-
 import { useFrame, useKinematicsConfiguration, useToolIndex } from "@glowbuzzer/store"
 import { SpinThreeDimensional } from "../spin/Spin"
+import {StaubliRobot} from "../../staubli/StaubliRobot";
 
-const DEG90 = Math.PI / 2
+// const DEG90 = Math.PI / 2
+//
+// const DEFAULT_POSITION = new THREE.Vector3(0, 0, 325)
+//
+// // const DEFAULT_POSITION = new THREE.Vector3(0, 0, -225)
+//
+// const TX40_KIN_CHAIN: RobotKinematicsChainElement[] = [
+//     { moveable: true },
+//     { rotateX: -DEG90, moveable: true, jointAngleAdjustment: -DEG90 },
+//     { rotateX: 0, translateX: 0.225, jointAngleAdjustment: DEG90, moveable: true },
+//     { rotateX: DEG90, translateZ: 0.035, moveable: true },
+//     { rotateX: -DEG90, translateZ: 0.225, moveable: true },
+//     { rotateX: DEG90, moveable: true },
+//     { translateZ: 0.065 },
+//     { moveable: false }
+// ]
 
-const DEFAULT_POSITION = new THREE.Vector3(0, 0, 325)
-
-// const DEFAULT_POSITION = new THREE.Vector3(0, 0, -225)
-
-const TX40_KIN_CHAIN: RobotKinematicsChainElement[] = [
-    { moveable: true },
-    { rotateX: -DEG90, moveable: true, jointAngleAdjustment: -DEG90 },
-    { rotateX: 0, translateX: 0.225, jointAngleAdjustment: DEG90, moveable: true },
-    { rotateX: DEG90, translateZ: 0.035, moveable: true },
-    { rotateX: -DEG90, translateZ: 0.225, moveable: true },
-    { rotateX: DEG90, moveable: true },
-    { translateZ: 0.065 },
-    { moveable: false }
-]
-
-type moveLineProps = {
-    x: number
-    y: number
-    z: number
-    setJoints: Dispatch<SetStateAction<number[]>>
-    jointAngles: any
-}
+// type moveLineProps = {
+//     x: number
+//     y: number
+//     z: number
+//     setJoints: Dispatch<SetStateAction<number[]>>
+//     jointAngles: any
+// }
 
 export enum activeMove {
     NONE,
@@ -78,7 +77,7 @@ export type moveJointSpaceCtxProps = {
 }
 
 const RobotAnimation = props => {
-    const targetBox = useRef(null)
+    // const targetBox = useRef(null)
 
     const baseRef = useRef(null)
     const gripperLeftRef = useRef(null)
@@ -124,18 +123,18 @@ const RobotAnimation = props => {
     const { translation, rotation } = useFrame(frameIndex!, false)
 
     // const jointPositions = useJointPositions(0)
-    const toolIndex = useToolIndex(0)
+    // const toolIndex = useToolIndex(0)
 
     // load the parts of the robot (links)
-    const parts = useGLTF([0, 1, 2, 3, 4, 5, 6].map(j => `/assets/tx40/L${j}.glb`)).map(
-        m => m.scene
-    )
+    // const parts = useGLTF([0, 1, 2, 3, 4, 5, 6].map(j => `/assets/tx40/L${j}.glb`)).map(
+    //     m => m.scene
+    // )
     const [j, setJ] = useState([0, 0, 0, 0, 0, 0])
     const moveNumber = useRef(0)
 
-    const toolRef = useRef<THREE.Mesh>(null)
+    // const toolRef = useRef<THREE.Mesh>(null)
 
-    const [toolColor, setToolColor] = useState(0xffffff)
+    // const [toolColor, setToolColor] = useState(0xffffff)
 
     useFrameR3f(({ clock }) => {
         if (overallCtx.moveType == activeMove.NONE) {
@@ -291,13 +290,13 @@ const RobotAnimation = props => {
 
     return (
         <>
-            <BasicRobot
-                kinematicsChain={TX40_KIN_CHAIN}
-                parts={parts}
+            <StaubliRobot
+                // kinematicsChain={TX40_KIN_CHAIN}
+                // parts={parts}
                 jointPositions={j}
-                translation={translation || DEFAULT_POSITION}
-                rotation={rotation}
-                scale={1000}
+                // translation={translation || DEFAULT_POSITION}
+                // rotation={rotation}
+                // scale={1000}
             >
                 {/*<CylindricalTool toolIndex={toolIndex} />*/}
 
@@ -342,7 +341,7 @@ const RobotAnimation = props => {
                         <meshStandardMaterial displacementScale={1} {...textureProps} />
                     </Box>
                 </group>
-            </BasicRobot>
+            </StaubliRobot>
             <Box
                 args={[50, 50, 50]}
                 visible={!showTargetBox}
