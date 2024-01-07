@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.3.7](https://github.com/glowbuzzer/glowsite/compare/v1.3.6...v1.3.7) (2024-01-07)
+
+
+### Bug Fix
+
+* add transformed staubli glb files ([53cccec](https://github.com/glowbuzzer/glowsite/commit/53cccec496faab0a63dcda11d23dd0226de362b1))
+
 ## [1.3.6](https://github.com/glowbuzzer/glowsite/compare/v1.3.5...v1.3.6) (2024-01-07)
 
 
