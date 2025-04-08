@@ -33,8 +33,8 @@ jobs:
         run: |
           echo $(which chrome)
           ls -l /usr/bin/google-chrome
-#          sudo ln -s $(which chrome) /usr/bin/google-chrome
           google-chrome --version
+          chrome --version
 
       - name: Build site
         run: pnpm run build:www
