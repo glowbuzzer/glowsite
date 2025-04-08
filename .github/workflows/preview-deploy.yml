@@ -28,7 +28,6 @@ jobs:
         run: pnpm install
 
       - uses: browser-actions/setup-chrome@v1
-        run: chrome --version
 
       - name: Build site
         run: pnpm run build:www
