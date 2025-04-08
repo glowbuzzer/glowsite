@@ -195,7 +195,7 @@ type TopNavProps = {
     hideSearch?: boolean
 }
 
-export const TopNav = ({ hideVersionLink, hideSearch }: TopNavProps) => {
+export const TopNav = ({ hideVersionLink, hideSearch=true }: TopNavProps) => {
     const [showMenu, setShowMenu] = useState(false)
 
     const node = useCurrentNav()
