@@ -28,16 +28,15 @@ jobs:
         run: |
           pnpm install
           pnpx puppeteer browsers install chrome
-          ls -R node_modules/puppeteer/.local-chromium/
 
-      - uses: browser-actions/setup-chrome@v1
+#      - uses: browser-actions/setup-chrome@v1
 
-      - name: Symlink Chrome so Mermaid can find it
-        run: |
-          echo $(which chrome)
-          ls -l /usr/bin/google-chrome
-          google-chrome --version
-          chrome --version
+#      - name: Symlink Chrome so Mermaid can find it
+#        run: |
+#          echo $(which chrome)
+#          ls -l /usr/bin/google-chrome
+#          google-chrome --version
+#          chrome --version
 
       - name: Build site
         run: pnpm run build:www
