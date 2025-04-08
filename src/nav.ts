@@ -120,6 +120,12 @@ const nav = {
                     component: () => import("./pages/how-it-works/fieldbus.mdx")
                 },
                 {
+                    slug: "fsoe",
+                    title: "Functional safety",
+                    subtitle: "Functional safety and FSoE support",
+                    component: () => import("./pages/how-it-works/fsoe.mdx")
+                },
+                {
                     slug: "drives",
                     title: "Drives integration",
                     subtitle: "How does it integrate with drives?",

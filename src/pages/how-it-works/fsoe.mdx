@@ -1,0 +1,35 @@
+import {Tldr} from "../../framework/components/Tldr"
+
+# {props.subtitle}
+
+<Tldr>
+- Supports a range of FSoE drives
+- Supports BBH Safety PLC
+- Advanced functional safety capabilities
+</Tldr>
+
+Function Safety is about ensuring your product operates correctly and safely in response to its inputs, even when there are faults or
+failures within the system. For robots working in close conjunction with machines, we are talking about high integrity levels - SIL3, PL-e level.
+
+Functional safety for simple machines relates mainly to implementing estop, stopping in response to different inputs, interlocks, limits on individual motor’s motion, and so on.
+
+For complex machines incorporating robotics, especially those working in close proximity to people, the functional safety requirements take on a new dimension:
+
+- You want to express position limits in terms of where the end-effector of the robots is rather than the position of an individual drive in simpler machines
+- Speed limits related to the speed of robot’s end-effector
+- Torque limits on the torques individual joints of the robot can produce and the force/toque the end-effector can exert
+- All Limits need to switched between values depending on the “mode” of the machine
+
+## How we deliver functional safety
+
+We we work with advanced FSoE drives (Synapticon Circulo, Kollmorgen AKD2G, Baumüller b maXX, Bosch Indradrive and others).
+
+Together with the BBH products FSoE master (SCU-X-EC) we are able to offer advanced functional safety with our software products.
+
+We have developed kinematics support in BBH to validate and limit end-effector velocity, plus other advanced functions.
+
+BBH Safety PLC allows the development and safety certification of products with sophisticated functional safety capabilities with SIL 3 integrity without long and complex development cycles.
+
+This has previously only been accessible to the big robot/machine vendors with large product development budgets. Previously it required
+electronic development of the dual CPU environment for the safety controller and custom low-level embedded software development.
+All wrapped in the formal methods that safety software development requires.

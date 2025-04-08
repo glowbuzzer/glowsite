@@ -16,13 +16,13 @@ import "antd/dist/reset.css"
 const rootNode = createRoot(document.getElementById("app"))
 rootNode.render(
     <BrowserRouter>
-        <ChatlioFirstMessageConversion/>
+        <ChatlioFirstMessageConversion />
         <CookieConsentProvider>
             <GlowbuzzerThemeProvider theme={AppTheme as any}>
                 <AppStyle>
                     <NavProvider root={root}>
-                        <TopNav/>
-                        <GlowsiteRoutes/>
+                        <TopNav />
+                        <GlowsiteRoutes />
                     </NavProvider>
                 </AppStyle>
             </GlowbuzzerThemeProvider>
