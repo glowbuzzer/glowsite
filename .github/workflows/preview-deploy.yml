@@ -27,7 +27,7 @@ jobs:
       - name: Install packages
         run: |
           pnpm install
-          npx puppeteer browsers install chrome@1045629
+          pnpx puppeteer browsers install chrome@1045629
           ls -R node_modules/puppeteer/.local-chromium/
 
       - uses: browser-actions/setup-chrome@v1
