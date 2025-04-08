@@ -29,6 +29,12 @@ jobs:
 
       - uses: browser-actions/setup-chrome@v1
 
+      - name: Symlink Chrome so Mermaid can find it
+        run: |
+          echo $(which chrome)
+          sudo ln -s $(which chrome) /usr/bin/google-chrome
+          google-chrome --version
+
       - name: Build site
         run: pnpm run build:www
         env:
