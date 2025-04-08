@@ -6,7 +6,7 @@ import { useGlowbuzzerTheme } from "@glowbuzzer/controls"
 
 type PrismTheme = typeof themes.vsLight
 
-const StyledApp = styled.div<{ prism: PrismTheme }>`
+const StyledApp = styled.div<{ $prism: PrismTheme }>`
   font-family: Roboto, sans-serif;
   line-height: 1.5715;
   font-size: 15.45px;
@@ -88,13 +88,13 @@ const StyledApp = styled.div<{ prism: PrismTheme }>`
   .remark-highlight,
   .glowbuzzer-highlight {
     pre {
-      background: ${props => props.prism.plain.backgroundColor};
-      color: ${props => props.prism.plain.color};
+      background: ${props => props.$prism.plain.backgroundColor};
+      color: ${props => props.$prism.plain.color};
       padding: 10px;
     }
 
     ${props =>
-            props.prism.styles.map(({types, style}) =>
+            props.$prism.styles.map(({types, style}) =>
                     types.map(
                             type => css`
                               pre .${type} {
@@ -186,7 +186,8 @@ const StyledApp = styled.div<{ prism: PrismTheme }>`
 `
 
 export const AppStyle = ({ children }) => {
-    const { darkMode } = useGlowbuzzerTheme()
+    // const { darkMode } = useGlowbuzzerTheme()
+    const darkMode=false
     const {token}=theme.useToken()
 
     const custom:ThemeConfig={
@@ -197,7 +198,7 @@ export const AppStyle = ({ children }) => {
     }
     return (
         <ConfigProvider theme={custom}>
-            <StyledApp prism={darkMode ? themes.palenight : themes.shadesOfPurple}>
+            <StyledApp $prism={darkMode ? themes.palenight : themes.shadesOfPurple}>
                 {children}
             </StyledApp>
         </ConfigProvider>

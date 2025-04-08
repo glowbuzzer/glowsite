@@ -4,14 +4,14 @@ import styled from "styled-components"
 import { css } from "styled-components"
 
 const StyledSection = styled.div<{
-    dataColor: string
-    dataInverted: boolean
-    dataSpaced: boolean
-    dataGuttered: boolean
-    dataExpand: boolean
+    $color: string
+    $inverted: boolean
+    $spaced: boolean
+    $guttered: boolean
+    $expand: boolean
 }>`
     display: flex;
-    background: ${props => props.dataColor || "inherit"};
+    background: ${props => props.$color || "inherit"};
 
     > .section {
         max-width: ${props => props.theme.breaks.mainWidth};
@@ -20,7 +20,7 @@ const StyledSection = styled.div<{
         flex-grow: 1;
 
         ${props =>
-            props.dataSpaced &&
+            props.$spaced &&
             css`
                 @media (min-width: 767px) {
                     padding: 40px 0;
@@ -28,7 +28,7 @@ const StyledSection = styled.div<{
             `}
 
         ${props =>
-            props.dataExpand &&
+            props.$expand &&
             css`
                 flex-grow: 1;
                 align-items: stretch;
@@ -36,20 +36,20 @@ const StyledSection = styled.div<{
     }
 
     ${props =>
-        props.dataExpand &&
+        props.$expand &&
         css`
             flex-grow: 1;
         `}
 
     ${props =>
-        props.dataGuttered &&
+        props.$expand &&
         css`
             padding: 0 40px;
         `}
 
 
   ${props =>
-        props.dataInverted &&
+        props.$inverted &&
         css`
             color: white;
 
@@ -84,11 +84,11 @@ export const Section: FC<SectionProps> = ({
 }) => {
     return (
         <StyledSection
-            dataColor={background}
-            dataInverted={inverted}
-            dataSpaced={spaced}
-            dataGuttered={guttered}
-            dataExpand={expand}
+            $color={background}
+            $inverted={inverted}
+            $spaced={spaced}
+            $guttered={guttered}
+            $expand={expand}
         >
             <div className="section">{children}</div>
         </StyledSection>

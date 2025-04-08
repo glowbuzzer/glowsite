@@ -13,6 +13,7 @@ import reactDocgenControls from "react-docgen:@glowbuzzer/controls"
 import typedoc from "typedoc:@glowbuzzer/store"
 import { typedocHookFilter } from "./typedoc/typedoc-hooks"
 import { LandingPageLayout } from "./framework/layouts/LandingPageLayout"
+import { BaseLayout } from "./framework/layouts/BaseLayout"
 
 function process(node: Omit<Node, "path">, parentPaths: string[], parent: Node): Node {
     const slug = node.slug
@@ -85,66 +86,89 @@ const nav = {
     layout: HomePage,
     children: [
         {
-            slug: "how-it-works",
-            title: "How it works",
-            layout: DefaultDocumentationPage,
+            slug: "partners",
+            title: "Partners",
+            layout: BaseLayout,
+            component: () => import("./pages/partners/Partners"),
             children: [
                 {
-                    slug: "overview",
-                    title: "Overview",
-                    subtitle: "Basically, how does it work?",
-                    component: () => import("./pages/how-it-works/overview.mdx")
+                    slug: "synapticon",
+                    title: "Synapticon",
+                    anchor: true
                 },
                 {
-                    slug: "architecture",
-                    title: "Architecture",
-                    subtitle: "A little more technical detail...",
-                    component: () => import("./pages/how-it-works/architecture.mdx")
+                    slug: "bbh",
+                    title: "BBH",
+                    anchor: true
                 },
                 {
-                    slug: "deployment",
-                    title: "Deployment",
-                    subtitle: "What platforms does the glowbuzzer toolkit run on?",
-                    component: () => import("./pages/how-it-works/platforms.mdx")
-                },
-                {
-                    slug: "embedded",
-                    title: "Embedded",
-                    subtitle: "Developing embedded machine controls with the toolkit",
-                    component: () => import("./pages/how-it-works/embedded.mdx")
-                },
-                {
-                    slug: "fieldbus",
-                    title: "Fieldbus integration",
-                    subtitle: "How does it integrate with a fieldbus?",
-                    component: () => import("./pages/how-it-works/fieldbus.mdx")
-                },
-                {
-                    slug: "drives",
-                    title: "Drives integration",
-                    subtitle: "How does it integrate with drives?",
-                    component: () => import("./pages/how-it-works/drives.mdx")
-                },
-                {
-                    slug: "real_time",
-                    title: "Real-time capability",
-                    subtitle: "Fast reaction to events",
-                    component: () => import("./pages/how-it-works/real_time.mdx")
-                },
-                {
-                    slug: "front_end_components",
-                    title: "User interface (HMI)",
-                    subtitle: "Building a machine control in React",
-                    component: () => import("./pages/how-it-works/front_end_components.mdx")
-                },
-                {
-                    slug: "motion",
-                    title: "Trajectory planner",
-                    subtitle: "The algorithms to make things move",
-                    component: () => import("./pages/how-it-works/motion.mdx")
+                    slug: "ibt",
+                    title: "IBT",
+                    anchor: true
                 }
             ]
         },
+        /*        {
+                    slug: "how-it-works",
+                    title: "How it works",
+                    layout: DefaultDocumentationPage,
+                    children: [
+                        {
+                            slug: "overview",
+                            title: "Overview",
+                            subtitle: "Basically, how does it work?",
+                            component: () => import("./pages/how-it-works/overview.mdx")
+                        },
+                        {
+                            slug: "architecture",
+                            title: "Architecture",
+                            subtitle: "A little more technical detail...",
+                            component: () => import("./pages/how-it-works/architecture.mdx")
+                        },
+                        {
+                            slug: "deployment",
+                            title: "Deployment",
+                            subtitle: "What platforms does the glowbuzzer toolkit run on?",
+                            component: () => import("./pages/how-it-works/platforms.mdx")
+                        },
+                        {
+                            slug: "embedded",
+                            title: "Embedded",
+                            subtitle: "Developing embedded machine controls with the toolkit",
+                            component: () => import("./pages/how-it-works/embedded.mdx")
+                        },
+                        {
+                            slug: "fieldbus",
+                            title: "Fieldbus integration",
+                            subtitle: "How does it integrate with a fieldbus?",
+                            component: () => import("./pages/how-it-works/fieldbus.mdx")
+                        },
+                        {
+                            slug: "drives",
+                            title: "Drives integration",
+                            subtitle: "How does it integrate with drives?",
+                            component: () => import("./pages/how-it-works/drives.mdx")
+                        },
+                        {
+                            slug: "real_time",
+                            title: "Real-time capability",
+                            subtitle: "Fast reaction to events",
+                            component: () => import("./pages/how-it-works/real_time.mdx")
+                        },
+                        {
+                            slug: "front_end_components",
+                            title: "User interface (HMI)",
+                            subtitle: "Building a machine control in React",
+                            component: () => import("./pages/how-it-works/front_end_components.mdx")
+                        },
+                        {
+                            slug: "motion",
+                            title: "Trajectory planner",
+                            subtitle: "The algorithms to make things move",
+                            component: () => import("./pages/how-it-works/motion.mdx")
+                        }
+                    ]
+                }*/ /*,
         {
             slug: "get-started",
             title: "Getting started",
@@ -216,7 +240,7 @@ const nav = {
                     component: () => import("./pages/get-started/services.mdx")
                 }
             ]
-        },
+        },*/
         {
             slug: "docs",
             title: "Documentation",
@@ -769,6 +793,21 @@ const nav = {
                     ]
                 },
                 {
+                    slug: "gbp",
+                    title: "Python API (GBP)",
+                    section: true,
+                    subtitle: "Python API documentation",
+                    children: [
+                        {
+                            slug: "overview",
+                            title: "Overview",
+                            subtitle: "Overview of the Python API (GBP)",
+                            component: () => import("./pages/docs/gbp/overview.mdx")
+                        }
+                    ]
+                },
+                /*
+                {
                     slug: "tutorials",
                     title: "Tutorials",
                     subtitle: "Step-by-step guidance for key topics",
@@ -789,6 +828,7 @@ const nav = {
                         }
                     ]
                 },
+                */
                 {
                     slug: "types",
                     title: "Types",
@@ -804,7 +844,7 @@ const nav = {
                         }))
                 }
             ]
-        },
+        } /*,
         {
             slug: "blogs",
             title: "Blogs",
@@ -986,8 +1026,7 @@ const nav = {
                     ]
                 }
             ]
-        },
-
+        }*/,
         {
             slug: "about",
             title: "About",
@@ -999,12 +1038,14 @@ const nav = {
                     subtitle: "What we want to achieve (vision)",
                     component: () => import("./pages/about/vision.mdx")
                 },
-                {
-                    slug: "values",
-                    title: "Values",
-                    subtitle: "What we stand for (values)",
-                    component: () => import("./pages/about/values.mdx")
-                },
+                /*
+                                {
+                                    slug: "values",
+                                    title: "Values",
+                                    subtitle: "What we stand for (values)",
+                                    component: () => import("./pages/about/values.mdx")
+                                },
+                */
                 {
                     slug: "contact",
                     title: "Contact",

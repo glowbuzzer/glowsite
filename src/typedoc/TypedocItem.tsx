@@ -22,7 +22,7 @@ import {
     ReflectionType,
     SignatureReflection,
     TupleType,
-    Type,
+    Type, TypeOperatorType,
     UnionType
 } from "typedoc"
 import styled from "styled-components"
@@ -169,6 +169,10 @@ const TypedocLiteral = ({ l }: { l: LiteralType }) => {
         case "bigint":
             return <span>{l.value.toString()}</span>
     }
+}
+
+const TypedocTypeOperator = ({ t }: { t: TypeOperatorType }) => {
+    return <span>{t.operator} <TypedocType t={t.target}/></span>
 }
 
 const TypedocSignature = ({
@@ -432,6 +436,11 @@ const TypedocType = ({ t, includeSynopsis = true }: { t: Type; includeSynopsis?:
                 </span>
             )
 
+        case "typeOperator":
+            return <span className="typedoc type typeOperator">
+                <TypedocTypeOperator t={t as TypeOperatorType}/>
+            </span>
+
         case "conditional":
         case "indexedAccess":
         case "inferred":
@@ -442,9 +451,9 @@ const TypedocType = ({ t, includeSynopsis = true }: { t: Type; includeSynopsis?:
         case "rest":
         case "templateLiteral":
         case "namedTupleMember":
-        case "typeOperator":
         case "unknown":
         default:
+            console.log("##", t)
             return <span className={"typedoc type " + t?.type}>##{t?.type}</span>
     }
 }

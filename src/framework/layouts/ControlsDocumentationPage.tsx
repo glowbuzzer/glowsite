@@ -2,22 +2,20 @@ import * as React from "react"
 import { useEffect } from "react"
 import { DefaultDocumentationPage } from "./DocumentationPage"
 import {
-    ConnectionState,
     GlowbuzzerConfig,
     MachineState,
     MACHINETARGET,
-    rootReducer,
     TASK_STATE,
     tasksSlice,
     TaskStatus,
     usePreview,
-    GlowbuzzerConnectionContext
+    GlowbuzzerConnectionContext, standardReducers
 } from "@glowbuzzer/store"
 
 import "dseg/css/dseg.css"
 import "flexlayout-react/style/light.css"
 
-import { configureStore } from "@reduxjs/toolkit"
+import { combineReducers, configureStore } from "@reduxjs/toolkit"
 import { Provider } from "react-redux"
 import { ComponentProp, ComponentProps } from "../components/ComponentProps"
 
@@ -27,6 +25,8 @@ import { GithubSourceLink } from "../components"
 import { ScrollToTopOnMount } from "../components/ScrollToTopOnMount"
 import { dino } from "../store/dino"
 import { ConfigLiveEditProvider } from "@glowbuzzer/controls"
+
+const rootReducer = combineReducers(standardReducers)
 
 const GlowbuzzerCustomApp = ({ children }) => {
     const preview = usePreview()

@@ -109,6 +109,7 @@ const StyledTopNav = styled.div`
             text-align: right;
             font-size: 1.5em;
             cursor: pointer;
+            padding: 0 10px;
         }
 
         .nav-narrow-open {
@@ -139,13 +140,11 @@ const NavMenu = ({ mode, onNavigate = undefined }) => {
         <Menu
             key={mode}
             className="nav-menu"
-            // className={mode}
             mode={mode}
             openKeys={openKeys}
             defaultSelectedKeys={[...ancestors, mode + ":" + pathname]}
             onOpenChange={onOpenChange}
             subMenuCloseDelay={1}
-            // forceSubMenuRender
             items={nav.children
                 // don't include nodes like 404 that have no children
                 // or nodes that are outside of nav
@@ -157,8 +156,8 @@ const NavMenu = ({ mode, onNavigate = undefined }) => {
                     popupClassName: "nav-sub-menu-" + mode,
                     children: children
                         .filter(n => !n.unlinked) // don't include nodes that are outside of nav
-                        .map(({ path, title, subtitle, children }) => {
-                            const to = children.length ? children[0].path : path
+                        .map(({ path: child_path, title, subtitle, children, anchor, slug }) => {
+                            const to = anchor ? `${path}#${slug}`: children.length ? children[0].path : child_path
 
                             function handle_click() {
                                 send_gtag(to)
@@ -166,7 +165,7 @@ const NavMenu = ({ mode, onNavigate = undefined }) => {
                             }
 
                             return {
-                                key: mode + ":" + path,
+                                key: mode + ":" + child_path,
                                 label: (
                                     <Link to={to} onClick={handle_click}>
                                         <div className="title">{title}</div>
@@ -195,7 +194,7 @@ type TopNavProps = {
     hideSearch?: boolean
 }
 
-export const TopNav = ({ hideVersionLink, hideSearch }: TopNavProps) => {
+export const TopNav = ({ hideVersionLink, hideSearch=true }: TopNavProps) => {
     const [showMenu, setShowMenu] = useState(false)
 
     const node = useCurrentNav()

@@ -9,6 +9,8 @@ const entities = {
     gbcl: "GBC (Core control)",
     gbr: "GBR",
     gbrl: "GBR (React)",
+    gbp: "GBP",
+    gbpl: "GBP (Python API)",
     gbem: "GBEM",
     gbeml: "GBEM (EtherCAT master)",
     gbsm: "GBSM",

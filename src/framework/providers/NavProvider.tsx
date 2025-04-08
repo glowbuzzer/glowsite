@@ -15,6 +15,7 @@ import * as Module from "module";
 export type Node = {
     parent?: Node
     slug: string
+    anchor?: boolean
     path: string
     title: string
     subtitle?: string

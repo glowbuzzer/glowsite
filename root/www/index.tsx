@@ -18,7 +18,7 @@ rootNode.render(
     <BrowserRouter>
         <ChatlioFirstMessageConversion/>
         <CookieConsentProvider>
-            <GlowbuzzerThemeProvider theme={AppTheme as any}>
+            <GlowbuzzerThemeProvider theme={AppTheme as any} darkModeDefault={false}>
                 <AppStyle>
                     <NavProvider root={root}>
                         <TopNav/>

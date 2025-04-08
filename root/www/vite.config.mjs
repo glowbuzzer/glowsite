@@ -51,9 +51,9 @@ export default defineConfig(({mode}) => {
                     remarkPrism
                 ]
             }),
-            react(
-                {jsxRuntime: "classic"}
-            ),
+            // react(
+            //     {jsxRuntime: "classic"}
+            // ),
             svgr(),
             typedoc(mode),
             react_docgen(mode),

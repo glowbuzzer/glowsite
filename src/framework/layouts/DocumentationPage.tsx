@@ -1,5 +1,5 @@
 import { ContexualLeftNav } from "../nav/ContexualLeftNav"
-import styled, {useTheme} from "styled-components"
+import styled, { useTheme } from "styled-components"
 import { BaseLayout } from "./BaseLayout"
 import { Section } from "../components/Section"
 import * as React from "react"
@@ -43,7 +43,7 @@ const StyledDocumentationPage = styled.div`
 `
 
 export const DocumentationPage = ({ left, children, ...props }) => {
-    const theme=useTheme()
+    const theme = useTheme()
 
     return (
         <BaseLayout {...props}>

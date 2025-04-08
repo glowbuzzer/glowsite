@@ -86,34 +86,6 @@ const DesktopFooter = ({}) => {
             <Row>
                 <Col span={3}></Col>
                 <Col span={5}>
-                    <h3>How it works</h3>
-                    <div />
-                    <div>
-                        <StyledLink to="/how-it-works/overview">Overview</StyledLink>
-                    </div>
-                    <div>
-                        <StyledLink to="/how-it-works/architecture">More detail</StyledLink>
-                    </div>
-                    <div>
-                        <StyledLink to="/how-it-works/deployment">Deployment</StyledLink>
-                    </div>
-                </Col>
-                <Col span={5}>
-                    <h3>Get started</h3>
-                    <div />
-                    <div>
-                        <StyledLink to="/get-started/simulation">Quick start guide</StyledLink>
-                    </div>
-                    <div>
-                        <StyledLink to="/get-started/kits/overview">
-                            Hardware starter kits
-                        </StyledLink>
-                    </div>
-                    <div>
-                        <StyledLink to="/get-started/how-to-buy">How to buy</StyledLink>
-                    </div>
-                </Col>
-                <Col span={5}>
                     <h3>Legal</h3>
                     <div />
                     <div>
