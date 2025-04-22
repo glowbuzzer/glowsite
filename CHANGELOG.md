@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.3.9](https://github.com/glowbuzzer/glowsite/compare/v1.3.8...v1.3.9) (2025-04-22)
+
+
+### Chore
+
+* Remove index generation ([fc1064d](https://github.com/glowbuzzer/glowsite/commit/fc1064d3b9968424f2f5279558bb4fe927e4ec7d))
+
 ## [1.3.8](https://github.com/glowbuzzer/glowsite/compare/v1.3.7...v1.3.8) (2025-04-09)
 
 
