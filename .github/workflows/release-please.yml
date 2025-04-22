@@ -49,6 +49,7 @@ jobs:
           NODE_OPTIONS: "--max_old_space_size=4096"
           VITE_GLOWBUZZER_VERSION: ${{ needs.release-please.outputs.version }}
 
+#
 #      - name: Install Chrome
 #        run: |
 #          sudo apt-get update
