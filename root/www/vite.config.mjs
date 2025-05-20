@@ -61,7 +61,7 @@ export default defineConfig(({mode}) => {
                 extendOutputFormats,
                 resolveConfigs
             }),
-            radar.default({
+            radar({
                 analytics: {
                     id: env.VITE_GA_TRACKING_ID
                     // disable: true

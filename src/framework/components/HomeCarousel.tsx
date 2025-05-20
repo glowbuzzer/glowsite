@@ -158,6 +158,18 @@ export const HomeCarousel = () => {
                 </main>
                 <img src={ForegroundImage3} alt="carousel image" />
             </CarouselItem>
+            <CarouselItem backgroundImage={BackgroundImage3}>
+                <main>
+                    <h1>Functional Safety using FSoE</h1>
+                    <p>
+                        Our toolkit works with advanced FSoE drives (Synapticon Circulo, Kollmorgen AKD2G, Baumüller b maXX, Bosch Indradrive, and others)
+                    </p>
+                    <p>
+                        Together with the BBH FSoE master (SCU-X-EC), we can help you develop advanced functional safety for your project without long and complex development cycles.
+                    </p>
+                </main>
+                <img src={ForegroundImage3} alt="carousel image" />
+            </CarouselItem>
         </CarouselWrapper>
     )
 }

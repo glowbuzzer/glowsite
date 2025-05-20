@@ -28,8 +28,8 @@ const server = app.listen(port, async () => {
             '--blink-settings=imagesEnabled=false',
             '--disable-gpu',
             '--headless',
-            "--disable-3d-apis"
-            // '--no-sandbox',
+            "--disable-3d-apis",
+            '--no-sandbox',
             // '--no-zygote',
             // '--single-process',
         ]

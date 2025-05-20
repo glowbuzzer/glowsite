@@ -21,6 +21,7 @@ import HexImage from "../../home/hex_components5.svg"
 import { ReactComponent as BlogIcon } from "../../home/blog.svg?inline"
 import { FeaturedItem, FeaturesSection } from "../components/FeaturesSection"
 import { TeaserCarousel } from "../components/TeaserCarousel"
+import { PromoFSoE } from "../components/PromoFSoE"
 
 const HeroSection = styled.div`
     position: relative;
@@ -72,6 +73,7 @@ export const HomePage = () => {
 
     return (
         <BaseLayout>
+            <PromoFSoE/>
             <HomeCarousel />
 
             <TeaserCarousel
