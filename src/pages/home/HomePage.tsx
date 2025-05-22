@@ -15,7 +15,7 @@ import { Section } from "../../framework/components/Section"
 import { FeaturedItem, FeaturesSection } from "../../framework/components/FeaturesSection"
 import styled, { useTheme } from "styled-components"
 import { OfferSection } from "./OfferSection"
-import { TeaserCarousel } from "../../framework/components/TeaserCarousel"
+import { HeroTeasers } from "../../framework/components/HeroTeasers"
 import { HeroSection } from "./HeroSection"
 import AniLogo from "../../landing/utils/aniLogo/aniLogo"
 
@@ -92,7 +92,7 @@ export const HomePage = () => {
                     <RocketIcon className="hero-image" />
                 </HeroSection>
             </Section>
-            <TeaserCarousel
+            <HeroTeasers
                 items={[
                     {
                         key: "0",
