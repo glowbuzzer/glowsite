@@ -28,10 +28,10 @@ const Ec = () => {
     )
 }
 
-export default function AniLogo(props) {
+export default function AniLogo({ color = undefined, width = "250px" }) {
     return (
-        <div style={{ width: "250px" }}>
-            <Canvas color={props.color}>
+        <div style={{ width }}>
+            <Canvas color={color} style={{ width: "100%", height: "100%" }}>
                 <Suspense>
                     <PerspectiveCamera
                         makeDefault

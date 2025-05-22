@@ -1,5 +1,5 @@
 import * as React from "react"
-import {FC, ReactNode} from "react"
+import { FC, ReactNode } from "react"
 import styled from "styled-components"
 import { css } from "styled-components"
 
@@ -12,6 +12,7 @@ const StyledSection = styled.div<{
 }>`
     display: flex;
     background: ${props => props.$color || "inherit"};
+    padding: 0 10px;
 
     > .section {
         max-width: ${props => props.theme.breaks.mainWidth};

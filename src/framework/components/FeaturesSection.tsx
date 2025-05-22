@@ -34,15 +34,15 @@ const StyledFeaturesSection = styled.div`
         background-color: transparent;
         //width: 300px;
         height: 250px;
-        border: 1px solid #f1f1f1;
+        border: 1px solid ${props => props.theme.colorPrimaryBorder};
         perspective: 1000px; /* Remove this if you don't want the 3D effect */
-        cursor: pointer;
+        //cursor: pointer;
 
-        &.front {
-            :hover {
-                background: rgb(0, 0, 0, 0.05);
-            }
-        }
+        //&.front {
+        //    > :hover {
+        //        background: rgb(0, 0, 0, 0.05);
+        //    }
+        //}
 
         &.back {
             .flip-card-inner {
@@ -84,6 +84,7 @@ const StyledFeaturesSection = styled.div`
                 color: white;
                 border: 1px solid white;
                 padding: 4px 8px;
+                text-decoration: none;
             }
 
             a:hover {
@@ -113,9 +114,9 @@ export const FeaturedItem = ({ children, back, to }: CardFlipProps) => {
     const [selected, setSelected] = useContext(featuresContext)
 
     function toggle() {
-        if ( selected == children ) {
+        if (selected == children) {
             setSelected(null)
-        } else if ( selected ) {
+        } else if (selected) {
             setSelected(null)
             setTimeout(() => {
                 setSelected(children)
@@ -128,8 +129,12 @@ export const FeaturedItem = ({ children, back, to }: CardFlipProps) => {
 
     return (
         <div className={"flip-card " + (selected === children ? "back" : "front")}>
-            <div className="flip-card-inner" onClick={toggle}>
+            <div
+                className="flip-card-inner"
+                // onClick={toggle}
+            >
                 <div className="flip-card-front">{children}</div>
+                {/*
                 <div className="flip-card-back">
                     <div className="content">{back}</div>
                     {to && (
@@ -138,6 +143,7 @@ export const FeaturedItem = ({ children, back, to }: CardFlipProps) => {
                         </div>
                     )}
                 </div>
+*/}
             </div>
         </div>
     )

@@ -1,8 +1,4 @@
-import { BaseLayout } from "./BaseLayout"
-import { Button } from "antd"
-import styled, { useTheme } from "styled-components"
-import { RightCircleOutlined } from "@ant-design/icons"
-import { FeaturedBlog } from "../components/FeaturedBlog"
+import { BaseLayout } from "../../framework/layouts/BaseLayout"
 import { ReactComponent as CoordinatedIcon } from "../../images/home_icons/coordinated-icon.svg?inline"
 import { ReactComponent as EmbeddedIcon } from "../../images/home_icons/embedded-icon.svg?inline"
 import { ReactComponent as FieldbusIcon } from "../../images/home_icons/fieldbus-icon.svg?inline"
@@ -12,59 +8,38 @@ import { ReactComponent as IntegratedIcon } from "../../images/home_icons/integr
 import { ReactComponent as RealTimeIcon } from "../../images/home_icons/real-time-icon.svg?inline"
 import { ReactComponent as RoboticArmIcon } from "../../images/home_icons/robotic-arm-icon.svg?inline"
 import { ReactComponent as Html5Icon } from "../../images/home_icons/html5-icon.svg?inline"
-import * as React from "react"
-import { Section } from "../components/Section"
 import { ReactComponent as RocketIcon } from "../../home/rocket.svg?inline"
-import { HomeCarousel } from "../components/HomeCarousel"
-import { YoutubeEmbed } from "../components/Video"
-import HexImage from "../../home/hex_components5.svg"
-import { ReactComponent as BlogIcon } from "../../home/blog.svg?inline"
-import { FeaturedItem, FeaturesSection } from "../components/FeaturesSection"
-import { TeaserCarousel } from "../components/TeaserCarousel"
-import { PromoFSoE } from "../components/PromoFSoE"
+import { ReactComponent as Logo } from "../../images/logos/tiny-logo.svg?inline"
+import * as React from "react"
+import { Section } from "../../framework/components/Section"
+import { FeaturedItem, FeaturesSection } from "../../framework/components/FeaturesSection"
+import styled, { useTheme } from "styled-components"
+import { OfferSection } from "./OfferSection"
+import { TeaserCarousel } from "../../framework/components/TeaserCarousel"
+import { HeroSection } from "./HeroSection"
+import AniLogo from "../../landing/utils/aniLogo/aniLogo"
 
-const HeroSection = styled.div`
-    position: relative;
+const HomepageHeroContent = styled.div`
     display: flex;
     align-items: center;
-    font-size: 1.3em;
-    //max-height: 300px;
 
-    main {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        padding: 50px 100px;
-
-        @media (max-width: 976px) {
-            padding: 25px 50px;
+    > div {
+        padding: 120px 40px;
+        .first {
+            font-size: 2.5em;
+            line-height: 100%;
         }
-
-        @media (max-width: 767px) {
-            font-size: 0.8em;
-            padding: 20px 0;
+        .second {
+            margin-top: 20px;
+            font-size: 1.5em;
+            line-height: 100%;
         }
     }
 
-    h1 {
-        margin-top: 0;
-    }
-
-    .hero-image {
-        min-height: 100%;
-        margin-left: auto;
-        margin-right: 100px;
-        fill: white;
-
-        @media (max-width: 976px) {
+    @media (max-width: 1200px) {
+        svg {
             display: none;
         }
-    }
-`
-
-const HexImageSection = styled.div`
-    @media (max-width: 767px) {
-        display: none;
     }
 `
 
@@ -73,9 +48,50 @@ export const HomePage = () => {
 
     return (
         <BaseLayout>
-            <PromoFSoE/>
-            <HomeCarousel />
-
+            {/*
+            <PromoFSoE />
+*/}
+            <Section spaced background={theme.colorPrimaryTextActive} inverted>
+                <HomepageHeroContent>
+                    <Logo width={"200px"} />
+                    <div>
+                        <div className="first">
+                            Are you building a product incorporating robotics and automation?
+                        </div>
+                        <div className="second">
+                            We provide the motion control software to simulate and control it and
+                            development services to help you
+                        </div>
+                    </div>
+                </HomepageHeroContent>
+            </Section>
+            <Section>
+                <OfferSection />
+            </Section>
+            <Section background={theme.colorPrimaryTextActive} inverted guttered>
+                <HeroSection>
+                    <main>
+                        <h1>What we do</h1>
+                        <p>
+                            We work with customers across the whole product development cycle. From
+                            idea conception and business case development though the development
+                            process to launch and field support
+                        </p>
+                        {/*
+                        <p>
+                            <Button
+                                type="primary"
+                                href="/get-started/simulation"
+                                icon={<RightCircleOutlined />}
+                            >
+                                Find out more
+                            </Button>
+                        </p>
+*/}
+                    </main>
+                    <RocketIcon className="hero-image" />
+                </HeroSection>
+            </Section>
             <TeaserCarousel
                 items={[
                     {
@@ -192,39 +208,6 @@ export const HomePage = () => {
                     }
                 ]}
             />
-
-            <HexImageSection>
-                <Section>
-                    <img src={HexImage} alt="hex image" />
-                </Section>
-            </HexImageSection>
-
-            <Section background={theme.colorBgContainer} spaced>
-                <YoutubeEmbed embedId="LPFD4kW1ILw" />
-            </Section>
-
-            <Section background={theme.colorPrimaryTextActive} inverted guttered>
-                <HeroSection>
-                    <main>
-                        <h1>Get started</h1>
-                        <p>
-                            With our starter-kits and easy to follow instructions, you can quickly
-                            build a React application to control motors and IO and get started
-                            controlling with machines with web-tech
-                        </p>
-                        <p>
-                            <Button
-                                type="primary"
-                                href="/get-started/simulation"
-                                icon={<RightCircleOutlined />}
-                            >
-                                Find out more
-                            </Button>
-                        </p>
-                    </main>
-                    <RocketIcon className="hero-image" />
-                </HeroSection>
-            </Section>
 
             <Section spaced>
                 <FeaturesSection>
@@ -394,17 +377,6 @@ export const HomePage = () => {
                     </FeaturedItem>
                 </FeaturesSection>
             </Section>
-
-            <Section background={theme.colorPrimaryTextActive} inverted spaced guttered>
-                <HeroSection>
-                    <main>
-                        <h1>Blogs that might interest you</h1>
-                    </main>
-                    <BlogIcon className="hero-image" style={{ maxHeight: "100px" }} />
-                </HeroSection>
-            </Section>
-
-            <FeaturedBlog />
         </BaseLayout>
     )
 }

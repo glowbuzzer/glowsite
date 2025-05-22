@@ -42,7 +42,8 @@ const StyledTopNav = styled.div`
             font-size: inherit;
         }
 
-        .ant-menu-submenu {
+        .ant-menu-submenu,
+        .ant-menu-item-only-child {
             padding-bottom: 10px !important;
         }
 
@@ -124,7 +125,7 @@ const NavMenu = ({ mode, onNavigate = undefined }) => {
     const ancestors = pathname
         .split("/")
         .slice(1, -1)
-        .map((p, index, paths) => mode + ":/" + paths.slice(0, index + 1).join("/"))
+        .map((_p, index, paths) => mode + ":/" + paths.slice(0, index + 1).join("/"))
 
     const [openKeys, setOpenKeys] = React.useState(mode === "inline" ? ancestors : [])
 
@@ -148,35 +149,53 @@ const NavMenu = ({ mode, onNavigate = undefined }) => {
             items={nav.children
                 // don't include nodes like 404 that have no children
                 // or nodes that are outside of nav
-                .filter(node => node.children.length && !node.unlinked)
-                .map(({ path, title, children }) => ({
-                    key: mode + ":" + path,
-                    label: title,
-                    popupOffset: [0, 20],
-                    popupClassName: "nav-sub-menu-" + mode,
-                    children: children
-                        .filter(n => !n.unlinked) // don't include nodes that are outside of nav
-                        .map(({ path: child_path, title, subtitle, children, anchor, slug }) => {
-                            const to = anchor ? `${path}#${slug}`: children.length ? children[0].path : child_path
+                .filter(node => /*node.children.length &&*/ !node.unlinked)
+                .map(({ path, title, children }) => {
+                    if (!children?.length) {
+                        return {
+                            key: mode + ":" + path,
+                            label: (
+                                <Link to={path} onClick={() => send_gtag(path)}>
+                                    {title}
+                                </Link>
+                            )
+                        }
+                    }
+                    return {
+                        key: mode + ":" + path,
+                        label: title,
+                        popupOffset: [0, 20],
+                        popupClassName: "nav-sub-menu-" + mode,
+                        children: children
+                            .filter(n => !n.unlinked) // don't include nodes that are outside of nav
+                            .map(
+                                ({ path: child_path, title, subtitle, children, anchor, slug }) => {
+                                    const to = anchor
+                                        ? `${path}#${slug}`
+                                        : children.length
+                                          ? children[0].path
+                                          : child_path
 
-                            function handle_click() {
-                                send_gtag(to)
-                                onNavigate?.()
-                            }
+                                    function handle_click() {
+                                        send_gtag(to)
+                                        onNavigate?.()
+                                    }
 
-                            return {
-                                key: mode + ":" + child_path,
-                                label: (
-                                    <Link to={to} onClick={handle_click}>
-                                        <div className="title">{title}</div>
-                                        {mode === "horizontal" && (
-                                            <div className="subtitle">{subtitle}</div>
-                                        )}
-                                    </Link>
-                                )
-                            }
-                        })
-                }))}
+                                    return {
+                                        key: mode + ":" + child_path,
+                                        label: (
+                                            <Link to={to} onClick={handle_click}>
+                                                <div className="title">{title}</div>
+                                                {mode === "horizontal" && (
+                                                    <div className="subtitle">{subtitle}</div>
+                                                )}
+                                            </Link>
+                                        )
+                                    }
+                                }
+                            )
+                    }
+                })}
         />
     )
 }
@@ -194,7 +213,7 @@ type TopNavProps = {
     hideSearch?: boolean
 }
 
-export const TopNav = ({ hideVersionLink, hideSearch=true }: TopNavProps) => {
+export const TopNav = ({ hideVersionLink = true, hideSearch = true }: TopNavProps) => {
     const [showMenu, setShowMenu] = useState(false)
 
     const node = useCurrentNav()
