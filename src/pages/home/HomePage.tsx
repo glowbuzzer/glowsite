@@ -13,31 +13,91 @@ import { ReactComponent as Logo } from "../../images/logos/tiny-logo.svg?inline"
 import * as React from "react"
 import { Section } from "../../framework/components/Section"
 import { FeaturedItem, FeaturesSection } from "../../framework/components/FeaturesSection"
-import styled, { useTheme } from "styled-components"
+import styled, { useTheme, keyframes } from "styled-components"
 import { OfferSection } from "./OfferSection"
 import { HeroTeasers } from "../../framework/components/HeroTeasers"
 import { HeroSection } from "./HeroSection"
 import AniLogo from "../../landing/utils/aniLogo/aniLogo"
+import { Button } from "antd"
+import { ArrowRightOutlined } from "@ant-design/icons"
+
+const fadeIn = keyframes`
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+`
 
 const HomepageHeroContent = styled.div`
     display: flex;
     align-items: center;
+    position: relative;
+    overflow: hidden;
 
-    > div {
+    &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: radial-gradient(circle at 30% 50%, rgba(146, 84, 222, 0.1) 0%, transparent 70%);
+        z-index: 0;
+    }
+
+    > div.logo-container {
+        z-index: 1;
+        animation: ${fadeIn} 0.8s ease-out;
+    }
+
+    > div.content {
+        z-index: 1;
         padding: 120px 40px;
+        animation: ${fadeIn} 0.8s ease-out 0.2s backwards;
+
         .first {
-            font-size: 2.5em;
-            line-height: 100%;
+            font-size: 2.8em;
+            line-height: 1.2;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 20px;
         }
+
         .second {
+            display: inline-block;
             margin-top: 20px;
-            font-size: 1.5em;
-            line-height: 100%;
+            font-size: 1.6em;
+            line-height: 1.4;
+            color: #e0e0e0;
+            max-width: 600px;
         }
     }
 
     @media (max-width: 1200px) {
-        svg {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+
+        > div.logo-container {
+            margin-bottom: 20px;
+        }
+
+        > div.content {
+            padding: 60px 40px;
+
+            .first,
+            .second {
+                text-align: center;
+            }
+        }
+    }
+
+    @media (max-width: 767px) {
+        > div.logo-container {
             display: none;
         }
     }
@@ -53,14 +113,15 @@ export const HomePage = () => {
 */}
             <Section spaced background={theme.colorPrimaryTextActive} inverted>
                 <HomepageHeroContent>
-                    <Logo width={"200px"} />
-                    <div>
-                        <div className="first">
-                            Are you building a product incorporating robotics and automation?
-                        </div>
+                    <div className="logo-container">
+                        <Logo width={"250px"} />
+                    </div>
+                    <div className="content">
+                        <div className="first">Building products with robotics and automation?</div>
                         <div className="second">
-                            We provide the motion control software to simulate and control it and
-                            development services to help you
+                            We provide cutting-edge motion control software to simulate and control
+                            your products, backed by expert development services to accelerate your
+                            success.
                         </div>
                     </div>
                 </HomepageHeroContent>
@@ -71,23 +132,21 @@ export const HomePage = () => {
             <Section background={theme.colorPrimaryTextActive} inverted guttered>
                 <HeroSection>
                     <main>
-                        <h1>What we do</h1>
+                        <h1>What We Do</h1>
                         <p>
-                            We work with customers across the whole product development cycle. From
-                            idea conception and business case development though the development
-                            process to launch and field support
+                            We partner with customers throughout the entire product development
+                            journey. From initial concept and business case development through the
+                            engineering process to product launch and ongoing field support.
                         </p>
-                        {/*
                         <p>
                             <Button
                                 type="primary"
                                 href="/get-started/simulation"
-                                icon={<RightCircleOutlined />}
+                                icon={<ArrowRightOutlined />}
                             >
-                                Find out more
+                                Explore Our Services
                             </Button>
                         </p>
-*/}
                     </main>
                     <RocketIcon className="hero-image" />
                 </HeroSection>

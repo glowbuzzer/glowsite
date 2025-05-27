@@ -1020,7 +1020,7 @@ const nav = {
             children: [
                 {
                     slug: "vision",
-                    title: "Vision",
+                    title: "Our vision",
                     subtitle: "What we want to achieve (vision)",
                     component: () => import("./pages/about/vision.mdx")
                 },

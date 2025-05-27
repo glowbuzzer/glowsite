@@ -7,7 +7,7 @@ import BackgroundImage2 from "../../home/background_board_w.jpg"
 import ForegroundImage2 from "../../home/iso_cpu.svg"
 import BackgroundImage3 from "../../home/background_io_w.jpg"
 import ForegroundImage3 from "../../home/iso_pc_ethercat_master.svg"
-import {FC, ReactNode} from "react"
+import { FC, ReactNode } from "react"
 
 export const CarouselSettings = {
     arrows: false,
@@ -40,7 +40,7 @@ const CarouselWrapper = styled(Carousel)`
     }
 `
 
-const CarouselDiv: FC<{ className?: string, children: ReactNode }> = ({ className, children }) => (
+const CarouselDiv: FC<{ className?: string; children: ReactNode }> = ({ className, children }) => (
     <div className={className}>
         <div className="carousel-item">{children}</div>
     </div>
@@ -54,7 +54,6 @@ const CarouselItem = styled(CarouselDiv)<{ backgroundImage: string }>`
 
     .carousel-item {
         text-align: left;
-        display: inline-flex;
         display: inline-flex;
         max-width: 1400px;
         gap: 40px;
@@ -162,10 +161,13 @@ export const HomeCarousel = () => {
                 <main>
                     <h1>Functional Safety using FSoE</h1>
                     <p>
-                        Our toolkit works with advanced FSoE drives (Synapticon Circulo, Kollmorgen AKD2G, Baumüller b maXX, Bosch Indradrive, and others)
+                        Our toolkit works with advanced FSoE drives (Synapticon Circulo, Kollmorgen
+                        AKD2G, Baumüller b maXX, Bosch Indradrive, and others)
                     </p>
                     <p>
-                        Together with the BBH FSoE master (SCU-X-EC), we can help you develop advanced functional safety for your project without long and complex development cycles.
+                        Together with the BBH FSoE master (SCU-X-EC), we can help you develop
+                        advanced functional safety for your project without long and complex
+                        development cycles.
                     </p>
                 </main>
                 <img src={ForegroundImage3} alt="carousel image" />
