@@ -6,12 +6,17 @@ import { Link } from "react-router-dom"
 import { useCookieConsent } from "../providers/CookieConsentProvider"
 
 const StyledFooter = styled.div`
+    margin-top: 50px;
     border-top: 1px solid ${props => props.theme.colorBorder};
     padding: 10px 100px;
     text-align: center;
 
     .copyright {
         margin-top: 20px;
+    }
+
+    @media (max-width: 767px) {
+        padding: 10px 20px;
     }
 `
 
@@ -71,8 +76,7 @@ export const GlowsiteFooter = ({}) => {
         <StyledFooter>
             {modalContext}
             <Row>
-                <Col span={7}></Col>
-                <Col span={5}>
+                <Col span={12}>
                     <h3>Legal</h3>
                     <div>
                         <StyledLink to="/privacy">Privacy policy</StyledLink>
@@ -86,7 +90,7 @@ export const GlowsiteFooter = ({}) => {
                         </StyledLinkLookalike>
                     </div>
                 </Col>
-                <Col span={5}>
+                <Col span={12}>
                     <h3>Resources</h3>
                     <Space direction="vertical">
                         <Space>
