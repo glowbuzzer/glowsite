@@ -129,28 +129,6 @@ export const HomePage = () => {
             <Section>
                 <OfferSection />
             </Section>
-            <Section background={theme.colorPrimaryTextActive} inverted guttered>
-                <HeroSection>
-                    <main>
-                        <h1>What We Do</h1>
-                        <p>
-                            We partner with customers throughout the entire product development
-                            journey. From initial concept and business case development through the
-                            engineering process to product launch and ongoing field support.
-                        </p>
-                        <p>
-                            <Button
-                                type="primary"
-                                href="/get-started/simulation"
-                                icon={<ArrowRightOutlined />}
-                            >
-                                Explore Our Services
-                            </Button>
-                        </p>
-                    </main>
-                    <RocketIcon className="hero-image" />
-                </HeroSection>
-            </Section>
             <HeroTeasers
                 items={[
                     {
@@ -267,6 +245,28 @@ export const HomePage = () => {
                     }
                 ]}
             />
+            <Section background={theme.colorPrimaryTextActive} inverted guttered>
+                <HeroSection>
+                    <main>
+                        <h1>What We Do</h1>
+                        <p>
+                            We partner with customers throughout the entire product development
+                            journey. From initial concept and business case development through the
+                            engineering process to product launch and ongoing field support.
+                        </p>
+                        <p>
+                            <Button
+                                type="primary"
+                                href="/get-started/simulation"
+                                icon={<ArrowRightOutlined />}
+                            >
+                                Explore Our Services
+                            </Button>
+                        </p>
+                    </main>
+                    <RocketIcon className="hero-image" />
+                </HeroSection>
+            </Section>
 
             <Section spaced>
                 <FeaturesSection>
