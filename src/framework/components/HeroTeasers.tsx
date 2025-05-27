@@ -91,6 +91,7 @@ const StyledHeroTeasers = styled.div`
 
     .more-container {
         margin-top: 30px;
+        padding: 0 20px;
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         gap: 30px;
@@ -432,7 +433,7 @@ export const HeroTeasers = ({ items }: HeroTeasersProps) => {
             {moreItems.length > 0 && (
                 <div className="show-more-button">
                     <button onClick={() => setShowMore(!showMore)}>
-                        {showMore ? "Show Less" : "Show More Examples"}
+                        {showMore ? "Show Less" : "More Examples"}
                         <span className="icon">{showMore ? <UpOutlined /> : <DownOutlined />}</span>
                     </button>
                 </div>
