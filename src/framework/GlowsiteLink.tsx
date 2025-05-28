@@ -21,6 +21,7 @@ function find_node(nav: Node[], pathname) {
 export const GlowsiteLink = ({ to, children }) => {
     const nav = useGlowsiteRoutes()
     const next = new URL(to, window.location.href)
+    console.log("next", next)
     const exists = find_node(nav, next.pathname)
     if (!exists) {
         console.error("BROKEN LINK FOUND", next.pathname)
@@ -30,5 +31,9 @@ export const GlowsiteLink = ({ to, children }) => {
             </Link>
         )
     }
-    return <Link to={next.pathname} className="markdown-link">{children}</Link>
+    return (
+        <Link to={next.pathname + next.hash} className="markdown-link">
+            {children}
+        </Link>
+    )
 }

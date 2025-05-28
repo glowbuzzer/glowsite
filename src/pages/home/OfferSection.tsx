@@ -1,6 +1,11 @@
 import styled, { keyframes } from "styled-components"
 import { GlowsiteLink } from "@glowsite"
-import { ApiOutlined, ControlOutlined, SafetyCertificateOutlined, CodeOutlined } from "@ant-design/icons"
+import {
+    ApiOutlined,
+    ControlOutlined,
+    DesktopOutlined,
+    SafetyCertificateOutlined
+} from "@ant-design/icons"
 
 const fadeInUp = keyframes`
   from {
@@ -11,7 +16,7 @@ const fadeInUp = keyframes`
     opacity: 1;
     transform: translateY(0);
   }
-`;
+`
 
 const pulse = keyframes`
   0% {
@@ -23,7 +28,7 @@ const pulse = keyframes`
   100% {
     box-shadow: 0 0 0 0 rgba(146, 84, 222, 0);
   }
-`;
+`
 
 const StyledDiv = styled.div`
     margin: 50px 0;
@@ -51,15 +56,25 @@ const StyledDiv = styled.div`
         background: linear-gradient(135deg, ${props => props.theme.colorPrimary}, #6a35c2);
         border-radius: 12px;
         box-shadow: 0 10px 20px rgba(106, 53, 194, 0.15);
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        transition:
+            transform 0.3s ease,
+            box-shadow 0.3s ease;
         animation: ${fadeInUp} 0.6s ease-out backwards;
         position: relative;
         overflow: hidden;
 
-        &:nth-child(1) { animation-delay: 0.1s; }
-        &:nth-child(2) { animation-delay: 0.2s; }
-        &:nth-child(3) { animation-delay: 0.3s; }
-        &:nth-child(4) { animation-delay: 0.4s; }
+        &:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+        &:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+        &:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+        &:nth-child(4) {
+            animation-delay: 0.4s;
+        }
 
         &:hover {
             transform: translateY(-5px);
@@ -67,7 +82,7 @@ const StyledDiv = styled.div`
         }
 
         &::before {
-            content: '';
+            content: "";
             position: absolute;
             top: 0;
             left: 0;
@@ -130,42 +145,46 @@ export const OfferSection = () => {
         <StyledDiv>
             <div>
                 <div className="icon">
-                    <CodeOutlined style={{ fontSize: '28px', color: 'white' }} />
+                    <DesktopOutlined style={{ fontSize: "28px", color: "white" }} />
                 </div>
                 <div>HMI Framework</div>
                 <div>Modern React-based interface for intuitive machine control</div>
                 <div className="link">
-                    <GlowsiteLink to="/how-it-works">Explore Features</GlowsiteLink>
+                    <GlowsiteLink to="/overview/software-stack#hmi">Explore Features</GlowsiteLink>
                 </div>
             </div>
             <div>
                 <div className="icon">
-                    <ControlOutlined style={{ fontSize: '28px', color: 'white' }} />
+                    <ControlOutlined style={{ fontSize: "28px", color: "white" }} />
                 </div>
                 <div>Real-time Motion Control</div>
                 <div>Advanced kinematics for precise automation control</div>
                 <div className="link">
-                    <GlowsiteLink to="/how-it-works">Discover Capabilities</GlowsiteLink>
+                    <GlowsiteLink to="/overview/software-stack#control">
+                        Discover Capabilities
+                    </GlowsiteLink>
                 </div>
             </div>
             <div>
                 <div className="icon">
-                    <ApiOutlined style={{ fontSize: '28px', color: 'white' }} />
+                    <ApiOutlined style={{ fontSize: "28px", color: "white" }} />
                 </div>
                 <div>EtherCAT Master</div>
                 <div>Industrial fieldbus integration with Modbus support</div>
                 <div className="link">
-                    <GlowsiteLink to="/how-it-works">Learn More</GlowsiteLink>
+                    <GlowsiteLink to="/overview/software-stack#ethercat">Learn More</GlowsiteLink>
                 </div>
             </div>
             <div>
                 <div className="icon">
-                    <SafetyCertificateOutlined style={{ fontSize: '28px', color: 'white' }} />
+                    <SafetyCertificateOutlined style={{ fontSize: "28px", color: "white" }} />
                 </div>
                 <div>Safety Supervisor</div>
                 <div>FSoE functional safety for secure operation</div>
                 <div className="link">
-                    <GlowsiteLink to="/how-it-works">View Details</GlowsiteLink>
+                    <GlowsiteLink to="/overview/software-stack#supervisor">
+                        View Details
+                    </GlowsiteLink>
                 </div>
             </div>
         </StyledDiv>

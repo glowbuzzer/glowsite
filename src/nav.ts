@@ -86,72 +86,36 @@ const nav = {
     layout: HomePage,
     children: [
         {
-            slug: "what-we-do",
-            title: "What we do",
+            slug: "overview",
+            title: "Overview",
             layout: DefaultDocumentationPage,
-            component: () => import("./pages/how-it-works/overview.mdx")
-            // children: [
-            //     {
-            //         slug: "overview",
-            //         title: "Overview",
-            //         subtitle: "Basically, how does it work?",
-            //         component: () => import("./pages/how-it-works/overview.mdx")
-            //     },
-            //     {
-            //         slug: "architecture",
-            //         title: "Architecture",
-            //         subtitle: "A little more technical detail...",
-            //         component: () => import("./pages/how-it-works/architecture.mdx")
-            //     },
-            //     {
-            //         slug: "deployment",
-            //         title: "Deployment",
-            //         subtitle: "What platforms does the glowbuzzer toolkit run on?",
-            //         component: () => import("./pages/how-it-works/platforms.mdx")
-            //     },
-            //     {
-            //         slug: "embedded",
-            //         title: "Embedded",
-            //         subtitle: "Developing embedded machine controls with the toolkit",
-            //         component: () => import("./pages/how-it-works/embedded.mdx")
-            //     },
-            //     {
-            //         slug: "fieldbus",
-            //         title: "Fieldbus integration",
-            //         subtitle: "How does it integrate with a fieldbus?",
-            //         component: () => import("./pages/how-it-works/fieldbus.mdx")
-            //     },
-            //     {
-            //         slug: "fsoe",
-            //         title: "Functional safety",
-            //         subtitle: "Functional safety and FSoE support",
-            //         component: () => import("./pages/how-it-works/fsoe.mdx")
-            //     },
-            //     {
-            //         slug: "drives",
-            //         title: "Drives integration",
-            //         subtitle: "How does it integrate with drives?",
-            //         component: () => import("./pages/how-it-works/drives.mdx")
-            //     },
-            //     {
-            //         slug: "real_time",
-            //         title: "Real-time capability",
-            //         subtitle: "Fast reaction to events",
-            //         component: () => import("./pages/how-it-works/real_time.mdx")
-            //     },
-            //     {
-            //         slug: "front_end_components",
-            //         title: "User interface (HMI)",
-            //         subtitle: "Building a machine control in React",
-            //         component: () => import("./pages/how-it-works/front_end_components.mdx")
-            //     },
-            //     {
-            //         slug: "motion",
-            //         title: "Trajectory planner",
-            //         subtitle: "The algorithms to make things move",
-            //         component: () => import("./pages/how-it-works/motion.mdx")
-            //     }
-            // ]
+            children: [
+                {
+                    slug: "what-we-do",
+                    title: "What we do",
+                    component: () => import("./pages/overview/what-we-do.mdx")
+                },
+                {
+                    slug: "software-stack",
+                    title: "Our software",
+                    component: () => import("./pages/overview/SoftwareStack")
+                },
+                {
+                    slug: "simulation",
+                    title: "Simulation and digital twin",
+                    component: () => import("./pages/overview/simulation.mdx")
+                },
+                {
+                    slug: "embedded",
+                    title: "Embedded and white-labelled",
+                    component: () => import("./pages/overview/embedded.mdx")
+                },
+                {
+                    slug: "how-we-work",
+                    title: "How we work with customers",
+                    component: () => import("./pages/overview/how-we-work.mdx")
+                }
+            ]
         },
         /*        {
             slug: "get-started",

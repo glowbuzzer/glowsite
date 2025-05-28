@@ -121,7 +121,7 @@ export const HomePage = () => {
                         <div className="second">
                             We provide cutting-edge motion control software to simulate and control
                             your products, backed by expert development services to accelerate your
-                            success.
+                            success
                         </div>
                     </div>
                 </HomepageHeroContent>
@@ -157,16 +157,17 @@ export const HomePage = () => {
                     //         "https://static.glowbuzzer.com/glowsite/carousel/physics/short_physics.mp4"
                     // },
                     {
-                        key: "1",
-                        title: "Robot collision avoidance and path planning",
+                        key: "5",
+                        title: "3,4, 5 axis CNC controls",
                         subtitle:
-                            "Obstacle avoidance and path planning for machines and robots. Create a path to follow from a number of points. Add an obstacle somewhere along the path. Uses different strategies to avoid collision.",
+                            "Use the glowbuzzer toolkit  for your 3, 4 and 5 axis CNC control. Software used to control the machine is React/TypeScript that machine builders can customise. In this demo we show the integration of an automatic tool changer (ATC)",
+                        // to: "/",
                         animationUrl:
-                            "https://static.glowbuzzer.com/glowsite/carousel/avoidance/short_avoidance_summary.gif",
+                            "https://static.glowbuzzer.com/glowsite/carousel/cnc/short_cnc_summary.gif",
                         imageUrl:
-                            "https://static.glowbuzzer.com/glowsite/carousel/avoidance/short_avoidance_keyframe.jpg",
+                            "https://static.glowbuzzer.com/glowsite/carousel/cnc/short_cnc_keyframe.jpg",
                         videoUrl:
-                            "https://static.glowbuzzer.com/glowsite/carousel/avoidance/short_avoidance.mp4"
+                            "https://static.glowbuzzer.com/glowsite/carousel/cnc/short_cnc.mp4"
                     },
                     // {
                     //     key: "2",
@@ -192,17 +193,29 @@ export const HomePage = () => {
                         videoUrl:
                             "https://static.glowbuzzer.com/glowsite/carousel/welding/short_welding.mp4"
                     },
+                    // {
+                    //     key: "3",
+                    //     title: "Drive testing",
+                    //     subtitle:
+                    //         "We recently completed a round of drive testing in which we tested the glowbuzzer toolkit with various manufacturers' drives. This round was focussed on EtherCAT drives from manufacturers including JVL, Oriental Motor, Delta, Kollmorgen, Beckhoff & Omron.",
+                    //     animationUrl:
+                    //         "https://static.glowbuzzer.com/glowsite/carousel/drive_testing/short_drive_testing_summary.gif",
+                    //     imageUrl:
+                    //         "https://static.glowbuzzer.com/glowsite/carousel/drive_testing/short_drive_testing_keyframe.jpg",
+                    //     videoUrl:
+                    //         "https://static.glowbuzzer.com/glowsite/carousel/drive_testing/short_drive_testing.mp4"
+                    // },
                     {
-                        key: "3",
-                        title: "Drive testing",
+                        key: "1",
+                        title: "Robot collision avoidance and path planning",
                         subtitle:
-                            "We recently completed a round of drive testing in which we tested the glowbuzzer toolkit with various manufacturers' drives. This round was focussed on EtherCAT drives from manufacturers including JVL, Oriental Motor, Delta, Kollmorgen, Beckhoff & Omron.",
+                            "Obstacle avoidance and path planning for machines and robots. Create a path to follow from a number of points. Add an obstacle somewhere along the path. Uses different strategies to avoid collision.",
                         animationUrl:
-                            "https://static.glowbuzzer.com/glowsite/carousel/drive_testing/short_drive_testing_summary.gif",
+                            "https://static.glowbuzzer.com/glowsite/carousel/avoidance/short_avoidance_summary.gif",
                         imageUrl:
-                            "https://static.glowbuzzer.com/glowsite/carousel/drive_testing/short_drive_testing_keyframe.jpg",
+                            "https://static.glowbuzzer.com/glowsite/carousel/avoidance/short_avoidance_keyframe.jpg",
                         videoUrl:
-                            "https://static.glowbuzzer.com/glowsite/carousel/drive_testing/short_drive_testing.mp4"
+                            "https://static.glowbuzzer.com/glowsite/carousel/avoidance/short_avoidance.mp4"
                     },
                     {
                         key: "4",
@@ -216,19 +229,6 @@ export const HomePage = () => {
                             "https://static.glowbuzzer.com/glowsite/carousel/gcode/short_gcode_keyframe.jpg",
                         videoUrl:
                             "https://static.glowbuzzer.com/glowsite/carousel/gcode/short_gcode.mp4"
-                    },
-                    {
-                        key: "5",
-                        title: "3,4, 5 axis CNC controls",
-                        subtitle:
-                            "Use the glowbuzzer toolkit  for your 3, 4 and 5 axis CNC control. Software used to control the machine is React/TypeScript that machine builders can customise. In this demo we show the integration of an automatic tool changer (ATC)",
-                        // to: "/",
-                        animationUrl:
-                            "https://static.glowbuzzer.com/glowsite/carousel/cnc/short_cnc_summary.gif",
-                        imageUrl:
-                            "https://static.glowbuzzer.com/glowsite/carousel/cnc/short_cnc_keyframe.jpg",
-                        videoUrl:
-                            "https://static.glowbuzzer.com/glowsite/carousel/cnc/short_cnc.mp4"
                     },
                     {
                         key: "6",
