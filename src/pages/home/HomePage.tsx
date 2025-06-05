@@ -9,17 +9,17 @@ import { ReactComponent as RealTimeIcon } from "../../images/home_icons/real-tim
 import { ReactComponent as RoboticArmIcon } from "../../images/home_icons/robotic-arm-icon.svg?inline"
 import { ReactComponent as Html5Icon } from "../../images/home_icons/html5-icon.svg?inline"
 import { ReactComponent as RocketIcon } from "../../home/rocket.svg?inline"
-import { ReactComponent as Logo } from "../../images/logos/tiny-logo.svg?inline"
 import * as React from "react"
-import { Section } from "../../framework/components/Section"
+import { Section, StyledSection } from "../../framework/components/Section"
 import { FeaturedItem, FeaturesSection } from "../../framework/components/FeaturesSection"
-import styled, { useTheme, keyframes } from "styled-components"
+import styled, { keyframes, useTheme } from "styled-components"
 import { OfferSection } from "./OfferSection"
 import { HeroTeasers } from "../../framework/components/HeroTeasers"
 import { HeroSection } from "./HeroSection"
-import AniLogo from "../../landing/utils/aniLogo/aniLogo"
 import { Button } from "antd"
 import { ArrowRightOutlined } from "@ant-design/icons"
+// @ts-ignore
+import background from "./img.png"
 
 const fadeIn = keyframes`
   from {
@@ -32,22 +32,39 @@ const fadeIn = keyframes`
   }
 `
 
-const HomepageHeroContent = styled.div`
-    display: flex;
-    align-items: center;
+const TopHeroSection = styled(StyledSection).withConfig({ displayName: "HeroSection" })`
     position: relative;
-    overflow: hidden;
-
-    &::before {
+    background: ${props => props.theme.colorPrimaryTextActive};
+    &::after {
         content: "";
         position: absolute;
         top: 0;
         left: 0;
         right: 0;
         bottom: 0;
-        background: radial-gradient(circle at 30% 50%, rgba(146, 84, 222, 0.1) 0%, transparent 70%);
-        z-index: 0;
+        background: url(${background}) center center no-repeat;
+        background-size: cover;
+        opacity: 0.2;
+        //z-index: -1;
     }
+`
+
+const HomepageHeroContent = styled.div.withConfig({ displayName: "HomepageHeroContent" })`
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+
+    //&::before {
+    //    content: "";
+    //    position: absolute;
+    //    top: 0;
+    //    left: 0;
+    //    right: 0;
+    //    bottom: 0;
+    //    background: radial-gradient(circle at 30% 50%, rgba(146, 84, 222, 0.1) 0%, transparent 70%);
+    //    z-index: 0;
+    //}
 
     > div.logo-container {
         z-index: 1;
@@ -111,21 +128,25 @@ export const HomePage = () => {
             {/*
             <PromoFSoE />
 */}
-            <Section spaced background={theme.colorPrimaryTextActive} inverted>
-                <HomepageHeroContent>
-                    <div className="logo-container">
-                        <Logo width={"250px"} />
-                    </div>
-                    <div className="content">
-                        <div className="first">Building smarter machines, faster</div>
-                        <div className="second">
-                            We provide cutting-edge motion control software to simulate and control
-                            your products, backed by expert development services to accelerate your
-                            success
+            <TopHeroSection $spaced $background={theme.colorPrimaryTextActive} $inverted>
+                <div className="section">
+                    <HomepageHeroContent>
+                        {/*
+                        <div className="logo-container">
+                            <Logo width={"250px"} />
                         </div>
-                    </div>
-                </HomepageHeroContent>
-            </Section>
+*/}
+                        <div className="content">
+                            <div className="first">Building smarter machines, faster</div>
+                            <div className="second">
+                                We provide cutting-edge motion control software to simulate and
+                                control your products, backed by expert development services to
+                                accelerate your success
+                            </div>
+                        </div>
+                    </HomepageHeroContent>
+                </div>
+            </TopHeroSection>
             <Section>
                 <OfferSection />
             </Section>

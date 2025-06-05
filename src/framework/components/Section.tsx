@@ -3,7 +3,7 @@ import { FC, ReactNode } from "react"
 import styled from "styled-components"
 import { css } from "styled-components"
 
-const StyledSection = styled.div<{
+export const StyledSection = styled.div<{
     $color: string
     $inverted: boolean
     $spaced: boolean

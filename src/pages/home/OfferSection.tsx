@@ -169,8 +169,8 @@ export const OfferSection = () => {
                 <div className="icon">
                     <ApiOutlined style={{ fontSize: "28px", color: "white" }} />
                 </div>
-                <div>EtherCAT Master</div>
-                <div>Industrial fieldbus integration with Modbus support</div>
+                <div>Industrial Fieldbus Integration</div>
+                <div>EtherCAT master with comprehensive modbus support</div>
                 <div className="link">
                     <GlowsiteLink to="/overview/software-stack#ethercat">Learn More</GlowsiteLink>
                 </div>
