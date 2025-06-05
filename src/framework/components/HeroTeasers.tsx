@@ -204,11 +204,11 @@ const StyledTeaser = styled.div`
         font-weight: 700;
         font-size: 1.3em;
         margin-bottom: 10px;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        display: -webkit-box;
-        -webkit-box-orient: vertical;
-        -webkit-line-clamp: 1;
+        //overflow: hidden;
+        //text-overflow: ellipsis;
+        //display: -webkit-box;
+        //-webkit-box-orient: vertical;
+        //-webkit-line-clamp: 1;
         color: ${props => props.theme.colorPrimary};
 
         a {
@@ -222,12 +222,13 @@ const StyledTeaser = styled.div`
     }
 
     .subtitle {
-        height: 6em;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        display: -webkit-box;
-        -webkit-box-orient: vertical;
-        -webkit-line-clamp: 3;
+        //height: 6em;
+        //overflow: hidden;
+        //text-overflow: ellipsis;
+        //display: -webkit-box;
+        //-webkit-box-orient: vertical;
+        //-webkit-line-clamp: 3;
+        flex-grow: 1;
         color: #555;
         line-height: 1.5;
         margin-bottom: 15px;
@@ -241,7 +242,6 @@ const StyledTeaser = styled.div`
         margin: 15px 0;
         position: relative;
         cursor: pointer;
-        flex-grow: 1;
         overflow: hidden;
         border-radius: 12px;
         box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);

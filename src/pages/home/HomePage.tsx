@@ -117,7 +117,7 @@ export const HomePage = () => {
                         <Logo width={"250px"} />
                     </div>
                     <div className="content">
-                        <div className="first">Building products with robotics and automation?</div>
+                        <div className="first">Building smarter machines, faster</div>
                         <div className="second">
                             We provide cutting-edge motion control software to simulate and control
                             your products, backed by expert development services to accelerate your
@@ -132,16 +132,36 @@ export const HomePage = () => {
             <HeroTeasers
                 items={[
                     {
-                        key: "0",
-                        title: "Dancing robots",
+                        key: "agv",
+                        title: "AGV and robot arm combo",
                         subtitle:
-                            "Two robots dancing! Here we show an application of time synchronised trajectories. Two robots perform different cartesian moves (one two lines and the other an arc) and both arrive at their destination at exactly the same time",
-                        animationUrl:
-                            "https://static.glowbuzzer.com/glowsite/carousel/dancing/short_dancing_summary.gif",
+                            "The glowbuzzer toolkit supports multiple kinematics models (concurrently). In this demo we show a simple AGV with a robot arm moving independently",
                         imageUrl:
-                            "https://static.glowbuzzer.com/glowsite/carousel/dancing/short_dancing_keyframe.jpg",
+                            "https://static.glowbuzzer.com/glowsite/carousel/agv/short_agv_keyframe.png",
                         videoUrl:
-                            "https://static.glowbuzzer.com/glowsite/carousel/dancing/short_dancing.mp4"
+                            "https://static.glowbuzzer.com/glowsite/carousel/agv/short_agv.mp4"
+                    },
+                    {
+                        key: "palletising",
+                        title: "Palletising with a robot arm and lift",
+                        subtitle:
+                            "Creating robot paths from the geometry of imported STEP files for robotic welding using the buerli.io CAD components",
+                        imageUrl:
+                            "https://static.glowbuzzer.com/glowsite/carousel/palletiser/short_pallet_keyframe.jpg",
+                        videoUrl:
+                            "https://static.glowbuzzer.com/glowsite/carousel/palletiser/short_pallet.mp4"
+                    },
+                    {
+                        key: "welding",
+                        title: "Creating paths from imported STEP files",
+                        subtitle:
+                            "Creating robot paths from the geometry of imported STEP files for robotic welding using the buerli.io CAD components",
+                        animationUrl:
+                            "https://static.glowbuzzer.com/glowsite/carousel/welding/short_welding_summary.gif",
+                        imageUrl:
+                            "https://static.glowbuzzer.com/glowsite/carousel/welding/short_welding_keyframe.jpg",
+                        videoUrl:
+                            "https://static.glowbuzzer.com/glowsite/carousel/welding/short_welding.mp4"
                     },
                     // {
                     //     key: "1",
@@ -156,6 +176,29 @@ export const HomePage = () => {
                     //     videoUrl:
                     //         "https://static.glowbuzzer.com/glowsite/carousel/physics/short_physics.mp4"
                     // },
+                    {
+                        key: "0",
+                        title: "Dancing robots",
+                        subtitle:
+                            "Two robots dancing! Here we show an application of time synchronised trajectories. Two robots perform different cartesian moves (one two lines and the other an arc) and both arrive at their destination at exactly the same time",
+                        animationUrl:
+                            "https://static.glowbuzzer.com/glowsite/carousel/dancing/short_dancing_summary.gif",
+                        imageUrl:
+                            "https://static.glowbuzzer.com/glowsite/carousel/dancing/short_dancing_keyframe.jpg",
+                        videoUrl:
+                            "https://static.glowbuzzer.com/glowsite/carousel/dancing/short_dancing.mp4"
+                    },
+                    {
+                        key: "teeth",
+                        title: "Stewart platform for precise control",
+                        subtitle:
+                            "The glowbuzzer toolkit supports stewart platform kinematics. This allows you to control machines with 6 degrees of freedom (6DOF) such as hexapods, flight simulators and so on. In this demo we show a digital twin of teeth chewing",
+                        // to: "/",
+                        imageUrl:
+                            "https://static.glowbuzzer.com/glowsite/carousel/teeth/short_teeth_keyframe.jpg",
+                        videoUrl:
+                            "https://static.glowbuzzer.com/glowsite/carousel/teeth/short_teeth.mp4"
+                    },
                     {
                         key: "5",
                         title: "3,4, 5 axis CNC controls",
@@ -181,18 +224,6 @@ export const HomePage = () => {
                     //     videoUrl:
                     //         "https://static.glowbuzzer.com/glowsite/carousel/hexapod/short_hexapod.mp4"
                     // },
-                    {
-                        key: "2",
-                        title: "Creating paths from imported STEP files",
-                        subtitle:
-                            "Creating robot paths from the geometry of imported STEP files for robotic welding using the buerli.io CAD components",
-                        animationUrl:
-                            "https://static.glowbuzzer.com/glowsite/carousel/welding/short_welding_summary.gif",
-                        imageUrl:
-                            "https://static.glowbuzzer.com/glowsite/carousel/welding/short_welding_keyframe.jpg",
-                        videoUrl:
-                            "https://static.glowbuzzer.com/glowsite/carousel/welding/short_welding.mp4"
-                    },
                     // {
                     //     key: "3",
                     //     title: "Drive testing",
