@@ -9,7 +9,8 @@ import {
     tasksSlice,
     TaskStatus,
     usePreview,
-    GlowbuzzerConnectionContext, standardReducers
+    GlowbuzzerConnectionContext,
+    standardReducers
 } from "@glowbuzzer/store"
 
 import "dseg/css/dseg.css"
@@ -22,7 +23,7 @@ import { ComponentProp, ComponentProps } from "../components/ComponentProps"
 import reactDocgenControls from "react-docgen:@glowbuzzer/controls"
 import { Markdown } from "../components/Markdown"
 import { GithubSourceLink } from "../components"
-import { ScrollToTopOnMount } from "../components/ScrollToTopOnMount"
+import { ScrollOnMount } from "../components/ScrollOnMount"
 import { dino } from "../store/dino"
 import { ConfigLiveEditProvider } from "@glowbuzzer/controls"
 
@@ -243,11 +244,11 @@ export const ControlsDocumentationPage = ({ children, slug, displayProps }) => {
 
     return (
         <Provider store={store}>
-            <GlowbuzzerConnectionContext.Provider value={{connected: true}}>
+            <GlowbuzzerConnectionContext.Provider value={{ connected: true }}>
                 <GlowbuzzerCustomApp>
                     <ConfigLiveEditProvider>
                         <DefaultDocumentationPage>
-                            <ScrollToTopOnMount on={[window.location.pathname]} />
+                            <ScrollOnMount on={[window.location.pathname]} />
 
                             {displayName && <h1>{displayName}</h1>}
 

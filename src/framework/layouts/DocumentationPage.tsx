@@ -3,7 +3,7 @@ import styled, { useTheme } from "styled-components"
 import { BaseLayout } from "./BaseLayout"
 import { Section } from "../components/Section"
 import * as React from "react"
-import { ScrollToTopOnMount } from "../components/ScrollToTopOnMount"
+import { ScrollOnMount } from "../components/ScrollOnMount"
 
 const StyledDocumentationPage = styled.div`
     display: flex;
@@ -47,7 +47,7 @@ export const DocumentationPage = ({ left, children, ...props }) => {
 
     return (
         <BaseLayout {...props}>
-            <ScrollToTopOnMount on={[window.location.pathname]} />
+            <ScrollOnMount on={[window.location.pathname]} />
             <Section background={theme.colorBgContainer} expand>
                 <StyledDocumentationPage>
                     <div className="left">

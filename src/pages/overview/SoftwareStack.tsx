@@ -6,6 +6,8 @@ import {
     SafetyCertificateOutlined
 } from "@ant-design/icons"
 import styled from "styled-components"
+import { ScrollOnMount } from "../../framework/components/ScrollOnMount"
+import { useLocation } from "react-router-dom"
 
 const StyledDiv = styled.div`
     h1 {
@@ -35,8 +37,10 @@ const IconWrapper = styled.div`
 `
 
 const SoftwareStack = () => {
+    const { hash } = useLocation()
     return (
         <StyledDiv>
+            <ScrollOnMount on={[hash]} anchor />
             <h1>We provide four key software components for your control solution</h1>
 
             <Section>

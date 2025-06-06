@@ -2,7 +2,7 @@ import styled from "styled-components"
 import { GlowsiteFooter } from "../footer/GlowsiteFooter"
 import { BreadcrumbNav } from "../components/BreadcrumbNav"
 import * as React from "react"
-import { ScrollToTopOnMount } from "../components/ScrollToTopOnMount"
+import { ScrollOnMount } from "../components/ScrollOnMount"
 import { Button } from "antd"
 import { Link } from "react-router-dom"
 import { useCookieConsent } from "../providers/CookieConsentProvider"
@@ -81,7 +81,7 @@ export const BaseLayout = ({
     return (
         <>
             <StyledLayout>
-                <ScrollToTopOnMount />
+                <ScrollOnMount />
                 <div className="main">
                     <div className={singleColumn ? "single-body" : "body"}>
                         <BreadcrumbNav />

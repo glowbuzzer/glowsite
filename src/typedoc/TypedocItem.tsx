@@ -22,13 +22,14 @@ import {
     ReflectionType,
     SignatureReflection,
     TupleType,
-    Type, TypeOperatorType,
+    Type,
+    TypeOperatorType,
     UnionType
 } from "typedoc"
 import styled from "styled-components"
 import { kindOf, ReflectionKindLocal } from "./util"
 import { useNavBySlug } from "../framework/nav"
-import { ScrollToTopOnMount } from "../framework/components/ScrollToTopOnMount"
+import { ScrollOnMount } from "../framework/components/ScrollOnMount"
 
 const StyledRender = styled.div`
     .debug {
@@ -172,7 +173,11 @@ const TypedocLiteral = ({ l }: { l: LiteralType }) => {
 }
 
 const TypedocTypeOperator = ({ t }: { t: TypeOperatorType }) => {
-    return <span>{t.operator} <TypedocType t={t.target}/></span>
+    return (
+        <span>
+            {t.operator} <TypedocType t={t.target} />
+        </span>
+    )
 }
 
 const TypedocSignature = ({
@@ -316,10 +321,8 @@ const TypedocDeclaration = ({
                             {d.children
                                 .filter(
                                     p =>
-                                        !(
-                                            /*p.flags?.isProtected ||*/ p.flags
-                                                ?.isPrivate /*|| p.inheritedFrom*/
-                                        )
+                                        !/*p.flags?.isProtected ||*/ p.flags
+                                            ?.isPrivate /*|| p.inheritedFrom*/
                                 )
                                 .map(property => (
                                     <span key={property.name} className="property">
@@ -437,9 +440,11 @@ const TypedocType = ({ t, includeSynopsis = true }: { t: Type; includeSynopsis?:
             )
 
         case "typeOperator":
-            return <span className="typedoc type typeOperator">
-                <TypedocTypeOperator t={t as TypeOperatorType}/>
-            </span>
+            return (
+                <span className="typedoc type typeOperator">
+                    <TypedocTypeOperator t={t as TypeOperatorType} />
+                </span>
+            )
 
         case "conditional":
         case "indexedAccess":
@@ -734,7 +739,7 @@ export default ({ title, slug, standaloneTypes }) => {
                 />
             }
         >
-            <ScrollToTopOnMount on={[item.name]} />
+            <ScrollOnMount on={[item.name]} />
             <h1>
                 {item.name} ({kindOf(item.kind)})
             </h1>
@@ -745,7 +750,7 @@ export default ({ title, slug, standaloneTypes }) => {
         </DocumentationPage>
     ) : (
         <div>
-            <ScrollToTopOnMount on={[item.name]} />
+            <ScrollOnMount on={[item.name]} />
             <h1>
                 {item.name} ({kindOf(item.kind)})
             </h1>
