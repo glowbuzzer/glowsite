@@ -19,7 +19,7 @@ import { HeroSection } from "./HeroSection"
 import { Button } from "antd"
 import { ArrowRightOutlined } from "@ant-design/icons"
 // @ts-ignore
-import background from "./img.png"
+import background from "./img-cropped.png"
 
 const fadeIn = keyframes`
   from {
@@ -45,6 +45,7 @@ const TopHeroSection = styled(StyledSection).withConfig({ displayName: "HeroSect
         background: url(${background}) center center no-repeat;
         background-size: cover;
         opacity: 0.2;
+        //max-width: 600px;
         //z-index: -1;
     }
 `
@@ -137,10 +138,12 @@ export const HomePage = () => {
                         </div>
 */}
                         <div className="content">
-                            <div className="first">Building smarter machines, faster</div>
+                            <div className="first">
+                                Software for OEMs to embed in their machines
+                            </div>
                             <div className="second">
                                 We provide cutting-edge motion control software to simulate and
-                                control your products, backed by expert development services to
+                                control your product, backed by expert development services to
                                 accelerate your success
                             </div>
                         </div>
