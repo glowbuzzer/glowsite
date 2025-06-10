@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.3.10](https://github.com/glowbuzzer/glowsite/compare/v1.3.9...v1.3.10) (2025-06-06)
+
+
+### Chore
+
+* add overview pages ([e49c9cf](https://github.com/glowbuzzer/glowsite/commit/e49c9cfe3ba13f1f4b2329a72c847996b15ce8af))
+* add padding on more items on homepage ([11836c9](https://github.com/glowbuzzer/glowsite/commit/11836c962b3943c36eeaa9ece428683bb198c52c))
+* crop home image, fix missing images ([16fc042](https://github.com/glowbuzzer/glowsite/commit/16fc042ef7360acf6e8675b86bb1ce0f1677fe16))
+* fix scroll from homepage links ([98bf7e5](https://github.com/glowbuzzer/glowsite/commit/98bf7e5c58db4a8ef873d450dd7a6f0258bb9312))
+* homepage image plus downgrade vite ([1b14c58](https://github.com/glowbuzzer/glowsite/commit/1b14c58b748e4f29275d092c0c8cff6ff0f63b61))
+* improve footer layout on mobile ([dad3f71](https://github.com/glowbuzzer/glowsite/commit/dad3f71ee0bcc886729a04b734abb1f31fa61064))
+* Initial re-cut of teaser carousel ([0f3490f](https://github.com/glowbuzzer/glowsite/commit/0f3490f1dfe8694058f55af8916637b499825fbf))
+* Junie edits of vision and contact pages ([d63c2dc](https://github.com/glowbuzzer/glowsite/commit/d63c2dc258dec031f88fd3d3ef0c443f00921967))
+* Junie jazz-up ([fd781bc](https://github.com/glowbuzzer/glowsite/commit/fd781bcb7ca3a238281c26a8db75a5e7bea34595))
+* reorder homepage to improve look ([0fa4a37](https://github.com/glowbuzzer/glowsite/commit/0fa4a371d238beb6d50fbf26634f26d6ef65ac6d))
+* updates ([b36822f](https://github.com/glowbuzzer/glowsite/commit/b36822f65d52d04b970095b0208de45617ce31f0))
+* Work on new website ([3134b98](https://github.com/glowbuzzer/glowsite/commit/3134b981d7511e697c5ec653a03dd265f1a39770))
+
 ## [1.3.9](https://github.com/glowbuzzer/glowsite/compare/v1.3.8...v1.3.9) (2025-04-22)
 
 
