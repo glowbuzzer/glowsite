@@ -13,7 +13,8 @@ import reactDocgenControls from "react-docgen:@glowbuzzer/controls"
 import typedoc from "typedoc:@glowbuzzer/store"
 import { typedocHookFilter } from "./typedoc/typedoc-hooks"
 import { LandingPageLayout } from "./framework/layouts/LandingPageLayout"
-import { BaseLayout } from "./framework/layouts/BaseLayout"
+import Features from "./pages/features/Features"
+import Services from "./pages/services/Services"
 
 function process(node: Omit<Node, "path">, parentPaths: string[], parent: Node): Node {
     const slug = node.slug
@@ -116,6 +117,16 @@ const nav = {
                     component: () => import("./pages/overview/how-we-work.mdx")
                 }
             ]
+        },
+        {
+            slug: "features",
+            title: "Features",
+            layout: Features
+        },
+        {
+            slug: "services",
+            title: "Services",
+            layout: Services
         },
         /*        {
             slug: "get-started",

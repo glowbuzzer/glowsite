@@ -20,6 +20,8 @@ import { Button } from "antd"
 import { ArrowRightOutlined } from "@ant-design/icons"
 // @ts-ignore
 import background from "./img-cropped.png"
+import { PromoFSoE } from "../../framework/components/PromoFSoE"
+import { Link } from "react-router-dom"
 
 const fadeIn = keyframes`
   from {
@@ -74,7 +76,7 @@ const HomepageHeroContent = styled.div.withConfig({ displayName: "HomepageHeroCo
 
     > div.content {
         z-index: 1;
-        padding: 120px 40px;
+        padding: 40px 40px;
         animation: ${fadeIn} 0.8s ease-out 0.2s backwards;
 
         .first {
@@ -126,25 +128,17 @@ export const HomePage = () => {
 
     return (
         <BaseLayout>
-            {/*
-            <PromoFSoE />
-*/}
             <TopHeroSection $spaced $background={theme.colorPrimaryTextActive} $inverted>
                 <div className="section">
                     <HomepageHeroContent>
-                        {/*
-                        <div className="logo-container">
-                            <Logo width={"250px"} />
-                        </div>
-*/}
                         <div className="content">
                             <div className="first">
                                 Software for OEMs to embed in their machines
                             </div>
                             <div className="second">
-                                We provide cutting-edge motion control software to simulate and
-                                control your product, backed by expert development services to
-                                accelerate your success
+                                We are a product development engineering firm providing pre-built
+                                electronics and software components. Our products and services
+                                enable companies to design and build next-generation machines.
                             </div>
                         </div>
                     </HomepageHeroContent>
@@ -155,6 +149,7 @@ export const HomePage = () => {
             </Section>
             <HeroTeasers
                 items={[
+                    /*
                     {
                         key: "agv",
                         title: "AGV and robot arm combo",
@@ -174,6 +169,20 @@ export const HomePage = () => {
                             "https://static.glowbuzzer.com/glowsite/carousel/palletiser/short_pallet_keyframe.jpg",
                         videoUrl:
                             "https://static.glowbuzzer.com/glowsite/carousel/palletiser/short_pallet.mp4"
+                    },
+*/
+                    {
+                        key: "5",
+                        title: "3,4, 5 axis CNC controls",
+                        subtitle:
+                            "Use the glowbuzzer toolkit  for your 3, 4 and 5 axis CNC control. Software used to control the machine is React/TypeScript that machine builders can customise. In this demo we show the integration of an automatic tool changer (ATC)",
+                        // to: "/",
+                        animationUrl:
+                            "https://static.glowbuzzer.com/glowsite/carousel/cnc/short_cnc_summary.gif",
+                        imageUrl:
+                            "https://static.glowbuzzer.com/glowsite/carousel/cnc/short_cnc_keyframe.jpg",
+                        videoUrl:
+                            "https://static.glowbuzzer.com/glowsite/carousel/cnc/short_cnc.mp4"
                     },
                     {
                         key: "welding",
@@ -200,6 +209,7 @@ export const HomePage = () => {
                     //     videoUrl:
                     //         "https://static.glowbuzzer.com/glowsite/carousel/physics/short_physics.mp4"
                     // },
+                    /*
                     {
                         key: "0",
                         title: "Dancing robots",
@@ -212,6 +222,7 @@ export const HomePage = () => {
                         videoUrl:
                             "https://static.glowbuzzer.com/glowsite/carousel/dancing/short_dancing.mp4"
                     },
+*/
                     {
                         key: "teeth",
                         title: "Stewart platform for precise control",
@@ -222,19 +233,6 @@ export const HomePage = () => {
                             "https://static.glowbuzzer.com/glowsite/carousel/teeth/short_teeth_keyframe.jpg",
                         videoUrl:
                             "https://static.glowbuzzer.com/glowsite/carousel/teeth/short_teeth.mp4"
-                    },
-                    {
-                        key: "5",
-                        title: "3,4, 5 axis CNC controls",
-                        subtitle:
-                            "Use the glowbuzzer toolkit  for your 3, 4 and 5 axis CNC control. Software used to control the machine is React/TypeScript that machine builders can customise. In this demo we show the integration of an automatic tool changer (ATC)",
-                        // to: "/",
-                        animationUrl:
-                            "https://static.glowbuzzer.com/glowsite/carousel/cnc/short_cnc_summary.gif",
-                        imageUrl:
-                            "https://static.glowbuzzer.com/glowsite/carousel/cnc/short_cnc_keyframe.jpg",
-                        videoUrl:
-                            "https://static.glowbuzzer.com/glowsite/carousel/cnc/short_cnc.mp4"
                     },
                     // {
                     //     key: "2",
@@ -260,6 +258,7 @@ export const HomePage = () => {
                     //     videoUrl:
                     //         "https://static.glowbuzzer.com/glowsite/carousel/drive_testing/short_drive_testing.mp4"
                     // },
+                    /*
                     {
                         key: "1",
                         title: "Robot collision avoidance and path planning",
@@ -272,6 +271,7 @@ export const HomePage = () => {
                         videoUrl:
                             "https://static.glowbuzzer.com/glowsite/carousel/avoidance/short_avoidance.mp4"
                     },
+*/
                     {
                         key: "4",
                         title: "CAM integration",
@@ -309,15 +309,11 @@ export const HomePage = () => {
                             journey. From initial concept and business case development through the
                             engineering process to product launch and ongoing field support.
                         </p>
-                        <p>
-                            <Button
-                                type="primary"
-                                href="/get-started/simulation"
-                                icon={<ArrowRightOutlined />}
-                            >
+                        <Link to="/services">
+                            <Button type="primary" icon={<ArrowRightOutlined />}>
                                 Explore Our Services
                             </Button>
-                        </p>
+                        </Link>
                     </main>
                     <RocketIcon className="hero-image" />
                 </HeroSection>
@@ -325,18 +321,7 @@ export const HomePage = () => {
 
             <Section spaced>
                 <FeaturesSection>
-                    <FeaturedItem
-                        back={
-                            <>
-                                With the glowbuzzer toolkit, you take our React components and use
-                                them either unchanged, extended or added to with your own custom
-                                components to build the visual front-end and control logic for your
-                                machine control. With this you will be writing machine control
-                                programs using familar web technologies.
-                            </>
-                        }
-                        to="/how-it-works/overview"
-                    >
+                    <FeaturedItem>
                         <Html5Icon width={"15%"} />
                         <h2>Web stack</h2>
                         <h3>
@@ -344,34 +329,12 @@ export const HomePage = () => {
                             proprietary languages or IDEs
                         </h3>
                     </FeaturedItem>
-                    <FeaturedItem
-                        back={
-                            <>
-                                The glowbuzzer toolkit supports complex machines: from basic x,y,z
-                                cartesian machines through to industrial robots. These kinematics
-                                models are fully parameterised and can be adapted to a variety of
-                                types of machine. If different kinematics models are required, we
-                                can either add these for you or you can provide the models.
-                            </>
-                        }
-                        to="/docs/gbc/configuration/config_joints_and_kinematics"
-                    >
+                    <FeaturedItem>
                         <CoordinatedIcon width={"15%"} />
                         <h2>Co-ordinated motion</h2>
                         <h3>Control robots and machines with complex kinematic configurations</h3>
                     </FeaturedItem>
-                    <FeaturedItem
-                        back={
-                            <>
-                                The glowbuzzer toolkit runs on microcontrollers and embedded Linux
-                                allowing you to embed a sophisticated motion/machine control into
-                                your product. The toolkit’s real-time core needs a fast dual-core
-                                microcontroller. Our reference design uses an STM32H7 with ARM M7
-                                and M4 cores running up to 480 MHz and 240 MHz respectively.
-                            </>
-                        }
-                        to="/how-it-works/embedded"
-                    >
+                    <FeaturedItem>
                         <EmbeddedIcon width={"15%"} />
                         <h2>Embeddable</h2>
                         <h3>
@@ -379,18 +342,7 @@ export const HomePage = () => {
                             your product
                         </h3>
                     </FeaturedItem>
-                    <FeaturedItem
-                        back={
-                            <>
-                                If you need guaranteed millisecond response times then you will need
-                                to write C code in the software PLC layer. If you have a greater
-                                degree of tolerance to your response times (e.g. 10ms) then you can
-                                deploy code written in JavaScript or if you can cope with say 20ms
-                                response times then you can have code in React responding.
-                            </>
-                        }
-                        to="/how-it-works/real_time"
-                    >
+                    <FeaturedItem>
                         <RealTimeIcon width={"15%"} />
                         <h2>Real-time</h2>
                         <h3>
@@ -398,72 +350,32 @@ export const HomePage = () => {
                             you are familiar with
                         </h3>
                     </FeaturedItem>
-                    <FeaturedItem
-                        back={
-                            <>
-                                Interoperability with the major fieldbus protocols is at the heart
-                                of the glowbuzzer toolkit. EtherCAT is the primary fieldbus we
-                                support. Mainly because of the wide range of drives and IO available
-                                for it.
-                            </>
-                        }
-                        to="/how-it-works/fieldbus"
-                    >
+                    <FeaturedItem>
                         <FieldbusIcon width={"15%"} />
-                        <h2>Fieldbus integration</h2>
+                        <h2>EtherCAT</h2>
                         <h3>
-                            Integrates common fieldbusses (EtherCAT, PROFINET, Ethernet/IP and so
-                            on)
+                            Integrates with EtherCAT to control servo drives, digital IO and Modbus
+                            devices (indirectly)
                         </h3>
                     </FeaturedItem>
-                    <FeaturedItem
-                        back={
-                            <>
-                                Machine controls can be complex. You requirements might well be
-                                unique and are ofte highly custom. The glowbuzzer toolkit has deep
-                                and wide APIs that allow you to tackle the most challenging of
-                                projects.
-                            </>
-                        }
-                        to="/docs/gbr/overview"
-                    >
+                    <FeaturedItem>
                         <RoboticArmIcon width={"15%"} />
-                        <h2>Solve challenging machine control problems</h2>
+                        <h2>Integration ready</h2>
                         <h3>
-                            Rich APIs allow you to write code to handle complex machine control
-                            requirements
+                            Rich APIs allow you to handle complex machine control requirements and
+                            coordinate with external systems
                         </h3>
                     </FeaturedItem>
 
-                    <FeaturedItem
-                        back={
-                            <>
-                                The glowbuzzer toolkit includes a software PLC but you can also
-                                integrate with off-the-shelf PLCs. We can sit on an fieldbus network
-                                either as a Master or Slave (with say the Hilscher netX) allowing
-                                real-time communication with the PLC.
-                            </>
-                        }
-                        to="/how-it-works/fieldbus"
-                    >
+                    <FeaturedItem>
                         <IntegratedIcon width={"15%"} />
-                        <h2>PLC integration</h2>
+                        <h2>Stepper drives</h2>
                         <h3>
-                            Integrates with PLCs from leading manufacturers - Codesys, Siemens,
-                            Allen Bradley, ABB, Omron...
+                            Reference TMC board designs for accurate control of stepper drives,
+                            including homing
                         </h3>
                     </FeaturedItem>
-                    <FeaturedItem
-                        back={
-                            <>
-                                The glowbuzzer toolkit is not based on proprietary technologies or
-                                is tied to any hardware. This allows you to work with pretty much
-                                any hardware on the market using software that is used by millions
-                                of developers around the world.
-                            </>
-                        }
-                        to="/how-it-works/drives"
-                    >
+                    <FeaturedItem>
                         <IndependenceIcon width={"15%"} />
                         <h2>Vendor independence</h2>
                         <h3>
@@ -471,22 +383,12 @@ export const HomePage = () => {
                             you want at the price point you need
                         </h3>
                     </FeaturedItem>
-                    <FeaturedItem
-                        back={
-                            <>
-                                From React for the front-end and machine control to C for the
-                                embedded PLC, we use technologies that are easy for you understand.
-                                There is nothing proprietary and nothing you can't find a million
-                                answers to on stack overflow.
-                            </>
-                        }
-                        to="/how-it-works/overview"
-                    >
+                    <FeaturedItem>
                         <GearsIcon width={"15%"} />
-                        <h2>Develop using technology you understand</h2>
+                        <h2>Diagnostics and tuning</h2>
                         <h3>
-                            Basic web development skills for the front-end and C for the embedded
-                            PLC.
+                            Real-time telemetry and fault logs simplify commissioning, tuning, and
+                            maintenance
                         </h3>
                     </FeaturedItem>
                 </FeaturesSection>

@@ -157,8 +157,8 @@ export const OfferSection = () => {
                 <div className="icon">
                     <ControlOutlined style={{ fontSize: "28px", color: "white" }} />
                 </div>
-                <div>Real-time Motion Control</div>
-                <div>Advanced kinematics for precise automation control</div>
+                <div>Motion Control Firmware</div>
+                <div>Advanced kinematics for flexible and precise automation control</div>
                 <div className="link">
                     <GlowsiteLink to="/overview/software-stack#control">
                         Discover Capabilities
@@ -169,8 +169,8 @@ export const OfferSection = () => {
                 <div className="icon">
                     <ApiOutlined style={{ fontSize: "28px", color: "white" }} />
                 </div>
-                <div>Industrial Fieldbus Integration</div>
-                <div>EtherCAT master with comprehensive modbus support</div>
+                <div>Motor Control Algorithms</div>
+                <div>For stepper and BLDC motors and encoders</div>
                 <div className="link">
                     <GlowsiteLink to="/overview/software-stack#ethercat">Learn More</GlowsiteLink>
                 </div>
@@ -179,8 +179,8 @@ export const OfferSection = () => {
                 <div className="icon">
                     <SafetyCertificateOutlined style={{ fontSize: "28px", color: "white" }} />
                 </div>
-                <div>Safety Supervisor</div>
-                <div>FSoE functional safety for secure operation</div>
+                <div>Electronics Reference Designs</div>
+                <div>Working board design as a template for your development</div>
                 <div className="link">
                     <GlowsiteLink to="/overview/software-stack#supervisor">
                         View Details
