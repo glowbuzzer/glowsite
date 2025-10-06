@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.3.11](https://github.com/glowbuzzer/glowsite/compare/v1.3.10...v1.3.11) (2025-10-06)
+
+
+### Chore
+
+* work on next version ([8290869](https://github.com/glowbuzzer/glowsite/commit/8290869b7d8ad5d0db3156290fbeff0f18f9f34b))
+
 ## [1.3.10](https://github.com/glowbuzzer/glowsite/compare/v1.3.9...v1.3.10) (2025-06-06)
 
 
