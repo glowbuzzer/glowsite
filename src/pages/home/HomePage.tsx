@@ -20,8 +20,20 @@ import { Button } from "antd"
 import { ArrowRightOutlined } from "@ant-design/icons"
 // @ts-ignore
 import background from "./img-cropped.png"
-import { PromoFSoE } from "../../framework/components/PromoFSoE"
 import { Link } from "react-router-dom"
+
+const StyledDiv = styled.div`
+    position: relative;
+    height: 800px;
+    video {
+        position: absolute;
+        width: 100%;
+        //opacity: 0.5;
+        top: 0;
+        left: 0;
+        right: 0;
+    }
+`
 
 const fadeIn = keyframes`
   from {
@@ -36,7 +48,7 @@ const fadeIn = keyframes`
 
 const TopHeroSection = styled(StyledSection).withConfig({ displayName: "HeroSection" })`
     position: relative;
-    background: ${props => props.theme.colorPrimaryTextActive};
+    //background: ${props => props.theme.colorPrimaryTextActive};
     &::after {
         content: "";
         position: absolute;
@@ -44,9 +56,9 @@ const TopHeroSection = styled(StyledSection).withConfig({ displayName: "HeroSect
         left: 0;
         right: 0;
         bottom: 0;
-        background: url(${background}) center center no-repeat;
-        background-size: cover;
-        opacity: 0.2;
+        //background: url(${background}) center center no-repeat;
+        //background-size: cover;
+        //opacity: 0.2;
         //max-width: 600px;
         //z-index: -1;
     }
@@ -76,14 +88,20 @@ const HomepageHeroContent = styled.div.withConfig({ displayName: "HomepageHeroCo
 
     > div.content {
         z-index: 1;
-        padding: 40px 40px;
+        margin-top: 60px;
+        margin-left: 400px;
+        padding: 70px 40px;
         animation: ${fadeIn} 0.8s ease-out 0.2s backwards;
+        background: rgba(255, 255, 255, 0.5);
+        border-radius: 30px;
+
+        color: #2e035a;
 
         .first {
             font-size: 2.8em;
             line-height: 1.2;
             font-weight: 700;
-            color: #ffffff;
+            //color: #ffffff;
             margin-bottom: 20px;
         }
 
@@ -92,7 +110,7 @@ const HomepageHeroContent = styled.div.withConfig({ displayName: "HomepageHeroCo
             margin-top: 20px;
             font-size: 1.6em;
             line-height: 1.4;
-            color: #e0e0e0;
+            //color: #e0e0e0;
             max-width: 600px;
         }
     }
@@ -128,22 +146,26 @@ export const HomePage = () => {
 
     return (
         <BaseLayout>
-            <TopHeroSection $spaced $background={theme.colorPrimaryTextActive} $inverted>
-                <div className="section">
-                    <HomepageHeroContent>
-                        <div className="content">
-                            <div className="first">
-                                Software for OEMs to embed in their machines
+            <StyledDiv>
+                <video autoPlay muted loop id="bgvid" src="/assets/website 2025.mp4" />
+                <TopHeroSection $spaced $background={theme.colorPrimaryTextActive} $inverted>
+                    <div className="section">
+                        <HomepageHeroContent>
+                            <div className="content">
+                                <div className="first">
+                                    Software for OEMs to embed in their machines
+                                </div>
+                                <div className="second">
+                                    We are a product development engineering firm providing
+                                    pre-built electronics and software components. Our products and
+                                    services enable companies to design and build next-generation
+                                    machines.
+                                </div>
                             </div>
-                            <div className="second">
-                                We are a product development engineering firm providing pre-built
-                                electronics and software components. Our products and services
-                                enable companies to design and build next-generation machines.
-                            </div>
-                        </div>
-                    </HomepageHeroContent>
-                </div>
-            </TopHeroSection>
+                        </HomepageHeroContent>
+                    </div>
+                </TopHeroSection>
+            </StyledDiv>
             <Section>
                 <OfferSection />
             </Section>
