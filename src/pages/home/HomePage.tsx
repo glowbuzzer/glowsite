@@ -212,6 +212,7 @@ export const HomePage = () => {
                         videoUrl:
                             "https://static.glowbuzzer.com/glowsite/carousel/dancing/short_dancing.mp4"
                     },
+                    /*
                     {
                         key: "teeth",
                         title: "Stewart platform for precise control",
@@ -223,6 +224,7 @@ export const HomePage = () => {
                         videoUrl:
                             "https://static.glowbuzzer.com/glowsite/carousel/teeth/short_teeth.mp4"
                     },
+*/
                     {
                         key: "5",
                         title: "3,4, 5 axis CNC controls",
