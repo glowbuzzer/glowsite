@@ -21,10 +21,17 @@ import { ArrowRightOutlined } from "@ant-design/icons"
 // @ts-ignore
 import background from "./img-cropped.png"
 import { Link } from "react-router-dom"
+import { HomeCarousel2 } from "../../framework/components/HomeCarousel2"
+
+const Strapline = styled.div`
+    text-align: center;
+    font-size: 2.5em;
+    padding: 40px 0;
+`
 
 const StyledDiv = styled.div`
     position: relative;
-    height: 800px;
+    //height: 800px;
     video {
         position: absolute;
         width: 100%;
@@ -32,6 +39,14 @@ const StyledDiv = styled.div`
         top: 0;
         left: 0;
         right: 0;
+    }
+
+    .strapline {
+        padding: 40px 0;
+        font-size: 2.5em;
+        font-weight: bold;
+        color: ${props => props.theme.colorPrimaryTextActive};
+        text-align: center;
     }
 `
 
@@ -146,8 +161,26 @@ export const HomePage = () => {
 
     return (
         <BaseLayout>
+            <Section background={theme.colorPrimaryTextActive} inverted guttered>
+                <Strapline>Robot Product Development with Stepper Motors</Strapline>
+                {/*
+                <HeroSection>
+                    <main>
+                        <Link to="/services">
+                            <Button type="primary" icon={<ArrowRightOutlined />}>
+                                Explore Our Services
+                            </Button>
+                        </Link>
+                    </main>
+                </HeroSection>
+*/}
+            </Section>
             <StyledDiv>
+                {/*
                 <video autoPlay muted loop id="bgvid" src="/assets/website 2025.mp4" />
+*/}
+                <HomeCarousel2 />
+                {/*
                 <TopHeroSection $spaced $background={theme.colorPrimaryTextActive} $inverted>
                     <div className="section">
                         <HomepageHeroContent>
@@ -165,6 +198,7 @@ export const HomePage = () => {
                         </HomepageHeroContent>
                     </div>
                 </TopHeroSection>
+*/}
             </StyledDiv>
             <Section>
                 <OfferSection />
