@@ -31,7 +31,7 @@ const Strapline = styled.div`
 
 const StyledDiv = styled.div`
     position: relative;
-    //height: 800px;
+    height: 800px;
     video {
         position: absolute;
         width: 100%;
@@ -176,9 +176,7 @@ export const HomePage = () => {
 */}
             </Section>
             <StyledDiv>
-                {/*
                 <video autoPlay muted loop id="bgvid" src="/assets/website 2025.mp4" />
-*/}
                 <HomeCarousel2 />
                 {/*
                 <TopHeroSection $spaced $background={theme.colorPrimaryTextActive} $inverted>
