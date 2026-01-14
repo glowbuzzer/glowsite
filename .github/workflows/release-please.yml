@@ -9,6 +9,8 @@ env:
   AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
   NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+  PUPPETEER_SKIP_CHROMIUM_DOWNLOAD: 'true'
+  PUPPETEER_EXECUTABLE_PATH: /usr/bin/google-chrome
 
 jobs:
   release-please:
@@ -27,7 +29,7 @@ jobs:
   publish-www:
     needs: release-please
     if: ${{ needs.release-please.outputs.release_created }}
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
 
