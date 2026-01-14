@@ -24,14 +24,18 @@ import { Link } from "react-router-dom"
 import { HomeCarousel2 } from "../../framework/components/HomeCarousel2"
 
 const Strapline = styled.div`
+    background: ${props => props.theme.colorPrimaryTextActive};
+    color: ${props => props.theme.colorPrimaryBg};
     text-align: center;
     font-size: 2.5em;
-    padding: 40px 0;
+    padding: 40px 20px;
+    margin: 0 0 20px 0;
+    box-shadow: 0 12px 4px rgba(0, 0, 0, 0.1);
 `
 
 const StyledDiv = styled.div`
     position: relative;
-    height: 800px;
+    //height: 800px;
     video {
         position: absolute;
         width: 100%;
@@ -39,14 +43,6 @@ const StyledDiv = styled.div`
         top: 0;
         left: 0;
         right: 0;
-    }
-
-    .strapline {
-        padding: 40px 0;
-        font-size: 2.5em;
-        font-weight: bold;
-        color: ${props => props.theme.colorPrimaryTextActive};
-        text-align: center;
     }
 `
 
@@ -161,9 +157,8 @@ export const HomePage = () => {
 
     return (
         <BaseLayout>
-            <Section background={theme.colorPrimaryTextActive} inverted guttered>
-                <Strapline>Robot Product Development with Stepper Motors</Strapline>
-                {/*
+            <Strapline>Robot Product Development with Stepper Motors</Strapline>
+            {/*
                 <HeroSection>
                     <main>
                         <Link to="/services">
@@ -174,9 +169,10 @@ export const HomePage = () => {
                     </main>
                 </HeroSection>
 */}
-            </Section>
             <StyledDiv>
+                {/*
                 <video autoPlay muted loop id="bgvid" src="/assets/website 2025.mp4" />
+*/}
                 <HomeCarousel2 />
                 {/*
                 <TopHeroSection $spaced $background={theme.colorPrimaryTextActive} $inverted>
@@ -277,6 +273,7 @@ export const HomePage = () => {
                             "https://static.glowbuzzer.com/glowsite/carousel/dancing/short_dancing.mp4"
                     },
 */
+                    /*
                     {
                         key: "teeth",
                         title: "Stewart platform for precise control",
@@ -288,6 +285,7 @@ export const HomePage = () => {
                         videoUrl:
                             "https://static.glowbuzzer.com/glowsite/carousel/teeth/short_teeth.mp4"
                     },
+*/
                     // {
                     //     key: "2",
                     //     title: "Introducing hexapod kinematics",

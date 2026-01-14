@@ -1,10 +1,10 @@
 import styled, { keyframes } from "styled-components"
 import { GlowsiteLink } from "@glowsite"
 import {
-    ApiOutlined,
     ControlOutlined,
     DesktopOutlined,
-    SafetyCertificateOutlined
+    SafetyCertificateOutlined,
+    UserOutlined
 } from "@ant-design/icons"
 
 const fadeInUp = keyframes`
@@ -52,7 +52,7 @@ const StyledDiv = styled.div`
         display: flex;
         flex-direction: column;
         padding: 30px 25px;
-        line-height: 1.7em;
+        line-height: 1.3em;
         background: linear-gradient(135deg, ${props => props.theme.colorPrimary}, #6a35c2);
         border-radius: 12px;
         box-shadow: 0 10px 20px rgba(106, 53, 194, 0.15);
@@ -66,14 +66,21 @@ const StyledDiv = styled.div`
         &:nth-child(1) {
             animation-delay: 0.1s;
         }
+
         &:nth-child(2) {
             animation-delay: 0.2s;
         }
+
         &:nth-child(3) {
             animation-delay: 0.3s;
         }
+
         &:nth-child(4) {
             animation-delay: 0.4s;
+        }
+
+        &:nth-child(5) {
+            animation-delay: 0.5s;
         }
 
         &:hover {
@@ -93,7 +100,6 @@ const StyledDiv = styled.div`
         }
 
         .icon {
-            margin: 0 auto 15px;
             width: 60px;
             height: 60px;
             display: flex;
@@ -101,7 +107,7 @@ const StyledDiv = styled.div`
             justify-content: center;
             background: rgba(255, 255, 255, 0.15);
             border-radius: 50%;
-            margin-bottom: 20px;
+            margin: 0 auto 20px;
         }
 
         > div:first-child {
@@ -143,6 +149,79 @@ const StyledDiv = styled.div`
 export const OfferSection = () => {
     return (
         <StyledDiv>
+            <div>
+                <div className="icon">
+                    <SafetyCertificateOutlined style={{ fontSize: "28px", color: "white" }} />
+                </div>
+                <div className="title">Reference Designs</div>
+                <div>
+                    One-stop multi-axis stepper electronics designs for rapid robotic prototyping
+                    through to production
+                </div>
+                <div className="link">
+                    <GlowsiteLink to="/overview/software-stack#supervisor">
+                        Reference designs
+                    </GlowsiteLink>
+                </div>
+            </div>
+            {/*
+            <div>
+                <div className="icon">
+                    <ControlOutlined style={{ fontSize: "28px", color: "white" }} />
+                </div>
+                <div>Motion Control Firmware</div>
+                <div>
+                    Production-grade real-time control firmware for stepper based robotic systems
+                </div>
+                <div className="link">
+                    <GlowsiteLink to="/overview/software-stack#control">
+                        Explor firmware layer
+                    </GlowsiteLink>
+                </div>
+            </div>
+*/}
+            <div>
+                <div className="icon">
+                    <ControlOutlined style={{ fontSize: "28px", color: "white" }} />
+                    {/*
+                    <ApiOutlined style={{ fontSize: "28px", color: "white" }} />
+*/}
+                </div>
+                <div>Advanced Motion Control</div>
+                <div>
+                    Real-time trajectory generation, kinematics, and robot-level coordination for
+                    complex machines
+                </div>
+                <div className="link">
+                    <GlowsiteLink to="/overview/software-stack#ethercat">
+                        See motion stack
+                    </GlowsiteLink>
+                </div>
+            </div>
+            <div>
+                <div className="icon">
+                    <DesktopOutlined style={{ fontSize: "28px", color: "white" }} />
+                </div>
+                <div>HMI and Digital Twinning</div>
+                <div>
+                    Run applications in simulation to test, debug, and optimise before deployment to
+                    real machine
+                </div>
+                <div className="link">
+                    <GlowsiteLink to="/overview/software-stack#hmi">Explore features</GlowsiteLink>
+                </div>
+            </div>
+            <div>
+                <div className="icon">
+                    <UserOutlined style={{ fontSize: "28px", color: "white" }} />
+                </div>
+                <div>Expert Engineering Support</div>
+                <div>Practical guidance from sizing and safety to production-ready electronics</div>
+                <div className="link">
+                    <GlowsiteLink to="/overview/software-stack#hmi">Our engineers</GlowsiteLink>
+                </div>
+            </div>
+            {/*
             <div>
                 <div className="icon">
                     <DesktopOutlined style={{ fontSize: "28px", color: "white" }} />
@@ -187,6 +266,7 @@ export const OfferSection = () => {
                     </GlowsiteLink>
                 </div>
             </div>
+*/}
         </StyledDiv>
     )
 }

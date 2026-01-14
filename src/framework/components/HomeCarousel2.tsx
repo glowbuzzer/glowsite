@@ -198,12 +198,12 @@ const slides = [
             "Offload step generation and real-time motion primitives to dedicated hardware, allowing control software to run on Embedded Linux — cutting development costs up to 5×"
     },
     {
-        title: "Hybrid Stepper Motor, Advanced Dynamics",
+        title: "Advanced Hybrid Stepper Motor Dynamics",
         description:
             "Leverage hybrid stepper motors with encoder-based supervision and advanced motion profiling to extract the highest achievable dynamic performance"
     },
     {
-        title: "Web-Native HMI",
+        title: "Web-Native HMI and Digital Twin",
         description:
             "Push high-level control, orchestration, and HMI into modern web stacks (React / Python), minimizing software complexity and long-term maintenance cost"
     }
@@ -215,6 +215,7 @@ export const HomeCarousel2 = () => {
         dragFree: false
     })
     const [selectedIndex, setSelectedIndex] = useState(0)
+    const [enableLoop, setEnableLoop] = useState(true)
 
     const onSelect = useCallback(() => {
         if (!emblaApi) {
@@ -238,30 +239,31 @@ export const HomeCarousel2 = () => {
     }, [emblaApi, onSelect])
 
     useEffect(() => {
-        if (!emblaApi) {
-            return
-        }
-
         const autoplay = setInterval(() => {
-            // emblaApi.scrollNext()
+            if (enableLoop) {
+                emblaApi?.scrollNext()
+            }
         }, 6000)
 
         return () => clearInterval(autoplay)
-    }, [emblaApi])
+    }, [emblaApi, enableLoop])
 
     const scrollTo = useCallback(
         (index: number) => {
-            if (emblaApi) emblaApi.scrollTo(index)
+            setEnableLoop(false)
+            emblaApi?.scrollTo(index)
         },
         [emblaApi]
     )
 
     const scrollPrev = useCallback(() => {
-        if (emblaApi) emblaApi.scrollPrev()
+        setEnableLoop(false)
+        emblaApi?.scrollPrev()
     }, [emblaApi])
 
     const scrollNext = useCallback(() => {
-        if (emblaApi) emblaApi.scrollNext()
+        setEnableLoop(false)
+        emblaApi?.scrollNext()
     }, [emblaApi])
 
     return (
