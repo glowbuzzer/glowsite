@@ -1,0 +1,90 @@
+<a id="electronics"/>
+
+## Electronics reference designs
+
+We provide fully engineered **reference hardware** for multi-axis stepper motor control, supporting both:
+
+* **Centralised architectures**
+A single controller board driving multiple motors
+* **Decentralised / distributed architectures**
+Compact motor-drive modules embedded near each joint or actuator
+
+Our designs cover the complete electrical chain required for a robotic axis:
+
+* Power input and protection
+* DC bus management
+* MOSFET power stage
+* Gate drive and current sensing
+* TMC5160 smart power driver
+* TMC4361 motion controller
+* Encoder and reference-switch interfaces
+* Safety-related inputs (STO / SS1 support)
+* Communications (SPI, GPIO, Ethernet, fieldbus via Linux host)
+
+To accelerate development, we supply **general-purpose multi-axis controller boards** combining:
+
+* Trinamic motion-control ICs
+* A full power stage
+* An embedded Linux host
+
+These boards allow mechanical and systems engineers to get real hardware moving early in the development cycle. As a product matures, this platform transitions naturally into **custom, product-specific electronics**, while the underlying firmware and software stack remains largely unchanged.
+
+<a id="firmware"/>
+
+## Firmware and real-time control
+
+glowbuzzer supplies a **production-grade firmware layer** for the Trinamic TMC4361/TMC5160 family, providing:
+
+* Configuration and management of all drive parameters
+* Closed-loop encoder handling
+* Homing and reference strategies
+* Error detection, stall monitoring, and recovery
+* Safety-related state handling (SS0 / SS1 / STO coordination)
+
+This firmware abstracts the complexity of the Trinamic devices into a clean, deterministic real-time control layer, suitable for safety-critical and multi-axis robotic systems.
+
+<a id="motion"/>
+
+## High-level motion and system control
+
+On top of the real-time layer, glowbuzzer provides a Linux-based control stack that implements:
+
+* Trajectory planning and motion blending
+* Multi-axis coordination
+* Kinematics and transforms
+* G-code and robot-level command interfaces
+* Application-level logic and sequencing
+
+This architecture separates **hard real-time motor control** from **high-level robot behaviour**, enabling sophisticated motion planning while preserving deterministic low-level timing.
+
+<a id="sim"/>
+
+## Digital twin and simulation
+
+The same software stack used to drive physical hardware also supports a **digital twin** of the machine:
+
+* Virtual motors, axes, switches and kinematics
+* Identical motion planning and control code
+* Visualisation of positions, velocities, and limits
+
+This allows:
+
+* Offline testing of motion programs
+* Debugging and optimisation before hardware is available
+* Reduced commissioning time on real machines
+
+<a id="services"/>
+
+## Engineering services
+
+glowbuzzer combines this platform with hands-on engineering support, including:
+
+* Architecture selection
+* Motor and gearbox sizing
+* Inertia and dynamic analysis
+* Motor tuning
+* Safety concept design (SS0, SS1, STO)
+* Guidance on electronics design
+* Transition from prototype to production electronics
+
+For companies building robotic products rather than one-off machines, this combination of **reference designs, production-ready software, and deep engineering expertise** dramatically reduces development risk and time-to-market.
