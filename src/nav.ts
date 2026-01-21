@@ -88,7 +88,7 @@ const nav = {
             slug: "solution",
             title: "Our Solution",
             layout: SimpleLayout,
-            component: () => import("./pages/solution/index.mdx"),
+            component: () => import("./pages/solution/Solution"),
             children: [
                 {
                     slug: "#electronics",
