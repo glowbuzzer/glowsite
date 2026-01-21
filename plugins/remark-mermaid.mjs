@@ -50,7 +50,21 @@ async function renderMermaidToSvg(definition) {
                 return new Promise((resolve, reject) => {
                     try {
                         window.mermaid.mermaidAPI.render("container", definition, svgCode => {
-                            resolve(svgCode)
+                            try {
+                                // Parse as XML/SVG
+                                const parser = new DOMParser()
+                                const doc = parser.parseFromString(svgCode, "text/html")
+                                const svgElement = doc.querySelector("svg")
+                                // const styleElement = svgElement.querySelector("style")
+                                // styleElement.remove()
+
+                                // Serialise back to a string – this will self-close empty elements
+                                const serializer = new XMLSerializer()
+                                const fixedSvg = serializer.serializeToString(svgElement)
+                                resolve(fixedSvg)
+                            } catch (e) {
+                                reject(e)
+                            }
                         })
                     } catch (e) {
                         reject(e)
