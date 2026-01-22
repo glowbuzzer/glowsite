@@ -2,23 +2,21 @@ import * as React from "react"
 import { useCallback, useEffect, useState } from "react"
 import styled from "styled-components"
 import useEmblaCarousel from "embla-carousel-react"
-import {
-    ArrowRightOutlined,
-    DownloadOutlined,
-    LeftOutlined,
-    RightOutlined
-} from "@ant-design/icons"
+import { DownloadOutlined, LeftOutlined, ReadOutlined, RightOutlined } from "@ant-design/icons"
 import { Link } from "react-router-dom"
 import { Button } from "antd"
 
 const CarouselContainer = styled.div`
     overflow: hidden;
-    width: 50%;
+    max-width: 600px;
     margin: 20px auto;
     background: rgba(255, 255, 255, 0.5);
     border-radius: 25px;
     user-select: none;
 
+    @media (max-width: 767px) {
+        margin: 10px 10px;
+    }
     div {
         background: rgba(255, 255, 255, 0.5);
     }
@@ -40,7 +38,6 @@ const Slide = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    //min-height: 400px;
 
     .slide-content {
         max-width: 1000px;
@@ -76,7 +73,7 @@ const Slide = styled.div`
     }
 
     @media (max-width: 767px) {
-        min-height: 300px;
+        min-height: 200px;
         padding: 20px 20px;
 
         .slide-content h2 {
@@ -93,7 +90,12 @@ const ButtonsContainer = styled.div`
     display: flex;
     justify-content: center;
     gap: 20px;
-    padding: 20px 0;
+    padding: 10px 0;
+
+    button {
+        font-size: 1.1em;
+        padding: 20px 10px;
+    }
 
     @media (max-width: 767px) {
         flex-direction: column;
@@ -282,14 +284,10 @@ export const HomeCarousel2 = () => {
             </CarouselViewport>
             <ButtonsContainer>
                 <Link to="/solution">
-                    <Button type="primary" icon={<DownloadOutlined />}>
-                        Download Whitepaper
-                    </Button>
+                    <Button icon={<ReadOutlined />}>Our Solution</Button>
                 </Link>
                 <Link to="/solution">
-                    <Button type="primary" icon={<ArrowRightOutlined />}>
-                        Technical Blueprint
-                    </Button>
+                    <Button icon={<DownloadOutlined />}>Download Whitepaper</Button>
                 </Link>
             </ButtonsContainer>
             <NavigationContainer>

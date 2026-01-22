@@ -31,6 +31,12 @@ const Strapline = styled.div`
     padding: 40px 20px;
     margin: 0 0 20px 0;
     box-shadow: 0 12px 4px rgba(0, 0, 0, 0.1);
+
+    @media (max-width: 767px) {
+        font-size: 2em;
+        padding: 20px;
+        line-height: 1.2;
+    }
 `
 
 const StyledDiv = styled.div`

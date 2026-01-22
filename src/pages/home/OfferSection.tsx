@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react"
 import styled, { keyframes } from "styled-components"
 import { GlowsiteLink } from "@glowsite"
 import {
@@ -6,6 +7,17 @@ import {
     SafetyCertificateOutlined,
     UserOutlined
 } from "@ant-design/icons"
+
+// @ts-ignore
+import boardsImg from "./boards.jpeg?glowsite&w=600"
+// @ts-ignore
+import motorImg from "./motor.png?glowsite&w=600"
+// @ts-ignore
+import machineImg from "./machine.jpeg?glowsite&w=600"
+// @ts-ignore
+import jointImg from "./joint.jpeg?glowsite&w=600"
+
+const backgroundImages = [boardsImg, motorImg, machineImg, jointImg]
 
 const fadeInUp = keyframes`
   from {
@@ -58,7 +70,8 @@ const StyledDiv = styled.div`
         box-shadow: 0 10px 20px rgba(106, 53, 194, 0.15);
         transition:
             transform 0.3s ease,
-            box-shadow 0.3s ease;
+            box-shadow 0.3s ease,
+            background 0.3s ease;
         animation: ${fadeInUp} 0.6s ease-out backwards;
         position: relative;
         overflow: hidden;
@@ -83,9 +96,65 @@ const StyledDiv = styled.div`
             animation-delay: 0.5s;
         }
 
+        &::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0.5;
+            filter: grayscale(100%);
+            transition:
+                opacity 0.3s ease,
+                filter 0.3s ease;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        &:nth-child(1)::after {
+            background-image: url(${boardsImg.replaceAll("\\", "/")});
+        }
+
+        &:nth-child(2)::after {
+            background-image: url(${motorImg.replaceAll("\\", "/")});
+        }
+
+        &:nth-child(3)::after {
+            background-image: url(${machineImg.replaceAll("\\", "/")});
+        }
+
+        &:nth-child(4)::after {
+            background-image: url(${jointImg.replaceAll("\\", "/")});
+        }
+
         &:hover {
             transform: translateY(-5px);
             box-shadow: 0 15px 30px rgba(106, 53, 194, 0.2);
+            background: rgba(255, 255, 255, 1);
+            color: black;
+
+            .icon {
+                background: rgba(106, 53, 194, 0.15);
+            }
+
+            .link a {
+                color: #6a35c2 !important;
+                border-color: rgba(106, 53, 194, 0.5);
+            }
+
+            .link a:hover {
+                background: rgba(106, 53, 194, 0.1);
+                border-color: #6a35c2;
+            }
+        }
+
+        &:hover::after {
+            opacity: 0.25;
+            filter: grayscale(0%);
         }
 
         &::before {
@@ -97,6 +166,7 @@ const StyledDiv = styled.div`
             height: 4px;
             background: white;
             opacity: 0.3;
+            z-index: 1;
         }
 
         .icon {
@@ -108,23 +178,38 @@ const StyledDiv = styled.div`
             background: rgba(255, 255, 255, 0.15);
             border-radius: 50%;
             margin: 0 auto 20px;
+            position: relative;
+            z-index: 1;
         }
 
         > div:first-child {
             font-size: 1.8em;
             font-weight: 600;
             margin-bottom: 5px;
+            position: relative;
+            z-index: 1;
         }
 
         > div:nth-child(2) {
-            font-size: 1.1em;
-            opacity: 0.8;
+            font-size: 1.2em;
+            opacity: 1;
             margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        > div:nth-child(3) {
+            position: relative;
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            z-index: 1;
         }
 
         .link {
             margin-top: auto;
             padding-top: 20px;
+            position: relative;
+            z-index: 1;
 
             a {
                 color: white !important;
@@ -147,6 +232,31 @@ const StyledDiv = styled.div`
 `
 
 export const OfferSection = () => {
+    const [imagesLoaded, setImagesLoaded] = useState(false)
+
+    useEffect(() => {
+        let loadedCount = 0
+        const totalImages = backgroundImages.length
+
+        const handleImageLoad = () => {
+            loadedCount++
+            if (loadedCount === totalImages) {
+                setImagesLoaded(true)
+            }
+        }
+
+        backgroundImages.forEach(src => {
+            const img = new Image()
+            img.onload = handleImageLoad
+            img.onerror = handleImageLoad // Count errors as loaded to prevent blocking
+            img.src = src.replaceAll("\\", "/")
+        })
+    }, [])
+
+    if (!imagesLoaded) {
+        return null
+    }
+
     return (
         <StyledDiv>
             <div>
