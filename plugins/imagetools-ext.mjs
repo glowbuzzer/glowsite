@@ -1,4 +1,4 @@
-import { metadataFormat } from "imagetools-core"
+import { metadataFormat, resolveConfigs as builtinResolveConfigs } from "imagetools-core"
 
 // if presets not specified in vite.config.js we will use these
 const defaultPresets = {
@@ -18,23 +18,6 @@ export function glowsiteImageToolsPresets(pluginConfig) {
         // look for 'glowsite' in the import name
         const glowsite_config = entries.find(([key]) => key === "glowsite")
         if (glowsite_config) {
-            // Check for width parameter (e.g., ?glowsite&w=800)
-            const width_config = entries.find(([key]) => key === "w")
-
-            if (width_config) {
-                console.log("Found width config:", width_config)
-                // Single width mode - return one optimized image
-                const [, [width_value]] = width_config
-                const width = parseInt(width_value, 10)
-                return [
-                    {
-                        width,
-                        webp: ""
-                    }
-                ]
-            }
-
-            // Existing multi-width behavior
             // get the preset if specified
             const [, [value]] = glowsite_config
             const preset_name = value.trim().length ? value.trim() : "default"
@@ -43,13 +26,14 @@ export function glowsiteImageToolsPresets(pluginConfig) {
 
             // spit out the widths from the preset
             const widths = preset.widths
-            const custom = widths.map((width, index) => ({
-                width,
-                webp: /*index === 0 ? undefined :*/ "" // always webp
-                // glowsite: [""] // ensure metadata is returned
+
+            return widths.map(width => ({
+                w: String(width),
+                format: "webp"
             }))
-            return custom
         }
+        // Fall back to builtin resolveConfigs for non-glowsite images
+        return builtinResolveConfigs(entries, outputFormats)
     }
 }
 
@@ -63,22 +47,15 @@ export function glowsiteOutputFormats(builtinOutputFormats) {
         glowsite: () => {
             const defaultFormat = metadataFormat()
             return metadatas => {
-                // just return the metadata we need
+                // just return the metadata we need (src and width for Image.tsx)
                 const formatted = defaultFormat(metadatas)
                 // Ensure we always have an array (defaultFormat may return single object for single image)
                 const formattedArray = Array.isArray(formatted) ? formatted : [formatted]
-                const result = formattedArray.map(({ format, width, height, src }) => ({
-                    format,
-                    width,
-                    height,
-                    src
+                // Always return array of objects with src and width for Image.tsx compatibility
+                return formattedArray.map(({ width, src }) => ({
+                    src,
+                    width
                 }))
-                console.log("image result", result)
-                // If only one image (single width mode), return just the src string for CSS background use
-                if (result.length === 1) {
-                    return result[0].src
-                }
-                return result
             }
         }
     }

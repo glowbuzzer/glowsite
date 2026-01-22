@@ -7,17 +7,22 @@ import {
     SafetyCertificateOutlined,
     UserOutlined
 } from "@ant-design/icons"
+import { optimal_image } from "../../framework/components"
 
 // @ts-ignore
-import boardsImg from "./boards.jpeg?glowsite&w=600"
+import boardsImgSet from "./boards.jpeg?glowsite"
 // @ts-ignore
-import motorImg from "./motor.png?glowsite&w=600"
+import motorImgSet from "./motor.png?glowsite"
 // @ts-ignore
-import machineImg from "./machine.jpeg?glowsite&w=600"
+import machineImgSet from "./machine.jpeg?glowsite"
 // @ts-ignore
-import jointImg from "./joint.jpeg?glowsite&w=600"
+import jointImgSet from "./joint.jpeg?glowsite"
 
-const backgroundImages = [boardsImg, motorImg, machineImg, jointImg]
+const backgroundImages = [boardsImgSet, motorImgSet, machineImgSet, jointImgSet].map(img =>
+    optimal_image(img, 500)
+)
+
+const [boardsImg, motorImg, machineImg, jointImg] = backgroundImages
 
 const fadeInUp = keyframes`
   from {
@@ -116,19 +121,19 @@ const StyledDiv = styled.div`
         }
 
         &:nth-child(1)::after {
-            background-image: url(${boardsImg.replaceAll("\\", "/")});
+            background-image: url(${boardsImg});
         }
 
         &:nth-child(2)::after {
-            background-image: url(${motorImg.replaceAll("\\", "/")});
+            background-image: url(${motorImg});
         }
 
         &:nth-child(3)::after {
-            background-image: url(${machineImg.replaceAll("\\", "/")});
+            background-image: url(${machineImg});
         }
 
         &:nth-child(4)::after {
-            background-image: url(${jointImg.replaceAll("\\", "/")});
+            background-image: url(${jointImg});
         }
 
         &:hover {
@@ -249,7 +254,7 @@ export const OfferSection = () => {
             const img = new Image()
             img.onload = handleImageLoad
             img.onerror = handleImageLoad // Count errors as loaded to prevent blocking
-            img.src = src.replaceAll("\\", "/")
+            img.src = src
         })
     }, [])
 
