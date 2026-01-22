@@ -159,9 +159,7 @@ export const OfferSection = () => {
                     through to production
                 </div>
                 <div className="link">
-                    <GlowsiteLink to="/overview/software-stack#supervisor">
-                        Reference designs
-                    </GlowsiteLink>
+                    <GlowsiteLink to="/solution#electronics">Explore electronics</GlowsiteLink>
                 </div>
             </div>
             {/*
@@ -193,22 +191,20 @@ export const OfferSection = () => {
                     complex machines
                 </div>
                 <div className="link">
-                    <GlowsiteLink to="/overview/software-stack#ethercat">
-                        See motion stack
-                    </GlowsiteLink>
+                    <GlowsiteLink to="/solution#firmware">See motion stack</GlowsiteLink>
                 </div>
             </div>
             <div>
                 <div className="icon">
                     <DesktopOutlined style={{ fontSize: "28px", color: "white" }} />
                 </div>
-                <div>HMI and Digital Twinning</div>
+                <div>Simulation and Digital Twin</div>
                 <div>
                     Run applications in simulation to test, debug, and optimise before deployment to
                     real machine
                 </div>
                 <div className="link">
-                    <GlowsiteLink to="/overview/software-stack#hmi">Explore features</GlowsiteLink>
+                    <GlowsiteLink to="/solution#sim">Explore simulation</GlowsiteLink>
                 </div>
             </div>
             <div>
@@ -218,7 +214,7 @@ export const OfferSection = () => {
                 <div>Expert Engineering Support</div>
                 <div>Practical guidance from sizing and safety to production-ready electronics</div>
                 <div className="link">
-                    <GlowsiteLink to="/overview/software-stack#hmi">Our engineers</GlowsiteLink>
+                    <GlowsiteLink to="/solution#services">Our services</GlowsiteLink>
                 </div>
             </div>
             {/*

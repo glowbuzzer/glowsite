@@ -281,21 +281,16 @@ export const HomeCarousel2 = () => {
                 </CarouselSlides>
             </CarouselViewport>
             <ButtonsContainer>
-                <Link to="/services">
+                <Link to="/solution">
                     <Button type="primary" icon={<DownloadOutlined />}>
                         Download Whitepaper
                     </Button>
                 </Link>
-                <Link to="/services">
+                <Link to="/solution">
                     <Button type="primary" icon={<ArrowRightOutlined />}>
                         Technical Blueprint
                     </Button>
                 </Link>
-                {/*
-
-                <StyledButton>Download Whitepaper</StyledButton>
-                <StyledButton>Technical Blueprint</StyledButton>
-*/}
             </ButtonsContainer>
             <NavigationContainer>
                 <ArrowButton onClick={scrollPrev} aria-label="Previous slide">

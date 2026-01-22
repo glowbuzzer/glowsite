@@ -8,12 +8,17 @@ const SolutionContainer = styled.div`
     max-width: 900px;
     margin: 0 auto;
     padding: 20px 0;
+
+    @media (max-width: 767px) {
+        padding: 10px 0;
+    }
 `
 
 const SolutionSection = styled.div<{ $alternate?: boolean }>`
     position: relative;
-    padding: 48px 0;
+    padding: 28px 0;
     border-bottom: 1px solid ${props => props.theme.colorBorderSecondary};
+    scroll-margin-top: 70px;
 
     &:last-child {
         border-bottom: none;
@@ -145,11 +150,18 @@ const Highlight = styled.div`
 `
 
 const ArchitectureList = styled.div`
-    margin: 16px 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin: 6px 0;
 `
 
 const ArchitectureItem = styled.div`
-    margin-bottom: 12px;
+    margin-bottom: 6px;
+    border: 1px solid grey;
+    border-radius: 12px;
+    padding: 10px;
 
     .arch-title {
         font-weight: 600;
