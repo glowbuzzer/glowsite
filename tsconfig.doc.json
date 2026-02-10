@@ -1,11 +1,9 @@
 {
     "compilerOptions": {
-        "lib": ["ES2015", "DOM"],
-        "esModuleInterop": true
+        "lib": ["ES2020", "DOM"],
+        "esModuleInterop": true,
+        "skipLibCheck": true
     },
-    "exclude": [
-    ],
-    "files": [
-        "./node_modules/@glowbuzzer/store/index.d.ts"
-    ]
+    "exclude": [],
+    "files": ["./node_modules/@glowbuzzer/store/index.d.ts"]
 }
