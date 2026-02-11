@@ -6,6 +6,8 @@ import { DownloadOutlined, LeftOutlined, ReadOutlined, RightOutlined } from "@an
 import { Link } from "react-router-dom"
 import { Button } from "antd"
 
+declare const gtag
+
 const CarouselContainer = styled.div`
     overflow: hidden;
     max-width: 600px;
@@ -268,6 +270,11 @@ export const HomeCarousel2 = () => {
         emblaApi?.scrollNext()
     }, [emblaApi])
 
+    const download_whitepaper = () => {
+        if (typeof gtag !== "undefined") {
+            gtag("event", "whitepaper_download")
+        }
+    }
     return (
         <CarouselContainer>
             <CarouselViewport ref={emblaRef}>
@@ -286,9 +293,13 @@ export const HomeCarousel2 = () => {
                 <Link to="/solution">
                     <Button icon={<ReadOutlined />}>Our Solution</Button>
                 </Link>
-                <Link to="/solution">
+                <a
+                    href="https://static.glowbuzzer.com/whitepaper.pdf"
+                    download
+                    onClick={download_whitepaper}
+                >
                     <Button icon={<DownloadOutlined />}>Download Whitepaper</Button>
-                </Link>
+                </a>
             </ButtonsContainer>
             <NavigationContainer>
                 <ArrowButton onClick={scrollPrev} aria-label="Previous slide">
