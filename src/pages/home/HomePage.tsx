@@ -331,19 +331,6 @@ export const HomePage = () => {
                     },
 */
                     {
-                        key: "4",
-                        title: "CAM integration",
-                        subtitle:
-                            "We have been working on integrating CAM into the glowbuzzer toolkit. In this demonstration, we are using eCAM to generate a toolpath for a laser cut part. We import the gcode into the glowbuzzer control then run the job on a machine.",
-                        // to: "/",
-                        animationUrl:
-                            "https://static.glowbuzzer.com/glowsite/carousel/gcode/short_gcode_summary.gif",
-                        imageUrl:
-                            "https://static.glowbuzzer.com/glowsite/carousel/gcode/short_gcode_keyframe.jpg",
-                        videoUrl:
-                            "https://static.glowbuzzer.com/glowsite/carousel/gcode/short_gcode.mp4"
-                    },
-                    {
                         key: "6",
                         title: "Control automation hardware with web-tech",
                         subtitle:
@@ -355,6 +342,19 @@ export const HomePage = () => {
                             "https://static.glowbuzzer.com/glowsite/carousel/conveyors/short_conveyors_keyframe.jpg",
                         videoUrl:
                             "https://static.glowbuzzer.com/glowsite/carousel/conveyors/short_conveyors.mp4"
+                    },
+                    {
+                        key: "4",
+                        title: "CAM integration",
+                        subtitle:
+                            "We have been working on integrating CAM into the glowbuzzer toolkit. In this demonstration, we are using eCAM to generate a toolpath for a laser cut part. We import the gcode into the glowbuzzer control then run the job on a machine.",
+                        // to: "/",
+                        animationUrl:
+                            "https://static.glowbuzzer.com/glowsite/carousel/gcode/short_gcode_summary.gif",
+                        imageUrl:
+                            "https://static.glowbuzzer.com/glowsite/carousel/gcode/short_gcode_keyframe.jpg",
+                        videoUrl:
+                            "https://static.glowbuzzer.com/glowsite/carousel/gcode/short_gcode.mp4"
                     }
                 ]}
             />
