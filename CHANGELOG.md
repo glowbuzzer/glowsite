@@ -2,6 +2,37 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.3.12](https://github.com/glowbuzzer/glowsite/compare/v1.3.11...v1.3.12) (2026-02-24)
+
+
+### Bug Fix
+
+* ensure SVG elements are properly terminated ([14f9417](https://github.com/glowbuzzer/glowsite/commit/14f9417acddcff535127706dddf062db5a70af4f))
+* memoize route creation ([a2dc197](https://github.com/glowbuzzer/glowsite/commit/a2dc197ae75baa1c0c4a55fffe5435c0a1dca97b))
+* typedoc issues ([b5c566f](https://github.com/glowbuzzer/glowsite/commit/b5c566fd31aac9ddfc8e6e77fff05a7ec3c73b23))
+* update store creation ([6d617e9](https://github.com/glowbuzzer/glowsite/commit/6d617e9227126e8f2441f2ab7f810c6dadc8efb1))
+* update vite-imagetools and adapt imagetools-ext.mjs ([50547e6](https://github.com/glowbuzzer/glowsite/commit/50547e629e3fa75486547eb6c59922e916624366))
+
+
+### Chore
+
+* add about.mdx ([4a0578a](https://github.com/glowbuzzer/glowsite/commit/4a0578afe65a4b1665f982f62faf821dd2737935))
+* add gtag event to whitepaper download ([439537a](https://github.com/glowbuzzer/glowsite/commit/439537ab6cc06d7e155eb7bcb6e919bb7b5434a3))
+* add images to offer rollovers and other tweaks ([6e6b92e](https://github.com/glowbuzzer/glowsite/commit/6e6b92ede50a678cb3ce719bed1742691f7f9fae))
+* add solutions section and update links ([38ae91d](https://github.com/glowbuzzer/glowsite/commit/38ae91dca657dd50a82dc6e0caabb8ead8756f63))
+* add strapline and new carousel ([91fea88](https://github.com/glowbuzzer/glowsite/commit/91fea88c1a0f4c56ff2ecd3cd2e780bb11dd4424))
+* add video back ([3436c0e](https://github.com/glowbuzzer/glowsite/commit/3436c0e1f3424a16c77652e14f3610849f1954b9))
+* attempt to fix missing chromium issue ([d1a9bdd](https://github.com/glowbuzzer/glowsite/commit/d1a9bddd906898bc04d7b7659e89986e45f4bcd6))
+* deploy next branch to preview ([6947656](https://github.com/glowbuzzer/glowsite/commit/69476560d5bf89ebc8a7179bf2c9435ad10d27d9))
+* fix bad merge ([2f93e38](https://github.com/glowbuzzer/glowsite/commit/2f93e3803941fc28f56a1388637d3e20f8421287))
+* fix broken services link ([6687dfd](https://github.com/glowbuzzer/glowsite/commit/6687dfddb62316d8dca2d84ff3c7febcd2325d5b))
+* preview deploy switch to main branch ([efc4545](https://github.com/glowbuzzer/glowsite/commit/efc454509733b046fdc64e6df83f33d7b64dd4f7))
+* reorder showcase vids ([2f858b4](https://github.com/glowbuzzer/glowsite/commit/2f858b44643e128f51e49f998b425d320ee1835f))
+* revamp solution section ([3660d45](https://github.com/glowbuzzer/glowsite/commit/3660d451d2907ef09aaea93b15bfc5b09d344f3a))
+* tweaks to offer section and attempt to fix mermaid error ([c13547c](https://github.com/glowbuzzer/glowsite/commit/c13547cd3fd33cb6487d24b2400a03d1d5182c19))
+* update lib versions, add solution section, remove css warning ([bb4205e](https://github.com/glowbuzzer/glowsite/commit/bb4205e268e4ccf25e1c2e595a9d8197504f144f))
+* update mermaid playground example ([c6e47a3](https://github.com/glowbuzzer/glowsite/commit/c6e47a322552b7fa709fcb2a8688e0ee9cdce573))
+
 ## [1.3.11](https://github.com/glowbuzzer/glowsite/compare/v1.3.10...v1.3.11) (2025-12-19)
 
 
