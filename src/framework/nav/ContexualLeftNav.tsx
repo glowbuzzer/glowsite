@@ -12,18 +12,19 @@ function* ancestors(node: Node): IterableIterator<Node> {
     }
 }
 
+// noinspection CssUnusedSymbol
 export const StyledLeftNavMenu = styled.div`
-  background: ${props => props.theme.colorBgContainer};
+    background: ${props => props.theme.colorBgContainer};
 
-  .title {
-    padding: 12px;
-    font-size: 1.2em;
-    font-weight: bold;
-  }
+    .title {
+        padding: 12px;
+        font-size: 1.2em;
+        font-weight: bold;
+    }
 
-  .ant-menu {
-    height: 100%;
-  }
+    .ant-menu {
+        height: 100%;
+    }
 `
 
 export const ContexualLeftNav = () => {

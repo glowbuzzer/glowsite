@@ -22,6 +22,11 @@ import { LATEST_VERSIONS } from "../../versions.mjs"
 import { Search } from "./Search"
 
 const StyledTopNav = styled.div`
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(8px);
     border-bottom: 1px solid ${props => props.theme.colorBorder};
 
     .logo {

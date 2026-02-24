@@ -13,7 +13,6 @@ import reactDocgenControls from "react-docgen:@glowbuzzer/controls"
 import typedoc from "typedoc:@glowbuzzer/store"
 import { typedocHookFilter } from "./typedoc/typedoc-hooks"
 import { LandingPageLayout } from "./framework/layouts/LandingPageLayout"
-import { BaseLayout } from "./framework/layouts/BaseLayout"
 
 function process(node: Omit<Node, "path">, parentPaths: string[], parent: Node): Node {
     const slug = node.slug
@@ -86,6 +85,35 @@ const nav = {
     layout: HomePage,
     children: [
         {
+            slug: "solution",
+            title: "Our Solution",
+            layout: SimpleLayout,
+            component: () => import("./pages/solution/Solution"),
+            children: [
+                {
+                    slug: "#electronics",
+                    title: "Electronics reference designs"
+                },
+                {
+                    slug: "#firmware",
+                    title: "Firmware and real-time control"
+                },
+                {
+                    slug: "#motion",
+                    title: "High-level motion and system control"
+                },
+                {
+                    slug: "#sim",
+                    title: "Digital twin and simulation"
+                },
+                {
+                    slug: "#services",
+                    title: "Engineering services"
+                }
+            ]
+        },
+        /*
+        {
             slug: "overview",
             title: "Overview",
             layout: DefaultDocumentationPage,
@@ -119,6 +147,17 @@ const nav = {
                 }
             ]
         },
+        {
+            slug: "features",
+            title: "Features",
+            layout: Features
+        },
+        {
+            slug: "services",
+            title: "Services",
+            layout: Services
+        },
+*/
         /*        {
             slug: "get-started",
             title: "Getting started",
@@ -364,18 +403,14 @@ const nav = {
                                     title: "Beckhoff AX5101",
                                     subtitle: "Review and integration of the Beckhoff AX5101",
                                     component: () =>
-                                        import(
-                                            "./pages/docs/gbem/drive_support/beckhoff_ax5101.mdx"
-                                        )
+                                        import("./pages/docs/gbem/drive_support/beckhoff_ax5101.mdx")
                                 },
                                 {
                                     slug: "cannon_automata_smc3",
                                     title: "Cannon Automata SMC3",
                                     subtitle: "Review and integration of the Cannon Automata SMC3",
                                     component: () =>
-                                        import(
-                                            "./pages/docs/gbem/drive_support/cannon_automata_smc3.mdx"
-                                        )
+                                        import("./pages/docs/gbem/drive_support/cannon_automata_smc3.mdx")
                                 },
                                 {
                                     slug: "delta_asd-a2",
@@ -424,9 +459,7 @@ const nav = {
                                     title: "Invertek Optidrive P2",
                                     subtitle: "Review and integration of the Invertek Optidrive P2",
                                     component: () =>
-                                        import(
-                                            "./pages/docs/gbem/drive_support/invertek_optidrive_p2.mdx"
-                                        )
+                                        import("./pages/docs/gbem/drive_support/invertek_optidrive_p2.mdx")
                                 },
                                 {
                                     slug: "kollmorgen_akd",
@@ -463,9 +496,7 @@ const nav = {
                                     title: "OMRON ACCURAX G5",
                                     subtitle: "Review and integration of the OMRON ACCURAX G5",
                                     component: () =>
-                                        import(
-                                            "./pages/docs/gbem/drive_support/omron_accurax_g5.mdx"
-                                        )
+                                        import("./pages/docs/gbem/drive_support/omron_accurax_g5.mdx")
                                     /*
                                 },
                                 {
@@ -985,11 +1016,19 @@ const nav = {
             layout: DefaultDocumentationPage,
             children: [
                 {
+                    slug: "about",
+                    title: "About us",
+                    subtitle: "About us",
+                    component: () => import("./pages/about/about.mdx")
+                },
+                /*
+                {
                     slug: "vision",
                     title: "Our vision",
                     subtitle: "What we want to achieve (vision)",
                     component: () => import("./pages/about/vision.mdx")
                 },
+*/
                 /*
                                 {
                                     slug: "values",

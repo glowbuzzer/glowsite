@@ -10,7 +10,8 @@ import {
     TaskStatus,
     usePreview,
     GlowbuzzerConnectionContext,
-    standardReducers
+    standardReducers,
+    initSettings
 } from "@glowbuzzer/store"
 
 import "dseg/css/dseg.css"
@@ -27,6 +28,7 @@ import { ScrollOnMount } from "../components/ScrollOnMount"
 import { dino } from "../store/dino"
 import { ConfigLiveEditProvider } from "@glowbuzzer/controls"
 
+initSettings("glowsite")
 const rootReducer = combineReducers(standardReducers)
 
 const GlowbuzzerCustomApp = ({ children }) => {
@@ -114,10 +116,7 @@ export const ControlsDocumentationPage = ({ children, slug, displayProps }) => {
                         kinematicsConfiguration: [
                             {
                                 name: "Machine",
-                                participatingJoints: [0, 1, 2],
-                                extentsX: [0, 500],
-                                extentsY: [0, 500],
-                                extentsZ: [0, 500]
+                                participatingJoints: [0, 1, 2]
                             }
                         ],
                         ain: [{ name: "Current Temp" }],
@@ -202,7 +201,7 @@ export const ControlsDocumentationPage = ({ children, slug, displayProps }) => {
     const store = configureStore({
         reducer: rootReducer,
         middleware,
-        enhancers: [enhancer]
+        enhancers: getDefaultEnhancers => getDefaultEnhancers().concat(enhancer)
     })
 
     useEffect(() => {

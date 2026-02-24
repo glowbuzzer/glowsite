@@ -1,67 +1,44 @@
-import { Card, Space, Divider } from 'antd';
 import { Tldr } from "../../framework/components";
+import { Link } from "react-router-dom"
 
-# Our vision for the future of machine control
+# Our vision
 
 <Tldr>
-  - revolutionizing machine controls with modern web technologies
-  - breaking free from proprietary hardware dependencies
-  - bringing software industry best practices to industrial automation
-  - creating an open, flexible platform for the future of machine control
+  - Get machines to market faster without writing firmware
+  - Ready-to-deploy, embeddable control software with commercial support
+  - Flexible HMI and integration options for production machines
+  - Built for OEM production—not one-off or hobby machines
 </Tldr>
 
-The industrial automation world has been slow to adopt modern software development practices and technologies. While the rest of the software industry has rapidly evolved with web technologies, cloud computing, and open platforms, machine controls remain largely tied to proprietary hardware and outdated development environments.
+## The market problem
 
-We're changing that.
+- OEMs must develop or adapt control stacks for each model and variant—firmware, HMI, and integrations — slowing launches and eroding margin
+- Open-source controllers like grbl and FluidNC are excellent for one-offs and hobby builds, but struggle with production-grade reliability, long-term support, and integration into factory software
+- EtherCAT is popular for industrial machines but expensive and not easily embedded in a shippable product
+- HMIs are often hard-coded and inflexible, making branding, customization, and multi-product reuse expensive
+- Integrations with ERP and other systems such as vision require ad-hoc glue code that is hard to maintain
 
-## The problem with traditional machine controls
+## What OEMs need
 
-The idea of using modern software development technologies to develop machine controls isn't new. Every PLC and robot control system was developed using what was once cutting-edge technology—typically C/C++—many decades ago.
+- A proven control core they can embed and ship
+- Freedom to choose the components with the right price/performance for a given product — without major code rewrites
+- A flexible, brandable HMI framework that can be adapted per product and customer
+- Clean integration options (APIs, SDKs, network protocols) for line automation, analytics, and custom apps
+- Commercial support, versioning, and a roadmap that matches product lifecycles
 
-However, PLC and robot controls have not evolved at the same pace as the rest of the software world:
+## Our solution
 
-- **outdated development tools**: many still rely on proprietary IDEs and programming languages
-- **hardware lock-in**: control systems are often tightly coupled with specific hardware
-- **limited flexibility**: customization and integration with modern systems is challenging
-- **high barriers to entry**: specialized knowledge requirements limit innovation
+- Ready-to-deploy, embeddable real-time control software that removes firmware as a blocker
+- React-based HMI framework with reusable widgets and layouts for fast, brandable machine UIs
+- High-level APIs and language bindings for integrating with factory systems, vision, and custom logic—beyond G-code
+- Hardware choice without code churn: support for cost-effective TMC steppers and EtherCAT servo drives
+- File-based configuration and modular architecture to scale across models and options
+- Commercial support, documentation, and a long-term roadmap
 
-## Previous attempts at modernization
+## Why it matters
 
-There have been attempts to address these limitations. For example, Beckhoff's TwinCAT vision, formed 20 years ago, blended Codesys with Microsoft development tools—an approach that contains definite echoes of what we are doing.
+- Ship sooner, scale faster, and support customers better — without building a control stack from scratch
+- Reuse software and HMIs across product lines while keeping room for customer-specific adaptations
+- Focus engineering effort on machine design and process know‑how, not infrastructure
 
-However, TwinCAT now looks outdated compared to the explosion of web technologies. "Windows C++ development" is now classified as legacy technology in the software industry, while web technologies continue to advance rapidly.
-
-## Our approach
-
-We admire companies like Beckhoff that have pushed the industry forward, bringing the same level of reliability and industrial focus, but with modern web technologies at the core.
-
-Our platform enables you to:
-
-- build machine controls using familiar web development tools and frameworks
-- deploy solutions that are hardware-independent
-- leverage the vast ecosystem of JavaScript/TypeScript libraries and tools
-- apply modern software development practices to industrial automation
-
-## Our promise
-
-Our idea is to deliver a platform that allows our customers to build machine controls of an industrially deployable nature using modern software tools, techniques, and frameworks. We're committed to:
-
-- **open standards**: embracing open technologies and standards
-- **hardware independence**: freedom from proprietary hardware lock-in
-- **modern development experience**: bringing the best of web development to machine control
-- **industrial reliability**: maintaining the robustness required for industrial applications
-
-<Divider />
-
-## Meeting the needs of OEMs
-
-Our software is specifically designed to address the unique challenges faced by Original Equipment Manufacturers (OEMs):
-
-- **highly flexible architecture**: our platform can be tailored to fit diverse machine types and control requirements without starting from scratch for each new project
-- **seamlessly embeddable**: the software can be embedded into existing systems and hardware platforms with minimal integration effort
-- **hardware agnostic**: works across a wide range of hardware configurations, allowing OEMs to select components based on cost, performance, and availability
-- **scalable deployment**: the same core technology scales from simple single-axis machines to complex multi-axis robotic systems
-- **white-labeling options**: OEMs can customize and brand the interface to maintain their market identity
-- **reduced time-to-market**: accelerate development cycles by leveraging our pre-built components and frameworks
-
-By providing a flexible, embeddable solution, we enable OEMs to focus on their core competencies and unique value propositions while building on a solid foundation of modern control technology.
+For further details, see the <Link to="/features">features</Link> and <Link to="/services">services</Link> sections.

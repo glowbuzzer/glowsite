@@ -105,45 +105,16 @@ export const FeaturesSection = ({ children }) => {
 }
 
 type CardFlipProps = {
-    back: ReactNode
     children: ReactNode
-    to?: string
 }
 
-export const FeaturedItem = ({ children, back, to }: CardFlipProps) => {
+export const FeaturedItem = ({ children }: CardFlipProps) => {
     const [selected, setSelected] = useContext(featuresContext)
-
-    function toggle() {
-        if (selected == children) {
-            setSelected(null)
-        } else if (selected) {
-            setSelected(null)
-            setTimeout(() => {
-                setSelected(children)
-            }, 200)
-        } else {
-            setSelected(children)
-        }
-        // setSelected(current => (current === children ? null : children))
-    }
 
     return (
         <div className={"flip-card " + (selected === children ? "back" : "front")}>
-            <div
-                className="flip-card-inner"
-                // onClick={toggle}
-            >
+            <div className="flip-card-inner">
                 <div className="flip-card-front">{children}</div>
-                {/*
-                <div className="flip-card-back">
-                    <div className="content">{back}</div>
-                    {to && (
-                        <div>
-                            <GlowsiteLink to={to}>More Info</GlowsiteLink>
-                        </div>
-                    )}
-                </div>
-*/}
             </div>
         </div>
     )

@@ -46,6 +46,10 @@ export const StyledSection = styled.div<{
         props.$expand &&
         css`
             padding: 0 40px;
+
+            @media (max-width: 767px) {
+                padding: 0 10px;
+            }
         `}
 
 

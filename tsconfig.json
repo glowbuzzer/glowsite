@@ -1,26 +1,15 @@
 {
-  "compilerOptions": {
-    "jsx": "react-jsx",
-    "module": "ES2020",
-    "lib": [
-      "ES2020",
-      "DOM"
-    ],
-    "moduleResolution": "Node",
-    "downlevelIteration": true,
-    "baseUrl": ".",
-    "paths": {
-      "@glowbuzzer/controls": [
-        "./src/controls/CustomComponent.tsx"
-      ],
-      "@glowsite": [
-        "./src/framework/index.ts"
-      ]
-    }
-  },
-  "include": [
-    "./src",
-    "./typings/images.d.ts",
-    "./typings/mdx.d.ts"
-  ]
+    "compilerOptions": {
+        "jsx": "react-jsx",
+        "module": "ES2020",
+        "lib": ["ES2020", "DOM"],
+        "moduleResolution": "Node",
+        "downlevelIteration": true,
+        "baseUrl": ".",
+        "paths": {
+            "@glowbuzzer/controls": ["./src/controls/CustomComponent.tsx"],
+            "@glowsite": ["./src/framework/index.ts"]
+        }
+    },
+    "include": ["./src", "./typings/images.d.ts", "./typings/mdx.d.ts"]
 }

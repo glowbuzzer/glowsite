@@ -6,11 +6,11 @@
  * The goal is to run processing async and report meaningful errors when there are issues with the markup
  *
  */
-import {visit} from "unist-util-visit"
+import { visit } from "unist-util-visit"
 import path from "path"
 import puppeteer from "puppeteer"
-import {createElement, createImport, handler} from "./util/mdast-util.mjs"
-import {createCache} from "./util/cache-util.mjs"
+import { createElement, createImport, handler } from "./util/mdast-util.mjs"
+import { createCache } from "./util/cache-util.mjs"
 
 // puppeteer seems to set a load of listeners on process, so increase the limit
 process.setMaxListeners(100)
@@ -25,6 +25,7 @@ const PLUGIN_NAME = "remark-mermaid"
 async function renderMermaidToSvg(definition) {
     const browser = await puppeteer.launch({
         headless: true,
+        executablePath: puppeteer.executablePath(),
         args: ["--no-sandbox", "--disable-setuid-sandbox"]
     })
     const page = await browser.newPage()
@@ -41,22 +42,36 @@ async function renderMermaidToSvg(definition) {
 
         await page.setContent(html)
         // assumes we have mermaid installed
-        await page.addScriptTag({path: "./node_modules/mermaid/dist/mermaid.min.js"})
+        await page.addScriptTag({ path: "./node_modules/mermaid/dist/mermaid.min.js" })
         return await page.evaluate(
-            async ({definition}) => {
+            async ({ definition }) => {
                 // run the mermaid magic "client side"
-                window.mermaid.initialize({flowchart: {useMaxWidth: false}})
+                window.mermaid.initialize({ flowchart: { useMaxWidth: false } })
                 return new Promise((resolve, reject) => {
                     try {
                         window.mermaid.mermaidAPI.render("container", definition, svgCode => {
-                            resolve(svgCode)
+                            try {
+                                // Parse as XML/SVG
+                                const parser = new DOMParser()
+                                const doc = parser.parseFromString(svgCode, "text/html")
+                                const svgElement = doc.querySelector("svg")
+                                // const styleElement = svgElement.querySelector("style")
+                                // styleElement.remove()
+
+                                // Serialise back to a string – this will self-close empty elements
+                                const serializer = new XMLSerializer()
+                                const fixedSvg = serializer.serializeToString(svgElement)
+                                resolve(fixedSvg)
+                            } catch (e) {
+                                reject(e)
+                            }
                         })
                     } catch (e) {
                         reject(e)
                     }
                 })
             },
-            {definition} /* pass in the mermaid source */
+            { definition } /* pass in the mermaid source */
         )
     } finally {
         await page.close()

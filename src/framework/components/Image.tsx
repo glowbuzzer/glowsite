@@ -33,6 +33,14 @@ type ImageProps = {
     preset?: ImagePreset
 }
 
+export function optimal_image(meta: any[], width: number) {
+    for (const image of meta) {
+        if (image.width >= width) {
+            return image.src
+        }
+    }
+}
+
 export const Image = ({ meta, maxWidth, alt, preset = "default" }: ImageProps) => {
     if (!meta?.[0]?.src) {
         console.log("Invalid image metadata: ", meta)

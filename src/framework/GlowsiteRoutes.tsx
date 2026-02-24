@@ -1,6 +1,6 @@
-import { useRoutes } from "react-router"
+import { useRoutes } from "react-router-dom"
 import * as React from "react"
-import { Suspense } from "react"
+import { Suspense, useMemo } from "react"
 import { Helmet, HelmetProvider } from "react-helmet-async"
 import { FallbackLayout } from "./layouts/FallbackLayout"
 import * as NotFound from "../pages/404.mdx"
@@ -17,55 +17,60 @@ import { ThemeViewer } from "./ThemeViewer"
 export const GlowsiteRoutes = () => {
     const nav = useGlowsiteRoutes()
 
-    return useRoutes([
-        {
-            path: "*",
-            element: (
-                <HelmetProvider>
-                    {/* 404 route */}
-                    <Helmet>
-                        <meta charSet="utf-8" />
-                        <title>Not Found</title>
-                    </Helmet>
-                    <BaseLayout>
-                        <NotFound.default />
-                    </BaseLayout>
-                </HelmetProvider>
-            )
-        },
-        ...nav.map(({ path, title, layout, component, ...props }) => {
-            const Layout = layout || FallbackLayout
-            const Component = component && React.lazy(component)
-            return {
-                path,
+    const routes = useMemo(
+        () => [
+            {
+                path: "*",
                 element: (
                     <HelmetProvider>
+                        {/* 404 route */}
                         <Helmet>
                             <meta charSet="utf-8" />
-                            {/** if component exported a title use it **/}
-                            {props.description && (
-                                <meta name="description" content={props.description} />
-                            )}
-                            {title && <title>{title}</title>}
+                            <title>Not Found</title>
                         </Helmet>
-                        <Layout title={title} path={path} {...props}>
-                            {Component && (
-                                <Suspense fallback={<Loading />}>
-                                    <Component title={title} {...props} />
-                                </Suspense>
-                            )}
-                        </Layout>
+                        <BaseLayout>
+                            <NotFound.default />
+                        </BaseLayout>
                     </HelmetProvider>
                 )
+            },
+            ...nav.map(({ path, title, layout, component, ...props }) => {
+                const Layout = layout || FallbackLayout
+                const Component = component && React.lazy(component)
+                return {
+                    path,
+                    element: (
+                        <HelmetProvider>
+                            <Helmet>
+                                <meta charSet="utf-8" />
+                                {/** if component exported a title use it **/}
+                                {props.description && (
+                                    <meta name="description" content={props.description} />
+                                )}
+                                {title && <title>{title}</title>}
+                            </Helmet>
+                            <Layout title={title} path={path} {...props}>
+                                {Component && (
+                                    <Suspense fallback={<Loading />}>
+                                        <Component title={title} {...props} />
+                                    </Suspense>
+                                )}
+                            </Layout>
+                        </HelmetProvider>
+                    )
+                }
+            }),
+            {
+                path: "/blogs/tag/:tag",
+                element: <BlogListByTag />
+            },
+            {
+                path: "/theme",
+                element: <ThemeViewer />
             }
-        }),
-        {
-            path: "/blogs/tag/:tag",
-            element: <BlogListByTag />
-        },
-        {
-            path: "/theme",
-            element: <ThemeViewer/>
-        }
-    ])
+        ],
+        [nav]
+    )
+
+    return useRoutes(routes)
 }

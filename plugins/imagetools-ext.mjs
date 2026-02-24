@@ -1,4 +1,4 @@
-import {metadataFormat} from "imagetools-core"
+import { metadataFormat, resolveConfigs as builtinResolveConfigs } from "imagetools-core"
 
 // if presets not specified in vite.config.js we will use these
 const defaultPresets = {
@@ -26,13 +26,14 @@ export function glowsiteImageToolsPresets(pluginConfig) {
 
             // spit out the widths from the preset
             const widths = preset.widths
-            const custom = widths.map((width, index) => ({
-                width,
-                webp: /*index === 0 ? undefined :*/ "" // always webp
-                // glowsite: [""] // ensure metadata is returned
+
+            return widths.map(width => ({
+                w: String(width),
+                format: "webp"
             }))
-            return custom
         }
+        // Fall back to builtin resolveConfigs for non-glowsite images
+        return builtinResolveConfigs(entries, outputFormats)
     }
 }
 
@@ -46,12 +47,14 @@ export function glowsiteOutputFormats(builtinOutputFormats) {
         glowsite: () => {
             const defaultFormat = metadataFormat()
             return metadatas => {
-                // just return the metadata we need
-                return defaultFormat(metadatas).map(({ format, width, height, src }) => ({
-                    format,
-                    width,
-                    height,
-                    src
+                // just return the metadata we need (src and width for Image.tsx)
+                const formatted = defaultFormat(metadatas)
+                // Ensure we always have an array (defaultFormat may return single object for single image)
+                const formattedArray = Array.isArray(formatted) ? formatted : [formatted]
+                // Always return array of objects with src and width for Image.tsx compatibility
+                return formattedArray.map(({ width, src }) => ({
+                    src,
+                    width
                 }))
             }
         }
