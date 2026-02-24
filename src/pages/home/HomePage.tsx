@@ -367,7 +367,7 @@ export const HomePage = () => {
                             journey. From initial concept and business case development through the
                             engineering process to product launch and ongoing field support.
                         </p>
-                        <Link to="/services">
+                        <Link to="/solution/#services">
                             <Button type="primary" icon={<ArrowRightOutlined />}>
                                 Explore Our Services
                             </Button>
