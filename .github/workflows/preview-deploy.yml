@@ -2,7 +2,7 @@ name: Preview and downloads frequent build and deploy
 on:
   push:
     branches:
-      - next
+      - main
 
 env:
   AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
