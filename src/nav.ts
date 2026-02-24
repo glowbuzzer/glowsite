@@ -128,13 +128,11 @@ const nav = {
                     title: "Our software",
                     component: () => import("./pages/overview/SoftwareStack")
                 },
-                /*
                 {
                     slug: "simulation",
                     title: "Simulation and digital twin",
                     component: () => import("./pages/overview/simulation.mdx")
                 },
-*/
                 {
                     slug: "embedded",
                     title: "Embedded and white-labelled",
